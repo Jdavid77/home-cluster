@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m0s
-  path: ./namespaces
+  path: ./k8s/namespaces
   prune: true
   sourceRef:
     kind: GitRepository

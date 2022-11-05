@@ -9,7 +9,7 @@ spec:
   dependsOn:
     - name: namespaces
     - name: crds
-  path: ./core
+  path: ./k8s/core
   prune: true
   sourceRef:
     kind: GitRepository
