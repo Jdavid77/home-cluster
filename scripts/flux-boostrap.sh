@@ -4,6 +4,6 @@ flux bootstrap github \
   --owner=Jdavid77 \
   --repository=home-cluster \
   --branch=main \
-  --path=server \
+  --path=k8s/clusters/server \
   --read-write-key \
   --token-auth
