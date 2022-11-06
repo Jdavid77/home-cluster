@@ -9,6 +9,7 @@ spec:
   dependsOn:
     - name: namespaces
     - name: crds
+    - name: charts
   path: ./k8s/core
   prune: true
   sourceRef:

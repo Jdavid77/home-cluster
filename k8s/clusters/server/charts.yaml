@@ -6,12 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m0s
-  dependsOn:
-    - name: namespaces
-    - name: crds
-    - name: core
-    - name: charts
-  path: ./k8s/apps
+  path: ./k8s/charts
   prune: true
   sourceRef:
     kind: GitRepository
