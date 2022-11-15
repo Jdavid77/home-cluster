@@ -4,3 +4,4 @@ resources:
   - metallb-charts.yaml
   - external-dns-charts.yaml
   - jetstack-charts.yaml
+  - traefik-charts.yaml
