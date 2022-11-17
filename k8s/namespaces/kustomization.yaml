@@ -4,3 +4,4 @@ resources:
   - cert-manager.yaml
   - network.yaml
   - traefik.yaml
+  - operators.yaml
