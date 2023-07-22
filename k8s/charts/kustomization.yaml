@@ -8,3 +8,4 @@ resources:
   - grafana-charts.yaml
   - jetstack-charts.yaml
   - traefik-charts.yaml
+  - opentelemetry-charts.yaml
