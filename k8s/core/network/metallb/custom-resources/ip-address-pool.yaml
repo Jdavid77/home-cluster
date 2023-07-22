@@ -7,3 +7,4 @@ spec:
   addresses:
   - ${IP_RANGE}
   autoAssign: true
+  avoidBuggyIPs: true
