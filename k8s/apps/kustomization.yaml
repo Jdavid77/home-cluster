@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - ./cert-manager
   - ./reflector
+  - ./grafana
