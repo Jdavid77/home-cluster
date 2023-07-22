@@ -1,0 +1,125 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: grafana
+  namespace: monitoring
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: grafana
+      version: 6.52.4
+      sourceRef:
+        kind: HelmRepository
+        name: grafana-charts
+        namespace: flux-system
+      interval: 5m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  values:
+    deploymentStrategy:
+      type: Recreate
+    replicas: 1
+    admin:
+      existingSecret: grafana-admin-login
+      userKey: user
+      passwordKey: password
+    annotations:
+      configmap.reloader.stakater.com/reload: "grafana"
+      secret.reloader.stakater.com/reload: "grafana-environment-vars"
+    grafana.ini:
+      server:
+        root_url: "https://grafana.${SECRET_DOMAIN}"
+      paths:
+        data: /var/lib/grafana/data
+        logs: /var/log/grafana
+        plugins: /var/lib/grafana/plugins
+        provisioning: /etc/grafana/provisioning
+      analytics:
+        check_for_updates: false
+      log:
+        mode: console
+      grafana_net:
+        url: https://grafana.net
+      auth.basic:
+        disable_login_form: false
+    dashboardProviders:
+      dashboardproviders.yaml:
+        apiVersion: 1
+        providers:
+          - name: "default"
+            orgId: 1
+            folder: ""
+            type: file
+            disableDeletion: false
+            editable: true
+            options:
+              path: /var/lib/grafana/dashboards/default
+    sidecar:
+      dashboards:
+        enabled: true
+        logLevel: INFO
+        searchNamespace: ALL
+        label: grafana_dashboard
+        labelValue: "true" # Create configmaps in JSON and provide the label "grafana_dashboard to import it via the sidecar"
+        folderAnnotation: grafana_folder # Can also specify the folder to segment the dashboards per folder
+        provider:
+          foldersFromFilesStructure: true
+          allowUiUpdates: true
+      datasources:
+        env:
+          FOLDER_ANNOTATION: /etc/grafana/provisioning/datasources
+        enabled: true
+        searchNamespace: ALL
+        label: grafana_datasource
+        labelValue: "true"
+        maxLines: 1000
+    plugins:
+      - agenty-flowcharting-panel
+      - digiapulssi-breadcrumb-panel
+      - flant-statusmap-panel
+      - grafana-piechart-panel
+      - isaozler-paretochart-panel
+      - jdbranham-diagram-panel
+      - macropower-analytics-panel
+      - marcusolsson-csv-datasource
+      - marcusolsson-dynamictext-panel
+      - marcusolsson-gantt-panel
+      - marcusolsson-hexmap-panel
+      - mtanda-histogram-panel
+      - mxswat-separator-panel
+      - neocat-cal-heatmap-panel
+      - novatec-sdg-panel
+      - scadavis-synoptic-panel
+      - smartmakers-trafficlight-panel
+      - snuids-svg-panel
+      - snuids-trafficlights-panel
+      - snuids-trafficlights-panel
+      - grafana-polystat-panel
+      # Data Sources
+      - camptocamp-prometheus-alertmanager-datasource
+    serviceMonitor:
+      enabled: false
+    ingress:
+      enabled: true
+      hosts:
+        - &host grafana.${SECRET_DOMAIN}
+      tls:
+        - hosts:
+            - *host
+    serviceAccount:
+      create: true
+      autoMount: true
+    persistence:
+      type: pvc
+      enabled: true
+      storageClassName: local-path
+      existingClaim: grafana-pvc
+    rbac:
+      pspEnabled: false
