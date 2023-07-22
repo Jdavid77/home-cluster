@@ -5,3 +5,4 @@ resources:
   - ./cert-manager
   - ./reflector
   - ./grafana
+  - ./opentelemetry
