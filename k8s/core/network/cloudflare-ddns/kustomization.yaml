@@ -5,6 +5,7 @@ resources:
   - cronjob.yaml
 configMapGenerator:
   - name: cloudflare-ddns
+    namespace: network
     files:
       - ddns.sh
 generatorOptions:
