@@ -111,7 +111,7 @@ spec:
       annotations:
         external-dns.alpha.kubernetes.io/hostname: grafana.${SECRET_DOMAIN}
         external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
-        cert-manager.io/cluster-issuer: letsencrypt-staging
+        cert-manager.io/cluster-issuer: letsencrypt-production
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
       hosts:
         - &host grafana.${SECRET_DOMAIN}
