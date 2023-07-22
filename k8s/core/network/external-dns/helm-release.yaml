@@ -32,7 +32,7 @@ spec:
           secretKeyRef:
             name: cloudflare-secrets
             key: EMAIL
-      - name: CF_API_KEY
+      - name: CF_API_TOKEN
         valueFrom:
           secretKeyRef:
             name: cloudflare-secrets
