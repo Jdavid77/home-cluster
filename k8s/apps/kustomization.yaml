@@ -6,3 +6,4 @@ resources:
   - ./reflector
   - ./grafana
   - ./opentelemetry
+  - ./uptime-kuma

@@ -9,3 +9,4 @@ resources:
   - jetstack-charts.yaml
   - traefik-charts.yaml
   - opentelemetry-charts.yaml
+  - dirsigler-charts.yaml
