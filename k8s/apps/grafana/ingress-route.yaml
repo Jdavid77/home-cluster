@@ -1,0 +1,16 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: grafana
+  namespace: monitoring
+spec:
+  routes:
+    - kind: Rule
+      match: Host(`grafana.${SECRET_DOMAIN}`)
+      middlewares:
+        - name: cloudflare-realip
+          namespace: traefik
+      services:
+        - name: grafana
+          namespace: monitoring
+          port: 80

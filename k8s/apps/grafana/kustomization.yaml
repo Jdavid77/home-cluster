@@ -5,3 +5,4 @@ resources:
   - helm-release.yaml
   - pvc.yaml
   - admin-secret.yaml
+  - ingress-route.yaml
