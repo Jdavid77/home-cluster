@@ -1,0 +1,9 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+    name: cloudflare-realip
+    namespace: traefik
+spec:
+  plugin:
+    cloudflarewarp:
+        disableDefault: "false"
