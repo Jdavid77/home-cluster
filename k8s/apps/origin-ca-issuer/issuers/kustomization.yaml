@@ -3,4 +3,3 @@ kind: Kustomization
 resources:
   - hajimari.yaml
   - monitoring.yaml
-  - cert-manager.yaml
