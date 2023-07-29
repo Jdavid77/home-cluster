@@ -5,3 +5,4 @@ resources:
   - role-approver.yaml
   - role-binding.yaml
   - role.yaml
+  - serviceaccount.yaml
