@@ -29,6 +29,9 @@ spec:
         hajimari.io/enable: "true"
       hosts:
         - host: &host uptime.${SECRET_DOMAIN}
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
       tls:
         - hosts:
             - *host 
