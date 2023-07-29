@@ -4,4 +4,4 @@ resources:
   - ./cert-manager
   - ./network
   - ./traefik
-  #- ./origin-ca-issuer
+  - ./origin-ca-issuer
