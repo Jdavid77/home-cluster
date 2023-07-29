@@ -5,11 +5,11 @@ metadata:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: originissuer-control
+  name: cert-manager
 subjects:
   - kind: ServiceAccount
     name: originissuer-control
-    namespace: origin-ca-issuer
+    namespace: cert-manager
 ---
 # bind the cert-manager internal approver to approve
 # cert-manager.k8s.cloudflare.com CertificateRequests
