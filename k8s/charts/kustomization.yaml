@@ -10,3 +10,4 @@ resources:
   - traefik-charts.yaml
   - opentelemetry-charts.yaml
   - dirsigler-charts.yaml
+  - hajimari-charts.yaml
