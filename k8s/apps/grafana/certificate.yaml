@@ -1,13 +1,17 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: cloudflare
+  name: grafana
   namespace: monitoring
 spec:
-  secretName: cloudflare-tls
+  secretName: grafana-tls
   dnsNames:
     - 'grafana.${SECRET_DOMAIN}'
   issuerRef:
     group: cert-manager.k8s.cloudflare.com
     kind: OriginIssuer
     name: prod-issuer
+  secretTemplate:
+    annotations:
+      reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
+      reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces: "traefik"
