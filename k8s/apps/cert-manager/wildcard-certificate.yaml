@@ -7,6 +7,7 @@ spec:
   privateKey:
     rotationPolicy: Always
   dnsNames:
+    - '${SECRET_DOMAIN}'
     - '*.${SECRET_DOMAIN}'
   issuerRef:
     group: cert-manager.io
