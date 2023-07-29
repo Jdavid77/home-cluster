@@ -8,3 +8,4 @@ spec:
   certificates:
     - secretName: hajimari-tls
     - secretName: grafana-tls
+    - secretName: uptime-tls
