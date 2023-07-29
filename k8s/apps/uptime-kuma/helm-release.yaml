@@ -17,7 +17,21 @@ spec:
       interval: 5m
   values:
     ingress:
-      enabled: false
+      enabled: true
+      className: traefik
+      annotations:
+        cert-manager.io/issuer: prod-issuer
+        cert-manager.io/issuer-group: cert-manager.k8s.cloudflare.com
+        cert-manager.io/issuer-kind: OriginIssuer
+        external-dns.alpha.kubernetes.io/hostname: uptime.${SECRET_DOMAIN}
+        external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        hajimari.io/enable: "true"
+      hosts:
+        - &host uptime.${SECRET_DOMAIN}
+      tls:
+        - hosts:
+            - *host 
     volume:
       enabled: true
       accessMode: ReadWriteOnce
