@@ -107,7 +107,18 @@ spec:
     serviceMonitor:
       enabled: false
     ingress:
-      enabled: false
+      enabled: true
+      ingressClassName: traefik
+      annotations:
+        external-dns.alpha.kubernetes.io/hostname: grafana.${SECRET_DOMAIN}
+        external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        cert-manager.io/cluster-issuer: letsencrypt-production
+      hosts:
+        - &host grafana.${SECRET_DOMAIN}
+      tls:
+        - hosts:
+            - *host 
     serviceAccount:
       create: true
       autoMount: true
