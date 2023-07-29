@@ -6,3 +6,4 @@ resources:
   - traefik.yaml
   - operators.yaml
   - monitoring.yaml
+  - hajimari.yaml
