@@ -7,3 +7,4 @@ resources:
   - ./grafana
   - ./opentelemetry
   - ./uptime-kuma
+  - ./hajimari
