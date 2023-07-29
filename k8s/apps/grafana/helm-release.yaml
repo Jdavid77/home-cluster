@@ -110,10 +110,12 @@ spec:
       enabled: true
       ingressClassName: traefik
       annotations:
+        cert-manager.io/issuer: prod-issuer
+        cert-manager.io/issuer-group: cert-manager.k8s.cloudflare.com
+        cert-manager.io/issuer-kind: OriginIssuer
         external-dns.alpha.kubernetes.io/hostname: grafana.${SECRET_DOMAIN}
         external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        cert-manager.io/cluster-issuer: letsencrypt-production
         hajimari.io/enable: "true"
       hosts:
         - &host grafana.${SECRET_DOMAIN}
