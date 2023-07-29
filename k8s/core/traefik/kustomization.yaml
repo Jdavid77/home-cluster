@@ -3,4 +3,4 @@ kind: Kustomization
 resources:
   - helm-release.yaml
   - tls-store.yaml
-  - ./middlewares
+  #- ./middlewares
