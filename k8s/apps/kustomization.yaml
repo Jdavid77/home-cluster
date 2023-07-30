@@ -8,3 +8,4 @@ resources:
   - ./uptime-kuma
   - ./hajimari
   - ./origin-ca-issuer
+  - ./authentik
