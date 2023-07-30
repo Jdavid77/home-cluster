@@ -5,3 +5,4 @@ resources:
   - ./network
   - ./traefik
   - ./origin-ca-issuer
+  - ./cloudnative-pg
