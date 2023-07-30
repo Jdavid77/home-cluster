@@ -15,7 +15,6 @@ spec:
     enablePodMonitor: false
   backup:
     retentionPolicy: 30d
-    primaryUpdateStrategy: unsupervised
     barmanObjectStore:
       wal:
         compression: bzip2
