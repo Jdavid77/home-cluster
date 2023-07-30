@@ -4,7 +4,7 @@ metadata:
   name: pg-cluster
   namespace: default
 spec:
-  instances: 2
+  instances: 3
   primaryUpdateStrategy: unsupervised
   storage:
     size: 20Gi
