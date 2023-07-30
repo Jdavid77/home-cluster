@@ -1,25 +1,25 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: postgres
-  namespace: operators
+    name: postgres
+    namespace: operators
 spec:
-  interval: 15m
-  chart:
-    spec:
-      chart: cloudnative-pg
-      version: 0.18.2
-      sourceRef:
-        kind: HelmRepository
-        name: cloudnative-pg-charts
-        namespace: flux-system
-  install:
-    createNamespace: false
-    remediation:
-      retries: 5
-  upgrade:
-    remediation:
-      retries: 5
-  values:
-    crds:
-      create: true
+    interval: 15m
+    chart:
+        spec:
+            chart: cloudnative-pg
+            version: 0.18.2
+            sourceRef:
+                kind: HelmRepository
+                name: cloudnative-pg-charts
+                namespace: flux-system
+    install:
+        createNamespace: false
+        remediation:
+            retries: 5
+    upgrade:
+        remediation:
+            retries: 5
+    values:
+        crds:
+            create: true

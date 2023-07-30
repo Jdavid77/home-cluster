@@ -1,0 +1,73 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: authentik
+  namespace: security
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://charts.goauthentik.io
+      chart: authentik
+      version: 2023.6.3
+      sourceRef:
+        kind: HelmRepository
+        name: authentik
+        namespace: flux-system
+      interval: 5m
+  values:
+    image:
+      repository: ghcr.io/goauthentik/server
+      pullPolicy: IfNotPresent
+      tag: 2023.6.1
+    serviceAccount:
+      create: false
+    ingress:
+      enabled: true
+      ingressClassName: traefik
+      annotations:
+        cert-manager.io/issuer: prod-issuer
+        cert-manager.io/issuer-group: cert-manager.k8s.cloudflare.com
+        cert-manager.io/issuer-kind: OriginIssuer
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        external-dns.alpha.kubernetes.io/hostname: authentik.${SECRET_DOMAIN}
+        external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
+        hajimari.io/enable: "true"
+        hajimari.io/icon: "shield-account-variant"
+        hajimari.io/appName: "Authentik"
+      hosts:
+        - host: authentik.${SECRET_DOMAIN}
+          paths:
+            - path: /
+      tls:
+        - hosts:
+            - authentik.${SECRET_DOMAIN}
+    authentik:
+      secret_key: ${AUTHENTIK_SECRET}
+      log_level: debug
+      error_reporting:
+        enabled: true
+      postgresql:
+        host: pg-cluster-rw.default.svc.cluster.local
+        user: authentik-admin
+        name: authentik
+        password: ${AUTHENTIK_PG_PASSWORD}
+    redis:
+      enabled: true
+      persistence:
+        enabled: false
+      auth:
+        enabled: false
+
+    prometheus:
+      serviceMonitor:
+        create: false
+      rules:
+        create: false
+    initContainers:
+      init-db:
+        image: ghcr.io/onedr0p/postgres-initdb:14.8
+        imagePullPolicy: IfNotPresent
+        envFrom:
+          - secretRef:
+              name: authentik-database-secrets

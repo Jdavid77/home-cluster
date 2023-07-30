@@ -9,3 +9,4 @@ spec:
     - secretName: hajimari-tls
     - secretName: grafana-tls
     - secretName: uptime-tls
+    - secretName: authentik-tls

@@ -1,0 +1,12 @@
+# issuer.yaml
+apiVersion: cert-manager.k8s.cloudflare.com/v1
+kind: OriginIssuer
+metadata:
+  name: prod-issuer
+  namespace: security
+spec:
+  requestType: OriginRSA
+  auth:
+    serviceKeyRef:
+      name: origin-ca-key
+      key: key

@@ -7,3 +7,4 @@ resources:
   - operators.yaml
   - monitoring.yaml
   - hajimari.yaml
+  - security.yaml

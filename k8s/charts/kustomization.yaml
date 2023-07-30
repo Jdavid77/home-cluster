@@ -11,3 +11,4 @@ resources:
   - opentelemetry-charts.yaml
   - dirsigler-charts.yaml
   - hajimari-charts.yaml
+  - authentik-charts.yaml
