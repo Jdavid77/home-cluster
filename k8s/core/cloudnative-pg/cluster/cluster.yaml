@@ -5,6 +5,7 @@ metadata:
   namespace: default
 spec:
   instances: 2
+  primaryUpdateStrategy: unsupervised
   storage:
     size: 20Gi
     storageClass: local-path
