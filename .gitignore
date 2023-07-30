@@ -1,1 +1,3 @@
 age.ageKey
+.env
+.terraform/
