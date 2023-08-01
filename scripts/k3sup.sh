@@ -1,6 +1,6 @@
 #!/bin/bash
 
-K3S_VERSION="v1.25.11+k3s1"
+K3S_VERSION="v1.27.4+k3s1"
 K3S_SERVER_IP="192.168.1.80"
 K3S_USER="server"
 LOCAL_KUBECONFIG="~/.kube/home-cluster"
