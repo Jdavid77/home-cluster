@@ -39,7 +39,6 @@ spec:
         - noatime
     storageClass:
       defaultClass: false
-      pathPattern: "${.PVC.namespace}-${.PVC.name}"
       reclaimPolicy: Retain
     affinity:
       podAntiAffinity:
