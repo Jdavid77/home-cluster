@@ -12,4 +12,4 @@ resources:
   - dirsigler-charts.yaml
   - hajimari-charts.yaml
   - authentik-charts.yaml
-  - nfs-provisioner-charts
+  - nfs-provisioner-charts.yaml
