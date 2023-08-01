@@ -3,8 +3,6 @@ kind: HelmRelease
 metadata:
   name: nfs-subdir-external-provisioner
   namespace: kube-system
-  labels:
-    kustomize.toolkit.fluxcd.io/substitute: "disabled"
 spec:
   interval: 5m
   chart:
@@ -34,9 +32,8 @@ spec:
   values:
     replicaCount: 1
     nfs:
-      # Hardcoded: So PVC pattern survives
       server: ${NFS_SERVER}
-      path: ${NFS_PATH}
+      path: /storage
       mountOptions:
         - nfsvers=4 ##  Set NFS version, must match server
         - noatime

@@ -1,3 +1,4 @@
 age.ageKey
 .env
 .terraform/
+.decrypted
