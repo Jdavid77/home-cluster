@@ -7,5 +7,5 @@ resources:
   - ./opentelemetry
   - ./uptime-kuma
   - ./hajimari
-  - ./origin-ca-issuer
+  #- ./origin-ca-issuer
   - ./authentik
