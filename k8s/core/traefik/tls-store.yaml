@@ -5,8 +5,5 @@ metadata:
   name: default
   namespace: traefik
 spec:
-  certificates:
-    - secretName: hajimari-tls
-    - secretName: grafana-tls
-    - secretName: uptime-tls
-    - secretName: authentik-tls
+  defaultCertificate:
+    secretName: ${SECRET_DOMAIN}-tls
