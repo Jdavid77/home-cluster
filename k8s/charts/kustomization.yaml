@@ -13,3 +13,4 @@ resources:
   - hajimari-charts.yaml
   - authentik-charts.yaml
   - nfs-provisioner-charts.yaml
+  - bjw-s-charts.yaml
