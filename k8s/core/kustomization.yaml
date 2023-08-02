@@ -6,4 +6,4 @@ resources:
   - ./traefik
   - ./origin-ca-issuer
   - ./cloudnative-pg
-  - ./nfs-subdir
+  #- ./nfs-subdir
