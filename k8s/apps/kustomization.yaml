@@ -9,3 +9,4 @@ resources:
   - ./hajimari
   #- ./origin-ca-issuer
   - ./authentik
+  - ./cert-manager
