@@ -30,6 +30,10 @@ spec:
     extraArgs:
       - --dns01-recursive-nameservers=1.1.1.1:53,9.9.9.9:53
       - --dns01-recursive-nameservers-only
+      - # When this flag is enabled, secrets will be automatically removed when the certificate resource is deleted
+      - --enable-certificate-owner-ref=true
+      - --default-issuer-name=letsencrypt-production
+      - --default-issuer-kind=ClusterIssuer
     replicaCount: 1
     podDnsPolicy: "None"
     podDnsConfig:
