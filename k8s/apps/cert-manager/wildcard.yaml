@@ -11,6 +11,8 @@ spec:
     name: letsencrypt-production
     kind: ClusterIssuer
   commonName: "${SECRET_DOMAIN}"
+  duration: 2160h # 90d
+  renewBefore: 720h # 30d before SSL will expire, renew it
   dnsNames:
     - "${SECRET_DOMAIN}"
     - "*.${SECRET_DOMAIN}"
