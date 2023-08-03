@@ -81,6 +81,8 @@ spec:
       - "--experimental.plugins.geoblock.version=v0.2.6"
       - "--experimental.plugins.cloudflarewarp.modulename=github.com/BetterCorp/cloudflarewarp"
       - "--experimental.plugins.cloudflarewarp.version=v1.3.3"
+    additionalArguments:
+      - "--providers.kubernetesingress.ingressendpoint.ip=${TRAEFIK_IP}"
     providers:
       kubernetesCRD:
         enabled: true
