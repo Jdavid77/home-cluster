@@ -114,7 +114,7 @@ spec:
         external-dns.alpha.kubernetes.io/hostname: grafana.${SECRET_DOMAIN}
         external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        traefik.ingress.kubernetes.io/router.middlewares: traefik-cloudflare-realip@kubernetescrd,traefik-geoblock@kubernetescrd
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-cloudflare-realip@kubernetescrd
         hajimari.io/enable: "true"
       hosts:
         - &host grafana.${SECRET_DOMAIN}
