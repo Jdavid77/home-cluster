@@ -57,6 +57,7 @@ spec:
         tls:
           - hosts:
               - *host
+            secretName: ${SECRET_DOMAIN}-tls 
     podAnnotations:
       configmap.reloader.stakater.com/reload: "hajimari-settings"
     persistence:

@@ -32,7 +32,8 @@ spec:
               pathType: ImplementationSpecific
       tls:
         - hosts:
-            - *host 
+            - *host
+          secretName: ${SECRET_DOMAIN}-tls
     volume:
       enabled: true
       accessMode: ReadWriteOnce
