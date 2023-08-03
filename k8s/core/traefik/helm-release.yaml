@@ -126,6 +126,8 @@ spec:
 
     tlsOptions:
       default:
+        minVersion: VersionTLS12
+        maxVersion: VersionTLS13
         sniStrict: true
     pilot:
       enabled: false
