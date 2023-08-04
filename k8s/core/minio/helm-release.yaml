@@ -57,11 +57,11 @@ spec:
     env:
       MINIO_UPDATE: "off"
       MINIO_BROWSER_REDIRECT_URL: https://minio.${SECRET_DOMAIN}
-      MINIO_SERVER_URL: http://minio.storage.svc.cluster.local:9000
+      MINIO_SERVER_URL: http://minio.default.svc.cluster.local:9000
       # MINIO_PROMETHEUS_URL: http://prometheus-prometheus.monitoring.svc.local:9090
       # MINIO_PROMETHEUS_JOB_ID: minio
       # MINIO_PROMETHEUS_AUTH_TYPE: public
-      MINIO_API_CORS_ALLOW_ORIGIN: https://minio.${SECRET_DOMAIN},http://minio.storage.svc.cluster.local:9000
+      MINIO_API_CORS_ALLOW_ORIGIN: https://minio.${SECRET_DOMAIN},http://minio.default.svc.cluster.local:9000
     envFrom:
       - secretRef:
           name: minio-secret
