@@ -86,9 +86,9 @@ spec:
             secretName: ${SECRET_DOMAIN}-tls
       s3:
         enabled: true
-        ingressClassName: nginx
+        ingressClassName: traefik
         annotations:
-          nginx.ingress.kubernetes.io/router.entrypoints: websecure
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
           cert-manager.io/cluster-issuer: letsencrypt-production
         hosts:
           - host: &api-host "minio-s3.${SECRET_DOMAIN}"
