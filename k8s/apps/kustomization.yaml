@@ -5,7 +5,7 @@ resources:
   - ./reflector
   - ./grafana
   - ./opentelemetry
-  #- ./uptime-kuma
+  - ./uptime-kuma
   - ./hajimari
   #- ./origin-ca-issuer
   - ./authentik
