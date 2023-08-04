@@ -7,4 +7,4 @@ resources:
   - ./origin-ca-issuer
   - ./cloudnative-pg
   - ./nfs-subdir
-  #- ./minio
+  - ./minio
