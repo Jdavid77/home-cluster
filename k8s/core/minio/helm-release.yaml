@@ -47,7 +47,7 @@ spec:
         enabled: true
         type: nfs
         server: 192.168.1.82
-        path: /storage/minio
+        path: /storage
         readOnly: false
         mountPath: /data
     podSecurityContext:
