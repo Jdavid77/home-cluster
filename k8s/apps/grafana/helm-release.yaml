@@ -104,6 +104,7 @@ spec:
       - grafana-polystat-panel
       # Data Sources
       - camptocamp-prometheus-alertmanager-datasource
+      - yesoreyeram-boomtheme-panel
     serviceMonitor:
       enabled: false
     ingress:
