@@ -8,3 +8,4 @@ resources:
   - monitoring.yaml
   - hajimari.yaml
   - security.yaml
+  - media.yaml
