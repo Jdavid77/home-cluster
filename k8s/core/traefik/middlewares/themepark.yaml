@@ -1,0 +1,10 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+    name: uptime-theme
+    namespace: traefik
+spec:
+    plugin:
+        traefik-themepark:
+            app: uptime-kuma
+            theme: hotpink

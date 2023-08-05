@@ -24,6 +24,7 @@ spec:
         external-dns.alpha.kubernetes.io/hostname: uptime.${SECRET_DOMAIN}
         external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-cloudflare-realip@kubernetescrd, traefik-uptime-theme@kubernetescrd
         hajimari.io/enable: "true"
       hosts:
         - host: &host uptime.${SECRET_DOMAIN}

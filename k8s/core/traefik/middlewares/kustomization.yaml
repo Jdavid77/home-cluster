@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - cloudflare-realip.yaml
   #- geoblock.yaml
+  - themepark.yaml
