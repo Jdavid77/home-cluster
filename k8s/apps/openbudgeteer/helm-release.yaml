@@ -30,7 +30,7 @@ spec:
       repository: axelander/openbudgeteer
       tag: 1.6.1
     env:
-      CONNECTION_PROVIDER: "postgresql"
+      CONNECTION_PROVIDER: "POSTGRESQL"
       CONNECTION_DATABASE: "open-budgeteer"
       CONNECTION_SERVER: "pg-cluster-rw.default.svc.cluster.local"
     envFrom: 
