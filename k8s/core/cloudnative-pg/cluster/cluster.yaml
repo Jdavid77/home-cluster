@@ -9,8 +9,6 @@ spec:
   storage:
     size: 20Gi
     storageClass: local-path
-  superuserSecret:
-    name: cloudnative-pg-superuser
   monitoring:
     enablePodMonitor: false
   backup:
