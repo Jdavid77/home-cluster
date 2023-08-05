@@ -67,7 +67,7 @@ spec:
       media:
         enabled: true
         existingClaim: nfs-audiobookshelf-pvc
-        mountPath: /media
+        mountPath: /books
       cache:
         enabled: true
         mountPath: /.npm
