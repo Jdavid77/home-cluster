@@ -11,3 +11,4 @@ resources:
   #- ./origin-ca-issuer
   - ./authentik
   - ./cert-manager
+  - ./openbudgeteer
