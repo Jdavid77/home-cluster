@@ -69,39 +69,39 @@ spec:
               - severity = "warning"
             equal: ["alertname", "namespace"]
           
-        ingress:
-          enabled: true
-          pathType: Prefix
-          annotations:
-            cert-manager.io/cluster-issuer: letsencrypt-production
-            external-dns.alpha.kubernetes.io/hostname: alerts.${SECRET_DOMAIN}
-            external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
-            traefik.ingress.kubernetes.io/router.entrypoints: websecure
-            traefik.ingress.kubernetes.io/router.middlewares: traefik-cloudflare-realip@kubernetescrd
-            hajimari.io/enable: "true"
-          hosts:
-            - &host alerts.${SECRET_DOMAIN}
-          tls:
-            - hosts:
-                - *host
-              secretName: ${SECRET_DOMAIN}-tls
-        alertmanagerSpec:
-          replicas: 1
-          podAffinity: hard
-          storage:
-            volumeClaimTemplate:
-              spec:
-                storageClassName: local-path
-                resources:
-                  requests:
-                    storage: 10Mi
-          resources:
-            requests:
-              cpu: 50m
-              memory: 64Mi
-            limits:
-              cpu: 60m
-              memory: 64Mi
+      ingress:
+        enabled: true
+        pathType: Prefix
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-production
+          external-dns.alpha.kubernetes.io/hostname: alerts.${SECRET_DOMAIN}
+          external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          traefik.ingress.kubernetes.io/router.middlewares: traefik-cloudflare-realip@kubernetescrd
+          hajimari.io/enable: "true"
+        hosts:
+          - &host alerts.${SECRET_DOMAIN}
+        tls:
+          - hosts:
+              - *host
+            secretName: ${SECRET_DOMAIN}-tls
+      alertmanagerSpec:
+        replicas: 1
+        podAffinity: hard
+        storage:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: local-path
+              resources:
+                requests:
+                  storage: 10Mi
+        resources:
+          requests:
+            cpu: 50m
+            memory: 64Mi
+          limits:
+            cpu: 60m
+            memory: 64Mi
     grafana:
       enabled: false
     kubelet:
