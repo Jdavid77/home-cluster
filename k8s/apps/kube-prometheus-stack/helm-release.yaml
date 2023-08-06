@@ -166,6 +166,8 @@ spec:
             cpu: 200m
       admissionWebhooks:
         enabled: false
+      tls:
+        enabled: false
 
     prometheus:
       ingress:
