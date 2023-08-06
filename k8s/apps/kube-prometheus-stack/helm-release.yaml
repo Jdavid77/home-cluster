@@ -138,7 +138,7 @@ spec:
               targetLabel: kubernetes_node
 
     kubeApiServer:
-      enabled: true
+      enabled: false
 
     kubeControllerManager:
       enabled: false
