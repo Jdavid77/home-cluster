@@ -103,4 +103,5 @@ spec:
           - hosts:
               - *api-host
             secretName: ${SECRET_DOMAIN}-tls
-#Z5Bz6Yk*5@Dv73nLqZ9%
+
+

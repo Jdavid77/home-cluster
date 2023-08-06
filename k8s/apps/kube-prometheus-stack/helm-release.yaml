@@ -1,0 +1,241 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: kube-prometheus-stack
+  namespace: monitoring
+spec:
+  interval: 15m
+  chart:
+    spec:
+      # renovate: registryUrl=https://prometheus-community.github.io/helm-charts
+      chart: kube-prometheus-stack
+      version: 48.3.1
+      sourceRef:
+        kind: HelmRepository
+        name: prometheus-community-charts
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+
+    crds:
+      enabled: true
+
+    cleanPrometheusOperatorObjectNames: true
+
+    defaultRules:
+      disabled:
+        HostHighCpuLoad: true
+
+    alertmanager:
+      config:
+        global:
+          resolve_timeout: 5m
+        receivers:
+        - name: 'null'
+        - name: 'pushover'
+          pushover_configs:
+            - send_resolved: false
+              retry: 20m
+              title: |-
+                [{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ if ne .CommonAnnotations.summary ""}}{{ .CommonAnnotations.summary }} {{ else if ne .CommonAnnotations.message ""}}{{ .CommonAnnotations.message }} {{ else if ne .CommonAnnotations.description ""}}{{ .CommonAnnotations.description }} {{ else }}{{ .CommonLabels.alertname }}{{ end }}
+              text: >-
+                {{ range .Alerts -}}
+                  *Alert:* {{ .Annotations.title }}{{ if .Labels.severity }} - `{{ .Labels.severity }}`{{ end }}
+
+                {{ if ne .Annotations.summary ""}}*Summary:* {{ .Annotations.summary }} {{ else if ne .Annotations.message ""}}*Message:* {{ .Annotations.message }} {{ else if ne .Annotations.description ""}}*Description:* {{ .Annotations.description }}{{ end }}
+
+                *Details:*
+                  {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
+                  {{ end }}
+                {{ end }}
+        route:
+          group_by: ["alertname", "job"]
+          group_wait: 45s
+          group_interval: 10m
+          repeat_interval: 12h
+          receiver: 'pushover'
+          routes:
+            - receiver: "null" # quote
+              matchers:
+                - alertname =~ "Watchdog"
+            - receiver: "null" # quote
+              matchers:
+                - alertname =~ "InfoInhibitor"
+            # - receiver: 'pagerduty'
+            #   matchers:
+            #     - severity = "critical"
+            #   continue: true
+            - receiver: 'pushover'
+        inhibit_rules:
+          - source_matchers:
+              - severity = "critical"
+            target_matchers:
+              - severity = "warning"
+            equal: ["alertname", "namespace"]
+      ingress:
+        enabled: true
+        pathType: Prefix
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-production
+          external-dns.alpha.kubernetes.io/hostname: alerts.${SECRET_DOMAIN}
+          external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          traefik.ingress.kubernetes.io/router.middlewares: traefik-cloudflare-realip@kubernetescrd
+          hajimari.io/enable: "true"
+        hosts:
+          - &host alerts.${SECRET_DOMAIN}
+        tls:
+          - hosts:
+              - *host
+            secretName: ${SECRET_DOMAIN}-tls
+      alertmanagerSpec:
+        replicas: 1
+        podAntiAffinity: hard
+        storage:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: local-path
+              resources:
+                requests:
+                  storage: 1Gi
+        tolerations:
+        - key: "arm"
+          operator: "Exists"
+
+    grafana:
+      enabled: false
+      forceDeployDashboards: true
+
+    kubelet:
+      enabled: true
+      serviceMonitor:
+        metricRelabelings:
+          - action: replace
+            sourceLabels: ["node"]
+            targetLabel: instance
+
+    kube-state-metrics:
+      metricLabelsAllowlist: ["persistentvolumeclaims=[*]"]
+      prometheus:
+        monitor:
+          enabled: true
+          relabelings:
+            - action: replace
+              regex: (.*)
+              replacement: $1
+              sourceLabels: ["__meta_kubernetes_pod_node_name"]
+              targetLabel: kubernetes_node
+
+    kubeApiServer:
+      enabled: true
+
+    kubeControllerManager:
+      enabled: false
+
+    kubeScheduler:
+      enabled: false
+    
+    kubeProxy:
+      enabled: false
+
+    kubeEtcd:
+      enabled: false
+
+    prometheusOperator:
+      createCustomResource: true
+      # prometheusConfigReloaderImage:
+      #   repository: quay.io/coreos/prometheus-config-reloader
+      #   tag: v0.39.0
+      # configmapReloadImage:
+      #   repository: jimmidyson/configmap-reload
+      #   tag: v0.4.0
+      prometheusConfigReloader:
+        resources:
+          limits:
+            cpu: 200m
+      admissionWebhooks:
+        enabled: false
+
+    prometheus:
+      ingress:
+        enabled: false
+
+      thanosService:
+        enabled: false
+      thanosServiceMonitor:
+        enabled: false
+      prometheusSpec:
+        replicas: 1
+        replicaExternalLabelName: "replica"
+        thanos:
+          image: quay.io/thanos/thanos:v0.31.0
+          version: v0.30.1
+          objectStorageConfig:
+            name: thanos-objstore-secret
+            key: objstore.yml
+        podAntiAffinity: hard
+        ruleSelectorNilUsesHelmValues: false
+        serviceMonitorSelectorNilUsesHelmValues: false
+        podMonitorSelectorNilUsesHelmValues: false
+        probeSelectorNilUsesHelmValues: false
+        retention: 2d
+        retentionSize: 6GB
+        enableAdminAPI: true
+        walCompression: true
+        storageSpec:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: local-path
+              resources:
+                requests:
+                  storage: 20Gi
+        resources:
+          requests:
+            memory: 2000Mi
+            cpu: 250m
+          limits:
+            memory: 5000Mi
+
+
+    nodeExporter:
+      enabled: true
+
+    prometheus-node-exporter:
+      prometheus:
+        monitor:
+          enabled: true
+          # relabelings:
+          #   - action: replace
+          #     regex: (.*)
+          #     replacement: $1
+          #     sourceLabels:
+          #       - __meta_kubernetes_pod_node_name
+          #     targetLabel: instance
+      tolerations:
+      - key: "arm"
+        operator: "Exists"
+      - key: "armhf"
+        operator: "Exists"
+      - key: "node-role.kubernetes.io/master"
+        operator: "Exists"
+
+  valuesFrom:
+    - targetPath: alertmanager.config.receivers[1].pushover_configs[0].user_key
+      kind: Secret
+      name: kube-prom-secret
+      valuesKey: PUSHOVER_USER_KEY
+    - targetPath: alertmanager.config.receivers[1].pushover_configs[0].token
+      kind: Secret
+      name: kube-prom-secret
+      valuesKey: PUSHOVER_TOKEN

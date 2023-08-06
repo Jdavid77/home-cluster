@@ -12,3 +12,4 @@ resources:
   - ./authentik
   - ./cert-manager
   - ./actual
+  - ./kube-prometheus-stack
