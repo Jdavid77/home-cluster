@@ -7,3 +7,4 @@ spec:
   interval: 15m
   url: oci://ghcr.io/prometheus-community/charts
   timeout: 3m
+  type: oci
