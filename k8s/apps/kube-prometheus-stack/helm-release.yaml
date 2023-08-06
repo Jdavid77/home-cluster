@@ -32,6 +32,8 @@ spec:
           pushover_configs:
             - send_resolved: true
               retry: 20m
+              user_key: ${PUSHOVER_USER_KEY}
+              token: ${PUSHOVER_TOKEN}
               title: |-
                 [{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ if ne .CommonAnnotations.summary ""}}{{ .CommonAnnotations.summary }} {{ else if ne .CommonAnnotations.message ""}}{{ .CommonAnnotations.message }} {{ else if ne .CommonAnnotations.description ""}}{{ .CommonAnnotations.description }} {{ else }}{{ .CommonLabels.alertname }}{{ end }}
               message: >-
@@ -161,12 +163,3 @@ spec:
         kubeScheduler: false
     kubeControllerManager:
       enabled: false
-  valuesFrom:
-    - targetPath: alertmanager.config.receivers[1].pushover_configs[0].user_key
-      kind: Secret
-      name: kube-prom-secret
-      valuesKey: PUSHOVER_USER_KEY
-    - targetPath: alertmanager.config.receivers[1].pushover_configs[0].token
-      kind: Secret
-      name: kube-prom-secret
-      valuesKey: PUSHOVER_TOKEN
