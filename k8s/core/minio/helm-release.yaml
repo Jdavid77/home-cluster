@@ -85,7 +85,6 @@ spec:
         tls:
           - hosts:
               - *console-host
-            secretName: ${SECRET_DOMAIN}-tls
       s3:
         enabled: true
         ingressClassName: traefik
@@ -102,6 +101,5 @@ spec:
         tls:
           - hosts:
               - *api-host
-            secretName: ${SECRET_DOMAIN}-tls
 
 
