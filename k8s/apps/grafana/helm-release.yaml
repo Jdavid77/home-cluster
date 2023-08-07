@@ -122,7 +122,6 @@ spec:
       tls:
         - hosts:
             - *host
-          secretName: ${SECRET_DOMAIN}-tls 
     serviceAccount:
       create: true
       autoMount: true
