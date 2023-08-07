@@ -34,6 +34,7 @@ spec:
       - --enable-certificate-owner-ref=true
       - --default-issuer-name=letsencrypt-production
       - --default-issuer-kind=ClusterIssuer
+      - --default-issuer-group=cert-manager.io
     replicaCount: 1
     podDnsPolicy: "None"
     podDnsConfig:
