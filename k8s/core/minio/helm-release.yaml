@@ -75,6 +75,8 @@ spec:
           cert-manager.io/cluster-issuer: letsencrypt-production
           external-dns.alpha.kubernetes.io/hostname: minio.${SECRET_DOMAIN}
           external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "database"
         hosts:
           - host: &console-host "minio.${SECRET_DOMAIN}"
             paths:
