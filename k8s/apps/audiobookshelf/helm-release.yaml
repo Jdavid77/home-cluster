@@ -49,6 +49,8 @@ spec:
           external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
           traefik.ingress.kubernetes.io/router.middlewares: traefik-cloudflare-realip@kubernetescrd
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "check-network"
         hosts:
           - host: &host audiobookshelf.${SECRET_DOMAIN}
             paths:
