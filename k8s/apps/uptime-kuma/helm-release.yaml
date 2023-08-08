@@ -20,7 +20,6 @@ spec:
       enabled: true
       className: traefik
       annotations:
-        cert-manager.io/cluster-issuer: letsencrypt-production
         external-dns.alpha.kubernetes.io/hostname: uptime.${SECRET_DOMAIN}
         external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
         traefik.ingress.kubernetes.io/router.entrypoints: websecure

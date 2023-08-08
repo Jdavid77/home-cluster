@@ -41,7 +41,6 @@ spec:
         enabled: true
         ingressClassName: traefik
         annotations:
-          cert-manager.io/cluster-issuer: letsencrypt-production
           external-dns.alpha.kubernetes.io/hostname: actual.${SECRET_DOMAIN}
           external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
@@ -56,6 +55,7 @@ spec:
         tls:
           - hosts:
               - *host
+            secretName: ${SECRET_DOMAIN}-tls
     persistence:
       data:
         enabled: true

@@ -26,8 +26,6 @@ spec:
       enabled: true
       ingressClassName: traefik
       annotations:
-        cert-manager.io/cluster-issuer: letsencrypt-production
-        kubernetes.io/tls-acme: "true"
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         external-dns.alpha.kubernetes.io/hostname: authentik.${SECRET_DOMAIN}
         external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
@@ -41,6 +39,7 @@ spec:
       tls:
         - hosts:
             - authentik.${SECRET_DOMAIN}
+          secretName: ${SECRET_DOMAIN}-tls
     authentik:
       secret_key: ${AUTHENTIK_SECRET}
       log_level: debug
