@@ -45,7 +45,7 @@ spec:
       error_reporting:
         enabled: true
       postgresql:
-        host: pg-cluster-rw.default.svc.cluster.local
+        host: pg-cluster-rw.storage.svc.cluster.local
         user: authentik-admin
         name: authentik
         password: ${AUTHENTIK_PG_PASSWORD}
