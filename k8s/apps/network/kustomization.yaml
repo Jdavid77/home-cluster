@@ -5,4 +5,5 @@ resources:
   - ./namespace.yaml
   - ./metallb/ks.yaml
   - ./traefik/ks.yaml
+  - ./external-dns/ks.yaml
 
