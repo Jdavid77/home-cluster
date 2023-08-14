@@ -71,7 +71,7 @@ spec:
         ingressClassName: traefik
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
-          traefik.ingress.kubernetes.io/router.middlewares: traefik-cloudflare-realip@kubernetescrd
+          traefik.ingress.kubernetes.io/router.middlewares: network-cloudflare-realip@kubernetescrd
           external-dns.alpha.kubernetes.io/hostname: minio.${SECRET_DOMAIN}
           external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
           hajimari.io/enable: "true"
