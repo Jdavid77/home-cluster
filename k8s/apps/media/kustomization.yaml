@@ -5,4 +5,5 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./_pvs
+  - ./qbittorrent/ks.yaml
   #- ./audiobookshelf/ks.yaml
