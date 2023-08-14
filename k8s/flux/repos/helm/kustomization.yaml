@@ -15,3 +15,4 @@ resources:
   - nfs-provisioner-charts.yaml
   - bjw-s-charts.yaml
   - prometheus-community-charts.yaml
+  - csi-driver-nfs.yaml
