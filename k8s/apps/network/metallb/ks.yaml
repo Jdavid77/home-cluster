@@ -1,0 +1,36 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: metallb
+  namespace: flux-system
+spec:
+  path: ./k8s/apps/network/metallb/app
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-cluster
+  wait: true
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: metallb-custom-resources
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: metallb
+  path: ./k8s/apps/network/metallb/custom-resources
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-cluster
+  wait: true
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
