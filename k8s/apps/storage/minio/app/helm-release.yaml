@@ -43,13 +43,13 @@ spec:
       - --console-address
       - :9001
     persistence:
-      config:
+      data:
         enabled: true
-        type: nfs
-        server: 192.168.1.82
-        path: /storage
-        readOnly: false
+        type: hostPath
+        hostPath: /mnt/backup/minio/
+        hostPathType: Directory
         mountPath: /data
+        readOnly: false
     podSecurityContext:
       runAsUser: 0
       privileged: true
