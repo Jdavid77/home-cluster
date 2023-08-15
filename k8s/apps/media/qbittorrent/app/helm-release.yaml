@@ -55,6 +55,19 @@ spec:
         ports:
           http:
             port: *port
+      bittorent:
+        enabled: true
+        type: LoadBalancer
+        loadBalancerIP: "${QB_TORRENT_IP}"
+        annotations:
+          metallb.universe.tf/loadBalancerIPs: "${QB_TORRENT_IP}"
+        ports:
+          bittorrent:
+            enabled: true
+            port: *port-bt
+            protocol: TCP
+            targetPort: *port-bt
+        externalTrafficPolicy: Local
 
     ingress:
       main:
