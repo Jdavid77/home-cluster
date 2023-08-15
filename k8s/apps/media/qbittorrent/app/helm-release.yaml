@@ -13,7 +13,6 @@ spec:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
-
   install:
     createNamespace: true
     remediation:
@@ -58,7 +57,7 @@ spec:
 
     ingress:
       main:
-        enabled: true
+        enabled: false
         ingressClassName: traefik
         annotations:
           external-dns.alpha.kubernetes.io/hostname: torrent.${SECRET_DOMAIN}

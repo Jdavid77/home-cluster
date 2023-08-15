@@ -4,5 +4,5 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./cloudnative-pg/ks.yaml
-  - ./minio/ks.yaml
+  #- ./minio/ks.yaml
   - ./csi-driver-nfs/ks.yaml
