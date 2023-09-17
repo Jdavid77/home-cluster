@@ -8,7 +8,7 @@ spec:
   primaryUpdateStrategy: unsupervised
   storage:
     size: 20Gi
-    storageClass: local-path
+    storageClass: longhorn
   monitoring:
     enablePodMonitor: false
   backup:
@@ -19,7 +19,7 @@ spec:
         maxParallel: 8
       destinationPath: s3://db-backups/
       endpointURL: https://${CLOUDFLARE_ACCOUNT_ID}.r2.cloudflarestorage.com
-      serverName: postgres-v1
+      serverName: postgres-v2
       s3Credentials:
         accessKeyId:
           name: r2-secrets
