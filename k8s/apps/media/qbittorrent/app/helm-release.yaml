@@ -107,4 +107,4 @@ spec:
         mountPath: /config
         accessMode: ReadWriteOnce
         size: 1Gi
-        storageClass: local-path
+        storageClass: longhorn
