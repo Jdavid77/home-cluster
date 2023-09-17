@@ -46,7 +46,7 @@ spec:
       data:
         enabled: true
         type: hostPath
-        hostPath: /minio/backup/
+        hostPath: /mnt/storage
         hostPathType: Directory
         mountPath: /data
         readOnly: false
