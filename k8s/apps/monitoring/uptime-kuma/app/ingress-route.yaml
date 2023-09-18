@@ -1,0 +1,28 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: uptime-kuma
+  namespace: monitoring
+spec:
+  routes:
+    - kind: Rule
+      match: Host(`uptime.${SECRET_DOMAIN}`)
+      priority: 10
+      middlewares:
+        - name: authentik
+          namespace: network
+      services:
+        - name: uptime-kuma
+          namespace: monitoring
+          port: 3001
+    - kind: Rule
+      match: "Host(`uptime.${SECRET_DOMAIN}`) && PathPrefix(`/outpost.goauthentik.io/`)"
+      priority: 15
+      services:
+        - kind: Service
+          name: authentik
+          namespace: security
+          port: 9000
+  tls:                              
+    secretName: ${SECRET_DOMAIN}-tls       

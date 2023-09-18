@@ -1,0 +1,133 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: authentik-outpost
+  namespace: security
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: kyverno.dev.ils.neoception.dev
+    http:
+      paths:
+      - backend:
+          service:
+            name: ak-outpost-ils-dev-outpost
+            port:
+              name: http
+        path: /outpost.goauthentik.io
+        pathType: Prefix
+  - host: alertmanager-integr.dev.ils.neoception.dev
+    http:
+      paths:
+      - backend:
+          service:
+            name: ak-outpost-ils-dev-outpost
+            port:
+              name: http
+        path: /outpost.goauthentik.io
+        pathType: Prefix
+  - host: uptime.dev.ils.neoception.dev
+    http:
+      paths:
+      - backend:
+          service:
+            name: ak-outpost-ils-dev-outpost
+            port:
+              name: http
+        path: /outpost.goauthentik.io
+        pathType: Prefix
+  - host: traefik.dev.ils.neoception.dev
+    http:
+      paths:
+      - backend:
+          service:
+            name: ak-outpost-ils-dev-outpost
+            port:
+              name: http
+        path: /outpost.goauthentik.io
+        pathType: Prefix
+  - host: kubeclarity.dev.ils.neoception.dev
+    http:
+      paths:
+      - backend:
+          service:
+            name: ak-outpost-ils-dev-outpost
+            port:
+              name: http
+        path: /outpost.goauthentik.io
+        pathType: Prefix
+  - host: alertmanager.dev.ils.neoception.dev
+    http:
+      paths:
+      - backend:
+          service:
+            name: ak-outpost-ils-dev-outpost
+            port:
+              name: http
+        path: /outpost.goauthentik.io
+        pathType: Prefix
+  - host: thanos.dev.ils.neoception.dev
+    http:
+      paths:
+      - backend:
+          service:
+            name: ak-outpost-ils-dev-outpost
+            port:
+              name: http
+        path: /outpost.goauthentik.io
+        pathType: Prefix
+  - host: alertmanager-core.dev.ils.neoception.dev
+    http:
+      paths:
+      - backend:
+          service:
+            name: ak-outpost-ils-dev-outpost
+            port:
+              name: http
+        path: /outpost.goauthentik.io
+        pathType: Prefix
+  - host: alertmanager-ops.dev.ils.neoception.dev
+    http:
+      paths:
+      - backend:
+          service:
+            name: ak-outpost-ils-dev-outpost
+            port:
+              name: http
+        path: /outpost.goauthentik.io
+        pathType: Prefix
+  - host: tracetest.dev.ils.neoception.dev
+    http:
+      paths:
+      - backend:
+          service:
+            name: ak-outpost-ils-dev-outpost
+            port:
+              name: http
+        path: /outpost.goauthentik.io
+        pathType: Prefix
+  - host: testkube.dev.ils.neoception.dev
+    http:
+      paths:
+      - backend:
+          service:
+            name: ak-outpost-ils-dev-outpost
+            port:
+              name: http
+        path: /outpost.goauthentik.io
+        pathType: Prefix
+  tls:
+  - hosts:
+    - kyverno.dev.ils.neoception.dev
+    - alertmanager-integr.dev.ils.neoception.dev
+    - uptime.dev.ils.neoception.dev
+    - traefik.dev.ils.neoception.dev
+    - kubeclarity.dev.ils.neoception.dev
+    - alertmanager.dev.ils.neoception.dev
+    - thanos.dev.ils.neoception.dev
+    - alertmanager-core.dev.ils.neoception.dev
+    - alertmanager-ops.dev.ils.neoception.dev
+    - tracetest.dev.ils.neoception.dev
+    - testkube.dev.ils.neoception.dev
+    secretName: authentik-outpost-tls
+
