@@ -141,8 +141,6 @@ spec:
         ruleSelectorNilUsesHelmValues: false
         serviceMonitorSelectorNilUsesHelmValues: false
         podMonitorSelectorNilUsesHelmValues: false
-        podMonitorNamespaceSelector:
-          any: true
         probeSelectorNilUsesHelmValues: false
         retention: 120d
         enableAdminAPI: true
