@@ -23,6 +23,4 @@ spec:
         - kind: Service
           name: authentik
           namespace: security
-          port: 9000
-  tls:                              
-    secretName: ${SECRET_DOMAIN}-tls       
+          port: 80
