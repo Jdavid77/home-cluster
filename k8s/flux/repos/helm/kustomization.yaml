@@ -16,3 +16,4 @@ resources:
   - bjw-s-charts.yaml
   - prometheus-community-charts.yaml
   - csi-driver-nfs.yaml
+  - kubernetes-sigs-charts.yaml

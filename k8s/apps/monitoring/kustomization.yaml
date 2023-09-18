@@ -7,3 +7,4 @@ resources:
   - ./uptime-kuma/ks.yaml
   - ./kube-prometheus-stack/ks.yaml
   - ./opentelemetry/ks.yaml
+  - ./metrics-server/ks.yaml
