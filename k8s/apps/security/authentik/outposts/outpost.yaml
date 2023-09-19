@@ -94,7 +94,7 @@ metadata:
   namespace: security
 spec:
   rules:
-  - host: authentik.jnobrega.com
+  - host: uptime.jnobrega.com
     http:
       paths:
       - backend:
@@ -102,5 +102,9 @@ spec:
             name: authentik-outpost
             port:
               name: http
-        path: /
+        path: /outpost.goauthentik.io
         pathType: Prefix
+  tls:
+  - hosts:
+    - uptime.jnobrega.com
+
