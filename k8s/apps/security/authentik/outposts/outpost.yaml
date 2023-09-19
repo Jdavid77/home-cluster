@@ -85,6 +85,7 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-buffer-size: 16k
     nginx.ingress.kubernetes.io/proxy-buffers-number: "4"
     traefik.ingress.kubernetes.io/affinity: "true"
+    traefik.ingress.kubernetes.io/router.tls: "true"
   labels:
     app.kubernetes.io/instance: authentik-outpost
     app.kubernetes.io/managed-by: goauthentik.io
@@ -93,6 +94,7 @@ metadata:
   name: authentik-outpost
   namespace: security
 spec:
+  ingressClassName: traefik
   rules:
   - host: uptime.jnobrega.com
     http:

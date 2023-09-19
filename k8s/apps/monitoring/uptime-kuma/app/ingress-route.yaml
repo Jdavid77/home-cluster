@@ -22,5 +22,4 @@ spec:
       services:
         - kind: Service
           name: authentik-outpost
-          namespace: security
           port: 9000
