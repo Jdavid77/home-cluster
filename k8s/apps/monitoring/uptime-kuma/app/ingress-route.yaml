@@ -4,6 +4,9 @@ kind: IngressRoute
 metadata:
   name: uptime-kuma
   namespace: monitoring
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: uptime.${SECRET_DOMAIN}
+    external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
 spec:
   routes:
     - kind: Rule
