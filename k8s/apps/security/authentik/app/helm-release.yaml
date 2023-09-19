@@ -68,3 +68,30 @@ spec:
         envFrom:
           - secretRef:
               name: authentik-database-secrets
+  postRenderers:
+    # Instruct helm-controller to use built-in "kustomize" post renderer.
+    - kustomize:
+        # Array of inline strategic merge patch definitions as YAML object.
+        # Note, this is a YAML object and not a string, to avoid syntax
+        # indention errors.
+        patchesStrategicMerge:
+          - kind: Service
+            apiVersion: v1
+            metadata:
+              name: authentik
+              namespace: security
+            spec:
+              ports:
+                - name: http-metrics
+                  port: 9300
+                  protocol: TCP
+                  targetPort: http-metrics
+                - name: http
+                  port: 80
+                  protocol: TCP
+                  targetPort: http
+                - name: outpost
+                  port: 9000
+                  protocol: TCP
+                  targetPort: outpost
+
