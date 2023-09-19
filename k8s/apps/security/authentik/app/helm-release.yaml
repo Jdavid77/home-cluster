@@ -79,7 +79,6 @@ spec:
             apiVersion: v1
             metadata:
               name: authentik
-              namespace: security
             spec:
               ports:
                 - name: http-metrics
