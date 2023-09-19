@@ -8,6 +8,7 @@ metadata:
     app.kubernetes.io/name: authentik-proxy
     app.kubernetes.io/version: 2023.8.3
   name: authentik-outpost
+  namespace: security
 spec:
   ports:
     - name: http
@@ -33,6 +34,7 @@ metadata:
     app.kubernetes.io/name: authentik-proxy
     app.kubernetes.io/version: 2023.8.3
   name: authentik-outpost
+  namespace: security
 spec:
   selector:
     matchLabels:
@@ -89,6 +91,7 @@ metadata:
     app.kubernetes.io/name: authentik-proxy
     app.kubernetes.io/version: 2023.8.3
   name: authentik-outpost
+  namespace: security
 spec:
   rules:
   - host: authentik.jnobrega.com
