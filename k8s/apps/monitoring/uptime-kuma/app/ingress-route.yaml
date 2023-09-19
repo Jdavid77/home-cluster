@@ -21,6 +21,5 @@ spec:
       priority: 15
       services:
         - kind: Service
-          name: authentik
-          namespace: security
-          port: outpost
+          name: authentik-outpost
+          port: 9000
