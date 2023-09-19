@@ -23,4 +23,4 @@ spec:
         - kind: Service
           name: authentik
           namespace: security
-          port: 80
+          port: 9000
