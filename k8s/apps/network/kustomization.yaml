@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./metallb/ks.yaml
-  - ./traefik/ks.yaml
+  #- ./traefik/ks.yaml
+  - ./nginx/ks.yaml
   - ./external-dns/ks.yaml
 
