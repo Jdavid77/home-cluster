@@ -25,7 +25,7 @@ spec:
     keepHistory: false
   values:
     env:
-      TZ: Europe/Lisbon
+      TZ: ${TIMEZONE}
     hajimari:
       title: Apps
       darkTheme: espresso
@@ -48,12 +48,10 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: traefik
+        ingressClassName: nginx
         annotations:
           external-dns.alpha.kubernetes.io/hostname: hajimari.${SECRET_DOMAIN}
           external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
-          traefik.ingress.kubernetes.io/router.entrypoints: websecure
-          traefik.ingress.kubernetes.io/router.middlewares: network-cloudflare-realip@kubernetescrd
         hosts:
           - host: &host hajimari.${SECRET_DOMAIN}
             paths:

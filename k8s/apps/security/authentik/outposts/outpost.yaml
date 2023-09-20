@@ -94,7 +94,7 @@ metadata:
   name: authentik-outpost
   namespace: security
 spec:
-  ingressClassName: traefik
+  ingressClassName: nginx
   rules:
   - host: uptime.jnobrega.com
     http:

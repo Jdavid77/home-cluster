@@ -39,12 +39,10 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: traefik
+        ingressClassName: nginx
         annotations:
           external-dns.alpha.kubernetes.io/hostname: actual.${SECRET_DOMAIN}
           external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
-          traefik.ingress.kubernetes.io/router.entrypoints: websecure
-          traefik.ingress.kubernetes.io/router.middlewares: network-cloudflare-realip@kubernetescrd
           hajimari.io/enable: "true"
           hajimari.io/icon: "finance"
         hosts:

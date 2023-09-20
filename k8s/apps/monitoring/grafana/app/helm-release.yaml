@@ -109,12 +109,10 @@ spec:
       enabled: false
     ingress:
       enabled: true
-      ingressClassName: traefik
+      ingressClassName: nginx
       annotations:
         external-dns.alpha.kubernetes.io/hostname: grafana.${SECRET_DOMAIN}
         external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
-        traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        traefik.ingress.kubernetes.io/router.middlewares: network-cloudflare-realip@kubernetescrd
         hajimari.io/enable: "true"
         hajimari.io/icon: "monitor-dashboard"
       hosts:

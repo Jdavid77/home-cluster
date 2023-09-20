@@ -71,7 +71,7 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: traefik
+        ingressClassName: nginx
         annotations:
           external-dns.alpha.kubernetes.io/hostname: torrent.${SECRET_DOMAIN}
           external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
