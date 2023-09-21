@@ -18,3 +18,4 @@ resources:
   - csi-driver-nfs.yaml
   - kubernetes-sigs-charts.yaml
   - ingress-nginx-charts.yaml
+  - kyverno-charts.yaml
