@@ -17,23 +17,24 @@ spec:
       interval: 5m
   values:
     ingress:
-      enabled: false
-      # className: traefik
-      # annotations:
-      #   external-dns.alpha.kubernetes.io/hostname: uptime.${SECRET_DOMAIN}
-      #   external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
-      #   traefik.ingress.kubernetes.io/router.entrypoints: websecure
-      #   traefik.ingress.kubernetes.io/router.middlewares: network-cloudflare-realip@kubernetescrd, network-uptime-theme@kubernetescrd, network-authentik@kubernetescrd
-      #   hajimari.io/enable: "true"
-      # hosts:
-      #   - host: &host uptime.${SECRET_DOMAIN}
-      #     paths:
-      #       - path: /
-      #         pathType: ImplementationSpecific
-      # tls:
-      #   - hosts:
-      #       - *host
-      #     secretName: ${SECRET_DOMAIN}-tls
+      enabled: true
+      className: nginx
+      annotations:
+        external-dns.alpha.kubernetes.io/hostname: uptime.${SECRET_DOMAIN}
+        external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
+        auth.home.arpa/enabled: "true"
+        nginx.ingress.kubernetes.io/auth-signin: |-
+            https://uptime.${SECRET_DOMAIN}/outpost.goauthentik.io/start?rd=$escaped_request_uri
+        hajimari.io/enable: "true"
+      hosts:
+        - host: &host uptime.${SECRET_DOMAIN}
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
+      tls:
+        - hosts:
+            - *host
+          secretName: ${SECRET_DOMAIN}-tls
     volume:
       enabled: true
       accessMode: ReadWriteOnce
