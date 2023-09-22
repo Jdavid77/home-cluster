@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./grafana/ks.yaml
-  - ./uptime-kuma/ks.yaml
+  #- ./uptime-kuma/ks.yaml
   - ./kube-prometheus-stack/ks.yaml
   - ./opentelemetry/ks.yaml
   - ./metrics-server/ks.yaml
