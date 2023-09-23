@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - outpost.yaml
   - secret.yaml
+  - ingress.yaml
