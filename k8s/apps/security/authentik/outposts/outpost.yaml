@@ -106,7 +106,5 @@ spec:
               name: http
         path: /outpost.goauthentik.io
         pathType: Prefix
-  tls:
-  - hosts:
-    - uptime.jnobrega.com
+
 
