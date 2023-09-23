@@ -23,8 +23,6 @@ spec:
         external-dns.alpha.kubernetes.io/hostname: uptime.${SECRET_DOMAIN}
         external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
         auth.home.arpa/enabled: "true"
-        nginx.ingress.kubernetes.io/auth-signin: |-
-            https://uptime.${SECRET_DOMAIN}/outpost.goauthentik.io/start?rd=$escaped_request_uri
         hajimari.io/enable: "true"
       hosts:
         - host: &host uptime.${SECRET_DOMAIN}
