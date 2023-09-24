@@ -7,3 +7,4 @@ resources:
   - ./_pvs
   - ./qbittorrent/ks.yaml
   #- ./audiobookshelf/ks.yaml
+  - ./calibre-web/ks.yaml

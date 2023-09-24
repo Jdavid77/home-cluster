@@ -1,0 +1,81 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: calibre-web
+  namespace: media
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.5.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-charts
+        namespace: flux-system
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    image:
+      repository: ghcr.io/bjw-s/calibre-web
+      tag: 0.6.20@sha256:a5a40ae5bc78afee94515cc20dca470ce775c2e7456962fac3e09e63cc00ddf2
+
+    podSecurityContext:
+      runAsUser: 1001
+      runAsGroup: 1001
+      fsGroup: 1001
+      fsGroupChangePolicy: OnRootMismatch
+
+    enableServiceLinks: false
+
+    env:
+      TZ: "${TZ}"
+      CACHE_DIR: /cache
+
+    service:
+      main:
+        ports:
+          http:
+            port: 8083
+
+    persistence:
+      config:
+        enabled: true
+        existingClaim: calibre-web-config
+      nfs-nas-books:
+        enabled: true
+        existingClaim: books-nfs-share-pvc
+        mountPath: /data/ebooks
+      cache:
+        enabled: true
+        type: emptyDir
+        mountPath: /cache
+
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: nginx
+        annotations:
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "book-open"
+        hosts:
+          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - secretName: ${SECRET_DOMAIN}-tls
+            hosts:
+              - *host
+
+    resources:
+      requests:
+        cpu: 15m
+        memory: 145M
+      limits:
+        memory: 770M
