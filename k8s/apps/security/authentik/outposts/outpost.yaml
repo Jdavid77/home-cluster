@@ -24,6 +24,7 @@ spec:
     app.kubernetes.io/managed-by: goauthentik.io
     app.kubernetes.io/name: authentik-outpost
     app.kubernetes.io/instance: authentik-outpost
+    app.kubernetes.io/version: 2023.8.3
 ---
 apiVersion: apps/v1
 kind: Deployment
