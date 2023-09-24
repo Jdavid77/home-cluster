@@ -5,7 +5,7 @@ metadata:
   labels:
     app.kubernetes.io/instance: authentik-outpost
     app.kubernetes.io/managed-by: goauthentik.io
-    app.kubernetes.io/name: authentik-proxy
+    app.kubernetes.io/name: authentik-outpost
     app.kubernetes.io/version: 2023.8.3
   name: authentik-outpost
   namespace: security
@@ -32,7 +32,7 @@ metadata:
   labels:
     app.kubernetes.io/instance: authentik-outpost
     app.kubernetes.io/managed-by: goauthentik.io
-    app.kubernetes.io/name: authentik-proxy
+    app.kubernetes.io/name: authentik-outpost
     app.kubernetes.io/version: 2023.8.3
   name: authentik-outpost
   namespace: security
@@ -41,14 +41,14 @@ spec:
     matchLabels:
       app.kubernetes.io/instance: authentik-outpost
       app.kubernetes.io/managed-by: goauthentik.io
-      app.kubernetes.io/name: authentik-proxy
+      app.kubernetes.io/name: authentik-outpost
       app.kubernetes.io/version: 2023.8.3
   template:
     metadata:
       labels:
         app.kubernetes.io/instance: authentik-outpost
         app.kubernetes.io/managed-by: goauthentik.io
-        app.kubernetes.io/name: authentik-proxy
+        app.kubernetes.io/name: authentik-outpost
         app.kubernetes.io/version: 2023.8.3
     spec:
       containers:
@@ -88,7 +88,7 @@ metadata:
   labels:
     app.kubernetes.io/instance: authentik-outpost
     app.kubernetes.io/managed-by: goauthentik.io
-    app.kubernetes.io/name: authentik-proxy
+    app.kubernetes.io/name: authentik-outpost
     app.kubernetes.io/version: 2023.8.3
   name: authentik-outpost
   namespace: security
