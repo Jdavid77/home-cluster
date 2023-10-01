@@ -36,6 +36,9 @@ spec:
         ports:
           http:
             port: 5006
+    controller:
+      main:
+        replicas: 3
     ingress:
       main:
         enabled: true
