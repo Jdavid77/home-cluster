@@ -12,7 +12,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   nfs:
     server: ${NFS_SERVER}
-    path: /ebooks
+    path: /export/ebooks
   mountOptions:
     - nfsvers=4.1
     - hard

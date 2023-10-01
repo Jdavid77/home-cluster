@@ -75,8 +75,6 @@ spec:
         annotations:
           external-dns.alpha.kubernetes.io/hostname: torrent.${SECRET_DOMAIN}
           external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
-          traefik.ingress.kubernetes.io/router.entrypoints: websecure
-          traefik.ingress.kubernetes.io/router.middlewares: network-cloudflare-realip@kubernetescrd
           hajimari.io/enable: "true"
         hosts:
           - host: &host "torrent.${SECRET_DOMAIN}"
