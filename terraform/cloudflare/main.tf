@@ -16,3 +16,9 @@ terraform {
   }
 
 }
+
+data "cloudflare_zones" "domain_com" {
+  filter {
+    name = var.cloudflare_domain_com
+  }
+}

@@ -23,11 +23,6 @@ variable "cloudflare_domain_com" {
   description = "My .com domain"
 }
 
-variable "cloudflare_zone_id" {
-  type = string
-  description = "Domain Zone Id"
-}
-
 variable "cloudflare_records" {
   type = list(string)
   description = "CNAME Records"
