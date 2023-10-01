@@ -46,6 +46,7 @@ spec:
         annotations:
           external-dns.alpha.kubernetes.io/hostname: actual.${SECRET_DOMAIN}
           external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
+          auth.home.arpa/enabled: "true"
           hajimari.io/enable: "true"
           hajimari.io/icon: "finance"
         hosts:
