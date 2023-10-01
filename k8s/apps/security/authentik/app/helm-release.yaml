@@ -16,6 +16,9 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
+    replicas: 3
+    worker:
+      replicas: 3
     image:
       repository: ghcr.io/goauthentik/server
       pullPolicy: IfNotPresent
