@@ -82,7 +82,6 @@ spec:
         labelValue: "true"
         maxLines: 1000
     plugins:
-      - agenty-flowcharting-panel
       - digiapulssi-breadcrumb-panel
       - flant-statusmap-panel
       - grafana-piechart-panel
