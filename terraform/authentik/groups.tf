@@ -1,6 +1,7 @@
 resource "authentik_user" "jnobrega_user" {
   username = "jnobrega"
   name     = "jnobrega"
+  email    = var.login_email
 }
 
 resource "authentik_group" "grafana_admin" {

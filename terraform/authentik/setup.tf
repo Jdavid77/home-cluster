@@ -20,6 +20,12 @@ module "home-cluster" {
       authentik_proxy_application_icon_url = "https://cf.appdrag.com/dashboard-openvm-clo-b2d42c/uploads/Uptime-kuma-7fPG.png"
       authentik_proxy_external_host        = "https://uptime.${var.external_host}"
     },
+    {
+      authentik_proxy_application_name     = "actual"
+      authentik_proxy_application_group    = "home-cluster"
+      authentik_proxy_application_icon_url = "https://play-lh.googleusercontent.com/209fPBA5Q2ceVu4hIDE2x4sE3-FQPQd4lJMPWv0ckZ4yH-K6fRfRt1ZilDxG3-AmzPDX=w240-h480-rw"
+      authentik_proxy_external_host        = "https://actual.${var.external_host}"
+    },
   ]
 
   providers = {

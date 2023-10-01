@@ -105,9 +105,20 @@ spec:
               name: http
         path: /outpost.goauthentik.io
         pathType: Prefix
+  - host: actual.${SECRET_DOMAIN}
+    http:
+      paths:
+      - backend:
+          service:
+            name: authentik-outpost
+            port:
+              name: http
+        path: /outpost.goauthentik.io
+        pathType: Prefix
   tls:
     - hosts:
         - uptime.${SECRET_DOMAIN}
+        - actual.${SECRET_DOMAIN}
       secretName: ${SECRET_DOMAIN}-tls
 
 

@@ -11,3 +11,8 @@ variable "external_host" {
   type        = string
   description = "External Host"
 }
+
+variable "login_email" {
+  type        = string
+  description = "Login Email"
+}
