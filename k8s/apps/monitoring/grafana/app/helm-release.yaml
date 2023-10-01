@@ -127,7 +127,6 @@ spec:
     persistence:
       type: pvc
       enabled: true
-      storageClassName: local-path
       existingClaim: grafana-pvc
     rbac:
       pspEnabled: false
