@@ -1,18 +1,18 @@
-# module "oidc" {
+module "oidc" {
 
-#     source = "./oidc"
+    source = "./oidc"
 
-#     providers = {
-#       authentik = authentik
-#      }
+    providers = {
+      authentik = authentik
+     }
 
-#     for_each = { for each in var.oidc : each.authentik_oidc_application_name => each }
+    for_each = { for each in var.oidc : each.authentik_oidc_application_name => each }
 
-#     authentik_oidc_application_name     = each.value.authentik_oidc_application_name
-#     authentik_oidc_application_group    = each.value.authentik_oidc_application_group
-#     authentik_oidc_application_icon_url = each.value.authentik_oidc_application_icon_url
+    authentik_oidc_application_name     = each.value.authentik_oidc_application_name
+    authentik_oidc_application_group    = each.value.authentik_oidc_application_group
+    authentik_oidc_application_icon_url = each.value.authentik_oidc_application_icon_url
 
-# }
+}
 
 module "proxy" {
 
