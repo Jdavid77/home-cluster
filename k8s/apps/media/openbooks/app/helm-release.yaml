@@ -64,7 +64,7 @@ spec:
       nfs-nas-books:
         enabled: true
         existingClaim: books-nfs-share-pvc
-        mountPath: /ebooks
+        mountPath: /books
     resources:
       requests:
         cpu: 15m
