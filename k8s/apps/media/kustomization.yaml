@@ -8,3 +8,4 @@ resources:
   - ./qbittorrent/ks.yaml
   #- ./audiobookshelf/ks.yaml
   - ./calibre-web/ks.yaml
+  - ./openbooks/ks.yaml
