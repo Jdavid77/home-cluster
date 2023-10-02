@@ -10,3 +10,4 @@ resources:
   - ./calibre-web/ks.yaml
   #- ./openbooks/ks.yaml
   - ./calibre/ks.yaml
+  - ./prowlarr/ks.yaml
