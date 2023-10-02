@@ -12,7 +12,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   nfs:
     server: ${NFS_SERVER}
-    path: /export/media
+    path: /media
   mountOptions:
     - nfsvers=4.1
     - hard
