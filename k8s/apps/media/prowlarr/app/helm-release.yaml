@@ -28,8 +28,8 @@ spec:
     keepHistory: false
   values:
     initContainers:
-      init-db:
-        image: ghcr.io/onedr0p/postgres-init:14.8
+      01-init-db:
+        image: ghcr.io/auricom/postgres-init:15.4
         imagePullPolicy: IfNotPresent
         envFrom: &envFrom
           - secretRef:
