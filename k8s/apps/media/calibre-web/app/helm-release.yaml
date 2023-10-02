@@ -65,6 +65,7 @@ spec:
           external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
           hajimari.io/enable: "true"
           hajimari.io/icon: "book-open"
+          auth.home.arpa/enabled: "true"
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
