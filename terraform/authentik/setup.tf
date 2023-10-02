@@ -32,6 +32,12 @@ module "home-cluster" {
       authentik_proxy_application_icon_url = "https://developer.asustor.com/uploadIcons/0020_999_1595583564_calibre-web_256.png"
       authentik_proxy_external_host        = "https://calibre-web.${var.external_host}"
     },
+    {
+      authentik_proxy_application_name     = "calibre"
+      authentik_proxy_application_group    = "home-cluster"
+      authentik_proxy_application_icon_url = "https://developer.asustor.com/uploadIcons/0020_999_1595583564_calibre-web_256.png"
+      authentik_proxy_external_host        = "https://calibre.${var.external_host}"
+    },
   ]
 
   providers = {
