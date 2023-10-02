@@ -61,6 +61,8 @@ spec:
         enabled: true
         ingressClassName: nginx
         annotations:
+          external-dns.alpha.kubernetes.io/hostname: calibre-web.${SECRET_DOMAIN}
+          external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
           hajimari.io/enable: "true"
           hajimari.io/icon: "book-open"
         hosts:
