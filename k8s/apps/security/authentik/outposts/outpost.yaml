@@ -145,6 +145,16 @@ spec:
               name: http
         path: /outpost.goauthentik.io
         pathType: Prefix
+  - host: ebooks.${SECRET_DOMAIN}
+    http:
+      paths:
+      - backend:
+          service:
+            name: authentik-outpost
+            port:
+              name: http
+        path: /outpost.goauthentik.io
+        pathType: Prefix
   tls:
     - hosts:
         - uptime.${SECRET_DOMAIN}
@@ -152,6 +162,7 @@ spec:
         - calibre-web.${SECRET_DOMAIN}
         - calibre.${SECRET_DOMAIN}
         - prowlarr.${SECRET_DOMAIN}
+        - ebooks.${SECRET_DOMAIN}
       secretName: ${SECRET_DOMAIN}-tls
 
 

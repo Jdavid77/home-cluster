@@ -44,6 +44,12 @@ module "home-cluster" {
       authentik_proxy_application_icon_url = "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/prowlarr-banner.png"
       authentik_proxy_external_host        = "https://prowlarr.${var.external_host}"
     },
+    {
+      authentik_proxy_application_name     = "readarr-ebooks"
+      authentik_proxy_application_group    = "home-cluster"
+      authentik_proxy_application_icon_url = "https://avatars.githubusercontent.com/u/57576474?s=280&v=4"
+      authentik_proxy_external_host        = "https://ebooks.${var.external_host}"
+    },
   ]
 
   providers = {
