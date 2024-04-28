@@ -74,10 +74,8 @@ spec:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
           - matchExpressions:
-            - key: kubernetes.azure.com/agentpool
-              operator: In
-              values:
-              - default
+            - key: node-role.kubernetes.io/control-plane
+              operator: Exists
 
     webhook:
       replicaCount: 3
@@ -92,10 +90,8 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: kubernetes.azure.com/agentpool
-                operator: In
-                values:
-                - default
+              - key: node-role.kubernetes.io/control-plane
+                operator: Exists
       volumes:
       - name: serviceaccount-token
         projected:
@@ -137,10 +133,8 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: kubernetes.azure.com/agentpool
-                operator: In
-                values:
-                - default
+              - key: node-role.kubernetes.io/control-plane
+                operator: Exists
       volumes:
       - name: serviceaccount-token
         projected:
@@ -174,10 +168,8 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: kubernetes.azure.com/agentpool
-                operator: In
-                values:
-                - default
+              - key: node-role.kubernetes.io/control-plane
+                operator: Exists
       volumes:
       - name: serviceaccount-token
         projected:
