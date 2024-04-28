@@ -6,7 +6,7 @@ metadata:
   name: longhorn
   namespace: flux-system
 spec:
-  path: ./k8s/apps/storage/longhorn/app
+  path: ./k8s/apps/longhorn-system/longhorn/app
   prune: true
   sourceRef:
     kind: GitRepository
