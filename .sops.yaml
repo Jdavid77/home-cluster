@@ -3,3 +3,7 @@ creation_rules:
     encrypted_regex: "^(data|stringData)$"
     age: >-
       age1ygtvf2uaevyhpsdwya27qhmjkjxd9vvyn0ajephhjwthmeeryseqx4munk
+  - path_regex: infrastructure/.*\.ya?ml
+    encrypted_regex: "^(data|stringData)$"
+    age: >-
+      age1ygtvf2uaevyhpsdwya27qhmjkjxd9vvyn0ajephhjwthmeeryseqx4munk
