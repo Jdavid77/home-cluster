@@ -21,3 +21,4 @@ resources:
   - kyverno-charts.yaml
   - external-secrets-charts.yaml
   - longhorn-charts.yaml
+  - descheduler-charts.yaml

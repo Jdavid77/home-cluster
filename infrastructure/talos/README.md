@@ -17,7 +17,7 @@ customization:
 e.g 
 
 ```bash
-$ curl -X POST --data-binary @bare-metal.yaml https://factory.talos.dev/schematics
+$ curl -X POST --data-binary @assets/longhorn.yaml https://factory.talos.dev/schematics
 {"id":"b8e8fbbe1b520989e6c52c8dc8303070cb42095997e76e812fa8892393e1d176"}
 ```
 
