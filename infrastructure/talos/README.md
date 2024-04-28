@@ -62,3 +62,5 @@ Bootstrap the Kubernetes control plane on the control plane nodes. This will sta
 ```bash
 talosctl bootstrap -n <node-ip> -e <node-ip> --talosconfig <config-file> 
 ```
+
+Props to @mirceanton for the tutorial: https://www.youtube.com/watch?v=4_U0KK-blXQ&t=1208s
