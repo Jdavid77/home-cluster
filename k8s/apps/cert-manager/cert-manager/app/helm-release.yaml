@@ -9,7 +9,7 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.jetstack.io/
       chart: cert-manager
-      version: v1.12.0
+      version: v1.14.4
       sourceRef:
         kind: HelmRepository
         name: jetstack-charts
@@ -25,21 +25,179 @@ spec:
       retries: 3
   values:
     installCRDs: true
-    webhook:
-      enabled: true
+    securityContext:
+      runAsNonRoot: true
+    enableCertificateOwnerRef: true
+    automountServiceAccountToken: false
+    serviceAccount:
+      automountServiceAccountToken: false
     extraArgs:
       - --dns01-recursive-nameservers=1.1.1.1:53,9.9.9.9:53
       - --dns01-recursive-nameservers-only
-      - # When this flag is enabled, secrets will be automatically removed when the certificate resource is deleted
-      - --enable-certificate-owner-ref=true
-      - --default-issuer-name=letsencrypt-production
-      - --default-issuer-kind=ClusterIssuer
-      - --default-issuer-group=cert-manager.io
-    replicaCount: 1
-    podDnsPolicy: "None"
+    replicaCount: 2
+    podDnsPolicy: 'None'
     podDnsConfig:
       nameservers:
-        - "1.1.1.1"
-        - "9.9.9.9"
+        - '1.1.1.1'
+        - '9.9.9.9'
     prometheus:
       enabled: false
+      servicemonitor:
+        enabled: false
+    volumes:
+    - name: serviceaccount-token
+      projected:
+        defaultMode: 0444
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            name: kube-root-ca.crt
+            items:
+            - key: ca.crt
+              path: ca.crt
+        - downwardAPI:
+            items:
+            - path: namespace
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: serviceaccount-token
+      readOnly: true
+
+
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: kubernetes.azure.com/agentpool
+              operator: In
+              values:
+              - default
+
+    webhook:
+      replicaCount: 3
+      podDisruptionBudget:
+        enabled: false
+        minAvailable: 1
+      automountServiceAccountToken: false
+      serviceAccount:
+        automountServiceAccountToken: false
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.azure.com/agentpool
+                operator: In
+                values:
+                - default
+      volumes:
+      - name: serviceaccount-token
+        projected:
+          defaultMode: 0444
+          sources:
+          - serviceAccountToken:
+              expirationSeconds: 3607
+              path: token
+          - configMap:
+              name: kube-root-ca.crt
+              items:
+              - key: ca.crt
+                path: ca.crt
+          - downwardAPI:
+              items:
+              - path: namespace
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: serviceaccount-token
+        readOnly: true
+      
+
+    cainjector:
+      extraArgs:
+      - --namespace=cert-manager
+      - --enable-certificates-data-source=false
+      replicaCount: 2
+      podDisruptionBudget:
+        enabled: false
+        minAvailable: 1
+      automountServiceAccountToken: false
+      serviceAccount:
+        automountServiceAccountToken: false
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.azure.com/agentpool
+                operator: In
+                values:
+                - default
+      volumes:
+      - name: serviceaccount-token
+        projected:
+          defaultMode: 0444
+          sources:
+          - serviceAccountToken:
+              expirationSeconds: 3607
+              path: token
+          - configMap:
+              name: kube-root-ca.crt
+              items:
+              - key: ca.crt
+                path: ca.crt
+          - downwardAPI:
+              items:
+              - path: namespace
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: serviceaccount-token
+        readOnly: true
+
+    startupapicheck:
+      automountServiceAccountToken: false
+      serviceAccount:
+        automountServiceAccountToken: false
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.azure.com/agentpool
+                operator: In
+                values:
+                - default
+      volumes:
+      - name: serviceaccount-token
+        projected:
+          defaultMode: 0444
+          sources:
+          - serviceAccountToken:
+              expirationSeconds: 3607
+              path: token
+          - configMap:
+              name: kube-root-ca.crt
+              items:
+              - key: ca.crt
+                path: ca.crt
+          - downwardAPI:
+              items:
+              - path: namespace
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: serviceaccount-token
+        readOnly: true
