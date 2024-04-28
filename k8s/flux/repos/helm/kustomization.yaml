@@ -19,3 +19,4 @@ resources:
   - kubernetes-sigs-charts.yaml
   - ingress-nginx-charts.yaml
   - kyverno-charts.yaml
+  - external-secrets-charts.yaml

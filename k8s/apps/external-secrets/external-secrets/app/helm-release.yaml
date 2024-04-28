@@ -1,0 +1,179 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: external-secrets
+  namespace: external-secrets
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: external-secrets
+      version: 0.9.16
+      sourceRef:
+        kind: HelmRepository
+        name: external-secrets-charts
+        namespace: flux-system
+  install:
+    createNamespace: true
+    crds: CreateReplace
+    remediation:
+      retries: 3
+  upgrade:
+    crds: CreateReplace
+    remediation:
+      retries: 3
+  values:
+    
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.kubernetes.io/control-plane
+              operator: Exists
+
+    serviceAccount:
+        create: true
+        automount: false
+
+    resources: 
+      requests:
+        cpu: 10m
+        memory: 32Mi
+
+    podAnnotations:
+      container.apparmor.security.beta.kubernetes.io/external-secrets: runtime/default
+
+    extraVolumes:
+      - name: serviceaccount-token
+        projected:
+          defaultMode: 0444
+          sources:
+          - serviceAccountToken:
+              expirationSeconds: 3607
+              path: token
+          - configMap:
+              name: kube-root-ca.crt
+              items:
+              - key: ca.crt
+                path: ca.crt
+          - downwardAPI:
+              items:
+              - path: namespace
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+
+    extraVolumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: serviceaccount-token
+        readOnly: true
+
+
+    webhook:
+      certManager:
+        enabled: true
+        addInjectorAnnotations: true
+        cert:
+          create: true
+          # -- For the Certificate created by this chart, setup the issuer. See
+          # https://cert-manager.io/docs/reference/api-docs/#cert-manager.io/v1.IssuerSpec
+          issuerRef:
+            group: cert-manager.io
+            kind: "ClusterIssuer"
+            name: "letsencrypt-production"
+          # -- Set the requested duration (i.e. lifetime) of the Certificate. See
+          # https://cert-manager.io/docs/reference/api-docs/#cert-manager.io/v1.CertificateSpec
+          # One year by default.
+          duration: "8760h"
+      
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: Exists
+      
+      serviceAccount:
+        create: true
+        automount: false
+      
+      extraVolumes:
+      - name: serviceaccount-token
+        projected:
+          defaultMode: 0444
+          sources:
+          - serviceAccountToken:
+              expirationSeconds: 3607
+              path: token
+          - configMap:
+              name: kube-root-ca.crt
+              items:
+              - key: ca.crt
+                path: ca.crt
+          - downwardAPI:
+              items:
+              - path: namespace
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+
+      extraVolumeMounts:
+        - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+          name: serviceaccount-token
+          readOnly: true
+      
+      podAnnotations:
+        container.apparmor.security.beta.kubernetes.io/webhook: runtime/default
+
+      resources: 
+        requests:
+          cpu: 10m
+          memory: 32Mi
+
+    certController:
+      serviceAccount:
+        create: true
+        automount: false
+      
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: Exists
+
+      extraVolumes:
+      - name: serviceaccount-token
+        projected:
+          defaultMode: 0444
+          sources:
+          - serviceAccountToken:
+              expirationSeconds: 3607
+              path: token
+          - configMap:
+              name: kube-root-ca.crt
+              items:
+              - key: ca.crt
+                path: ca.crt
+          - downwardAPI:
+              items:
+              - path: namespace
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+
+      extraVolumeMounts:
+        - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+          name: serviceaccount-token
+          readOnly: true
+
+      podAnnotations:
+        container.apparmor.security.beta.kubernetes.io/cert-controller: runtime/default
+
+      resources: 
+        requests:
+          cpu: 10m
+          memory: 32Mi
