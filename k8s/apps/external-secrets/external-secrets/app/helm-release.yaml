@@ -33,16 +33,13 @@ spec:
               operator: Exists
 
     serviceAccount:
-        create: true
-        automount: false
+      create: true
+      automount: false
 
     resources: 
       requests:
         cpu: 10m
         memory: 32Mi
-
-    podAnnotations:
-      container.apparmor.security.beta.kubernetes.io/external-secrets: runtime/default
 
     extraVolumes:
       - name: serviceaccount-token
@@ -124,9 +121,6 @@ spec:
           name: serviceaccount-token
           readOnly: true
       
-      podAnnotations:
-        container.apparmor.security.beta.kubernetes.io/webhook: runtime/default
-
       resources: 
         requests:
           cpu: 10m
@@ -169,9 +163,6 @@ spec:
         - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
           name: serviceaccount-token
           readOnly: true
-
-      podAnnotations:
-        container.apparmor.security.beta.kubernetes.io/cert-controller: runtime/default
 
       resources: 
         requests:
