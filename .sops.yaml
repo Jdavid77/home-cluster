@@ -4,6 +4,6 @@ creation_rules:
     age: >-
       age1ygtvf2uaevyhpsdwya27qhmjkjxd9vvyn0ajephhjwthmeeryseqx4munk
   - path_regex: infrastructure/.*\.ya?ml
-    encrypted_regex: "^(data|stringData)$"
+    encrypted_regex: "^(id|secret|bootstraptoken|secretboxencryptionsecret|token|ca|crt|key)$"
     age: >-
       age1ygtvf2uaevyhpsdwya27qhmjkjxd9vvyn0ajephhjwthmeeryseqx4munk
