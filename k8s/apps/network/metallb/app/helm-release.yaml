@@ -21,10 +21,6 @@ spec:
     remediation:
       retries: 3
   values:
-    psp:
-      create: false
-    crds:
-      enabled: true
     controller:
       affinity:
         nodeAffinity:
