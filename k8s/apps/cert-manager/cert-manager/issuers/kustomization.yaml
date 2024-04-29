@@ -4,3 +4,4 @@ resources:
   - lets-encrypt-staging.yaml
   - lets-encrypt-production.yaml
   - cloudflare-secret.yaml
+  - secret.yaml
