@@ -6,5 +6,5 @@ resources:
   - ./cilium/ks.yaml
   #- ./traefik/ks.yaml
   - ./nginx/ks.yaml
-  # - ./external-dns/ks.yaml
+  - ./external-dns/ks.yaml
 

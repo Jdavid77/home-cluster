@@ -8,6 +8,7 @@ metadata:
 spec:
   dependsOn:
     - name: cert-manager
+    - name: cillium-resources
   path: ./k8s/apps/network/nginx/app
   prune: true
   sourceRef:
