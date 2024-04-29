@@ -31,13 +31,7 @@ spec:
 
   values:
     controller:
-      
       replicaCount: 2
-
-      ## Enables debugging for NGINX. Uses the nginx-debug binary. Requires error-log-level: debug in ConfigMap via `controller.config.entries`.
-      #nginxDebug: true
-
-      ## The log level of the Ingress Controller.
       logLevel: 3
 
       extraEnvs:
@@ -72,7 +66,41 @@ spec:
         proxy-buffer-size: "16k"
         ssl-protocols: "TLSv1.3 TLSv1.2"
         use-forwarded-headers: "true"
-
+      readOnlyRootFilesystem: true
+      extraVolumes:
+        - name: nginx-etc
+          emptyDir: {}
+        - name: nginx-cache
+          emptyDir: {}
+        - name: nginx-lib
+          emptyDir: {}
+        - name: nginx-log
+          emptyDir: {}
+      extraVolumeMounts:
+        - mountPath: /etc/nginx
+          name: nginx-etc
+        - mountPath: /var/cache/nginx
+          name: nginx-cache
+        - mountPath: /var/lib/nginx
+          name: nginx-lib
+        - mountPath: /var/log/nginx
+          name: nginx-log
+      extraInitContainers:
+        - image: busybox:1.36.1
+          imagePullPolicy: IfNotPresent
+          name: init-nginx-ingress
+          command: ['cp', '-vdR', '/etc/nginx/.', '/mnt/etc']
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            runAsUser: 101 #nginx
+            runAsNonRoot: true
+            capabilities:
+              drop:
+              - ALL
+          volumeMounts:
+          - mountPath: /mnt/etc
+            name: nginx-etc
       metrics:
         enabled: true
         serviceMonitor:
@@ -98,7 +126,7 @@ spec:
         repository: ghcr.io/tarampampam/error-pages
         tag: 2.27.0
       extraEnvs:
-        - { name: TEMPLATE_NAME, value: orient }
+        - { name: TEMPLATE_NAME, value: hacker-terminal }
         - { name: SHOW_DETAILS, value: "false" }
       resources:
         requests:
@@ -106,6 +134,13 @@ spec:
           cpu: 25m
         limits:
           memory: 350Mi
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.kubernetes.io/control-plane
+              operator: Exists
   valuesFrom:
     # Cloudflare Networks
     # https://www.cloudflare.com/ips/
