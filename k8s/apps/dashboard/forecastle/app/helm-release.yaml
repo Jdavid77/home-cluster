@@ -29,6 +29,12 @@ spec:
         name: stakater/forecastle
         tag: *version
       deployment:
+        podSecurityContext:
+          runAsNonRoot: true
+          runAsUser: 10001
+          fsGroup: 10001
+          seccompProfile:
+            type: RuntimeDefault
         affinity: 
           nodeAffinity:
             requiredDuringSchedulingIgnoredDuringExecution:
@@ -36,18 +42,6 @@ spec:
               - matchExpressions:
                 - key: node-role.kubernetes.io/control-plane
                   operator: Exists
-        securityContext:
-          runAsNonRoot: true
-          runAsUser: 10002
-          runAsGroup: 10002
-          readOnlyRootFilesystem: true
-          capabilities:
-            drop:
-              - ALL
-          privileged: false
-          allowPrivilegeEscalation: false
-          seccompProfile:
-            type: RuntimeDefault
       config:
         namespaceSelector:
           any: true
