@@ -1,11 +1,9 @@
----
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.1.0/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: stirling-pdf
 spec:
-  interval: 30m
   chart:
     spec:
       chart: app-template
@@ -21,6 +19,7 @@ spec:
     cleanupOnFail: true
     remediation:
       retries: 3
+  interval: 30m
   values:
     defaultPodOptions:
       affinity:
@@ -32,40 +31,73 @@ spec:
                 operator: DoesNotExist
     controllers:
       stirling:
-        annotations:
-          reloader.stakater.com/auto: "true"
+        strategy: RollingUpdate
         containers:
           app:
             image:
-              repository: frooodle/s-pdf
-              tag: 0.23.1
+              repository: ghcr.io/stirling-tools/s-pdf
+              tag: 0.23.1@sha256:c05852ee8b6aa72dd5eaa31444669a42807ea12ef3585d5b924c4244065af6c9
               pullPolicy: IfNotPresent
-            securityContext:
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: false
             env:
-              SECURITY_ENABLE_LOGIN: true
-              DOCKER_ENABLE_SECURITY: true
+              DOCKER_ENABLE_SECURITY: "true"
+              INSTALL_BOOK_AND_ADVANCED_HTML_OPS: "false"
               SYSTEM_DEFAULTLOCALE: "en-GB"
+              SECURITY_ENABLE_LOGIN: true
+            probes:
+              liveness: &probe
+                enabled: true
+                type: HTTP
+                path: /api/v1/info/status
+              readiness: *probe
+              startup:
+                <<: *probe
+                spec:
+                  failureThreshold: 90
+                  periodSeconds: 5
+            securityContext:
+              readOnlyRootFilesystem: true
+        pod:
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+            fsGroupChangePolicy: OnRootMismatch
+
+    persistence:
+      configs:
+        enabled: true
+        type: emptyDir
+      logs:
+        enabled: true
+        type: emptyDir
+      tmp:
+        enabled: true
+        type: emptyDir
+      tessdata:
+        enabled: true
+        type: emptyDir
+        globalMounts:
+          - path: /usr/share/tessdata
+
     service:
-      app:
-        controller: stirling
+      stirling-pdf:
+        controller: stirling-pdf
         ports:
           http:
             port: 8080
 
     ingress:
-      main:
+      stirling-pdf:
         enabled: true
-        className: nginx
         hosts:
           - host: &host "pdf.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
-                  identifier: app
+                  identifier: stirling-pdf
                   port: http
         tls:
-          - hosts: [*host]
-            secretName: "${SECRET_DOMAIN}-tls"
-
+          - secretName: "${SECRET_DOMAIN}-tls"
+            hosts:
+              - *host
