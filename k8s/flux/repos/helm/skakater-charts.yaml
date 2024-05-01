@@ -6,5 +6,5 @@ metadata:
   namespace: flux-system
 spec:
   interval: 30m
-  url: https://github.com/stakater/Reloader
+  url: https://stakater.github.io/stakater-charts
   timeout: 3m
