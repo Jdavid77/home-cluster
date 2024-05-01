@@ -1,0 +1,81 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: forecastle
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: forecastle
+      version: &version v1.0.139
+      sourceRef:
+        kind: HelmRepository
+        name: skakater-charts
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    forecastle:
+      namespace: dashboard
+      image:
+        name: stakater/forecastle
+        tag: *version
+      deployment:
+        affinity: 
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+              - matchExpressions:
+                - key: node-role.kubernetes.io/control-plane
+                  operator: Exists
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 10002
+          runAsGroup: 10002
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+              - ALL
+          privileged: false
+          allowPrivilegeEscalation: false
+          seccompProfile:
+            type: RuntimeDefault
+      container:
+        securityContext:
+          privileged: false
+          capabilities:
+            drop:
+              - ALL
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          runAsUser: 1000
+          runAsGroup: 1000
+          allowPrivilegeEscalation: false
+      config:
+        namespaceSelector:
+          any: true
+        headerBackground: "#000000"
+        headerForeground: "#ffffff"
+        title: Home Dashboard
+        instanceName: dashboard
+        crdEnabled: false
+      ingress:
+        enabled: true
+        className: nginx
+        hosts:
+          - host: &host dashboard.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+            secretName: ${SECRET_DOMAIN}-tls
