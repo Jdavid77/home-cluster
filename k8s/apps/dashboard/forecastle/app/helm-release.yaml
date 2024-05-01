@@ -44,9 +44,6 @@ spec:
               - matchExpressions:
                 - key: node-role.kubernetes.io/control-plane
                   operator: Exists
-      pod:
-        annotations: 
-          reloader.stakater.com/auto: "true"
       config:
         namespaceSelector:
           matchNames:
