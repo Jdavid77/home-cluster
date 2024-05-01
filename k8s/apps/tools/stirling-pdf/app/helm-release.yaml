@@ -22,6 +22,14 @@ spec:
     remediation:
       retries: 3
   values:
+    defaultPodOptions:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: DoesNotExist
     controllers:
       stirling:
         annotations:
@@ -38,7 +46,7 @@ spec:
             env:
               SECURITY_ENABLE_LOGIN: true
               DOCKER_ENABLE_SECURITY: true
-              SYSTEM_DEFAULTLOCALE: "pt-PT"
+              SYSTEM_DEFAULTLOCALE: "en-GB"
     service:
       app:
         controller: stirling
