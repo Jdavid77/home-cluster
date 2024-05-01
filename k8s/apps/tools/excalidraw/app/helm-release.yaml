@@ -68,8 +68,13 @@ spec:
     ingress:
       app:
         className: nginx
+        annotations:
+          forecastle.stakater.com/expose: "true"
+          forecastle.stakater.com/appName: *app
+          forecastle.stakater.com/group: tools
+          forecastle.stakater.com/url: &host draw.${SECRET_DOMAIN}
         hosts:
-          - host: &host draw.${SECRET_DOMAIN}
+          - host: *host 
             paths:
               - path: /
                 service:
