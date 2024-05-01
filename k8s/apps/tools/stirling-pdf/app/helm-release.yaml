@@ -77,4 +77,4 @@ spec:
         globalMounts:
           - path: /configs/settings.yml
             subPath: settings.yml
-            readOnly: true
+            readOnly: false
