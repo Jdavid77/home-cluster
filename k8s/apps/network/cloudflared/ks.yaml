@@ -6,6 +6,7 @@ metadata:
   name: cloudflared-tunnel
   namespace: flux-system
 spec:
+  targetNamespace: network
   path: ./k8s/apps/network/cloudflared/app
   prune: true
   sourceRef:
