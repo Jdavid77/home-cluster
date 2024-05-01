@@ -4,7 +4,7 @@ variable "cloudflare_email" {
 }
 
 variable "cloudflare_account_id" {
-  type = string
+  type        = string
   description = "Cloudflare Account ID"
 }
 
@@ -22,13 +22,3 @@ variable "cloudflare_domain_com" {
   type        = string
   description = "My .com domain"
 }
-
-variable "cloudflare_records" {
-  type = list(string)
-  description = "CNAME Records"
-} 
-
-variable "cloudflare_buckets" {
-  type = list(string)
-  description = "R2 Buckets"
-} 
