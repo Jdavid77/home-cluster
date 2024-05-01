@@ -42,6 +42,7 @@ spec:
             port: 8080
 
     defaultPodOptions:
+
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
