@@ -24,7 +24,7 @@ spec:
       retries: 3
   values:
     controllers:
-      stirling:
+      main:
         containers:
           app:
             image:
@@ -36,7 +36,7 @@ spec:
               readOnlyRootFilesystem: false
     service:
       app:
-        controller: stirling
+        controller: main
         ports:
           http:
             port: 8080
