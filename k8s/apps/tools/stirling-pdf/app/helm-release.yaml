@@ -35,7 +35,10 @@ spec:
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: false
-              
+            env:
+              SECURITY_ENABLE_LOGIN: true
+              DOCKER_ENABLE_SECURITY: false
+              SYSTEM_DEFAULTLOCALE: "pt-PT"
     service:
       app:
         controller: stirling
@@ -58,11 +61,3 @@ spec:
           - hosts: [*host]
             secretName: "${SECRET_DOMAIN}-tls"
 
-    persistence:
-      config:
-        type: configMap
-        name: stirling-pdf-configmap
-        globalMounts:
-          - path: /configs/settings.yml
-            subPath: settings.yaml
-            readOnly: false
