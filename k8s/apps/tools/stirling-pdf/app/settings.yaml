@@ -1,0 +1,19 @@
+security:
+  enableLogin: true # set to 'true' to enable login
+  csrfDisabled: true
+
+system:
+  defaultLocale: 'pt-PT' # Set the default language (e.g. 'de-DE', 'fr-FR', etc)
+  googlevisibility: false # 'true' to allow Google visibility (via robots.txt), 'false' to disallow
+  customStaticFilePath: '/customFiles/static/' # Directory path for custom static files
+  showUpdate: true # see when a new update is available
+  showUpdateOnlyAdmin: true # Only admins can see when a new update is available, depending on showUpdate it must be set to 'true'
+  customHTMLFiles: false # enable to have files placed in /customFiles/templates override the existing template html files
+
+ui:
+  appName: Pdf Editor # Application's visible name
+  homeDescription: Locally hosted web application that allows you to perform various operations on PDF files # Short description or tagline shown on homepage.
+  appNameNavbar: Editor # Name displayed on the navigation bar
+
+metrics:
+  enabled: true # 'true' to enable Info APIs endpoints (view http://localhost:8080/swagger-ui/index.html#/API to learn more), 'false' to disable
