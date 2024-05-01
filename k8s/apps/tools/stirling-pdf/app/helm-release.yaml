@@ -34,7 +34,6 @@ spec:
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: false
-              capabilities: { drop: ["ALL"] }
     service:
       app:
         controller: stirling
@@ -43,9 +42,6 @@ spec:
             port: 8080
 
     defaultPodOptions:
-      securityContext:
-        seccompProfile: { type: RuntimeDefault }
-
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
