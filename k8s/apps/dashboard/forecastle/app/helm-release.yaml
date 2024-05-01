@@ -46,7 +46,8 @@ spec:
                   operator: Exists
       config:
         namespaceSelector:
-          any: true
+          matchNames:
+            - tools
         headerBackground: "#000000"
         headerForeground: "#ffffff"
         title: Home Dashboard

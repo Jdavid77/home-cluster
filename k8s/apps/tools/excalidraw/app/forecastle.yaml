@@ -1,0 +1,11 @@
+apiVersion: forecastle.stakater.com/v1alpha1
+kind: ForecastleApp
+metadata:
+  name: &ingress excalidraw
+spec:
+  name: Excalidraw
+  group: tools
+  icon: https://github.com/stakater/ForecastleIcons/blob/master/kubernetes.png
+  urlFrom: # This is new
+    ingressRef:
+      name: *ingress
