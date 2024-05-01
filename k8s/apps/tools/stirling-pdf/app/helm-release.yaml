@@ -33,7 +33,7 @@ spec:
               pullPolicy: IfNotPresent
             securityContext:
               allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
+              readOnlyRootFilesystem: false
               capabilities: { drop: ["ALL"] }
     service:
       app:
