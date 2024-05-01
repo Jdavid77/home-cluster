@@ -5,3 +5,4 @@ kind: Kustomization
 resources:
   - ./reflector/ks.yaml
   - ./descheduler/ks.yaml
+  - ./reloader/ks.yaml

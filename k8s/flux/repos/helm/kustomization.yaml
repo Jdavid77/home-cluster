@@ -22,3 +22,4 @@ resources:
   - external-secrets-charts.yaml
   - longhorn-charts.yaml
   - descheduler-charts.yaml
+  - skakater-charts.yaml
