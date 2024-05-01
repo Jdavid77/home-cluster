@@ -1,0 +1,9 @@
+originRequest:
+  originServerName: jnobrega.com
+
+ingress:
+  - hostname: "jnobrega.com"
+    service: https://ingress-nginx-controller.network.svc.cluster.local:443
+  - hostname: "*.jnobrega.com"
+    service: https://ingress-nginx-controller.network.svc.cluster.local:443
+  - service: http_status:404

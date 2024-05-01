@@ -7,4 +7,5 @@ resources:
   #- ./traefik/ks.yaml
   - ./nginx/ks.yaml
   - ./external-dns/ks.yaml
+  - ./cloudflared/ks.yaml
 
