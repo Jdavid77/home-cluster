@@ -26,6 +26,7 @@ spec:
   path: ./k8s/apps/storage/cloudnative-pg/cluster
   dependsOn:
     - name: cloudnative-pg
+    - name: external-secrets
   prune: true
   sourceRef:
     kind: GitRepository
