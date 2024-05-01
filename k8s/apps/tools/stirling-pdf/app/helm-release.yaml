@@ -20,37 +20,28 @@ spec:
   upgrade:
     cleanupOnFail: true
     remediation:
-      strategy: rollback
       retries: 3
   values:
     controllers:
-      main:
+      stirling:
+        annotations:
+          reloader.stakater.com/auto: "true"
         containers:
-          main:
-            nameOverride: stirling
+          app:
             image:
-              repository: ghcr.io/stirling-tools/s-pdf
-              tag: 0.23.0
+              repository: frooodle/s-pdf
+              tag: 0.23.1
               pullPolicy: IfNotPresent
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: false
+              
     service:
-      main:
-        controller: main
+      app:
+        controller: stirling
         ports:
           http:
             port: 8080
-
-    defaultPodOptions:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: node-role.kubernetes.io/control-plane
-                operator: DoesNotExist
-        
 
     ingress:
       main:
@@ -61,7 +52,7 @@ spec:
             paths:
               - path: /
                 service:
-                  identifier: main
+                  identifier: app
                   port: http
         tls:
           - hosts: [*host]
@@ -73,5 +64,5 @@ spec:
         name: stirling-pdf-configmap
         globalMounts:
           - path: /configs/settings.yml
-            subPath: settings.yml
+            subPath: settings.yaml
             readOnly: false
