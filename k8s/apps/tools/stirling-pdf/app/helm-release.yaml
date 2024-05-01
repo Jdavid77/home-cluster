@@ -45,7 +45,7 @@ spec:
     defaultPodOptions:
       securityContext:
         seccompProfile: { type: RuntimeDefault }
-        
+
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -75,6 +75,6 @@ spec:
         type: configMap
         name: stirling-pdf-configmap
         globalMounts:
-          - path: /config/settings.yml
+          - path: /configs/settings.yml
             subPath: settings.yml
             readOnly: true
