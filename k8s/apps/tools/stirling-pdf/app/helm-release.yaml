@@ -81,21 +81,20 @@ spec:
           - path: /usr/share/tessdata
 
     service:
-      stirling-pdf:
-        controller: stirling-pdf
+      app:
+        controller: stirling
         ports:
           http:
             port: 8080
 
     ingress:
-      stirling-pdf:
-        enabled: true
+      main:
         hosts:
           - host: &host "pdf.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
-                  identifier: stirling-pdf
+                  identifier: app
                   port: http
         tls:
           - secretName: "${SECRET_DOMAIN}-tls"
