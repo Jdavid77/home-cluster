@@ -5,7 +5,7 @@ kind: Kustomization
 resources:
   - ./external-secret.yaml
   - ./endpoint.yaml
-  - ./helmrelease.yaml
+  - ./helm-release.yaml
 configMapGenerator:
   - name: cloudflared-configmap
     files:
