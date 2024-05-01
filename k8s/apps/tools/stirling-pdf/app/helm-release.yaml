@@ -37,7 +37,7 @@ spec:
               readOnlyRootFilesystem: false
             env:
               SECURITY_ENABLE_LOGIN: true
-              DOCKER_ENABLE_SECURITY: false
+              DOCKER_ENABLE_SECURITY: true
               SYSTEM_DEFAULTLOCALE: "pt-PT"
     service:
       app:
