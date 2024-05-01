@@ -26,7 +26,8 @@ spec:
     controllers:
       main:
         containers:
-          app:
+          main:
+            nameOverride: stirling
             image:
               repository: ghcr.io/stirling-tools/s-pdf
               tag: 0.23.0
@@ -35,7 +36,7 @@ spec:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: false
     service:
-      app:
+      main:
         controller: main
         ports:
           http:
@@ -60,7 +61,7 @@ spec:
             paths:
               - path: /
                 service:
-                  identifier: app
+                  identifier: main
                   port: http
         tls:
           - hosts: [*host]
