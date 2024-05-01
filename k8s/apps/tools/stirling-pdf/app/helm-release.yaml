@@ -88,7 +88,8 @@ spec:
             port: 8080
 
     ingress:
-      main:
+      app:
+        className: nginx
         hosts:
           - host: &host "pdf.${SECRET_DOMAIN}"
             paths:
