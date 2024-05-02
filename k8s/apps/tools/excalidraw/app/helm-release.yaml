@@ -68,6 +68,8 @@ spec:
     ingress:
       app:
         className: nginx
+        annotations:
+          hajimari.io/icon: pencil-box
         hosts:
           - host: &host draw.${SECRET_DOMAIN}
             paths:
