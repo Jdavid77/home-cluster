@@ -34,13 +34,24 @@ spec:
       showGreeting: false
       showAppGroups: false
       showAppStatus: true
-      showBookmarkGroups: false
+      showBookmarkGroups: true
       showGlobalBookmarks: false
       showAppUrls: false
       defaultEnable: true
       namespaceSelector:
         matchNames:
           - tools
+      bookmarks:
+        - group: Kubernetes
+          bookmarks:
+            - name: Jdavid77/home-ops
+              icon: ''
+              url: https://github.com/Jdavid77
+              targetBlank: false
+            - name: k8s-at-home-search
+              icon: ''
+              url: https://kubesearch.dev/
+              targetBlank: false
     ingress:
       main:
         enabled: true
