@@ -89,5 +89,5 @@ spec:
           metrics:
             port: 8080
     serviceAccount:
-      create: true
-      name: *app
+      create: false
+      name: dragonfly-operator-system
