@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - helm-release.yaml
   - rbac.yaml
+  - https://raw.githubusercontent.com/dragonflydb/dragonfly-operator/v1.1.2/manifests/crd.yaml
