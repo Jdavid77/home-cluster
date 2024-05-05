@@ -3,38 +3,79 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: &app dragonfly-operator
+  name: dragonfly-operator
 spec:
   interval: 30m
   chart:
     spec:
       chart: app-template
       version: 3.1.0
+      interval: 30m
       sourceRef:
         kind: HelmRepository
-        name: bjw-s-charts
+        name: bjw-s
         namespace: flux-system
-  install:
-    remediation:
-      retries: 3
-  upgrade:
-    cleanupOnFail: true
-    remediation:
-      strategy: rollback
-      retries: 3
   values:
+    defaultPodOptions:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: DoesNotExist
+    serviceAccount:
+      create: false
+      name: dragonfly-operator-controller-manager
     controllers:
       dragonfly-operator:
-        strategy: RollingUpdate
+        pod:
+          topologySpreadConstraints:
+            - maxSkew: 1
+              topologyKey: kubernetes.io/hostname
+              whenUnsatisfiable: DoNotSchedule
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: dragonfly-operator
         containers:
+          rbac-proxy:
+            image:
+              repository: gcr.io/kubebuilder/kube-rbac-proxy
+              tag: v0.16.0
+            args:
+              - "--secure-listen-address=0.0.0.0:8443"
+              - "--upstream=http://127.0.0.1:8080/"
+              - "--logtostderr=true"
+              - "--v=0"
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities:
+                drop:
+                  - ALL
+            resources:
+              requests:
+                cpu: 5m
+                memory: 64Mi
+              limits:
+                cpu: 500m
+                memory: 128Mi
           app:
             image:
-              repository: ghcr.io/dragonflydb/operator
-              tag: v1.1.2@sha256:f0d76725950095ac65b36252e0042d339d1db9b181b1d068f4b6686ea93055e4
-            command: ["/manager"]
+              repository: docker.dragonflydb.io/dragonflydb/operator
+              tag: v1.1.2
             args:
-              - --health-probe-bind-address=:8081
-              - --metrics-bind-address=:8080
+              - "--health-probe-bind-address=:8081"
+              - "--metrics-bind-address=127.0.0.1:8080"
+              - "--leader-elect"
+            command:
+              - "/manager"
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities:
+                drop:
+                  - ALL
             probes:
               liveness:
                 enabled: true
@@ -58,36 +99,20 @@ spec:
                   periodSeconds: 10
                   timeoutSeconds: 1
                   failureThreshold: 3
+              startup:
+                enabled: false
             resources:
               requests:
                 cpu: 10m
+                memory: 64Mi
               limits:
+                cpu: 500m
                 memory: 128Mi
-            securityContext:
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
-    defaultPodOptions:
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 65534
-        runAsGroup: 65534
-        seccompProfile: { type: RuntimeDefault }
-      topologySpreadConstraints:
-        - maxSkew: 1
-          topologyKey: kubernetes.io/hostname
-          whenUnsatisfiable: DoNotSchedule
-          labelSelector:
-            matchLabels:
-              app.kubernetes.io/name: *app
+        annotations:
+          reloader.stakater.com/auto: "true"
     service:
       app:
-        controller: *app
+        controller: dragonfly-operator
         ports:
           http:
             port: *port
-          metrics:
-            port: 8080
-    serviceAccount:
-      create: false
-      name: dragonfly-operator-system
