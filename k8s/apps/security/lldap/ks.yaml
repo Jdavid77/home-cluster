@@ -6,6 +6,7 @@ metadata:
   name: lldap
   namespace: flux-system
 spec:
+  targetNamespace: security
   path: ./k8s/apps/security/lldap/app
   prune: true
   sourceRef:
