@@ -29,14 +29,6 @@ spec:
       name: dragonfly-operator-controller-manager
     controllers:
       dragonfly-operator:
-        pod:
-          topologySpreadConstraints:
-            - maxSkew: 1
-              topologyKey: kubernetes.io/hostname
-              whenUnsatisfiable: DoNotSchedule
-              labelSelector:
-                matchLabels:
-                  app.kubernetes.io/name: dragonfly-operator
         containers:
           rbac-proxy:
             image:
