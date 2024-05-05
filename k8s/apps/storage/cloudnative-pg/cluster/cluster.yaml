@@ -10,6 +10,9 @@ spec:
     storageClass: longhorn
   monitoring:
     enablePodMonitor: false
+  superuserSecret:
+    name: cloudnative-pg-admin-secret
+  enableSuperuserAccess: true
   backup:
     retentionPolicy: 30d
     barmanObjectStore:
