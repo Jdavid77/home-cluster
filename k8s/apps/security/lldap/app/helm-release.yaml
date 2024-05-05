@@ -22,7 +22,7 @@ spec:
         strategy: RollingUpdate
 
         annotations:
-          secret.reloader.stakater.com/reload: lldap-secret, lldap-db-secret
+          secret.reloader.stakater.com/reload: lldap-secret
 
         pod:
           securityContext:
@@ -40,7 +40,7 @@ spec:
               pullPolicy: IfNotPresent
             envFrom: 
               - secretRef:
-                  name: lldap-db-secret
+                  name: lldap-secret
 
         containers:
           app:
@@ -59,8 +59,6 @@ spec:
             envFrom:
               - secretRef:
                   name: lldap-secret
-              - secretRef:
-                  name: lldap-db-secret
             probes:
               liveness: &probes
                 enabled: true
