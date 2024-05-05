@@ -4,3 +4,4 @@ resources:
   - cluster.yaml
   - secret.yaml
   - scheduledbackup.yaml
+  - super-user.yaml

@@ -3,22 +3,22 @@
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
-  name: cloudnative-pg-secret
+  name: cloudnative-pg-admin-secret
 spec:
   secretStoreRef:
     kind: ClusterSecretStore
     name: akeyless-secret-store
   target:
-    name: r2-secrets
+    name: cloudnative-pg-admin-secret
     template:
       engineVersion: v2
       metadata:
         labels:
           cnpg.io/reload: "true"
   data:
-    - secretKey: CLIENT_ID
+    - secretKey: username
       remoteRef:
-        key: /cnpg/CLIENT_ID
-    - secretKey: CLIENT_SECRET
+        key: /cnpg/POSTGRES_SUPER_USER
+    - secretKey: password
       remoteRef:
-        key: /cnpg/CLIENT_SECRET
+        key: /cnpg/POSTGRES_SUPER_PASS
