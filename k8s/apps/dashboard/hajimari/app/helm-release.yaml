@@ -41,6 +41,7 @@ spec:
       namespaceSelector:
         matchNames:
           - tools
+          - security
       bookmarks:
         - group: Kubernetes
           bookmarks:
