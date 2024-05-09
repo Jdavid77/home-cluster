@@ -4,8 +4,8 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./cilium/ks.yaml
-  #- ./traefik/ks.yaml
-  - ./nginx/ks.yaml
+  - ./traefik/ks.yaml
+  #- ./nginx/ks.yaml
   - ./external-dns/ks.yaml
   - ./cloudflared/ks.yaml
 

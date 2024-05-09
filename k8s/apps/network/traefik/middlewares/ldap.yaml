@@ -1,0 +1,14 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+    name: ldapAuth
+    namespace: network
+spec:
+    plugin:
+        ldapAuth:
+            Attribute: uid
+            BaseDn: dc=jnobrega,dc=com
+            Enabled: "true"
+            LogLevel: DEBUG
+            Port: "389"
+            Url: ldap://lldap.security.svc.cluster.local
