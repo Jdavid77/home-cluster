@@ -98,7 +98,7 @@ spec:
             port: *ldapPort
     ingress:
       app:
-        className: nginx
+        className: traefik
         annotations:
           hajimari.io/icon: mdi:account-multiple
         hosts:

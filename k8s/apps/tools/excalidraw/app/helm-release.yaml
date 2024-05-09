@@ -67,7 +67,7 @@ spec:
             port: 80
     ingress:
       app:
-        className: nginx
+        className: traefik
         annotations:
           hajimari.io/icon: pencil-box
         hosts:
