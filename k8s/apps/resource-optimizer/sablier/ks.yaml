@@ -7,7 +7,7 @@ metadata:
   namespace: flux-system
 spec:
   targetNamespace: resource-optimizer
-  path: ./k8s/apps/status/sablier/app
+  path: ./k8s/apps/resource-optimizer/sablier/app
   prune: true
   sourceRef:
     kind: GitRepository
