@@ -7,7 +7,7 @@ spec:
     plugin:
         ldapAuth:
             Attribute: uid
-            BaseDn: dc=jnobrega,dc=com
+            BaseDn: ou=people,dc=jnobrega,dc=com
             Enabled: "true"
             LogLevel: DEBUG
             Port: "389"
