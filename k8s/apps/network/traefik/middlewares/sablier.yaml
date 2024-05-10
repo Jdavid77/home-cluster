@@ -12,5 +12,5 @@ spec:
         refreshFrequency: 5s
         showDetails: "true"
         theme: hacker-terminal
-      sablierUrl: http://sablier:10000
+      sablierUrl: http://sablier.resource-optimizer.svc.cluster.local:10000
       sessionDuration: 1m
