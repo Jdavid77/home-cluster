@@ -12,4 +12,4 @@ spec:
             LogLevel: DEBUG
             Port: "389"
             Url: ldap://lldap.security.svc.cluster.local
-            allowedGroups: users
+
