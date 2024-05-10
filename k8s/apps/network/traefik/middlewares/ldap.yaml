@@ -6,9 +6,10 @@ metadata:
 spec:
     plugin:
         ldapAuth:
-            Attribute: cn
+            Attribute: uid
             BaseDn: dc=jnobrega,dc=com
             Enabled: "true"
             LogLevel: DEBUG
             Port: "389"
             Url: ldap://lldap.security.svc.cluster.local
+            allowedGroups: users
