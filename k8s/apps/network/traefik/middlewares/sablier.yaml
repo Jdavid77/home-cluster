@@ -8,9 +8,9 @@ spec:
     sablier:
       group: apps
       dynamic:
-        displayName: Service is starting...
+        displayName: Services
         refreshFrequency: 5s
-        showDetails: "true"
+        showDetails: "false"
         theme: hacker-terminal
       sablierUrl: http://sablier.resource-optimizer.svc.cluster.local:10000
-      sessionDuration: 1m
+      sessionDuration: 5m
