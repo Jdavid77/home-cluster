@@ -25,8 +25,14 @@ spec:
             - matchExpressions:
               - key: node-role.kubernetes.io/control-plane
                 operator: DoesNotExist
+
     controllers:
       calibre-web:
+        
+        labels:
+          sablier.enable: "true"
+          sablier.group: apps
+
         annotations:
           reloader.stakater.com/auto: "true"
 
@@ -75,6 +81,7 @@ spec:
         className: traefik
         annotations:
           hajimari.io/icon: bookshelf
+          traefik.ingress.kubernetes.io/router.middlewares: resource-optimizer-sablier@kubernetescrd, books-calibre@kubernetescrd
         hosts:
           - host: &hostName books.${SECRET_DOMAIN}
             paths:
