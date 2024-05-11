@@ -88,9 +88,7 @@ spec:
               - path: /config
 
       media:
-        type: nfs
-        server: ${NFS_SERVER}
-        path: /exports/ebooks
+        existingClaim: books-nfs-share-pvc
         advancedMounts:
           calibre-web:
             app:
