@@ -34,7 +34,7 @@ spec:
       excalidraw:
         labels:
           sablier.enable: "true"
-          sablier.group: apps
+          sablier.group: books
         replicas: 2
         strategy: RollingUpdate
         containers:
@@ -73,7 +73,7 @@ spec:
         className: traefik
         annotations:
           hajimari.io/icon: pencil-box
-          traefik.ingress.kubernetes.io/router.middlewares: resource-optimizer-sablier@kubernetescrd, network-ldap@kubernetescrd
+          traefik.ingress.kubernetes.io/router.middlewares: resource-optimizer-tools@kubernetescrd, network-ldap@kubernetescrd
         hosts:
           - host: &host draw.${SECRET_DOMAIN}
             paths:

@@ -33,7 +33,7 @@ spec:
       stirling:
         labels:
           sablier.enable: "true"
-          sablier.group: apps
+          sablier.group: books
         strategy: RollingUpdate
         containers:
           app:
@@ -95,7 +95,7 @@ spec:
         className: traefik
         annotations:
           hajimari.io/icon: file-pdf-box
-          traefik.ingress.kubernetes.io/router.middlewares: resource-optimizer-sablier@kubernetescrd
+          traefik.ingress.kubernetes.io/router.middlewares: resource-optimizer-tools@kubernetescrd
         hosts:
           - host: &host "pdf.${SECRET_DOMAIN}"
             paths:

@@ -34,7 +34,7 @@ spec:
       it-tools:
         labels:
           sablier.enable: "true"
-          sablier.group: apps
+          sablier.group: books
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
@@ -65,7 +65,7 @@ spec:
         className: traefik
         annotations:
           hajimari.io/icon: tools
-          traefik.ingress.kubernetes.io/router.middlewares: resource-optimizer-sablier@kubernetescrd
+          traefik.ingress.kubernetes.io/router.middlewares: resource-optimizer-tools@kubernetescrd
         hosts:
           - host: &host it-tools.${SECRET_DOMAIN}
             paths:

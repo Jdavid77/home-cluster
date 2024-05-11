@@ -1,14 +1,14 @@
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
-  name: sablier
+  name: tools
   namespace: resource-optimizer
 spec:
   plugin:
     sablier:
-      group: apps
+      group: tools
       dynamic:
-        displayName: Services
+        displayName: Tool Services
         refreshFrequency: 5s
         showDetails: "false"
         theme: ghost
