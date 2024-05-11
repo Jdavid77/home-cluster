@@ -42,6 +42,7 @@ spec:
         matchNames:
           - tools
           - security
+          - books
       bookmarks:
         - group: Kubernetes
           bookmarks:
@@ -60,7 +61,7 @@ spec:
         annotations:
           traefik.ingress.kubernetes.io/router.middlewares: resource-optimizer-sablier@kubernetescrd
         hosts:
-          - host: &host hajimari.${SECRET_DOMAIN}
+          - host: &host dashboard.${SECRET_DOMAIN}
             paths:
               - path: /
                 pathType: Prefix
