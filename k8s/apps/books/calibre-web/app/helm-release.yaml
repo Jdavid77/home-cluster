@@ -81,7 +81,7 @@ spec:
         className: traefik
         annotations:
           hajimari.io/icon: bookshelf
-          traefik.ingress.kubernetes.io/router.middlewares: resource-optimizer-books@kubernetescrd, books-calibre@kubernetescrd
+          traefik.ingress.kubernetes.io/router.middlewares: books-calibre@kubernetescrd
         hosts:
           - host: &hostName books.${SECRET_DOMAIN}
             paths:

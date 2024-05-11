@@ -127,9 +127,6 @@ spec:
         ldapAuth:
           moduleName: "github.com/wiltonsr/ldapAuth"
           version: "v0.1.8"
-        sablier:
-          moduleName: "github.com/acouvreur/sablier"
-          version: "v1.6.1"
         themepark:
           moduleName: "github.com/packruler/traefik-themepark"
           version: "v1.4.0"

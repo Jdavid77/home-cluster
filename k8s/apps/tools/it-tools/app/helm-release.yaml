@@ -65,7 +65,6 @@ spec:
         className: traefik
         annotations:
           hajimari.io/icon: tools
-          traefik.ingress.kubernetes.io/router.middlewares: resource-optimizer-tools@kubernetescrd
         hosts:
           - host: &host it-tools.${SECRET_DOMAIN}
             paths:
