@@ -11,6 +11,6 @@ spec:
         displayName: Services
         refreshFrequency: 5s
         showDetails: "false"
-        theme: hacker-terminal
+        theme: ghost
       sablierUrl: http://sablier.resource-optimizer.svc.cluster.local:10000
       sessionDuration: 5m
