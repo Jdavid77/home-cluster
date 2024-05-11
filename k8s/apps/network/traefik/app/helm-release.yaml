@@ -133,7 +133,7 @@ spec:
         themepark:
           moduleName: "github.com/packruler/traefik-themepark"
           version: "v1.4.0"
-        crowdsec-bouncer-traefik-plugin:
+        bouncer:
           moduleName: "github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin"
           version: "v1.3.0"
 
