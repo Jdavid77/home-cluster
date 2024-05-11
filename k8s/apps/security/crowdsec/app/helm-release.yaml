@@ -27,7 +27,7 @@ spec:
       enabled: true
       bouncer:
         reflector:
-          namespaces: ["traefik"]
+          namespaces: ["network"]
     agent:
       tolerations:
         - key: node-role.kubernetes.io/control-plane
