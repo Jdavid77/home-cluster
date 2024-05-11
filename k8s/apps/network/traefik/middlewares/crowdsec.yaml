@@ -2,14 +2,14 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
   name: bouncer
-  namespace: traefik
+  namespace: network
 spec:
   plugin:
     bouncer:
       enabled: true
       crowdsecMode: none
       crowdsecLapiScheme: https
-      crowdsecLapiHost: crowdsec-service.security:8080
+      crowdsecLapiHost: crowdsec-service.security.svc.cluster.local:8080
       crowdsecLapiTLSCertificateAuthorityFile: /etc/traefik/crowdsec-certs/ca.crt
       crowdsecLapiTLSCertificateBouncerFile: /etc/traefik/crowdsec-certs/tls.crt
       crowdsecLapiTLSCertificateBouncerKeyFile: /etc/traefik/crowdsec-certs/tls.key
