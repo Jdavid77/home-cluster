@@ -58,8 +58,6 @@ spec:
       main:
         enabled: true
         ingressClassName: traefik
-        annotations:
-          traefik.ingress.kubernetes.io/router.middlewares: resource-optimizer-sablier@kubernetescrd
         hosts:
           - host: &host dashboard.${SECRET_DOMAIN}
             paths:
