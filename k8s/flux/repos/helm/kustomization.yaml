@@ -23,3 +23,4 @@ resources:
   - longhorn-charts.yaml
   - descheduler-charts.yaml
   - skakater-charts.yaml
+  - crowdsec-charts.yaml
