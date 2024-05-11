@@ -9,6 +9,7 @@ spec:
   dependsOn:
     - name: cert-manager      
     - name: cillium-resources
+    - name: crowdsec
   path: ./k8s/apps/network/traefik/app
   prune: true
   sourceRef:
