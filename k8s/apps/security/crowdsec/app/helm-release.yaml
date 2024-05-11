@@ -36,7 +36,7 @@ spec:
       # Specify each pod whose logs you want to process
       acquisition:
         # The namespace where the pod is located
-        - namespace: traefik
+        - namespace: network
           # The pod name
           podName: traefik-*
           # as in crowdsec configuration, we need to specify the program name to find a matching parser
