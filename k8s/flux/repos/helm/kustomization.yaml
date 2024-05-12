@@ -24,3 +24,4 @@ resources:
   - descheduler-charts.yaml
   - skakater-charts.yaml
   - crowdsec-charts.yaml
+  - backube-charts.yaml
