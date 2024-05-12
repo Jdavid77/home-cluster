@@ -25,3 +25,4 @@ resources:
   - skakater-charts.yaml
   - crowdsec-charts.yaml
   - backube-charts.yaml
+  - piraeus-charts

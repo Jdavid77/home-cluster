@@ -30,9 +30,10 @@ spec:
   trigger:
     schedule: "0 0 * * 0"
   restic:
-    copyMethod: Clone
+    copyMethod: Snapshot
     pruneIntervalDays: 15
     repository: restic-calibre-config
+    volumeSnapshotClassName: longhorn-snapshot
     storageClassName: longhorn
     moverSecurityContext:
       runAsUser: 568
