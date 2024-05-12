@@ -8,6 +8,9 @@ metadata:
 spec:
   targetNamespace: documents
   path: ./k8s/apps/documents/paperless/app
+  dependsOn:
+    - name: dragonfly-cluster
+    - name: cloudnative-pg-cluster
   prune: true
   sourceRef:
     kind: GitRepository
