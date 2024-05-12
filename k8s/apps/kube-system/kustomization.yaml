@@ -6,3 +6,4 @@ resources:
   - ./reflector/ks.yaml
   - ./descheduler/ks.yaml
   - ./reloader/ks.yaml
+  - ./kubernetes-chemas/ks.yaml
