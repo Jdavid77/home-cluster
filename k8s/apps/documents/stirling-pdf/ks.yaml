@@ -6,8 +6,8 @@ metadata:
   name: stirling-pdf
   namespace: flux-system
 spec:
-  targetNamespace: tools
-  path: ./k8s/apps/tools/stirling-pdf/app
+  targetNamespace: documents
+  path: ./k8s/apps/documents/stirling-pdf/app
   prune: true
   sourceRef:
     kind: GitRepository

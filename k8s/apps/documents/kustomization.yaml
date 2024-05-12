@@ -5,4 +5,5 @@ resources:
   - ./namespace.yaml
   - _pvs
   - ./paperless/ks.yaml
+  - ./stirling-pdf/ks.yaml
 
