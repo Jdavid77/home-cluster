@@ -1,0 +1,108 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: paperless-media-share-pv
+spec:
+  capacity:
+    storage: 1Mi
+  storageClassName: nfs
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: ${NFS_SERVER}
+    path: /paperless-media
+  mountOptions:
+    - nfsvers=4.1
+    - hard
+    - noatime
+    - nodiratime
+    - rsize=1048576
+    - wsize=1048576
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: paperless-media-share-pvc
+  namespace: books
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: nfs
+  resources:
+    requests:
+      storage: 1Mi
+  volumeName: paperless-media-share-pv
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: paperless-consume-share-pv
+spec:
+  capacity:
+    storage: 1Mi
+  storageClassName: nfs
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: ${NFS_SERVER}
+    path: /paperless-consume
+  mountOptions:
+    - nfsvers=4.1
+    - hard
+    - noatime
+    - nodiratime
+    - rsize=1048576
+    - wsize=1048576
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: paperless-consume-share-pvc
+  namespace: books
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: nfs
+  resources:
+    requests:
+      storage: 1Mi
+  volumeName: paperless-consume-share-pv
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: paperless-data-share-pv
+spec:
+  capacity:
+    storage: 1Mi
+  storageClassName: nfs
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: ${NFS_SERVER}
+    path: /paperless-data
+  mountOptions:
+    - nfsvers=4.1
+    - hard
+    - noatime
+    - nodiratime
+    - rsize=1048576
+    - wsize=1048576
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: paperless-data-share-pvc
+  namespace: books
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: nfs
+  resources:
+    requests:
+      storage: 1Mi
+  volumeName: paperless-data-share-pv
