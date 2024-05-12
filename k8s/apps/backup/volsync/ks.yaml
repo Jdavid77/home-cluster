@@ -8,6 +8,8 @@ metadata:
 spec:
   targetNamespace: backup
   path: ./k8s/apps/backup/volsync/app
+  dependsOn:
+    - name: snapshot-controller
   prune: true
   sourceRef:
     kind: GitRepository
