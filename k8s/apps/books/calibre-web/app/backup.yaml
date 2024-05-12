@@ -35,10 +35,6 @@ spec:
     repository: restic-calibre-config
     volumeSnapshotClassName: longhorn-snapshot
     storageClassName: longhorn
-    moverSecurityContext:
-      runAsUser: 568
-      runAsGroup: 568
-      fsGroup: 568
     retain:
       weekly: 1
       within: 14d
