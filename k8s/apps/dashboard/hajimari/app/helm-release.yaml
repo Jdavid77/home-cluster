@@ -43,6 +43,7 @@ spec:
           - tools
           - security
           - books
+          - documents
       bookmarks:
         - group: Kubernetes
           bookmarks:
