@@ -25,7 +25,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: paperless-media-share-pvc
-  namespace: books
+  namespace: documents
 spec:
   accessModes:
     - ReadWriteMany
@@ -61,7 +61,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: paperless-consume-share-pvc
-  namespace: books
+  namespace: documents
 spec:
   accessModes:
     - ReadWriteMany
@@ -97,7 +97,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: paperless-data-share-pvc
-  namespace: books
+  namespace: documents
 spec:
   accessModes:
     - ReadWriteMany
