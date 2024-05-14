@@ -1,4 +1,5 @@
 ---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -135,7 +136,7 @@ spec:
           version: "v1.3.0"
         cloudflarewarp:
           modulename: github.com/BetterCorp/cloudflarewarp
-          version: v1.3.3
+          version: "v1.3.3"
 
     volumes:
       - name: crowdsec-bouncer-tls
