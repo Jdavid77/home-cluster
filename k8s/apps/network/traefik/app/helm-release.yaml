@@ -134,9 +134,9 @@ spec:
         bouncer:
           moduleName: "github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin"
           version: "v1.3.0"
-        cloudflarewarp:
-          modulename: "github.com/BetterCorp/cloudflarewarp"
-          version: "v1.3.3"
+        # cloudflarewarp:
+        #   modulename: "github.com/BetterCorp/cloudflarewarp"
+        #   version: "v1.3.3"
 
     volumes:
       - name: crowdsec-bouncer-tls
