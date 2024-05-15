@@ -104,23 +104,23 @@ spec:
       data:
         enabled: true
         existingClaim: paperless-data-share-pvc
-        advancedMounts:
-          paperless:
-            app:
-              - path: /usr/src/paperless/data
+        globalMounts:
+          - path: /usr/src/paperless/data
                 
       media:
         enabled: true
         existingClaim: paperless-media-share-pvc
-        advancedMounts:
-          paperless:
-            app:
-              - path: /usr/src/paperless/media
+        globalMounts:
+          - path: /usr/src/paperless/media
                 
       consume:
         enabled: true
         existingClaim: paperless-consume-share-pvc
-        advancedMounts:
-          paperless:
-            app:
-              - path: /usr/src/paperless/consume
+        globalMounts:
+          - path: /usr/src/paperless/consume
+      
+      export:
+        enabled: true
+        existingClaim: paperless-export-share-pvc
+        globalMounts:
+          - path: /usr/src/paperless/export
