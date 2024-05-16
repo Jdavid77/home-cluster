@@ -1,0 +1,36 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: gha-runner-scale-set-controller
+  namespace: flux-system
+spec:
+  targetNamespace: actions-runner-system
+  path: ./k8s/apps/actions-runner-system/actions-runner-controller/app
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-cluster
+  wait: true
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: gha-runner-scale-set
+  namespace: flux-system
+spec:
+  targetNamespace: actions-runner-system
+  dependsOn:
+    - name: external-secrets-store
+  path: ./k8s/apps/actions-runner-system/actions-runner-controller/runner
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-cluster
+  wait: true
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
