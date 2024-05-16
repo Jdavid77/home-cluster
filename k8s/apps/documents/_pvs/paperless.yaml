@@ -12,7 +12,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   nfs:
     server: ${NFS_SERVER}
-    path: /paperless/media
+    path: /paperless-media
   mountOptions:
     - nfsvers=4.1
     - hard
@@ -48,7 +48,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   nfs:
     server: ${NFS_SERVER}
-    path: /paperless/consume
+    path: /paperless-documents
   mountOptions:
     - nfsvers=4.1
     - hard
@@ -84,7 +84,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   nfs:
     server: ${NFS_SERVER}
-    path: /paperless/data
+    path: /paperless-data
   mountOptions:
     - nfsvers=4.1
     - hard
@@ -120,7 +120,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   nfs:
     server: ${NFS_SERVER}
-    path: /paperless/export
+    path: /paperless-export
   mountOptions:
     - nfsvers=4.1
     - hard
