@@ -48,7 +48,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   nfs:
     server: ${NFS_SERVER}
-    path: /paperless-documents
+    path: /paperless-consume
   mountOptions:
     - nfsvers=4.1
     - hard
