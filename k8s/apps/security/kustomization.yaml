@@ -5,4 +5,4 @@ resources:
   - ./namespace.yaml
   - ./lldap/ks.yaml
   - ./crowdsec/ks.yaml
-  # - ./authentik/ks.yaml
+  - ./authentik/ks.yaml
