@@ -24,7 +24,7 @@ spec:
   values:
     nameOverride: *app
     runnerScaleSetName: *app
-    githubConfigUrl: https://github.com/Jdavid77
+    githubConfigUrl: https://github.com/Jdavid77/home-cluster
     githubConfigSecret: actions-runner-controller-secret
     minRunners: 1
     maxRunners: 3
