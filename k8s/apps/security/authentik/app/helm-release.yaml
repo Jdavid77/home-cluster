@@ -16,6 +16,12 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
+    affinity:
+      nodeAffinity:
+        type: hard
+        matchExpressions:
+          - key: node-role.kubernetes.io/control-plane
+            operator: Exists
     global:
       podAnnotations:
         secret.reloader.stakater.com/reload: &secret authentik-secret
