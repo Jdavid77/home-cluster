@@ -6,5 +6,4 @@ resources:
   - ./reflector/ks.yaml
   - ./descheduler/ks.yaml
   - ./reloader/ks.yaml
-  - ./kubernetes-schemas/ks.yaml
   - ./kube-cleanup-operator/ks.yaml

@@ -46,6 +46,7 @@ spec:
           - security
           - books
           - documents
+          - flux-system
       bookmarks:
         - group: Kubernetes
           bookmarks:
