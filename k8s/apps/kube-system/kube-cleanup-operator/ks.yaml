@@ -6,6 +6,7 @@ metadata:
   name: kube-cleanup-operator
   namespace: flux-system
 spec:
+  targetNamespace: kube-system
   path: ./k8s/apps/kube-system/kube-cleanup-operator/app
   prune: true
   sourceRef:
