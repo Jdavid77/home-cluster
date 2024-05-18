@@ -59,7 +59,7 @@ spec:
               PAPERLESS_CONSUMER_RECURSIVE: "true"
               PAPERLESS_CONSUMER_SUBDIRS_AS_TAGS: "true"
               PAPERLESS_ENABLE_HTTP_REMOTE_USER: "false"
-              PAPERLESS_SOCIALACCOUNT_ALLOW_SIGNUPS: "false"
+              PAPERLESS_SOCIALACCOUNT_ALLOW_SIGNUPS: "true"
               PAPERLESS_OCR_LANGUAGES: por
               PAPERLESS_OCR_LANGUAGE: por
               PAPERLESS_PORT: 8000
