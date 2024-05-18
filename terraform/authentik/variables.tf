@@ -7,12 +7,18 @@ variable "authentik_api_url" {
   description = "Authentik API URL"
 }
 
+variable "bind_password" {
+  type        = string
+  description = "LLDAP Bind Password"
+}
+
+variable "bind_cn" {
+  type        = string
+  description = "LLDAP Bind CN"
+}
+
 variable "external_host" {
   type        = string
   description = "External Host"
-}
-
-variable "login_email" {
-  type        = string
-  description = "Login Email"
+  
 }

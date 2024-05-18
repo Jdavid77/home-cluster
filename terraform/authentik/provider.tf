@@ -1,4 +1,4 @@
 provider "authentik" {
-  url      = var.authentik_api_url
-  token    = var.authentik_api_token
+  url   = var.authentik_api_url
+  token = var.authentik_api_token
 }

@@ -3,7 +3,8 @@ terraform {
   required_providers {
     authentik = {
       source  = "goauthentik/authentik"
-      version = "2023.8.0"
+      version = "2024.4.2"
+      configuration_aliases = [ authentik ]
     }
     random = {
       source  = "hashicorp/random"
@@ -11,4 +12,3 @@ terraform {
     }
   }
 }
-

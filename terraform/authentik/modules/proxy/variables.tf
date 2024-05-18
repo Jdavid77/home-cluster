@@ -4,7 +4,7 @@ variable "authentik_proxy_application_name" {
 }
 
 variable "authentik_proxy_external_host" {
-  type = string
+  type        = string
   description = "Authentik Proxy External Host"
 }
 
@@ -15,7 +15,6 @@ variable "authentik_proxy_application_icon_url" {
 variable "authentik_proxy_application_group" {
   type        = string
   description = "Application Group"
-  default     = "OIDC"
 }
 variable "authentik_proxy_application_description" {
   type        = string
