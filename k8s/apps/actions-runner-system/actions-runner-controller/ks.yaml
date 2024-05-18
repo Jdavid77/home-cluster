@@ -24,6 +24,7 @@ metadata:
 spec:
   targetNamespace: actions-runner-system
   dependsOn:
+    - name: gha-runner-scale-set-controller
     - name: external-secrets-store
   path: ./k8s/apps/actions-runner-system/actions-runner-controller/runner
   prune: true

@@ -8,6 +8,9 @@ metadata:
 spec:
   targetNamespace: books
   path: ./k8s/apps/books/calibre-web/app
+  dependsOn:
+    - name: external-secrets-store
+    - name: volsync
   prune: true
   sourceRef:
     kind: GitRepository

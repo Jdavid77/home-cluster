@@ -8,6 +8,9 @@ metadata:
 spec:
   targetNamespace: documents
   path: ./k8s/apps/documents/joplin/app
+  dependsOn:
+    - name: external-secrets-store
+    - name: cloudnative-pg-cluster
   prune: true
   sourceRef:
     kind: GitRepository
