@@ -3,5 +3,3 @@ kind: Kustomization
 resources:
   - ldap.yaml
   - crowdsec.yaml
-  #- cloudflare.yaml
-  - authentik.yaml

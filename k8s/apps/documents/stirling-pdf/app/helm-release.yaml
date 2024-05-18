@@ -96,6 +96,7 @@ spec:
         className: traefik
         annotations:
           hajimari.io/icon: file-pdf-box
+          traefik.ingress.kubernetes.io/router.middlewares: "security-ak-outpost-proxy@kubernetescrd"
         hosts:
           - host: &host "pdf.${SECRET_DOMAIN}"
             paths:
