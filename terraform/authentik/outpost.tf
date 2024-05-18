@@ -5,8 +5,8 @@ locals {
 }
 
 resource "authentik_outpost" "outpost" {
-  name = "proxy"
+  name               = "proxy"
   protocol_providers = local.proxy_ids
 
-  depends_on = [ module.proxy ]
+  depends_on = [module.proxy]
 }

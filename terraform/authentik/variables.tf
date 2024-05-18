@@ -20,5 +20,5 @@ variable "bind_cn" {
 variable "external_host" {
   type        = string
   description = "External Host"
-  
+
 }

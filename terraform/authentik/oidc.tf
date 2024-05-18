@@ -12,6 +12,12 @@ locals {
       authentik_oidc_application_icon_url    = "https://avatars.githubusercontent.com/u/99562962?s=280&v=4"
       authentik_oidc_application_description = "Paperless OAuth application"
     },
+    {
+      authentik_oidc_application_name        = "NextCloud"
+      authentik_oidc_application_group       = "Cloud"
+      authentik_oidc_application_icon_url    = "https://nextcloud.com/c/uploads/2023/02/logo_nextcloud_white.svg"
+      authentik_oidc_application_description = "NextCloud OAuth application"
+    },
   ]
 }
 

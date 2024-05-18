@@ -27,7 +27,7 @@ locals {
 module "proxy" {
 
   for_each = { for proxy in local.proxies : proxy.application_name => proxy }
-  
+
   source = "./modules/proxy"
 
   providers = {
