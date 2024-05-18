@@ -6,6 +6,13 @@ locals {
       application_icon_url    = "https://stirlingtools.com/img/logo.svg"
       application_description = "Stirling PDF Proxy Application"
       external_host           = "https://pdf.${var.external_host}"
+    },
+    {
+      application_name        = "Excalidraw"
+      application_group       = "Tools"
+      application_icon_url    = "https://pbs.twimg.com/profile_images/1701265499357614080/4lGkkWCm_400x400.jpg"
+      application_description = "Excaliraw Proxy Application"
+      external_host           = "https://draw.${var.external_host}"
     }
   ]
 }
