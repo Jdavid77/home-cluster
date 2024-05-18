@@ -48,6 +48,8 @@ spec:
       ingress:
         enabled: true
         ingressClassName: traefik
+        annotations:
+          hajimari.io/icon: account-lock
         hosts:
           - &host auth.${SECRET_DOMAIN}
         tls: [hosts: [*host]]
