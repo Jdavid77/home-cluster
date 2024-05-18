@@ -68,6 +68,7 @@ spec:
               PAPERLESS_TASK_WORKERS: 2
               PAPERLESS_TIME_ZONE: Europe/Lisbon
               PAPERLESS_URL: https://paperless.${SECRET_DOMAIN}
+              PAPERLESS_APPS: allauth.socialaccount.providers.openid_connect
             envFrom: *envFrom
             resources:
               requests:
