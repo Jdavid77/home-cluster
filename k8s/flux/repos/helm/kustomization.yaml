@@ -27,3 +27,4 @@ resources:
   - backube-charts.yaml
   - piraeus-charts.yaml
   - actions-runner-controller-charts.yaml
+  - lwolf-charts.yaml
