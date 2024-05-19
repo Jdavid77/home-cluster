@@ -23,6 +23,14 @@ spec:
       strategy: rollback
       retries: 3
   values:
+    defaultPodOptions:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: DoesNotExist
     controllers:
       minio:
         annotations:
