@@ -32,17 +32,18 @@ spec:
             - matchExpressions:
               - key: node-role.kubernetes.io/control-plane
                 operator: DoesNotExist
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 5050
-        runAsGroup: 5050
-        seccompProfile: { type: RuntimeDefault }
     controllers:
       pgadmin:
         replicas: 1
         strategy: RollingUpdate
         annotations:
           reloader.stakater.com/auto: "true"
+        pod:
+          securityContext:
+            runAsUser: 5050 # ${APP_UID}
+            runAsGroup: 5050 # ${APP_GID}
+            fsGroup: 5050 # ${APP_GID}
+            fsGroupChangePolicy: OnRootMismatch
         containers:
           app:
             image:
@@ -53,7 +54,6 @@ spec:
                   name: pgadmin-secret
             securityContext:
               allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: false
               capabilities: { drop: ["ALL"] }
             resources:
               requests:
