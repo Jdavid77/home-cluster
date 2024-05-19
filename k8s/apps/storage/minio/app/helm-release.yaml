@@ -44,7 +44,7 @@ spec:
               MINIO_IDENTITY_OPENID_CLAIM_USERINFO: "on"
             envFrom:
               - secretRef:
-                  name: *app
+                  name: minio-secret
             args: ["server", "/data", "--console-address", ":9001"]
             probes:
               liveness: &probes
