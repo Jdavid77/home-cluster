@@ -38,12 +38,6 @@ spec:
         strategy: RollingUpdate
         annotations:
           reloader.stakater.com/auto: "true"
-        pod:
-          securityContext:
-            runAsUser: 5050 # ${APP_UID}
-            runAsGroup: 5050 # ${APP_GID}
-            fsGroup: 5050 # ${APP_GID}
-            fsGroupChangePolicy: OnRootMismatch
         containers:
           app:
             image:
@@ -52,9 +46,6 @@ spec:
             envFrom:
               - secretRef:
                   name: pgadmin-secret
-            securityContext:
-              allowPrivilegeEscalation: false
-              capabilities: { drop: ["ALL"] }
             resources:
               requests:
                 cpu: 15m
