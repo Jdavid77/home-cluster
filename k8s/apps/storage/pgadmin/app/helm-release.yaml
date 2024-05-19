@@ -48,6 +48,9 @@ spec:
             image:
               repository: docker.io/dpage/pgadmin4
               tag: "8.6@sha256:701f221dfc5da1fb3d4095ad4264ebb00ef4f7ecc6573007a49a59740019703d"
+            envFrom:
+              - secretRef:
+                  name: pgadmin-secret
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
