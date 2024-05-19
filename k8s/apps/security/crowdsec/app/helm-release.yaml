@@ -42,19 +42,51 @@ spec:
           # as in crowdsec configuration, we need to specify the program name to find a matching parser
           program: traefik
       env:
+        - name: TZ
+          value: ${TIMEZONE}
         - name: PARSERS
           value: "crowdsecurity/cri-logs"
         - name: COLLECTIONS
-          value: "crowdsecurity/traefik"
-        # When testing, allow bans on private networks
-        - name: DISABLE_PARSERS
-          value: "crowdsecurity/whitelists"
+          value: >-
+            crowdsecurity/traefik
+            crowdsecurity/base-http-scenarios
+            crowdsecurity/http-cve
+            crowdsecurity/pgsql
+            crowdsecurity/linux
+            crowdsecurity/sshd
+
       persistentVolume:
         config:
-          enabled: false
+          enabled: true
+          accessModes:
+            - ReadWriteMany
+          storageClassName: longhorn
+          size: 100Mi
     lapi:
+      env:
+        - name: TZ
+          value: ${TIMEZONE}
+        - name: ENROLL_KEY
+          valueFrom:
+            secretKeyRef:
+              name: *app
+              key: ENROLL_KEY
+        - name: ENROLL_INSTANCE_NAME
+          value: k8s_cluster
+        - name: ENROLL_TAGS
+          value: "home-ops k8s"
       dashboard:
         enabled: false
       persistentVolume:
+        data:
+          enabled: true
+          accessModes:
+            - ReadWriteMany
+          storageClassName: longhorn
+          size: 1Gi
         config:
-          enabled: false
+          enabled: true
+          accessModes:
+            - ReadWriteMany
+          storageClassName: longhorn
+          size: 100Mi
