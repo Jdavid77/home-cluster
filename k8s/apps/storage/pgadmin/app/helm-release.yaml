@@ -1,31 +1,28 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: pgadmin
 spec:
-  interval: 15m
+  interval: 30m
   chart:
     spec:
       chart: app-template
       version: 3.1.0
+      interval: 30m
       sourceRef:
         kind: HelmRepository
         name: bjw-s-charts
         namespace: flux-system
-      interval: 15m
-  maxHistory: 3
   install:
-    createNamespace: true
     remediation:
       retries: 3
   upgrade:
     cleanupOnFail: true
     remediation:
+      strategy: rollback
       retries: 3
-  uninstall:
-    keepHistory: false
   values:
     defaultPodOptions:
       affinity:
@@ -35,60 +32,59 @@ spec:
             - matchExpressions:
               - key: node-role.kubernetes.io/control-plane
                 operator: DoesNotExist
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 5050
+        runAsGroup: 5050
+        seccompProfile: { type: RuntimeDefault }
     controllers:
-      main:
-        strategy: Recreate
+      pgadmin:
+        replicas: 1
+        strategy: RollingUpdate
         annotations:
           reloader.stakater.com/auto: "true"
-        pod:
-          securityContext:
-            runAsUser: 5050 
-            runAsGroup: 5050 
-            fsGroup: 5050 
-            fsGroupChangePolicy: OnRootMismatch
         containers:
-          main:
+          app:
             image:
               repository: docker.io/dpage/pgadmin4
               tag: "8.6@sha256:701f221dfc5da1fb3d4095ad4264ebb00ef4f7ecc6573007a49a59740019703d"
-            envFrom:
-              - secretRef:
-                  name: pgadmin-secret
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
             resources:
               requests:
                 cpu: 15m
                 memory: 164M
               limits:
                 memory: 236M
-
     service:
-      main:
-        controller: main
+      app:
+        controller: pgadmin
         ports:
           http:
             port: 80
-
     ingress:
       main:
         enabled: true
         className: traefik
         hosts:
-          - host: "{{ .Release.Name }}.${SECRET_DOMAIN_NAME}"
+          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
                 service:
-                  identifier: main
+                  identifier: app
                   port: http
-
+        tls:
+          - hosts: [*host]
+            secretName: ${SECRET_DOMAIN}-tls
     persistence:
       config:
         enabled: true
         existingClaim: pgadmin-config
-        advancedMounts:
-          main:
-            main:
-              - path: /var/lib/pgadmin
+        globalMounts:
+          - path: /var/lib/pgadmin
       oauth:
         enabled: true
         type: secret
@@ -96,3 +92,4 @@ spec:
         globalMounts:
           - path: /pgadmin4/config_local.py
             subPath: config_local.py
+
