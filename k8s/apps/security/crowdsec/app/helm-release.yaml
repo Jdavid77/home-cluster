@@ -69,7 +69,7 @@ spec:
         - name: ENROLL_KEY
           valueFrom:
             secretKeyRef:
-              name: *app
+              name: crowdsec-secret
               key: ENROLL_KEY
         - name: ENROLL_INSTANCE_NAME
           value: k8s_cluster
