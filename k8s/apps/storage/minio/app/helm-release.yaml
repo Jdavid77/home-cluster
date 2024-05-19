@@ -50,6 +50,7 @@ spec:
               MINIO_IDENTITY_OPENID_SCOPES: "openid,profile,email,groups"
               MINIO_IDENTITY_OPENID_REDIRECT_URI: "https://minio.${SECRET_DOMAIN}/oauth_callback"
               MINIO_IDENTITY_OPENID_CLAIM_USERINFO: "on"
+              MINIO_IDENTITY_OPENID_CLAIM_NAME: policy
             envFrom:
               - secretRef:
                   name: minio-secret
