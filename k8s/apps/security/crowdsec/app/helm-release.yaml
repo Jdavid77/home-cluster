@@ -54,6 +54,8 @@ spec:
             crowdsecurity/pgsql
             crowdsecurity/linux
             crowdsecurity/sshd
+            firix/authentik
+            andreasbrett/paperless-ngx
 
       persistentVolume:
         config:
