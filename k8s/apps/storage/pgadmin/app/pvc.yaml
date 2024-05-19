@@ -3,12 +3,12 @@ kind: PersistentVolumeClaim
 metadata:
   name: pgadmin-config
   labels:
-    app.kubernetes.io/name: &name pgamin
+    app.kubernetes.io/name: &name pgadmin
     app.kubernetes.io/instance: *name
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gb
+      storage: 1Gi
   storageClassName: longhorn
