@@ -94,6 +94,6 @@ spec:
         advancedMounts:
           pgadmin:
             app:
-              - path: /pgadmin4/config_system.py
-                subPath: config_system.py
+              - path: /pgadmin4/config_local.py
+                subPath: config_local.py
 
