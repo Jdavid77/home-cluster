@@ -6,6 +6,10 @@ metadata:
   name: minio
   namespace: flux-system
 spec:
+  targetNamespace: storage
+  dependsOn:
+    - name: csi-driver-nfs-storageclass
+    - name: external-secrets-store
   path: ./k8s/apps/storage/minio/app
   prune: true
   sourceRef:

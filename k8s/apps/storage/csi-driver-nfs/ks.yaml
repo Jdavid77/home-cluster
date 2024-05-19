@@ -25,6 +25,8 @@ metadata:
   namespace: flux-system
 spec:
   path: ./k8s/apps/storage/csi-driver-nfs/storage
+  dependsOn: 
+    - name: csi-driver-nfs
   prune: true
   sourceRef:
     kind: GitRepository

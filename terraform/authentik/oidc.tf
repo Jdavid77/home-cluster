@@ -18,6 +18,12 @@ locals {
       authentik_oidc_application_icon_url    = "https://nextcloud.com/c/uploads/2023/02/logo_nextcloud_white.svg"
       authentik_oidc_application_description = "NextCloud OAuth application"
     },
+    {
+      authentik_oidc_application_name        = "Minio"
+      authentik_oidc_application_group       = "Storage"
+      authentik_oidc_application_icon_url    = "https://min.io/resources/img/logo/MINIO_Bird.png"
+      authentik_oidc_application_description = "Minio OAuth application"
+    },
   ]
 }
 
