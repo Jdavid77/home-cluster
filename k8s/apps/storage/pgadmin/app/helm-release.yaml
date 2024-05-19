@@ -79,7 +79,7 @@ spec:
         existingClaim: pgadmin-config
         advancedMounts:
           pgadmin:
-            main:
+            app:
               - path: /var/lib/pgadmin
       oauth:
         enabled: true
