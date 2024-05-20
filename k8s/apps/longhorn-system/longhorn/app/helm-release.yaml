@@ -48,6 +48,7 @@ spec:
       tlsSecret: ${SECRET_DOMAIN}-tls
       annotations:
         hajimari.io/icon: harddisk
+        traefik.ingress.kubernetes.io/router.middlewares: "security-ak-outpost-proxy@kubernetescrd"
     longhornDriver:
       tolerations: &tolerations
         - key: CriticalAddonsOnly
