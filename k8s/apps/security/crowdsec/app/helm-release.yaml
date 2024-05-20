@@ -51,9 +51,10 @@ spec:
             crowdsecurity/traefik
             crowdsecurity/base-http-scenarios
             crowdsecurity/http-cve
+            crowdsecurity/http-dos
+            crowdsecurity/k8s-audit
             crowdsecurity/pgsql
             crowdsecurity/linux
-            crowdsecurity/sshd
             firix/authentik
             andreasbrett/paperless-ngx
 
