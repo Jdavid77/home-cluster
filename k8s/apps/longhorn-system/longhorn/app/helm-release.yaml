@@ -41,7 +41,13 @@ spec:
       defaultLonghornStaticStorageClass: longhorn
       nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
     ingress:
-      enabled: false
+      enabled: true
+      ingressClassName: traefik
+      host: longhorn.${SECRET_DOMAIN}
+      tls: true
+      tlsSecret: ${SECRET_DOMAIN}-tls
+      annotations:
+        hajimari.io/icon: harddisk
     longhornDriver:
       tolerations: &tolerations
         - key: CriticalAddonsOnly

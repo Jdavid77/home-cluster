@@ -21,6 +21,13 @@ locals {
       application_description = "IT-Tools Proxy Application"
       external_host           = "https://it-tools.${var.external_host}"
     },
+    {
+      application_name        = "Longhorn UI"
+      application_group       = "Storage"
+      application_icon_url    = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTquJBoCjTwNhw5MhHBzITJJbv-ZEo1sV2Rb559Bmivkw&s"
+      application_description = "Longhorn UI Proxy Application"
+      external_host           = "https://longhorn.${var.external_host}"
+    },
   ]
 }
 
