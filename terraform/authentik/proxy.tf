@@ -37,7 +37,7 @@ locals {
     },
     {
       application_name        = "Alert-Manager"
-      application_group       = "Storage"
+      application_group       = "Monitoring"
       application_icon_url    = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Prometheus_software_logo.svg/1200px-Prometheus_software_logo.svg.png"
       application_description = "AlertManager Proxy Application"
       external_host           = "https://alerts.${var.external_host}"
