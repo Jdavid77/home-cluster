@@ -140,6 +140,9 @@ spec:
       - name: crowdsec-bouncer-tls
         mountPath: /etc/traefik/crowdsec-certs/
         type: secret
+      - name: ban-html-page
+        mountPath: /crowdsec/
+        type: configMap
 
     resources:
       requests:
