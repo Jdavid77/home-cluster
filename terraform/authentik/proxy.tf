@@ -28,6 +28,20 @@ locals {
       application_description = "Longhorn UI Proxy Application"
       external_host           = "https://longhorn.${var.external_host}"
     },
+    {
+      application_name        = "Prometheus"
+      application_group       = "Monitoring"
+      application_icon_url    = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Prometheus_software_logo.svg/1200px-Prometheus_software_logo.svg.png"
+      application_description = "Prometheus Proxy Application"
+      external_host           = "https://prometheus.${var.external_host}"
+    },
+    {
+      application_name        = "Alert-Manager"
+      application_group       = "Storage"
+      application_icon_url    = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Prometheus_software_logo.svg/1200px-Prometheus_software_logo.svg.png"
+      application_description = "AlertManager Proxy Application"
+      external_host           = "https://alerts.${var.external_host}"
+    },
   ]
 }
 
