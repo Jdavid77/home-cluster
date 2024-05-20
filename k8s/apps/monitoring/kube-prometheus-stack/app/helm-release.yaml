@@ -54,7 +54,6 @@ spec:
             discord_configs:
               - webhook_url: ${DISCORD_WEBHOOK_URL}
                 send_resolved: true
-                url_title: View in Alert Manager
                 title: |-
                   [{{ .Status | toUpper -}}
                   {{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{- end -}}
