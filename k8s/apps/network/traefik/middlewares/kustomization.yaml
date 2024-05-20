@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - ldap.yaml
   - crowdsec.yaml
+  - redirect.yaml
