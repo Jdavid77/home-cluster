@@ -29,9 +29,9 @@ spec:
     rbac:
       pspEnabled: false
     env:
-      GF_AUTH_GENERIC_OAUTH_API_URL: https://auth.${SECRET_DOMAIN}/api/oidc/userinfo
-      GF_AUTH_GENERIC_OAUTH_AUTH_URL: https://auth.${SECRET_DOMAIN}/api/oidc/authorization
-      GF_AUTH_GENERIC_OAUTH_TOKEN_URL: https://auth.${SECRET_DOMAIN}/api/oidc/token
+      GF_AUTH_GENERIC_OAUTH_API_URL: https://auth.${SECRET_DOMAIN}/application/o/userinfo/
+      GF_AUTH_GENERIC_OAUTH_AUTH_URL: https://auth.${SECRET_DOMAIN}/application/o/authorize/
+      GF_AUTH_GENERIC_OAUTH_TOKEN_URL: https://auth.${SECRET_DOMAIN}/application/o/token/
       GF_AUTH_GENERIC_OAUTH_ALLOW_SIGN_UP: "true"
       GF_DATE_FORMATS_USE_BROWSER_LOCALE: true
       GF_EXPLORE_ENABLED: true
@@ -49,7 +49,7 @@ spec:
         check_for_plugin_updates: false
         reporting_enabled: false
       auth:
-        signout_redirect_url: "https://auth.${SECRET_DOMAIN}/logout"
+        signout_redirect_url: "https://auth.${SECRET_DOMAIN}/application/o/grafana/end-session/"
         oauth_auto_login: true
         oauth_allow_insecure_email_lookup: true
       auth.generic_oauth:
@@ -65,7 +65,7 @@ spec:
       auth.generic_oauth.group_mapping:
         org_id: 1
         role_attribute_path: |
-          contains(groups[*], 'admins') && 'Admin' || contains(groups[*], 'people') && 'Viewer'
+          contains(groups[*], 'grafana_admin') && 'Admin' || contains(groups[*], 'grafana_viewer') && 'Viewer'
       auth.basic:
         enabled: false
       auth.anonymous:
@@ -86,14 +86,6 @@ spec:
             editable: true
             options:
               path: /var/lib/grafana/dashboards/default-folder
-          - name: ceph
-            orgId: 1
-            folder: Ceph
-            type: file
-            disableDeletion: false
-            editable: true
-            options:
-              path: /var/lib/grafana/dashboards/ceph-folder
           - name: flux
             orgId: 1
             folder: Flux
