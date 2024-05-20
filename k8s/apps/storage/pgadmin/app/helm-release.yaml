@@ -68,6 +68,8 @@ spec:
       main:
         enabled: true
         className: traefik
+        annotations:
+          hajimari.io/icon: database
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
