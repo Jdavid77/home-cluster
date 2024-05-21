@@ -46,6 +46,9 @@ spec:
               MINIO_BROWSER_REDIRECT_URL: https://minio.${SECRET_DOMAIN}
               MINIO_SERVER_URL: https://s3.${SECRET_DOMAIN}
               MINIO_API_CORS_ALLOW_ORIGIN: https://minio.${SECRET_DOMAIN},https://s3.${SECRET_DOMAIN}
+              MINIO_PROMETHEUS_JOB_ID: minio
+              MINIO_PROMETHEUS_URL: https://prometheus.${SECRET_DOMAIN}
+              MINIO_PROMETHEUS_AUTH_TYPE: public
             envFrom:
               - secretRef:
                   name: minio-secret
@@ -84,6 +87,15 @@ spec:
             port: 9001
           api:
             port: *api-port
+    serviceMonitor:
+      app:
+        serviceName: minio
+        endpoints:
+          - port: s3
+            scheme: http
+            path: /minio/v2/metrics/cluster
+            interval: 1m
+            scrapeTimeout: 10s
     ingress:
       app:
         className: traefik
