@@ -48,6 +48,7 @@ spec:
           - documents
           - flux-system
           - storage
+          - monitoring
       bookmarks:
         - group: Kubernetes
           bookmarks:
