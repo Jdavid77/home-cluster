@@ -38,7 +38,7 @@ spec:
       enabled: true
       className: traefik
       annotations:
-        hajimari.io/icon: monitor-dashboard
+        hajimari.io/icon: simple-icons:flux
       hosts:
         - host: &host gitops.${SECRET_DOMAIN}
           paths:
