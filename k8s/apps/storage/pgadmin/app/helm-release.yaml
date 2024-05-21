@@ -69,7 +69,7 @@ spec:
         enabled: true
         className: traefik
         annotations:
-          hajimari.io/icon: database
+          hajimari.io/icon: simple-icons:postgresql
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:

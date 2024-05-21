@@ -80,7 +80,7 @@ spec:
       app:
         className: traefik
         annotations:
-          hajimari.io/icon: bookshelf
+          hajimari.io/icon: simple-icons:calibreweb
         hosts:
           - host: &hostName books.${SECRET_DOMAIN}
             paths:

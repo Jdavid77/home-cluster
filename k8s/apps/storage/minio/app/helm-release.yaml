@@ -88,7 +88,7 @@ spec:
       app:
         className: traefik
         annotations:
-          hajimari.io/icon: pail
+          hajimari.io/icon: simple-icons:minio
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:

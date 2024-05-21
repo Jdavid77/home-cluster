@@ -87,7 +87,7 @@ spec:
         enabled: true
         className: traefik
         annotations:
-          hajimari.io/icon: mdi:barcode-scan
+          hajimari.io/icon: simple-icons:paperlessngx
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:

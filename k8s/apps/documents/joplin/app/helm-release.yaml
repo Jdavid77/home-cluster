@@ -72,7 +72,7 @@ spec:
         enabled: true
         className: traefik
         annotations:
-          hajimari.io/icon: notebook-multiple
+          hajimari.io/icon: simple-icons:joplin
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
