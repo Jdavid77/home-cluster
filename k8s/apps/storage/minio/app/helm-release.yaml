@@ -91,7 +91,7 @@ spec:
       app:
         serviceName: minio
         endpoints:
-          - port: s3
+          - port: api
             scheme: http
             path: /minio/v2/metrics/cluster
             interval: 1m
