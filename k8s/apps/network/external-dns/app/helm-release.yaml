@@ -54,7 +54,7 @@ spec:
     podAnnotations:
       secret.reloader.stakater.com/reload: externaldns-secrets
     serviceMonitor:
-      enabled: false
+      enabled: true
     resources:
       requests:
         memory: 100Mi
