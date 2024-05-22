@@ -6,3 +6,4 @@ resources:
   - ./kube-prometheus-stack/ks.yaml
   - ./metrics-server/ks.yaml
   - ./grafana/ks.yaml
+  - ./speedtest-exporter/ks.yaml
