@@ -1,6 +1,28 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended"
-  ]
+    "config:recommended",
+    ":dependencyDashboard",
+    ":disableRateLimiting",
+    ":semanticCommits",
+    ":skipStatusChecks",
+    "replacements:k8s-registry-move"
+  ],
+  "dependencyDashboardTitle": "Home-Ops Renovate Dashboard",
+  "suppressNotifications": ["prEditedNotification", "prIgnoreNotification"],
+  "rebaseWhen": "conflicted",
+  "assigneesFromCodeOwners": true,
+  "reviewersFromCodeOwners": true,
+  "ignorePaths": [
+    "**/*.sops.*"
+  ],
+  "kubernetes": {
+    "fileMatch": ["k8s/.+\\.yaml$"]
+  },
+  "helm-values": {
+    "fileMatch": ["k8s/.+\\.yaml$"]
+  },
+  "flux": {
+    "fileMatch": ["k8s/.+\\.yaml$"]
+  }
 }
