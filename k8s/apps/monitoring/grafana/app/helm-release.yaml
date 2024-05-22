@@ -152,6 +152,10 @@ spec:
           gnetId: 11001
           revision: 1
           datasource: Prometheus
+        speedtest-exporter:
+          gnetId: 13665
+          revision: 4
+          datasource: Prometheus
         dragonfly:
           url: https://raw.githubusercontent.com/dragonflydb/dragonfly/main/tools/local/monitoring/grafana/provisioning/dashboards/dashboard.json
           datasource: Prometheus
