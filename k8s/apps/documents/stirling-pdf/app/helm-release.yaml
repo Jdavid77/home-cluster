@@ -40,7 +40,7 @@ spec:
           app:
             image:
               repository: ghcr.io/stirling-tools/s-pdf
-              tag: 0.23.1@sha256:c05852ee8b6aa72dd5eaa31444669a42807ea12ef3585d5b924c4244065af6c9
+              tag: 0.24.4@sha256:03737636bb09694b351cf6710b0fb8963ae33e9c57353d5340116c6c505cb8f6
               pullPolicy: IfNotPresent
             env:
               DOCKER_ENABLE_SECURITY: "true"
