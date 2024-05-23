@@ -4,3 +4,4 @@ resources:
   - ldap.yaml
   - crowdsec.yaml
   - redirect.yaml
+  - errors.yaml

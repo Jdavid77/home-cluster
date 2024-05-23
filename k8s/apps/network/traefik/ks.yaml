@@ -52,6 +52,7 @@ spec:
   dependsOn:
     - name: traefik
     - name: crowdsec
+    - name: error-pages
   path: ./k8s/apps/network/traefik/middlewares
   prune: true
   sourceRef:
