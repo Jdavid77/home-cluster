@@ -6,6 +6,7 @@ metadata:
   name: error-pages
   namespace: flux-system
 spec:
+  targetNamespace: network
   path: ./k8s/apps/network/error-pages/app
   prune: true
   sourceRef:
