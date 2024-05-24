@@ -164,8 +164,8 @@ spec:
           moduleName: github.com/jpxd/torblock
           version: "v0.1.1"
         cloudflarewarp:
-          modulename: github.com/BetterCorp/cloudflarewarp
-          version: "v1.3.0"
+          moduleName: "github.com/BetterCorp/cloudflarewarp"
+          ersion: "v1.3.3"
 
 
     volumes:
