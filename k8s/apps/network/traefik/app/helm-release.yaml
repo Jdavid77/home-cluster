@@ -163,10 +163,6 @@ spec:
         torblock:
           moduleName: github.com/jpxd/torblock
           version: "v0.1.1"
-        cloudflarewarp:
-          moduleName: "github.com/BetterCorp/cloudflarewarp"
-          ersion: "v1.3.3"
-
 
     volumes:
       - name: crowdsec-bouncer-tls

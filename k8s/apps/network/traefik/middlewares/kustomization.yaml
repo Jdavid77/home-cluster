@@ -6,4 +6,4 @@ resources:
   - ratelimit.yaml
   - errors.yaml
   - tor.yaml
-  - cloudflare.yaml
+  #- cloudflare.yaml
