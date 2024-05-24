@@ -3,6 +3,6 @@ kind: Kustomization
 resources:
   - ldap.yaml
   - crowdsec.yaml
-  - rate-limit.yaml
+  - ratelimit.yaml
   - errors.yaml
   - tor.yaml
