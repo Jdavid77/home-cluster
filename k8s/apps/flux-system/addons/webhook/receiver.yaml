@@ -1,0 +1,14 @@
+apiVersion: notification.toolkit.fluxcd.io/v1
+kind: Receiver
+metadata:
+  name: gh-receiver
+spec:
+  type: github
+  events:
+    - "ping"
+    - "push"
+  secretRef:
+    name: webhook-token
+  resources:
+    - kind: GitRepository
+      name: home-cluster
