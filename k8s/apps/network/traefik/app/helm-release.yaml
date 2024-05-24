@@ -100,6 +100,8 @@ spec:
         middlewares:
           - network-bouncer@kubernetescrd
           - network-errors@kubernetescrd
+          - network-ratelimit@kubernetescrd
+          - network-torblock@kubernetescrd
         http3:
           enabled: true
         tls:
@@ -157,6 +159,9 @@ spec:
         bouncer:
           moduleName: "github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin"
           version: "v1.3.0"
+        torblock:
+          moduleName: github.com/jpxd/torblock
+          version: "v0.1.1"
 
 
     volumes:
