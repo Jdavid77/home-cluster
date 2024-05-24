@@ -37,6 +37,7 @@ spec:
       loadBalancerIPs:
         - "${LB_IP}"
       externalTrafficPolicy: Local
+      ipFamilyPolicy: PreferDualStack
       ipFamilies:
         - "IPv4"
         - "IPv6"
@@ -78,8 +79,6 @@ spec:
       - "--metrics.prometheus.entryPoint=metrics"
     additionalArguments:
       - "--providers.kubernetesingress.ingressendpoint.ip=${LB_IP}"
-      - "--entrypoints.web.http.middlewares=network-redirectscheme@kubernetescrd,network-bouncer@kubernetescrd"
-      - "--entrypoints.websecure.http.middlewares=network-bouncer@kubernetescrd,network-errors@kubernetescrd"
     providers:
       kubernetesCRD:
         enabled: true
@@ -100,6 +99,9 @@ spec:
         redirectTo:
           port: websecure
       websecure:
+        middlewares:
+          - network-bouncer@kubernetescrd
+          - network-errors@kubernetescrd
         http3:
           enabled: true
         tls:
