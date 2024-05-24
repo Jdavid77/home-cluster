@@ -37,10 +37,8 @@ spec:
       loadBalancerIPs:
         - "${LB_IP}"
       externalTrafficPolicy: Local
-      ipFamilyPolicy: PreferDualStack
       ipFamilies:
         - "IPv4"
-        - "IPv6"
     logs:
       general:
         format: json
