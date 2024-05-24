@@ -1,0 +1,13 @@
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta3
+kind: Alert
+metadata:
+  name: helm-release-alert
+spec:
+  summary: "Helm Release"
+  eventSeverity: error
+  eventSources:
+    - kind: HelmRelease
+      name: "*"
+  providerRef:
+    name: discord
