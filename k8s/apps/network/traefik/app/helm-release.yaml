@@ -102,7 +102,6 @@ spec:
           - network-errors@kubernetescrd
           - network-ratelimit@kubernetescrd
           - network-torblock@kubernetescrd
-          - network-cloudflarewarp@kubernetescrd
         http3:
           enabled: true
         tls:
