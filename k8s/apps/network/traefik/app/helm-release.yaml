@@ -83,7 +83,6 @@ spec:
           - network-bouncer@kubernetescrd
           - network-errors@kubernetescrd
           - network-ratelimit@kubernetescrd
-          - network-torblock@kubernetescrd
         http3:
           enabled: true
         tls:
