@@ -35,7 +35,7 @@ spec:
         host: dragonfly.storage.svc.cluster.local
         db: 1
     server:
-      replicas: 2
+      replicas: 3
       initContainers:
         - name: init-db
           image: ghcr.io/onedr0p/postgres-init:16.3@sha256:dc0e7510173f389ebd6754a753fa7a745127ed69c54e0eef6882704532fef1a3
