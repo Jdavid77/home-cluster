@@ -56,6 +56,8 @@ spec:
             crowdsecurity/linux
             firix/authentik
             andreasbrett/paperless-ngx
+        - name: LEVEL_INFO
+          value: "true"
 
       persistentVolume:
         config:
@@ -64,6 +66,10 @@ spec:
             - ReadWriteMany
           storageClassName: longhorn
           size: 100Mi
+      metrics:
+        enabled: true
+        serviceMonitor:
+          enabled: true
     lapi:
       env:
         - name: TZ
@@ -92,3 +98,8 @@ spec:
             - ReadWriteMany
           storageClassName: longhorn
           size: 100Mi
+      metrics:
+        enabled: true
+        serviceMonitor:
+          enabled: true
+    
