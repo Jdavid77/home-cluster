@@ -49,7 +49,6 @@ spec:
         - name: COLLECTIONS
           value: >-
             crowdsecurity/traefik
-            crowdsecurity/base-http-scenarios
             crowdsecurity/http-cve
             crowdsecurity/http-dos
             crowdsecurity/k8s-audit
