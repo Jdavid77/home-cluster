@@ -4,5 +4,5 @@ metadata:
   name: ratelimit
 spec:
   rateLimit:
-    average: 20
-    burst: 40
+    average: 100
+    burst: 50
