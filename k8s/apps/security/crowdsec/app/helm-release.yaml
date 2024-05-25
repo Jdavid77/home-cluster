@@ -23,6 +23,11 @@ spec:
       retries: 3
   values:
     container_runtime: containerd
+    config:
+      console.yaml: 
+          |
+        share_manual_decisions: true
+        share_tainted: true
     tls:
       enabled: true
       bouncer:
