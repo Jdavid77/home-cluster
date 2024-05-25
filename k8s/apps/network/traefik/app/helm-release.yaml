@@ -46,24 +46,6 @@ spec:
       access:
         enabled: true
         format: json
-        fields:
-          general:
-            names:
-              defaultmode: drop
-              ClientAddr: keep
-              RequestAddr: keep
-              RequestMethod: keep
-              RequestPath: keep
-              RequestCount: keep
-              RequestProtocol: keep
-              RequestScheme: keep
-              RetryAttempts: keep
-              RouterName: keep
-              Duration: keep
-          headers:
-            defaultmode: keep
-            names:
-              Authorization: drop
     ingressClass:
       enabled: true
       isDefaultClass: true
