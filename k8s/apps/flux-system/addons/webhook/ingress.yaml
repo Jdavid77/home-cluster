@@ -8,9 +8,15 @@ spec:
     http:
       paths:
       - pathType: Prefix
-        path: /
+        path: /hook/
         backend:
           service:
             name: webhook-receiver
             port:
               number: 80
+  tls:
+    - hosts:
+        - flux-webhook.${SECRET_DOMAIN}
+      secretName: ${SECRET_DOMAIN}-tls
+
+    
