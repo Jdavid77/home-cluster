@@ -16,10 +16,9 @@ spec:
       metadata:
         labels:
           cnpg.io/reload: "true"
-  data:
-    - secretKey: username
-      remoteRef:
-        key: /cnpg/POSTGRES_SUPER_USER
-    - secretKey: password
-      remoteRef:
-        key: /cnpg/POSTGRES_SUPER_PASS
+      data:
+        POSTGRES_SUPER_PASS: '{{ .POSTGRES_SUPER_PASS }}'
+        POSTGRES_SUPER_USER: '{{ .POSTGRES_SUPER_USER }}'
+  dataFrom:
+    - extract:
+        key: /cnpg/super-user

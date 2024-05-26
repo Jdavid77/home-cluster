@@ -64,12 +64,20 @@ spec:
         WOODPECKER_ADMIN: 'Jdavid77'
         WOODPECKER_HOST: 'https://ci.${SECRET_DOMAIN}'
         WOODPECKER_GITHUB: "true"
+      
+      initContainers: 
+        - name: init-db
+          image: ghcr.io/onedr0p/postgres-init:16
+          envFrom: 
+            - secretRef:
+                name: woodpecker-postgres-secret
 
 
       # -- Add extra environment variables from the secrets list
       extraSecretNamesForEnvFrom:
         - woodpecker-github-secret
         - woodpecker-secret
+        - woodpecker-postgres-secret
 
       # -- Create a generic secret to store things in, e.g. env values
       secrets:
