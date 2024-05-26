@@ -29,3 +29,4 @@ resources:
   - actions-runner-controller-charts.yaml
   - lwolf-charts.yaml
   - weave-gitops-charts.yaml
+  - woodpecker-charts.yaml
