@@ -6,6 +6,7 @@ metadata:
   name: woodpecker
   namespace: flux-system
 spec:
+  targetNamespace: cicd
   path: ./k8s/apps/cicd/woodpecker/app
   prune: true
   sourceRef:
