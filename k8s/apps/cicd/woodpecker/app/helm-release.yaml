@@ -37,6 +37,7 @@ spec:
         WOODPECKER_BACKEND_K8S_VOLUME_SIZE: 10G
         WOODPECKER_BACKEND_K8S_STORAGE_RWX: false
         WOODPECKER_CONNECT_RETRY_COUNT: '1'
+        WOODPECKER_MAX_WORKFLOWS: 5
       
       extraSecretNamesForEnvFrom:
         - woodpecker-token
