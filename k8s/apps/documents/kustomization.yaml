@@ -6,5 +6,3 @@ resources:
   - _pvs
   - ./paperless/ks.yaml
   - ./stirling-pdf/ks.yaml
-  - ./joplin/ks.yaml
-
