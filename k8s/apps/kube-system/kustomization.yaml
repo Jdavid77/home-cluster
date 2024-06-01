@@ -7,3 +7,4 @@ resources:
   - ./descheduler/ks.yaml
   - ./reloader/ks.yaml
   - ./kube-cleanup-operator/ks.yaml
+  - ./node-problem-detector/ks.yaml
