@@ -30,3 +30,4 @@ resources:
   - lwolf-charts.yaml
   - weave-gitops-charts.yaml
   - woodpecker-charts.yaml
+  - deliveryhero-charts.yaml
