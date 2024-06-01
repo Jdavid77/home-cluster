@@ -54,8 +54,6 @@ spec:
             crowdsecurity/k8s-audit
             crowdsecurity/pgsql
             crowdsecurity/linux
-            firix/authentik
-            andreasbrett/paperless-ngx
         - name: LEVEL_INFO
           value: "true"
 
