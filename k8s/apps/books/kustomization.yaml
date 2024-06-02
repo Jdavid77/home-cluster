@@ -4,5 +4,5 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./calibre-web/ks.yaml
-  - ./_pvs
+  - ./_pvs/ks.yaml
 
