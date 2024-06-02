@@ -3,6 +3,9 @@ machine:
   kubelet:
     extraArgs:
       rotate-server-certificates: true
+      feature-gates: GracefulNodeShutdown=true,NewVolumeManagerReconstruction=false
+    extraConfig:
+      maxPods: 150
 
 cluster:
   extraManifests:
