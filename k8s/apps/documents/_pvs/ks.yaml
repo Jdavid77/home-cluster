@@ -9,7 +9,7 @@ spec:
   targetNamespace: documents
   path: ./k8s/apps/documents/_pvs/nfs
   dependsOn:
-    - name: external-secrets-store
+    - name: csi-driver-nfs-storageclass
   prune: true
   sourceRef:
     kind: GitRepository

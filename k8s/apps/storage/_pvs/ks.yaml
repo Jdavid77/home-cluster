@@ -8,6 +8,8 @@ metadata:
 spec:
   targetNamespace: storage
   path: ./k8s/apps/storage/_pvs/nfs
+  dependsOn:
+    - name: csi-driver-nfs-storageclass
   prune: true
   sourceRef:
     kind: GitRepository
