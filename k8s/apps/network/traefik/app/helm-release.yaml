@@ -148,6 +148,9 @@ spec:
       - name: ban-html-page
         mountPath: /crowdsec/
         type: configMap
+      - name: captcha-html-page
+        mountPath: /crowdsec/
+        type: configMap
 
     resources:
       requests:

@@ -6,5 +6,8 @@ configMapGenerator:
   - name: ban-html-page
     files:
       - ./ban/ban.html
+  - name: captcha-html-page
+    files:
+      - ./captcha/captcha.html
 generatorOptions:
   disableNameSuffixHash: true

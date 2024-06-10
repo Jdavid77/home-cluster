@@ -14,6 +14,11 @@ spec:
       crowdsecLapiTLSCertificateBouncerKeyFile: /etc/traefik/crowdsec-certs/tls.key
       crowdsecLapiKey: ${CROWDSEC_BOUNCER_KEY}
       banHtmlFilePath: /crowdsec/ban.html
+      captchaProvider: turnstile
+      captchaSiteKey: 0x4AAAAAAAam_BRSaSBVO7CF
+      captchaSecretKey: ${CLOUDFLARE_CAPTCHA_KEY}
+      captchaGracePeriodSeconds: 1800
+      captchaHTMLFilePath: /crowdsec/captcha.html
       forwardedheaderstrustedips:
         - 173.245.48.0/20
         - 103.21.244.0/22
