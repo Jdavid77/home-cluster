@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: forecastle
-      version: &version v1.0.139
+      version: &version v1.0.140
       sourceRef:
         kind: HelmRepository
         name: skakater-charts
