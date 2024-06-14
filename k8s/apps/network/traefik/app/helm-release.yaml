@@ -146,10 +146,10 @@ spec:
         mountPath: /etc/traefik/crowdsec-certs/
         type: secret
       - name: ban-html-page
-        mountPath: /crowdsec/
+        mountPath: /ban/
         type: configMap
       - name: captcha-html-page
-        mountPath: /crowdsec/
+        mountPath: /captcha/
         type: configMap
 
     resources:
