@@ -45,6 +45,7 @@ spec:
         annotations:
           hajimari.io/icon: alert-octagon
           traefik.ingress.kubernetes.io/router.middlewares: "security-ak-outpost-proxy@kubernetescrd"
+          external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
       config:
         global:
           resolve_timeout: 5m
@@ -142,6 +143,7 @@ spec:
         annotations:
           hajimari.io/icon: simple-icons:prometheus
           traefik.ingress.kubernetes.io/router.middlewares: "security-ak-outpost-proxy@kubernetescrd"
+          external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
       thanosService:
         enabled: false
       thanosServiceMonitor:
