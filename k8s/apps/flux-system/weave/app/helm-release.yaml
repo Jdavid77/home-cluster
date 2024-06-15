@@ -39,6 +39,7 @@ spec:
       className: traefik
       annotations:
         hajimari.io/icon: simple-icons:flux
+        external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
       hosts:
         - host: &host gitops.${SECRET_DOMAIN}
           paths:

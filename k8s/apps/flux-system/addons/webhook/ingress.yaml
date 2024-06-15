@@ -2,6 +2,8 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: webhook-receiver
+  annotations:
+    external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
 spec:
   rules:
   - host: flux-webhook.${SECRET_DOMAIN}

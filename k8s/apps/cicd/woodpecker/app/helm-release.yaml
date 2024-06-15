@@ -102,6 +102,9 @@ spec:
         # -- Add annotations to the ingress
         ingressClassName: 'traefik'
 
+        annotations:
+          external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
+          
         hosts:
           - host: ci.${SECRET_DOMAIN}
             paths:

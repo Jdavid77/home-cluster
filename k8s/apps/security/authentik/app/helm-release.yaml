@@ -51,6 +51,7 @@ spec:
         ingressClassName: traefik
         annotations:
           hajimari.io/icon: simple-icons:authentik
+          external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
         hosts:
           - &host auth.${SECRET_DOMAIN}
         tls: [hosts: [*host]]

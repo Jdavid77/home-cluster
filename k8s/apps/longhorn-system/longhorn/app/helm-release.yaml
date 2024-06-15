@@ -49,6 +49,7 @@ spec:
       annotations:
         hajimari.io/icon: harddisk
         traefik.ingress.kubernetes.io/router.middlewares: "security-ak-outpost-proxy@kubernetescrd"
+        external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
     longhornDriver:
       tolerations: &tolerations
         - key: CriticalAddonsOnly

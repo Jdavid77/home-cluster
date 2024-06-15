@@ -81,6 +81,7 @@ spec:
         className: traefik
         annotations:
           hajimari.io/icon: simple-icons:calibreweb
+          external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
         hosts:
           - host: &hostName books.${SECRET_DOMAIN}
             paths:

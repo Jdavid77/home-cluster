@@ -101,6 +101,7 @@ spec:
         className: traefik
         annotations:
           hajimari.io/icon: simple-icons:minio
+          external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
@@ -115,6 +116,7 @@ spec:
         className: traefik
         annotations:
           hajimari.io/enable: "false"
+          external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
         hosts:
           - host: &api-host s3.${SECRET_DOMAIN}
             paths:

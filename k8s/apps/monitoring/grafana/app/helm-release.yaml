@@ -265,6 +265,7 @@ spec:
       ingressClassName: "traefik"
       annotations:
         hajimari.io/icon: simple-icons:grafana
+        external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
       hosts:
         - &host "grafana.${SECRET_DOMAIN}"
       tls:

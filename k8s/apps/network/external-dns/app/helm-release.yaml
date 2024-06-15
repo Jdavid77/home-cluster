@@ -40,15 +40,14 @@ spec:
     extraArgs:
       - --cloudflare-proxied
       - --crd-source-apiversion=externaldns.k8s.io/v1alpha1
-      - --ingress-class=nginx
+      - --ingress-class=traefik
       - --crd-source-kind=DNSEndpoint
-      - --annotation-filter=external-dns.alpha.kubernetes.io/target
     policy: sync
     sources:
       - ingress
       - crd
     txtPrefix: "k8s."
-    txtOwnerId: "default"
+    txtOwnerId: "network"
     domainFilters:
       - "${SECRET_DOMAIN}"
     podAnnotations:

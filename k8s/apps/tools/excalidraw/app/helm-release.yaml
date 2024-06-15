@@ -74,6 +74,7 @@ spec:
         annotations:
           hajimari.io/icon: simple-icons:excalidraw
           traefik.ingress.kubernetes.io/router.middlewares: "security-ak-outpost-proxy@kubernetescrd"
+          external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
         hosts:
           - host: &host draw.${SECRET_DOMAIN}
             paths:
