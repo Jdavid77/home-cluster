@@ -1,3 +1,5 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/postgresql.cnpg.io/cluster_v1.json
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
@@ -15,13 +17,13 @@ spec:
   enableSuperuserAccess: true
   backup:
     retentionPolicy: 30d
-    barmanObjectStore:
+    barmanObjectStore: &barmanObjectStore
       wal:
         compression: bzip2
         maxParallel: 8
       destinationPath: s3://db-backups/
       endpointURL: https://${CLOUDFLARE_ACCOUNT_ID}.r2.cloudflarestorage.com
-      serverName: postgres-v3
+      serverName: postgres-v4
       s3Credentials:
         accessKeyId:
           name: r2-secrets
@@ -29,3 +31,11 @@ spec:
         secretAccessKey:
           name: r2-secrets
           key: CLIENT_SECRET
+  bootstrap:
+    recovery:
+      source: &previousCluster postgres-v3
+  externalClusters:
+    - name: *previousCluster
+      barmanObjectStore:
+        <<: *barmanObjectStore
+        serverName: *previousCluster
