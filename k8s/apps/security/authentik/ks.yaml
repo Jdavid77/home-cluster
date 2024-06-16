@@ -10,6 +10,8 @@ spec:
   dependsOn:
     - name: external-secrets-store
     - name: cloudnative-pg-cluster
+    - name: longhorn
+    - name: dragonfly-cluster
   path: ./k8s/apps/security/authentik/app
   prune: true
   sourceRef:

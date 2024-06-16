@@ -11,6 +11,8 @@ spec:
   dependsOn:
     - name: external-secrets-store
     - name: volsync
+    - name: longhorn
+    - name: books-pvs
   prune: true
   sourceRef:
     kind: GitRepository

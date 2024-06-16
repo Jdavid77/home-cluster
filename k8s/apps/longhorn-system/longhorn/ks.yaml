@@ -8,6 +8,8 @@ metadata:
 spec:
   path: ./k8s/apps/longhorn-system/longhorn/app
   prune: true
+  dependsOn:
+    - name: traefik
   sourceRef:
     kind: GitRepository
     name: home-cluster
@@ -24,6 +26,8 @@ metadata:
   namespace: flux-system
 spec:
   path: ./k8s/apps/longhorn-system/longhorn/snapshot
+  dependsOn:
+    - name: longhorn
   prune: true
   sourceRef:
     kind: GitRepository

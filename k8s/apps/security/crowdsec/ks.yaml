@@ -7,6 +7,9 @@ metadata:
   namespace: flux-system
 spec:
   targetNamespace: security
+  dependsOn:
+    - name: external-secrets-store
+    - name: longhorn
   path: ./k8s/apps/security/crowdsec/app
   prune: true
   sourceRef:

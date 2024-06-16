@@ -12,6 +12,7 @@ spec:
     - name: dragonfly-cluster
     - name: cloudnative-pg-cluster
     - name: external-secrets-store
+    - name: documents-pvs
   prune: true
   sourceRef:
     kind: GitRepository

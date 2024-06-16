@@ -8,6 +8,8 @@ metadata:
 spec:
   targetNamespace: monitoring
   path: ./k8s/apps/monitoring/kube-prometheus-stack/app
+  dependsOn:
+    - name: longhorn
   prune: true
   sourceRef:
     kind: GitRepository

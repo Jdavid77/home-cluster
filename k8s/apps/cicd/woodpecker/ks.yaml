@@ -7,6 +7,8 @@ metadata:
   namespace: flux-system
 spec:
   targetNamespace: cicd
+  dependsOn:
+    - name: external-secrets-store
   path: ./k8s/apps/cicd/woodpecker/app
   prune: true
   sourceRef:
