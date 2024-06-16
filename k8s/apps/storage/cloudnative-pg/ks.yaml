@@ -29,6 +29,7 @@ spec:
   dependsOn:
     - name: cloudnative-pg
     - name: external-secrets-store
+    - name: longhorn
   prune: true
   sourceRef:
     kind: GitRepository
