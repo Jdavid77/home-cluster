@@ -6,7 +6,7 @@ metadata:
   name: cilium
   annotations:
     meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: network
+    meta.helm.sh/release-namespace: kube-system
   labels:
     app.kubernetes.io/managed-by: Helm
 spec:
