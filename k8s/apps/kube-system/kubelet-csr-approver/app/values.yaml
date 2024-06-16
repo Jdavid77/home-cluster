@@ -1,0 +1,5 @@
+---
+providerRegex: |
+  ^(bmax|hp)$
+
+bypassDnsResolution: true

@@ -31,3 +31,5 @@ resources:
   - weave-gitops-charts.yaml
   - woodpecker-charts.yaml
   - deliveryhero-charts.yaml
+  - postfinance-charts.yaml
+  - cilium-charts.yaml

@@ -1,22 +1,125 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/budimanjojo/talhelper/master/pkg/config/schemas/talconfig.json
 clusterName: home-cluster
-endpoint: https://192.168.1.85:6443
-talosVersion: v1.7.2
-kubernetesVersion: v1.30.1
-allowSchedulingOnMasters: true
-allowSchedulingOnControlPlanes: true
+endpoint: https://192.168.1.83:6443
+talosVersion: v1.7.4
+kubernetesVersion: v1.30.2
 additionalMachineCertSans:
-  - 192.168.1.85
+  - 192.168.1.83
 additionalApiServerCertSans:
   - home-cluster.local
+  - "127.0.0.1" # KubePrism
 cniConfig:
-  name: custom
-imageFactory:
-  registryURL: factory.talos.dev
-  schematicEndpoint: /schematics
-  protocol: https
-  installerURLTmpl: factory.talos.dev/installer/613e1592b2da41ae5e265e8789429f22e121aab91cb4deb6bc3c0b6262961245:v1.7.2
+  name: none
 patches:
   - "@patches/interface-names.yaml"
   - "@patches/kubelet-certificates.yaml"
+  - "@patches/dhcp.yaml"
 controlPlane:
-  talosImageURL: factory.talos.dev/installer/613e1592b2da41ae5e265e8789429f22e121aab91cb4deb6bc3c0b6262961245
+  patches:
+    # Disable search domain everywhere
+    - &domainPatch |-
+      machine:
+        network:
+          disableSearchDomain: true
+
+    # Enable KubePrism
+    - &kubePrismPatch |-
+      machine:
+        features:
+          kubePrism:
+            enabled: true
+            port: 7445
+    
+    # Cluster configuration
+    - &proxyPatch |-
+      cluster:
+        allowSchedulingOnMasters: true
+        proxy:
+          disabled: true
+  
+    - |-
+      machine:
+        features:
+          kubernetesTalosAPIAccess:
+            enabled: true
+            allowedRoles:
+              - os:admin
+            allowedKubernetesNamespaces:
+              - system-upgrade
+worker:
+  schematic:
+    customization:
+      systemExtensions:
+        officialExtensions:
+          - siderolabs/iscsi-tools
+          - siderolabs/util-linux-tools
+  nodeLabels:
+    node.longhorn.io/create-default-disk: "true"
+    storage: longhorn
+  patches:
+    - *domainPatch
+    - *kubePrismPatch
+    - *proxyPatch
+    - |-
+      machine:
+        kubelet:
+          extraMounts:
+            - destination: /var/lib/longhorn
+              type: bind
+              source: /var/lib/longhorn
+              options:
+                - bind
+                - rshared
+                - rw
+    
+nodes:
+  - hostname: bmax1-master
+    ipAddress: 192.168.1.83
+    controlPlane: true
+    installDisk: /dev/mmcblk0
+    nameservers:
+      - "8.8.8.8"
+      - "1.1.1.1"
+    networkInterfaces:
+      - deviceSelector:
+          hardwareAddr: "00:e0:4c:2f:69:52"
+        dhcp: true
+        mtu: 1500
+    machineSpec:
+      mode: metal
+      arch: amd64
+  
+  - hostname: hp-worker3
+    ipAddress: 192.168.1.86
+    nameservers:
+      - "8.8.8.8"
+      - "1.1.1.1"
+    installDisk: /dev/sdb
+    controlPlane: false
+    networkInterfaces:
+      - deviceSelector:
+          hardwareAddr: "10:60:4b:73:34:97"
+        dhcp: true
+        mtu: 1500
+    machineSpec:
+      mode: metal
+      arch: amd64
+  
+  - hostname: hp-worker2
+    ipAddress: 192.168.1.85
+    nameservers:
+      - "8.8.8.8"
+      - "1.1.1.1"
+    installDisk: /dev/sda
+    controlPlane: false
+    networkInterfaces:
+      - deviceSelector:
+          hardwareAddr: "10:60:4b:73:34:97"
+        dhcp: true
+        mtu: 1500
+    machineSpec:
+      mode: metal
+      arch: amd64
+
+  

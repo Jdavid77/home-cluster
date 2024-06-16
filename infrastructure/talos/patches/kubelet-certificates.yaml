@@ -3,10 +3,6 @@ machine:
   kubelet:
     extraArgs:
       rotate-server-certificates: true
-      feature-gates: GracefulNodeShutdown=true,NewVolumeManagerReconstruction=false
+      feature-gates: GracefulNodeShutdown=true
     extraConfig:
       maxPods: 150
-
-cluster:
-  extraManifests:
-    - https://raw.githubusercontent.com/alex1989hu/kubelet-serving-cert-approver/main/deploy/standalone-install.yaml
