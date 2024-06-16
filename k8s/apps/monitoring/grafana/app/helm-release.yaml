@@ -26,6 +26,13 @@ spec:
   values:
     annotations:
       reloader.stakater.com/auto: "true"
+    affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: DoesNotExist
     rbac:
       pspEnabled: false
     env:

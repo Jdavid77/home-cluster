@@ -23,7 +23,14 @@ spec:
     remediation:
       retries: 5
   values:
-    interval: 15m
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.kubernetes.io/control-plane
+              operator: DoesNotExist
+    interval: 5m
     logLevel: debug
     provider: cloudflare
     env:

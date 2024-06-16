@@ -23,7 +23,7 @@ spec:
             nodeSelectorTerms:
             - matchExpressions:
               - key: node-role.kubernetes.io/control-plane
-                operator: Exists
+                operator: DoesNotExist
     serviceAccount:
       create: false
       name: dragonfly-operator-controller-manager

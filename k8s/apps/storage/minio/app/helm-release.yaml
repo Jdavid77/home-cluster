@@ -35,6 +35,12 @@ spec:
       minio:
         annotations:
           reloader.stakater.com/auto: "true"
+        pod:
+          securityContext:
+            runAsUser: 1002
+            runAsGroup: 100
+            fsGroup: 100
+            fsGroupChangePolicy: "OnRootMismatch"
         containers:
           app:
             image:
@@ -72,12 +78,6 @@ spec:
                 cpu: 50m
               limits:
                 memory: 750Mi
-        pod:
-          securityContext:
-            runAsUser: 1002
-            runAsGroup: 1002
-            fsGroup: 1002
-            fsGroupChangePolicy: OnRootMismatch
     service:
       app:
         controller: minio
