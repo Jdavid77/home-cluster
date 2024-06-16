@@ -8,8 +8,6 @@ metadata:
 spec:
   path: ./k8s/apps/longhorn-system/longhorn/app
   prune: true
-  dependsOn:
-    - name: traefik
   sourceRef:
     kind: GitRepository
     name: home-cluster
