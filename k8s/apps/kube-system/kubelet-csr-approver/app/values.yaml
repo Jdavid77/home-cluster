@@ -1,5 +1,2 @@
 ---
-providerRegex: |
-  ^system:node:(bmax|hp)$
-
 bypassDnsResolution: true
