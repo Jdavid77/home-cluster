@@ -10,7 +10,6 @@ spec:
   dependsOn:
     - name: external-secrets-store
     - name: longhorn
-    - name: cloudnative-pg-cluster
   path: ./k8s/apps/security/crowdsec/app
   prune: true
   sourceRef:
