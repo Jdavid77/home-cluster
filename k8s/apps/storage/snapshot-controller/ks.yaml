@@ -8,8 +8,6 @@ metadata:
 spec:
   targetNamespace: storage
   path: ./k8s/apps/storage/snapshot-controller/app
-  dependsOn:
-    - name: longhorn-snapshot
   prune: true
   sourceRef:
     kind: GitRepository

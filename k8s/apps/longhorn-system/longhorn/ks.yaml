@@ -26,6 +26,7 @@ spec:
   path: ./k8s/apps/longhorn-system/longhorn/snapshot
   dependsOn:
     - name: longhorn
+    - name: snapshot-controller
   prune: true
   sourceRef:
     kind: GitRepository
