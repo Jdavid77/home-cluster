@@ -6,6 +6,7 @@ metadata:
   name: pg-cluster
 spec:
   instances: 3
+  imageName: ghcr.io/cloudnative-pg/postgresql:16.3-4
   primaryUpdateStrategy: unsupervised
   affinity:
     nodeAffinity:
@@ -22,6 +23,13 @@ spec:
   superuserSecret:
     name: cloudnative-pg-admin-secret
   enableSuperuserAccess: true
+  postgresql:
+    parameters:
+      max_connections: "400"
+      shared_buffers: 256MB
+  nodeMaintenanceWindow:
+    inProgress: false
+    reusePVC: true
   backup:
     retentionPolicy: 30d
     barmanObjectStore: 
