@@ -29,10 +29,13 @@ spec:
         reflector:
           namespaces: ["network"]
     agent:
-      tolerations:
-        - key: node-role.kubernetes.io/control-plane
-          operator: Equal
-          effect: NoSchedule
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: DoesNotExist
       # Specify each pod whose logs you want to process
       acquisition:
         # The namespace where the pod is located
