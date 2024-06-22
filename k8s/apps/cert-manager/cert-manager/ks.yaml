@@ -23,6 +23,7 @@ metadata:
   name: cert-manager-issuers
   namespace: flux-system
 spec:
+  targetNamespace: cert-manager
   dependsOn:
     - name: cert-manager
   path: ./k8s/apps/cert-manager/cert-manager/issuers
