@@ -7,4 +7,5 @@ resources:
   - ./external-dns/ks.yaml
   - ./cloudflared/ks.yaml
   - ./error-pages/ks.yaml
+  - ./tailscale/ks.yaml
 

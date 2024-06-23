@@ -1,0 +1,33 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: tailscale-operator
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: tailscale-operator
+      version: 1.68.1
+      interval: 30m
+      sourceRef:
+        kind: HelmRepository
+        name: tailscale-charts
+        namespace: flux-system
+  values:
+    operatorConfig:
+      hostname: "tailscale-operator"
+      defaultTags:
+        - "tag:k8s"
+    apiServerProxyConfig:
+      mode: "true"
+  valuesFrom:
+    - kind: Secret
+      name: tailscale-operator-secret
+      valuesKey: CLIENT_ID
+      targetPath: oauth.clientId
+    - kind: Secret
+      name: tailscale-operator-secret
+      valuesKey: CLIENT_SECRET
+      targetPath: oauth.clientSecret
