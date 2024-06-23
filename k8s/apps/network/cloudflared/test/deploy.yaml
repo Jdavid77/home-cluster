@@ -34,14 +34,42 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: nginx
+  annotations:
+    external-dns.alpha.kubernetes.io/target: internal.jnobrega.com
 spec:
-  defaultBackend:
-    service:
-      name: nginx
-      port:
-        number: 80
-  ingressClassName: tailscale
+  ingressClassName: internal
+  rules:
+  - host: nginx.jnobrega.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: nginx
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
   tls:
-    - hosts:
-        - nginx-test
-
+  - hosts:
+    - nginx.jnobrega.com
+    secretName: jnobrega.com-tls
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ubuntu-pod
+  labels:
+    app: ubuntu
+spec:
+  containers:
+  - name: ubuntu-container
+    image: ubuntu:latest
+    command: ["/bin/bash", "-c", "while true; do sleep 3600; done"]
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+    - containerPort: 80
+      name: http
+  restartPolicy: Always
