@@ -76,7 +76,7 @@ spec:
           namespaceSelector:
             any: true
       extraArgs:
-        default-ssl-certificate: "network/${SECRET-DOMAIN}-tls"
+        default-ssl-certificate: "network/${SECRET_DOMAIN}-tls"
       resources:
         requests:
           cpu: 100m
