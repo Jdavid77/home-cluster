@@ -22,13 +22,15 @@ spec:
       interval: 15m
   maxHistory: 2
   install:
+    crds: CreateReplace
     remediation:
       retries: 3
   upgrade:
     cleanupOnFail: true
+    crds: CreateReplace
     remediation:
+      strategy: rollback
       retries: 3
-      remediateLastFailure: true
   uninstall:
     keepHistory: false
 

@@ -15,13 +15,14 @@ spec:
         name: traefik-charts
         namespace: flux-system
   install:
-    createNamespace: true
     crds: CreateReplace
     remediation:
       retries: 3
   upgrade:
+    cleanupOnFail: true
     crds: CreateReplace
     remediation:
+      strategy: rollback
       retries: 3
   values:
     image:

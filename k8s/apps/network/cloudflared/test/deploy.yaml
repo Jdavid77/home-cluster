@@ -21,7 +21,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-service
+  name: nginx
 spec:
   selector:
     app: nginx
@@ -33,20 +33,15 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: nginx-ingress
+  name: nginx
 spec:
-  rules:
-  - host: test.jnobrega.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: nginx-service
-            port:
-              number: 80
+  defaultBackend:
+    service:
+      name: nginx
+      port:
+        number: 80
+  ingressClassName: tailscale
   tls:
-  - hosts:
-    - test.jnobrega.com
-    secretName: jnobrega.com-tls
+    - hosts:
+        - nginx-test
+
