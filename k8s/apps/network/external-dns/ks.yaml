@@ -25,6 +25,7 @@ metadata:
   name: external-dns-pihole
   namespace: flux-system
 spec:
+  targetNamespace: network
   path: ./k8s/apps/network/external-dns/pihole
   dependsOn:
     - name: external-secrets-store
