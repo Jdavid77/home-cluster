@@ -33,3 +33,4 @@ resources:
   - deliveryhero-charts.yaml
   - postfinance-charts.yaml
   - cilium-charts.yaml
+  - tailscale-charts.yaml
