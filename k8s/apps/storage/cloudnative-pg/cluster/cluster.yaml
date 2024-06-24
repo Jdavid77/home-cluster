@@ -5,7 +5,7 @@ kind: Cluster
 metadata:
   name: pg-cluster
 spec:
-  instances: 3
+  instances: 2
   imageName: ghcr.io/cloudnative-pg/postgresql:16.3-4
   primaryUpdateStrategy: unsupervised
   affinity:
