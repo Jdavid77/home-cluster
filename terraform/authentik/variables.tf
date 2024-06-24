@@ -16,9 +16,3 @@ variable "bind_cn" {
   type        = string
   description = "LLDAP Bind CN"
 }
-
-variable "external_host" {
-  type        = string
-  description = "External Host"
-
-}
