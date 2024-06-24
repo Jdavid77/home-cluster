@@ -114,12 +114,11 @@ spec:
             port: *ldapPort
     ingress:
       app:
-        className: traefik
+        className: tailscale
         annotations:
           hajimari.io/icon: mdi:account-multiple
-          external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
         hosts:
-          - host: &hostName lldap.${SECRET_DOMAIN}
+          - host: &hostName lldap
             paths:
               - path: /
                 service:
@@ -128,7 +127,6 @@ spec:
         tls:
           - hosts:
               - *hostName
-            secretName: ${SECRET_DOMAIN}-tls
 
     persistence:
       data:

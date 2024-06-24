@@ -67,12 +67,11 @@ spec:
     ingress:
       main:
         enabled: true
-        className: traefik
+        className: tailscale
         annotations:
           hajimari.io/icon: simple-icons:postgresql
-          external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
         hosts:
-          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - host: &host "{{ .Release.Name }}"
             paths:
               - path: /
                 pathType: Prefix
@@ -81,7 +80,6 @@ spec:
                   port: http
         tls:
           - hosts: [*host]
-            secretName: ${SECRET_DOMAIN}-tls
     persistence:
       config:
         enabled: true

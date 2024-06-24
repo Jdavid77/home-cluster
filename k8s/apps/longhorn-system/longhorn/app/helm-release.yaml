@@ -47,14 +47,11 @@ spec:
       upgradeChecker: false
     ingress:
       enabled: true
-      ingressClassName: traefik
-      host: longhorn.${SECRET_DOMAIN}
+      ingressClassName: tailscale
+      host: longhorn
       tls: true
-      tlsSecret: ${SECRET_DOMAIN}-tls
       annotations:
         hajimari.io/icon: harddisk
-        traefik.ingress.kubernetes.io/router.middlewares: "security-ak-outpost-proxy@kubernetescrd"
-        external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
     longhornManager:
       nodeSelector:
         storage: longhorn

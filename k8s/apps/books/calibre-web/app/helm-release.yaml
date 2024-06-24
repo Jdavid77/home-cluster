@@ -85,12 +85,11 @@ spec:
 
     ingress:
       app:
-        className: traefik
+        className: tailscale
         annotations:
           hajimari.io/icon: simple-icons:calibreweb
-          external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
         hosts:
-          - host: &hostName books.${SECRET_DOMAIN}
+          - host: &hostName books
             paths:
               - path: /
                 service:
@@ -99,7 +98,6 @@ spec:
         tls:
           - hosts:
               - *hostName
-            secretName: ${SECRET_DOMAIN}-tls
 
     persistence:
       config:

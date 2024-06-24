@@ -56,12 +56,11 @@ spec:
           enabled: false
       ingress:
         enabled: true
-        ingressClassName: traefik
+        ingressClassName: tailscale
         annotations:
           hajimari.io/icon: simple-icons:authentik
-          external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
         hosts:
-          - &host auth.${SECRET_DOMAIN}
+          - &host auth
         tls: [hosts: [*host]]
     prometheus:
       rules:

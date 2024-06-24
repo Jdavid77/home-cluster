@@ -101,22 +101,21 @@ spec:
         # -- Enable the ingress for the server component
         enabled: true
         # -- Add annotations to the ingress
-        ingressClassName: 'traefik'
+        ingressClassName: 'tailscale'
 
         annotations:
           external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
           
         hosts:
-          - host: ci.${SECRET_DOMAIN}
+          - host: &hostname ci
             paths:
               - path: /
                 backend:
                   serviceName: woodpecker-server
                   servicePort: 80
         tls: 
-          - secretName: ${SECRET_DOMAIN}-tls
-            hosts:
-              - ci.${SECRET_DOMAIN}
+          - hosts:
+            - &hostname
 
       # -- Add affinity
       affinity: 
