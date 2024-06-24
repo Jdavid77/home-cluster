@@ -13,12 +13,6 @@ locals {
       authentik_oidc_application_description = "Paperless OAuth application"
     },
     {
-      authentik_oidc_application_name        = "NextCloud"
-      authentik_oidc_application_group       = "Cloud"
-      authentik_oidc_application_icon_url    = "https://nextcloud.com/c/uploads/2023/02/logo_nextcloud_white.svg"
-      authentik_oidc_application_description = "NextCloud OAuth application"
-    },
-    {
       authentik_oidc_application_name        = "PGAdmin"
       authentik_oidc_application_group       = "Storage"
       authentik_oidc_application_icon_url    = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Postgresql_elephant.svg/1200px-Postgresql_elephant.svg.png"
