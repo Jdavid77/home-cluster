@@ -66,7 +66,6 @@ spec:
         className: traefik
         annotations:
           hajimari.io/icon: tools
-          traefik.ingress.kubernetes.io/router.middlewares: "security-ak-outpost-proxy@kubernetescrd"
           external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
         hosts:
           - host: &host it-tools.${SECRET_DOMAIN}
