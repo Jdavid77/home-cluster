@@ -31,7 +31,8 @@ spec:
         reflector:
           namespaces: ["network"]
     agent:
-      nodeSelector: storage
+      nodeSelector: 
+        storage: longhorn
       # Specify each pod whose logs you want to process
       acquisition:
         # The namespace where the pod is located
@@ -68,7 +69,8 @@ spec:
         serviceMonitor:
           enabled: true
     lapi:
-      nodeSelector: storage
+      nodeSelector: 
+        storage: longhorn
       env:
         - name: TZ
           value: ${TIMEZONE}
