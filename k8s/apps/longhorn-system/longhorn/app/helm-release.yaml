@@ -32,6 +32,9 @@ spec:
       defaultClass: true
       defaultClassReplicaCount: 2
       reclaimPolicy: Retain
+      defaultNodeSelector:
+        enable: true
+        selector: longhorn
     defaultSettings:
       defaultReplicaCount: 2
       backupstorePollInterval: 0
