@@ -60,10 +60,7 @@ spec:
       persistentVolume:
         config:
           enabled: true
-          accessModes:
-            - ReadWriteMany
-          storageClassName: longhorn
-          size: 100Mi
+          existingClaim: agent-config-pvc
       metrics:
         enabled: true
         serviceMonitor:
@@ -88,16 +85,10 @@ spec:
       persistentVolume:
         data:
           enabled: true
-          accessModes:
-            - ReadWriteMany
-          storageClassName: longhorn
-          size: 1Gi
+          existingClaim: lapi-data-pvc
         config:
           enabled: true
-          accessModes:
-            - ReadWriteMany
-          storageClassName: longhorn
-          size: 100Mi
+          existingClaim: lapi-config-pvc
       metrics:
         enabled: true
         serviceMonitor:
