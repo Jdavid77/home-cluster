@@ -34,7 +34,8 @@ spec:
       reclaimPolicy: Retain
       defaultNodeSelector:
         enable: true
-        selector: longhorn
+        selector: 
+          storage: longhorn
     defaultSettings:
       defaultReplicaCount: 2
       backupstorePollInterval: 0
