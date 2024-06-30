@@ -9,6 +9,10 @@ spec:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   storageClassName: longhorn
+  csi:
+    driver: driver.longhorn.io
+    fsType: ext4
+    volumeHandle: lapi-data-pv
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -34,6 +38,10 @@ spec:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   storageClassName: longhorn
+  csi:
+    driver: driver.longhorn.io
+    fsType: ext4
+    volumeHandle: lapi-config-pv
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -59,6 +67,10 @@ spec:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   storageClassName: longhorn
+  csi:
+    driver: driver.longhorn.io
+    fsType: ext4
+    volumeHandle: agent-config-pv
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
