@@ -60,7 +60,9 @@ spec:
       persistentVolume:
         config:
           enabled: true
-          existingClaim: agent-config-pvc
+          accessModes:
+            - ReadWriteOnce
+          storageClassName: longhorn
       metrics:
         enabled: true
         serviceMonitor:
@@ -85,10 +87,14 @@ spec:
       persistentVolume:
         data:
           enabled: true
-          existingClaim: lapi-data-pvc
+          accessModes:
+            - ReadWriteOnce
+          storageClassName: longhorn
         config:
           enabled: true
-          existingClaim: lapi-config-pvc
+          accessModes:
+            - ReadWriteOnce
+          storageClassName: longhorn
       metrics:
         enabled: true
         serviceMonitor:
