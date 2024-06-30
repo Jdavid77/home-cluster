@@ -36,10 +36,8 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: storage
-                operator: In
-                values:
-                - longhorn
+              - key: node-role.kubernetes.io/control-plane
+                operator: DoesNotExist
       # Specify each pod whose logs you want to process
       acquisition:
         # The namespace where the pod is located
@@ -80,10 +78,8 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: storage
-                operator: In
-                values:
-                - longhorn
+              - key: node-role.kubernetes.io/control-plane
+                operator: DoesNotExist
       env:
         - name: TZ
           value: ${TIMEZONE}
