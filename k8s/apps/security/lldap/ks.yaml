@@ -9,7 +9,6 @@ spec:
   targetNamespace: security
   dependsOn:
     - name: external-secrets-store
-    - name: cloudnative-pg-cluster
   path: ./k8s/apps/security/lldap/app
   prune: true
   sourceRef:
