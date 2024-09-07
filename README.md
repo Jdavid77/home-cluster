@@ -53,7 +53,7 @@ The setup is based on Talos OS. I used [Talhelper](https://budimanjojo.github.io
 | Bmax1-master     | 1     | 128GB        | 8GB  | Talos v1.7.4     | Kubernetes Control |
 | Hp-worker2       | 1     | 240GB        | 24GB | Talos v1.7.4     | Kubernetes Worker  |
 | Hp-worker3       | 1     | 240GB        | 20GB | Talos v1.7.4     | Kubernetes Worker  |
-| Raspberry PI 4   | 1     | 3TB (2 + 1)  | 8GB  | Pi OS            | NAS (OVM)          |
+| Raspberry PI 4   | 1     | 3TB (2 + 1)  | 8GB  | Pi OS            | NAS (OMV)          |
 | TP-Link LS108G   | 1     | -            | -    | -                | Switch             |
 ---
 
