@@ -44,7 +44,7 @@ spec:
               tag: 3.2.0@sha256:d09f15b6d7c80d535b3dc7f719f655f293d8c5f80121c5eb88843bfb8a603a4a
             env:
               TZ: ${TIMEZONE}
-              TEMPLATE_NAME: matrix
+              TEMPLATE_NAME: hacker-terminal
             resources:
               requests:
                 cpu: 5m
