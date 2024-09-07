@@ -15,9 +15,10 @@
 
 ## 📖 Overview
 
----
+This repository houses the code responsible for managing my home infrastructure.
 
-## ⛵ Kubernetes
+The setup is based on Talos OS. I used [Talhelper](https://budimanjojo.github.io/talhelper/latest/) to generate the initial configs. Following the cluster deployment, Flux continuously monitors this repository for changes, and Renovate is used to handle automated dependency updates.
+
 
 ---
 
