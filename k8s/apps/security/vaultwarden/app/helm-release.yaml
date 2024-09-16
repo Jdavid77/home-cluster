@@ -86,6 +86,14 @@ spec:
                 cpu: 10m
               limits:
                 memory: 128Mi
+                
+            pod:
+              securityContext:
+                runAsNonRoot: true
+                runAsUser: 1000
+                runAsGroup: 1000
+                fsGroup: 1000
+                fsGroupChangePolicy: OnRootMismatch
 
     service:
       app:
