@@ -98,7 +98,8 @@ spec:
       app:
         className: traefik
         annotations:
-          hajimari.io/icon: mdi:account-multiple
+          hajimari.io/icon: simple-icons:vaultwarden
+          external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
         hosts:
           - host: &hostName vaultwarden.${SECRET_DOMAIN}
             paths:
