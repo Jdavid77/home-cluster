@@ -90,9 +90,6 @@ spec:
                 enabled: false
               readiness: *probes
               startup: *probes
-            securityContext:
-              allowPrivilegeEscalation: false
-              capabilities: { drop: ["ALL"] }
             resources:
               requests:
                 cpu: 10m
