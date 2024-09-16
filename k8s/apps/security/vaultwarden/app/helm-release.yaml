@@ -46,6 +46,9 @@ spec:
               repository: ghcr.io/onedr0p/postgres-init
               tag: 16
               pullPolicy: IfNotPresent
+            envFrom:
+              - secretRef:
+                  name: vaultwarden-secret
 
         containers:
           app:
