@@ -26,7 +26,7 @@ spec:
   values:
     securityContext:
       runAsUser: 65534  # run as nobody user
-    containerSecurityContext: 
+    containerSecurityContext:
       runAsUser: 65534
       runAsNonRoot: true
       allowPrivilegeEscalation: false

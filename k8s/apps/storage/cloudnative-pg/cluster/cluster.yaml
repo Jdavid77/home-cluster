@@ -32,7 +32,7 @@ spec:
     reusePVC: true
   backup:
     retentionPolicy: 30d
-    barmanObjectStore: 
+    barmanObjectStore:
       wal:
         compression: bzip2
         maxParallel: 8

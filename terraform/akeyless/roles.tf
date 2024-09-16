@@ -9,4 +9,3 @@ resource "akeyless_role" "read_only" {
   }
 
 }
-

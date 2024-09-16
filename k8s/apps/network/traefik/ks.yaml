@@ -7,7 +7,7 @@ metadata:
   namespace: flux-system
 spec:
   targetNamespace: network
-  dependsOn:  
+  dependsOn:
     - name: cilium-resources
     - name: crowdsec
   path: ./k8s/apps/network/traefik/app
@@ -30,7 +30,7 @@ spec:
   targetNamespace: network
   dependsOn:
     - name: traefik
-    - name: cert-manager    
+    - name: cert-manager
   path: ./k8s/apps/network/traefik/certificates
   prune: true
   sourceRef:

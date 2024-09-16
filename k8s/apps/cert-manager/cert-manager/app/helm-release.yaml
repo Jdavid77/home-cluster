@@ -116,7 +116,7 @@ spec:
       - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
         name: serviceaccount-token
         readOnly: true
-      
+
 
     cainjector:
       extraArgs:

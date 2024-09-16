@@ -39,7 +39,7 @@ spec:
         WOODPECKER_BACKEND_K8S_STORAGE_RWX: false
         WOODPECKER_CONNECT_RETRY_COUNT: '1'
         WOODPECKER_MAX_WORKFLOWS: 5
-      
+
       extraSecretNamesForEnvFrom:
         - woodpecker-token
 
@@ -51,7 +51,7 @@ spec:
         runAsNonRoot: true
         runAsUser: 1000
 
-      affinity: 
+      affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
@@ -69,11 +69,11 @@ spec:
         WOODPECKER_ADMIN: 'Jdavid77'
         WOODPECKER_HOST: 'https://ci.${SECRET_DOMAIN}'
         WOODPECKER_GITHUB: "true"
-      
-      initContainers: 
+
+      initContainers:
         - name: init-db
           image: ghcr.io/onedr0p/postgres-init:16
-          envFrom: 
+          envFrom:
             - secretRef:
                 name: woodpecker-postgres-secret
 
@@ -105,7 +105,7 @@ spec:
 
         annotations:
           external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
-          
+
         hosts:
           - host: &hostname ci
             paths:
@@ -113,12 +113,12 @@ spec:
                 backend:
                   serviceName: woodpecker-server
                   servicePort: 80
-        tls: 
+        tls:
           - hosts:
             - *hostname
 
       # -- Add affinity
-      affinity: 
+      affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:

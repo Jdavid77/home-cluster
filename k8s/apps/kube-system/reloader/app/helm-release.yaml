@@ -37,10 +37,9 @@ spec:
               - matchExpressions:
                 - key: node-role.kubernetes.io/control-plane
                   operator: DoesNotExist
-      containerSecurityContext: 
+      containerSecurityContext:
         capabilities:
           drop:
             - ALL
         allowPrivilegeEscalation: false
         readOnlyRootFilesystem: true
-          

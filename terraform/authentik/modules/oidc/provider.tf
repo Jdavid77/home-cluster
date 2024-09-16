@@ -23,5 +23,3 @@ resource "authentik_provider_oauth2" "oidc_provider" {
     data.authentik_flow.default-authorization-flow
   ]
 }
-
-

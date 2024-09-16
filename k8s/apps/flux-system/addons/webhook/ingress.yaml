@@ -21,5 +21,3 @@ spec:
     - hosts:
         - flux-webhook.${SECRET_DOMAIN}
       secretName: ${SECRET_DOMAIN}-tls
-
-    

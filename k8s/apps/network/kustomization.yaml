@@ -8,4 +8,3 @@ resources:
   - ./cloudflared/ks.yaml
   - ./error-pages/ks.yaml
   - ./tailscale/ks.yaml
-

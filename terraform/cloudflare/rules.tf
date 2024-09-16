@@ -1,7 +1,7 @@
 resource "cloudflare_filter" "notportugal" {
   zone_id     = lookup(data.cloudflare_zones.domain_com.zones[0], "id")
   description = "Block Requests that dont come from Portugal"
-  expression  = "(ip.geoip.country ne \"PT\")" 
+  expression  = "(ip.geoip.country ne \"PT\")"
 }
 
 resource "cloudflare_firewall_rule" "notportugal" {
@@ -14,7 +14,7 @@ resource "cloudflare_firewall_rule" "notportugal" {
 resource "cloudflare_filter" "blockbots" {
   zone_id     = lookup(data.cloudflare_zones.domain_com.zones[0], "id")
   description = "Block Known Bots"
-  expression  = "(cf.client.bot)" 
+  expression  = "(cf.client.bot)"
 }
 
 resource "cloudflare_firewall_rule" "blockbots" {

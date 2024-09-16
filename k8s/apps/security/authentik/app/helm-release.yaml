@@ -66,4 +66,3 @@ spec:
     prometheus:
       rules:
         enabled: false
-

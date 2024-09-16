@@ -25,21 +25,21 @@ The setup is based on Talos OS. I used [Talhelper](https://budimanjojo.github.io
 ## Repository Structure
 
 ```
-📁 infrastructure  
+📁 infrastructure
 └── 📁 talos           # applications
     ├── 📁 clusterconfig  # holds the talos configuration for each node
     ├── 📁 integrations   # helmfile for initial deployments
     ├── 📁 patches        # talos patches
-    └── talconfig.yaml          
-    └── talsecret.sops.yaml          
-📁 k8s  
+    └── talconfig.yaml
+    └── talsecret.sops.yaml
+📁 k8s
 ├── 📁 apps           # applications
 ├── 📁 bootstrap      # bootstrap procedures
 └── 📁 flux           # core flux configuration
-📁 terraform  
-├── 📁 authentik           
-├── 📁 akeyless      
-└── 📁 cloudflare           
+📁 terraform
+├── 📁 authentik
+├── 📁 akeyless
+└── 📁 cloudflare
 
 ```
 

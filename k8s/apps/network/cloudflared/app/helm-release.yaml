@@ -100,7 +100,7 @@ spec:
                 memory: 105Mi
               limits:
                 memory: 105Mi
-    
+
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
@@ -137,4 +137,3 @@ spec:
           - path: /etc/cloudflared/creds/credentials.json
             subPath: credentials.json
             readOnly: true
-

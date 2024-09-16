@@ -91,10 +91,9 @@ spec:
       oauth:
         enabled: true
         type: secret
-        name: pgadmin-secret-auth            
+        name: pgadmin-secret-auth
         advancedMounts:
           pgadmin:
             app:
               - path: /pgadmin4/config_local.py
                 subPath: config_local.py
-

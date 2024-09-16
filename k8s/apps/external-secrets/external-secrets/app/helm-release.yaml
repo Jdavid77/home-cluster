@@ -25,7 +25,7 @@ spec:
     remediation:
       retries: 3
   values:
-    
+
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
@@ -37,11 +37,11 @@ spec:
     serviceAccount:
       create: true
       automount: false
-    
+
     serviceMonitor:
       enabled: true
 
-    resources: 
+    resources:
       requests:
         cpu: 10m
         memory: 32Mi
@@ -75,7 +75,7 @@ spec:
     webhook:
       certManager:
         enabled: false
-      
+
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -83,11 +83,11 @@ spec:
             - matchExpressions:
               - key: node-role.kubernetes.io/control-plane
                 operator: Exists
-      
+
       serviceAccount:
         create: true
         automount: false
-      
+
       extraVolumes:
       - name: serviceaccount-token
         projected:
@@ -112,8 +112,8 @@ spec:
         - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
           name: serviceaccount-token
           readOnly: true
-      
-      resources: 
+
+      resources:
         requests:
           cpu: 10m
           memory: 32Mi
@@ -122,7 +122,7 @@ spec:
       serviceAccount:
         create: true
         automount: false
-      
+
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -156,7 +156,7 @@ spec:
           name: serviceaccount-token
           readOnly: true
 
-      resources: 
+      resources:
         requests:
           cpu: 10m
           memory: 32Mi

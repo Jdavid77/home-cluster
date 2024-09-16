@@ -6,4 +6,3 @@ spec:
   plugin:
     cloudflarewarp:
       disableDefault: "false"
-
