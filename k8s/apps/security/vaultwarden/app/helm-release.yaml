@@ -32,6 +32,15 @@ spec:
             - matchExpressions:
               - key: node-role.kubernetes.io/control-plane
                 operator: DoesNotExist
+
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile: { type: RuntimeDefault }
+
     controllers:
       vaultwarden:
         replicas: 1
@@ -81,20 +90,17 @@ spec:
                 enabled: false
               readiness: *probes
               startup: *probes
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
             resources:
               requests:
                 cpu: 10m
+                memory: 100Mi
               limits:
-                memory: 128Mi
-                
-            pod:
-              securityContext:
-                runAsNonRoot: true
-                runAsUser: 1000
-                runAsGroup: 1000
-                fsGroup: 1000
-                fsGroupChangePolicy: OnRootMismatch
-
+                memory: 250Mi
+      
     service:
       app:
         controller: vaultwarden
