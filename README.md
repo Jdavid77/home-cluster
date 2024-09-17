@@ -26,7 +26,7 @@ The setup is based on Talos OS. I used [Talhelper](https://budimanjojo.github.io
 
 ```
 📁 infrastructure
-└── 📁 talos           # applications
+└── 📁 talos           
     ├── 📁 clusterconfig  # holds the talos configuration for each node
     ├── 📁 integrations   # helmfile for initial deployments
     ├── 📁 patches        # talos patches
@@ -42,6 +42,22 @@ The setup is based on Talos OS. I used [Talhelper](https://budimanjojo.github.io
 └── 📁 cloudflare
 
 ```
+
+---
+
+## :wrench:&nbsp; Tools
+
+Here’s the updated table including Terraform:
+
+| Tool                                                       | Purpose                                                                 |
+|-------------------------------------------------------------|-------------------------------------------------------------------------|
+| [Sops](https://github.com/mozilla/sops)                     | A flexible tool for managing repository secrets securely.               |
+| [Pre-commit](https://github.com/pre-commit/pre-commit)      | Ensures consistency and quality of YAML and shell scripts in the repository. |
+| [Renovate](https://docs.renovatebot.com/)                   | Automates the detection of new releases and creates pull requests accordingly. |
+| [Akeyless](https://console.akeyless.io/)                    | A centralized platform for managing and securing certificates, credentials, and keys, used in conjunction with External Secrets. |
+| [Cloudflare](https://www.cloudflare.com/en-gb/)             | DNS management service for handling domain name resolutions.            |
+| [GMX](https://www.gmx.com)                                  | SMTP service provider for managing email communications.                |
+| [Terraform](https://www.terraform.io/)                      | IAC tool for automating the provisioning and management of outside dependencies (Akeyless, Cloudflare, etc...). |
 
 ---
 
