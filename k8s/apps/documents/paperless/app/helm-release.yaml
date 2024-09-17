@@ -67,7 +67,7 @@ spec:
               PAPERLESS_REDIS: redis://dragonfly.storage.svc.cluster.local:6379
               PAPERLESS_TASK_WORKERS: 2
               PAPERLESS_TIME_ZONE: Europe/Lisbon
-              PAPERLESS_URL: https://paperless.${SECRET_DOMAIN}
+              PAPERLESS_URL: https://paperless.${TAILSCALE_DOMAIN}
               PAPERLESS_APPS: allauth.socialaccount.providers.openid_connect
             envFrom: *envFrom
             resources:
@@ -85,12 +85,11 @@ spec:
     ingress:
       app:
         enabled: true
-        className: traefik
+        className: tailscale
         annotations:
           hajimari.io/icon: simple-icons:paperlessngx
-          external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
         hosts:
-          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - host: &host "{{ .Release.Name }}"
             paths:
               - path: /
                 service:
@@ -99,7 +98,6 @@ spec:
         tls:
           - hosts:
               - *host
-            secretName: ${SECRET_DOMAIN}-tls
 
     persistence:
 
