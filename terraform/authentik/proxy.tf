@@ -14,6 +14,11 @@ locals {
       authentik_proxy_application_name     = "Hajimari"
       authentik_proxy_application_icon_url = "https://cdn-icons-png.flaticon.com/512/25/25694.png"
       authentik_proxy_external_host        = "https://dashboard.${var.external_host}"
+    },
+    {
+      authentik_proxy_application_name     = "Alert-Manager"
+      authentik_proxy_application_icon_url = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2x5gPl3VFda5rgQkPWsRB1d2zZ8zQKQgsgg&s"
+      authentik_proxy_external_host        = "https://alerts.${var.external_host}"
     }
   ]
 }

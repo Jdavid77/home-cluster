@@ -36,11 +36,11 @@ spec:
       ingress:
         enabled: true
         pathType: Prefix
-        ingressClassName: tailscale
-        hosts: ["alerts"]
+        ingressClassName: traefik
+        hosts: ["alerts.${SECRET_DOMAIN}"]
         tls:
           - hosts:
-            - alerts
+            - alerts.${SECRET_DOMAIN}
         annotations:
           hajimari.io/icon: alert-octagon
       config:
