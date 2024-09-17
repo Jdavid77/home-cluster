@@ -98,11 +98,11 @@ spec:
 
     ingress:
       app:
-        className: traefik
+        className: tailscale
         annotations:
           hajimari.io/icon: simple-icons:vaultwarden
         hosts:
-          - host: &hostName vaultwarden.${SECRET_DOMAIN}
+          - host: &hostName vaultwarden
             paths:
               - path: /
                 service:
