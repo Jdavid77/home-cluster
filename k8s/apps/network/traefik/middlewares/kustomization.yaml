@@ -5,3 +5,4 @@ resources:
   - crowdsec.yaml
   - ratelimit.yaml
   - errors.yaml
+  - middleware.yaml
