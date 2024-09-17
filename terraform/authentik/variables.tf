@@ -7,6 +7,11 @@ variable "authentik_api_url" {
   description = "Authentik API URL"
 }
 
+variable "external_host" {
+  type        = string
+  description = "Cloudflare Domain"
+}
+
 variable "bind_password" {
   type        = string
   description = "LLDAP Bind Password"

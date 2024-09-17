@@ -102,6 +102,7 @@ spec:
         annotations:
           hajimari.io/icon: simple-icons:vaultwarden
           external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
+          traefik.ingress.kubernetes.io/router.middlewares: network-authentik-outpost@kubernetescrd
         hosts:
           - host: &hostName vaultwarden.${SECRET_DOMAIN}
             paths:

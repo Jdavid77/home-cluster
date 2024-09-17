@@ -15,6 +15,7 @@ variable "authentik_proxy_application_icon_url" {
 variable "authentik_proxy_application_group" {
   type        = string
   description = "Application Group"
+  default     = "Proxy"
 }
 variable "authentik_proxy_application_description" {
   type        = string
