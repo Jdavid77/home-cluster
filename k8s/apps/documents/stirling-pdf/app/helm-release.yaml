@@ -98,6 +98,7 @@ spec:
         annotations:
           hajimari.io/icon: file-pdf-box
           external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
+          traefik.ingress.kubernetes.io/router.middlewares: authentik-outpost@security@kubernetescrd
         hosts:
           - host: &host "pdf.${SECRET_DOMAIN}"
             paths:
