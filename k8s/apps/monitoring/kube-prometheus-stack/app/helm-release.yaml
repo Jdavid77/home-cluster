@@ -43,6 +43,8 @@ spec:
             - alerts.${SECRET_DOMAIN}
         annotations:
           hajimari.io/icon: alert-octagon
+          external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
+          traefik.ingress.kubernetes.io/router.middlewares: network-authentik-outpost@kubernetescrd
       config:
         global:
           resolve_timeout: 5m
