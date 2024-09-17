@@ -57,7 +57,7 @@ spec:
               repository: vaultwarden/server
               tag: 1.32.0
             env:
-              DOMAIN: "https://vaultwarden.${SECRET_DOMAIN}"
+              DOMAIN: "https://vaultwarden.${TAILSCALE_DOMAIN}"
               TZ: ${TIMEZONE}
               SIGNUPS_ALLOWED: "false"
               INVITATIONS_ALLOWED: "true"
@@ -101,8 +101,6 @@ spec:
         className: traefik
         annotations:
           hajimari.io/icon: simple-icons:vaultwarden
-          external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
-          traefik.ingress.kubernetes.io/router.middlewares: network-authentik-outpost@kubernetescrd
         hosts:
           - host: &hostName vaultwarden.${SECRET_DOMAIN}
             paths:
