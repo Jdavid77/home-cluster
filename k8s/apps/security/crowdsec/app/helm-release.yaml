@@ -59,6 +59,7 @@ spec:
             crowdsecurity/k8s-audit
             crowdsecurity/pgsql
             crowdsecurity/linux
+            Dominic-Wagner/vaultwarden
         - name: LEVEL_INFO
           value: "true"
 
