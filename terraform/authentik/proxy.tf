@@ -11,9 +11,9 @@ locals {
       authentik_proxy_external_host        = "https://it-tools.${var.external_host}"
     },
     {
-      authentik_proxy_application_name     = "Vaultwarden"
-      authentik_proxy_application_icon_url = "https://canada1.discourse-cdn.com/free1/uploads/vaultwarden/original/1X/26a1c808c7d5849039d47820eef7889b3415e5ec.png"
-      authentik_proxy_external_host        = "https://vaultwarden.${var.external_host}"
+      authentik_proxy_application_name     = "Hajimari"
+      authentik_proxy_application_icon_url = "https://cdn-icons-png.flaticon.com/512/25/25694.png"
+      authentik_proxy_external_host        = "https://dashboard.${var.external_host}"
     }
   ]
 }
