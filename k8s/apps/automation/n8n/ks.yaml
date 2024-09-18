@@ -6,6 +6,7 @@ metadata:
   name: n8n
   namespace: flux-system
 spec:
+  targetNamespace: automation
   path: ./k8s/apps/automation/n8n/app
   prune: true
   sourceRef:
