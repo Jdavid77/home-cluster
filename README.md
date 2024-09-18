@@ -26,7 +26,7 @@ The setup is based on Talos OS. I used [Talhelper](https://budimanjojo.github.io
 
 ```
 📁 infrastructure
-└── 📁 talos           
+└── 📁 talos
     ├── 📁 clusterconfig  # holds the talos configuration for each node
     ├── 📁 integrations   # helmfile for initial deployments
     ├── 📁 patches        # talos patches
@@ -47,7 +47,7 @@ The setup is based on Talos OS. I used [Talhelper](https://budimanjojo.github.io
 
 ## :wrench:&nbsp; Tools
 
-Here’s the updated table including Terraform:
+Here's the updated table including Terraform:
 
 | Tool                                                       | Purpose                                                                 |
 |-------------------------------------------------------------|-------------------------------------------------------------------------|

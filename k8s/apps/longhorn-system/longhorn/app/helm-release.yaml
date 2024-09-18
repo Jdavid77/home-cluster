@@ -36,7 +36,8 @@ spec:
         enable: true
         selector: storage
     defaultSettings:
-      backupTarget: nfs://${NFS_SERVER}:/longhorn-backups/
+      backupTarget: s3://longhorn-backups@weur/
+      backupTargetCredentialSecret: longhorn-secret
       defaultReplicaCount: 2
       backupstorePollInterval: 0
       createDefaultDiskLabeledNodes: true
