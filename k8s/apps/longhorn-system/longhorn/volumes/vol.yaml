@@ -14,5 +14,5 @@ spec:
   - storage
   numberOfReplicas: 2
   size: "536870912"
-  fromBackup: "s3://longhorn-backups@weur/?backup=backup-b7fb629003a7465e&volume=pvc-bb957b5e-fe2d-4718-a52d-8f8bf9b44ac1"
+  fromBackup: "s3://longhorn-backups@weur/?backup=backup-ddadf79e39a14c4b&volume=pvc-bb957b5e-fe2d-4718-a52d-8f8bf9b44ac1"
 
