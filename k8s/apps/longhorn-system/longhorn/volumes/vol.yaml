@@ -1,0 +1,18 @@
+apiVersion: longhorn.io/v1beta2
+kind: Volume
+metadata:
+  name: calibre-web
+  namespace: longhorn-system
+spec:
+  Standby: false
+  backupCompressionMethod: lz4
+  dataEngine: v1
+  dataLocality: best-effort
+  disableFrontend: false
+  frontend: blockdev
+  nodeSelector:
+  - storage
+  numberOfReplicas: 2
+  size: "536870912"
+  fromBackup: "s3://longhorn-backups@weur/?backup=backup-b7fb629003a7465e&volume=pvc-bb957b5e-fe2d-4718-a52d-8f8bf9b44ac1"
+
