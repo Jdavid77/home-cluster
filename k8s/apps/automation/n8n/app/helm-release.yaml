@@ -5,7 +5,7 @@ kind: HelmRelease
 metadata:
   name: n8n
 spec:
-  interval: 30m
+  interval: 5m
   chart:
     spec:
       chart: app-template
@@ -15,6 +15,16 @@ spec:
         kind: HelmRepository
         name: bjw-s-charts
         namespace: flux-system
+  install:
+    crds: CreateReplace
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    crds: CreateReplace
+    remediation:
+      strategy: rollback
+      retries: 3
 
   values:
     
@@ -26,7 +36,7 @@ spec:
             - matchExpressions:
               - key: node-role.kubernetes.io/control-plane
                 operator: DoesNotExist
-                
+
     controllers:
       n8n:
         initContainers:
