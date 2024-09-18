@@ -77,7 +77,7 @@ spec:
               N8N_USER_MANAGEMENT_DISABLED: true
 
               N8N_METRICS: true
-              N8N_USER_FOLDER: /home/node/.n8n
+              N8N_USER_FOLDER: /home/jnobrega/n8n
               NODE_FUNCTION_ALLOW_EXTERNAL: databricks/sql
             envFrom:
               - secretRef:
@@ -113,7 +113,7 @@ spec:
         advancedMounts:
           n8n:
             app:
-              - path: /home/node/.n8n
+              - path: /home/jnobrega/n8n
 
     resources:
       requests:
