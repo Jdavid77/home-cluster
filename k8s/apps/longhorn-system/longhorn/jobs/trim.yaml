@@ -1,0 +1,11 @@
+apiVersion: longhorn.io/v1beta1
+kind: RecurringJob
+metadata:
+  name: trim-filesystem
+  namespace: longhorn-system
+spec:
+  cron: "0 0 ? * SAT"
+  task: "snapshot"
+  groups:
+  - prom
+  concurrency: 2
