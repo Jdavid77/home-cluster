@@ -103,7 +103,7 @@ spec:
         annotations:
           hajimari.io/enable: "true"
           hajimari.io/icon: mdi:water-flow
-        className: external
+        className: traefik
         hosts:
           - host: n8n.${SECRET_DOMAIN}
             paths:
