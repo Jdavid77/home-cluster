@@ -109,15 +109,6 @@ spec:
                 service:
                   identifier: app
                   port: http
-        tls:
-          - hosts: [*host]
-            secretName: ${SECRET_DOMAIN}-tls
-      s3:
-        className: traefik
-        annotations:
-          hajimari.io/enable: "false"
-          external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
-        hosts:
           - host: &api-host s3.${SECRET_DOMAIN}
             paths:
               - path: /
@@ -125,8 +116,9 @@ spec:
                   identifier: app
                   port: api
         tls:
-          - hosts: [*api-host]
+          - hosts: [*host,*api-host]
             secretName: ${SECRET_DOMAIN}-tls
+
     persistence:
       data:
         enabled: true
