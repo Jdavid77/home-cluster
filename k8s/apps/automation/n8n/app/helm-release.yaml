@@ -103,6 +103,7 @@ spec:
         annotations:
           hajimari.io/icon: mdi:water-flow
           external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
+          traefik.ingress.kubernetes.io/router.middlewares: network-authentik-outpost@kubernetescrd
         className: traefik
         hosts:
           - host: n8n.${SECRET_DOMAIN}

@@ -24,6 +24,11 @@ locals {
       authentik_proxy_application_name     = "Prometheus"
       authentik_proxy_application_icon_url = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2x5gPl3VFda5rgQkPWsRB1d2zZ8zQKQgsgg&s"
       authentik_proxy_external_host        = "https://prometheus.${var.external_host}"
+    },
+    {
+      authentik_proxy_application_name     = "N8N"
+      authentik_proxy_application_icon_url = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTEiB39xDx7ypCCzO8_H3Oot9L_MnGz9XgkQ&s"
+      authentik_proxy_external_host        = "https://n8n.${var.external_host}"
     }
   ]
 }
