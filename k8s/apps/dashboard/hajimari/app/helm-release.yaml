@@ -49,6 +49,7 @@ spec:
           - flux-system
           - storage
           - monitoring
+          - automation
       bookmarks:
         - group: Kubernetes
           bookmarks:

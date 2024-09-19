@@ -101,8 +101,8 @@ spec:
     ingress:
       app:
         annotations:
-          hajimari.io/enable: "true"
           hajimari.io/icon: mdi:water-flow
+          external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
         className: traefik
         hosts:
           - host: n8n.${SECRET_DOMAIN}
