@@ -33,7 +33,7 @@ spec:
             - matchExpressions:
               - key: node-role.kubernetes.io/control-plane
                 operator: DoesNotExist
-                
+
     controllers:
       wiki:
         
@@ -83,4 +83,7 @@ spec:
                 service:
                   identifier: app
                   port: http
+        tls:
+          - hosts:
+              - *host
 
