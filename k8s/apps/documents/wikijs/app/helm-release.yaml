@@ -1,0 +1,76 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: wikijs
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-charts
+        namespace: flux-system
+      interval: 15m
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  values:
+    controllers:
+      wiki:
+        
+        pod:
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+            fsGroupChangePolicy: "OnRootMismatch"
+        
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: 16
+              pullPolicy: IfNotPresent
+            envFrom:
+              - secretRef:
+                  name: wikijs-secret
+        containers:
+          app:
+            image:
+              repository: ghcr.io/requarks/wiki
+              pullPolicy: IfNotPresent
+              tag: "2.5.304@sha256:99f465dc4443f4a6891af55a87adad499f17396901a5e06b37965fe92ba6ec46"
+            envFrom:
+              - secretRef:
+                  name: wikijs-secret
+    service:
+      app:
+        controller: wiki
+        ports:
+          http:
+            port: 3000
+            
+    ingress:
+      app:
+        enabled: true
+        className: tailscale
+        hosts:
+          - host: &host wiki
+            paths:
+              - path: /
+                service:
+                  identifier: main
+                  port: http
+
