@@ -45,7 +45,7 @@ spec:
               pullPolicy: IfNotPresent
             envFrom:
               - secretRef:
-                  name: wikijs-secret
+                  name: wiki-js-secret
         containers:
           app:
             image:
@@ -54,7 +54,7 @@ spec:
               tag: "2.5.304@sha256:99f465dc4443f4a6891af55a87adad499f17396901a5e06b37965fe92ba6ec46"
             envFrom:
               - secretRef:
-                  name: wikijs-secret
+                  name: wiki-js-secret
     service:
       app:
         controller: wiki
