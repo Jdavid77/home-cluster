@@ -40,8 +40,8 @@ spec:
               tag: 24.7.8@sha256:582f9acb754066bc83435d20b0fd9aae6d43c36a065b9add9c0d2a27014575a3
             env:
               DRAWIO_SERVER_URL: https://draw.${SECRET_DOMAIN}
-              PLANTUML_URL: http://plantuml.svc.cluster.local:8080/
-              EXPORT_URL: http://export.svc.cluster.local:8000/
+              PLANTUML_URL: http://drawio-uml.svc.cluster.local:8080/
+              EXPORT_URL: http://drawio-export.svc.cluster.local:8000/
             probes:
               liveness:
                 enabled: false
