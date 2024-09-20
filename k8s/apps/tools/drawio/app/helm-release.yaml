@@ -40,8 +40,8 @@ spec:
               tag: 24.7.8@sha256:582f9acb754066bc83435d20b0fd9aae6d43c36a065b9add9c0d2a27014575a3
             env:
               DRAWIO_SERVER_URL: https://draw.${SECRET_DOMAIN}
-              PLANTUML_URL: http://plantuml:8080/
-              EXPORT_URL: http://export:8000/
+              PLANTUML_URL: http://plantuml.svc.cluster.local:8080/
+              EXPORT_URL: http://export.svc.cluster.local:8000/
             probes:
               liveness:
                 enabled: false
@@ -54,6 +54,8 @@ spec:
               requests:
                 cpu: 50m
                 memory: 128Mi
+      export:
+        containers:
           export:
             image:
               repository: jgraph/export-server
@@ -70,7 +72,9 @@ spec:
               requests:
                 cpu: 50m
                 memory: 128Mi
-          plantuml:
+      plantuml:
+        containers:
+          uml:
             image:
               repository: plantuml/plantuml-server
               tag: v1.2024.7@sha256:cd62e975a7830f2804535b20a3dd2439dd9df4e377dc00bc335c52cfd89f963f
@@ -90,6 +94,16 @@ spec:
     service:
       app:
         controller: drawio
+        ports:
+          http:
+            port: 8080
+      export:
+        controller: export
+        ports:
+          http:
+            port: 8000
+      uml:
+        controller: plantuml
         ports:
           http:
             port: 8080
