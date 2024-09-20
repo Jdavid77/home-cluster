@@ -42,7 +42,7 @@ spec:
               DRAWIO_SELF_CONTAINED: "1"
               DRAWIO_SERVER_URL: https://draw.${SECRET_DOMAIN}
               PLANTUML_URL: http://drawio-uml.svc.cluster.local:8080/
-              EXPORT_URL: http://drawio-export.svc.cluster.local:8000/
+              EXPORT_URL: http://export:8000/
             probes:
               liveness:
                 enabled: false
@@ -55,8 +55,6 @@ spec:
               requests:
                 cpu: 50m
                 memory: 128Mi
-      export:
-        containers:
           export:
             image:
               repository: jgraph/export-server
@@ -100,11 +98,6 @@ spec:
         ports:
           http:
             port: 8080
-      export:
-        controller: export
-        ports:
-          http:
-            port: 8000
       uml:
         controller: plantuml
         ports:
