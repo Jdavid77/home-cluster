@@ -39,6 +39,7 @@ spec:
               repository: jgraph/drawio
               tag: 24.7.8@sha256:582f9acb754066bc83435d20b0fd9aae6d43c36a065b9add9c0d2a27014575a3
             env:
+              DRAWIO_SELF_CONTAINED: "1"
               DRAWIO_SERVER_URL: https://draw.${SECRET_DOMAIN}
               PLANTUML_URL: http://drawio-uml.svc.cluster.local:8080/
               EXPORT_URL: http://drawio-export.svc.cluster.local:8000/
@@ -60,6 +61,8 @@ spec:
             image:
               repository: jgraph/export-server
               tag: latest@sha256:98bf4691dd7fd273e9c8d8d23d75c155a628a306c48968579cf5631d8d920a4f
+            env:
+              DRAWIO_BASE_URL: https://draw.${SECRET_DOMAIN}
             probes:
               liveness:
                 enabled: false
