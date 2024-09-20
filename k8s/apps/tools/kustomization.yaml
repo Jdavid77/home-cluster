@@ -7,4 +7,4 @@ resources:
   # - ./minio/ks.yaml
   # - ./csi-driver-nfs/ks.yaml
   - ./it-tools/ks.yaml
-  - ./draw.io/ks.yaml
+  - ./drawio/ks.yaml
