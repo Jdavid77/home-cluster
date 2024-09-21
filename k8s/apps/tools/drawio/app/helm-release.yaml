@@ -60,7 +60,7 @@ spec:
               requests:
                 cpu: 50m
                 memory: 128Mi
-          export:
+          export: # shit ain't working yet...
             image:
               repository: jgraph/export-server
               tag: latest@sha256:98bf4691dd7fd273e9c8d8d23d75c155a628a306c48968579cf5631d8d920a4f
