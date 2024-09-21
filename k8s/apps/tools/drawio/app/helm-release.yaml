@@ -43,7 +43,6 @@ spec:
               DRAWIO_SERVER_URL: https://draw.${SECRET_DOMAIN}/
               DRAWIO_BASE_URL: https://draw.${SECRET_DOMAIN}
               DRAWIO_VIEWER_URL: https://draw.${SECRET_DOMAIN}/js/viewer.min.js
-              PLANTUML_URL: http://localhost:8080/
               EXPORT_URL: http://localhost:8000/
             securityContext:
               runAsUser: 1001
@@ -83,33 +82,13 @@ spec:
               requests:
                 cpu: 50m
                 memory: 128Mi
-          uml:
-            image:
-              repository: plantuml/plantuml-server
-              tag: v1.2024.7@sha256:cd62e975a7830f2804535b20a3dd2439dd9df4e377dc00bc335c52cfd89f963f
-            probes:
-              liveness:
-                enabled: false
-              readiness:
-                enabled: false
-            securityContext:
-              runAsUser: 999
-              runAsGroup: 999
-              fsGroup: 999
-            resources:
-              limits:
-                cpu: 200m
-                memory: 512Mi
-              requests:
-                cpu: 50m
-                memory: 128Mi
             
     service:
       app:
         controller: drawio
         ports:
           http:
-            port: 8443
+            port: 8080
     ingress:
       app:
         className: traefik
