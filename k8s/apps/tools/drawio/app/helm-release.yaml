@@ -43,7 +43,7 @@ spec:
               DRAWIO_SERVER_URL: https://draw.${SECRET_DOMAIN}/
               DRAWIO_BASE_URL: https://draw.${SECRET_DOMAIN}
               DRAWIO_VIEWER_URL: https://draw.${SECRET_DOMAIN}/js/viewer.min.js
-              PLANTUML_URL: http://drawio-uml.svc.cluster.local:8080/
+              PLANTUML_URL: http://localhost:8080/
               EXPORT_URL: http://localhost:8000/
             securityContext:
               runAsUser: 1001
@@ -83,8 +83,6 @@ spec:
               requests:
                 cpu: 50m
                 memory: 128Mi
-      plantuml:
-        containers:
           uml:
             image:
               repository: plantuml/plantuml-server
@@ -94,6 +92,10 @@ spec:
                 enabled: false
               readiness:
                 enabled: false
+            securityContext:
+              runAsUser: 999
+              runAsGroup: 999
+              fsGroup: 999
             resources:
               limits:
                 cpu: 200m
@@ -105,11 +107,6 @@ spec:
     service:
       app:
         controller: drawio
-        ports:
-          http:
-            port: 8080
-      uml:
-        controller: plantuml
         ports:
           http:
             port: 8080
