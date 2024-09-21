@@ -109,7 +109,7 @@ spec:
         controller: drawio
         ports:
           http:
-            port: 8080
+            port: 8443
     ingress:
       app:
         className: traefik
