@@ -82,7 +82,7 @@ spec:
               requests:
                 cpu: 50m
                 memory: 128Mi
-            
+
     service:
       app:
         controller: drawio

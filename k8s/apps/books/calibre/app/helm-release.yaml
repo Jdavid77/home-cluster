@@ -1,0 +1,92 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app calibre
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-charts
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controllers:
+      calibre:
+        
+        pod:
+          securityContext:
+            runAsUser: 1002
+            runAsGroup: 100
+            fsGroup: 100
+            fsGroupChangePolicy: "OnRootMismatch"
+
+        containers:
+          app:
+            image:
+              repository: ghcr.io/linuxserver/calibre
+              tag: version-v7.18.0@sha256:e19891900c5325790c5b9ccc13f94084db451c96a09d438f6405eba976c96007
+            env:
+              TZ: "${TIMEZONE}"
+              PUID: "1002"
+              PGID: "100"
+            resources:
+              requests:
+                cpu: 15m
+                memory: 324M
+              limits:
+                memory: 604M
+
+    service:
+      app:
+        controller: *app
+        ports:
+          http:
+            port: 8080
+
+    ingress:
+      app:
+        enabled: true
+        className: tailscale
+        hosts:
+          - host: &host "{{ .Release.Name }}"
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+        tls:
+          - hosts:
+              - *host
+    
+    persistence:
+      
+      config:
+        enabled: true
+        existingClaim: *app
+        globalMounts:
+          - path: /config
+            
+      media:
+        enabled: true
+        existingClaim: books-nfs-share-pvc
+        advancedMounts:
+          calibre:
+            app:
+              - path: /data/ebooks

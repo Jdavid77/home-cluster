@@ -24,7 +24,7 @@ spec:
       strategy: rollback
       retries: 3
   values:
-    
+
     defaultPodOptions:
       affinity:
         nodeAffinity:
@@ -36,14 +36,14 @@ spec:
 
     controllers:
       wiki:
-        
+
         pod:
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
             fsGroup: 1000
             fsGroupChangePolicy: "OnRootMismatch"
-        
+
         annotations:
           reloader.stakater.com/auto: "true"
 
@@ -71,7 +71,7 @@ spec:
         ports:
           http:
             port: 3000
-            
+
     ingress:
       app:
         enabled: true
@@ -86,4 +86,3 @@ spec:
         tls:
           - hosts:
               - *host
-

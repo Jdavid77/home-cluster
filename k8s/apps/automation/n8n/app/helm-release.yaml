@@ -25,7 +25,7 @@ spec:
       retries: 3
 
   values:
-    
+
     defaultPodOptions:
       affinity:
         nodeAffinity:
@@ -37,7 +37,7 @@ spec:
 
     controllers:
       n8n:
-        
+
         pod:
           securityContext:
             runAsUser: 1000
@@ -77,7 +77,7 @@ spec:
 
               N8N_LOG_LEVEL: debug
               N8N_LOG_OUTPUT: console, file
-              
+
               N8N_DIAGONISTICS_ENABLED: false
               N8N_HIRING_BANNER_ENABLED: false
               N8N_USER_MANAGEMENT_DISABLED: true
@@ -88,7 +88,7 @@ spec:
             envFrom:
               - secretRef:
                   name: n8n-secret
-              
+
     service:
       app:
         controller: n8n
