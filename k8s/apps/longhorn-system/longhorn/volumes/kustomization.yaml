@@ -4,3 +4,4 @@ resources:
   - calibre-web.yaml
   - n8n.yaml
   - calibre.yaml
+  - crowdsec.yaml
