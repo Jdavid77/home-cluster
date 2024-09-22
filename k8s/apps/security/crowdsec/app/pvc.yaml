@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: lapi-data-pv
+  name: lapi-data
 spec:
   capacity:
     storage: 1Gi
@@ -12,7 +12,7 @@ spec:
   csi:
     driver: driver.longhorn.io
     fsType: ext4
-    volumeHandle: lapi-data-pv
+    volumeHandle: lapi-data
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -25,12 +25,12 @@ spec:
   resources:
     requests:
       storage: 1Gi
-  volumeName: lapi-data-pv
+  volumeName: lapi-data
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: lapi-config-pv
+  name: lapi-config
 spec:
   capacity:
     storage: 100Mi
@@ -41,7 +41,7 @@ spec:
   csi:
     driver: driver.longhorn.io
     fsType: ext4
-    volumeHandle: lapi-config-pv
+    volumeHandle: lapi-config
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -54,33 +54,4 @@ spec:
   resources:
     requests:
       storage: 100Mi
-  volumeName: lapi-config-pv
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: agent-config-pv
-spec:
-  capacity:
-    storage: 100Mi
-  accessModes:
-    - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: longhorn
-  csi:
-    driver: driver.longhorn.io
-    fsType: ext4
-    volumeHandle: agent-config-pv
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: agent-config-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: longhorn
-  resources:
-    requests:
-      storage: 100Mi
-  volumeName: agent-config-pv
+  volumeName: lapi-config

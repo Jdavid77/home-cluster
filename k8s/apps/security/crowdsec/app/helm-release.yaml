@@ -31,13 +31,6 @@ spec:
         reflector:
           namespaces: ["network"]
     agent:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: node-role.kubernetes.io/control-plane
-                operator: DoesNotExist
       # Specify each pod whose logs you want to process
       acquisition:
         # The namespace where the pod is located
@@ -63,24 +56,13 @@ spec:
         - name: LEVEL_INFO
           value: "true"
 
-      persistentVolume:
-        config:
-          enabled: true
-          accessModes:
-            - ReadWriteOnce
-          storageClassName: longhorn
       metrics:
         enabled: true
         serviceMonitor:
           enabled: true
+
     lapi:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: node-role.kubernetes.io/control-plane
-                operator: DoesNotExist
+
       env:
         - name: TZ
           value: ${TIMEZONE}
@@ -93,19 +75,22 @@ spec:
           value: k8s_cluster
         - name: ENROLL_TAGS
           value: "home-ops k8s"
+
       dashboard:
         enabled: false
+
       persistentVolume:
         data:
           enabled: true
           accessModes:
             - ReadWriteOnce
-          storageClassName: longhorn
+          existingClaim: lapi-data-pvc
         config:
           enabled: true
           accessModes:
             - ReadWriteOnce
-          storageClassName: longhorn
+          existingClaim: lapi-config-pvc
+
       metrics:
         enabled: true
         serviceMonitor:
