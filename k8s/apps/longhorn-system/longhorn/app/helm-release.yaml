@@ -26,8 +26,8 @@ spec:
       retries: 3
   values:
     monitoring:
-      enabled: true
-      createPrometheusRules: true
+      serviceMonitor:
+        enabled: true
     persistence:
       defaultClass: true
       defaultClassReplicaCount: 2
