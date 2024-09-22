@@ -29,13 +29,6 @@ spec:
   values:
     controllers:
       calibre:
-        
-        pod:
-          securityContext:
-            runAsUser: 1002
-            runAsGroup: 100
-            fsGroup: 100
-            fsGroupChangePolicy: "OnRootMismatch"
 
         containers:
           app:
