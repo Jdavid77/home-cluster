@@ -77,7 +77,8 @@ spec:
           value: "home-ops k8s"
 
       dashboard:
-        enabled: false
+        enabled: true
+        
 
       persistentVolume:
         data:
