@@ -114,7 +114,8 @@ spec:
             - 2a06:98c0::/29
             - 2c0f:f248::/32
       metrics:
-        expose: false
+        expose: 
+          default: true
 
     tlsOptions:
       default:
