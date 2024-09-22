@@ -9,7 +9,6 @@ spec:
   targetNamespace: monitoring
   dependsOn:
     - name: external-secrets-store
-    - name: authentik
   path: ./k8s/apps/monitoring/grafana/app
   prune: true
   sourceRef:
