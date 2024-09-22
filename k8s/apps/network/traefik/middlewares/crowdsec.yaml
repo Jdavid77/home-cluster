@@ -12,7 +12,6 @@ spec:
       crowdsecLapiTLSCertificateAuthorityFile: /etc/traefik/crowdsec-certs/ca.crt
       crowdsecLapiTLSCertificateBouncerFile: /etc/traefik/crowdsec-certs/tls.crt
       crowdsecLapiTLSCertificateBouncerKeyFile: /etc/traefik/crowdsec-certs/tls.key
-      crowdsecLapiKey: ${CROWDSEC_BOUNCER_KEY}
       banHtmlFilePath: /ban/ban.html
       captchaProvider: turnstile
       captchaSiteKey: 0x4AAAAAAAam_BRSaSBVO7CF
