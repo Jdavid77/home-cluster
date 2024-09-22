@@ -12,7 +12,6 @@ spec:
     - name: dragonfly-cluster
     - name: external-secrets-store
     - name: documents-pvs
-    - name: authentik
   prune: true
   sourceRef:
     kind: GitRepository
