@@ -9,7 +9,6 @@ spec:
   targetNamespace: books
   path: ./k8s/apps/books/calibre/app
   dependsOn:
-    - name: longhorn
     - name: books-pvs
   prune: true
   sourceRef:
