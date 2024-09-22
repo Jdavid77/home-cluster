@@ -22,4 +22,4 @@ spec:
         username: '{{ .POSTGRES_SUPER_USER }}'
   dataFrom:
     - extract:
-        key: /cnpg/super-user
+        key: /postgres/super-user

@@ -14,5 +14,3 @@ spec:
   - storage
   numberOfReplicas: 2
   size: "536870912"
-  
-

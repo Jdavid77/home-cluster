@@ -13,8 +13,8 @@ spec:
   nodeSelector:
   - storage
   numberOfReplicas: 2
-  size: "1073741824" 
---- 
+  size: "1073741824"
+---
 apiVersion: longhorn.io/v1beta2
 kind: Volume
 metadata:
@@ -31,4 +31,3 @@ spec:
   - storage
   numberOfReplicas: 2
   size: "104857600"
-
