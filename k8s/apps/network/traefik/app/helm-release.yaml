@@ -25,8 +25,6 @@ spec:
       strategy: rollback
       retries: 3
   values:
-    image:
-      name: traefik
     deployment:
       kind: Deployment
       replicas: 2
