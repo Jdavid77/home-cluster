@@ -33,8 +33,7 @@ spec:
     service:
       enabled: true
       type: LoadBalancer
-      annotations:
-        tailscale.com/expose: "true"
+      loadBalancerClass: tailscale
       loadBalancerIPs:
         - "${LB_INTERNAL_IP}"
       externalTrafficPolicy: Local
