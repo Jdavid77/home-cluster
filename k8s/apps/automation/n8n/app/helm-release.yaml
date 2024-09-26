@@ -58,7 +58,7 @@ spec:
           app:
             image:
               repository: docker.io/n8nio/n8n
-              tag: 1.60.1
+              tag: 1.61.0
             env:
               # Isolating N8N
               N8N_PERSONALIZATION_ENABLED: false
