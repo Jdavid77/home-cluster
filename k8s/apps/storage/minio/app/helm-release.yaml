@@ -38,8 +38,8 @@ spec:
         containers:
           app:
             image:
-              repository: quay.io/minio/minio
-              tag: RELEASE.2024-05-10T01-41-38Z@sha256:7fb572d98b25502cf9c04e07aa64827dc291da8e7e55f80c80ae396fff93f639
+              repository: minio/minio
+              tag: RELEASE.2024-09-22T00-33-43Z@sha256:7d80fd232a2f7108aa6f133fcfe5fade3f1626d92d31ae1318076e7aa61928a2
             env:
               TZ: "${TIMEZONE}"
               MINIO_UPDATE: "off"
