@@ -36,7 +36,7 @@ spec:
         enable: true
         selector: storage
     defaultSettings:
-      backupTarget: s3://longhorn-backups@weur/
+      backupTarget: s3://longhorn@weur/
       backupTargetCredentialSecret: longhorn-secret
       defaultReplicaCount: 2
       backupstorePollInterval: 0
