@@ -35,6 +35,12 @@ spec:
       minio:
         annotations:
           reloader.stakater.com/auto: "true"
+        pod:
+          securityContext:
+            runAsUser: 1002
+            runAsGroup: 100
+            fsGroup: 100
+            fsGroupChangePolicy: "OnRootMismatch"
         containers:
           app:
             image:
