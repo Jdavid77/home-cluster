@@ -1,9 +1,0 @@
-apiVersion: tailscale.com/v1alpha1
-kind: Connector
-metadata:
-  name: exit-node
-spec:
-  hostname: exit-node
-  exitNode: true
-  tags:
-    - "tag:k8s"

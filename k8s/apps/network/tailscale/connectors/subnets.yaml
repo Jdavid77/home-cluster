@@ -1,0 +1,10 @@
+apiVersion: tailscale.com/v1alpha1
+kind: Connector
+metadata:
+  name: ts-k8s-cidrs
+spec:
+  hostname: ts-k8s-cidrs
+  subnetRouter:
+    advertiseRoutes:
+      - ${SERVICE_CIDR}
+      - ${POD_CIDR}
