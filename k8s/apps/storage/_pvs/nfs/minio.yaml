@@ -12,7 +12,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   nfs:
     server: ${NFS_SERVER}
-    path: /s3
+    path: /minio
   mountOptions:
     - nfsvers=4.1
     - hard
