@@ -166,7 +166,7 @@ spec:
           version: "v1.4.0"
         bouncer:
           moduleName: "github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin"
-          version: "v1.3.0"
+          version: "v1.3.3"
         traefik-plugin-blockuseragent:
           moduleName: "github.com/agence-gaya/traefik-plugin-blockuseragent"
           version: "v0.1.7"
