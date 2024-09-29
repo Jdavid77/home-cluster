@@ -142,17 +142,6 @@ spec:
         expose:
           default: true
 
-    tlsOptions:
-      default:
-        minVersion: VersionTLS12
-        maxVersion: VersionTLS13
-        sniStrict: true
-
-    tlsStore:
-      default:
-        defaultCertificate:
-          secretName: ${SECRET_DOMAIN}-tls
-
     pilot:
       enabled: false
 

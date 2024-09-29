@@ -30,6 +30,26 @@ spec:
   targetNamespace: network
   dependsOn:
     - name: traefik
+  path: ./k8s/apps/network/traefik/addons
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-cluster
+  wait: true
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: traefik-certificates
+  namespace: flux-system
+spec:
+  targetNamespace: network
+  dependsOn:
+    - name: traefik
     - name: cert-manager
   path: ./k8s/apps/network/traefik/certificates
   prune: true
