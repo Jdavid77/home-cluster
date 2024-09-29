@@ -82,6 +82,7 @@ spec:
           - network-bouncer@kubernetescrd
           - network-errors@kubernetescrd
           - network-ratelimit@kubernetescrd
+          - network-blockuseragent@kubernetescrd
         http3:
           enabled: true
         tls:
@@ -166,6 +167,9 @@ spec:
         bouncer:
           moduleName: "github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin"
           version: "v1.3.0"
+        traefik-plugin-blockuseragent:
+          moduleName: "github.com/agence-gaya/traefik-plugin-blockuseragent"
+          version: "v0.1.7"
 
     volumes:
       - name: crowdsec-bouncer-tls

@@ -1,0 +1,10 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+    name: blockuseragent
+spec:
+  plugin:
+    traefik-plugin-blockuseragent:
+      Regex:
+        - "AI2Bot|Ai2Bot-Dolma|Amazonbot|Applebot|Applebot-Extended|Bytespider|CCBot|ChatGPT-User|Claude-Web|ClaudeBot|Diffbot|FacebookBot|FriendlyCrawler|GPTBot|Google-Extended|GoogleOther|GoogleOther-Image|GoogleOther-Video|ICC-Crawler|ImagesiftBot|Kangaroo Bot|Meta-ExternalAgent|Meta-ExternalFetcher|OAI-SearchBot|PerplexityBot|PetalBot|Scrapy|Sidetrade indexer bot|Timpibot|VelenPublicWebCrawler|Webzio-Extended|YouBot|anthropic-ai|cohere-ai|facebookexternalhit|iaskspider\\/2\\.0|img2dataset|omgili|omgilibot"
+        # taken from https://github.com/ai-robots-txt/ai.robots.txt/blob/main/robots.txt
