@@ -1,0 +1,108 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: traefik-internal
+  namespace: network
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: traefik
+      version: 32.0.0
+      sourceRef:
+        kind: HelmRepository
+        name: traefik-charts
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  values:
+    deployment:
+      kind: Deployment
+      replicas: 2
+    podSecurityPolicy:
+      enabled: false
+    service:
+      enabled: true
+      type: LoadBalancer
+      loadBalancerIPs:
+        - ${LB_INTERNAL_IP}
+      annotations:
+        io.cilium/lb-ipam-ips: ${LB_INTERNAL_IP}
+        external-dns.alpha.kubernetes.io/hostname: "internal.${SECRET_DOMAIN}"
+      externalTrafficPolicy: Cluster
+      ipFamilies:
+        - "IPv4"
+    logs:
+      general:
+        format: json
+        level: WARN
+      access:
+        enabled: true
+        format: json
+    ingressClass:
+      enabled: true
+      isDefaultClass: false
+      name: internal
+    ingressRoute:
+      dashboard:
+        enabled: false
+    globalArguments:
+      - "--api.insecure=true"
+      - "--serverstransport.insecureskipverify=true"
+    additionalArguments:
+      - "--providers.kubernetesingress.ingressendpoint.ip=${LB_INTERNAL_IP}"
+    providers:
+      kubernetesCRD:
+        enabled: true
+        allowCrossNamespace: true
+        allowExternalNameServices: true
+      kubernetesIngress:
+        enabled: true
+        allowExternalNameServices: true
+        allowEmptyServices: true
+        ingressClass: internal
+        publishedService:
+          enabled: true
+    ports:
+      traefik:
+        expose:
+          default: false
+      web:
+        redirectTo:
+          port: websecure
+      websecure:
+        middlewares:
+          - network-errors@kubernetescrd
+          - network-ratelimit@kubernetescrd
+        http3:
+          enabled: true
+        tls:
+          enabled: true
+          options: default
+        forwardedHeaders:
+          trustedIPs:
+            - 192.168.1.0/24
+        proxyProtocol:
+          trustedIPs:
+            - 192.168.1.0/24
+      metrics:
+        expose:
+          default: true
+
+    pilot:
+      enabled: false
+
+    resources:
+      requests:
+        cpu: 15m
+        memory: 110M
+      limits:
+        memory: 642M
