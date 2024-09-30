@@ -99,6 +99,7 @@ spec:
         tls:
           - hosts:
               - *hostName
+            secretName: ${SECRET_DOMAIN}-tls
 
     persistence:
       config:
