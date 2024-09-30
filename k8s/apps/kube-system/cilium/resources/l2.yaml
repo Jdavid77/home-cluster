@@ -6,3 +6,7 @@ metadata:
   name: l2-policy
 spec:
   loadBalancerIPs: true
+  serviceSelector:
+    matchLabels:
+      app.kubernetes.io/instance: traefik-internal-network
+      
