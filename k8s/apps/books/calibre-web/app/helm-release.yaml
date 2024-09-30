@@ -85,11 +85,12 @@ spec:
 
     ingress:
       app:
-        className: tailscale
+        className: internal
         annotations:
           hajimari.io/icon: simple-icons:calibreweb
+          external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
         hosts:
-          - host: &hostName books
+          - host: &hostName books.${SECRET_DOMAIN}
             paths:
               - path: /
                 service:
