@@ -7,7 +7,7 @@ locals {
 
 module "app" {
   source = "./app"
-  for_each = toset(local.apps) 
+  for_each = toset(local.apps)
   name = each.value
 
   providers = {

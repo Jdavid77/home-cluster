@@ -9,4 +9,3 @@ spec:
   serviceSelector:
     matchLabels:
       app.kubernetes.io/instance: traefik-internal-network
-      

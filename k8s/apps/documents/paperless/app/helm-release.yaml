@@ -100,7 +100,7 @@ spec:
           - hosts:
               - *host
             secretName: ${SECRET_DOMAIN}-tls
-      
+
       tailscale:
         enabled: true
         className: internal

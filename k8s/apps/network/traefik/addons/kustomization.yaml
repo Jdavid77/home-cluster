@@ -3,4 +3,3 @@ kind: Kustomization
 resources:
   - options.yaml
   - store.yaml
-
