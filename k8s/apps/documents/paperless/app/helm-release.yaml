@@ -66,8 +66,8 @@ spec:
               PAPERLESS_DBNAME: paperless
               PAPERLESS_REDIS: redis://dragonfly.storage.svc.cluster.local:6379
               PAPERLESS_TASK_WORKERS: 2
-              PAPERLESS_TIME_ZONE: Europe/Lisbon
-              PAPERLESS_URL: https://paperless.${TAILSCALE_DOMAIN}
+              PAPERLESS_TIME_ZONE: ${TIMEZONE}
+              PAPERLESS_URL: https://paperless.${SECRET_DOMAIN}
               PAPERLESS_APPS: allauth.socialaccount.providers.openid_connect
             envFrom: *envFrom
             resources:
@@ -85,11 +85,27 @@ spec:
     ingress:
       app:
         enabled: true
-        className: tailscale
+        className: internal
         annotations:
           hajimari.io/icon: simple-icons:paperlessngx
+          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
         hosts:
-          - host: &host "{{ .Release.Name }}"
+          - host: &host paperless.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+        tls:
+          - hosts:
+              - *host
+            secretName: ${SECRET_DOMAIN}-tls
+      
+      tailscale:
+        enabled: true
+        className: internal
+        hosts:
+          - host: &host paperless
             paths:
               - path: /
                 service:
@@ -100,7 +116,6 @@ spec:
               - *host
 
     persistence:
-
       data:
         enabled: true
         existingClaim: paperless-data-share-pvc

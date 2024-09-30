@@ -52,8 +52,8 @@ spec:
       upgradeChecker: false
     ingress:
       enabled: true
-      ingressClassName: tailscale
-      host: longhorn
+      ingressClassName: internal
+      host: longhorn.${SECRET_DOMAIN}
       tls: true
       annotations:
         hajimari.io/icon: harddisk

@@ -64,10 +64,9 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: traefik
+        ingressClassName: internal
         annotations:
-          external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
-          traefik.ingress.kubernetes.io/router.middlewares: network-authentik-outpost@kubernetescrd
+          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
         hosts:
           - host: &host dashboard.${SECRET_DOMAIN}
             paths:
@@ -76,6 +75,8 @@ spec:
         tls:
           - hosts:
               - *host
+            secretName: ${SECRET_DOMAIN}-tls
+    
     podAnnotations:
       configmap.reloader.stakater.com/reload: "hajimari-settings"
     persistence:
