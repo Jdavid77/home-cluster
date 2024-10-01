@@ -97,6 +97,11 @@ spec:
         expose:
           default: true
 
+    metrics:
+      prometheus:
+        serviceMonitor:
+          enabled: true
+
     pilot:
       enabled: false
 
