@@ -58,7 +58,7 @@ spec:
         reporting_enabled: false
       auth:
         signout_redirect_url: "https://auth.${SECRET_DOMAIN}/application/o/grafana/end-session/"
-        oauth_auto_login: true
+        oauth_auto_login: false
         oauth_allow_insecure_email_lookup: true
       auth.generic_oauth:
         enabled: true
@@ -75,7 +75,7 @@ spec:
         role_attribute_path: |
           contains(groups[*], 'grafana_admin') && 'Admin' || contains(groups[*], 'grafana_viewer') && 'Viewer'
       auth.basic:
-        enabled: false
+        enabled: true
       auth.anonymous:
         enabled: false
         # org_id: 1
