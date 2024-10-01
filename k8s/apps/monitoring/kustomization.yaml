@@ -7,3 +7,4 @@ resources:
   - ./metrics-server/ks.yaml
   - ./grafana/ks.yaml
   - ./speedtest-exporter/ks.yaml
+  - ./pihole-exporter/ks.yaml
