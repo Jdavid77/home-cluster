@@ -134,6 +134,14 @@ spec:
             editable: true
             options:
               path: /var/lib/grafana/dashboards/longhorn-folder
+          - name: traefik
+            orgId: 1
+            folder: Traefik
+            type: file
+            disableDeletion: false
+            editable: true
+            options:
+              path: /var/lib/grafana/dashboards/traefik-folder
     datasources:
       datasources.yaml:
         apiVersion: 1
@@ -260,6 +268,11 @@ spec:
         longhorn:
           gnetId: 13032
           revision: 6
+          datasource: Prometheus
+      traefik:
+        traefik:
+          gnetId: 17347
+          revision: 9
           datasource: Prometheus
     sidecar:
       dashboards:
