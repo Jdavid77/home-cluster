@@ -65,11 +65,9 @@ spec:
           http:
             port: 80
     ingress:
-      main:
+      tailscale:
         enabled: true
         className: tailscale
-        annotations:
-          hajimari.io/icon: simple-icons:postgresql
         hosts:
           - host: &host "{{ .Release.Name }}"
             paths:
@@ -80,6 +78,23 @@ spec:
                   port: http
         tls:
           - hosts: [*host]
+      app:
+        enabled: true
+        className: internal
+        annotations:
+          hajimari.io/icon: simple-icons:postgresql
+          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
+        hosts:
+          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: app
+                  port: http
+        tls:
+          - hosts: [*host]
+            secretName: ${SECRET_DOMAIN}-tls
     persistence:
       config:
         enabled: true

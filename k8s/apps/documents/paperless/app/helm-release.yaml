@@ -103,7 +103,7 @@ spec:
 
       tailscale:
         enabled: true
-        className: internal
+        className: tailscale
         hosts:
           - host: &host paperless
             paths:
