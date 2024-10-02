@@ -9,3 +9,4 @@ spec:
     advertiseRoutes:
       - ${SERVICE_CIDR}
       - ${POD_CIDR}
+      - ${HOME_CIDR}
