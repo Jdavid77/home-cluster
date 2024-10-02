@@ -57,6 +57,7 @@ spec:
       tls: true
       annotations:
         hajimari.io/icon: harddisk
+        external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
     longhornManager:
       nodeSelector:
         storage: longhorn
