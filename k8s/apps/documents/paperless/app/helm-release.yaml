@@ -69,6 +69,7 @@ spec:
               PAPERLESS_TIME_ZONE: ${TIMEZONE}
               PAPERLESS_URL: https://paperless.${SECRET_DOMAIN}
               PAPERLESS_APPS: allauth.socialaccount.providers.openid_connect
+              PAPERLESS_OCR_USER_ARGS: '{"invalidate_digital_signatures": true}'
             envFrom: *envFrom
             resources:
               requests:
