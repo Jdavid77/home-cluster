@@ -10,7 +10,7 @@ spec:
   dependsOn:
     - name: cilium-resources
     - name: crowdsec
-  path: ./k8s/apps/network/traefik/app
+  path: ./k8s/apps/network/traefik/external
   prune: true
   sourceRef:
     kind: GitRepository
