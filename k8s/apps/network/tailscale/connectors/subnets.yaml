@@ -7,5 +7,5 @@ spec:
   hostname: dns-cidrs
   subnetRouter:
     advertiseRoutes:
-      - ${LB_INTERNAL_IP}
-      - ${PIHOLE_IP}
+      - ${LB_INTERNAL_IP}/32
+      - ${PIHOLE_IP}/32
