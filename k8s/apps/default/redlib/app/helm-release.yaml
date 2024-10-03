@@ -40,14 +40,16 @@ spec:
               # instance settings
               REDLIB_ROBOTS_DISABLE_INDEXING: "on"
               # user settings
-              REDLIB_DEFAULT_THEME: "dark"
+              REDLIB_DEFAULT_THEME: "dracula"
               REDLIB_DEFAULT_FRONT_PAGE: "all"
               REDLIB_DEFAULT_HIDE_HLS_NOTIFICATION: "on"
               REDLIB_DEFAULT_POST_SORT: "new"
               REDLIB_DEFAULT_LAYOUT: "compact"
-              REDLIB_DEFAULT_SUBSCRIPTIONS: "selfhosted"
               REDLIB_DEFAULT_SHOW_NSFW: "on"
               REDLIB_DEFAULT_USE_HLS: "on"
+            envFrom:
+              - secretRef:
+                  name: redlib-secret
             probes:
               liveness: &probes
                 enabled: true
@@ -86,12 +88,16 @@ spec:
           hajimari.io/icon: simple-icons:reddit
           external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
         hosts:
-          - host: "reddit.${SECRET_DOMAIN}"
+          - host: &hostName reddit.${SECRET_DOMAIN}
             paths:
               - path: /
                 service:
                   identifier: app
                   port: http
+        tls:
+          - hosts:
+              - *hostName
+            secretName: ${SECRET_DOMAIN}-tls
     service:
       app:
         controller: redlib
