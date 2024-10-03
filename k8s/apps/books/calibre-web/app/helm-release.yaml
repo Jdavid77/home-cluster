@@ -101,20 +101,6 @@ spec:
               - *hostName
             secretName: ${SECRET_DOMAIN}-tls
 
-      tailscale:
-        enabled: true
-        className: tailscale
-        hosts:
-          - host: &hostName books
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
-        tls:
-          - hosts:
-              - *hostName
-
     persistence:
       config:
         existingClaim: calibre-web

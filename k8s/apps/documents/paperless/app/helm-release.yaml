@@ -102,20 +102,6 @@ spec:
               - *host
             secretName: ${SECRET_DOMAIN}-tls
 
-      tailscale:
-        enabled: true
-        className: tailscale
-        hosts:
-          - host: &host paperless
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
-        tls:
-          - hosts:
-              - *host
-
     persistence:
       data:
         enabled: true

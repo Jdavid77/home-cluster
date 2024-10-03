@@ -75,20 +75,6 @@ spec:
             port: 3000
 
     ingress:
-      tailscale:
-        enabled: true
-        className: tailscale
-        hosts:
-          - host: &host wiki
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
-        tls:
-          - hosts:
-              - *host
-
       app:
         enabled: true
         className: internal
