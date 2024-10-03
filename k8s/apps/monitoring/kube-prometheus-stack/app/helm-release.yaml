@@ -36,15 +36,14 @@ spec:
       ingress:
         enabled: true
         pathType: Prefix
-        ingressClassName: traefik
+        ingressClassName: internal
         hosts: ["alerts.${SECRET_DOMAIN}"]
         tls:
           - hosts:
             - alerts.${SECRET_DOMAIN}
         annotations:
           hajimari.io/icon: alert-octagon
-          external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
-          traefik.ingress.kubernetes.io/router.middlewares: network-authentik-outpost@kubernetescrd
+          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
       config:
         global:
           resolve_timeout: 5m
@@ -132,7 +131,7 @@ spec:
     prometheus:
       ingress:
         enabled: true
-        ingressClassName: traefik
+        ingressClassName: internal
         pathType: Prefix
         hosts: ["prometheus.${SECRET_DOMAIN}"]
         tls:
@@ -140,8 +139,7 @@ spec:
             - prometheus.${SECRET_DOMAIN}
         annotations:
           hajimari.io/icon: simple-icons:prometheus
-          external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
-          traefik.ingress.kubernetes.io/router.middlewares: network-authentik-outpost@kubernetescrd
+          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
       thanosService:
         enabled: false
       thanosServiceMonitor:
