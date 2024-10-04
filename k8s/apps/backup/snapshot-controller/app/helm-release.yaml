@@ -28,3 +28,5 @@ spec:
           deletionPolicy: Delete
           parameters:
             type: bak
+    webhook:
+      enabled: false
