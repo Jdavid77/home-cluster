@@ -38,6 +38,3 @@ spec:
     admissionWebhooks:
       certManager:
         enabled: true
-        issuerRef:
-          kind: ClusterIssuer
-          name: letsencrypt-production
