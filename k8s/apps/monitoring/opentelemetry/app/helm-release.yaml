@@ -32,9 +32,10 @@ spec:
       image:
         repository: ghcr.io/open-telemetry/opentelemetry-operator/opentelemetry-operator
       # Collector contrib has more features
+        tag: v0.109.0
       collectorImage:
         repository: ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-contrib
-        tag: 0.110.0
+        tag: 0.109.0
     admissionWebhooks:
       certManager:
         enabled: true
