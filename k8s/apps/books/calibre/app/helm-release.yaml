@@ -81,5 +81,5 @@ spec:
         existingClaim: books-nfs-share-pvc
         advancedMounts:
           calibre:
-            app:
+            calibre:
               - path: /data/ebooks
