@@ -9,3 +9,4 @@ resources:
   - ./speedtest-exporter/ks.yaml
   - ./pihole-exporter/ks.yaml
   - ./loki/ks.yaml
+  - ./opentelemetry/ks.yaml
