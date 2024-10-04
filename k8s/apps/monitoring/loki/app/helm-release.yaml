@@ -81,9 +81,7 @@ spec:
       storage:
         type: s3
         bucketNames:
-          chunks: loki-chunks
-          ruler: loki-ruler
-          admin: loki-admin
+          chunks: loki
         s3:
           s3ForcePathStyle: true
           insecure: true
