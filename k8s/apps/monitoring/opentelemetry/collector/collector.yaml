@@ -20,7 +20,7 @@ spec:
     receivers:     
       filelog:
         include:
-          - /var/log/pods/*/*/*.log
+          - /var/log/pods/**/**/*.log
         exclude:
           # Exclude logs from all containers named otel-collector
           - /var/log/pods/**/otel-collector/*.log
@@ -125,6 +125,9 @@ spec:
           receivers: [filelog]
           processors: [k8sattributes,batch,resource,memory_limiter]
           exporters: [loki]
+  securityContext:
+    runAsUser: 0
+    runAsGroup: 0
   volumeMounts:
     - name: pods
       mountPath: /var/log/pods
