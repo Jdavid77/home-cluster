@@ -92,7 +92,7 @@ spec:
             paths:
               - path: /
                 service:
-                  identifier: app
+                  identifier: redlib
                   port: http
         tls:
           - hosts:

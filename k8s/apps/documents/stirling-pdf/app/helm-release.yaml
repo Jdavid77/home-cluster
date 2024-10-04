@@ -104,7 +104,7 @@ spec:
             paths:
               - path: /
                 service:
-                  identifier: app
+                  identifier: stirling
                   port: http
         tls:
           - secretName: "${SECRET_DOMAIN}-tls"
