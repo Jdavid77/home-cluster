@@ -23,6 +23,7 @@ metadata:
   name: open-telemetry-collector
   namespace: flux-system
 spec:
+  targetNamespace: monitoring
   path: ./k8s/apps/monitoring/opentelemetry/collector
   prune: true
   sourceRef:
