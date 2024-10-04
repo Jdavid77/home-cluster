@@ -1,0 +1,202 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: loki
+  namespace: monitoring
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: loki
+      version: 6.12.0
+      sourceRef:
+        kind: HelmRepository
+        name: grafana-charts
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    deploymentMode: SimpleScalable
+    loki:
+      podAnnotations:
+        configmap.reloader.stakater.com/reload: loki-secret
+      auth_enabled: false
+      analytics:
+        reporting_enabled: false
+      compactor:
+        working_directory: /var/loki/compactor/retention
+        delete_request_store: s3
+        retention_enabled: true
+      frontend:
+        max_outstanding_per_tenant: 4096
+      ingester:
+        chunk_encoding: snappy
+      commonConfig:
+        replication_factor: 2
+      limits_config:
+        ingestion_burst_size_mb: 128
+        ingestion_rate_mb: 64
+        max_query_parallelism: 100
+        per_stream_rate_limit: 64M
+        per_stream_rate_limit_burst: 128M
+        reject_old_samples: true
+        reject_old_samples_max_age: 72h
+        retention_period: 7d
+        shard_streams:
+          enabled: true
+        split_queries_by_interval: 1h
+      query_scheduler:
+        max_outstanding_requests_per_tenant: 4096
+      rulerConfig:
+        enable_api: true
+        enable_alertmanager_v2: true
+        alertmanager_url: http://alertmanager-operated.monitoring.svc.cluster.local:9093
+        storage:
+          type: local
+          local:
+            directory: /rules
+        rule_path: /rules/fake
+
+      schemaConfig:
+        configs:
+          - from: "2024-04-01"
+            store: tsdb
+            object_store: s3
+            schema: v13
+            index:
+              prefix: loki_index_
+              period: 24h
+      server:
+        log_level: info
+        grpc_server_max_recv_msg_size: 8388608
+        grpc_server_max_send_msg_size: 8388608
+      storage:
+        type: s3
+        bucketNames:
+          chunks: loki-chunks
+          ruler: loki-ruler
+          admin: loki-admin
+        s3:
+          s3ForcePathStyle: true
+          insecure: true
+    gateway:
+      replicas: 2
+      enabled: true
+      image:
+        registry: ghcr.io
+        repository: nginxinc/nginx-unprivileged
+        tag: 1.27.1-alpine@sha256:5d7b7ca2046497980b2be6a2ff67eeb721d35daa669ad2c9ca43b3d2aeced31e
+      deploymentStrategy:
+        type: RollingUpdate
+        rollingUpdate:
+          maxUnavailable: 50%
+          maxSurge: 50%
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/name: loki
+              app.kubernetes.io/component: gateway
+      ingress:
+        enabled: true
+        ingressClassName: internal
+        annotations:
+          hajimari.io/enable: "false"
+        hosts:
+          - host: &host "loki.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+            secretName: ${SECRET_DOMAIN}-tls
+
+      resources:
+        requests:
+          cpu: 50m
+          memory: 64Mi
+
+    write:
+      replicas: 2
+      nodeSelector:
+        storage: longhorn
+      persistence:
+        storageClass: longhorn
+
+    read:
+      replicas: 2
+      nodeSelector:
+        storage: longhorn
+      persistence:
+        storageClass: longhorn
+        size: 5Gi
+
+    backend:
+      replicas: 2
+      nodeSelector:
+        storage: longhorn
+      persistence:
+        storageClass: longhorn
+
+      resources:
+        requests:
+          cpu: 100m
+          memory: 500M
+
+    monitoring:
+      dashboards:
+        annotations:
+          grafana_folder: Loki
+      rules:
+        enabled: false
+      serviceMonitor:
+        enabled: false
+        metricsInstance:
+          enabled: false
+      selfMonitoring:
+        enabled: false
+        grafanaAgent:
+          installOperator: false
+
+    sidecar:
+      image:
+        repository: ghcr.io/kiwigrid/k8s-sidecar
+      rules:
+        searchNamespace: ALL
+        folder: /rules/fake
+
+    lokiCanary:
+      enabled: false
+
+    test:
+      enabled: false
+
+  valuesFrom:
+    - targetPath: loki.structuredConfig.common.storage.s3.bucketnames
+      kind: Secret
+      name: loki-secret
+      valuesKey: BUCKET_NAME
+    - targetPath: loki.structuredConfig.common.storage.s3.endpoint
+      kind: Secret
+      name: loki-secret
+      valuesKey: BUCKET_HOST
+    - targetPath: loki.structuredConfig.common.storage.s3.access_key_id
+      kind: Secret
+      name: loki-secret
+      valuesKey: AWS_ACCESS_KEY_ID
+    - targetPath: loki.structuredConfig.common.storage.s3.secret_access_key
+      kind: Secret
+      name: loki-secret
+      valuesKey: AWS_SECRET_ACCESS_KEY
