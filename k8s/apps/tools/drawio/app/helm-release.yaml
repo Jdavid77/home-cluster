@@ -34,7 +34,7 @@ spec:
     controllers:
       drawio:
         containers:
-          app:
+          drawio:
             image:
               repository: jgraph/drawio
               tag: 24.7.17@sha256:3e14dbd7818bb2222ef93d920809771dbbdc1bf8e1d8794c99314ad9a922eeb6
@@ -84,13 +84,13 @@ spec:
                 memory: 128Mi
 
     service:
-      app:
+      drawio:
         controller: drawio
         ports:
           http:
             port: 8080
     ingress:
-      app:
+      external:
         className: traefik
         annotations:
           hajimari.io/icon: tools
@@ -101,7 +101,7 @@ spec:
             paths:
               - path: /
                 service:
-                  identifier: app
+                  identifier: drawio
                   port: http
         tls:
           - hosts: [*host]

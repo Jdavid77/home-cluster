@@ -59,7 +59,7 @@ spec:
                   name: lldap-secret
 
         containers:
-          app:
+          lldap:
             image:
               repository: ghcr.io/lldap/lldap
               tag: v0.5.0
@@ -104,7 +104,7 @@ spec:
                 memory: 128Mi
 
     service:
-      app:
+      lldap:
         controller: lldap
         ports:
           http:
@@ -113,7 +113,7 @@ spec:
             enabled: true
             port: *ldapPort
     ingress:
-      app:
+      internal:
         enabled: true
         className: internal
         annotations:
@@ -124,7 +124,7 @@ spec:
             paths:
               - path: /
                 service:
-                  identifier: app
+                  identifier: lldap
                   port: http
         tls:
           - hosts:

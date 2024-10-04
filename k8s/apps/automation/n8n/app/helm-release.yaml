@@ -55,7 +55,7 @@ spec:
               - secretRef:
                   name: n8n-secret
         containers:
-          app:
+          n8n:
             image:
               repository: docker.io/n8nio/n8n
               tag: 1.62.1
@@ -90,14 +90,14 @@ spec:
                   name: n8n-secret
 
     service:
-      app:
+      n8n:
         controller: n8n
         ports:
           http:
             port: *port
 
     ingress:
-      app:
+      external:
         annotations:
           hajimari.io/icon: mdi:water-flow
           external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
@@ -108,7 +108,7 @@ spec:
             paths:
               - path: /
                 service:
-                  identifier: app
+                  identifier: n8n
                   port: *port
         tls:
           - hosts:
@@ -119,7 +119,7 @@ spec:
         existingClaim: n8n
         advancedMounts:
           n8n:
-            app:
+            n8n:
               - path: /home/jnobrega/n8n
 
     resources:

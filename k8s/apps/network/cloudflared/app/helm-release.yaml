@@ -42,7 +42,7 @@ spec:
                 matchLabels:
                   app.kubernetes.io/name: cloudflared
         containers:
-          app:
+          cloudflared:
             image:
               repository: docker.io/cloudflare/cloudflared
               tag: 2024.9.1
@@ -116,7 +116,7 @@ spec:
                 operator: DoesNotExist
 
     service:
-      app:
+      cloudflared:
         controller: cloudflared
         ports:
           http:

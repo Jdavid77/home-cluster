@@ -49,7 +49,7 @@ spec:
               - secretRef:
                   name: paperless-secret
         containers:
-          app:
+          paperless:
             image:
               repository: ghcr.io/paperless-ngx/paperless-ngx
               tag: 2.12.1@sha256:217cec76128c2545872cf356694f2ffd4524cb84892d0333e654795dec255633
@@ -78,13 +78,13 @@ spec:
               limits:
                 memory: 1812M
     service:
-      app:
+      paperless:
         controller: *app
         ports:
           http:
             port: 8000
     ingress:
-      app:
+      internal:
         enabled: true
         className: internal
         annotations:
@@ -95,7 +95,7 @@ spec:
             paths:
               - path: /
                 service:
-                  identifier: app
+                  identifier: paperless
                   port: http
         tls:
           - hosts:

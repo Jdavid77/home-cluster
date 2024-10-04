@@ -45,7 +45,7 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          app:
+          pgadmin:
             image:
               repository: docker.io/dpage/pgadmin4
               tag: "8.12@sha256:585350593e8b0483941fa9a2d5ebb04b88a66e83a7b5603c169f9446b271312f"
@@ -59,13 +59,13 @@ spec:
               limits:
                 memory: 236M
     service:
-      app:
+      pgadmin:
         controller: pgadmin
         ports:
           http:
             port: 80
     ingress:
-      app:
+      internal:
         enabled: true
         className: internal
         annotations:
@@ -77,7 +77,7 @@ spec:
               - path: /
                 pathType: Prefix
                 service:
-                  identifier: app
+                  identifier: pgadmin
                   port: http
         tls:
           - hosts: [*host]

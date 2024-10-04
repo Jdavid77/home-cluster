@@ -32,7 +32,7 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          app:
+          redlib:
             image:
               repository: quay.io/redlib/redlib
               tag: latest@sha256:e65e977dee589a3b07274ffca2a1c19cf487176f230d0ff03cbf09c626f3db11
@@ -81,7 +81,7 @@ spec:
         runAsGroup: 65534
         seccompProfile: { type: RuntimeDefault }
     ingress:
-      app:
+      internal:
         enabled: true
         className: internal
         annotations:
@@ -99,7 +99,7 @@ spec:
               - *hostName
             secretName: ${SECRET_DOMAIN}-tls
     service:
-      app:
+      redlib:
         controller: redlib
         ports:
           http:

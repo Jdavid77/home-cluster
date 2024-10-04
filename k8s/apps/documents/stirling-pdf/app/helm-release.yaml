@@ -38,7 +38,7 @@ spec:
           sablier.group: books
         strategy: RollingUpdate
         containers:
-          app:
+          stirling:
             image:
               repository: ghcr.io/stirling-tools/s-pdf
               tag: 0.29.0@sha256:5b9c9443e6eb0fa23b39475d68741d80826249193df231d6859ecda0f0aedd8d
@@ -86,14 +86,14 @@ spec:
           - path: /usr/share/tessdata
 
     service:
-      app:
+      stirling:
         controller: stirling
         ports:
           http:
             port: 8080
 
     ingress:
-      app:
+      external:
         className: traefik
         annotations:
           hajimari.io/icon: file-pdf-box

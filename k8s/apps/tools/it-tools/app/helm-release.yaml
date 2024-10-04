@@ -39,7 +39,7 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          app:
+          tools:
             image:
               repository: ghcr.io/corentinth/it-tools
               tag: 2023.12.21-5ed3693
@@ -56,13 +56,13 @@ spec:
               limits:
                 memory: 500Mi
     service:
-      app:
+      tools:
         controller: *app
         ports:
           http:
             port: 80
     ingress:
-      app:
+      external:
         className: traefik
         annotations:
           hajimari.io/icon: tools
@@ -73,7 +73,7 @@ spec:
             paths:
               - path: /
                 service:
-                  identifier: app
+                  identifier: tools
                   port: http
         tls:
           - hosts: [*host]

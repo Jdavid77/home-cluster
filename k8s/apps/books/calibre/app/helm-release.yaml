@@ -31,7 +31,7 @@ spec:
       calibre:
 
         containers:
-          app:
+          calibre:
             image:
               repository: ghcr.io/linuxserver/calibre
               tag: version-v7.18.0@sha256:b6120d24bc974c36b2554968df2aa7e3ca12404c2e7b2db9ca6fe7b45b0087e9
@@ -47,7 +47,7 @@ spec:
                 memory: 604M
 
     service:
-      app:
+      calibre:
         controller: *app
         ports:
           http:
@@ -56,13 +56,13 @@ spec:
     ingress:
       app:
         enabled: true
-        className: tailscale
+        className: internal
         hosts:
           - host: &host "{{ .Release.Name }}"
             paths:
               - path: /
                 service:
-                  identifier: app
+                  identifier: calibre
                   port: http
         tls:
           - hosts:

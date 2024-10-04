@@ -53,7 +53,7 @@ spec:
             fsGroupChangePolicy: "OnRootMismatch"
 
         containers:
-          app:
+          calibre-web:
             image:
               repository: ghcr.io/bjw-s/calibre-web
               tag: 0.6.23@sha256:e00ee73349c41ad1da9461161a53fd083f843cafb454e56083940d7296d22053
@@ -77,7 +77,7 @@ spec:
                 memory: 470M
 
     service:
-      app:
+      calibre-web:
         controller: calibre-web
         ports:
           http:
@@ -94,7 +94,7 @@ spec:
             paths:
               - path: /
                 service:
-                  identifier: app
+                  identifier: calibre-web
                   port: http
         tls:
           - hosts:

@@ -57,7 +57,7 @@ spec:
               - secretRef:
                   name: wiki-js-secret
         containers:
-          app:
+          wiki:
             image:
               repository: ghcr.io/requarks/wiki
               pullPolicy: IfNotPresent
@@ -66,7 +66,7 @@ spec:
               - secretRef:
                   name: wiki-js-secret
     service:
-      app:
+      wiki:
         controller: wiki
         annotations:
           tailscale.com/hostname: wiki-js
@@ -75,7 +75,7 @@ spec:
             port: 3000
 
     ingress:
-      app:
+      internal:
         enabled: true
         className: internal
         annotations:
@@ -86,7 +86,7 @@ spec:
             paths:
               - path: /
                 service:
-                  identifier: app
+                  identifier: wiki
                   port: http
         tls:
           - hosts:

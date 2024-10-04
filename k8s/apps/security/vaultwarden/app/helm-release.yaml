@@ -52,7 +52,7 @@ spec:
                   name: vaultwarden-secret
 
         containers:
-          app:
+          vaultwarden:
             image:
               repository: vaultwarden/server
               tag: 1.32.1
@@ -90,14 +90,14 @@ spec:
                 memory: 250Mi
 
     service:
-      app:
+      vaultwarden:
         controller: vaultwarden
         ports:
           http:
             port: 80
 
     ingress:
-      app:
+      internal:
         className: internal
         annotations:
           hajimari.io/icon: simple-icons:vaultwarden
@@ -107,7 +107,7 @@ spec:
             paths:
               - path: /
                 service:
-                  identifier: app
+                  identifier: vaultwarden
                   port: http
         tls:
           - hosts:
