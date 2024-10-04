@@ -55,7 +55,7 @@ spec:
           app:
             image:
               repository: vaultwarden/server
-              tag: 1.32.0
+              tag: 1.32.1
             env:
               DOMAIN: "https://vaultwarden.${SECRET_DOMAIN}"
               TZ: ${TIMEZONE}
