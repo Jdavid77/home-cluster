@@ -87,6 +87,7 @@ spec:
         s3:
           s3ForcePathStyle: true
           insecure: true
+          region: weur
     gateway:
       replicas: 2
       enabled: true
@@ -183,19 +184,15 @@ spec:
       enabled: false
 
   valuesFrom:
-    - targetPath: loki.structuredConfig.common.storage.s3.bucketnames
-      kind: Secret
-      name: loki-secret
-      valuesKey: BUCKET_NAME
-    - targetPath: loki.structuredConfig.common.storage.s3.endpoint
+    - targetPath: loki.storage.s3.endpoint
       kind: Secret
       name: loki-secret
       valuesKey: BUCKET_HOST
-    - targetPath: loki.structuredConfig.common.storage.s3.access_key_id
+    - targetPath: loki.storage.s3.accessKeyId
       kind: Secret
       name: loki-secret
       valuesKey: AWS_ACCESS_KEY_ID
-    - targetPath: loki.structuredConfig.common.storage.s3.secret_access_key
+    - targetPath: loki.storage.s3.secretAccessKey
       kind: Secret
       name: loki-secret
       valuesKey: AWS_SECRET_ACCESS_KEY
