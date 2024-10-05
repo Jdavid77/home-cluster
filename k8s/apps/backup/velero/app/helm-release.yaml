@@ -1,0 +1,69 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: velero
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: velero
+      version: 7.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: vmware-tanzu-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    annotations:
+      secret.reloader.stakater.com/reload: velero-secret
+    configuration:
+      features: EnableCSI
+      extraEnvVars:
+        TZ: "${TIMEZONE}"
+      provider: aws
+      backupStorageLocation:
+        name: default
+        bucket: velero
+        default: true
+        config:
+          region: weur
+          s3ForcePathStyle: true
+          s3Url: http://minio.storage.svc.cluster.local:9000
+      volumeSnapshotLocation:
+      - name: default
+        provider: velero.io/aws
+        credential:
+          name: velero-secret
+          key: cloud
+        config: 
+          region: weur
+    credentials:
+      existingSecret: velero-secret
+    schedules:
+      weekly-backup:
+        schedule: "0 0 * * 0"
+        template:
+          ttl: "338h"
+    initContainers:
+      - name: velero-plugin-for-aws
+        image: velero/velero-plugin-for-aws:v1.10.0
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+          - mountPath: /target
+            name: plugins
+      - name: velero-plugin-for-csi
+        image: velero/velero-plugin-for-csi:v0.4.0
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+          - mountPath: /target
+            name: plugins
+    backupsEnabled: true
+    snapshotsEnabled: true
+    upgradeCRDs: false
+    cleanUpCRDs: false
+    kubectl:
+      image:
+        repository: ghcr.io/onedr0p/kubernetes-kubectl
+        tag: 1.29.2
+    deployNodeAgent: false
