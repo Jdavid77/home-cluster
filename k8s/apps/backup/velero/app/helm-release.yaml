@@ -21,15 +21,14 @@ spec:
       features: EnableCSI
       extraEnvVars:
         TZ: "${TIMEZONE}"
-      provider: aws
       backupStorageLocation:
-        name: default
-        bucket: velero
-        default: true
-        config:
-          region: weur
-          s3ForcePathStyle: true
-          s3Url: http://minio.storage.svc.cluster.local:9000
+        - name: default
+          bucket: velero
+          default: true
+          config:
+            region: weur
+            s3ForcePathStyle: true
+            s3Url: http://minio.storage.svc.cluster.local:9000
       volumeSnapshotLocation:
       - name: default
         provider: velero.io/aws
