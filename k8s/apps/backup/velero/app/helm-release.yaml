@@ -35,6 +35,7 @@ spec:
         - name: default
           bucket: velero
           default: true
+          provider: aws
           config:
             region: weur
             s3ForcePathStyle: true
