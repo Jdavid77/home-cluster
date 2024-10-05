@@ -55,6 +55,10 @@ spec:
         schedule: "0 0 * * 0"
         template:
           ttl: "338h"
+          includedNamespaces:
+          - books
+          - automation
+          - security
     initContainers:
       - name: velero-plugin-for-aws
         image: velero/velero-plugin-for-aws:v1.10.0
