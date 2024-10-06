@@ -67,7 +67,7 @@ spec:
         - group: DNS
           apps:
             - name: Pihole
-              url: 'https://192.168.1.87/admin'
+              url: 'http://192.168.1.87/admin'
               icon: 'simple-icons:pihole'
               info: Pihole
         - group: NAS

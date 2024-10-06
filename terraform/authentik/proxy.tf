@@ -19,6 +19,11 @@ locals {
       authentik_proxy_application_name     = "Drawio"
       authentik_proxy_application_icon_url = "https://store-images.s-microsoft.com/image/apps.1409.13851527096222888.2b60149a-04a5-4578-a6b2-d7b7377332d5.c22d8e97-4d44-4304-9bd2-55f9d29c0f82"
       authentik_proxy_external_host        = "https://draw.${var.external_host}"
+    },
+    {
+      authentik_proxy_application_name     = "Goldilocks"
+      authentik_proxy_application_icon_url = "https://goldilocks.docs.fairwinds.com/img/goldilocks.svg"
+      authentik_proxy_external_host        = "https://goldilocks.${var.external_host}"
     }
   ]
 }
