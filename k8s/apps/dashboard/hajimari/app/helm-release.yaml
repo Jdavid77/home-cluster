@@ -50,6 +50,7 @@ spec:
           - storage
           - monitoring
           - automation
+          - default
       bookmarks:
         - group: Kubernetes
           bookmarks:

@@ -75,3 +75,15 @@ spec:
         repository: ghcr.io/onedr0p/kubernetes-kubectl
         tag: 1.29.2
     deployNodeAgent: false
+    containerSecurityContext: 
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop: ["ALL"]
+      readOnlyRootFilesystem: true
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.kubernetes.io/control-plane
+              operator: DoesNotExist
