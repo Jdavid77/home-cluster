@@ -11,7 +11,7 @@ spec:
       version: 9.0.1
       sourceRef:
         kind: HelmRepository
-        name: fairwinds-charts
+        name: fairwind-charts
         namespace: flux-system
   install:
     remediation:
