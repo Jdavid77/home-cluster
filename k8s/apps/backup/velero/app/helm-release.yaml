@@ -46,7 +46,7 @@ spec:
         credential:
           name: velero-secret
           key: cloud
-        config: 
+        config:
           region: weur
     credentials:
       existingSecret: velero-secret
@@ -75,7 +75,7 @@ spec:
         repository: ghcr.io/onedr0p/kubernetes-kubectl
         tag: 1.29.2
     deployNodeAgent: false
-    containerSecurityContext: 
+    containerSecurityContext:
       allowPrivilegeEscalation: false
       capabilities:
         drop: ["ALL"]

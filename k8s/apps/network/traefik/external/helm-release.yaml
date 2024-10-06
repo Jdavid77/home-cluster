@@ -141,7 +141,7 @@ spec:
       metrics:
         expose:
           default: true
-    
+
     metrics:
       prometheus:
         serviceMonitor:

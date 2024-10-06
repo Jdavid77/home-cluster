@@ -17,7 +17,7 @@ spec:
         fieldRef:
           fieldPath: spec.nodeName
   config:
-    receivers:     
+    receivers:
       filelog:
         include:
           - /var/log/pods/**/**/*.log
@@ -123,7 +123,7 @@ spec:
     exporters:
       loki:
         endpoint: http://loki-gateway.monitoring/loki/api/v1/push
-        default_labels_enabled: 
+        default_labels_enabled:
           exporter: false
     service:
       pipelines:
@@ -142,5 +142,3 @@ spec:
     - name: pods
       hostPath:
         path: /var/log/pods
-    
-

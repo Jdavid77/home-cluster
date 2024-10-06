@@ -25,7 +25,7 @@ spec:
   uninstall:
     keepHistory: false
   values:
-      
+
     controllers:
       redlib:
         replicas: 2

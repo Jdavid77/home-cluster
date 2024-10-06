@@ -24,5 +24,3 @@ spec:
       path: /var/log
       type: ""
     name: varlog
-
-

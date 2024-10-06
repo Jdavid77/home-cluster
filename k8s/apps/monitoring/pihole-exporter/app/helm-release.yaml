@@ -23,7 +23,7 @@ spec:
       strategy: rollback
       retries: 3
   values:
-    
+
     defaultPodOptions:
       affinity:
         nodeAffinity:
@@ -32,7 +32,7 @@ spec:
             - matchExpressions:
               - key: node-role.kubernetes.io/control-plane
                 operator: DoesNotExist
-    
+
     controllers:
       pihole-exporter:
         containers:
