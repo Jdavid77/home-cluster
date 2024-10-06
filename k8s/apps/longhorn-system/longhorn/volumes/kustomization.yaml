@@ -5,3 +5,4 @@ resources:
   - n8n.yaml
   - calibre.yaml
   - crowdsec.yaml
+  - wallos.yaml
