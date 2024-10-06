@@ -22,23 +22,23 @@ spec:
   upgrade:
     cleanupOnFail: true
     remediation:
+      strategy: rollback
       retries: 3
-  uninstall:
-    keepHistory: false
   values:
     env:
       TZ: ${TIMEZONE}
     hajimari:
-      title: Apps
-      lightTheme: gazette
+      title: Home Dashboard
+      name: "Mr"
+      lightTheme: paper
       darkTheme: tron
       alwaysTargetBlank: true
-      showGreeting: false
+      showGreeting: true
       showAppGroups: false
       showAppStatus: true
       showBookmarkGroups: true
-      showGlobalBookmarks: false
-      showAppUrls: false
+      showGlobalBookmarks: true
+      showAppUrls: true
       defaultEnable: true
       namespaceSelector:
         matchNames:
@@ -51,17 +51,30 @@ spec:
           - monitoring
           - automation
           - default
-      bookmarks:
+      globalBookmarks:
         - group: Kubernetes
           bookmarks:
-            - name: Jdavid77/home-ops
+            - name: home-ops
               icon: ''
-              url: https://github.com/Jdavid77
+              url: https://github.com/Jdavid77/home-cluster
               targetBlank: false
             - name: k8s-at-home-search
               icon: ''
               url: https://kubesearch.dev/
               targetBlank: false
+      customApps: 
+        - group: DNS
+          apps:
+            - name: Pihole
+              url: 'https://192.168.1.87/admin'
+              icon: 'simple-icons:pihole'
+              info: Pihole
+        - group: NAS
+          apps:
+            - name: OMV
+              url: 'http://nas.${SECRET_DOMAIN}'
+              icon: 'simple-icons:openmediavault'
+              info: OMV
     ingress:
       main:
         enabled: true
