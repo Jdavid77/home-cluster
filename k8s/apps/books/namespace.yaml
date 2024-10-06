@@ -3,4 +3,4 @@ kind: Namespace
 metadata:
   name: books
   annotations:
-    volsync.backube/privileged-movers: "true"
+    goldilocks.fairwinds.com/enabled: "true"
