@@ -61,7 +61,7 @@ spec:
               limits:
                 cpu: 500m
                 memory: 128Mi
-          app:
+          dragonfly:
             image:
               repository: docker.dragonflydb.io/dragonflydb/operator
               tag: v1.1.7
@@ -112,7 +112,7 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
     service:
-      app:
+      dragonfly:
         controller: dragonfly-operator
         ports:
           http:

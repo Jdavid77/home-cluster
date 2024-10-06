@@ -9,7 +9,6 @@ spec:
   interval: 5m
   chart:
     spec:
-      # renovate: registryUrl=https://open-telemetry.github.io/opentelemetry-helm-charts
       chart: opentelemetry-operator
       version: 0.69.0
       sourceRef:

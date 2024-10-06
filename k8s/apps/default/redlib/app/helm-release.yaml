@@ -25,16 +25,7 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    
-    defaultPodOptions:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: node-role.kubernetes.io/control-plane
-                operator: DoesNotExist
-                
+      
     controllers:
       redlib:
         replicas: 2
@@ -90,6 +81,13 @@ spec:
         runAsUser: 65534
         runAsGroup: 65534
         seccompProfile: { type: RuntimeDefault }
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: DoesNotExist
     ingress:
       internal:
         enabled: true

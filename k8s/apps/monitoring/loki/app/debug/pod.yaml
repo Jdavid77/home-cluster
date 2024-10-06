@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: debug
+  namespace: monitoring
+  labels:
+    name: debug
+spec:
+  containers:
+  - name: debug
+    image: busybox
+    command:
+      - sleep
+      - "3600"
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    volumeMounts:
+    - mountPath: /var/log
+      name: varlog
+  volumes:
+  - hostPath:
+      path: /var/log
+      type: ""
+    name: varlog
+
+

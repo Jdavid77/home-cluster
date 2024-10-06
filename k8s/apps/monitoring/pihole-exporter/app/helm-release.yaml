@@ -36,7 +36,7 @@ spec:
     controllers:
       pihole-exporter:
         containers:
-          app:
+          pihole-exporter:
             image:
               repository: ekofr/pihole-exporter
               tag: latest@sha256:dc2a9870071e08560228bd41a340213a699e9bb18df0312151ebdf5c176f26ce
@@ -53,13 +53,13 @@ spec:
               limits:
                 memory: 60M
     service:
-      app:
+      pihole-exporter:
         controller: pihole-exporter
         ports:
           http:
             port: *port
     serviceMonitor:
-      app:
+      pihole-exporter:
         serviceName: pihole-exporter
         endpoints:
           - port: http

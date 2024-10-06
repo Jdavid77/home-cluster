@@ -22,8 +22,14 @@ spec:
         include:
           - /var/log/pods/**/**/*.log
         exclude:
-          # Exclude logs from all containers named otel-collector
-          - /var/log/pods/**/otel-collector/*.log
+          - /var/log/pods/**/otc-container/*.log
+          - /var/log/pods/**/grafana-sc-datasources/*.log
+          - /var/log/pods/**/grafana-sc-dashboard/*.log
+          - /var/log/pods/**/download-dashboards/*.log
+          - /var/log/pods/**/init-db/*.log
+          - /var/log/pods/**/trim-filesystem/*.log
+          - /var/log/pods/**/config-reloader/*.log
+          - /var/log/pods/**/init-config-reloader/*.log
         include_file_path: true
         include_file_name: false
         operators:
