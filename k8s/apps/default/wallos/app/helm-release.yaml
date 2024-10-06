@@ -42,7 +42,7 @@ spec:
 
     service:
       wallos:
-        controller: *app
+        controller: wallos
         ports:
           http:
             port: 80
