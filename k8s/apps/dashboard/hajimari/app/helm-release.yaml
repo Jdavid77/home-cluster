@@ -29,7 +29,7 @@ spec:
       TZ: ${TIMEZONE}
     hajimari:
       title: Home Dashboard
-      name: "Mr"
+      name: "Mr.David"
       lightTheme: paper
       darkTheme: tron
       alwaysTargetBlank: true
