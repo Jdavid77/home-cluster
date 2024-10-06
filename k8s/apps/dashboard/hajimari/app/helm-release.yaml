@@ -36,6 +36,7 @@ spec:
       showGreeting: true
       showAppGroups: false
       showAppStatus: true
+      defaultAppIcon: mdi:application-brackets
       showBookmarkGroups: true
       showGlobalBookmarks: true
       showAppUrls: true
@@ -72,7 +73,7 @@ spec:
         - group: NAS
           apps:
             - name: OMV
-              url: 'http://nas.${SECRET_DOMAIN}'
+              url: 'http://omv.${SECRET_DOMAIN}'
               icon: 'simple-icons:openmediavault'
               info: OMV
     ingress:

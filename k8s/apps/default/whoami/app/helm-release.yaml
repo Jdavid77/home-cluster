@@ -61,6 +61,7 @@ spec:
         className: internal
         annotations:
           external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
+          hajimari.io/icon: simple-icons:traefikproxy
         hosts:
           - host: &hostName "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:

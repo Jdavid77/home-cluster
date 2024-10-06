@@ -61,6 +61,9 @@ spec:
       internal:
         enabled: true
         className: internal
+        annotations:
+          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
+          hajimari.io/icon: mid:list-status
         hosts:
           - host: &host "subs.${SECRET_DOMAIN}"
             paths:
