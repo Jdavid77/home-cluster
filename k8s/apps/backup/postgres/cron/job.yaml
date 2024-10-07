@@ -18,6 +18,8 @@ spec:
                 value: "postgres"
               - name: S3_PREFIX
                 value: "backup"
+              - name: S3_ENDPOINT
+                value: "http://minio.storage.svc.cluster.local:9000"
               - name: POSTGRES_BACKUP_ALL
                 value: "true"
               - name: POSTGRES_HOST
