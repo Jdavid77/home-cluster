@@ -26,6 +26,9 @@ spec:
                 value: "${NFS_SERVER}"
               - name: POSTGRES_EXTRA_OPTS
                 value: "--schema=public --blobs"
+            envFrom:
+              - secretRef:
+                  name: postgres-backup-secret
             imagePullPolicy: IfNotPresent
           restartPolicy: OnFailure
       backoffLimit: 3
