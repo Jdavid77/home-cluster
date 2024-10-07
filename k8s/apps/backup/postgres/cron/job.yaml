@@ -1,0 +1,33 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: postgresql-backup-cron-job
+spec:
+  schedule: "0 0 * * 0"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: postgresql-backup-job
+            image: ariaieboy/pg-backup-s3:latest@sha256:6292f7c5d95f36285306c3bbc8faaed3d95f03d14229e253f7dd62723a480ca9
+            env:
+              - name: S3_REGION
+                value: "weur"
+              - name: S3_BUCKET
+                value: "postgres"
+              - name: S3_PREFIX
+                value: "backup"
+              - name: POSTGRES_BACKUP_ALL
+                value: "true"
+              - name: POSTGRES_HOST
+                value: "${NFS_SERVER}"
+              - name: POSTGRES_EXTRA_OPTS
+                value: "--schema=public --blobs"
+            imagePullPolicy: Always
+            args:
+            - /bin/bash
+            - -c
+            - cd /home/root; ls; bash postgres-backup.sh;
+          restartPolicy: OnFailure
+      backoffLimit: 3

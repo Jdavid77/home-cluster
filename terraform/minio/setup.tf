@@ -2,7 +2,8 @@ locals {
   apps = [
     "longhorn",
     "loki",
-    "velero"
+    "velero",
+    "postgres"
   ]
 }
 
