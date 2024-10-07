@@ -26,10 +26,6 @@ spec:
                 value: "${NFS_SERVER}"
               - name: POSTGRES_EXTRA_OPTS
                 value: "--schema=public --blobs"
-            imagePullPolicy: Always
-            args:
-            - /bin/bash
-            - -c
-            - cd /home/root; ls; bash postgres-backup.sh;
+            imagePullPolicy: IfNotPresent
           restartPolicy: OnFailure
       backoffLimit: 3
