@@ -10,7 +10,7 @@ spec:
         spec:
           containers:
           - name: postgresql-backup-job
-            image: ariaieboy/pg-backup-s3:latest@sha256:a6617c61febfba588ed52310e08025ce8c9fe5c7d4b41d10559bbea6a6a4a0ed
+            image: ariaieboy/pg-backup-s3:latest@sha256:ddd87b1412ae4d5e50eb311c9f86c8ca41273f063c111cd2d2f3f955f4b1aaf0
             env:
               - name: S3_REGION
                 value: "weur"
