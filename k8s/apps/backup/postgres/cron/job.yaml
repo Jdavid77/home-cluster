@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: postgresql-backup-cron-job-test
+  name: postgresql-backup-cron-job
   namespace: backup
 spec:
   schedule: "0 0 * * 0"
