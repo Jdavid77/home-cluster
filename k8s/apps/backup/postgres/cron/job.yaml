@@ -25,6 +25,12 @@ spec:
       retries: 3
 
   values:
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+        runAsGroup: 1001
+        seccompProfile: { type: RuntimeDefault }
     controllers:
       pg-backup-s3:
         type: cronjob
@@ -42,7 +48,7 @@ spec:
           pg-backup-s3:
             image:
               repository: ghcr.io/jdavid77/pg-backup-s3
-              tag: ghcr.io/jdavid77/pg-backup-s3:main@sha256:5c5ca1cb26d239c768464c7e1649cc5b9ee97f2cdda6c0f3e5f10e514c36d7da
+              tag: main@sha256:27f829fde4e308ef26d2af62fc7afcb9ebcdc4381686d0359a965284b8e7c48e
             env:
               S3_REGION: "weur"
               S3_BUCKET: "postgres"
@@ -54,3 +60,7 @@ spec:
             envFrom:
               - secretRef:
                   name: postgres-backup-secret
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
