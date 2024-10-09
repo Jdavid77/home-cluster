@@ -1,7 +1,8 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: postgresql-backup-cron-job
+  name: postgresql-backup-cron-job-test
+  namespace: backup
 spec:
   schedule: "0 0 * * 0"
   jobTemplate:
@@ -10,7 +11,7 @@ spec:
         spec:
           containers:
           - name: postgresql-backup-job
-            image: ariaieboy/pg-backup-s3:latest@sha256:a6617c61febfba588ed52310e08025ce8c9fe5c7d4b41d10559bbea6a6a4a0ed
+            image: ghcr.io/jdavid77/pg-backup-s3:main@sha256:cddc7745bdea197ce78218b6493c019985bf3af8620f0c0e952c150fc8fb8413
             env:
               - name: S3_REGION
                 value: "weur"
