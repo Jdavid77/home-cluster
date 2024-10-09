@@ -49,7 +49,7 @@ spec:
           pg-backup-s3:
             image:
               repository: ghcr.io/jdavid77/pg-backup-s3
-              tag: main@sha256:27f829fde4e308ef26d2af62fc7afcb9ebcdc4381686d0359a965284b8e7c48e
+              tag: main@sha256:26d7ef1405f079dd6fbc737f857601c9bfba5020f473f9a14ba51968e9423ae0
             env:
               S3_REGION: "weur"
               S3_BUCKET: "postgres"
@@ -58,6 +58,7 @@ spec:
               POSTGRES_BACKUP_ALL: "true"
               POSTGRES_HOST: "${NFS_SERVER}"
               POSTGRES_EXTRA_OPTS: "--schema=public --blobs"
+              REMOVE_BEFORE: "15"
             envFrom:
               - secretRef:
                   name: postgres-backup-secret
