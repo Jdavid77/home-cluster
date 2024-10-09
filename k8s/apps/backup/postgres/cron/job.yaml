@@ -54,12 +54,3 @@ spec:
             envFrom:
               - secretRef:
                   name: postgres-backup-secret
-
-    service:
-      pg-backup-s3:
-        enabled: false
-
-    ingress:
-      internal:
-        enabled: false
-
