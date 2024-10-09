@@ -11,7 +11,7 @@ spec:
         spec:
           containers:
           - name: postgresql-backup-job
-            image: ghcr.io/jdavid77/pg-backup-s3:main@sha256:cddc7745bdea197ce78218b6493c019985bf3af8620f0c0e952c150fc8fb8413
+            image: ghcr.io/jdavid77/pg-backup-s3:main@sha256:5c5ca1cb26d239c768464c7e1649cc5b9ee97f2cdda6c0f3e5f10e514c36d7da
             env:
               - name: S3_REGION
                 value: "weur"
