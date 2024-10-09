@@ -1,35 +1,65 @@
-apiVersion: batch/v1
-kind: CronJob
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
 metadata:
-  name: postgresql-backup-cron-job
-  namespace: backup
+  name: pg-backup-s3
 spec:
-  schedule: "0 0 * * 0"
-  jobTemplate:
+  interval: 5m
+  chart:
     spec:
-      template:
-        spec:
-          containers:
-          - name: postgresql-backup-job
-            image: ghcr.io/jdavid77/pg-backup-s3:main@sha256:5c5ca1cb26d239c768464c7e1649cc5b9ee97f2cdda6c0f3e5f10e514c36d7da
+      chart: app-template
+      version: 3.5.0
+      interval: 30m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-charts
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+
+  values:
+    controllers:
+      pg-backup-s3:
+        type: cronjob
+        cronjob:
+          suspend: false
+          concurrencyPolicy: Forbid
+          timeZone: ${TIMEZONE}
+          schedule: "0 0 * * 0"
+          startingDeadlineSeconds: 30
+          successfulJobsHistory: 1
+          failedJobsHistory: 1
+          backoffLimit: 3
+          parallelism: 0
+        containers:
+          pg-backup-s3:
+            image:
+              repository: ghcr.io/jdavid77/pg-backup-s3
+              tag: ghcr.io/jdavid77/pg-backup-s3:main@sha256:5c5ca1cb26d239c768464c7e1649cc5b9ee97f2cdda6c0f3e5f10e514c36d7da
             env:
-              - name: S3_REGION
-                value: "weur"
-              - name: S3_BUCKET
-                value: "postgres"
-              - name: S3_PREFIX
-                value: "backup"
-              - name: S3_ENDPOINT
-                value: "http://minio.storage.svc.cluster.local:9000"
-              - name: POSTGRES_BACKUP_ALL
-                value: "true"
-              - name: POSTGRES_HOST
-                value: "${NFS_SERVER}"
-              - name: POSTGRES_EXTRA_OPTS
-                value: "--schema=public --blobs"
+              S3_REGION: "weur"
+              S3_BUCKET: "postgres"
+              S3_PREFIX: "backup"
+              S3_ENDPOINT: "http://minio.storage.svc.cluster.local:9000"
+              POSTGRES_BACKUP_ALL: "true"
+              POSTGRES_HOST: "${NFS_SERVER}"
+              POSTGRES_EXTRA_OPTS: "--schema=public --blobs"
             envFrom:
               - secretRef:
                   name: postgres-backup-secret
-            imagePullPolicy: IfNotPresent
-          restartPolicy: OnFailure
-      backoffLimit: 3
+
+    service:
+      pg-backup-s3:
+        enabled: false
+
+    ingress:
+      internal:
+        enabled: false
+
