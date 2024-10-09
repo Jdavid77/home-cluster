@@ -4,6 +4,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: pg-backup-s3
+  namespace: backup
 spec:
   interval: 5m
   chart:
@@ -60,7 +61,3 @@ spec:
             envFrom:
               - secretRef:
                   name: postgres-backup-secret
-            securityContext:
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: false
-              capabilities: { drop: ["ALL"] }
