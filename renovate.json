@@ -15,7 +15,8 @@
   "reviewersFromCodeOwners": true,
   "ignorePaths": [
     "**/*.sops.*",
-    "terraform/**"
+    "terraform/**",
+    "k8s/archive/**"
   ],
   "kubernetes": {
     "fileMatch": ["k8s/.+\\.yaml$"]
