@@ -7,7 +7,7 @@ metadata:
   namespace: flux-system
 spec:
   targetNamespace: media
-  path: ./k8s/apps/books/calibre/app
+  path: ./k8s/apps/media/calibre/app
   dependsOn:
     - name: books-pvs
   prune: true

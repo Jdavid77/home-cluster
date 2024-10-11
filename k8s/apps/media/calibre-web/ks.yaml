@@ -7,7 +7,7 @@ metadata:
   namespace: flux-system
 spec:
   targetNamespace: media
-  path: ./k8s/apps/books/calibre-web/app
+  path: ./k8s/apps/media/calibre-web/app
   dependsOn:
     - name: external-secrets-store
     - name: books-pvs
