@@ -6,7 +6,7 @@ metadata:
   name: books-nfs
   namespace: flux-system
 spec:
-  targetNamespace: books
+  targetNamespace: media
   path: ./k8s/apps/books/_pvs/nfs
   dependsOn:
     - name: csi-driver-nfs-storageclass
@@ -26,7 +26,7 @@ metadata:
   name: books-pvs
   namespace: flux-system
 spec:
-  targetNamespace: books
+  targetNamespace: media
   path: ./k8s/apps/books/_pvs/longhorn
   dependsOn:
     - name: longhorn

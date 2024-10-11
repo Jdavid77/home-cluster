@@ -3,13 +3,15 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: calibre
+  name: calibre-web
   namespace: flux-system
 spec:
-  targetNamespace: books
-  path: ./k8s/apps/books/calibre/app
+  targetNamespace: media
+  path: ./k8s/apps/books/calibre-web/app
   dependsOn:
+    - name: external-secrets-store
     - name: books-pvs
+    - name: books-nfs
   prune: true
   sourceRef:
     kind: GitRepository
