@@ -9,9 +9,8 @@ spec:
   targetNamespace: media
   path: ./k8s/apps/media/calibre-web/app
   dependsOn:
-    - name: external-secrets-store
-    - name: books-pvs
-    - name: books-nfs
+    - name: media-pvs
+    - name: media-nfs
   prune: true
   sourceRef:
     kind: GitRepository
