@@ -5,4 +5,5 @@ resources:
   - ./namespace.yaml
   - ./calibre-web/ks.yaml
   - ./calibre/ks.yaml
+  - ./qbittorrent/ks.yaml
   - ./_pvs/ks.yaml

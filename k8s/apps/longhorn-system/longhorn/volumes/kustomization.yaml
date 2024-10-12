@@ -6,3 +6,4 @@ resources:
   - calibre.yaml
   - crowdsec.yaml
   - wallos.yaml
+  - qbittorrent.yaml

@@ -1,0 +1,35 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: downloads-nfs-share-pv
+spec:
+  capacity:
+    storage: 1Mi
+  storageClassName: nfs
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: ${NFS_SERVER}
+    path: /downloads
+  mountOptions:
+    - nfsvers=4.1
+    - hard
+    - noatime
+    - nodiratime
+    - rsize=1048576
+    - wsize=1048576
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: downloads-nfs-share-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: nfs
+  resources:
+    requests:
+      storage: 1Mi
+  volumeName: downloads-nfs-share-pv
