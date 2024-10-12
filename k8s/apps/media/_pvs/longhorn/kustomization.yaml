@@ -5,4 +5,4 @@ namespace: media
 resources:
   - ./calibre-web.yaml
   - ./calibre.yaml
-  - ./qbittorrentyaml
+  - ./qbittorrent.yaml
