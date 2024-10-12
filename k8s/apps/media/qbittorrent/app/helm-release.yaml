@@ -99,12 +99,16 @@ spec:
           hajimari.io/icon: simple-icons:qbittorrent
           external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
         hosts:
-          - host: "qb.${SECRET_DOMAIN}"
+          - host: &host "qb.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
                   identifier: app
                   port: http
+        tls:
+          - hosts:
+              - *host
+            secretName: ${SECRET_DOMAIN}-tls
     persistence:
       config:
         existingClaim: qbittorrent
