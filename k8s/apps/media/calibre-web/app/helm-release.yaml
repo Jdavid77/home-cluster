@@ -70,10 +70,11 @@ spec:
                   periodSeconds: 5
             resources:
               requests:
-                cpu: 5m
-                memory: 470M
+                cpu: 15m
+                memory: 249M
               limits:
-                memory: 470M
+                cpu: 15m
+                memory: 300M
 
     service:
       calibre-web:

@@ -73,10 +73,11 @@ spec:
             envFrom: *envFrom
             resources:
               requests:
-                cpu: 25m
-                memory: 1812M
+                cpu: 15m
+                memory: 1239M
               limits:
-                memory: 1812M
+                cpu: 15m
+                memory: 1500M
     service:
       paperless:
         controller: *app
