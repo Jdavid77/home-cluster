@@ -73,8 +73,8 @@ spec:
                 cpu: 15m
                 memory: 249M
               limits:
-                cpu: 15m
-                memory: 300M
+                cpu: 25m
+                memory: 400M
 
     service:
       calibre-web:
