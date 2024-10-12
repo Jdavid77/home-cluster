@@ -107,6 +107,5 @@ spec:
         existingClaim: downloads-nfs-share-pvc
         globalMounts:
           - path: /downloads
-            subPath: torrents
 
         
