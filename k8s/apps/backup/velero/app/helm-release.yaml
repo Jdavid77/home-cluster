@@ -56,7 +56,7 @@ spec:
         template:
           ttl: "338h"
           includedNamespaces:
-          - books
+          - media
           - automation
           - security
     initContainers:
