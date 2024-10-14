@@ -101,3 +101,7 @@ spec:
         existingClaim: books-nfs-share-pvc
         globalMounts:
           - path: /data/ebooks
+      downloads:
+        existingClaim: downloads-nfs-share-pvc
+        globalMounts:
+          - path: /downloads
