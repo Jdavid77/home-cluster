@@ -6,4 +6,3 @@ resources:
   - ./calibre-web.yaml
   - ./calibre.yaml
   - ./qbittorrent.yaml
-  - ./readarr.yaml
