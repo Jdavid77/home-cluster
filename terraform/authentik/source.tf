@@ -1,4 +1,4 @@
-data "authentik_property_mapping_source_ldap" "user_property" {
+data "authentik_property_mapping_source_ldap" "this" {
   managed_list = [
     "goauthentik.io/sources/ldap/default-name",
     "goauthentik.io/sources/ldap/default-mail",
@@ -9,14 +9,14 @@ data "authentik_property_mapping_source_ldap" "user_property" {
   ]
 }
 
-data "authentik_property_mapping_source_ldap" "group_property" {
+data "authentik_property_mapping_source_ldap" "group" {
   managed_list = [
     "goauthentik.io/sources/ldap/openldap-cn",
   ]
 }
 
 
-resource "authentik_source_ldap" "lldap" {
+resource "authentik_source_ldap" "this" {
   name = "lldap"
   slug = "lldap"
 
@@ -25,8 +25,8 @@ resource "authentik_source_ldap" "lldap" {
   bind_password           = var.bind_password
   base_dn                 = "dc=jnobrega,dc=com"
   user_path_template      = "LDAP/users"
-  property_mappings       = data.authentik_property_mapping_source_ldap.user_property.ids
-  property_mappings_group = data.authentik_property_mapping_source_ldap.group_property.ids
+  property_mappings       = data.authentik_property_mapping_source_ldap.this.ids
+  property_mappings_group = data.authentik_property_mapping_source_ldap.group.ids
   additional_user_dn      = "ou=people"
   additional_group_dn     = "ou=groups"
   user_object_filter      = "(objectClass=person)"
@@ -35,5 +35,5 @@ resource "authentik_source_ldap" "lldap" {
   object_uniqueness_field = "uid"
   start_tls               = false
 
-  depends_on = [data.authentik_property_mapping_source_ldap.user_property, data.authentik_property_mapping_source_ldap.group_property]
+  depends_on = [data.authentik_property_mapping_source_ldap.this, data.authentik_property_mapping_source_ldap.group]
 }

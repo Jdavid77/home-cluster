@@ -1,9 +1,9 @@
 output "client_id" {
   sensitive = true
-  value     = random_id.random_client_id.dec
+  value     = random_id.this.dec
 }
 
 output "client_secret" {
   sensitive = true
-  value     = random_password.random_client_secret.result
+  value     = random_password.this.result
 }

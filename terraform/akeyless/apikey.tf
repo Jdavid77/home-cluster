@@ -1,3 +1,3 @@
-resource "akeyless_auth_method_api_key" "flux_key" {
+resource "akeyless_auth_method_api_key" "this" {
   name = "Flux-Key"
 }

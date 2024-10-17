@@ -1,4 +1,4 @@
-resource "akeyless_role" "read_only" {
+resource "akeyless_role" "this" {
 
   name = "ReadOnly"
 
