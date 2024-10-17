@@ -1,0 +1,16 @@
+apiVersion: longhorn.io/v1beta2
+kind: Volume
+metadata:
+  name: audiobookshelf
+  namespace: longhorn-system
+spec:
+  Standby: false
+  backupCompressionMethod: lz4
+  dataEngine: v1
+  dataLocality: best-effort
+  disableFrontend: false
+  frontend: blockdev
+  nodeSelector:
+  - storage
+  numberOfReplicas: 2
+  size: "536870912"

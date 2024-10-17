@@ -2,6 +2,4 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - ./books-nfs.yaml
-  - ./downloads-nfs.yaml
-  - ./audiobooks-nfs.yaml
+  - helm-release.yaml
