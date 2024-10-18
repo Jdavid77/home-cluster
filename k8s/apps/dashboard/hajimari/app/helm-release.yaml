@@ -45,7 +45,7 @@ spec:
         matchNames:
           - tools
           - security
-          - books
+          - media
           - documents
           - flux-system
           - storage
