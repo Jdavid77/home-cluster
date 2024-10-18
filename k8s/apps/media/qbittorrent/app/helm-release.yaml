@@ -160,6 +160,6 @@ spec:
         advancedMounts:
           qbittorrent:
             app:
-              - path: /downloads
+              - path: /torrents
 
         
