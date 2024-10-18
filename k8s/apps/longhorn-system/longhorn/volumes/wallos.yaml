@@ -14,7 +14,7 @@ spec:
   freezeFilesystemForSnapshot: ignored
   fromBackup: ""
   frontend: blockdev
-  image: longhornio/longhorn-engine:v1.7.1
+  image: longhornio/longhorn-engine:v1.7.2
   migratable: false
   nodeSelector:
   - storage
