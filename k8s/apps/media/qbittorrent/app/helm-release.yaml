@@ -29,6 +29,12 @@ spec:
           nfsMount: "true"
         annotations:
           reloader.stakater.com/auto: "true"
+        pod:
+          securityContext:
+            runAsUser: 1002
+            runAsGroup: 100
+            fsGroup: 100
+            fsGroupChangePolicy: "OnRootMismatch"
         containers:
           app:
             image:
@@ -147,7 +153,9 @@ spec:
         existingClaim: qbittorrent
       downloads:
         existingClaim: downloads-nfs-share-pvc
-        globalMounts:
-          - path: /downloads
+        advancedMounts:
+          qbittorrent:
+            app:
+              - path: /downloads
 
         
