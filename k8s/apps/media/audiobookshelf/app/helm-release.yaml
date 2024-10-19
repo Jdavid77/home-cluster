@@ -80,4 +80,3 @@ spec:
         existingClaim: downloads-nfs-share-pvc
         globalMounts:
           - path: /audiobooks
-            subPath: Audiobooks
