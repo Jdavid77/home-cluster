@@ -59,6 +59,7 @@ spec:
           - media
           - automation
           - security
+          - default
     initContainers:
       - name: velero-plugin-for-aws
         image: velero/velero-plugin-for-aws:v1.10.1
