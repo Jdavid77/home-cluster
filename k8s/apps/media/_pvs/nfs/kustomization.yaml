@@ -4,4 +4,3 @@ kind: Kustomization
 resources:
   - ./books-nfs.yaml
   - ./downloads-nfs.yaml
-  - ./audiobooks-nfs.yaml
