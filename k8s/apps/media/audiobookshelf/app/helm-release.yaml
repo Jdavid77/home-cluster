@@ -77,7 +77,7 @@ spec:
       config:
         existingClaim: audiobookshelf
       media:
-        existingClaim: audiobooks-nfs-share-pvc
+        existingClaim: downloads-nfs-share-pvc
         globalMounts:
           - path: /audiobooks
             subPath: Audiobooks
