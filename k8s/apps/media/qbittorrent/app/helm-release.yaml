@@ -128,6 +128,8 @@ spec:
         type: LoadBalancer
         annotations:
           io.cilium/lb-ipam-ips: "${LB_QBITTORRENT_IP}"
+        labels:
+          cilium.l2.announce: "true"
         ports:
           bittorrent:
             enabled: true

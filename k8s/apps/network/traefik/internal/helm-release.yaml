@@ -37,6 +37,8 @@ spec:
       annotations:
         io.cilium/lb-ipam-ips: ${LB_INTERNAL_IP}
         external-dns.alpha.kubernetes.io/hostname: "internal.${SECRET_DOMAIN}"
+      labels:
+        cilium.l2.announce: "true"
       externalTrafficPolicy: Cluster
       ipFamilies:
         - "IPv4"

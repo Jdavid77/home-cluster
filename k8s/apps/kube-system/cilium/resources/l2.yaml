@@ -8,4 +8,4 @@ spec:
   loadBalancerIPs: true
   serviceSelector:
     matchLabels:
-      app.kubernetes.io/instance: traefik-internal-network
+      cilium.l2.announce: "true"
