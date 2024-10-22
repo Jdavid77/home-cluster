@@ -76,7 +76,6 @@ spec:
               VPN_TYPE: openvpn
               FIREWALL_INPUT_PORTS: *port
               FIREWALL_OUTBOUND_SUBNETS: 10.244.0.0/16,10.96.0.0/12
-              SERVER_COUNTRIES: Netherlands
               UPDATER_PERIOD: 24h
             envFrom:
               - secretRef:
