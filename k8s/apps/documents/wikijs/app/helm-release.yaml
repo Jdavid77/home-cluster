@@ -67,10 +67,10 @@ spec:
                   name: wiki-js-secret
             resources:
               requests:
-                cpu: 15m
+                cpu: 100m
                 memory: 164M
               limits:
-                cpu: 15m
+                cpu: 250m
                 memory: 200M
     service:
       wiki:
