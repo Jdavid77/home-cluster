@@ -3,7 +3,6 @@ kind: Kustomization
 resources:
   - calibre-web.yaml
   - n8n.yaml
-  - calibre.yaml
   - crowdsec.yaml
   - wallos.yaml
   - qbittorrent.yaml
