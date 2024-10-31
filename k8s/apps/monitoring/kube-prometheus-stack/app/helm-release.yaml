@@ -89,24 +89,20 @@ spec:
                   operator: DoesNotExist
 
     kubelet:
-      enabled: true
+      enabled: false
 
     kubeApiServer:
-      enabled: true
+      enabled: false
 
     kubeControllerManager:
-      enabled: true
-      endpoints: &cp
-        - 192.168.1.83
+      enabled: false
 
     kubeEtcd:
-      enabled: true
-      endpoints: *cp
+      enabled: false
 
     kubeScheduler:
-      enabled: true
-      endpoints: *cp
-
+      enabled: false
+      
     kubeProxy:
       enabled: false
 
