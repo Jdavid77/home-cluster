@@ -49,16 +49,10 @@ spec:
               SYSTEM_DEFAULTLOCALE: "en-GB"
               SECURITY_ENABLE_LOGIN: true
             probes:
-              liveness: &probe
-                enabled: true
-                type: HTTP
-                path: /api/v1/info/status
-              readiness: *probe
-              startup:
-                <<: *probe
-                spec:
-                  failureThreshold: 90
-                  periodSeconds: 5
+              liveness: &probes
+                enabled: false
+              readiness: *probes
+              startup: *probes
             securityContext:
               readOnlyRootFilesystem: true
             resources:
