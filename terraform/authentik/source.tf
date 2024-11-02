@@ -35,5 +35,4 @@ resource "authentik_source_ldap" "this" {
   object_uniqueness_field = "uid"
   start_tls               = false
 
-  depends_on = [data.authentik_property_mapping_source_ldap.this, data.authentik_property_mapping_source_ldap.group]
 }
