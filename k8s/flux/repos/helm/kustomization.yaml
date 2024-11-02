@@ -36,3 +36,4 @@ resources:
   - tailscale-charts.yaml
   - vmware-tanzu-charts.yaml
   - fairwind-charts.yaml
+  - kubernetes-dashboards-charts.yaml
