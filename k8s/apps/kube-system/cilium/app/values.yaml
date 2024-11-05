@@ -1,4 +1,3 @@
----
 cgroup:
   automount:
     enabled: false
@@ -8,12 +7,45 @@ cluster:
   name: main
 hubble:
   enabled: true
+  metrics:
+    enabled:
+    - dns:query
+    - drop
+    - tcp
+    - flow
+    - port-distribution
+    - icmp
+    - http
+    serviceMonitor:
+      enabled: true
+  relay:
+    enabled: true
+  ui:
+    enabled: true
+    ingress:
+      annotations:
+        external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
+      enabled: true
+      hosts:
+      - hubble.${SECRET_DOMAIN}
+      tls:
+      - hosts:
+        - hubble.${SECRET_DOMAIN}
+        secretName: ${SECRET_DOMAIN}-tls
+routingMode: "native"
+ipv4NativeRoutingCIDR: 10.244.0.0/16
 ipam:
   mode: kubernetes
+devices: eth0
+autoDirectNodeRoutes: true
+endpointRoutes:
+  enabled: true
 k8sServiceHost: 127.0.0.1
 k8sServicePort: 7445
 kubeProxyReplacement: true
 l2announcements:
+  enabled: true
+externalIPs:
   enabled: true
 securityContext:
   capabilities:
@@ -33,3 +65,4 @@ securityContext:
       - NET_ADMIN
       - SYS_ADMIN
       - SYS_RESOURCE
+    
