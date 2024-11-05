@@ -23,8 +23,8 @@ hubble:
     enabled: true
   ui:
     enabled: true
-    className: internal
     ingress:
+      className: internal
       annotations:
         external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
       enabled: true
