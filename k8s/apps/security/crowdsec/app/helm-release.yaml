@@ -31,6 +31,9 @@ spec:
         reflector:
           namespaces: ["network"]
     agent:
+      tolerations:
+        - key: node-role.kubernetes.io/control-plane
+          effect: NoSchedule
       # Specify each pod whose logs you want to process
       acquisition:
         # The namespace where the pod is located
