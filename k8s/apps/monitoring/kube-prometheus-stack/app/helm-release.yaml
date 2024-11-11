@@ -16,19 +16,17 @@ spec:
         name: prometheus-community-charts
         namespace: flux-system
   install:
-    crds: CreateReplace
     remediation:
       retries: 3
   upgrade:
     cleanupOnFail: true
-    crds: CreateReplace
     remediation:
       strategy: rollback
       retries: 3
   values:
 
     crds:
-      enabled: true
+      enabled: false
 
     cleanPrometheusOperatorObjectNames: true
 

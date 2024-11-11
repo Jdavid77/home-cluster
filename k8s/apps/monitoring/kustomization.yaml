@@ -10,3 +10,4 @@ resources:
   - ./pihole-exporter/ks.yaml
   - ./loki/ks.yaml
   - ./opentelemetry/ks.yaml
+  - ./prometheus-operator-crds/ks.yaml
