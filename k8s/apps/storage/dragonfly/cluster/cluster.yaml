@@ -21,13 +21,6 @@ spec:
         resourceFieldRef:
           resource: limits.memory
           divisor: 1Mi
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-        - matchExpressions:
-          - key: node-role.kubernetes.io/control-plane
-            operator: DoesNotExist
   args:
     - "--maxmemory=$(MAX_MEMORY)Mi"
     - "--proactor_threads=2"

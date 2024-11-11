@@ -28,13 +28,6 @@ spec:
           deletionPolicy: Delete
           parameters:
             type: bak
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: node-role.kubernetes.io/control-plane
-                operator: DoesNotExist
     resources:
       requests:
         cpu: 15m

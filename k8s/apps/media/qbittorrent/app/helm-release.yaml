@@ -86,13 +86,6 @@ spec:
               allowPrivilegeEscalation: false
     defaultPodOptions:
       terminationGracePeriodSeconds: 120
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: node-role.kubernetes.io/control-plane
-                operator: DoesNotExist
     service:
       app:
         controller: *app

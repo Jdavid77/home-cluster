@@ -28,10 +28,3 @@ spec:
     configuration:
       logging:
         minimumLevel: Debug
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: node-role.kubernetes.io/control-plane
-              operator: DoesNotExist

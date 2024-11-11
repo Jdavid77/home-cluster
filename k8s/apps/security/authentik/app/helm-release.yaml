@@ -25,12 +25,6 @@ spec:
       retries: 3
   values:
     global:
-      affinity:
-        nodeAffinity:
-          type: hard
-          matchExpressions:
-            - key: node-role.kubernetes.io/control-plane
-              operator: DoesNotExist
       podAnnotations:
         secret.reloader.stakater.com/reload: &secret authentik-secret
       deploymentStrategy:

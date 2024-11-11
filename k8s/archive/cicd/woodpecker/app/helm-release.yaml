@@ -51,14 +51,6 @@ spec:
         runAsNonRoot: true
         runAsUser: 1000
 
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: node-role.kubernetes.io/control-plane
-                operator: DoesNotExist
-
 
     server:
       # -- Enable the server component
@@ -117,11 +109,3 @@ spec:
           - hosts:
             - *hostname
 
-      # -- Add affinity
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: node-role.kubernetes.io/control-plane
-                operator: DoesNotExist

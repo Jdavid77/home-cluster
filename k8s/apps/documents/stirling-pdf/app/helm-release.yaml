@@ -23,14 +23,6 @@ spec:
       retries: 3
   interval: 30m
   values:
-    defaultPodOptions:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: node-role.kubernetes.io/control-plane
-                operator: DoesNotExist
     controllers:
       stirling:
         labels:
