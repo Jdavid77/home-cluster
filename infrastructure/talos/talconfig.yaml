@@ -2,8 +2,8 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/budimanjojo/talhelper/master/pkg/config/schemas/talconfig.json
 clusterName: home-cluster
 endpoint: https://192.168.1.83:6443
-talosVersion: v1.7.4
-kubernetesVersion: v1.30.2
+talosVersion: v1.8.2
+kubernetesVersion: v1.31.2
 additionalMachineCertSans:
   - 192.168.1.83
 additionalApiServerCertSans:
@@ -34,9 +34,33 @@ controlPlane:
     # Cluster configuration
     - &proxyPatch |-
       cluster:
-        allowSchedulingOnMasters: true
+        allowSchedulingOnMasters: false
         proxy:
           disabled: true
+
+    # Configure NFS mount options
+    - &nfsPatch |-
+      machine:
+        files:
+          - op: overwrite
+            path: /etc/nfsmount.conf
+            permissions: 0o644
+            content: |
+              [ NFSMount_Global_Options ]
+              nfsvers=4.2
+              hard=True
+              noatime=True
+              nodiratime=True
+              rsize=131072
+              wsize=131072
+              nconnect=8
+
+    # ETCD configuration
+    - |-
+      cluster:
+        etcd:
+          extraArgs:
+            listen-metrics-urls: http://0.0.0.0:2381
 
     - |-
       machine:
@@ -61,6 +85,7 @@ worker:
     - *domainPatch
     - *kubePrismPatch
     - *proxyPatch
+    - *nfsPatch
     - |-
       machine:
         kubelet:
@@ -79,8 +104,7 @@ nodes:
     controlPlane: true
     installDisk: /dev/mmcblk0
     nameservers:
-      - "8.8.8.8"
-      - "1.1.1.1"
+      - "192.168.1.87"
     networkInterfaces:
       - deviceSelector:
           hardwareAddr: "00:e0:4c:2f:69:52"
@@ -93,13 +117,12 @@ nodes:
   - hostname: hp-worker3
     ipAddress: 192.168.1.86
     nameservers:
-      - "8.8.8.8"
-      - "1.1.1.1"
+      - "192.168.1.87"
     installDisk: /dev/sdb
     controlPlane: false
     networkInterfaces:
       - deviceSelector:
-          hardwareAddr: "10:60:4b:73:34:97"
+          hardwareAddr: "74:46:a0:90:26:0f"
         dhcp: true
         mtu: 1500
     machineSpec:
@@ -109,8 +132,7 @@ nodes:
   - hostname: hp-worker2
     ipAddress: 192.168.1.85
     nameservers:
-      - "8.8.8.8"
-      - "1.1.1.1"
+      - "192.168.1.87"
     installDisk: /dev/sda
     controlPlane: false
     networkInterfaces:

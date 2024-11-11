@@ -18,7 +18,7 @@ releases:
     chart: cilium/cilium
     version: 1.16.3
     values:
-      - ../../../k8s/apps/network/cilium/app/values.yaml
+      - ../../../k8s/apps/kube-system/cilium/app/values.yaml
 
   - name: kubelet-csr-approver
     namespace: kube-system
