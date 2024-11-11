@@ -81,10 +81,3 @@ spec:
       capabilities:
         drop: ["ALL"]
       readOnlyRootFilesystem: true
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: node-role.kubernetes.io/control-plane
-              operator: DoesNotExist
