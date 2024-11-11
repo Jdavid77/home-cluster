@@ -44,7 +44,6 @@ metadata:
   namespace: flux-system
 spec:
   targetNamespace: flux-system
-  path: ./k8s/apps/backup/velero/crds
   prune: true
   sourceRef:
     kind: GitRepository
