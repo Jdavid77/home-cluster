@@ -42,7 +42,7 @@ spec:
       backupstorePollInterval: 0
       createDefaultDiskLabeledNodes: true
       restoreVolumeRecurringJobs: true
-      storageMinimalAvailablePercentage: 25
+      storageMinimalAvailablePercentage: 20
       guaranteedEngineManagerCPU: 20
       guaranteedReplicaManagerCPU: 20
       orphanAutoDeletion: true
