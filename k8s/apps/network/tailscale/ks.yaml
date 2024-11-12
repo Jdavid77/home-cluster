@@ -10,6 +10,7 @@ spec:
   path: ./k8s/apps/network/tailscale/operator
   dependsOn:
     - name: external-secrets-store
+    - name: tailscale-device
   prune: true
   sourceRef:
     kind: GitRepository
@@ -30,6 +31,24 @@ spec:
   path: ./k8s/apps/network/tailscale/connectors
   dependsOn:
     - name: tailscale-operator
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-cluster
+  wait: true
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: tailscale-device
+  namespace: flux-system
+spec:
+  targetNamespace: network
+  path: ./k8s/apps/network/tailscale/device
   prune: true
   sourceRef:
     kind: GitRepository
