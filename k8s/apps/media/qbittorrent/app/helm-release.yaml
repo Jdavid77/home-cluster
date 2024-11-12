@@ -78,6 +78,9 @@ spec:
               FIREWALL_INPUT_PORTS: *port
               FIREWALL_OUTBOUND_SUBNETS: 10.244.0.0/16,10.96.0.0/12
               UPDATER_PERIOD: 24h
+            resources:
+              limits:
+                squat.ai/tun: "1"
             envFrom:
               - secretRef:
                   name: vpn-secret
