@@ -5,6 +5,7 @@ metadata:
   name: dns-cidrs
 spec:
   hostname: dns-cidrs
+  proxyClass: kernel-org-tun
   subnetRouter:
     advertiseRoutes:
       - ${LB_INTERNAL_IP}/32
