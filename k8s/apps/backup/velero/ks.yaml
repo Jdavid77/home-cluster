@@ -29,7 +29,7 @@ spec:
   url: https://github.com/vmware-tanzu/helm-charts
   ref:
     # renovate: datasource=github-releases depName=vmware-tanzu/helm-charts
-    tag: "velero-7.2.2"
+    tag: "velero-8.0.0"
   ignore: |
     # exclude all
     /*
