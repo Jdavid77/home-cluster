@@ -37,3 +37,4 @@ resources:
   - vmware-tanzu-charts.yaml
   - fairwind-charts.yaml
   - kubernetes-dashboard-charts.yaml
+  - emqx-charts.yaml
