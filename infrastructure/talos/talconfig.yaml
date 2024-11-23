@@ -6,6 +6,8 @@ talosVersion: v1.8.2
 kubernetesVersion: v1.31.2
 additionalMachineCertSans:
   - 192.168.1.83
+  - 192.168.1.90
+  - 192.168.1.89
 additionalApiServerCertSans:
   - home-cluster.local
   - "127.0.0.1" # KubePrism
@@ -108,6 +110,36 @@ nodes:
     networkInterfaces:
       - deviceSelector:
           hardwareAddr: "00:e0:4c:2f:69:52"
+        dhcp: true
+        mtu: 1500
+    machineSpec:
+      mode: metal
+      arch: amd64
+
+  - hostname: soyo1-master
+    ipAddress: 192.168.1.90
+    controlPlane: true
+    installDisk: /dev/mmcblk0
+    nameservers:
+      - "192.168.1.87"
+    networkInterfaces:
+      - deviceSelector:
+          hardwareAddr: "e0:51:d8:14:4b:b8"
+        dhcp: true
+        mtu: 1500
+    machineSpec:
+      mode: metal
+      arch: amd64
+
+  - hostname: soyo2-master
+    ipAddress: 192.168.1.89
+    controlPlane: true
+    installDisk: /dev/mmcblk0
+    nameservers:
+      - "192.168.1.87"
+    networkInterfaces:
+      - deviceSelector:
+          hardwareAddr: "e0:51:d8:14:46:a2"
         dhcp: true
         mtu: 1500
     machineSpec:
