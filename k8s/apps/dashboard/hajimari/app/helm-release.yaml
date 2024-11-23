@@ -63,7 +63,7 @@ spec:
               icon: ''
               url: https://kubesearch.dev/
               targetBlank: false
-      customApps: 
+      customApps:
         - group: DNS
           apps:
             - name: Pihole

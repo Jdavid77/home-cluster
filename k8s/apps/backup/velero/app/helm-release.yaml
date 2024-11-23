@@ -84,7 +84,7 @@ spec:
     metrics:
       prometheusRule:
         enabled: true
-        spec: 
+        spec:
           - alert: VeleroBackupPartialFailures
             annotations:
               message: Velero backup {{ $labels.schedule }} has {{ $value | humanizePercentage }} partialy failed backups.

@@ -10,5 +10,3 @@ metadata:
     pod-security.kubernetes.io/warn: privileged
     pod-security.kubernetes.io/warn-version: latest
     goldilocks.fairwinds.com/enabled: "true"
-
-    

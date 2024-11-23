@@ -26,7 +26,7 @@ spec:
   values:
     app:
       image:
-        pullPolicy: IfNotPresent     
+        pullPolicy: IfNotPresent
       ingress:
         enabled: true
         ingressClassName: internal

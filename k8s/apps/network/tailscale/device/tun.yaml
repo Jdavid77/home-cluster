@@ -30,7 +30,7 @@ spec:
           groups:
             - count: 1000
               paths:
-                - path: /dev/net/tun          
+                - path: /dev/net/tun
         name: generic-device-plugin
         resources:
           requests:
