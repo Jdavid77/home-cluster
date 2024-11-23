@@ -1,0 +1,78 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: emqx
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: emqx
+      version: 5.8.2
+      sourceRef:
+        kind: HelmRepository
+        name: emqx-charts
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  values:
+    image:
+      repository: public.ecr.aws/emqx/emqx
+    replicaCount: 2
+    recreatePods: true
+    emqxConfig:
+      EMQX_ALLOW_ANONYMOUS: "false"
+      EMQX_AUTH__MNESIA__PASSWORD_HASH: plain
+      EMQX_DASHBOARD__DEFAULT_USERNAME: admin
+    service:
+      type: LoadBalancer
+      loadBalancerIP: ${EMQX_LB_IP}
+      externalTrafficPolicy: Local
+    ingress:
+      dashboard:
+        enabled: true
+        ingressClassName: internal
+        annotations:
+          hajimari.io/appName: "EMQX"
+          hajimari.io/icon: simple-icons:eclipsemosquitto
+          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
+        path: /
+        pathType: Prefix
+        hosts:
+          - &host "emqx.${SECRET_DOMAIN}"
+        tls:
+          - hosts:
+              - *host
+            secretName: ${SECRET_DOMAIN}-tls
+    metrics:
+      enabled: true
+    persistence:
+      enabled: true
+      existingClaim: emqx
+    resources:
+      requests:
+        cpu: 100m
+        memory: 150Mi
+      limits:
+        memory: 512Mi
+  valuesFrom:
+    - targetPath: emqxConfig.EMQX_DASHBOARD__DEFAULT_PASSWORD
+      kind: Secret
+      name: emqx-secret
+      valuesKey: admin_password
+    - targetPath: emqxConfig.EMQX_AUTH__USER__1__USERNAME
+      kind: Secret
+      name: emqx-secret
+      valuesKey: user_1_username
+    - targetPath: emqxConfig.EMQX_AUTH__USER__1__PASSWORD
+      kind: Secret
+      name: emqx-secret
+      valuesKey: user_1_password

@@ -7,3 +7,4 @@ resources:
   - wallos.yaml
   - qbittorrent.yaml
   - audiobookshelf.yaml
+  - emqx.yaml
