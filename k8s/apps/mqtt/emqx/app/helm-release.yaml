@@ -31,7 +31,6 @@ spec:
     emqxConfig:
       EMQX_ALLOW_ANONYMOUS: "false"
       EMQX_AUTH__MNESIA__PASSWORD_HASH: plain
-      EMQX_DASHBOARD__DEFAULT_USERNAME: admin
     service:
       type: LoadBalancer
       loadBalancerIP: ${EMQX_LB_IP}
