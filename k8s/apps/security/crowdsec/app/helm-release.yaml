@@ -73,6 +73,10 @@ spec:
           enabled: true
 
     lapi:
+      
+      tolerations:
+        - key: node-role.kubernetes.io/control-plane
+          effect: NoSchedule
 
       env:
         - name: TZ
