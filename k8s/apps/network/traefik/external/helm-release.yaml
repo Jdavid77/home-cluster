@@ -176,6 +176,14 @@ spec:
         mountPath: /captcha/
         type: configMap
 
+    topologySpreadConstraints: 
+      - labelSelector:
+          matchLabels:
+            app.kubernetes.io/instance: traefik-network
+        maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: DoNotSchedule
+
     resources:
       requests:
         cpu: 15m
