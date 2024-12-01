@@ -59,6 +59,14 @@ spec:
         - name: LEVEL_INFO
           value: "true"
 
+      resources:
+        limits:
+          memory: 250Mi
+          cpu: 500m
+        requests:
+          cpu: 200m
+          memory: 100Mi
+
       metrics:
         enabled: true
         serviceMonitor:
