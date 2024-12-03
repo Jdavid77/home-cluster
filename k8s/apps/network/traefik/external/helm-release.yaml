@@ -26,8 +26,10 @@ spec:
       retries: 3
   values:
     deployment:
-      kind: Deployment
-      replicas: 2
+      kind: DaemonSet
+    podDisruptionBudget:
+      enabled: true
+      minAvailable: 1
     podSecurityPolicy:
       enabled: false
     service:
@@ -175,14 +177,6 @@ spec:
       - name: captcha-html-page
         mountPath: /captcha/
         type: configMap
-
-    topologySpreadConstraints: 
-      - labelSelector:
-          matchLabels:
-            app.kubernetes.io/instance: traefik-network
-        maxSkew: 1
-        topologyKey: kubernetes.io/hostname
-        whenUnsatisfiable: DoNotSchedule
 
     resources:
       requests:
