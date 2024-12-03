@@ -106,6 +106,13 @@ spec:
         serviceMonitor:
           enabled: true
 
+    # Disable gateway for now
+    gateway:
+      enabled: false
+
+    gatewayClass: 
+      enabled: false
+
     pilot:
       enabled: false
 

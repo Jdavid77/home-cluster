@@ -153,6 +153,7 @@ spec:
       enabled: false
 
     experimental:
+      abortOnPluginFailure: true
       plugins:
         ldapAuth:
           moduleName: "github.com/wiltonsr/ldapAuth"
@@ -166,6 +167,13 @@ spec:
         traefik-plugin-blockuseragent:
           moduleName: "github.com/agence-gaya/traefik-plugin-blockuseragent"
           version: "v0.1.7"
+
+    # Disable gateway for now
+    gateway:
+      enabled: false
+
+    gatewayClass: 
+      enabled: false
 
     volumes:
       - name: crowdsec-bouncer-tls
