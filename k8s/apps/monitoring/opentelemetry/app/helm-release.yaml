@@ -36,4 +36,9 @@ spec:
         tag: 0.114.0
     admissionWebhooks:
       certManager:
-        enabled: false
+        enabled: true
+        issuerRef:
+          kind: ClusterIssuer
+          name: letsencrypt-production
+        duration: "2160h"
+        renewBefore: "720h"
