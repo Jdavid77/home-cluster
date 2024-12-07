@@ -76,7 +76,7 @@ Here's the updated table with the links added:
 | Raspberry PI 4   | 1     | 3TB (2 + 1)  | 8GB  | Pi OS            | NAS (OMV)          |                                                                                                        |
 | TP-Link LS108G   | 1     | -            | -    | -                | Switch             |                                                                                                        |
 
-Let me know if you'd like any further modifications!
+
 ---
 
 ## Gratitude and Thanks
