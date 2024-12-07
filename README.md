@@ -64,15 +64,19 @@ Here's the updated table including Terraform:
 ## 🔧 Hardware
 
 
-| Devices          | Count | OS Disk Size | RAM  | Operating System | Purpose            |
-|------------------|-------|--------------|------|------------------|--------------------|
-| Bmax1-master     | 1     | 128GB        | 8GB  | Talos v1.8.2     | Kubernetes Control |
-| Soyo1-master     | 1     | 64GB         | 8GB  | Talos v1.8.2     | Kubernetes Control |
-| Soyo2-master     | 1     | 64GB         | 8GB  | Talos v1.8.2     | Kubernetes Control |
-| Hp-worker2       | 1     | 240GB        | 28GB | Talos v1.8.2     | Kubernetes Worker  |
-| Hp-worker3       | 1     | 240GB        | 32GB | Talos v1.8.2     | Kubernetes Worker  |
-| Raspberry PI 4   | 1     | 3TB (2 + 1)  | 8GB  | Pi OS            | NAS (OMV)          |
-| TP-Link LS108G   | 1     | -            | -    | -                | Switch             |
+Here's the updated table with the links added:
+
+| Devices          | Count | OS Disk Size | RAM  | Operating System | Purpose            | Links                                                                                                  |
+|------------------|-------|--------------|------|------------------|--------------------|--------------------------------------------------------------------------------------------------------|
+| Bmax1-master     | 1     | 128GB        | 8GB  | Talos v1.8.2     | Kubernetes Control | [Amazon Link](https://www.amazon.es/dp/B0CJM1TDHL?ref=ppx_yo2ov_dt_b_fed_asin_title)                   |
+| Soyo1-master     | 1     | 64GB         | 6GB  | Talos v1.8.2     | Kubernetes Control | [AliExpress Link](https://es.aliexpress.com/item/1005006460890415.html?aff_fcid=505c2a4499e846b2a13fde87aa7c7385-1733566005358-08415-_DBcuZW1&tt=CPS_NORMAL&aff_fsk=_DBcuZW1&aff_platform=portals-tool&sk=_DBcuZW1&aff_trace_key=505c2a4499e846b2a13fde87aa7c7385-1733566005358-08415-_DBcuZW1&terminal_id=bb14814936f042d6a7ff280cc2d52e01&afSmartRedirect=y) |
+| Soyo2-master     | 1     | 64GB         | 6GB  | Talos v1.8.2     | Kubernetes Control | [AliExpress Link](https://es.aliexpress.com/item/1005006460890415.html?aff_fcid=505c2a4499e846b2a13fde87aa7c7385-1733566005358-08415-_DBcuZW1&tt=CPS_NORMAL&aff_fsk=_DBcuZW1&aff_platform=portals-tool&sk=_DBcuZW1&aff_trace_key=505c2a4499e846b2a13fde87aa7c7385-1733566005358-08415-_DBcuZW1&terminal_id=bb14814936f042d6a7ff280cc2d52e01&afSmartRedirect=y) |
+| Hp-worker2       | 1     | 240GB        | 28GB | Talos v1.8.2     | Kubernetes Worker  | [Amazon Link](https://www.amazon.es/dp/B0792TQ4XS?ref=ppx_yo2ov_dt_b_fed_asin_title)                   |
+| Hp-worker3       | 1     | 240GB        | 32GB | Talos v1.8.2     | Kubernetes Worker  | [Amazon Link](https://www.amazon.es/dp/B0792TQ4XS?ref=ppx_yo2ov_dt_b_fed_asin_title)                   |
+| Raspberry PI 4   | 1     | 3TB (2 + 1)  | 8GB  | Pi OS            | NAS (OMV)          |                                                                                                        |
+| TP-Link LS108G   | 1     | -            | -    | -                | Switch             |                                                                                                        |
+
+Let me know if you'd like any further modifications!
 ---
 
 ## Gratitude and Thanks
