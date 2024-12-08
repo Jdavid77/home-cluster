@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    external-dns.alpha.kubernetes.io/target: internal.jnobrega.com
+    hajimari.io/icon: simple-icons:traefikproxy
+  name: traefik
+  namespace: network
+spec:
+  ingressClassName: internal
+  rules:
+  - host: traefik.${SECRET_DOMAIN}
+    http:
+      paths:
+      - backend:
+          service:
+            name: traefik
+            port:
+              number: 9000
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - traefik.${SECRET_DOMAIN}
+    secretName: ${SECRET_DOMAIN}-tls
