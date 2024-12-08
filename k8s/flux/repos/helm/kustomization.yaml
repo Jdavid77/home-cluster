@@ -38,3 +38,4 @@ resources:
   - fairwind-charts.yaml
   - kubernetes-dashboard-charts.yaml
   - emqx-charts.yaml
+  - trivy-charts.yaml
