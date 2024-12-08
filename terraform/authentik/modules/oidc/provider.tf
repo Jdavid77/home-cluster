@@ -14,5 +14,6 @@ resource "authentik_provider_oauth2" "oidc_provider" {
   client_secret      = random_password.this.result
   property_mappings  = data.authentik_property_mapping_provider_scope.this.ids
   signing_key        = data.authentik_certificate_key_pair.this.id
+  invalidation_flow  = data.authentik_flow.invalidation.id
 
 }

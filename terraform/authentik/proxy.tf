@@ -21,9 +21,9 @@ locals {
       authentik_proxy_external_host        = "https://draw.${var.external_host}"
     },
     {
-      authentik_proxy_application_name     = "Goldilocks"
-      authentik_proxy_application_icon_url = "https://goldilocks.docs.fairwinds.com/img/goldilocks.svg"
-      authentik_proxy_external_host        = "https://goldilocks.${var.external_host}"
+      authentik_proxy_application_name     = "Kubernetes-Dashboard"
+      authentik_proxy_application_icon_url = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7eOTub-DfX6pyyeyzBsPCHH2mAYPtVOp1Yw&s"
+      authentik_proxy_external_host        = "https://kubernetes.${var.external_host}"
     }
   ]
 }
