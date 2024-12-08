@@ -35,6 +35,10 @@ spec:
           external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
         hosts:
           - kubernetes.${SECRET_DOMAIN}
+        useDefaultAnnotations: false
+        issuer:
+          name: letsencrypt-production
+          scope: cluster
         tls:
           secretName: ${SECRET_DOMAIN}-tls
           hosts:
