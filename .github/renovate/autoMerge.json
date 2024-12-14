@@ -2,6 +2,27 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "packageRules": [
     {
+      "datasources": ["docker"],
+      "automerge": true,
+      "automergeType": "branch",
+      "requiredStatusChecks": null,
+      "schedule": "after 1am and before 7am",
+      "updateTypes": ["minor", "patch", "digest"],
+      "packageNames": [
+        "bellamy/wallos",
+        "docker.io/traefik/whoami",
+        "ghcr.io/stirling-tools/s-pdf",
+        "ghcr.io/requarks/wiki",
+        "ghcr.io/advplyr/audiobookshelf",
+        "ekofr/pihole-exporter",
+        "docker.io/n8nio/n8n",
+        "ghcr.io/miguelndecarvalho/speedtest-exporter",
+        "ghcr.io/tarampampam/error-pages",
+        "jgraph/drawio",
+        "ghcr.io/corentinth/it-tools"
+      ]
+    },
+    {
       "description": ["Auto merge Github Actions"],
       "matchManagers": ["github-actions"],
       "automerge": true,
