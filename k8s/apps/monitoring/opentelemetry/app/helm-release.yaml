@@ -36,5 +36,5 @@ spec:
         tag: 0.115.1
     admissionWebhooks:
       certManager:
-        enabled: true
+        enabled: false
 
