@@ -2,6 +2,7 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "packageRules": [
     {
+      "description": ["Auto-merge generic apps"],
       "datasources": ["docker"],
       "automerge": true,
       "automergeType": "branch",
@@ -19,7 +20,9 @@
         "ghcr.io/miguelndecarvalho/speedtest-exporter",
         "ghcr.io/tarampampam/error-pages",
         "jgraph/drawio",
-        "ghcr.io/corentinth/it-tools"
+        "ghcr.io/corentinth/it-tools",
+        "quay.io/redlib/redlib",
+        "docker.io/dpage/pgadmin4"
       ]
     },
     {
