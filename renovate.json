@@ -4,9 +4,17 @@
     "config:recommended",
     ":dependencyDashboard",
     ":disableRateLimiting",
+    "docker:enableMajor",
+    ":automergeBranch",
     ":semanticCommits",
     ":skipStatusChecks",
-    "replacements:k8s-registry-move"
+    "replacements:k8s-registry-move",
+    ":timezone(Europe/Lisbon)",
+    "github>Jdavid77/home-cluster//.github/renovate/autoMerge.json",
+    "github>Jdavid77/home-cluster//.github/renovate/commitMessage.json",
+    "github>Jdavid77/home-cluster//.github/renovate/customManagers.json",
+    "github>Jdavid77/home-cluster//.github/renovate/labels.json",
+    "github>Jdavid77/home-cluster//.github/renovate/semanticCommits.json"
   ],
   "dependencyDashboardTitle": "Home-Ops Renovate Dashboard",
   "suppressNotifications": ["prEditedNotification", "prIgnoreNotification"],
