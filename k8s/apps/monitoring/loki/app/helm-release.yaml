@@ -92,7 +92,7 @@ spec:
       image:
         registry: ghcr.io
         repository: nginxinc/nginx-unprivileged
-        tag: 1.27.3-alpine@sha256:780173e03906023cf8a399ded62a6ed4b20a83da5664102398e8ac04602aa56b
+        tag: 1.27.3-alpine@sha256:6ee5430af721180110f09eae8fa5f044c3626fdaf8df97a4abf0c5b398a1ddb2
       deploymentStrategy:
         type: RollingUpdate
         rollingUpdate:
