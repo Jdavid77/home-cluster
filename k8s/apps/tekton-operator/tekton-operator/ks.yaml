@@ -6,7 +6,7 @@ metadata:
   name: tekton-operator
   namespace: flux-system
 spec:
-  path: ./k8s/apps/cicd/tekton-operator/app
+  path: ./k8s/apps/tekton-operator/tekton-operator/app
   prune: true
   sourceRef:
     kind: GitRepository
