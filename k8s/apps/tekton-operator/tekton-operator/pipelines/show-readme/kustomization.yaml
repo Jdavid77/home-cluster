@@ -4,4 +4,3 @@ kind: Kustomization
 resources:
   - ./pipeline-run.yaml
   - ./pipeline.yaml
-  - ./task.yaml
