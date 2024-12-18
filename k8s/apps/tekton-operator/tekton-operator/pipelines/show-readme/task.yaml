@@ -5,7 +5,7 @@ metadata:
 spec:
   description: Read and display README file.
   workspaces:
-  - name: output
+  - name: source
   steps:
   - name: read
     image: alpine:latest

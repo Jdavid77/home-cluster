@@ -4,7 +4,7 @@ metadata:
   name: clone-read
 spec:
   description: | 
-    This pipeline clones a git repo, then echoes the README file to the stdout.
+    This pipeline clones a git repo, then echoes the README file to the stout.
   params:
   - name: repo-url
     type: string
@@ -17,10 +17,17 @@ spec:
   tasks:
   - name: fetch-source
     taskRef:
-      name: show-readme
+      name: git-clone
     workspaces:
     - name: output
       workspace: shared-data
     params:
     - name: url
       value: $(params.repo-url)
+  - name: show-readme
+    runAfter: ["fetch-source"]
+    taskRef:
+      name: show-readme
+    workspaces:
+    - name: source
+      workspace: shared-data
