@@ -13,4 +13,4 @@ spec:
     emptyDir: {}
   params:
   - name: repo-url
-    value: https://github.com/Jdavid77/pg-backup-s3
+    value: https://github.com/Jdavid77/pg-backup-s3.git
