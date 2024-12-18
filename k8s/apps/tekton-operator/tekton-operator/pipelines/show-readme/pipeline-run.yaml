@@ -10,13 +10,7 @@ spec:
       fsGroup: 65532
   workspaces:
   - name: shared-data
-    volumeClaimTemplate:
-      spec:
-        accessModes:
-        - ReadWriteOnce
-        resources:
-          requests:
-            storage: 1Gi
+    emptyDir: {}
   params:
   - name: repo-url
     value: https://github.com/Jdavid77/pg-backup-s3
