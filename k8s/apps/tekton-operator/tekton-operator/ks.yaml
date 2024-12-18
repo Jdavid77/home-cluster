@@ -23,6 +23,7 @@ metadata:
   name: tekton-pipelines
   namespace: flux-system
 spec:
+  targetNamespace: tekton-pipelines
   path: ./k8s/apps/tekton-operator/tekton-operator/pipelines
   prune: true
   sourceRef:
