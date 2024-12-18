@@ -17,7 +17,7 @@ spec:
   tasks:
   - name: fetch-source
     taskRef:
-      name: git-clone
+      name: show-readme
     workspaces:
     - name: output
       workspace: shared-data
