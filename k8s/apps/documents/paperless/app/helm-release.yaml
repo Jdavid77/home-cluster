@@ -27,9 +27,20 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    defaultPodOptions:
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/name: paperless
     controllers:
       paperless:
         strategy: RollingUpdate
+        rollingUpdate:
+          surge: 0
+          unavailable: 1
         annotations:
           reloader.stakater.com/auto: "true"
         initContainers:
