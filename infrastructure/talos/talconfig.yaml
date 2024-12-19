@@ -175,3 +175,18 @@ nodes:
     machineSpec:
       mode: metal
       arch: amd64
+
+  - hostname: hp-worker1
+    ipAddress: 192.168.1.91
+    nameservers:
+      - "192.168.1.87"
+    installDisk: /dev/sdb
+    controlPlane: false
+    networkInterfaces:
+      - deviceSelector:
+          hardwareAddr: "c4:65:16:16:e2:b8"
+        dhcp: true
+        mtu: 1500
+    machineSpec:
+      mode: metal
+      arch: amd64
