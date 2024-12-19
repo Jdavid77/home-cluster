@@ -6,7 +6,6 @@ resources:
   - ./kube-prometheus-stack/ks.yaml
   - ./metrics-server/ks.yaml
   - ./grafana/ks.yaml
-  - ./speedtest-exporter/ks.yaml
   - ./pihole-exporter/ks.yaml
   - ./loki/ks.yaml
   - ./opentelemetry/ks.yaml
