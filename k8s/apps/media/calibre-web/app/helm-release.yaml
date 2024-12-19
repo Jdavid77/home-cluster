@@ -24,9 +24,20 @@ spec:
       strategy: rollback
       retries: 3
   values:
+    
+    defaultPodOptions:
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/name: calibre-web
 
     controllers:
       calibre-web:
+        
+        replicas: 3
 
         labels:
           sablier.enable: "true"

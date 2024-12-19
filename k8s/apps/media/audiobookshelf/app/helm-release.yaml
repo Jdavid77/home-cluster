@@ -15,8 +15,19 @@ spec:
         namespace: flux-system
   interval: 30m
   values:
+    
+    defaultPodOptions:
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/name: audiobookshelf
+    
     controllers:
       audiobookshelf:
+        replicas: 3
         pod:
           securityContext:
             runAsUser: &uid 1002

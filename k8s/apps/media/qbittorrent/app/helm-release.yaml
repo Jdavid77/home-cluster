@@ -25,6 +25,7 @@ spec:
   values:
     controllers:
       qbittorrent:
+        replicas: 3
         labels:
           nfsMount: "true"
         annotations:
