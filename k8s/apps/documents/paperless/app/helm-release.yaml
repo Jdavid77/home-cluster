@@ -37,6 +37,7 @@ spec:
               app.kubernetes.io/name: paperless
     controllers:
       paperless:
+        replicas: 3
         strategy: RollingUpdate
         rollingUpdate:
           surge: 0
