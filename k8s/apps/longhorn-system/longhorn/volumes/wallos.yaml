@@ -18,7 +18,7 @@ spec:
   migratable: false
   nodeSelector:
   - storage
-  numberOfReplicas: 2
+  numberOfReplicas: 3
   replicaAutoBalance: ignored
   replicaDiskSoftAntiAffinity: ignored
   replicaSoftAntiAffinity: ignored

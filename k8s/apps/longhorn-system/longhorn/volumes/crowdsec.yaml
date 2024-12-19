@@ -12,7 +12,7 @@ spec:
   frontend: blockdev
   nodeSelector:
   - storage
-  numberOfReplicas: 2
+  numberOfReplicas: 3
   size: "1073741824"
 ---
 apiVersion: longhorn.io/v1beta2
@@ -29,5 +29,5 @@ spec:
   frontend: blockdev
   nodeSelector:
   - storage
-  numberOfReplicas: 2
+  numberOfReplicas: 3
   size: "104857600"

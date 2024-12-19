@@ -12,5 +12,5 @@ spec:
   frontend: blockdev
   nodeSelector:
   - storage
-  numberOfReplicas: 2
+  numberOfReplicas: 3
   size: "536870912"
