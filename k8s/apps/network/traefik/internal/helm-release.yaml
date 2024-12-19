@@ -110,7 +110,7 @@ spec:
     gateway:
       enabled: false
 
-    gatewayClass: 
+    gatewayClass:
       enabled: false
 
     pilot:

@@ -9,6 +9,6 @@ spec:
   steps:
   - name: read
     image: alpine:latest
-    script: | 
+    script: |
       #!/usr/bin/env sh
       cat $(workspaces.source.path)/README.md

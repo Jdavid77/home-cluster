@@ -37,4 +37,3 @@ spec:
     admissionWebhooks:
       certManager:
         enabled: false
-
