@@ -25,11 +25,8 @@ spec:
   values:
     controllers:
       qbittorrent:
-        replicas: 3
+        replicas: 1
         strategy: RollingUpdate
-        rollingUpdate:
-          surge: 0
-          unavailable: 1
         labels:
           nfsMount: "true"
         annotations:
