@@ -24,9 +24,23 @@ spec:
       strategy: rollback
       retries: 3
   values:
+    
+    defaultPodOptions:
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/name: wikijs
 
-    controllers:
+    controllers: 
       wiki:
+        replicas: 3
+        strategy: RollingUpdate
+        rollingUpdate:
+          surge: 0
+          unavailable: 1
 
         pod:
           securityContext:
@@ -66,8 +80,6 @@ spec:
     service:
       wiki:
         controller: wiki
-        annotations:
-          tailscale.com/hostname: wiki-js
         ports:
           http:
             port: 3000
