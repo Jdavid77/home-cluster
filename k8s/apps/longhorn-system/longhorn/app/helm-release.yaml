@@ -30,7 +30,7 @@ spec:
         enabled: true
     persistence:
       defaultClass: true
-      defaultClassReplicaCount: 2
+      defaultClassReplicaCount: 3
       reclaimPolicy: Retain
       defaultNodeSelector:
         enable: true
@@ -38,7 +38,7 @@ spec:
     defaultSettings:
       backupTarget: s3://longhorn@weur/
       backupTargetCredentialSecret: longhorn-secret
-      defaultReplicaCount: 2
+      defaultReplicaCount: 3
       backupstorePollInterval: 0
       createDefaultDiskLabeledNodes: true
       restoreVolumeRecurringJobs: true
