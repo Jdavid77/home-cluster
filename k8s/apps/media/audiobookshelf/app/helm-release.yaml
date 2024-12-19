@@ -28,6 +28,10 @@ spec:
     controllers:
       audiobookshelf:
         replicas: 3
+        strategy: RollingUpdate
+        rollingUpdate:
+          surge: 0
+          unavailable: 1
         pod:
           securityContext:
             runAsUser: &uid 1002
