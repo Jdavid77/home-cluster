@@ -46,5 +46,3 @@ spec:
     serviceMonitor:
       enabled: true
 
-    nodeCollector:
-      useNodeSelector: false
