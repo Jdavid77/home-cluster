@@ -26,62 +26,38 @@ spec:
   values:
     deploymentMode: SingleBinary
     loki:
-      podAnnotations:
-        configmap.reloader.stakater.com/reload: loki-secret
       auth_enabled: false
       analytics:
         reporting_enabled: false
+      server:
+        log_level: info
+      commonConfig:
+        replication_factor: 1
       compactor:
         working_directory: /var/loki/compactor/retention
-        delete_request_store: s3
+        delete_request_store: filesystem
         retention_enabled: true
-      frontend:
-        max_outstanding_per_tenant: 4096
       ingester:
         chunk_encoding: snappy
-      commonConfig:
-        replication_factor: 2
-      limits_config:
-        ingestion_burst_size_mb: 128
-        ingestion_rate_mb: 64
-        max_query_parallelism: 100
-        per_stream_rate_limit: 64M
-        per_stream_rate_limit_burst: 128M
-        reject_old_samples: true
-        reject_old_samples_max_age: 72h
-        retention_period: 30d
-        shard_streams:
-          enabled: true
-        split_queries_by_interval: 1h
-      query_scheduler:
-        max_outstanding_requests_per_tenant: 4096
-
+      storage:
+        type: filesystem
       schemaConfig:
         configs:
-          - from: "2024-04-01"
+          - from: "2024-04-01" # quote
             store: tsdb
-            object_store: s3
+            object_store: filesystem
             schema: v13
             index:
               prefix: loki_index_
               period: 24h
-      server:
-        log_level: info
-        grpc_server_max_recv_msg_size: 8388608
-        grpc_server_max_send_msg_size: 8388608
-      storage:
-        type: s3
-        bucketNames:
-          chunks: loki
-        s3:
-          s3ForcePathStyle: true
-          insecure: true
-          region: weur
+      limits_config:
+        retention_period: 14d
     singleBinary:
       replicas: 1
       persistence:
-        size: 5Gi
+        enabled: true
         storageClass: longhorn
+        size: 10Gi
     gateway:
       replicas: 3
       enabled: true
@@ -92,8 +68,8 @@ spec:
       deploymentStrategy:
         type: RollingUpdate
         rollingUpdate:
-          maxUnavailable: 50%
-          maxSurge: 50%
+          maxUnavailable: 1
+          maxSurge: 0
       topologySpreadConstraints:
         - maxSkew: 1
           topologyKey: kubernetes.io/hostname
@@ -117,58 +93,24 @@ spec:
           - hosts:
               - *host
             secretName: ${SECRET_DOMAIN}-tls
-
-      resources:
-        requests:
-          cpu: 50m
-          memory: 64Mi
-
-    write:
-      replicas: 0
-
-    read:
-      replicas: 0
-
     backend:
       replicas: 0
-
-    test:
-      enabled: false
-
-    lokiCanary:
-      enabled: false
-
+    read:
+      replicas: 0
+    write:
+      replicas: 0
     chunksCache:
       enabled: false
-      
     resultsCache:
       enabled: false
-
-    monitoring:
-      dashboards:
-        annotations:
-          grafana_folder: Loki
+    lokiCanary:
+      enabled: false
+    test:
+      enabled: false
+    sidecar:
+      image:
+        repository: ghcr.io/kiwigrid/k8s-sidecar
       rules:
-        enabled: false
-      serviceMonitor:
-        enabled: false
-        metricsInstance:
-          enabled: false
-      selfMonitoring:
-        enabled: false
-        grafanaAgent:
-          installOperator: false
+        searchNamespace: ALL
 
-  valuesFrom:
-    - targetPath: loki.storage.s3.endpoint
-      kind: Secret
-      name: loki-secret
-      valuesKey: BUCKET_HOST
-    - targetPath: loki.storage.s3.accessKeyId
-      kind: Secret
-      name: loki-secret
-      valuesKey: AWS_ACCESS_KEY_ID
-    - targetPath: loki.storage.s3.secretAccessKey
-      kind: Secret
-      name: loki-secret
-      valuesKey: AWS_SECRET_ACCESS_KEY
+
