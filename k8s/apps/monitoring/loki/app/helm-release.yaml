@@ -61,10 +61,6 @@ spec:
     gateway:
       replicas: 3
       enabled: true
-      image:
-        registry: ghcr.io
-        repository: nginxinc/nginx-unprivileged
-        tag: 1.27.3-alpine@sha256:780173e03906023cf8a399ded62a6ed4b20a83da5664102398e8ac04602aa56b
       deploymentStrategy:
         type: RollingUpdate
         rollingUpdate:
