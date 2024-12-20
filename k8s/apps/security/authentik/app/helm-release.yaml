@@ -25,10 +25,21 @@ spec:
       retries: 3
   values:
     global:
+      securityContext: 
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
       podAnnotations:
         secret.reloader.stakater.com/reload: &secret authentik-secret
-      deploymentStrategy:
+      deploymentStrategy: 
         type: RollingUpdate
+        rollingUpdate:
+          maxSurge: 0
+          maxUnavailable: 1
       envFrom:
         - secretRef:
             name: *secret
@@ -57,6 +68,29 @@ spec:
         hosts:
           - &host auth.${SECRET_DOMAIN}
         tls: [hosts: [*host]]
+      pdb:
+        enabled: true
+        maxUnavailable: 1
+      containerSecurityContext: 
+        runAsNonRoot: true
+        readOnlyRootFilesystem: true
+        allowPrivilegeEscalation: false
+        seccomProfile:
+          type: RuntimeDefault
+        capabilities:
+          drop:
+            - ALL
+    worker:
+      replicas: 3
+      containerSecurityContext: 
+        runAsNonRoot: true
+        readOnlyRootFilesystem: true
+        allowPrivilegeEscalation: false
+        seccomProfile:
+          type: RuntimeDefault
+        capabilities:
+          drop:
+            - ALL
     prometheus:
       rules:
-        enabled: false
+        enabled: true
