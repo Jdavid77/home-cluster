@@ -8,7 +8,14 @@ spec:
   labels:
     dragonflydb.io/cluster: dragonfly
   image: docker.dragonflydb.io/dragonflydb/dragonfly:v1.25.5
-  replicas: 2
+  replicas: 3
+  topologySpreadConstraints:
+    - maxSkew: 1
+      topologyKey: kubernetes.io/hostname
+      whenUnsatisfiable: DoNotSchedule
+      labelSelector:
+        matchLabels:
+          app.kubernetes.io/name: dragonfly
   resources:
     requests:
       cpu: 100m
