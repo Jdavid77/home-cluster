@@ -24,7 +24,7 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    deploymentMode: SimpleScalable
+    deploymentMode: SingleBinary
     loki:
       podAnnotations:
         configmap.reloader.stakater.com/reload: loki-secret
@@ -49,21 +49,12 @@ spec:
         per_stream_rate_limit_burst: 128M
         reject_old_samples: true
         reject_old_samples_max_age: 72h
-        retention_period: 7d
+        retention_period: 30d
         shard_streams:
           enabled: true
         split_queries_by_interval: 1h
       query_scheduler:
         max_outstanding_requests_per_tenant: 4096
-      rulerConfig:
-        enable_api: true
-        enable_alertmanager_v2: true
-        alertmanager_url: http://alertmanager-operated.monitoring.svc.cluster.local:9093
-        storage:
-          type: local
-          local:
-            directory: /rules
-        rule_path: /rules/fake
 
       schemaConfig:
         configs:
@@ -86,8 +77,13 @@ spec:
           s3ForcePathStyle: true
           insecure: true
           region: weur
+    singleBinary:
+      replicas: 1
+      persistence:
+        size: 5Gi
+        storageClass: longhorn
     gateway:
-      replicas: 2
+      replicas: 3
       enabled: true
       image:
         registry: ghcr.io
@@ -128,31 +124,25 @@ spec:
           memory: 64Mi
 
     write:
-      replicas: 2
-      nodeSelector:
-        storage: longhorn
-      persistence:
-        storageClass: longhorn
+      replicas: 0
 
     read:
-      replicas: 2
-      nodeSelector:
-        storage: longhorn
-      persistence:
-        storageClass: longhorn
-        size: 5Gi
+      replicas: 0
 
     backend:
-      replicas: 2
-      nodeSelector:
-        storage: longhorn
-      persistence:
-        storageClass: longhorn
+      replicas: 0
 
-      resources:
-        requests:
-          cpu: 100m
-          memory: 500M
+    test:
+      enabled: false
+
+    lokiCanary:
+      enabled: false
+
+    chunksCache:
+      enabled: false
+      
+    resultsCache:
+      enabled: false
 
     monitoring:
       dashboards:
@@ -168,19 +158,6 @@ spec:
         enabled: false
         grafanaAgent:
           installOperator: false
-
-    sidecar:
-      image:
-        repository: ghcr.io/kiwigrid/k8s-sidecar
-      rules:
-        searchNamespace: ALL
-        folder: /rules/fake
-
-    lokiCanary:
-      enabled: false
-
-    test:
-      enabled: false
 
   valuesFrom:
     - targetPath: loki.storage.s3.endpoint
