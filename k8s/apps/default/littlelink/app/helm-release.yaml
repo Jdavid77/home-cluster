@@ -41,12 +41,14 @@ spec:
               OG_TITLE: João David Nóbrega Links
               OG_DESCRIPTION: A collection of all of my relevant links
               OG_URL: https://links.${SECRET_DOMAIN}
+              AVATAR_URL: https://avatars.githubusercontent.com/u/49655819?v=4
+              AVATAR_2X_URL: https://avatars.githubusercontent.com/u/49655819?v=4
               NAME: João David Nóbrega
               THEME: Dark
               BIO: "Devops Engineer"
               BUTTON_ORDER: GITHUB,LINKED_IN
-              GITHUB: https://github.com/rafaribe
-              LINKED_IN: https://www.linkedin.com/in/rafaribe1/
+              GITHUB: https://github.com/Jdavid77
+              LINKED_IN: https://www.linkedin.com/in/joaodavid77/
               EMAIL: johnynobrega17@gmail.com
               EMAIL_TEXT: Email me!
               FOOTER: João David Nóbrega © 2024-Present
