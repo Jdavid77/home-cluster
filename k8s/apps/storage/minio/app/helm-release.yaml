@@ -23,8 +23,21 @@ spec:
       strategy: rollback
       retries: 3
   values:
+    defaultPodOptions:
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/name: minio
     controllers:
       minio:
+        replicas: 3
+        strategy: RollingUpdate
+        rollingUpdate:
+          surge: 0
+          unavailable: 1
         annotations:
           reloader.stakater.com/auto: "true"
         pod:
