@@ -65,7 +65,7 @@ spec:
       main:
         className: traefik
         annotations:
-          external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
+          external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
         hosts:
           - host: &host links.${SECRET_DOMAIN}
             paths:
