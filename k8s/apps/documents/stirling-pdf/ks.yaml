@@ -9,6 +9,11 @@ spec:
   targetNamespace: documents
   path: ./k8s/apps/documents/stirling-pdf/app
   prune: true
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      name: stirling-pdf
+      namespace: documents
   sourceRef:
     kind: GitRepository
     name: home-cluster

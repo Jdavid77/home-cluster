@@ -11,6 +11,11 @@ spec:
     - name: velero-crds
   path: ./k8s/apps/backup/velero/app
   prune: true
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      name: velero
+      namespace: backup
   sourceRef:
     kind: GitRepository
     name: home-cluster

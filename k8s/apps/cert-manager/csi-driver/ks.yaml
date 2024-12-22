@@ -9,6 +9,11 @@ spec:
   path: ./k8s/apps/cert-manager/csi-driver/app
   dependsOn:
     - name: cert-manager
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      name: cert-manager-csi-driver
+      namespace: cert-manager
   prune: true
   sourceRef:
     kind: GitRepository
