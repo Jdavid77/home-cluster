@@ -1,0 +1,38 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: '3'
+
+tasks:
+
+  reconcile-source:
+    desc: Force update Flux to pull in changes from your Git repository
+    cmds: 
+      - flux --namespace flux-system reconcile kustomization cluster --with-source
+    preconditions:
+      - test -f {{.KUBECONFIG}}
+      - which flux
+
+  reconcile-hr:
+    desc: Force update Flux to reconcile Helm release
+    cmds: 
+      - flux --namespace {{.NAMESPACE}} reconcile helmrelease {{.HELM_RELEASE}}
+    vars:
+      NAMESPACE:
+        sh: flux get helmreleases --all-namespaces | grep {{.HELM_RELEASE}} | awk '{print $1}'
+    preconditions:
+      - test -f {{.KUBECONFIG}}
+      - which flux
+  
+  resume-suspend-hr:
+    desc: Resume && Suspend Helm release
+    cmds:
+      - flux --namespace {{.NAMESPACE}} suspend helmrelease {{.HELM_RELEASE}}
+      - sleep 2
+      - flux --namespace {{.NAMESPACE}} resume helmrelease {{.HELM_RELEASE}}
+    vars:
+      NAMESPACE:
+        sh: flux get helmreleases --all-namespaces | grep {{.HELM_RELEASE}} | awk '{print $1}'
+    preconditions:
+      - test -f {{.KUBECONFIG}}
+      - which flux
+  
