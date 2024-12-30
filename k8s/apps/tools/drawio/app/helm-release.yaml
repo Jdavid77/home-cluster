@@ -29,7 +29,7 @@ spec:
           drawio:
             image:
               repository: jgraph/drawio
-              tag: 26.0.0@sha256:44ff7ee1a74b9da8f1f97dfcf0d582cd64d569dbc5094264c215d6a81b87c4fe
+              tag: 26.0.2@sha256:c81b684038e67dc4aae7e647934c3b11abd80e3109437dfcb3b336e7e4cfd006
             env:
               DRAWIO_SELF_CONTAINED: "1"
               DRAWIO_SERVER_URL: https://draw.${SECRET_DOMAIN}/
