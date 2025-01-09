@@ -3,7 +3,8 @@ locals {
     "longhorn",
     "loki",
     "velero",
-    "postgres"
+    "postgres",
+    "obsidian"
   ]
 }
 
