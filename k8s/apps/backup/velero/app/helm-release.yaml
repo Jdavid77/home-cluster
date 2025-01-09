@@ -39,7 +39,7 @@ spec:
           config:
             region: weur
             s3ForcePathStyle: true
-            s3Url: http://minio.storage.svc.cluster.local:9000
+            s3Url: https://s3.${SECRET_DOMAIN}
       volumeSnapshotLocation:
       - name: default
         provider: velero.io/aws
@@ -101,3 +101,5 @@ spec:
             for: 15m
             labels:
               severity: warning
+
+
