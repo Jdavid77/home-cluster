@@ -51,8 +51,8 @@ spec:
     credentials:
       existingSecret: velero-secret
     schedules:
-      weekly-backup:
-        schedule: "0 0 * * 0"
+      daily-backup:
+        schedule: "0 0 * * *"
         template:
           ttl: "338h"
           includedNamespaces:
