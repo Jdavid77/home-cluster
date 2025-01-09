@@ -14,6 +14,11 @@ locals {
       authentik_oidc_application_name        = "PGAdmin"
       authentik_oidc_application_icon_url    = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Postgresql_elephant.svg/1200px-Postgresql_elephant.svg.png"
       authentik_oidc_application_description = "PGAdmin OAuth application"
+    },
+    {
+      authentik_oidc_application_name        = "Backstage-Dev"
+      authentik_oidc_application_icon_url    = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBzHHyxg-LtRQ5iGOxRQeP5VzxFoNjzDY3Lg&s"
+      authentik_oidc_application_description = "Backstage-Dev OAuth application"
     }
   ]
 }
