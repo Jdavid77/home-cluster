@@ -5,7 +5,7 @@ resources:
   - ./namespace.yaml
   - ./calibre-web/ks.yaml
   # - ./calibre/ks.yaml
-  # - ./qbittorrent/ks.yaml
+  - ./qbittorrent/ks.yaml
   # - ./prowlarr/ks.yaml
   - ./audiobookshelf/ks.yaml
   # - ./readarr/ks.yaml
