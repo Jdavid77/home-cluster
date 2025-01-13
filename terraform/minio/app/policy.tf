@@ -1,28 +1,6 @@
 resource "minio_iam_policy" "this" {
   name = "${var.name}-policy"
-  policy= <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "GrantLonghornBackupstoreAccess0",
-      "Effect": "Allow",
-      "Action": [
-        "s3:Get*",
-        "s3:Put*",
-        "s3:List*",
-        "s3:DeleteObject",
-        "s3:AbortMultipartUpload",
-        "s3:ListMultipartUploadParts"
-      ],
-      "Resource": [
-        "arn:aws:s3:::${var.name}",
-        "arn:aws:s3:::${var.name}/*"
-      ]
-    }
-  ]
-}
-EOF
+  policy = templatefile("${path.module}/policy.json.tpl", { name = var.name })
 }
 
 resource "minio_iam_user_policy_attachment" "this" {
