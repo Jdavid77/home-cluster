@@ -6,7 +6,7 @@ metadata:
   name: monitoring-pvs
   namespace: flux-system
 spec:
-  targetNamespace: default
+  targetNamespace: monitoring
   path: ./k8s/apps/monitoring/_pvs/longhorn
   dependsOn:
     - name: longhorn
