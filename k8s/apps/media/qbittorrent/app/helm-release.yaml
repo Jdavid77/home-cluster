@@ -26,9 +26,7 @@ spec:
     controllers:
       qbittorrent:
         replicas: 1
-        strategy: RollingUpdate
-        labels:
-          nfsMount: "true"
+        strategy: Recreate
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
