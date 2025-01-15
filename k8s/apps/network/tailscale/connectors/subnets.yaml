@@ -10,3 +10,4 @@ spec:
     advertiseRoutes:
       - ${LB_INTERNAL_IP}/32
       - ${PIHOLE_IP}/32
+      - "192.168.1.83/32"
