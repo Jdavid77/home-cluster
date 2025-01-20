@@ -42,7 +42,7 @@ spec:
           audiobookshelf:
             image:
               repository: ghcr.io/advplyr/audiobookshelf
-              tag: 2.17.7
+              tag: 2.18.0
             env:
               TZ: ${TIMEZONE}
               PORT: &port 8080
