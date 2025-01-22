@@ -10,7 +10,7 @@ spec:
   dataLocality: best-effort
   disableFrontend: false
   frontend: blockdev
-  image: longhornio/longhorn-engine:v1.7.2
+  image: longhornio/longhorn-engine:v1.8.0
   nodeSelector:
   - storage
   numberOfReplicas: 3
@@ -28,7 +28,7 @@ spec:
   dataLocality: best-effort
   disableFrontend: false
   frontend: blockdev
-  image: longhornio/longhorn-engine:v1.7.2
+  image: longhornio/longhorn-engine:v1.8.0
   nodeSelector:
   - storage
   numberOfReplicas: 3
