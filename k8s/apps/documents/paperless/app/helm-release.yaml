@@ -31,7 +31,7 @@ spec:
       topologySpreadConstraints:
         - maxSkew: 1
           topologyKey: kubernetes.io/hostname
-          whenUnsatisfiable: DoNotSchedule
+          whenUnsatisfiable: ScheduleAnyway
           labelSelector:
             matchLabels:
               app.kubernetes.io/name: paperless
@@ -40,7 +40,7 @@ spec:
         replicas: 3
         strategy: RollingUpdate
         rollingUpdate:
-          surge: 0
+          surge: 1
           unavailable: 1
         annotations:
           reloader.stakater.com/auto: "true"
