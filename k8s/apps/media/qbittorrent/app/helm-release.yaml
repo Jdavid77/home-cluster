@@ -42,16 +42,6 @@ spec:
               QBT_Preferences__WebUI__AuthSubnetWhitelist: |-
                 192.168.1.0/24
               QBT_Preferences__WebUI__LocalHostAuth: false
-            probes:
-              liveness:
-                enabled: true
-              readiness:
-                enabled: true
-              startup:
-                enabled: true
-                spec:
-                  failureThreshold: 30
-                  periodSeconds: 5
             securityContext:
               runAsNonRoot: true
               runAsUser: 1002
