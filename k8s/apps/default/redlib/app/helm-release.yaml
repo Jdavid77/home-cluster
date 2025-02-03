@@ -36,7 +36,7 @@ spec:
           redlib:
             image:
               repository: quay.io/redlib/redlib
-              tag: latest@sha256:d04e722091fe17424425499882a548507a70654f37aaf8cbc71081ef29b7b341
+              tag: latest@sha256:cf3c652de44c9fd43482af3a8fea92799e332283a549c63243c4775114920728
             env:
               # instance settings
               REDLIB_ROBOTS_DISABLE_INDEXING: "on"
