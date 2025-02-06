@@ -33,7 +33,7 @@ spec:
           wallos:
             image:
               repository: bellamy/wallos
-              tag: 2.45.1
+              tag: 2.45.2
             env:
               TZ: ${TIMEZONE}
             resources:
