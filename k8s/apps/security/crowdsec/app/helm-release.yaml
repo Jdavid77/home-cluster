@@ -27,9 +27,11 @@ spec:
     container_runtime: containerd
     tls:
       enabled: true
-      bouncer:
-        reflector:
-          namespaces: ["network"]
+      certManager:
+        secretTemplate:
+          annotations:
+            reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
+            reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces: "network"
     agent:
       tolerations:
         - key: node-role.kubernetes.io/control-plane
