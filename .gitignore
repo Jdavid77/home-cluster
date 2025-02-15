@@ -2,3 +2,4 @@ age.ageKey
 .terraform/
 .decrypted
 *.tmp.yaml
+.tmp.env
