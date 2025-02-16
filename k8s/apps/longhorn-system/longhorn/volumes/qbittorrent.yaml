@@ -11,7 +11,5 @@ spec:
   disableFrontend: false
   frontend: blockdev
   image: longhornio/longhorn-engine:v1.8.0
-  nodeSelector:
-  - storage
   numberOfReplicas: 3
   size: "536870912"
