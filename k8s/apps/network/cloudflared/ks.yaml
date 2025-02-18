@@ -8,8 +8,6 @@ metadata:
 spec:
   targetNamespace: network
   path: ./k8s/apps/network/cloudflared/app
-  dependsOn:
-    - name: external-secrets-store
   prune: true
   sourceRef:
     kind: GitRepository
