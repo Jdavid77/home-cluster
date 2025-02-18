@@ -56,10 +56,13 @@ spec:
         containers:
           calibre-web:
             image:
-              repository: ghcr.io/bjw-s/calibre-web
-              tag: 0.6.24
+              repository: docker.io/crocodilestick/calibre-web-automated
+              tag: V3.0.1
             env:
               CACHE_DIR: /cache
+              CALIBRE_PORT: &port 8083
+              PUID: 1002
+              PGID: 100
             probes:
               liveness:
                 enabled: true
@@ -83,7 +86,7 @@ spec:
         controller: calibre-web
         ports:
           http:
-            port: 8083
+            port: *port
 
     ingress:
       app:
@@ -121,3 +124,4 @@ spec:
         type: emptyDir
         globalMounts:
           - path: /cache
+
