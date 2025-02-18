@@ -8,6 +8,8 @@ metadata:
 spec:
   targetNamespace: automation
   path: ./k8s/apps/automation/n8n/app
+  dependsOn:
+    - name: longhorn
   prune: true
   sourceRef:
     kind: GitRepository

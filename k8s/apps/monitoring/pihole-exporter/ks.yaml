@@ -8,6 +8,8 @@ metadata:
 spec:
   targetNamespace: monitoring
   path: ./k8s/apps/monitoring/pihole-exporter/app
+  dependsOn:
+    - name: external-secrets-store
   prune: true
   sourceRef:
     kind: GitRepository

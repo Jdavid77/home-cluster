@@ -8,6 +8,8 @@ metadata:
 spec:
   targetNamespace: backup
   path: ./k8s/apps/backup/postgres/cron
+  dependsOn:
+    - name: external-secrets-store
   prune: true
   sourceRef:
     kind: GitRepository

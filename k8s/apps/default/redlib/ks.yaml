@@ -8,6 +8,8 @@ metadata:
 spec:
   targetNamespace: default
   path: ./k8s/apps/default/redlib/app
+  dependsOn:
+    - name: external-secrets-store
   prune: true
   sourceRef:
     kind: GitRepository

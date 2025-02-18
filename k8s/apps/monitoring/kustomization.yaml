@@ -11,4 +11,4 @@ resources:
   - ./loki/ks.yaml
   - ./opentelemetry/ks.yaml
   - ./prometheus-operator-crds/ks.yaml
-  - ./_pvs/ks.yaml
+  # - ./_pvs/ks.yaml

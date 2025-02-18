@@ -11,6 +11,7 @@ spec:
   dependsOn:
     - name: media-pvs
     - name: media-nfs
+    - name: external-secrets-store
   prune: true
   sourceRef:
     kind: GitRepository

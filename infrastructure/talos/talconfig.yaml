@@ -5,9 +5,7 @@ endpoint: https://192.168.1.83:6443
 talosVersion: v1.9.3
 kubernetesVersion: v1.32.1
 additionalMachineCertSans:
-  - 192.168.1.83
-  - 192.168.1.90
-  - 192.168.1.89
+  - 192.168.1.84
 additionalApiServerCertSans:
   - home-cluster.local
   - "127.0.0.1" # KubePrism
@@ -16,9 +14,9 @@ cniConfig:
 patches:
   - "@patches/interface-names.yaml"
   - "@patches/kubelet-certificates.yaml"
-  - "@patches/dhcp.yaml"
 controlPlane:
   patches:
+    - "@patches/vip.yaml"
     # Disable search domain everywhere
     - &domainPatch |-
       machine:
@@ -84,6 +82,7 @@ worker:
     node.longhorn.io/create-default-disk: "true"
     storage: longhorn
   patches:
+    - "@patches/worker.yaml"
     - *domainPatch
     - *kubePrismPatch
     - *proxyPatch
@@ -104,6 +103,8 @@ nodes:
   - hostname: bmax1-master
     ipAddress: 192.168.1.83
     controlPlane: true
+    nodeAnnotations:
+      installerImage: '{{ .MachineConfig.MachineInstall.InstallImage }}'
     installDisk: /dev/mmcblk0
     nameservers:
       - "192.168.1.87"
@@ -119,7 +120,9 @@ nodes:
   - hostname: soyo1-master
     ipAddress: 192.168.1.90
     controlPlane: true
-    installDisk: /dev/mmcblk0
+    nodeAnnotations:
+      installerImage: '{{ .MachineConfig.MachineInstall.InstallImage }}'
+    installDisk: /dev/mmcblk1
     nameservers:
       - "192.168.1.87"
     networkInterfaces:
@@ -134,6 +137,8 @@ nodes:
   - hostname: soyo2-master
     ipAddress: 192.168.1.89
     controlPlane: true
+    nodeAnnotations:
+      installerImage: '{{ .MachineConfig.MachineInstall.InstallImage }}'
     installDisk: /dev/mmcblk0
     nameservers:
       - "192.168.1.87"
@@ -150,8 +155,10 @@ nodes:
     ipAddress: 192.168.1.86
     nameservers:
       - "192.168.1.87"
-    installDisk: /dev/sdb
+    installDisk: /dev/sda
     controlPlane: false
+    nodeAnnotations:
+      installerImage: '{{ .MachineConfig.MachineInstall.InstallImage }}'
     networkInterfaces:
       - deviceSelector:
           hardwareAddr: "74:46:a0:90:26:0f"
@@ -167,6 +174,8 @@ nodes:
       - "192.168.1.87"
     installDisk: /dev/sda
     controlPlane: false
+    nodeAnnotations:
+      installerImage: '{{ .MachineConfig.MachineInstall.InstallImage }}'
     networkInterfaces:
       - deviceSelector:
           hardwareAddr: "10:60:4b:73:34:97"
@@ -180,8 +189,10 @@ nodes:
     ipAddress: 192.168.1.91
     nameservers:
       - "192.168.1.87"
-    installDisk: /dev/sdb
+    installDisk: /dev/sda
     controlPlane: false
+    nodeAnnotations:
+      installerImage: '{{ .MachineConfig.MachineInstall.InstallImage }}'
     networkInterfaces:
       - deviceSelector:
           hardwareAddr: "c4:65:16:16:e2:b8"

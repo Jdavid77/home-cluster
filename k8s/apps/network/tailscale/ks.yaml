@@ -48,6 +48,8 @@ metadata:
 spec:
   targetNamespace: network
   path: ./k8s/apps/network/tailscale/device
+  dependsOn:
+    - name: tailscale-operator
   prune: true
   sourceRef:
     kind: GitRepository

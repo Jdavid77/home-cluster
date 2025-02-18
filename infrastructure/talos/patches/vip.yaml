@@ -1,0 +1,10 @@
+---
+machine:
+  network:
+    interfaces:
+      - interface: eth0
+        vip:
+          ip: 192.168.1.80
+cluster:
+  controlPlane:
+    endpoint: https://192.168.1.80:6443
