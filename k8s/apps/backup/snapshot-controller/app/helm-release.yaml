@@ -14,20 +14,28 @@ spec:
         kind: HelmRepository
         name: piraeus-charts
         namespace: flux-system
+  install:
+    crds: CreateReplace
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    crds: CreateReplace
+    remediation:
+      strategy: rollback
+      retries: 3
   values:
     controller:
       serviceMonitor:
         create: true
       volumeSnapshotClasses:
-        - name: longhorn
+        - name: longhorn-snapshot-vsc
           annotations:
             snapshot.storage.kubernetes.io/is-default-class: "true"
-          labels:
-            velero.io/csi-volumesnapshot-class: "true"
           driver: driver.longhorn.io
           deletionPolicy: Delete
           parameters:
-            type: bak
+            type: snap
     resources:
       requests:
         cpu: 15m
