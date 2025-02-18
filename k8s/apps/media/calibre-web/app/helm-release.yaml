@@ -46,12 +46,12 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
 
-        pod:
-          securityContext:
-            runAsUser: 1002
-            runAsGroup: 100
-            fsGroup: 100
-            fsGroupChangePolicy: "OnRootMismatch"
+        # pod:
+        #   securityContext:
+        #     runAsUser: 1002
+        #     runAsGroup: 100
+        #     fsGroup: 100
+        #     fsGroupChangePolicy: "OnRootMismatch"
 
         containers:
           calibre-web:
@@ -61,6 +61,7 @@ spec:
             env:
               CACHE_DIR: /cache
               CALIBRE_PORT: &port 8083
+              TZ: ${TIMEZONE}
               PUID: 1002
               PGID: 100
             probes:
@@ -114,7 +115,7 @@ spec:
         advancedMounts:
           calibre-web:
             calibre-web:
-              - path: /data/ebooks
+              - path: /books
       cache:
         type: emptyDir
         globalMounts:
