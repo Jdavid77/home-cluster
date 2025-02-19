@@ -31,7 +31,7 @@ spec:
               tag: latest@sha256:15e1de5f35f94c822272ec56acc9776cea9bd47dc8e96316c652c0c1a7677dd5
             env:
               TZ: ${TIMEZONE}
-              META_TITLE: João David Nóbrega
+              META_TITLE: "@joaodavid77"
               META_DESCRIPTION: João David Nóbrega Link Page
               META_KEYWORDS: Devops
               META_AUTHOR: João David Nóbrega
