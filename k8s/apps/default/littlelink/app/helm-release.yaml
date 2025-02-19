@@ -31,7 +31,7 @@ spec:
               tag: latest@sha256:15e1de5f35f94c822272ec56acc9776cea9bd47dc8e96316c652c0c1a7677dd5
             env:
               TZ: ${TIMEZONE}
-              META_TITLE: "@joaodavid77"
+              META_TITLE: João David Nóbrega
               META_DESCRIPTION: João David Nóbrega Link Page
               META_KEYWORDS: Devops
               META_AUTHOR: João David Nóbrega
@@ -43,7 +43,7 @@ spec:
               OG_URL: https://links.${SECRET_DOMAIN}
               AVATAR_URL: https://media.licdn.com/dms/image/v2/D4D03AQHy9TDTu7zkCg/profile-displayphoto-shrink_800_800/B4DZS.wWQhH0Ac-/0/1738367133232?e=1745452800&v=beta&t=7mKbl17M0jmHqtgy22apUGmOY3B0k8fcMHB37LsWNuM
               AVATAR_2X_URL: https://media.licdn.com/dms/image/v2/D4D03AQHy9TDTu7zkCg/profile-displayphoto-shrink_800_800/B4DZS.wWQhH0Ac-/0/1738367133232?e=1745452800&v=beta&t=7mKbl17M0jmHqtgy22apUGmOY3B0k8fcMHB37LsWNuM
-              NAME: João David Nóbrega
+              NAME: "@joaodavid77"
               THEME: Dark
               BIO: "Devops Engineer"
               BUTTON_ORDER: GITHUB,LINKED_IN,MEDIUM
