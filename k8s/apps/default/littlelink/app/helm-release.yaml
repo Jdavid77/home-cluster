@@ -46,9 +46,10 @@ spec:
               NAME: João David Nóbrega
               THEME: Dark
               BIO: "Devops Engineer"
-              BUTTON_ORDER: GITHUB,LINKED_IN
+              BUTTON_ORDER: GITHUB,LINKED_IN,MEDIUM
               GITHUB: https://github.com/Jdavid77
               LINKED_IN: https://www.linkedin.com/in/joaodavid77/
+              MEDIUM: https://medium.com/@johnynobrega17
               EMAIL: johnynobrega17@gmail.com
               EMAIL_TEXT: Email me!
               FOOTER: João David Nóbrega © 2024-Present
