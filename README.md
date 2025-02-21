@@ -1,6 +1,6 @@
 <h1 align="center"><div align="center">
 
-<img src="docs/src/assets/logo.png" align="center" width="200px" height="194px"/>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Kubernetes_logo_without_workmark.svg/1055px-Kubernetes_logo_without_workmark.svg.png" align="center" width="200px" height="194px"/>
 
 ### Kubernetes cluster
 
@@ -45,39 +45,191 @@ The setup is based on Talos OS. I used [Talhelper](https://budimanjojo.github.io
 
 ---
 
-## :wrench:&nbsp; Tools
+## :wrench:&nbsp; External Tools 
 
-Here's the updated table including Terraform:
-
-| Tool                                                       | Purpose                                                                 |
-|-------------------------------------------------------------|-------------------------------------------------------------------------|
-| [Sops](https://github.com/mozilla/sops)                     | A flexible tool for managing repository secrets securely.               |
-| [Pre-commit](https://github.com/pre-commit/pre-commit)      | Ensures consistency and quality of YAML and shell scripts in the repository. |
-| [Renovate](https://docs.renovatebot.com/)                   | Automates the detection of new releases and creates pull requests accordingly. |
-| [Akeyless](https://console.akeyless.io/)                    | A centralized platform for managing and securing certificates, credentials, and keys, used in conjunction with External Secrets. |
-| [Cloudflare](https://www.cloudflare.com/en-gb/)             | DNS management service for handling domain name resolutions.            |
-| [GMX](https://www.gmx.com)                                  | SMTP service provider for managing email communications.                |
-| [Terraform](https://www.terraform.io/)                      | IAC tool for automating the provisioning and management of outside dependencies (Akeyless, Cloudflare, etc...). |
-
----
+<table>
+            <tr>
+                <th>Logo</th>
+                <th>Tool</th>
+                <th>Purpose</th>
+            </tr>
+            <tr>
+                <td><img width="32" src="https://archive.org/download/github.com-mozilla-sops_-_2020-01-23_22-37-00/cover.jpg" alt="Sops logo" /></td>
+                <td><a href="https://github.com/mozilla/sops">Sops</a></td>
+                <td>A flexible tool for managing repository secrets securely.</td>
+            </tr>
+            <tr>
+                <td><img width="32" src="https://pre-commit.com/logo.svg" alt="Pre-commit logo" /></td>
+                <td><a href="https://github.com/pre-commit/pre-commit">Pre-commit</a></td>
+                <td>Ensures consistency and quality of YAML and shell scripts in the repository.</td>
+            </tr>
+            <tr>
+                <td><img width="32" src="https://www.svgrepo.com/download/374041/renovate.svg" alt="Renovate logo" /></td>
+                <td><a href="https://docs.renovatebot.com/">Renovate</a></td>
+                <td>Automates the detection of new releases and creates pull requests accordingly.</td>
+            </tr>
+            <tr>
+                <td><img width="32" src="https://cdn.brandfetch.io/idO1RZnoWN/w/400/h/400/theme/dark/icon.png?c=1dxbfHSJFAPEGdCLU4o5B" alt="Akeyless logo" /></td>
+                <td><a href="https://console.akeyless.io/">Akeyless</a></td>
+                <td>A centralized platform for managing and securing certificates, credentials, and keys.</td>
+            </tr>
+            <tr>
+                <td><img width="32" src="https://www.svgrepo.com/download/353564/cloudflare.svg" alt="Cloudflare logo" /></td>
+                <td><a href="https://www.cloudflare.com/en-gb/">Cloudflare</a></td>
+                <td>DNS management service for handling domain name resolutions.</td>
+            </tr>
+            <tr>
+                <td><img width="32" src="https://www.svgrepo.com/download/331413/gmx.svg" alt="GMX logo" /></td>
+                <td><a href="https://www.gmx.com">GMX</a></td>
+                <td>SMTP service provider for managing email communications.</td>
+            </tr>
+            <tr>
+                <td><img width="32" src="https://www.svgrepo.com/download/354447/terraform-icon.svg" alt="Terraform logo" /></td>
+                <td><a href="https://www.terraform.io/">Terraform</a></td>
+                <td>IAC tool for automating the provisioning and management of outside dependencies (Akeyless, Cloudflare, etc...).</td>
+            </tr>
+    </table>
 
 ## 🔧 Hardware
 
 
 Here's the updated table with the links added:
 
-| Devices          | Count | OS Disk Size | RAM  | Operating System | Purpose            | Links                                                                                                  |
-|------------------|-------|--------------|------|------------------|--------------------|--------------------------------------------------------------------------------------------------------|
-| Bmax1-master     | 1     | 128GB        | 8GB  | Talos v1.8.2     | Kubernetes Control | [Amazon Link](https://www.amazon.es/dp/B0CJM1TDHL?ref=ppx_yo2ov_dt_b_fed_asin_title)                   |
-| Soyo1-master     | 1     | 128GB        | 6GB  | Talos v1.8.2     | Kubernetes Control | [AliExpress Link](https://es.aliexpress.com/item/1005006460890415.html?aff_fcid=505c2a4499e846b2a13fde87aa7c7385-1733566005358-08415-_DBcuZW1&tt=CPS_NORMAL&aff_fsk=_DBcuZW1&aff_platform=portals-tool&sk=_DBcuZW1&aff_trace_key=505c2a4499e846b2a13fde87aa7c7385-1733566005358-08415-_DBcuZW1&terminal_id=bb14814936f042d6a7ff280cc2d52e01&afSmartRedirect=y) |
-| Soyo2-master     | 1     | 128GB        | 6GB  | Talos v1.8.2     | Kubernetes Control | [AliExpress Link](https://es.aliexpress.com/item/1005006460890415.html?aff_fcid=505c2a4499e846b2a13fde87aa7c7385-1733566005358-08415-_DBcuZW1&tt=CPS_NORMAL&aff_fsk=_DBcuZW1&aff_platform=portals-tool&sk=_DBcuZW1&aff_trace_key=505c2a4499e846b2a13fde87aa7c7385-1733566005358-08415-_DBcuZW1&terminal_id=bb14814936f042d6a7ff280cc2d52e01&afSmartRedirect=y) |
-| Hp-worker2       | 1     | 240GB        | 28GB | Talos v1.8.2     | Kubernetes Worker  | [Amazon Link](https://www.amazon.es/dp/B0792TQ4XS?ref=ppx_yo2ov_dt_b_fed_asin_title)                   |
-| Hp-worker3       | 1     | 240GB        | 32GB | Talos v1.8.2     | Kubernetes Worker  | [Amazon Link](https://www.amazon.es/dp/B0792TQ4XS?ref=ppx_yo2ov_dt_b_fed_asin_title)                   |
-| Raspberry PI 4   | 1     | 3TB (2 + 1)  | 8GB  | Pi OS            | NAS (OMV)          |                                                                                                        |
-| TP-Link LS108G   | 1     | -            | -    | -                | Switch             |                                                                                                        |
+<table>
+        <thead>
+            <tr>
+                <th>Devices</th>
+                <th>Count</th>
+                <th>OS Disk Size</th>
+                <th>RAM</th>
+                <th>Operating System</th>
+                <th>Purpose</th>
+                <th>Links</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Bmax1-master</td>
+                <td>1</td>
+                <td>128GB</td>
+                <td>8GB</td>
+                <td>Talos v1.9.3</td>
+                <td>Kubernetes Control</td>
+                <td><a href="https://www.amazon.es/dp/B0CJM1TDHL?ref=ppx_yo2ov_dt_b_fed_asin_title">Amazon Link</a></td>
+            </tr>
+            <tr>
+                <td>Soyo1-master</td>
+                <td>1</td>
+                <td>128GB</td>
+                <td>6GB</td>
+                <td>Talos v1.9.3</td>
+                <td>Kubernetes Control</td>
+                <td><a href="https://es.aliexpress.com/item/1005006460890415.html?aff_fcid=505c2a4499e846b2a13fde87aa7c7385-1733566005358-08415-_DBcuZW1&tt=CPS_NORMAL&aff_fsk=_DBcuZW1&aff_platform=portals-tool&sk=_DBcuZW1&aff_trace_key=505c2a4499e846b2a13fde87aa7c7385-1733566005358-08415-_DBcuZW1&terminal_id=bb14814936f042d6a7ff280cc2d52e01&afSmartRedirect=y">AliExpress Link</a></td>
+            </tr>
+            <tr>
+                <td>Soyo2-master</td>
+                <td>1</td>
+                <td>128GB</td>
+                <td>6GB</td>
+                <td>Talos v1.9.3</td>
+                <td>Kubernetes Control</td>
+                <td><a href="https://es.aliexpress.com/item/1005006460890415.html?aff_fcid=505c2a4499e846b2a13fde87aa7c7385-1733566005358-08415-_DBcuZW1&tt=CPS_NORMAL&aff_fsk=_DBcuZW1&aff_platform=portals-tool&sk=_DBcuZW1&aff_trace_key=505c2a4499e846b2a13fde87aa7c7385-1733566005358-08415-_DBcuZW1&terminal_id=bb14814936f042d6a7ff280cc2d52e01&afSmartRedirect=y">AliExpress Link</a></td>
+            </tr> 
+            <tr>
+                <td>Hp-worker1</td>
+                <td>1</td>
+                <td>240GB</td>
+                <td>20GB</td>
+                <td>Talos v1.9.3</td>
+                <td>Kubernetes Worker</td>
+                <td><a href="https://www.amazon.es/HP-Ultra-i5-6500T-Windows-reacondicionado/dp/B09N7RDZS4/ref=sr_1_6?__mk_es_ES=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=5P820ES85Z7&dib=eyJ2IjoiMSJ9.9qQ4-jcMh6rXQhtkqIYNbkuJggelF1M_SJlqlGQCAHcPjfxWlB_RU0FJjyMfb5oLuK-EeHupVLktRPePaLSwtwdZ7UQAqRcTE5AMdeSt_JjvXJwN9xP6tJkSVZjvfnjWuzPe8JcUNuhgvE089AjHcfb12wMdPstVMotSvYjhYQ_05eUlY7gpmrHbT2Jft-Ljk2Ix8umRel2DZfzKF0IlCsnZKfNFdo3iZJw2ZBARp1hkbWDRgB75yWnJt-AB_L4kQz10EiF2DByt4qxn3lz0RHoxzUSz9KPzSKDfTF2atRiZXWV8Ey9c5a32K-jHafQLTMc8p4kq9g-CEAYojjwSNLr7Da6Rjk1jvH6aH-tEAREpncDfcedtqGgQm9icJW9kNtFuZVyKm4-X5I3Rdn_l9jFVhkBINkUZngDQFjwQCS-ILYQlFBjqnBatzGrkQI-u.QPP6rbbL-trb_zb96HCzozMA-Gitd5ibCVXwhXsrAf0&dib_tag=se&keywords=hp+minipc+800+g4&qid=1740177891&sprefix=hp+mini+pc+800+g%2Caps%2C213&sr=8-6">Amazon Link</a></td>
+            </tr>
+            <tr>
+                <td>Hp-worker2</td>
+                <td>1</td>
+                <td>240GB</td>
+                <td>28GB</td>
+                <td>Talos v1.9.3</td>
+                <td>Kubernetes Worker</td>
+                <td><a href="https://www.amazon.es/dp/B0792TQ4XS?ref=ppx_yo2ov_dt_b_fed_asin_title">Amazon Link</a></td>
+            </tr>
+            <tr>
+                <td>Hp-worker3</td>
+                <td>1</td>
+                <td>240GB</td>
+                <td>32GB</td>
+                <td>Talos v1.9.3</td>
+                <td>Kubernetes Worker</td>
+                <td><a href="https://www.amazon.es/dp/B0792TQ4XS?ref=ppx_yo2ov_dt_b_fed_asin_title">Amazon Link</a></td>
+            </tr>
+            <tr>
+                <td>Raspberry PI 4</td>
+                <td>1</td>
+                <td>3TB (2 + 1)</td>
+                <td>8GB</td>
+                <td>Pi OS</td>
+                <td>NAS - OpenMediaVault</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>TP-Link LS108G</td>
+                <td>1</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>Switch</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    
+### Applications
 
+#### Infrastruture Related
 
----
+<table>
+    <tr>
+        <th>Logo</th>
+        <th>Name</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td><img width="32" src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/cert-manager.svg"></td>
+        <td><a href="https://cert-manager.io/">Cert Manager</a></td>
+        <td>Let's Encrypt Certificates for SSL/TLS</td>
+    </tr>
+    <tr>
+        <td><img width="32" src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/cilium.svg"></td>
+        <td><a href="https://cilium.io/">Cilium</a></td>
+        <td>CNI </td>
+    </tr>
+        <tr>
+        <td><img width="32" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuQSJXRx5KbH4dtzk4dxVgw0Gtgk264x_TXw&s"></td>
+        <td><a href="https://longhorn.io/">Longhorn</a></td>
+        <td>Distributed block storage for POD’s persistent volumes </td>
+    </tr>
+    </tr>
+        <tr>
+        <td><img width="32" src="https://cdn.worldvectorlogo.com/logos/minio-1.svg"></td>
+        <td><a href="https://min.io/">Minio</a></td>
+        <td>S3 Object storage</td>
+    </tr>
+    <tr>
+        <td><img width="32" src="https://www.svgrepo.com/download/530451/dns.svg"></td>
+        <td><a href="https://github.com/kubernetes-sigs/external-dns">External DNS</a></td>
+        <td>Synchronizes exposed Kubernetes Services and Ingresses with DNS providers.</td>
+    </tr>
+    <tr>
+        <td><img width="32" src="https://www.svgrepo.com/download/477066/lock.svg"></td>
+        <td><a href="https://external-secrets.io/latest/">External Secrets Operator</a></td>
+        <td>Used with Akeyless Platform to retrieve and push secrets</td>
+    </tr>
+    <tr>
+        <td><img width="32" src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/flux-cd.svg"></td>
+        <td><a href="https://fluxcd.io/">Flux CD</a></td>
+        <td>GitOps tool of choice</td>
+    </tr>
+</table>
 
 ## Gratitude and Thanks
 
