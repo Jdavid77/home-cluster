@@ -4,5 +4,4 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./snapshot-controller/ks.yaml
-  # - ./velero/ks.yaml
   - ./postgres/ks.yaml
