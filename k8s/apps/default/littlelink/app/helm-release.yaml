@@ -53,7 +53,7 @@ spec:
               CUSTOM_BUTTON_TEXT_COLOR: #ffffff
               CUSTOM_BUTTON_ALT_TEXT: HomeLab
               CUSTOM_BUTTON_NAME: HOMELAB
-              CUSTOM_BUTTON_ICON: fas fa-computer
+              # CUSTOM_BUTTON_ICON: fas fa-computer
               GITHUB: https://github.com/Jdavid77
               LINKED_IN: https://www.linkedin.com/in/joaodavid77/
               MEDIUM: https://medium.com/@johnynobrega17
