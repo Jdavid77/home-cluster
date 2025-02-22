@@ -39,13 +39,16 @@ The setup is based on Talos OS. I used [Talhelper](https://budimanjojo.github.io
 📁 terraform
 ├── 📁 authentik
 ├── 📁 akeyless
-└── 📁 cloudflare
+├── 📁 cloudflare
+└── 📁 minio
 
 ```
-
 ---
 
 ## :wrench:&nbsp; External Third-Party Components 
+
+These tools complement the Kubernetes infrastructure by providing essential functionality for **security**, **automation** and **infrastructure** management
+
 
 <table>
             <tr>
@@ -93,7 +96,7 @@ The setup is based on Talos OS. I used [Talhelper](https://budimanjojo.github.io
 ## 🔧 Hardware
 
 
-Here's the updated table with the links added:
+Hardware is a combination of mini PC's and desktop computers. Worker nodes have been upgraded to have more RAM.
 
 <table>
         <thead>
@@ -183,6 +186,8 @@ Here's the updated table with the links added:
         </tbody>
     </table>
     
+  ---
+    
 ### Applications
 
 #### Infrastruture Related
@@ -220,7 +225,7 @@ Here's the updated table with the links added:
         <td>Synchronizes exposed Kubernetes Services and Ingresses with DNS providers.</td>
     </tr>
     <tr>
-        <td><img width="32" src="https://www.svgrepo.com/download/477066/lock.svg"></td>
+        <td><img width="32" src="https://api.civo.com/k3s-marketplace/kubernetes-external-secrets.png"></td>
         <td><a href="https://external-secrets.io/latest/">External Secrets Operator</a></td>
         <td>Used with Akeyless Platform to retrieve and push secrets</td>
     </tr>
@@ -255,11 +260,55 @@ Here's the updated table with the links added:
         <td>Curated Threat Intelligence. Used in conjunction with Traefik</td>
     </tr>
     <tr>
+        <td><img width="32" src="https://static-00.iconduck.com/assets.00/authentik-orange-icon-512x391-4kzut6y1.png"></td>
+        <td><a href="https://goauthentik.io/">Authentik</a></td>
+        <td>Open source identity provider</td>
+    </tr>
+    <tr>
         <td><img width="32" src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/flux-cd.svg"></td>
         <td><a href="https://fluxcd.io/">Flux CD</a></td>
         <td>GitOps tool of choice</td>
     </tr>
 </table>
+
+---
+
+### NAS
+
+The backbone of my home storage infrastructure is built on a Raspberry Pi 4 running [OpenMediaVault](https://www.openmediavault.org/), a dedicated network-attached storage solution. The system utilizes two SSDs (2TB + 1TB) configured to store:
+
+-   Media content (books, audiobooks)
+-   Longhorn volume backups
+-   System configurations
+-   Docker Containers Data
+
+The NAS hosts several essential containers:
+
+<table>
+    <tr>
+        <th>Service</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td><a href="https://www.postgresql.org/">Postgres</a></td>
+        <td>Reliable relational database for persistent data storage</td>
+    </tr>
+    <tr>
+        <td><a href="https://pi-hole.net/">PI-Hole</a></td>
+        <td>Network-wide ad blocking and local DNS management</td>
+    </tr>
+    <tr>
+        <td><a href="https://www.portainer.io/">Portainer</a></td>
+        <td>Container management and monitoring interface</td>
+    </tr>
+    <tr>
+        <td><a href="Tailscale exit node egressing over NordVPN">TailNord</a></td>
+        <td>Tailscale exit node egressing over NordVPN</td>
+    </tr>
+</table>
+
+
+---
 
 ## Gratitude and Thanks
 
