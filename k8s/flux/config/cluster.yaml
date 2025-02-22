@@ -7,11 +7,12 @@ metadata:
   namespace: flux-system
 spec:
   interval: 30m
-  url: ssh://git@github.com/Jdavid77/home-cluster
+  url: https://github.com/Jdavid77/home-cluster.git
   ref:
     branch: main
+  provider: github
   secretRef:
-    name: github-deploy-key
+    name: github-app
   ignore: |
     # exclude all
     /*
