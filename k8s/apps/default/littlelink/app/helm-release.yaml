@@ -46,13 +46,13 @@ spec:
               NAME: "@joaodavid77"
               THEME: Dark
               BIO: "Devops Engineer"
-              BUTTON_ORDER: GITHUB,LINKED_IN,MEDIUM
+              BUTTON_ORDER: GITHUB,LINKED_IN,MEDIUM,HOMELAB,EMAIL
               CUSTOM_BUTTON_TEXT: HomeLab
               CUSTOM_BUTTON_URL: https://github.com/Jdavid77/home-cluster
               CUSTOM_BUTTON_COLOR: #000000,#000000
               CUSTOM_BUTTON_TEXT_COLOR: #ffffff,#ffffff
               CUSTOM_BUTTON_ALT_TEXT: HomeLab
-              CUSTOM_BUTTON_NAME: HomeLab
+              CUSTOM_BUTTON_NAME: HOMELAB
               CUSTOM_BUTTON_ICON: fas fa-computer
               GITHUB: https://github.com/Jdavid77
               LINKED_IN: https://www.linkedin.com/in/joaodavid77/
