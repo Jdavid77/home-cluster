@@ -45,7 +45,7 @@ The setup is based on Talos OS. I used [Talhelper](https://budimanjojo.github.io
 
 ---
 
-## :wrench:&nbsp; External Tools 
+## :wrench:&nbsp; External Third-Party Components 
 
 <table>
             <tr>
@@ -223,6 +223,36 @@ Here's the updated table with the links added:
         <td><img width="32" src="https://www.svgrepo.com/download/477066/lock.svg"></td>
         <td><a href="https://external-secrets.io/latest/">External Secrets Operator</a></td>
         <td>Used with Akeyless Platform to retrieve and push secrets</td>
+    </tr>
+    <tr>
+        <td><img width="32" src="https://cdn.worldvectorlogo.com/logos/traefik-1.svg"></td>
+        <td><a href="https://traefik.io/traefik/">Traefik</a></td>
+        <td>Reverse proxy and Ingress controller</td>
+    </tr>
+    <tr>
+        <td><img width="32" src="https://cdn.brandfetch.io/id7QyaLp8E/w/768/h/768/theme/dark/logo.png?c=1dxbfHSJFAPEGdCLU4o5B"></td>
+        <td><a href="https://tailscale.com/kb/1236/kubernetes-operator">Tailscale Operator</a></td>
+        <td>Secure access to Kubernetes</td>
+    </tr>
+    <tr>
+        <td><img width="32" src="https://www.svgrepo.com/download/353564/cloudflare.svg"></td>
+        <td><a href="https://github.com/cloudflare/cloudflared">Cloudflared</a></td>
+        <td>Cloudflare Tunnel client</td>
+    </tr>
+    <tr>
+        <td><img width="32" src="https://avatars.githubusercontent.com/u/33050221?v=4"></td>
+        <td><a href="https://github.com/kubernetes-csi/csi-driver-nfs">CSI Driver NFS</a></td>
+        <td>Allows Kubernetes to access NFS server</td>
+    </tr>
+    <tr>
+        <td><img width="32" src="https://avatars.githubusercontent.com/u/104819355?v=4"></td>
+        <td><a href="https://www.dragonflydb.io/docs/getting-started/kubernetes-operator">Dragonfly</a></td>
+        <td>Modern in-memory datastore, fully compatible with Redis and Memcached APIs</td>
+    </tr>
+    <tr>
+        <td><img width="32" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAF1eQ7_2Jmsj_I0Julb8r4YkUO8aXe9Q53A&s"></td>
+        <td><a href="https://www.crowdsec.net/">Crowdsec</a></td>
+        <td>Curated Threat Intelligence. Used in conjunction with Traefik</td>
     </tr>
     <tr>
         <td><img width="32" src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/flux-cd.svg"></td>
