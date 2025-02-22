@@ -7,3 +7,4 @@ resources:
   - ./redlib/ks.yaml
   - ./wallos/ks.yaml
   - ./littlelink/ks.yaml
+  - ./wallabag/ks.yaml
