@@ -45,7 +45,7 @@ spec:
               AVATAR_2X_URL: https://media.licdn.com/dms/image/v2/D4D03AQHy9TDTu7zkCg/profile-displayphoto-shrink_800_800/B4DZS.wWQhH0Ac-/0/1738367133232?e=1745452800&v=beta&t=7mKbl17M0jmHqtgy22apUGmOY3B0k8fcMHB37LsWNuM
               NAME: "@joaodavid77"
               THEME: Dark
-              BIO: "Devops Engineer"
+              BIO: "DevOps Engineer | Homelab | 🇵🇹"
               BUTTON_ORDER: GITHUB,LINKED_IN,MEDIUM,HOMELAB,EMAIL
               CUSTOM_BUTTON_TEXT: HomeLab
               CUSTOM_BUTTON_URL: https://github.com/Jdavid77/home-cluster
