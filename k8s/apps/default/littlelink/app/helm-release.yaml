@@ -49,8 +49,8 @@ spec:
               BUTTON_ORDER: GITHUB,LINKED_IN,MEDIUM,HOMELAB,EMAIL
               CUSTOM_BUTTON_TEXT: HomeLab
               CUSTOM_BUTTON_URL: https://github.com/Jdavid77/home-cluster
-              CUSTOM_BUTTON_COLOR: #000000,#000000
-              CUSTOM_BUTTON_TEXT_COLOR: #ffffff,#ffffff
+              CUSTOM_BUTTON_COLOR: #000000
+              CUSTOM_BUTTON_TEXT_COLOR: #ffffff
               CUSTOM_BUTTON_ALT_TEXT: HomeLab
               CUSTOM_BUTTON_NAME: HOMELAB
               CUSTOM_BUTTON_ICON: fas fa-computer
