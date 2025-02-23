@@ -17,7 +17,7 @@ spec:
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
-      name: littlelink
+      name: linkding
       namespace: default
   wait: true
   interval: 30m
