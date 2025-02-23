@@ -3,13 +3,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: wallabag
+  name: linkding
   namespace: flux-system
 spec:
   targetNamespace: default
-  path: ./k8s/apps/default/wallabag/app
   dependsOn:
-    - name: external-secrets-store
+    - name: default-pvs
+  path: ./k8s/apps/default/linkding/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -17,7 +17,7 @@ spec:
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
-      name: wallabag
+      name: littlelink
       namespace: default
   wait: true
   interval: 30m
