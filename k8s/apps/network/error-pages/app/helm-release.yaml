@@ -37,7 +37,7 @@ spec:
               tag: 3.3.1@sha256:8aa49143d301a8e43fb38578a21450567169c32068db7c43a05a67ac9f9283c8
             env:
               TZ: ${TIMEZONE}
-              TEMPLATE_NAME: hacker-terminal
+              TEMPLATE_NAME: lost-in-space
             resources:
               requests:
                 cpu: 5m
