@@ -72,7 +72,7 @@ spec:
           hajimari.io/icon: link
           external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
         hosts:
-          - host: &host "links.${SECRET_DOMAIN}"
+          - host: &host "bookmarks.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
@@ -82,7 +82,7 @@ spec:
           - hosts:
               - *host
             secretName: ${SECRET_DOMAIN}-tls
-            
+
     persistence:
       config:
         enabled: true
