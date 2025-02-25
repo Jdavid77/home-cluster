@@ -13,15 +13,12 @@ spec:
   ingress:
     - fromEndpoints:
         - matchLabels:
-            name: prometheus
+            app.kubernetes.io/name: prometheus
+            io.kubernetes.pod.namespace: monitoring
       toPorts:
         - ports:
           - port: "8080"
             protocol: "TCP"
-          rules:
-            http:
-            - method: "GET"
-              path: "/metrics"
     - fromEntities:
         - kube-apiserver
       toPorts:
