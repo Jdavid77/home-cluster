@@ -8,15 +8,21 @@ spec:
     matchLabels:
       app.kubernetes.io/name: external-secrets
   egress:
-    - toEntities:
-        - kube-apiserver
-    - toCIDR:
-        - 3.33.153.134/32
-        - 75.2.48.248/32
+    - toEndpoints:
+      - matchLabels:
+          io.kubernetes.pod.namespace: kube-system
+          k8s-app: kube-dns
       toPorts:
         - ports:
-          - port: "443"
-            protocol: "TCP"
+           - port: "53"
+             protocol: ANY
+          rules:
+            dns:
+              - matchPattern: "*"
+    - toFQDNs:
+        - matchName: "api.akeyless.io"
+    - toEntities:
+        - kube-apiserver
   ingress:
     - fromEndpoints:
         - matchLabels:
