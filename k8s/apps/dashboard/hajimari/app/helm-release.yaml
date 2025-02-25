@@ -73,7 +73,7 @@ spec:
         - group: NAS
           apps:
             - name: OMV
-              url: 'http://omv.${SECRET_DOMAIN}'
+              url: 'https://omv.${SECRET_DOMAIN}'
               icon: 'simple-icons:openmediavault'
               info: OMV
     ingress:
