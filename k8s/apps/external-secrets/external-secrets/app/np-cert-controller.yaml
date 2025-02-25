@@ -6,17 +6,17 @@ metadata:
 spec:
   endpointSelector:
     matchLabels:
-      metrics: cert-controller
+      app.kubernetes.io/name: external-secrets-cert-controller
   egress:
     - toEntities:
         - kube-apiserver 
   ingress:
     - fromEndpoints:
         - matchLabels:
-            name: prometheus
+            app.kubernetes.io/name: prometheus
       toPorts:
         - ports:
-          - port: "8080"
+          - port: "8089"
             protocol: "TCP"
           rules:
             http:
