@@ -16,5 +16,11 @@ spec:
         - ports:
             - port: "3000"
               protocol: TCP
+    - fromEntities:
+        - host
+      toPorts:
+        - ports:
+            - port: "3000"
+              protocol: TCP
   egress:
     - {}
