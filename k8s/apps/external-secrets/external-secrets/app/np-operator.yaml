@@ -6,7 +6,7 @@ metadata:
 spec:
   endpointSelector:
     matchLabels:
-      name: external-secrets
+      app.kubernetes.io/name: external-secrets
   egress:
     - toEntities:
         - kube-apiserver
