@@ -1,0 +1,32 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "eso-operator-np"
+  namespace: external-secrets
+spec:
+  endpointSelector:
+    matchLabels:
+      name: external-secrets
+  egress:
+    - toEntities:
+        - kube-apiserver
+    - toCIDR:
+        - 3.33.153.134/32
+        - 75.2.48.248/32
+      toPorts:
+        - ports:
+          - port: "443"
+            protocol: "TCP"
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            name: prometheus
+      toPorts:
+        - ports:
+          - port: "8080"
+            protocol: "TCP"
+          rules:
+            http:
+            - method: "GET"
+              path: "/metrics"
+

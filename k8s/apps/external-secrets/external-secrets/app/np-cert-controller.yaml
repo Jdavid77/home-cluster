@@ -1,0 +1,30 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "eso-cert-controller-np"
+  namespace: external-secrets
+spec:
+  endpointSelector:
+    matchLabels:
+      metrics: cert-controller
+  egress:
+    - toEntities:
+        - kube-apiserver 
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            name: prometheus
+      toPorts:
+        - ports:
+          - port: "8080"
+            protocol: "TCP"
+          rules:
+            http:
+            - method: "GET"
+              path: "/metrics"
+    - fromEntities:
+        - host
+      toPorts:
+        - ports:
+            - port: "8081"
+              protocol: TCP

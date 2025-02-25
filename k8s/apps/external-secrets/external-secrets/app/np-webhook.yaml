@@ -1,0 +1,39 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "eso-webhook-np"
+  namespace: external-secrets
+spec:
+  endpointSelector:
+    matchLabels:
+      name: external-secrets-webhook
+  egress:
+    - toEntities:
+        - kube-apiserver
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            name: prometheus
+      toPorts:
+        - ports:
+          - port: "8080"
+            protocol: "TCP"
+          rules:
+            http:
+            - method: "GET"
+              path: "/metrics"
+    - fromEntities:
+        - kube-apiserver
+      toPorts:
+        - ports:
+          - port: "10250"
+            protocol: "TCP"
+    - fromEntities:
+        - host
+      toPorts:
+        - ports:
+            - port: "8081"
+              protocol: TCP
+
+
+
