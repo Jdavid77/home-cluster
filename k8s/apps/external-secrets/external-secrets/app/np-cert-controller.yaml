@@ -16,7 +16,7 @@ spec:
             app.kubernetes.io/name: prometheus
       toPorts:
         - ports:
-          - port: "8089"
+          - port: "8080"
             protocol: "TCP"
           rules:
             http:
