@@ -20,7 +20,8 @@ spec:
   ingress:
     - fromEndpoints:
         - matchLabels:
-            name: prometheus
+            app.kubernetes.io/name: prometheus
+            io.kubernetes.pod.namespace: monitoring
       toPorts:
         - ports:
           - port: "8080"
