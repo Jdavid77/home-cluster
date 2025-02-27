@@ -12,7 +12,8 @@ data:
 
     allow_anonymous false
 
-    persistence false
+    persistence true
+    persistence_location /mosquitto/data/
 
     log_timestamp true
     log_type debug
