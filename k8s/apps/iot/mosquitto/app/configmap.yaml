@@ -1,0 +1,29 @@
+apiVersion: v1
+data:
+  aclfile.acl: |-
+    user admin
+    topic readwrite #
+  mosquitto.conf: |
+    listener 8883
+    protocol mqtt
+    cafile /etc/ssl/certs/ca-cert-ISRG_Root_X1.pem
+    certfile /mosquitto/certs/tls.crt
+    keyfile /mosquitto/certs/tls.key
+
+    allow_anonymous false
+
+    persistence false
+
+    log_timestamp true
+    log_type debug
+    log_timestamp_format %Y-%m-%dT%H:%M:%S
+
+    autosave_interval 1800
+
+    password_file /mosquitto/config/passwdfile.pwd
+
+    acl_file /mosquitto/config/aclfile.acl
+kind: ConfigMap
+metadata:
+  name: mosquitto-config
+
