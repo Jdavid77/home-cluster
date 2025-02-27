@@ -18,6 +18,7 @@ data:
     log_timestamp true
     log_type debug
     log_timestamp_format %Y-%m-%dT%H:%M:%S
+    log_dest file /mosquitto/log/mosquitto.log
 
     autosave_interval 1800
 
