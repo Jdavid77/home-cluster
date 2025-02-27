@@ -20,7 +20,7 @@ data:
 
     autosave_interval 1800
 
-    password_file /mosquitto/config/passwdfile.pwd
+    password_file /mosquitto/external_config/passwdfile.pwd
 
     acl_file /mosquitto/config/aclfile.acl
 kind: ConfigMap

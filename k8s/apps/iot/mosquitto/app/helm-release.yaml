@@ -34,7 +34,7 @@ spec:
               tag: 2.0.20
               pullPolicy: IfNotPresent
             command: ["/bin/sh", "-c"]
-            args: ["cp /tmp/secret/* /mosquitto/config/ && mosquitto_passwd -U /mosquitto/config/passwdfile.pwd"]
+            args: ["cp /tmp/secret/* /mosquitto/external_config/ && mosquitto_passwd -U /mosquitto/external_config/passwdfile.pwd"]
         containers:
           app:
             image:
@@ -87,3 +87,8 @@ spec:
           mosquitto:
             app:
               - path: /mosquitto/certs
+                
+      external-config:
+        type: emptyDir
+        globalMounts:
+          - path: /mosquitto/external_config
