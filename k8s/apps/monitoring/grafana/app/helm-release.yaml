@@ -311,6 +311,7 @@ spec:
       - grafana-clock-panel
       - grafana-piechart-panel
       - grafana-worldmap-panel
+      - grafana-mqtt-datasource
     serviceMonitor:
       enabled: true
     ingress:
