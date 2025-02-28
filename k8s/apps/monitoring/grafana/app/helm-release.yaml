@@ -34,52 +34,53 @@ spec:
       existingSecret: grafana-admin
       userKey: GRAFANA_ADMIN_USERNAME
       passwordKey: GRAFANA_ADMIN_PASSWORD
-    env:
-      GF_AUTH_GENERIC_OAUTH_API_URL: https://auth.${SECRET_DOMAIN}/application/o/userinfo/
-      GF_AUTH_GENERIC_OAUTH_AUTH_URL: https://auth.${SECRET_DOMAIN}/application/o/authorize/
-      GF_AUTH_GENERIC_OAUTH_TOKEN_URL: https://auth.${SECRET_DOMAIN}/application/o/token/
-      GF_AUTH_GENERIC_OAUTH_ALLOW_SIGN_UP: "true"
-      GF_DATE_FORMATS_USE_BROWSER_LOCALE: true
-      GF_EXPLORE_ENABLED: true
-      GF_PANELS_DISABLE_SANITIZE_HTML: true
-      GF_LOG_FILTERS: rendering:debug
-      GF_DATE_FORMATS_FULL_DATE: "DD.MM.YYYY hh:mm:ss"
-      GF_SECURITY_ALLOW_EMBEDDING: true
-      GF_SECURITY_COOKIE_SAMESITE: grafana
-      GF_SERVER_ROOT_URL: https://grafana.${SECRET_DOMAIN}
     envFromSecrets:
       - name: grafana-secret
     grafana.ini:
       analytics:
-        check_for_updates: false
         check_for_plugin_updates: false
+        check_for_updates: false
         reporting_enabled: false
       auth:
-        signout_redirect_url: "https://auth.${SECRET_DOMAIN}/application/o/grafana/end-session/"
-        oauth_auto_login: false
         oauth_allow_insecure_email_lookup: true
-      auth.generic_oauth:
-        enabled: true
-        name: Authentik
-        icon: signin
-        scopes: "openid profile email groups"
-        empty_scopes: false
-        login_attribute_path: user
-        groups_attribute_path: groups
-        name_attribute_path: user
-        use_pkce: true
-      auth.generic_oauth.group_mapping:
-        org_id: 1
-        role_attribute_path: |
-          contains(groups[*], 'grafana_admin') && 'Admin' || contains(groups[*], 'grafana_viewer') && 'Viewer'
-      auth.basic:
-        enabled: true
+        oauth_auto_login: false
+        signout_redirect_url: "https://auth.${SECRET_DOMAIN}/application/o/grafana/end-session/"
       auth.anonymous:
         enabled: false
-        # org_id: 1
-        # org_role: Viewer
+      auth.basic:
+        enabled: true
+      auth.generic_oauth:
+        allow_sign_up: true
+        api_url: https://auth.${SECRET_DOMAIN}/application/o/userinfo/
+        auth_url: https://auth.${SECRET_DOMAIN}/application/o/authorize/
+        empty_scopes: false
+        enabled: true
+        groups_attribute_path: groups
+        icon: signin
+        login_attribute_path: user
+        name: Authentik
+        name_attribute_path: user
+        role_attribute_path: |
+          contains(groups[*], 'Grafana Admin') && 'Admin' || 'Viewer'
+        scopes: "openid profile email groups"
+        token_url: https://auth.${SECRET_DOMAIN}/application/o/token/
+        use_pkce: true
+      date_formats:
+        full_date: "DD.MM.YYYY hh:mm:ss"
+        use_browser_locale: true
+      explore:
+        enabled: true
+      log:
+        filters: rendering:debug
       news:
         news_feed_enabled: false
+      panels:
+        disable_sanitize_html: true
+      security:
+        allow_embedding: true
+        cookie_samesite: disabled
+      server:
+        root_url: https://grafana.${SECRET_DOMAIN}
     dashboardProviders:
       dashboardproviders.yaml:
         apiVersion: 1
