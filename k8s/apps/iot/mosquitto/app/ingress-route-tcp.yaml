@@ -3,13 +3,11 @@ kind: IngressRouteTCP
 metadata:
   name: mosquitto-tcp
   namespace: iot
-  annotations:
-    external-dns.alpha.kubernetes.io/target: internal.jnobrega.com
 spec:
   entryPoints:
     - mqtts
   routes:
-  - match: HostSNI(`mqtt.jnobrega.com`)
+  - match: HostSNI(`*`)
     priority: 10
     services:
     - name: mosquitto
