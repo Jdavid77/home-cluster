@@ -45,7 +45,7 @@ The setup is based on Talos OS. I used [Talhelper](https://budimanjojo.github.io
 ```
 ---
 
-## :wrench:&nbsp; External Third-Party Components 
+## :wrench:&nbsp; External Third-Party Components
 
 These tools complement the Kubernetes infrastructure by providing essential functionality for **security**, **automation** and **infrastructure** management
 
@@ -137,7 +137,7 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
                 <td>Talos v1.9.3</td>
                 <td>Kubernetes Control</td>
                 <td><a href="https://es.aliexpress.com/item/1005006460890415.html?aff_fcid=505c2a4499e846b2a13fde87aa7c7385-1733566005358-08415-_DBcuZW1&tt=CPS_NORMAL&aff_fsk=_DBcuZW1&aff_platform=portals-tool&sk=_DBcuZW1&aff_trace_key=505c2a4499e846b2a13fde87aa7c7385-1733566005358-08415-_DBcuZW1&terminal_id=bb14814936f042d6a7ff280cc2d52e01&afSmartRedirect=y">AliExpress Link</a></td>
-            </tr> 
+            </tr>
             <tr>
                 <td>Hp-worker1</td>
                 <td>1</td>
@@ -185,9 +185,9 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
             </tr>
         </tbody>
     </table>
-    
+
   ---
-    
+
 ### Applications
 
 #### Infrastruture Related
@@ -211,7 +211,7 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
         <tr>
         <td><img width="32" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuQSJXRx5KbH4dtzk4dxVgw0Gtgk264x_TXw&s"></td>
         <td><a href="https://longhorn.io/">Longhorn</a></td>
-        <td>Distributed block storage for POD’s persistent volumes </td>
+        <td>Distributed block storage for POD's persistent volumes </td>
     </tr>
     </tr>
         <tr>

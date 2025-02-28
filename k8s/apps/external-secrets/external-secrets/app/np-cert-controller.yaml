@@ -9,7 +9,7 @@ spec:
       app.kubernetes.io/name: external-secrets-cert-controller
   egress:
     - toEntities:
-        - kube-apiserver 
+        - kube-apiserver
   ingress:
     - fromEndpoints:
         - matchLabels:

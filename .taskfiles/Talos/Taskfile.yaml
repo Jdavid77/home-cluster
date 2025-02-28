@@ -15,7 +15,7 @@ tasks:
 
   generate-config:
     desc: Generate Talos configuration
-    cmds: 
+    cmds:
       - talhelper genconfig --config-file {{.TALHELPER_CONFIG_FILE}} --secret-file {{.TALHELPER_SECRET_FILE}} --out-dir {{.TALHELPER_CLUSTER_DIR}}
     preconditions:
       - test -f {{.TALHELPER_CONFIG_FILE}}

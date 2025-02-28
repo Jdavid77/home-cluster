@@ -24,10 +24,10 @@ spec:
       strategy: rollback
       retries: 3
   values:
-    
+
     controllers:
       calibre-web:
-        
+
         replicas: 1
 
         annotations:
@@ -107,4 +107,3 @@ spec:
         type: emptyDir
         globalMounts:
           - path: /cache
-

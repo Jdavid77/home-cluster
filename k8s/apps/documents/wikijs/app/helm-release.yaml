@@ -24,7 +24,7 @@ spec:
       strategy: rollback
       retries: 3
   values:
-    
+
     defaultPodOptions:
       topologySpreadConstraints:
         - maxSkew: 1
@@ -34,7 +34,7 @@ spec:
             matchLabels:
               app.kubernetes.io/name: wikijs
 
-    controllers: 
+    controllers:
       wiki:
         replicas: 3
         strategy: RollingUpdate

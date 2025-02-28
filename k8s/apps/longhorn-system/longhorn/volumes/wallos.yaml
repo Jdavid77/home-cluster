@@ -13,4 +13,3 @@ spec:
   image: longhornio/longhorn-engine:v1.8.0
   numberOfReplicas: 3
   size: "536870912"
-

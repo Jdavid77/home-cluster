@@ -6,7 +6,7 @@ tasks:
 
   reconcile-source:
     desc: Force update Flux to pull in changes from your Git repository
-    cmds: 
+    cmds:
       - flux --namespace flux-system reconcile kustomization cluster --with-source
     preconditions:
       - test -f {{.KUBECONFIG}}
@@ -14,7 +14,7 @@ tasks:
 
   reconcile-hr:
     desc: Force update Flux to reconcile Helm release
-    cmds: 
+    cmds:
       - flux --namespace {{.NAMESPACE}} reconcile helmrelease {{.HELM_RELEASE}}
     vars:
       NAMESPACE:
@@ -22,7 +22,7 @@ tasks:
     preconditions:
       - test -f {{.KUBECONFIG}}
       - which flux
-  
+
   resume-suspend-hr:
     desc: Resume && Suspend Helm release
     cmds:
@@ -35,4 +35,3 @@ tasks:
     preconditions:
       - test -f {{.KUBECONFIG}}
       - which flux
-  

@@ -31,6 +31,3 @@ spec:
         - ports:
             - port: "8081"
               protocol: TCP
-
-
-

@@ -24,13 +24,6 @@ repos:
       - id: check-merge-conflict
       - id: check-executables-have-shebangs
 
-  - repo: https://github.com/gruntwork-io/pre-commit
-    rev: v0.1.23
-    hooks:
-      - id: terraform-fmt
-      - id: terraform-validate
-      - id: tflint
-
   - repo: https://github.com/renovatebot/pre-commit-hooks
     rev: 38.82.0
     hooks:

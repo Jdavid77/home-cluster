@@ -67,7 +67,7 @@ spec:
           mqtts:
             port: 8883
     persistence:
-      
+
       config-file:
         type: configMap
         name: mosquitto-config
@@ -75,9 +75,9 @@ spec:
           mosquitto:
             app:
               - path: /mosquitto/config/mosquitto.conf
-                subPath: mosquitto.conf 
+                subPath: mosquitto.conf
               - path: /mosquitto/external_config/aclfile.acl
-                subPath: aclfile.acl 
+                subPath: aclfile.acl
 
       secret-file:
         type: secret
@@ -86,7 +86,7 @@ spec:
           mosquitto:
             init-config:
               - path: /tmp/secret
-                
+
       certs:
         type: secret
         name: ${SECRET_DOMAIN}-tls
@@ -94,7 +94,7 @@ spec:
           mosquitto:
             app:
               - path: /mosquitto/certs
-                
+
       external-config:
         type: emptyDir
         globalMounts:

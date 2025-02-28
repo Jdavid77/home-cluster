@@ -3,6 +3,6 @@ version: "3"
 
 tasks:
   dashboard-sa-token:
-    desc: Retrieve SA token for k8s dashboard 
+    desc: Retrieve SA token for k8s dashboard
     cmds:
       - kubectl -n kube-system create token admin-user | pbcopy

@@ -25,7 +25,7 @@ spec:
       retries: 3
   values:
     global:
-      securityContext: 
+      securityContext:
         runAsUser: 1000
         runAsGroup: 1000
         fsGroup: 1000
@@ -35,7 +35,7 @@ spec:
           whenUnsatisfiable: DoNotSchedule
       podAnnotations:
         secret.reloader.stakater.com/reload: &secret authentik-secret
-      deploymentStrategy: 
+      deploymentStrategy:
         type: RollingUpdate
         rollingUpdate:
           maxSurge: 0
@@ -71,7 +71,7 @@ spec:
       pdb:
         enabled: true
         maxUnavailable: 1
-      containerSecurityContext: 
+      containerSecurityContext:
         runAsNonRoot: true
         readOnlyRootFilesystem: true
         allowPrivilegeEscalation: false
@@ -82,7 +82,7 @@ spec:
             - ALL
     worker:
       replicas: 3
-      containerSecurityContext: 
+      containerSecurityContext:
         runAsNonRoot: true
         readOnlyRootFilesystem: true
         allowPrivilegeEscalation: false

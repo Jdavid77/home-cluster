@@ -76,9 +76,9 @@ spec:
         publishedService:
           enabled: true
     ports:
-      mqtts: 
+      mqtts:
         port: 8883
-        expose: 
+        expose:
           default: true
         exposedPort: 8883
         protocol: TCP

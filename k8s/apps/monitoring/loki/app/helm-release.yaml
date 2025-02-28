@@ -108,5 +108,3 @@ spec:
         repository: ghcr.io/kiwigrid/k8s-sidecar
       rules:
         searchNamespace: ALL
-
-
