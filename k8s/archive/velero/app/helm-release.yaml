@@ -1,4 +1,3 @@
----
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -41,13 +40,13 @@ spec:
             s3ForcePathStyle: true
             s3Url: https://s3.${SECRET_DOMAIN}
       volumeSnapshotLocation:
-      - name: default
-        provider: velero.io/aws
-        credential:
-          name: velero-secret
-          key: cloud
-        config:
-          region: weur
+        - name: default
+          provider: velero.io/aws
+          credential:
+            name: velero-secret
+            key: cloud
+          config:
+            region: weur
     credentials:
       existingSecret: velero-secret
     schedules:
@@ -56,10 +55,10 @@ spec:
         template:
           ttl: "338h"
           includedNamespaces:
-          - media
-          - automation
-          - security
-          - default
+            - media
+            - automation
+            - security
+            - default
     initContainers:
       - name: velero-plugin-for-aws
         image: velero/velero-plugin-for-aws:v1.11.1

@@ -1,4 +1,3 @@
----
 # yaml-language-server: $schema=http://kubernetes-schemas.devbu.io/helm.toolkit.fluxcd.io/helmrelease_v2beta2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -23,7 +22,6 @@ spec:
       strategy: rollback
       retries: 3
   values:
-
     controllers:
       pihole-exporter:
         containers:

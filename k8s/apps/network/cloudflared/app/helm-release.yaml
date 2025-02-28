@@ -1,4 +1,3 @@
----
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -23,16 +22,13 @@ spec:
     remediation:
       strategy: rollback
       retries: 3
-
   values:
     controllers:
       cloudflared:
         replicas: 2
         strategy: RollingUpdate
-
         annotations:
           reloader.stakater.com/auto: "true"
-
         containers:
           cloudflared:
             image:
@@ -85,28 +81,25 @@ spec:
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
+              capabilities: {drop: ["ALL"]}
             resources:
               requests:
                 cpu: 6m
                 memory: 105Mi
               limits:
                 memory: 105Mi
-
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
         runAsUser: 65534
         runAsGroup: 65534
-        seccompProfile: { type: RuntimeDefault }
-
+        seccompProfile: {type: RuntimeDefault}
     service:
       cloudflared:
         controller: cloudflared
         ports:
           http:
             port: 8080
-
     persistence:
       config:
         type: configMap

@@ -1,4 +1,3 @@
----
 apiVersion: opentelemetry.io/v1beta1
 kind: OpenTelemetryCollector
 metadata:
@@ -105,12 +104,12 @@ spec:
         # Pod association using resource attributes and connection
         pod_association:
           - sources:
-             - from: resource_attribute
-               name: k8s.pod.uid
-             - from: resource_attribute
-               name: k8s.pod.name
+              - from: resource_attribute
+                name: k8s.pod.uid
+              - from: resource_attribute
+                name: k8s.pod.name
           - sources:
-             - from: connection
+              - from: connection
       memory_limiter:
         check_interval: 1s
         limit_percentage: 70
@@ -129,7 +128,7 @@ spec:
       pipelines:
         logs:
           receivers: [filelog]
-          processors: [k8sattributes,batch,resource,memory_limiter]
+          processors: [k8sattributes, batch, resource, memory_limiter]
           exporters: [loki]
   securityContext:
     runAsUser: 0

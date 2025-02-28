@@ -1,4 +1,3 @@
----
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -146,15 +145,12 @@ spec:
       metrics:
         expose:
           default: true
-
     metrics:
       prometheus:
         serviceMonitor:
           enabled: true
-
     pilot:
       enabled: false
-
     experimental:
       plugins:
         ldapAuth:
@@ -169,14 +165,11 @@ spec:
         traefik-plugin-blockuseragent:
           moduleName: "github.com/agence-gaya/traefik-plugin-blockuseragent"
           version: "v0.1.7"
-
     # Disable gateway for now
     gateway:
       enabled: false
-
     gatewayClass:
       enabled: false
-
     volumes:
       - name: crowdsec-bouncer-tls
         mountPath: /etc/traefik/crowdsec-certs/
@@ -187,7 +180,6 @@ spec:
       - name: captcha-html-page
         mountPath: /captcha/
         type: configMap
-
     resources:
       requests:
         cpu: 15m

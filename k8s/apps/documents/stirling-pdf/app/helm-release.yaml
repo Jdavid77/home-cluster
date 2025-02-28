@@ -1,4 +1,3 @@
----
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -54,7 +53,6 @@ spec:
               limits:
                 cpu: 25m
                 memory: 600M
-
         pod:
           securityContext:
             runAsNonRoot: true
@@ -62,7 +60,6 @@ spec:
             runAsGroup: 1000
             fsGroup: 1000
             fsGroupChangePolicy: OnRootMismatch
-
     persistence:
       configs:
         enabled: true
@@ -78,14 +75,12 @@ spec:
         type: emptyDir
         globalMounts:
           - path: /usr/share/tessdata
-
     service:
       stirling:
         controller: stirling
         ports:
           http:
             port: 8080
-
     ingress:
       external:
         className: traefik

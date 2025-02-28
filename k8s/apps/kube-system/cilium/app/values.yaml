@@ -1,4 +1,3 @@
----
 cgroup:
   automount:
     enabled: false
@@ -10,13 +9,13 @@ hubble:
   enabled: true
   metrics:
     enabled:
-    - dns:query
-    - drop
-    - tcp
-    - flow
-    - port-distribution
-    - icmp
-    - http
+      - dns:query
+      - drop
+      - tcp
+      - flow
+      - port-distribution
+      - icmp
+      - http
     serviceMonitor:
       enabled: true
   relay:
@@ -29,11 +28,11 @@ hubble:
         external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
       enabled: true
       hosts:
-      - hubble.${SECRET_DOMAIN}
-      tls:
-      - hosts:
         - hubble.${SECRET_DOMAIN}
-        secretName: ${SECRET_DOMAIN}-tls
+      tls:
+        - hosts:
+            - hubble.${SECRET_DOMAIN}
+          secretName: ${SECRET_DOMAIN}-tls
 routingMode: "native"
 ipv4NativeRoutingCIDR: 10.244.0.0/16
 ipam:

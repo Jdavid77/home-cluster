@@ -9,13 +9,13 @@ spec:
       app.kubernetes.io/name: external-secrets
   egress:
     - toEndpoints:
-      - matchLabels:
-          io.kubernetes.pod.namespace: kube-system
-          k8s-app: kube-dns
+        - matchLabels:
+            io.kubernetes.pod.namespace: kube-system
+            k8s-app: kube-dns
       toPorts:
         - ports:
-           - port: "53"
-             protocol: ANY
+            - port: "53"
+              protocol: ANY
           rules:
             dns:
               - matchPattern: "*"
@@ -30,5 +30,5 @@ spec:
             io.kubernetes.pod.namespace: monitoring
       toPorts:
         - ports:
-          - port: "8080"
-            protocol: "TCP"
+            - port: "8080"
+              protocol: "TCP"

@@ -17,14 +17,14 @@ spec:
             io.kubernetes.pod.namespace: monitoring
       toPorts:
         - ports:
-          - port: "8080"
-            protocol: "TCP"
+            - port: "8080"
+              protocol: "TCP"
     - fromEntities:
         - kube-apiserver
       toPorts:
         - ports:
-          - port: "10250"
-            protocol: "TCP"
+            - port: "10250"
+              protocol: "TCP"
     - fromEntities:
         - host
       toPorts:

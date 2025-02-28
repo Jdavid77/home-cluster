@@ -6,10 +6,4 @@ provisioner: nfs.csi.k8s.io
 reclaimPolicy: Retain
 volumeBindingMode: Immediate
 mountOptions:
-  - nfsvers=4.1
-    hard=True
-    noatime=True
-    nodiratime=True
-    rsize=131072
-    wsize=131072
-    nconnect=8
+  - nfsvers=4.1 hard=True noatime=True nodiratime=True rsize=131072 wsize=131072 nconnect=8

@@ -1,4 +1,3 @@
----
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -109,9 +108,8 @@ spec:
                   identifier: minio
                   port: api
         tls:
-          - hosts: [*host,*api-host]
+          - hosts: [*host, *api-host]
             secretName: ${SECRET_DOMAIN}-tls
-
     persistence:
       data:
         enabled: true

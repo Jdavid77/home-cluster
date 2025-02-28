@@ -7,6 +7,6 @@ spec:
   cron: "0 0 ? * SAT"
   task: backup
   groups:
-  - apps
+    - apps
   concurrency: 5
   retain: 3

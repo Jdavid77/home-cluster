@@ -7,5 +7,5 @@ spec:
   cron: "0 0 ? * SAT"
   task: "filesystem-trim"
   groups:
-  - prom
+    - prom
   concurrency: 2

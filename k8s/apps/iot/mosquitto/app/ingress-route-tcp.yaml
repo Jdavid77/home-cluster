@@ -7,10 +7,10 @@ spec:
   entryPoints:
     - mqtts
   routes:
-  - match: HostSNI(`*`)
-    priority: 10
-    services:
-    - name: mosquitto
-      port: 8883
+    - match: HostSNI(`*`)
+      priority: 10
+      services:
+        - name: mosquitto
+          port: 8883
   tls:
-     passthrough: true
+    passthrough: true

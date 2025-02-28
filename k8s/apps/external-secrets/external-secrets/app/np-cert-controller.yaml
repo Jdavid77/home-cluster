@@ -17,8 +17,8 @@ spec:
             io.kubernetes.pod.namespace: monitoring
       toPorts:
         - ports:
-          - port: "8080"
-            protocol: "TCP"
+            - port: "8080"
+              protocol: "TCP"
     - fromEntities:
         - host
       toPorts:

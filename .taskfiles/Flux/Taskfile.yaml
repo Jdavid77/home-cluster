@@ -1,9 +1,6 @@
----
 # yaml-language-server: $schema=https://taskfile.dev/schema.json
 version: '3'
-
 tasks:
-
   reconcile-source:
     desc: Force update Flux to pull in changes from your Git repository
     cmds:
@@ -11,7 +8,6 @@ tasks:
     preconditions:
       - test -f {{.KUBECONFIG}}
       - which flux
-
   reconcile-hr:
     desc: Force update Flux to reconcile Helm release
     cmds:
@@ -22,7 +18,6 @@ tasks:
     preconditions:
       - test -f {{.KUBECONFIG}}
       - which flux
-
   resume-suspend-hr:
     desc: Resume && Suspend Helm release
     cmds:

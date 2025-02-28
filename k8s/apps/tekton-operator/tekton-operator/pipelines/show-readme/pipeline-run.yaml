@@ -9,8 +9,8 @@ spec:
     securityContext:
       fsGroup: 65532
   workspaces:
-  - name: shared-data
-    emptyDir: {}
+    - name: shared-data
+      emptyDir: {}
   params:
-  - name: repo-url
-    value: https://github.com/Jdavid77/pg-backup-s3.git
+    - name: repo-url
+      value: https://github.com/Jdavid77/pg-backup-s3.git

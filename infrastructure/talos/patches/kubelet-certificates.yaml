@@ -1,4 +1,3 @@
----
 machine:
   kubelet:
     extraArgs:

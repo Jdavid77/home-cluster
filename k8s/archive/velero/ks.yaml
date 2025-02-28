@@ -23,7 +23,6 @@
 #   interval: 30m
 #   retryInterval: 1m
 #   timeout: 5m
----
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: GitRepository
 metadata:

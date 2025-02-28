@@ -1,4 +1,3 @@
----
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -109,22 +108,17 @@ spec:
       metrics:
         expose:
           default: true
-
     metrics:
       prometheus:
         serviceMonitor:
           enabled: true
-
     # Disable gateway for now
     gateway:
       enabled: false
-
     gatewayClass:
       enabled: false
-
     pilot:
       enabled: false
-
     resources:
       requests:
         cpu: 15m

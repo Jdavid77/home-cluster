@@ -1,4 +1,3 @@
----
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -52,16 +51,9 @@ spec:
           value: "crowdsecurity/cri-logs"
         - name: COLLECTIONS
           value: >-
-            crowdsecurity/traefik
-            crowdsecurity/http-cve
-            crowdsecurity/http-dos
-            crowdsecurity/k8s-audit
-            crowdsecurity/pgsql
-            crowdsecurity/linux
-            Dominic-Wagner/vaultwarden
+            crowdsecurity/traefik crowdsecurity/http-cve crowdsecurity/http-dos crowdsecurity/k8s-audit crowdsecurity/pgsql crowdsecurity/linux Dominic-Wagner/vaultwarden
         - name: LEVEL_INFO
           value: "true"
-
       resources:
         limits:
           memory: 250Mi
@@ -69,14 +61,11 @@ spec:
         requests:
           cpu: 200m
           memory: 100Mi
-
       metrics:
         enabled: true
         serviceMonitor:
           enabled: true
-
     lapi:
-
       env:
         - name: TZ
           value: ${TIMEZONE}
@@ -89,10 +78,8 @@ spec:
           value: k8s_cluster
         - name: ENROLL_TAGS
           value: "home-ops k8s"
-
       dashboard:
         enabled: false
-
       persistentVolume:
         data:
           enabled: true
@@ -104,7 +91,6 @@ spec:
           accessModes:
             - ReadWriteOnce
           existingClaim: lapi-config-pvc
-
       metrics:
         enabled: true
         serviceMonitor:

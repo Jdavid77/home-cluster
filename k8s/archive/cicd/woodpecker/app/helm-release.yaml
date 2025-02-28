@@ -1,4 +1,3 @@
----
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -39,65 +38,52 @@ spec:
         WOODPECKER_BACKEND_K8S_STORAGE_RWX: false
         WOODPECKER_CONNECT_RETRY_COUNT: '1'
         WOODPECKER_MAX_WORKFLOWS: 5
-
       extraSecretNamesForEnvFrom:
         - woodpecker-token
-
       securityContext:
         capabilities:
           drop:
-          - ALL
+            - ALL
         readOnlyRootFilesystem: true
         runAsNonRoot: true
         runAsUser: 1000
-
-
     server:
       # -- Enable the server component
       enabled: true
-
       # -- Add environment variables for the server component
       env:
         WOODPECKER_ADMIN: 'Jdavid77'
         WOODPECKER_HOST: 'https://ci.${SECRET_DOMAIN}'
         WOODPECKER_GITHUB: "true"
-
       initContainers:
         - name: init-db
           image: ghcr.io/onedr0p/postgres-init:16
           envFrom:
             - secretRef:
                 name: woodpecker-postgres-secret
-
-
       # -- Add extra environment variables from the secrets list
       extraSecretNamesForEnvFrom:
         - woodpecker-github-secret
         - woodpecker-secret
         - woodpecker-postgres-secret
-
       # -- Create a generic secret to store things in, e.g. env values
       secrets:
         - name: woodpecker-secret
-
       # -- Add security context
       securityContext:
         capabilities:
           drop:
-          - ALL
+            - ALL
         readOnlyRootFilesystem: true
         runAsNonRoot: true
         runAsUser: 1000
-
       ingress:
         # -- Enable the ingress for the server component
         enabled: true
         # -- Add annotations to the ingress
         ingressClassName: 'tailscale'
-
         annotations:
           external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
-
         hosts:
           - host: &hostname ci
             paths:
@@ -107,4 +93,4 @@ spec:
                   servicePort: 80
         tls:
           - hosts:
-            - *hostname
+              - *hostname

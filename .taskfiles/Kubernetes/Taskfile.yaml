@@ -1,6 +1,4 @@
----
 version: "3"
-
 tasks:
   dashboard-sa-token:
     desc: Retrieve SA token for k8s dashboard

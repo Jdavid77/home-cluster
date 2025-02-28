@@ -1,4 +1,3 @@
----
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -95,26 +94,22 @@ spec:
           - hosts:
               - *host
             secretName: ${SECRET_DOMAIN}-tls
-
     persistence:
       data:
         enabled: true
         existingClaim: paperless-data-share-pvc
         globalMounts:
           - path: /usr/src/paperless/data
-
       media:
         enabled: true
         existingClaim: paperless-media-share-pvc
         globalMounts:
           - path: /usr/src/paperless/media
-
       consume:
         enabled: true
         existingClaim: paperless-consume-share-pvc
         globalMounts:
           - path: /usr/src/paperless/consume
-
       export:
         enabled: true
         existingClaim: paperless-export-share-pvc

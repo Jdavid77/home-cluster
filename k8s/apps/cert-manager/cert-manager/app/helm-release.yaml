@@ -1,4 +1,3 @@
----
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -52,33 +51,32 @@ spec:
       servicemonitor:
         enabled: true
     volumes:
-    - name: serviceaccount-token
-      projected:
-        defaultMode: 0444
-        sources:
-        - serviceAccountToken:
-            expirationSeconds: 3607
-            path: token
-        - configMap:
-            name: kube-root-ca.crt
-            items:
-            - key: ca.crt
-              path: ca.crt
-        - downwardAPI:
-            items:
-            - path: namespace
-              fieldRef:
-                apiVersion: v1
-                fieldPath: metadata.namespace
+      - name: serviceaccount-token
+        projected:
+          defaultMode: 0444
+          sources:
+            - serviceAccountToken:
+                expirationSeconds: 3607
+                path: token
+            - configMap:
+                name: kube-root-ca.crt
+                items:
+                  - key: ca.crt
+                    path: ca.crt
+            - downwardAPI:
+                items:
+                  - path: namespace
+                    fieldRef:
+                      apiVersion: v1
+                      fieldPath: metadata.namespace
     volumeMounts:
-    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
-      name: serviceaccount-token
-      readOnly: true
-
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: serviceaccount-token
+        readOnly: true
     webhook:
       tolerations:
-      - key: node-role.kubernetes.io/control-plane
-        effect: NoSchedule
+        - key: node-role.kubernetes.io/control-plane
+          effect: NoSchedule
       replicaCount: 3
       podDisruptionBudget:
         enabled: false
@@ -87,37 +85,35 @@ spec:
       serviceAccount:
         automountServiceAccountToken: false
       volumes:
-      - name: serviceaccount-token
-        projected:
-          defaultMode: 0444
-          sources:
-          - serviceAccountToken:
-              expirationSeconds: 3607
-              path: token
-          - configMap:
-              name: kube-root-ca.crt
-              items:
-              - key: ca.crt
-                path: ca.crt
-          - downwardAPI:
-              items:
-              - path: namespace
-                fieldRef:
-                  apiVersion: v1
-                  fieldPath: metadata.namespace
+        - name: serviceaccount-token
+          projected:
+            defaultMode: 0444
+            sources:
+              - serviceAccountToken:
+                  expirationSeconds: 3607
+                  path: token
+              - configMap:
+                  name: kube-root-ca.crt
+                  items:
+                    - key: ca.crt
+                      path: ca.crt
+              - downwardAPI:
+                  items:
+                    - path: namespace
+                      fieldRef:
+                        apiVersion: v1
+                        fieldPath: metadata.namespace
       volumeMounts:
-      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
-        name: serviceaccount-token
-        readOnly: true
-
-
+        - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+          name: serviceaccount-token
+          readOnly: true
     cainjector:
       tolerations:
-      - key: node-role.kubernetes.io/control-plane
-        effect: NoSchedule
+        - key: node-role.kubernetes.io/control-plane
+          effect: NoSchedule
       extraArgs:
-      - --namespace=cert-manager
-      - --enable-certificates-data-source=false
+        - --namespace=cert-manager
+        - --enable-certificates-data-source=false
       replicaCount: 2
       podDisruptionBudget:
         enabled: false
@@ -126,56 +122,55 @@ spec:
       serviceAccount:
         automountServiceAccountToken: false
       volumes:
-      - name: serviceaccount-token
-        projected:
-          defaultMode: 0444
-          sources:
-          - serviceAccountToken:
-              expirationSeconds: 3607
-              path: token
-          - configMap:
-              name: kube-root-ca.crt
-              items:
-              - key: ca.crt
-                path: ca.crt
-          - downwardAPI:
-              items:
-              - path: namespace
-                fieldRef:
-                  apiVersion: v1
-                  fieldPath: metadata.namespace
+        - name: serviceaccount-token
+          projected:
+            defaultMode: 0444
+            sources:
+              - serviceAccountToken:
+                  expirationSeconds: 3607
+                  path: token
+              - configMap:
+                  name: kube-root-ca.crt
+                  items:
+                    - key: ca.crt
+                      path: ca.crt
+              - downwardAPI:
+                  items:
+                    - path: namespace
+                      fieldRef:
+                        apiVersion: v1
+                        fieldPath: metadata.namespace
       volumeMounts:
-      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
-        name: serviceaccount-token
-        readOnly: true
-
+        - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+          name: serviceaccount-token
+          readOnly: true
     startupapicheck:
       tolerations:
-      - key: node-role.kubernetes.io/control-plane
-        effect: NoSchedule
+        - key: node-role.kubernetes.io/control-plane
+          effect: NoSchedule
       automountServiceAccountToken: false
       serviceAccount:
         automountServiceAccountToken: false
       volumes:
-      - name: serviceaccount-token
-        projected:
-          defaultMode: 0444
-          sources:
-          - serviceAccountToken:
-              expirationSeconds: 3607
-              path: token
-          - configMap:
-              name: kube-root-ca.crt
-              items:
-              - key: ca.crt
-                path: ca.crt
-          - downwardAPI:
-              items:
-              - path: namespace
-                fieldRef:
-                  apiVersion: v1
-                  fieldPath: metadata.namespace
+        - name: serviceaccount-token
+          projected:
+            defaultMode: 0444
+            sources:
+              - serviceAccountToken:
+                  expirationSeconds: 3607
+                  path: token
+              - configMap:
+                  name: kube-root-ca.crt
+                  items:
+                    - key: ca.crt
+                      path: ca.crt
+              - downwardAPI:
+                  items:
+                    - path: namespace
+                      fieldRef:
+                        apiVersion: v1
+                        fieldPath: metadata.namespace
       volumeMounts:
-      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
-        name: serviceaccount-token
-        readOnly: true
+        - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+          name: serviceaccount-token
+          readOnly: true

@@ -1,4 +1,3 @@
----
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -153,9 +152,9 @@ spec:
       datasources.yaml:
         apiVersion: 1
         deleteDatasources:
-          - { name: Alertmanager, orgId: 1 }
-          - { name: Prometheus, orgId: 1 }
-          - { name: Loki, orgId: 1 }
+          - {name: Alertmanager, orgId: 1}
+          - {name: Prometheus, orgId: 1}
+          - {name: Loki, orgId: 1}
         datasources:
           - name: Prometheus
             type: prometheus
@@ -189,7 +188,7 @@ spec:
           gnetId: 13502
           revision: 26
           datasource:
-            - { name: DS_PROMETHEUS, value: Prometheus }
+            - {name: DS_PROMETHEUS, value: Prometheus}
         node-exporter-full:
           # renovate: depName="Node Exporter Full"
           gnetId: 1860

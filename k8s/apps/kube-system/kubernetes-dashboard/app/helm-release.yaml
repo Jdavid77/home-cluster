@@ -1,4 +1,3 @@
----
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -42,6 +41,6 @@ spec:
         tls:
           secretName: ${SECRET_DOMAIN}-tls
           hosts:
-          - kubernetes.${SECRET_DOMAIN}
+            - kubernetes.${SECRET_DOMAIN}
     metricsScraper:
       enabled: true

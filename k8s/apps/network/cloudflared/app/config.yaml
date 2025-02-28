@@ -1,6 +1,5 @@
 originRequest:
   originServerName: ${SECRET_DOMAIN}
-
 ingress:
   - hostname: "${SECRET_DOMAIN}"
     service: https://traefik.network.svc.cluster.local:443

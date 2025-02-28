@@ -1,18 +1,13 @@
----
 # yaml-language-server: $schema=https://taskfile.dev/schema.json
 version: '3'
-
 vars:
   TALHELPER_CLUSTER_DIR: '{{.KUBERNETES_DIR}}/infrastructure/talos/clusterconfig'
   TALHELPER_CONFIG_FILE: '{{.KUBERNETES_DIR}}/infrastructure/talos/talconfig.yaml'
   TALHELPER_SECRET_FILE: '{{.KUBERNETES_DIR}}/infrastructure/talos/talsecret.sops.yaml'
   TALOSCONFIG: '{{.TALHELPER_CLUSTER_DIR}}/talosconfig'
-
 env:
   TALOSCONFIG: '{{.TALOSCONFIG}}'
-
 tasks:
-
   generate-config:
     desc: Generate Talos configuration
     cmds:
@@ -22,7 +17,6 @@ tasks:
       - test -f {{.SOPS_CONFIG_FILE}}
       - test -f {{.SOPS_AGE_KEY_FILE}}
       - which talhelper
-
   apply-node:
     desc: Apply Talos config to a node [HOSTNAME=required]
     cmds:
@@ -40,7 +34,6 @@ tasks:
       - test -f {{.TALHELPER_CLUSTER_DIR}}/{{.CLUSTER_NAME}}-{{.HOSTNAME}}.yaml
       - test -f {{.TALOSCONFIG}}
       - which talosctl yq
-
   upgrade-node:
     desc: Upgrade Talos on a single node [HOST_IP=required]
     cmds:
@@ -65,7 +58,6 @@ tasks:
       - talosctl config info &>/dev/null
       - test -f {{.TALOSCONFIG}}
       - which kubectl talosctl yq
-
   upgrade-k8s:
     desc: Upgrade Kubernetes
     cmd: talosctl --nodes {{.KUBERNETES_CONTROLLER}} upgrade-k8s --to {{.KUBERNETES_VERSION}}
@@ -80,13 +72,11 @@ tasks:
       - talosctl config info &>/dev/null
       - test -f {{.TALOSCONFIG}}
       - which talosctl yq
-
   down:
     internal: true
     cmd: flux --namespace flux-system suspend kustomization --all
     preconditions:
       - which flux
-
   up:
     internal: true
     cmd: flux --namespace flux-system resume kustomization --all

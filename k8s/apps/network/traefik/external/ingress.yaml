@@ -9,17 +9,17 @@ metadata:
 spec:
   ingressClassName: internal
   rules:
-  - host: traefik.${SECRET_DOMAIN}
-    http:
-      paths:
-      - backend:
-          service:
-            name: traefik
-            port:
-              number: 8080
-        path: /
-        pathType: Prefix
+    - host: traefik.${SECRET_DOMAIN}
+      http:
+        paths:
+          - backend:
+              service:
+                name: traefik
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix
   tls:
-  - hosts:
-    - traefik.${SECRET_DOMAIN}
-    secretName: ${SECRET_DOMAIN}-tls
+    - hosts:
+        - traefik.${SECRET_DOMAIN}
+      secretName: ${SECRET_DOMAIN}-tls
