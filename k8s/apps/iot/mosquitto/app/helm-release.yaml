@@ -71,7 +71,9 @@ spec:
           mosquitto:
             app:
               - path: /mosquitto/config/mosquitto.conf
-                subPath: mosquitto.conf
+                subPath: mosquitto.conf 
+              - path: /mosquitto/external_config/aclfile.acl
+                subPath: aclfile.acl 
 
       secret-file:
         type: secret
@@ -80,6 +82,7 @@ spec:
           mosquitto:
             init-config:
               - path: /tmp/secret
+                
       certs:
         type: secret
         name: ${SECRET_DOMAIN}-tls
@@ -92,3 +95,10 @@ spec:
         type: emptyDir
         globalMounts:
           - path: /mosquitto/external_config
+
+      logs:
+        type: emptyDir
+        advancedMounts:
+          mosquitto:
+            app:
+              - path: /mosquitto/log

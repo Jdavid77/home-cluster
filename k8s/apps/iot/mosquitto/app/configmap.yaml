@@ -24,7 +24,7 @@ data:
 
     password_file /mosquitto/external_config/passwdfile.pwd
 
-    acl_file /mosquitto/config/aclfile.acl
+    acl_file /mosquitto/external_config/aclfile.acl
 kind: ConfigMap
 metadata:
   name: mosquitto-config
