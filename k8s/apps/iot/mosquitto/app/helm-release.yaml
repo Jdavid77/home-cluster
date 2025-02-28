@@ -34,7 +34,11 @@ spec:
               tag: 2.0.20
               pullPolicy: IfNotPresent
             command: ["/bin/sh", "-c"]
-            args: ["cp /tmp/secret/* /mosquitto/external_config/ && mosquitto_passwd -U /mosquitto/external_config/passwdfile.pwd"]
+            args:
+              - |
+                cp /tmp/secret/* /mosquitto/external_config/;
+                chmod 600 /mosquitto/external_config/passwdfile.pwd;
+                mosquitto_passwd -U /mosquitto/external_config/passwdfile.pwd;
         containers:
           app:
             image:
@@ -52,9 +56,9 @@ spec:
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
-        runAsUser: 1000
-        runAsGroup: 100
-        fsGroup: 100
+        runAsUser: 65534
+        runAsGroup: 65534
+        fsGroup: 65534
         fsGroupChangePolicy: OnRootMismatch
     service:
       app:
