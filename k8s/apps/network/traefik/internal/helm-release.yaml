@@ -76,6 +76,12 @@ spec:
         publishedService:
           enabled: true
     ports:
+      mqtts: 
+        port: 8883
+        expose: 
+          default: true
+        exposedPort: 8883
+        protocol: TCP
       traefik:
         expose:
           default: true
