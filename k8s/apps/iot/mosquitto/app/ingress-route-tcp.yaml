@@ -12,6 +12,5 @@ spec:
     services:
     - name: mosquitto
       port: 8883
-      nativeLB: true
   tls:
      passthrough: true
