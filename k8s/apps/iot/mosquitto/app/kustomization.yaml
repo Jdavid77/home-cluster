@@ -4,4 +4,5 @@ resources:
   - helm-release.yaml
   - secret.yaml
   - configmap.yaml
-  - ingress-route-tcp.yaml
+  - tls-tcp-route.yaml
+  - tcp-route.yaml

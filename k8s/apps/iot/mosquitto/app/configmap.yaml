@@ -4,6 +4,9 @@ data:
     user admin
     topic readwrite #
   mosquitto.conf: |
+    listener 1883
+    allow_anonymous false
+    protocol mqtt
     listener 8883
     protocol mqtt
     cafile /etc/ssl/certs/ca-cert-ISRG_Root_X1.pem
