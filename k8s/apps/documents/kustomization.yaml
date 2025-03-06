@@ -5,4 +5,3 @@ resources:
   - ./_pvs/ks.yaml
   - ./paperless/ks.yaml
   - ./stirling-pdf/ks.yaml
-  - ./wikijs/ks.yaml
