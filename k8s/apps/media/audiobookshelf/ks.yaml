@@ -8,7 +8,6 @@ spec:
   targetNamespace: media
   path: ./k8s/apps/media/audiobookshelf/app
   dependsOn:
-    - name: media-pvs
     - name: media-nfs
   prune: true
   sourceRef:

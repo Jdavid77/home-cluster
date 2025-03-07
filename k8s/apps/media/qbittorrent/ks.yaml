@@ -8,7 +8,6 @@ spec:
   targetNamespace: media
   path: ./k8s/apps/media/qbittorrent/app
   dependsOn:
-    - name: media-pvs
     - name: media-nfs
     - name: external-secrets-store
   prune: true
