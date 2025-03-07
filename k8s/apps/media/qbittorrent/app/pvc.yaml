@@ -2,7 +2,7 @@
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
-  name: &secret audiobookshelf-restic
+  name: &secret qbittorrent-restic
 spec:
   refreshInterval: 5m
   secretStoreRef:
@@ -15,7 +15,7 @@ spec:
     template:
       engineVersion: v2
       data:
-        RESTIC_REPOSITORY: s3:http://minio.storage.svc.cluster.local:9000/audiobookshelf
+        RESTIC_REPOSITORY: s3:http://minio.storage.svc.cluster.local:9000/qbittorrent
         RESTIC_PASSWORD: "{{ .RESTIC_PASSWORD }}"
         AWS_ACCESS_KEY_ID: "{{ .MINIO_ROOT_USER }}"
         AWS_SECRET_ACCESS_KEY: "{{ .MINIO_ROOT_PASSWORD }}"
@@ -29,15 +29,15 @@ spec:
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
-  name: audiobookshelf
+  name: qbittorrent
 spec:
-  sourcePVC: audiobookshelf
+  sourcePVC: qbittorrent
   trigger:
     schedule: "0 0 * * *"
   restic:
     copyMethod: Snapshot
     pruneIntervalDays: 7
-    repository: audiobookshelf-restic
+    repository: qbittorrent-restic
     volumeSnapshotClassName: longhorn-snapshot-vsc
     cacheCapacity: 512Mi
     cacheStorageClassName: "longhorn-cache"
@@ -55,12 +55,12 @@ spec:
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationDestination
 metadata:
-  name: audiobookshelf
+  name: qbittorrent
 spec:
   trigger:
     manual: restore-once
   restic:
-    repository: "audiobookshelf-restic"
+    repository: qbittorrent-restic
     copyMethod: Snapshot
     volumeSnapshotClassName: longhorn-snapshot-vsc
     cacheStorageClassName: longhorn-cache
@@ -77,13 +77,13 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: audiobookshelf
+  name: qbittorrent
 spec:
   accessModes: ["ReadWriteOnce"]
   dataSourceRef:
     kind: ReplicationDestination
     apiGroup: volsync.backube
-    name: "audiobookshelf"
+    name: "qbittorrent"
   resources:
     requests:
       storage: "512Mi"

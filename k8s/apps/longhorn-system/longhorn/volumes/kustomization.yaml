@@ -4,5 +4,4 @@ resources:
   - n8n.yaml
   - crowdsec.yaml
   - wallos.yaml
-  - qbittorrent.yaml
   - linkding.yaml
