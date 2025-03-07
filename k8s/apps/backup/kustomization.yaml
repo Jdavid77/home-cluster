@@ -4,3 +4,4 @@ resources:
   - ./namespace.yaml
   - ./snapshot-controller/ks.yaml
   - ./postgres/ks.yaml
+  - ./volsync/ks.yaml

@@ -4,7 +4,8 @@ locals {
     "loki",
     "velero",
     "postgres",
-    "obsidian"
+    "obsidian",
+    "restic"
   ]
 }
 
