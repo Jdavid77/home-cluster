@@ -9,7 +9,6 @@ spec:
   path: ./k8s/apps/media/calibre-web/app
   dependsOn:
     - name: external-secrets-store
-    - name: media-pvs
     - name: media-nfs
   prune: true
   sourceRef:
