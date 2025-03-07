@@ -5,5 +5,4 @@ resources:
   - crowdsec.yaml
   - wallos.yaml
   - qbittorrent.yaml
-  - audiobookshelf.yaml
   - linkding.yaml

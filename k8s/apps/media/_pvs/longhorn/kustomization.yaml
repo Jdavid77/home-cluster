@@ -3,4 +3,3 @@ kind: Kustomization
 namespace: media
 resources:
   - ./qbittorrent.yaml
-  - ./audiobookshelf.yaml
