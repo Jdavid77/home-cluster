@@ -10,7 +10,7 @@ spec:
   dataLocality: best-effort
   disableFrontend: false
   frontend: blockdev
-  image: longhornio/longhorn-engine:v1.8.0
+  image: longhornio/longhorn-engine:v1.8.1
   numberOfReplicas: 3
   size: "1073741824"
 ---
@@ -26,6 +26,6 @@ spec:
   dataLocality: best-effort
   disableFrontend: false
   frontend: blockdev
-  image: longhornio/longhorn-engine:v1.8.0
+  image: longhornio/longhorn-engine:v1.8.1
   numberOfReplicas: 3
   size: "104857600"
