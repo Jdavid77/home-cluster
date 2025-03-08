@@ -7,8 +7,6 @@ metadata:
 spec:
   targetNamespace: default
   path: ./k8s/apps/default/wallos/app
-  dependsOn:
-    - name: default-pvs
   prune: true
   sourceRef:
     kind: GitRepository

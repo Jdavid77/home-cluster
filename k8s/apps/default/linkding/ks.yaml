@@ -6,8 +6,6 @@ metadata:
   namespace: flux-system
 spec:
   targetNamespace: default
-  dependsOn:
-    - name: default-pvs
   path: ./k8s/apps/default/linkding/app
   prune: true
   sourceRef:
