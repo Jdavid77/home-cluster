@@ -3,4 +3,3 @@ kind: Kustomization
 resources:
   - n8n.yaml
   - crowdsec.yaml
-  - wallos.yaml
