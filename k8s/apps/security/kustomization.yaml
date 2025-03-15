@@ -3,6 +3,5 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./lldap/ks.yaml
-  - ./crowdsec/ks.yaml
   - ./vaultwarden/ks.yaml
   - ./authentik/ks.yaml

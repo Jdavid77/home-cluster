@@ -159,9 +159,6 @@ spec:
         themepark:
           moduleName: "github.com/packruler/traefik-themepark"
           version: "v1.4.0"
-        bouncer:
-          moduleName: "github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin"
-          version: "v1.3.3"
         traefik-plugin-blockuseragent:
           moduleName: "github.com/agence-gaya/traefik-plugin-blockuseragent"
           version: "v0.1.7"
@@ -170,16 +167,6 @@ spec:
       enabled: false
     gatewayClass:
       enabled: false
-    volumes:
-      - name: crowdsec-bouncer-tls
-        mountPath: /etc/traefik/crowdsec-certs/
-        type: secret
-      - name: ban-html-page
-        mountPath: /ban/
-        type: configMap
-      - name: captcha-html-page
-        mountPath: /captcha/
-        type: configMap
     resources:
       requests:
         cpu: 15m

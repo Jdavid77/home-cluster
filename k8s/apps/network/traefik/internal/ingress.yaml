@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    external-dns.alpha.kubernetes.io/target: internal.jnobrega.com
+    external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
     hajimari.io/icon: simple-icons:traefikproxy
   name: traefik-internal
   namespace: network
