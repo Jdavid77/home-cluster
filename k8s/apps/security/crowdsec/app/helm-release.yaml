@@ -51,7 +51,7 @@ spec:
           value: "crowdsecurity/cri-logs"
         - name: COLLECTIONS
           value: >-
-            crowdsecurity/traefik crowdsecurity/http-cve crowdsecurity/http-dos crowdsecurity/k8s-audit crowdsecurity/pgsql crowdsecurity/linux Dominic-Wagner/vaultwarden
+            crowdsecurity/traefik crowdsecurity/http-cve crowdsecurity/http-dos crowdsecurity/k8s-audit crowdsecurity/pgsql crowdsecurity/linux
         - name: LEVEL_INFO
           value: "true"
       resources:
