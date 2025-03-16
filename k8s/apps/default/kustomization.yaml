@@ -6,3 +6,4 @@ resources:
   - ./wallos/ks.yaml
   - ./littlelink/ks.yaml
   - ./linkding/ks.yaml
+  - ./adventurelog/ks.yaml
