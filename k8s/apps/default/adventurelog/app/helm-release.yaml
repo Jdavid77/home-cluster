@@ -1,0 +1,117 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app adventurelog
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.7.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-charts
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controllers:
+      adventurelog:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: 16
+              pullPolicy: IfNotPresent
+            envFrom: &secret
+              - secretRef:
+                  name: adventurelog-secret
+        containers:
+          frontend:
+            image:
+              repository: ghcr.io/seanmorley15/adventurelog-frontend
+              tag: latest@sha256:c4dd42e44c78515f0550e4701bf40fc6ce18b871ebba94e8124098fa3a5125aa
+            env:
+              PUBLIC_SERVER_URL: "https://adventurelog-backend.${SECRET_DOMAIN}"
+              BODY_SIZE_LIMIT: "200000"
+            probes:
+              liveness: &probes
+                enabled: false
+              readiness: *probes
+              startup: *probes
+            resources:
+              requests:
+                cpu: 50m
+                memory: 100Mi
+          server:
+            image:
+              repository: ghcr.io/seanmorley15/adventurelog-backend
+              tag: latest@sha256:389f3a0d61cee934e4ab47a17157eed4e835507de23c2f268f1a3f93d312855e
+            env:
+              PUBLIC_URL: https://adventurelog-backend.${SECRET_DOMAIN}
+              FRONTEND_URL: https://adventurelog.${SECRET_DOMAIN}
+              CSRF_TRUSTED_ORIGINS: https://adventurelog-backend.${SECRET_DOMAIN},https://adventurelog.${SECRET_DOMAIN}
+              DEBUG: "true"
+              DJANGO_ADMIN_USERNAME: admin
+            envFrom: *secret
+            probes:
+              liveness: &probes
+                enabled: false
+              readiness: *probes
+              startup: *probes
+            resources:
+              requests:
+                cpu: 125m
+                memory: 500Mi
+    service:
+      app:
+        controller: *app
+        ports:
+          http:
+            port: 3000
+          base:
+            port: 8000
+    ingress:
+      app:
+        enabled: true
+        className: internal
+        annotations:
+          hajimari.io/icon: airplane
+          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
+        hosts:
+          - host: &frontend "adventurelog.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+          - host: &backend "adventurelog-backend.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: base
+        tls:
+          - hosts:
+              - *frontend
+              - *backend
+            secretName: ${SECRET_DOMAIN}-tls
+    persistence:
+      config:
+        enabled: true
+        existingClaim: *app
+        globalMounts:
+          - path: /code/media
