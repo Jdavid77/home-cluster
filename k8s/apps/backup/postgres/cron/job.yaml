@@ -47,7 +47,7 @@ spec:
           pg-backup-s3:
             image:
               repository: ghcr.io/jdavid77/pg-backup-s3
-              tag: main@sha256:26d7ef1405f079dd6fbc737f857601c9bfba5020f473f9a14ba51968e9423ae0
+              tag: main@sha256:c2562c3a3ffccf1c3844b5b659152def74680de981b2d0ee2fe5e0c80a683ecc
             env:
               S3_REGION: "weur"
               S3_BUCKET: "postgres"
