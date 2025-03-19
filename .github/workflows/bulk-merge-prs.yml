@@ -26,13 +26,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           token: "${{ steps.app-token.outputs.token }}"
-      - name: Debug Token Permissions
-        shell: bash
-        env:
-          GITHUB_TOKEN: "${{ steps.app-token.outputs.token }}"
-        run: |
-          gh auth status
-          gh api user
       - name: Merge
         shell: bash
         env:
