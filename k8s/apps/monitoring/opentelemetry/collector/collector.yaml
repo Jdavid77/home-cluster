@@ -120,16 +120,14 @@ spec:
             key: loki.format
             value: json
     exporters:
-      loki:
-        endpoint: http://loki-gateway.monitoring/loki/api/v1/push
-        default_labels_enabled:
-          exporter: false
+      otlphttp/loki:
+        endpoint: http://loki.monitoring:3100/otlp/v1/logs
     service:
       pipelines:
         logs:
           receivers: [filelog]
           processors: [k8sattributes, batch, resource, memory_limiter]
-          exporters: [loki]
+          exporters: [otlphttp/loki]
   securityContext:
     runAsUser: 0
     runAsGroup: 0
