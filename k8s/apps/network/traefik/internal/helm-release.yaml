@@ -76,6 +76,7 @@ spec:
           enabled: true
       kubernetesGateway:
         enabled: true
+        experimentalChannel: true
     ports:
       mqtt:
         port: 1883
