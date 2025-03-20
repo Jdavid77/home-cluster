@@ -80,9 +80,9 @@ spec:
       external:
         annotations:
           hajimari.io/icon: mdi:water-flow
-          external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
+          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
           traefik.ingress.kubernetes.io/router.middlewares: network-authentik-outpost@kubernetescrd
-        className: traefik
+        className: internal
         hosts:
           - host: n8n.${SECRET_DOMAIN}
             paths:
