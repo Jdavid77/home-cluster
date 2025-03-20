@@ -74,6 +74,8 @@ spec:
         ingressClass: internal
         publishedService:
           enabled: true
+      kubernetesGateway:
+        enabled: true
     ports:
       mqtt:
         port: 1883
