@@ -37,7 +37,7 @@ spec:
       - --pihole-server=http://192.168.1.87
       - --ingress-class=internal
     policy: sync
-    sources: ["ingress", "service", "gateway-httproute", "gateway-tlsroute", "gateway-tcproute"]
+    sources: ["ingress", "service", "gateway-httproute", "gateway-tcproute"]
     domainFilters: ["${SECRET_DOMAIN}"]
     serviceMonitor:
       enabled: true
