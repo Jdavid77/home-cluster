@@ -121,7 +121,7 @@ spec:
             value: json
     exporters:
       otlphttp/loki:
-        endpoint: http://loki.monitoring:3100/otlp/v1/logs
+        endpoint: http://loki-gateway.monitoring/otlp
     service:
       pipelines:
         logs:
