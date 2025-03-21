@@ -123,25 +123,9 @@ spec:
           enabled: true
     # Disable gateway for now
     gateway:
-      enabled: true
-      name: internal
-      listeners:
-        web:
-          port: 8000
-          hostname: "*.${SECRET_DOMAIN}"
-          protocol: HTTP
-          namespacePolicy: "All"
-        websecure:
-          port: 8443
-          hostname: "*.${SECRET_DOMAIN}"
-          protocol: HTTPS
-          namespacePolicy: "All"
-          certificateRefs:
-            - name: ${SECRET_DOMAIN}-tls
-          mode: "Terminate"
+      enabled: false
     gatewayClass:
-      enabled: true
-      name: internal
+      enabled: false
     pilot:
       enabled: false
     resources:
