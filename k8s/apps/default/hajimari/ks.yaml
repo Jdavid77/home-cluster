@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   targetNamespace: default
-  path: ./k8s/apps/dashboard/hajimari/app
+  path: ./k8s/apps/default/hajimari/app
   prune: true
   sourceRef:
     kind: GitRepository
