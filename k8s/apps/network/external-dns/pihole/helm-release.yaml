@@ -24,7 +24,8 @@ spec:
       retries: 3
   values:
     fullnameOverride: *app
-    provider: pihole
+    provider:
+      name: pihole
     env:
       - name: &name EXTERNAL_DNS_PIHOLE_PASSWORD
         valueFrom:

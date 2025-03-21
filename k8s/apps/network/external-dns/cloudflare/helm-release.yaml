@@ -33,7 +33,8 @@ spec:
                   operator: DoesNotExist
     interval: 5m
     logLevel: debug
-    provider: cloudflare
+    provider:
+      name: cloudflare
     env:
       - name: CF_API_EMAIL
         valueFrom:
