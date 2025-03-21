@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: external-dns
-      version: 1.16.0
+      version: 1.15.2
       sourceRef:
         kind: HelmRepository
         name: external-dns-charts
@@ -24,8 +24,7 @@ spec:
       retries: 3
   values:
     fullnameOverride: *app
-    provider:
-      name: pihole
+    provider: pihole
     env:
       - name: &name EXTERNAL_DNS_PIHOLE_PASSWORD
         valueFrom:
