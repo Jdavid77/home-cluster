@@ -255,9 +255,9 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
         <td>Modern in-memory datastore, fully compatible with Redis and Memcached APIs</td>
     </tr>
     <tr>
-        <td><img width="32" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAF1eQ7_2Jmsj_I0Julb8r4YkUO8aXe9Q53A&s"></td>
-        <td><a href="https://www.crowdsec.net/">Crowdsec</a></td>
-        <td>Curated Threat Intelligence. Used in conjunction with Traefik</td>
+        <td><img width="32" src="https://avatars.githubusercontent.com/u/47803932?s=48&v=4"></td>
+        <td><a href="https://volsync.readthedocs.io/en/stable/">Volsync</a></td>
+        <td>PVC backups using Restic</td>
     </tr>
     <tr>
         <td><img width="32" src="https://static-00.iconduck.com/assets.00/authentik-orange-icon-512x391-4kzut6y1.png"></td>
@@ -296,10 +296,6 @@ The NAS hosts several essential containers:
     <tr>
         <td><a href="https://pi-hole.net/">PI-Hole</a></td>
         <td>Network-wide ad blocking and local DNS management</td>
-    </tr>
-    <tr>
-        <td><a href="https://www.portainer.io/">Portainer</a></td>
-        <td>Container management and monitoring interface</td>
     </tr>
     <tr>
         <td><a href="Tailscale exit node egressing over NordVPN">TailNord</a></td>
