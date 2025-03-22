@@ -16,9 +16,11 @@ spec:
         namespace: flux-system
       interval: 15m
   install:
+    disableSchemaValidation: true
     remediation:
       retries: 3
   upgrade:
+    disableSchemaValidation: true
     cleanupOnFail: true
     remediation:
       strategy: rollback
@@ -33,7 +35,8 @@ spec:
                   operator: DoesNotExist
     interval: 5m
     logLevel: debug
-    provider: cloudflare
+    provider:
+      name: cloudflare
     env:
       - name: CF_API_EMAIL
         valueFrom:

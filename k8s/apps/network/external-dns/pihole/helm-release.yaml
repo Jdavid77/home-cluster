@@ -18,13 +18,16 @@ spec:
     remediation:
       retries: 3
   upgrade:
+    disableSchemaValidation: true
     cleanupOnFail: true
     remediation:
       strategy: rollback
       retries: 3
   values:
+    disableSchemaValidation: true
     fullnameOverride: *app
-    provider: pihole
+    provider:
+      name: pihole
     env:
       - name: &name EXTERNAL_DNS_PIHOLE_PASSWORD
         valueFrom:
