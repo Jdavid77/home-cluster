@@ -1,0 +1,28 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: gateway-api-source
+  namespace: flux-system
+spec:
+  interval: 30m
+  url: https://github.com/kubernetes-sigs/gateway-api.git
+  ref:
+    tag: release-1.2
+  ignore: |
+    # exclude all
+    /*
+    # include deploy crds dir
+    !/config/crd/experimental
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: gateway-api-crds
+  namespace: flux-system
+spec:
+  interval: 15m
+  prune: false
+  wait: true
+  sourceRef:
+    kind: GitRepository
+    name: gateway-api-source
