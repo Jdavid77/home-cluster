@@ -26,7 +26,7 @@ spec:
   values:
     controllers:
       redlib:
-        replicas: 2
+        replicas: 1
         strategy: RollingUpdate
         annotations:
           reloader.stakater.com/auto: "true"
@@ -79,24 +79,25 @@ spec:
         runAsUser: 65534
         runAsGroup: 65534
         seccompProfile: {type: RuntimeDefault}
-    ingress:
-      internal:
+    route:
+      main:
         enabled: true
-        className: internal
-        annotations:
-          hajimari.io/icon: simple-icons:reddit
-          external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
-        hosts:
-          - host: &hostName reddit.${SECRET_DOMAIN}
-            paths:
-              - path: /
-                service:
-                  identifier: redlib
-                  port: http
-        tls:
-          - hosts:
-              - *hostName
-            secretName: ${SECRET_DOMAIN}-tls
+        kind: HTTPRoute
+        parentRefs:
+          - kind: Gateway
+            name: internal
+            namespace: network
+            sectionName: websecure
+        hostNames:
+          - reddit.${SECRET_DOMAIN}
+        rules:
+          - backendRefs:
+              - name: redlib
+                port: *port
+            matches:
+              - path:
+                  type: PathPrefix
+                  value: /
     service:
       redlib:
         controller: redlib
