@@ -39,6 +39,8 @@ spec:
     extraArgs:
       - --pihole-server=http://192.168.1.87
       - --ingress-class=internal
+      - --gateway-name=internal
+      - --registry=noop
     policy: sync
     sources: ["ingress", "service", "gateway-httproute"]
     domainFilters: ["${SECRET_DOMAIN}"]

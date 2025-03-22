@@ -121,11 +121,25 @@ spec:
       prometheus:
         serviceMonitor:
           enabled: true
-    # Disable gateway for now
     gateway:
-      enabled: false
+      enabled: true
+      name: internal
+      annotations:
+        external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
+      listeners:
+        web:
+          port: 8000
+          namespacePolicy: All
+        websecure:
+          port: 8443
+          namespacePolicy: All
+          protocol: HTTPS
+          certificateRefs:
+            - name: ${SECRET_DOMAIN}-tls
+          mode: Terminate
     gatewayClass:
-      enabled: false
+      enabled: true
+      name: internal
     pilot:
       enabled: false
     resources:
