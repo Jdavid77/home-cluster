@@ -2,12 +2,31 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
+  name: traefik-crds
+  namespace: flux-system
+spec:
+  targetNamespace: network
+  path: ./k8s/apps/network/traefik/crds
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-cluster
+  wait: true
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
   name: traefik
   namespace: flux-system
 spec:
   targetNamespace: network
   dependsOn:
     - name: cilium-resources
+    - name: traefik-crds
   path: ./k8s/apps/network/traefik/external
   prune: true
   sourceRef:
@@ -28,6 +47,7 @@ spec:
   targetNamespace: network
   dependsOn:
     - name: cilium-resources
+    - name: traefik-crds
   path: ./k8s/apps/network/traefik/internal
   prune: true
   sourceRef:
