@@ -5,8 +5,8 @@ metadata:
   name: it-tools
   namespace: flux-system
 spec:
-  targetNamespace: tools
-  path: ./k8s/apps/tools/it-tools/app
+  targetNamespace: default
+  path: ./k8s/apps/default/it-tools/app
   prune: true
   sourceRef:
     kind: GitRepository
