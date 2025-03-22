@@ -74,21 +74,6 @@ spec:
               url: 'https://omv.${SECRET_DOMAIN}'
               icon: 'simple-icons:openmediavault'
               info: OMV
-    ingress:
-      main:
-        enabled: true
-        ingressClassName: internal
-        annotations:
-          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
-        hosts:
-          - host: &host dashboard.${SECRET_DOMAIN}
-            paths:
-              - path: /
-                pathType: Prefix
-        tls:
-          - hosts:
-              - *host
-            secretName: ${SECRET_DOMAIN}-tls
     podAnnotations:
       configmap.reloader.stakater.com/reload: "hajimari-settings"
     persistence:

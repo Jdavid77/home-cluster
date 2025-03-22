@@ -76,23 +76,25 @@ spec:
         ports:
           http:
             port: *port
-    ingress:
-      external:
-        annotations:
-          hajimari.io/icon: mdi:water-flow
-          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
-          traefik.ingress.kubernetes.io/router.middlewares: network-authentik-outpost@kubernetescrd
-        className: internal
-        hosts:
-          - host: n8n.${SECRET_DOMAIN}
-            paths:
-              - path: /
-                service:
-                  identifier: n8n
-                  port: *port
-        tls:
-          - hosts:
-              - *host
+    route:
+      main:
+        enabled: true
+        kind: HTTPRoute
+        parentRefs:
+          - kind: Gateway
+            name: internal
+            namespace: network
+            sectionName: websecure
+        hostnames:
+          - n8n.${SECRET_DOMAIN}
+        rules:
+          - backendRefs:
+              - name: n8n
+                port: *port
+            matches:
+              - path:
+                  type: PathPrefix
+                  value: /
     persistence:
       config:
         existingClaim: n8n
