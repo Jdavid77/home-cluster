@@ -22,3 +22,4 @@ spec:
     remediation:
       strategy: rollback
       retries: 3
+  # the gateway option doesn't include the experimental Gateway CR's...
