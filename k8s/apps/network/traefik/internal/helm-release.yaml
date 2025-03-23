@@ -51,29 +51,20 @@ spec:
         enabled: true
         format: json
     ingressClass:
-      enabled: true
-      isDefaultClass: false
-      name: internal
+      enabled: false
     ingressRoute:
       dashboard:
         enabled: false
     globalArguments:
       - "--api.insecure=true"
       - "--serverstransport.insecureskipverify=true"
-    additionalArguments:
-      - "--providers.kubernetesingress.ingressendpoint.ip=${LB_INTERNAL_IP}"
     providers:
       kubernetesCRD:
         enabled: true
         allowCrossNamespace: true
         allowExternalNameServices: true
       kubernetesIngress:
-        enabled: true
-        allowExternalNameServices: true
-        allowEmptyServices: true
-        ingressClass: internal
-        publishedService:
-          enabled: true
+        enabled: false
       kubernetesGateway:
         enabled: true
         experimentalChannel: true
@@ -108,12 +99,6 @@ spec:
         tls:
           enabled: true
           options: default
-        forwardedHeaders:
-          trustedIPs:
-            - 192.168.1.0/24
-        proxyProtocol:
-          trustedIPs:
-            - 192.168.1.0/24
       metrics:
         expose:
           default: true
