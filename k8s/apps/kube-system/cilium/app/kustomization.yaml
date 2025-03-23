@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: kube-system
 resources:
   - helm-release.yaml
+  - route.yaml
 configMapGenerator:
   - name: cilium-values
     files:

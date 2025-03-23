@@ -20,19 +20,6 @@ hubble:
       enabled: true
   relay:
     enabled: true
-  ui:
-    enabled: true
-    ingress:
-      className: internal
-      annotations:
-        external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
-      enabled: true
-      hosts:
-        - hubble.${SECRET_DOMAIN}
-      tls:
-        - hosts:
-            - hubble.${SECRET_DOMAIN}
-          secretName: ${SECRET_DOMAIN}-tls
 routingMode: "native"
 ipv4NativeRoutingCIDR: 10.244.0.0/16
 ipam:

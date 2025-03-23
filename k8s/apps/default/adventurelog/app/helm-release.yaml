@@ -81,34 +81,46 @@ spec:
         controller: *app
         ports:
           http:
-            port: 3000
+            port: &frontend-port 3000
           base:
-            port: 8000
-    ingress:
-      app:
+            port: &server-port 8000
+    route:
+      frontend:
         enabled: true
-        className: internal
-        annotations:
-          hajimari.io/icon: airplane
-          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
-        hosts:
-          - host: &frontend "adventurelog.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
-          - host: &backend "adventurelog-backend.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: base
-        tls:
-          - hosts:
-              - *frontend
-              - *backend
-            secretName: ${SECRET_DOMAIN}-tls
+        kind: HTTPRoute
+        parentRefs:
+          - kind: Gateway
+            name: internal
+            namespace: network
+            sectionName: websecure
+        hostnames:
+          - adventurelog.${SECRET_DOMAIN}
+        rules:
+          - backendRefs:
+              - name: *app
+                port: *frontend-port
+            matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+      server:
+        enabled: true
+        kind: HTTPRoute
+        parentRefs:
+          - kind: Gateway
+            name: internal
+            namespace: network
+            sectionName: websecure
+        hostnames:
+          - adventurelog-backend.${SECRET_DOMAIN}
+        rules:
+          - backendRefs:
+              - name: *app
+                port: *server-port
+            matches:
+              - path:
+                  type: PathPrefix
+                  value: /
     persistence:
       config:
         enabled: true
