@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: whoami
+  name: &app whoami
 spec:
   interval: 15m
   chart:
@@ -35,28 +35,29 @@ spec:
               repository: docker.io/traefik/whoami
               tag: v1.11.0@sha256:200689790a0a0ea48ca45992e0450bc26ccab5307375b41c84dfc4f2475937ab
             env:
-              WHOAMI_PORT_NUMBER: 80
+              WHOAMI_PORT_NUMBER: &port 80
     service:
       whoami:
         controller: main
         ports:
           http:
             port: 80
-    ingress:
-      internal:
+    route:
+      main:
         enabled: true
-        className: internal
-        annotations:
-          external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
-          hajimari.io/icon: simple-icons:traefikproxy
-        hosts:
-          - host: &hostName "{{ .Release.Name }}.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                service:
-                  identifier: whoami
-                  port: http
-        tls:
-          - hosts:
-              - *hostName
-            secretName: ${SECRET_DOMAIN}-tls
+        kind: HTTPRoute
+        parentRefs:
+          - kind: Gateway
+            name: internal
+            namespace: network
+            sectionName: websecure
+        hostnames:
+          - whoami.${SECRET_DOMAIN}
+        rules:
+          - backendRefs:
+              - name: *app
+                port: *port
+            matches:
+              - path:
+                  type: PathPrefix
+                  value: /

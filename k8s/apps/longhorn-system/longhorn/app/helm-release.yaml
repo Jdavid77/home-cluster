@@ -49,15 +49,6 @@ spec:
       defaultLonghornStaticStorageClass: longhorn
       nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
       upgradeChecker: false
-    ingress:
-      enabled: true
-      ingressClassName: internal
-      host: longhorn.${SECRET_DOMAIN}
-      tls: true
-      tlsSecret: ${SECRET_DOMAIN}-tls
-      annotations:
-        hajimari.io/icon: harddisk
-        external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
     longhornManager:
       nodeSelector:
         storage: longhorn

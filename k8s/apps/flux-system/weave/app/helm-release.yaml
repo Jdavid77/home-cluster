@@ -26,21 +26,6 @@ spec:
       create: true
       createSecret: false
       username: admin
-    ingress:
-      enabled: true
-      className: internal
-      annotations:
-        hajimari.io/icon: simple-icons:flux
-        external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
-      hosts:
-        - host: &host gitops.${SECRET_DOMAIN}
-          paths:
-            - path: /
-              pathType: Prefix
-      tls:
-        - hosts:
-            - *host
-          secretName: ${SECRET_DOMAIN}-tls
     networkPolicy:
       create: false
     metrics:

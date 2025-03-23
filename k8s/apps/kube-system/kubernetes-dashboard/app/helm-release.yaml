@@ -26,21 +26,5 @@ spec:
     app:
       image:
         pullPolicy: IfNotPresent
-      ingress:
-        enabled: true
-        ingressClassName: internal
-        annotations:
-          hajimari.io/icon: simple-icons:kubernetes
-          external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
-        hosts:
-          - kubernetes.${SECRET_DOMAIN}
-        useDefaultAnnotations: false
-        issuer:
-          name: letsencrypt-production
-          scope: cluster
-        tls:
-          secretName: ${SECRET_DOMAIN}-tls
-          hosts:
-            - kubernetes.${SECRET_DOMAIN}
     metricsScraper:
       enabled: true
