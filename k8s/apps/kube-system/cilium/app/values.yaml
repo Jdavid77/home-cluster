@@ -20,6 +20,8 @@ hubble:
       enabled: true
   relay:
     enabled: true
+  ui:
+    enabled: true
 routingMode: "native"
 ipv4NativeRoutingCIDR: 10.244.0.0/16
 ipam:
