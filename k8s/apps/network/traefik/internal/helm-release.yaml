@@ -115,7 +115,9 @@ spec:
       listeners:
         web:
           port: 8000
-          namespacePolicy: None
+          # doesn't support None for now... shitty workaround but it is what it is
+          # https://gateway-api.sigs.k8s.io/reference/spec/#fromnamespaces
+          namespacePolicy: Selector
         websecure:
           port: 8443
           namespacePolicy: All
