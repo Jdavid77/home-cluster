@@ -92,8 +92,6 @@ spec:
             name: internal
             namespace: network
             sectionName: tls
-        hostnames:
-          - mosquitto.${SECRET_DOMAIN}
         rules:
           - backendRefs:
               - name: *app
