@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: wallos
+  name: &app wallos
 spec:
   interval: 15m
   chart:
@@ -43,25 +43,26 @@ spec:
         controller: wallos
         ports:
           http:
-            port: 80
-    ingress:
-      internal:
+            port: &port 80
+    route:
+      main:
         enabled: true
-        className: internal
-        annotations:
-          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
-          hajimari.io/icon: mid:currency-usd
-        hosts:
-          - host: &host "subs.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                service:
-                  identifier: wallos
-                  port: http
-        tls:
-          - hosts:
-              - *host
-            secretName: ${SECRET_DOMAIN}-tls
+        kind: HTTPRoute
+        parentRefs:
+          - kind: Gateway
+            name: internal
+            namespace: network
+            sectionName: websecure
+        hostnames:
+          - subs.${SECRET_DOMAIN}
+        rules:
+          - backendRefs:
+              - name: *app
+                port: *port
+            matches:
+              - path:
+                  type: PathPrefix
+                  value: /
     persistence:
       config:
         existingClaim: wallos

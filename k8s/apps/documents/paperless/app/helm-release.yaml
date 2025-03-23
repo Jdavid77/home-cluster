@@ -54,7 +54,7 @@ spec:
               PAPERLESS_SOCIALACCOUNT_ALLOW_SIGNUPS: "true"
               PAPERLESS_OCR_LANGUAGES: por
               PAPERLESS_OCR_LANGUAGE: por
-              PAPERLESS_PORT: 8000
+              PAPERLESS_PORT: &port 8000
               PAPERLESS_DBNAME: paperless
               PAPERLESS_REDIS: redis://dragonfly.storage.svc.cluster.local:6379
               PAPERLESS_TASK_WORKERS: 2
@@ -76,24 +76,25 @@ spec:
         ports:
           http:
             port: 8000
-    ingress:
-      internal:
+    route:
+      main:
         enabled: true
-        className: internal
-        annotations:
-          hajimari.io/icon: simple-icons:paperlessngx
-          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
-        hosts:
-          - host: &host paperless.${SECRET_DOMAIN}
-            paths:
-              - path: /
-                service:
-                  identifier: paperless
-                  port: http
-        tls:
-          - hosts:
-              - *host
-            secretName: ${SECRET_DOMAIN}-tls
+        kind: HTTPRoute
+        parentRefs:
+          - kind: Gateway
+            name: internal
+            namespace: network
+            sectionName: websecure
+        hostnames:
+          - paperless.${SECRET_DOMAIN}
+        rules:
+          - backendRefs:
+              - name: *app
+                port: *port
+            matches:
+              - path:
+                  type: PathPrefix
+                  value: /
     persistence:
       data:
         enabled: true
