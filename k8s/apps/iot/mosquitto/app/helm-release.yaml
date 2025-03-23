@@ -84,6 +84,24 @@ spec:
               - path:
                   type: PathPrefix
                   value: /
+      tls:
+        enabled: true
+        kind: TLSRoute
+        parentRefs:
+          - kind: Gateway
+            name: internal
+            namespace: network
+            sectionName: tls
+        hostnames:
+          - mosquitto.${SECRET_DOMAIN}
+        rules:
+          - backendRefs:
+              - name: *app
+                port: *mqtts-port
+            matches:
+              - path:
+                  type: PathPrefix
+                  value: /
     persistence:
       config-file:
         type: configMap
