@@ -131,6 +131,7 @@ spec:
           port: 8883
           namespacePolicy: All
           protocol: TLS
+          mode: Passthrough
     gatewayClass:
       enabled: true
       name: internal
