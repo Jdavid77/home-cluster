@@ -38,7 +38,6 @@ spec:
       secret.reloader.stakater.com/reload: *secret
     extraArgs:
       - --pihole-server=http://192.168.1.87
-      - --ingress-class=internal
       - --gateway-name=internal
     policy: sync
     sources: ["ingress", "service", "gateway-httproute", "gateway-tlsroute"]
