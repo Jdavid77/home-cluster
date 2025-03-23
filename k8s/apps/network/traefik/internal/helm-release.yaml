@@ -127,6 +127,10 @@ spec:
           port: 1883
           namespacePolicy: All
           protocol: TCP
+        tls:
+          port: 8883
+          namespacePolicy: All
+          protocol: TLS
     gatewayClass:
       enabled: true
       name: internal
