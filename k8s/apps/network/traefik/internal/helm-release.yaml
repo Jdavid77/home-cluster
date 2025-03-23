@@ -110,6 +110,7 @@ spec:
       enabled: true
       name: internal
       annotations:
+        # https://kubernetes-sigs.github.io/external-dns/v0.14.2/sources/gateway/#matching-listeners
         external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
       listeners:
         web:

@@ -64,9 +64,26 @@ spec:
         controller: *app
         ports:
           mqtts:
-            port: 8883
+            port: &mqtts-port 8883
           mqtt:
-            port: 1883
+            port: &mqtt-port 1883
+    route:
+      tcp:
+        enabled: true
+        kind: TCPRoute
+        parentRefs:
+          - kind: Gateway
+            name: internal
+            namespace: network
+            sectionName: tcp
+        rules:
+          - backendRefs:
+              - name: *app
+                port: *mqtt-port
+            matches:
+              - path:
+                  type: PathPrefix
+                  value: /
     persistence:
       config-file:
         type: configMap
