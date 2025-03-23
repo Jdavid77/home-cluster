@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: lldap
+  name: &app lldap
 spec:
   interval: 30m
   chart:
@@ -98,24 +98,25 @@ spec:
           ldap:
             enabled: true
             port: *ldapPort
-    ingress:
-      internal:
+    route:
+      main:
         enabled: true
-        className: internal
-        annotations:
-          hajimari.io/icon: mdi:account-multiple
-          external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
-        hosts:
-          - host: &hostName lldap.${SECRET_DOMAIN}
-            paths:
-              - path: /
-                service:
-                  identifier: lldap
-                  port: http
-        tls:
-          - hosts:
-              - *hostName
-            secretName: ${SECRET_DOMAIN}-tls
+        kind: HTTPRoute
+        parentRefs:
+          - kind: Gateway
+            name: internal
+            namespace: network
+            sectionName: websecure
+        hostnames:
+          - lldap.${SECRET_DOMAIN}
+        rules:
+          - backendRefs:
+              - name: *app
+                port: *port
+            matches:
+              - path:
+                  type: PathPrefix
+                  value: /
     persistence:
       data:
         type: emptyDir

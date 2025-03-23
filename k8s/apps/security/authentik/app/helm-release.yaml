@@ -58,15 +58,6 @@ spec:
         enabled: false
         serviceMonitor:
           enabled: false
-      ingress:
-        enabled: true
-        ingressClassName: traefik
-        annotations:
-          hajimari.io/icon: simple-icons:authentik
-          external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
-        hosts:
-          - &host auth.${SECRET_DOMAIN}
-        tls: [{hosts: [*host]}]
       pdb:
         enabled: true
         maxUnavailable: 1

@@ -95,23 +95,25 @@ spec:
             enabled: true
             port: *torrentPort
             protocol: TCP
-    ingress:
-      app:
-        className: internal
-        annotations:
-          hajimari.io/icon: simple-icons:qbittorrent
-          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
-        hosts:
-          - host: &host "qb.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
-        tls:
-          - hosts:
-              - *host
-            secretName: ${SECRET_DOMAIN}-tls
+    route:
+      main:
+        enabled: true
+        kind: HTTPRoute
+        parentRefs:
+          - kind: Gateway
+            name: internal
+            namespace: network
+            sectionName: websecure
+        hostnames:
+          - qb.${SECRET_DOMAIN}
+        rules:
+          - backendRefs:
+              - name: *app
+                port: *port
+            matches:
+              - path:
+                  type: PathPrefix
+                  value: /
     persistence:
       config:
         existingClaim: qbittorrent
