@@ -27,17 +27,19 @@ spec:
       enabled: false
     cleanPrometheusOperatorObjectNames: true
     alertmanager:
-      ingress:
-        enabled: true
-        pathType: Prefix
-        ingressClassName: internal
-        hosts: ["alerts.${SECRET_DOMAIN}"]
-        tls:
-          - hosts:
-              - alerts.${SECRET_DOMAIN}
-        annotations:
-          hajimari.io/icon: alert-octagon
-          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
+      route:
+        main:
+          enabled: true
+          hostnames:
+            - alerts.${SECRET_DOMAIN}
+          parentRefs:
+            - name: internal
+              namespace: network
+              sectionName: websecure
+          matches:
+            - path:
+                type: PathPrefix
+                value: /
       config:
         global:
           resolve_timeout: 5m
@@ -112,17 +114,19 @@ spec:
             cpu: 300m
             memory: 100Mi
     prometheus:
-      ingress:
-        enabled: true
-        ingressClassName: internal
-        pathType: Prefix
-        hosts: ["prometheus.${SECRET_DOMAIN}"]
-        tls:
-          - hosts:
-              - prometheus.${SECRET_DOMAIN}
-        annotations:
-          hajimari.io/icon: simple-icons:prometheus
-          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
+      route:
+        main:
+          enabled: true
+          hostnames:
+            - prometheus.${SECRET_DOMAIN}
+          parentRefs:
+            - name: internal
+              namespace: network
+              sectionName: websecure
+          matches:
+            - path:
+                type: PathPrefix
+                value: /
       thanosService:
         enabled: false
       thanosServiceMonitor:
