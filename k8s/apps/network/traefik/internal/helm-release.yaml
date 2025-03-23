@@ -115,7 +115,7 @@ spec:
       listeners:
         web:
           port: 8000
-          namespacePolicy: All
+          namespacePolicy: None
         websecure:
           port: 8443
           namespacePolicy: All
