@@ -8,3 +8,4 @@ resources:
   - ./linkding/ks.yaml
   - ./adventurelog/ks.yaml
   - ./it-tools/ks.yaml
+  - ./dashy/ks.yaml
