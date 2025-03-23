@@ -28,6 +28,9 @@ spec:
     env:
       TZ: ${TIMEZONE}
     hajimari:
+      image:
+        # https://github.com/toboshii/hajimari/issues/142
+        tag: main-f77fe68
       title: Home Dashboard
       name: "Mr.David"
       lightTheme: paper
