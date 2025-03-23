@@ -122,6 +122,10 @@ spec:
           certificateRefs:
             - name: ${SECRET_DOMAIN}-tls
           mode: Terminate
+        tcp:
+          port: 1883
+          namespacePolicy: All
+          protocol: TCP
     gatewayClass:
       enabled: true
       name: internal
