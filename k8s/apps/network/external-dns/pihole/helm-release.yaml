@@ -41,7 +41,7 @@ spec:
       - --ingress-class=internal
       - --gateway-name=internal
     policy: sync
-    sources: ["ingress", "service", "gateway-httproute"]
+    sources: ["ingress", "service", "gateway-httproute", "gateway-tlsroute"]
     domainFilters: ["${SECRET_DOMAIN}"]
     serviceMonitor:
       enabled: true
