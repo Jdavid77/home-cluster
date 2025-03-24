@@ -53,6 +53,8 @@ spec:
     globalArguments:
       - "--api.insecure=true"
       - "--serverstransport.insecureskipverify=true"
+    additionalArguments:
+      - "--providers.kubernetesgateway.labelselector=gateway=internal"
     providers:
       kubernetesCRD:
         enabled: true
@@ -64,7 +66,6 @@ spec:
         experimentalChannel: true
         statusAddress:
           ip: ${LB_INTERNAL_IP}
-        labelSelector: "traefik-gateway=internal"
     ports:
       mqtt:
         port: 1883
