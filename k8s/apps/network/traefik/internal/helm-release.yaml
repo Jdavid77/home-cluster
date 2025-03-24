@@ -25,11 +25,6 @@ spec:
   values:
     deployment:
       kind: DaemonSet
-    podDisruptionBudget:
-      enabled: true
-      minAvailable: 1
-    podSecurityPolicy:
-      enabled: false
     service:
       enabled: true
       type: LoadBalancer
@@ -69,8 +64,7 @@ spec:
         experimentalChannel: true
         statusAddress:
           ip: ${LB_INTERNAL_IP}
-        labelSelector:
-          app.kubernetes.io/instance: traefik-internal-network
+        labelSelector: "traefik-gateway=internal"
     ports:
       mqtt:
         port: 1883
