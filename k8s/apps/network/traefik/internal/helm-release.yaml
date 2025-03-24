@@ -68,6 +68,8 @@ spec:
       kubernetesGateway:
         enabled: true
         experimentalChannel: true
+        statusAddress:
+          ip: ${LB_INTERNAL_IP}
     ports:
       mqtt:
         port: 1883
@@ -110,7 +112,7 @@ spec:
       enabled: true
       name: internal
       annotations:
-        # https://kubernetes-sigs.github.io/external-dns/v0.14.2/sources/gateway/#matching-listeners
+        # https://kubernetes-sigs.github.io/external-dns/v0.14.2/sources/gateway/#targets
         external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
       listeners:
         web:
@@ -137,8 +139,6 @@ spec:
     gatewayClass:
       enabled: true
       name: internal
-    pilot:
-      enabled: false
     resources:
       requests:
         cpu: 15m
