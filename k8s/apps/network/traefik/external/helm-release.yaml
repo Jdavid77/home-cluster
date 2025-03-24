@@ -57,6 +57,7 @@ spec:
       - "--serverstransport.insecureskipverify=true"
     additionalArguments:
       - "--providers.kubernetesingress.ingressendpoint.ip=${LB_IP}"
+      - "--providers.kubernetesgateway.labelselector=app.kubernetes.io/instance=traefik-network"
     providers:
       kubernetesCRD:
         enabled: true
@@ -69,6 +70,11 @@ spec:
         ingressClass: traefik
         publishedService:
           enabled: true
+      kubernetesGateway:
+        enabled: true
+        experimentalChannel: true
+        statusAddress:
+          ip: "${LB_IP}"
     ports:
       traefik:
         expose:
@@ -159,11 +165,28 @@ spec:
         traefik-plugin-blockuseragent:
           moduleName: "github.com/agence-gaya/traefik-plugin-blockuseragent"
           version: "v0.1.7"
-    # Disable gateway for now
     gateway:
-      enabled: false
+      enabled: true
+      name: external
+      annotations:
+        # https://kubernetes-sigs.github.io/external-dns/v0.14.2/sources/gateway/#targets
+        external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
+      listeners:
+        web:
+          port: 8000
+          # doesn't support None for now... shitty workaround but it is what it is
+          # https://gateway-api.sigs.k8s.io/reference/spec/#fromnamespaces
+          namespacePolicy: Selector
+        websecure:
+          port: 8443
+          namespacePolicy: All
+          protocol: HTTPS
+          certificateRefs:
+            - name: ${SECRET_DOMAIN}-tls
+          mode: Terminate
     gatewayClass:
-      enabled: false
+      enabled: true
+      name: external
     resources:
       requests:
         cpu: 15m
