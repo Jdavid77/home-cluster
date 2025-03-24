@@ -72,7 +72,7 @@ spec:
           enabled: true
       kubernetesGateway:
         enabled: true
-        experimentalChannel: true
+        experimentalChannel: false
         statusAddress:
           ip: "${LB_IP}"
     ports:
