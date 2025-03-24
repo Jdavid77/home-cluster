@@ -62,7 +62,6 @@ spec:
       kubernetesCRD:
         enabled: true
         allowCrossNamespace: true
-        allowExternalNameServices: true
       kubernetesIngress:
         enabled: false
       kubernetesGateway:
@@ -70,6 +69,8 @@ spec:
         experimentalChannel: true
         statusAddress:
           ip: ${LB_INTERNAL_IP}
+        labelSelector:
+          app.kubernetes.io/instance: traefik-internal-network
     ports:
       mqtt:
         port: 1883
