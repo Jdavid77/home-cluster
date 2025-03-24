@@ -54,7 +54,7 @@ spec:
       - "--api.insecure=true"
       - "--serverstransport.insecureskipverify=true"
     additionalArguments:
-      - "--providers.kubernetesgateway.labelselector=gateway=internal"
+      - "--providers.kubernetesgateway.labelselector=app.kubernetes.io/instance=traefik-internal-network"
     providers:
       kubernetesCRD:
         enabled: true
