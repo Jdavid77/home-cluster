@@ -314,18 +314,19 @@ spec:
       - grafana-mqtt-datasource
     serviceMonitor:
       enabled: true
-    ingress:
-      enabled: true
-      ingressClassName: "traefik"
-      annotations:
-        hajimari.io/icon: simple-icons:grafana
-        external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
-      hosts:
-        - &host "grafana.${SECRET_DOMAIN}"
-      tls:
-        - hosts:
-            - *host
-          secretName: ${SECRET_DOMAIN}-tls
+    route:
+      main:
+        enabled: true
+        hostnames:
+          - grafana.${SECRET_DOMAIN}
+        parentRefs:
+          - name: external
+            namespace: network
+            sectionName: websecure
+        matches:
+          - path:
+              type: PathPrefix
+              value: /
     persistence:
       enabled: false
     testFramework:

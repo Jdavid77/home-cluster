@@ -69,20 +69,15 @@ spec:
         controller: littlelink
         ports:
           http:
-            port: 3000
-    ingress:
+            port: &port 3000
+    route:
       main:
-        className: traefik
-        annotations:
-          external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
-        hosts:
-          - host: &host links.${SECRET_DOMAIN}
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
-        tls:
-          - hosts:
-              - *host
-            secretName: "${SECRET_DOMAIN}-tls"
+        hostnames: ["links.${SECRET_DOMAIN}"]
+        parentRefs:
+          - name: external
+            namespace: network
+            sectionName: websecure
+        rules:
+          - backendRefs:
+              - name: app
+                port: *port

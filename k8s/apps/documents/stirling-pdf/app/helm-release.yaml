@@ -29,7 +29,7 @@ spec:
           sablier.group: books
         strategy: RollingUpdate
         containers:
-          stirling:
+          app:
             image:
               repository: ghcr.io/stirling-tools/s-pdf
               tag: 0.44.3@sha256:e78ceedb616a73d39eff6761247387262b6d8ded9e4d9bab1a0529d8f7ceae0c
@@ -80,22 +80,21 @@ spec:
         controller: stirling
         ports:
           http:
-            port: 8080
-    ingress:
-      external:
-        className: traefik
-        annotations:
-          hajimari.io/icon: file-pdf-box
-          external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
-          traefik.ingress.kubernetes.io/router.middlewares: network-authentik-outpost@kubernetescrd
-        hosts:
-          - host: &host "pdf.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                service:
-                  identifier: stirling
-                  port: http
-        tls:
-          - secretName: "${SECRET_DOMAIN}-tls"
-            hosts:
-              - *host
+            port: &port 8080
+    route:
+      main:
+        hostnames: ["pdf.${SECRET_DOMAIN}"]
+        parentRefs:
+          - name: external
+            namespace: network
+            sectionName: websecure
+        rules:
+          - backendRefs:
+              - name: app
+                port: *port
+            filters:
+              - type: ExtensionRef
+                extensionRef:
+                  group: traefik.io
+                  kind: Middleware
+                  name: authentik-outpost

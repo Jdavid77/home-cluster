@@ -24,13 +24,10 @@ spec:
   values:
     controllers:
       it-tools:
-        labels:
-          sablier.enable: "true"
-          sablier.group: books
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          tools:
+          app:
             image:
               repository: ghcr.io/corentinth/it-tools
               tag: 2023.12.21-5ed3693
@@ -53,21 +50,21 @@ spec:
         controller: *app
         ports:
           http:
-            port: 80
-    ingress:
-      external:
-        className: traefik
-        annotations:
-          hajimari.io/icon: tools
-          external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
-          traefik.ingress.kubernetes.io/router.middlewares: network-authentik-outpost@kubernetescrd
-        hosts:
-          - host: &host it-tools.${SECRET_DOMAIN}
-            paths:
-              - path: /
-                service:
-                  identifier: tools
-                  port: http
-        tls:
-          - hosts: [*host]
-            secretName: "${SECRET_DOMAIN}-tls"
+            port: &port 80
+    route:
+      main:
+        hostnames: ["it-tools.${SECRET_DOMAIN}"]
+        parentRefs:
+          - name: external
+            namespace: network
+            sectionName: websecure
+        rules:
+          - backendRefs:
+              - name: app
+                port: *port
+            filters:
+              - type: ExtensionRef
+                extensionRef:
+                  group: traefik.io
+                  kind: Middleware
+                  name: authentik-outpost

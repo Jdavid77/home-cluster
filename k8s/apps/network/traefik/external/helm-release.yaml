@@ -24,11 +24,6 @@ spec:
   values:
     deployment:
       kind: DaemonSet
-    podDisruptionBudget:
-      enabled: true
-      minAvailable: 1
-    podSecurityPolicy:
-      enabled: false
     service:
       enabled: true
       type: LoadBalancer
@@ -47,8 +42,7 @@ spec:
         enabled: true
         format: json
     ingressClass:
-      enabled: true
-      isDefaultClass: true
+      enabled: false
     ingressRoute:
       dashboard:
         enabled: false
@@ -64,12 +58,7 @@ spec:
         allowCrossNamespace: true
         allowExternalNameServices: true
       kubernetesIngress:
-        enabled: true
-        allowExternalNameServices: true
-        allowEmptyServices: true
-        ingressClass: traefik
-        publishedService:
-          enabled: true
+        enabled: false
       kubernetesGateway:
         enabled: true
         experimentalChannel: false
@@ -152,8 +141,6 @@ spec:
       prometheus:
         serviceMonitor:
           enabled: true
-    pilot:
-      enabled: false
     experimental:
       plugins:
         ldapAuth:
