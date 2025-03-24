@@ -106,7 +106,6 @@ metadata:
   name: traefik-middlewares
   namespace: flux-system
 spec:
-  targetNamespace: network
   dependsOn:
     - name: traefik
     - name: error-pages
