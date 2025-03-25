@@ -92,7 +92,7 @@ spec:
           enabled: true
       metrics:
         expose:
-          default: true
+          default: false
     metrics:
       prometheus:
         serviceMonitor:

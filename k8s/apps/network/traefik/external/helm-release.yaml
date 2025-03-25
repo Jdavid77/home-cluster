@@ -134,7 +134,7 @@ spec:
             - 2c0f:f248::/32
       metrics:
         expose:
-          default: true
+          default: false
     metrics:
       prometheus:
         serviceMonitor:
