@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: stirling-pdf
+  name: &app stirling-pdf
 spec:
   chart:
     spec:
@@ -90,7 +90,7 @@ spec:
             sectionName: websecure
         rules:
           - backendRefs:
-              - name: app
+              - name: *app
                 port: *port
             filters:
               - type: ExtensionRef
