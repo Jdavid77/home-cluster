@@ -4,7 +4,7 @@ endpoint: https://192.168.1.83:6443
 talosVersion: v1.9.3
 kubernetesVersion: v1.32.1
 additionalMachineCertSans:
-  - 192.168.1.84
+  - 192.168.1.140
 additionalApiServerCertSans:
   - home-cluster.local
   - "127.0.0.1" # KubePrism
