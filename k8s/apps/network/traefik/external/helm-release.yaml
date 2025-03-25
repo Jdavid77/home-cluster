@@ -80,6 +80,8 @@ spec:
         tls:
           enabled: true
           options: default
+        http3:
+          enabled: true
         forwardedHeaders:
           trustedIPs:
             - 192.168.1.0/24
