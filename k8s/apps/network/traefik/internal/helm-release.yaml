@@ -40,9 +40,6 @@ spec:
         - "IPv4"
     ingressClass:
       enabled: false
-    ingressRoute:
-      dashboard:
-        enabled: false
     globalArguments:
       - "--api.insecure=true"
       - "--serverstransport.insecureskipverify=true"
@@ -72,15 +69,6 @@ spec:
           default: true
         exposedPort: 8883
         protocol: TCP
-      traefik:
-        expose:
-          default: false
-      web:
-        redirections:
-          entryPoint:
-            to: websecure
-            scheme: https
-            permanent: true
       websecure:
         middlewares:
           - network-errors@kubernetescrd
@@ -90,9 +78,6 @@ spec:
           options: default
         http3:
           enabled: true
-      metrics:
-        expose:
-          default: false
     metrics:
       prometheus:
         serviceMonitor:
@@ -106,9 +91,9 @@ spec:
       listeners:
         web:
           port: 8000
-          # doesn't support None for now... shitty workaround but it is what it is
+          # doesn't support None for now...
           # https://gateway-api.sigs.k8s.io/reference/spec/#fromnamespaces
-          namespacePolicy: Selector
+          namespacePolicy: All
         websecure:
           port: 8443
           namespacePolicy: All
