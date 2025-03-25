@@ -38,13 +38,6 @@ spec:
       externalTrafficPolicy: Cluster
       ipFamilies:
         - "IPv4"
-    logs:
-      general:
-        format: json
-        level: WARN
-      access:
-        enabled: true
-        format: json
     ingressClass:
       enabled: false
     ingressRoute:
@@ -81,7 +74,7 @@ spec:
         protocol: TCP
       traefik:
         expose:
-          default: true
+          default: false
       web:
         redirections:
           entryPoint:

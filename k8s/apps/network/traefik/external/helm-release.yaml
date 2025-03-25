@@ -65,7 +65,7 @@ spec:
     ports:
       traefik:
         expose:
-          default: true
+          default: false
       web:
         redirections:
           entryPoint:
