@@ -92,8 +92,6 @@ spec:
         middlewares:
           - network-errors@kubernetescrd
           - network-ratelimit@kubernetescrd
-        http3:
-          enabled: true
         tls:
           enabled: true
           options: default

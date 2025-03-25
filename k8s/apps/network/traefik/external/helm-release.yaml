@@ -50,13 +50,11 @@ spec:
       - "--api.insecure=true"
       - "--serverstransport.insecureskipverify=true"
     additionalArguments:
-      - "--providers.kubernetesingress.ingressendpoint.ip=${LB_IP}"
       - "--providers.kubernetesgateway.labelselector=app.kubernetes.io/instance=traefik-network"
     providers:
       kubernetesCRD:
         enabled: true
         allowCrossNamespace: true
-        allowExternalNameServices: true
       kubernetesIngress:
         enabled: false
       kubernetesGateway:
@@ -79,8 +77,6 @@ spec:
           - network-errors@kubernetescrd
           - network-ratelimit@kubernetescrd
           - network-blockuseragent@kubernetescrd
-        http3:
-          enabled: true
         tls:
           enabled: true
           options: default
@@ -143,12 +139,6 @@ spec:
           enabled: true
     experimental:
       plugins:
-        ldapAuth:
-          moduleName: "github.com/wiltonsr/ldapAuth"
-          version: "v0.1.8"
-        themepark:
-          moduleName: "github.com/packruler/traefik-themepark"
-          version: "v1.4.0"
         traefik-plugin-blockuseragent:
           moduleName: "github.com/agence-gaya/traefik-plugin-blockuseragent"
           version: "v0.1.7"
