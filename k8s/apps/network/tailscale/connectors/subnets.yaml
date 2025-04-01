@@ -8,5 +8,5 @@ spec:
   subnetRouter:
     advertiseRoutes:
       - ${LB_INTERNAL_IP}/32
-      - ${PIHOLE_IP}/32
-      - "192.168.1.140/32"
+      - 192.168.1.139/32
+      - 192.168.1.140/32
