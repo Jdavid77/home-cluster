@@ -67,8 +67,9 @@ spec:
           initialDelaySeconds: 10
           timeoutSeconds: 5
         service:
+          # https://github.com/muhlba91/external-dns-provider-adguard?tab=readme-ov-file#v7-to-v8
           # -- Webhook exposed HTTP port for the service.
-          port: 8888
+          port: 8080
     podAnnotations:
       secret.reloader.stakater.com/reload: *secret
     extraArgs:
