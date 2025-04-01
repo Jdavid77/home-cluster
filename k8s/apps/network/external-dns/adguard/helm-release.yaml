@@ -35,7 +35,7 @@ spec:
           pullPolicy: IfNotPresent
         env:
           - name: ADGUARD_URL
-            value: http://192.168.1.139:3000
+            value: http://192.168.1.139
           - name: &name ADGUARD_USER
             valueFrom:
               secretKeyRef:
@@ -70,7 +70,6 @@ spec:
     extraArgs:
       - --webhook-provider-url=http://localhost:8888
       - --gateway-name=internal
-      - --registry=txt
     policy: upsert-only
     sources: ["service", "gateway-httproute"]
     domainFilters: ["${SECRET_DOMAIN}"]
