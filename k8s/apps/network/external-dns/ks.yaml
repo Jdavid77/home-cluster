@@ -21,10 +21,10 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: external-dns-agduard
+  name: external-dns-pihole
   namespace: flux-system
 spec:
-  path: ./k8s/apps/network/external-dns/adguard
+  path: ./k8s/apps/network/external-dns/pihole
   dependsOn:
     - name: external-secrets-store
   prune: true
