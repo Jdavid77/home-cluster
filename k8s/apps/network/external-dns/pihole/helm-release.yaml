@@ -15,6 +15,7 @@ spec:
         name: external-dns-charts
         namespace: flux-system
   install:
+    disableSchemaValidation: true
     remediation:
       retries: 3
   upgrade:
@@ -24,7 +25,11 @@ spec:
       strategy: rollback
       retries: 3
   values:
-    disableSchemaValidation: true
+    image:
+      # https://github.com/kubernetes-sigs/external-dns/pull/5226
+      repository: gcr.io/k8s-staging-external-dns/external-dns
+      tag: v20250402-v0.16.1-48-g1efdf416
+      pullPolicy: IfNotPresent
     fullnameOverride: *app
     provider:
       name: pihole
