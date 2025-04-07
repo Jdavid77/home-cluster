@@ -1,8 +1,9 @@
 apiVersion: notification.toolkit.fluxcd.io/v1beta3
 kind: Provider
 metadata:
-  name: discord
+  name: gotify
+  namespace: flux-system
 spec:
-  type: discord
+  type: generic
   secretRef:
-    name: discord-webhook
+    name: gotify-address
