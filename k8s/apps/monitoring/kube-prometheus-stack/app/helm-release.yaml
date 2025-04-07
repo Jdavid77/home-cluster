@@ -45,17 +45,17 @@ spec:
           resolve_timeout: 5m
         receivers:
           - name: "null"
-          - name: "discord"
-            discord_configs:
-              - webhook_url: ${DISCORD_WEBHOOK_URL}
+          - name: "gotify"
+            webhook_configs:
+              - url: http://alertmanager-gotify.svc.cluster.local:8080/gotify_webhook
                 send_resolved: true
         route:
-          receiver: "discord"
+          receiver: "gotify"
           routes:
             - receiver: "null"
               matchers:
                 - alertname =~ "InfoInhibitor|Watchdog|RebootScheduled"
-            - receiver: "discord"
+            - receiver: "gotify"
               matchers:
                 - severity = "critical"
               continue: true
