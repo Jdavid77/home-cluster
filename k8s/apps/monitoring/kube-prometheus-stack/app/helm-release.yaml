@@ -47,7 +47,7 @@ spec:
           - name: "null"
           - name: "gotify"
             webhook_configs:
-              - url: http://alertmanager-gotify.svc.cluster.local:8080/gotify_webhook
+              - url: http://alertmanager-gotify:8080/gotify_webhook
                 send_resolved: true
         route:
           receiver: "gotify"
