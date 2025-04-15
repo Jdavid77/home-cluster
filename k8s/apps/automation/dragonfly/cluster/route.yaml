@@ -15,7 +15,7 @@ spec:
     - backendRefs:
         - group: ""
           kind: Service
-          name: dragondly
+          name: dragonfly
           namespace: automation
           port: 6379
       matches:
