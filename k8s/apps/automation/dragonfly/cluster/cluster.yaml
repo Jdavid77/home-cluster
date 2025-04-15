@@ -7,6 +7,10 @@ spec:
   labels:
     dragonflydb.io/cluster: dragonfly
   image: docker.dragonflydb.io/dragonflydb/dragonfly:v1.28.0
+  authentication:
+    passwordFromSecret:
+      key: REDIS_PASSWORD
+      name: dragonfly-secret
   replicas: 3
   topologySpreadConstraints:
     - maxSkew: 1
