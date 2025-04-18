@@ -47,9 +47,9 @@ spec:
               tag: 1.89.2
             env:
               # Isolating N8N
-              N8N_PERSONALIZATION_ENABLED: false
+              N8N_PERSONALIZATION_ENABLED: true
               N8N_VERSION_NOTIFICATIONS_ENABLED: false
-              N8N_TEMPLATES_ENABLED: false
+              N8N_TEMPLATES_ENABLED: true
               # URL
               N8N_PORT: &port 5678
               N8N_HOST: &host "n8n.${SECRET_DOMAIN}"
