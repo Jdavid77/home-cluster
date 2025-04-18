@@ -67,6 +67,8 @@ spec:
               N8N_METRICS: true
               N8N_USER_FOLDER: /home/jnobrega/n8n
               NODE_FUNCTION_ALLOW_EXTERNAL: databricks/sql
+              # MCP
+              N8N_COMMUNITY_PACKAGES_ALLOW_TOOL_USAGE: "true"
             envFrom:
               - secretRef:
                   name: n8n-secret
