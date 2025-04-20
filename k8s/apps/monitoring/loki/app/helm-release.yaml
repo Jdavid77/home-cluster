@@ -59,6 +59,10 @@ spec:
             local:
               directory: /rules
           rule_path: /rules/fake
+          remote_write:
+            enabled: true
+            client:
+              url: http://prometheus-operated:9090/api/v1/write
       limits_config:
         retention_period: 14d
     singleBinary:
