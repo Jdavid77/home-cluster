@@ -54,8 +54,6 @@ spec:
           enable_api: true
           enable_alertmanager_v2: true
           alertmanager_url: http://alertmanager-operated:9093
-          wal:
-            dir: /loki/ruler-wal
           storage:
             type: local
             local:
