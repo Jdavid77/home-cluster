@@ -140,6 +140,7 @@ spec:
         podMonitorSelectorNilUsesHelmValues: false
         probeSelectorNilUsesHelmValues: false
         scrapeConfigSelectorNilUsesHelmValues: false
+        enableRemoteWriteReceiver: true
         enableAdminAPI: true
         walCompression: true
         enableFeatures:
