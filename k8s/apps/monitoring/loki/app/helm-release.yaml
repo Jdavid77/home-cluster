@@ -104,3 +104,4 @@ spec:
         searchNamespace: ALL
         label_value: "true"
         resource: configmap
+        folder: /rules/fake
