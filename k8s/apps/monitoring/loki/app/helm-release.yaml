@@ -23,6 +23,13 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    global:
+      extraVolumes:
+        - name: wal
+          emptyDir: {}
+      extraVolumeMounts:
+        - name: wal
+          mountPath: /loki/ruler-wal
     deploymentMode: SingleBinary
     loki:
       auth_enabled: false
@@ -58,6 +65,8 @@ spec:
             type: local
             local:
               directory: /rules
+          wal:
+            dir: /loki/ruler-wal
           rule_path: /rules/fake
           remote_write:
             enabled: true
