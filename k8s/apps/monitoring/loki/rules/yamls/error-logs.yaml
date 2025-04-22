@@ -1,0 +1,15 @@
+groups:
+  - name: generic-rules
+    limit: 15
+    interval: 1m
+    rules:
+      - alert: LogErrors
+        expr: |
+          count_over_time({k8s_deployment_name=~".+"} | label_format level=detected_level | level = `error` [5m]) > 5
+        labels:
+          severity: critical
+          service: "{{ $labels.service_name }}"
+        annotations:
+          summary: High frequency of error-level logs detected
+          description: |
+            More than 5 log entries with level "error" were detected within a 5-minute window in {{ $labels.k8s_deployment_name }}
