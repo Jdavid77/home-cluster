@@ -1,7 +1,7 @@
 groups:
   - name: generic-rules
     limit: 100
-    interval: 1m
+    interval: 5m
     rules:
       - alert: LogErrors
         expr: |
