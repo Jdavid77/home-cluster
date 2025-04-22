@@ -18,6 +18,7 @@ spec:
   config:
     receivers:
       k8s_events:
+        auth_type: serviceAccount
         namespaces: [flux-system]
     exporters:
       otlphttp/loki:
