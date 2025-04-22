@@ -1,6 +1,6 @@
 groups:
   - name: generic-rules
-    limit: 15
+    limit: 100
     interval: 1m
     rules:
       - alert: LogErrors
