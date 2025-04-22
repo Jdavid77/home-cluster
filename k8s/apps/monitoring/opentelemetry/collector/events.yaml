@@ -21,10 +21,12 @@ spec:
         auth_type: serviceAccount
         namespaces: [flux-system]
     exporters:
+      debug:
+        verbosity: detailed
       otlphttp/loki:
         endpoint: http://loki-gateway.monitoring/otlp
     service:
       pipelines:
         logs:
           receivers: [k8s_events]
-          exporters: [otlphttp/loki]
+          exporters: [otlphttp/loki, debug]
