@@ -5,7 +5,7 @@ groups:
     rules:
       - alert: LogErrors
         expr: |
-          count_over_time({k8s_deployment_name=~".+"} | label_format level=detected_level | level = `error` [5m]) > 5
+          count_over_time({k8s_deployment_name=~".+"} | label_format level=detected_level | level = `error` [5m]) >= 1
         labels:
           severity: critical
           service: "{{ $labels.service_name }}"
