@@ -1,0 +1,29 @@
+apiVersion: opentelemetry.io/v1beta1
+kind: OpenTelemetryCollector
+metadata:
+  name: otel-events
+spec:
+  managementState: managed
+  upgradeStrategy: automatic
+  mode: deployment
+  serviceAccount: collector
+  ports:
+    - name: health
+      port: 13113
+  env:
+    - name: KUBE_NODE_NAME
+      valueFrom:
+        fieldRef:
+          fieldPath: spec.nodeName
+  config:
+    receivers:
+      k8s_events:
+        namespaces: [flux-system]
+    exporters:
+      otlphttp/loki:
+        endpoint: http://loki-gateway.monitoring/otlp
+    service:
+      pipelines:
+        logs:
+          receivers: [k8s_events]
+          exporters: [otlphttp/loki]
