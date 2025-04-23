@@ -1,0 +1,75 @@
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app calibre-web-downloader
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 3.7.3
+      interval: 30m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-charts
+        namespace: flux-system
+  interval: 30m
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  values:
+    controllers:
+      calibre-web-automated-book-downloader:
+        containers:
+          app:
+            image:
+              repository: ghcr.io/calibrain/calibre-web-automated-book-downloader
+              tag: 20250404@sha256:c9141176d41a20f8c348a2577315bc8f9ab73daeb5b485cdc6b414285948a543
+            env:
+              FLASK_PORT: &port 8084
+              UID: 1002
+              GID: 100
+              BOOK_LANGUAGE: en
+              CUSTOM_DNS: 192.168.1.139
+            securityContext:
+              allowPrivilegeEscalation: false
+            resources:
+              requests:
+                cpu: 5m
+    service:
+      app:
+        controller: calibre-web-automated-book-downloader
+        ports:
+          http:
+            port: *port
+    route:
+      main:
+        enabled: true
+        kind: HTTPRoute
+        parentRefs:
+          - kind: Gateway
+            name: internal
+            namespace: network
+            sectionName: websecure
+        hostnames:
+          - books-downloader.${SECRET_DOMAIN}
+        rules:
+          - backendRefs:
+              - name: *app
+                port: *port
+            matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+    persistence:
+      ingest:
+        existingClaim: book-ingests-nfs-share-pvc
+        advancedMounts:
+          calibre-web-automated-book-downloader:
+            app:
+              - path: /cwa-book-ingest
