@@ -94,7 +94,13 @@ spec:
         advancedMounts:
           calibre-web:
             calibre-web:
-              - path: /books
+              - path: /calibre-library
+      ingest:
+        existingClaim: book-ingests-nfs-share-pvc
+        advancedMounts:
+          calibre-web:
+            calibre-web:
+              - path: /cwa-book-ingest
       cache:
         type: emptyDir
         globalMounts:

@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - ./books-nfs.yaml
   - ./downloads-nfs.yaml
+  - ./ingest-nfs.yaml
