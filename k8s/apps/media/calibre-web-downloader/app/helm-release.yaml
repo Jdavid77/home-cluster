@@ -35,7 +35,8 @@ spec:
               UID: 1002
               GID: 100
               BOOK_LANGUAGE: en
-              CUSTOM_DNS: 192.168.1.139
+              CUSTOM_DNS: cloudflare
+              USE_DOH: "true"
             securityContext:
               allowPrivilegeEscalation: false
             resources:
