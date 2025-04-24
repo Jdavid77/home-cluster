@@ -111,9 +111,9 @@ spec:
       tolerations:
         - key: node-role.kubernetes.io/control-plane
           effect: NoSchedule
-      extraArgs:
-        - --namespace=cert-manager
-        - --enable-certificates-data-source=false
+      # extraArgs:
+      #   - --namespace=cert-manager
+      #   - --enable-certificates-data-source=false
       replicaCount: 2
       podDisruptionBudget:
         enabled: false
