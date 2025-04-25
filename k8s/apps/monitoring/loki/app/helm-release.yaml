@@ -74,6 +74,7 @@ spec:
               url: http://prometheus-operated:9090/api/v1/write
       limits_config:
         retention_period: 14d
+        allow_structured_metadata: true
     singleBinary:
       replicas: 1
       persistence:
