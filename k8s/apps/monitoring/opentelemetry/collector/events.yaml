@@ -40,4 +40,4 @@ spec:
         logs:
           receivers: [k8s_events]
           processors: [batch, resource/k8s_events]
-          exporters: [otlphttp/loki]
+          exporters: [otlphttp/loki, debug]
