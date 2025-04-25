@@ -120,6 +120,8 @@ spec:
             key: loki.format
             value: json
     exporters:
+      debug:
+        verbosity: detailed
       otlphttp/loki:
         endpoint: http://loki-gateway.monitoring/otlp
     service:
@@ -127,7 +129,7 @@ spec:
         logs:
           receivers: [filelog]
           processors: [k8sattributes, batch, resource, memory_limiter]
-          exporters: [otlphttp/loki]
+          exporters: [otlphttp/loki, debug]
   securityContext:
     runAsUser: 0
     runAsGroup: 0
