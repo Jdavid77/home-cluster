@@ -17,9 +17,13 @@ spec:
           fieldPath: spec.nodeName
   config:
     receivers:
-      k8s_events:
+      k8sobjects:
         auth_type: serviceAccount
-        namespaces: []
+        objects:
+          - name: events
+            mode: watch
+            group: events.k8s.io
+            exclude_watch_type: ["ADDED", "MODIFIED", "DELETED", "BOOKMARK"]
     processors:
       batch: {}
       resource/k8s_events:
@@ -38,6 +42,6 @@ spec:
     service:
       pipelines:
         logs:
-          receivers: [k8s_events]
+          receivers: [k8sobjects]
           processors: [batch, resource/k8s_events]
           exporters: [otlphttp/loki, debug]
