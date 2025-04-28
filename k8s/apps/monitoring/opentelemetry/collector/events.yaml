@@ -22,7 +22,7 @@ spec:
         objects:
           - name: events
             mode: watch
-            group: events.k8s.io
+            group: v1
             exclude_watch_type: ["ADDED", "MODIFIED", "DELETED", "BOOKMARK"]
     processors:
       batch: {}
