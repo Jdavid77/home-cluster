@@ -1,0 +1,146 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": 51,
+    "links": [],
+    "panels": [
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "loki"
+        },
+        "fieldConfig": {
+          "defaults": {},
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 18,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 1,
+        "options": {
+          "dedupStrategy": "none",
+          "enableInfiniteScrolling": false,
+          "enableLogDetails": true,
+          "prettifyLogMessage": false,
+          "showCommonLabels": false,
+          "showLabels": false,
+          "showTime": false,
+          "sortOrder": "Descending",
+          "wrapLogMessage": false
+        },
+        "pluginVersion": "11.6.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "loki"
+            },
+            "direction": "backward",
+            "editorMode": "builder",
+            "expr": "{service_name=\"unknown_service\", k8s_namespace_name=\"$namespace\"} | json | line_format `Source: {{.object_source_component}} - {{.object_involvedObject_kind}} {{.object_involvedObject_name}} - {{.object_message}}` | type = `$type`",
+            "queryType": "range",
+            "refId": "A"
+          }
+        ],
+        "title": "Events",
+        "type": "logs"
+      }
+    ],
+    "preload": false,
+    "schemaVersion": 41,
+    "tags": [],
+    "templating": {
+      "list": [
+        {
+          "current": {
+            "text": "flux-system",
+            "value": "flux-system"
+          },
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "definition": "",
+          "description": "",
+          "label": "Namespace",
+          "name": "namespace",
+          "options": [],
+          "query": {
+            "label": "k8s_namespace_name",
+            "refId": "LokiVariableQueryEditor-VariableQuery",
+            "stream": "",
+            "type": 1
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "current": {
+            "text": "ADDED",
+            "value": "ADDED"
+          },
+          "label": "Type",
+          "name": "type",
+          "options": [
+            {
+              "selected": true,
+              "text": "ADDED",
+              "value": "ADDED"
+            },
+            {
+              "selected": false,
+              "text": "MODIFIED",
+              "value": "MODIFIED"
+            },
+            {
+              "selected": false,
+              "text": "DELETED",
+              "value": "DELETED"
+            },
+            {
+              "selected": false,
+              "text": "BOOKMARK",
+              "value": "BOOKMARK"
+            },
+            {
+              "selected": false,
+              "text": "ERROR",
+              "value": "ERROR"
+            }
+          ],
+          "query": "ADDED, MODIFIED, DELETED, BOOKMARK, ERROR",
+          "type": "custom"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "browser",
+    "title": "Events",
+    "uid": "aekbf9pdc0m4gf",
+    "version": 11
+  }
