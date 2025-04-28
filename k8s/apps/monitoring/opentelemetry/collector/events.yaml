@@ -25,14 +25,6 @@ spec:
             group: v1
     processors:
       batch: {}
-      resource/k8s_events:
-        attributes:
-          - action: insert
-            key: job
-            value: 'events'
-          - action: insert
-            key: loki.resource.labels
-            value: job
     exporters:
       debug:
         verbosity: detailed
@@ -42,5 +34,5 @@ spec:
       pipelines:
         logs:
           receivers: [k8sobjects]
-          processors: [batch, resource/k8s_events]
+          processors: [batch]
           exporters: [otlphttp/loki, debug]
