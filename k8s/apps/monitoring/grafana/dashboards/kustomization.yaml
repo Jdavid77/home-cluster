@@ -8,6 +8,6 @@ generatorOptions:
   disableNameSuffixHash: true
   annotations:
     kustomize.toolkit.fluxcd.io/substitute: disabled
-    grafana_folder: "Dashboards"
+    grafana_folder: "Logs"
   labels:
     grafana_dashboard: 'true'
