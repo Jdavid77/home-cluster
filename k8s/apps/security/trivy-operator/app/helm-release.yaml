@@ -41,6 +41,7 @@ spec:
       ignoreUnfixed: true
       mode: ClientServer
       severity: HIGH,CRITICAL
+      storageClassEnabled: false # ephemeral storage
       resources:
         limits:
           cpu: 500m
