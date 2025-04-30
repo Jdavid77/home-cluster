@@ -149,6 +149,14 @@ spec:
             editable: true
             options:
               path: /var/lib/grafana/dashboards/dns-folder
+          - name: trivy
+            orgId: 1
+            folder: Trivy
+            type: file
+            disableDeletion: false
+            editable: true
+            options:
+              path: /var/lib/grafana/dashboards/trivy-folder
     datasources:
       datasources.yaml:
         apiVersion: 1
@@ -272,6 +280,11 @@ spec:
       dns:
         pihole:
           url: https://raw.githubusercontent.com/eko/pihole-exporter/refs/heads/master/grafana/dashboard.json
+          datasource: Prometheus
+      trivy:
+        trivy-vulnerabilities:
+          gnetId: 16337
+          revision: 14
           datasource: Prometheus
     sidecar:
       dashboards:
