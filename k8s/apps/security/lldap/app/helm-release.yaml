@@ -48,8 +48,8 @@ spec:
         containers:
           lldap:
             image:
-              repository: ghcr.io/lldap/lldap
-              tag: v0.6.1
+              repository: lldap/lldap
+              tag: 2025-04-25-alpine-rootless
             command:
               - /app/lldap
             args:
