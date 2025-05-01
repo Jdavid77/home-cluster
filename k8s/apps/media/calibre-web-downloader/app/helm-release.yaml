@@ -37,23 +37,36 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/calibrain/calibre-web-automated-book-downloader
-              tag: 20250404@sha256:c9141176d41a20f8c348a2577315bc8f9ab73daeb5b485cdc6b414285948a543
+              repository: ghcr.io/calibrain/calibre-web-automated-book-downloader-tor
+              tag: 20250501@sha256:df411c3f4b2696740e2f10013bdec96deb8b272e8d0b0eaabf080e6813953640
             env:
               TZ: ${TIMEZONE}
               FLASK_PORT: &port 8084
               UID: 1002
               GID: 100
               BOOK_LANGUAGE: en
-              CUSTOM_DNS: cloudflare
-              USE_DOH: "true"
+              # CUSTOM_DNS: cloudflare
+              # USE_DOH: "true"
               INGEST_URL: /cwa-book-ingest
               HOME: /tmp
+              USING_TOR: "true"
+              APP_ENV: prod
             command: ['python', '-m', 'app'] # don't run startup script, since it doesn't work on a read-only fs
+            probes:
+              liveness: &probe
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /request/api/status
+                    port: *port
+              readiness: *probe
+              startup: *probe
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
-              capabilities: {drop: ['ALL']}
+              capabilities:
+                add: ["NET_ADMIN", "NET_RAW"]
             resources:
               requests:
                 cpu: 5m
