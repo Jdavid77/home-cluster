@@ -110,3 +110,7 @@ spec:
         type: emptyDir
         globalMounts:
           - path: /var/log/cwa-book-downloader/
+      downloaded:
+        type: emptyDir
+        globalMounts:
+          - path: /app/downloaded_files
