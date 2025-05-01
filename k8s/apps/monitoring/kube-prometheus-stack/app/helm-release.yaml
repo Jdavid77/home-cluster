@@ -201,8 +201,4 @@ spec:
               targetLabel: node
     grafana:
       enabled: false
-      forceDeployDashboards: true
-      sidecar:
-        dashboards:
-          annotations:
-            grafana_folder: Kubernetes
+      defaultDashboardsEnabled: false
