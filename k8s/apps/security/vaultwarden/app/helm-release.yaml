@@ -41,7 +41,7 @@ spec:
           vaultwarden:
             image:
               repository: vaultwarden/server
-              tag: 1.33.2
+              tag: 1.33.2-alpine
             env:
               DOMAIN: "https://vaultwarden.${SECRET_DOMAIN}"
               TZ: ${TIMEZONE}
