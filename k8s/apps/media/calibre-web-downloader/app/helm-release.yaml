@@ -51,7 +51,12 @@ spec:
               HOME: /tmp
               USING_TOR: "true"
               APP_ENV: prod
-            command: ['python', '-m', 'app'] # don't run startup script, since it doesn't work on a read-only fs
+            # props
+            # https://github.com/tholinka/home-ops/blob/main/kubernetes/apps/media/calibre-downloader/app/helmrelease.yaml#L35C13-L38C112
+            command: # don't run startup script, since it doesn't work on a read-only fs
+              - bash
+              - -c
+              - touch /usr/local/lib/python3.10/site-packages/seleniumbase/drivers/__init__.py && python -m app
             probes:
               liveness: &probe
                 enabled: true
