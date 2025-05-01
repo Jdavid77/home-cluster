@@ -113,7 +113,8 @@ spec:
       enabled: false
     sidecar:
       image:
-        repository: ghcr.io/kiwigrid/k8s-sidecar
+        repository: ghcr.io/home-operations/k8s-sidecar
+        tag: 1.30.3
       rules:
         searchNamespace: ALL
         label_value: "true"
