@@ -29,8 +29,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/corentinth/it-tools
-              tag: 2023.12.21-5ed3693
+              repository: ghcr.io/home-operations/it-tools
+              tag: 2024.10.22
             env:
               TZ: ${TIMEZONE}
             probes:
