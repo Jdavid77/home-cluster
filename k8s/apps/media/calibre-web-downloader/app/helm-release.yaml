@@ -23,6 +23,15 @@ spec:
       strategy: rollback
       retries: 3
   values:
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1002
+        runAsGroup: 100
+        fsGroup: 100
+        supplementalGroups: [65534] # nobody group, required since calibre-web-automated tries to use root on startup
+        fsGroupChangePolicy: 'OnRootMismatch'
+        seccompProfile: {type: RuntimeDefault}
     controllers:
       calibre-web-automated-book-downloader:
         containers:
@@ -38,8 +47,13 @@ spec:
               BOOK_LANGUAGE: en
               CUSTOM_DNS: cloudflare
               USE_DOH: "true"
+              INGEST_URL: /cwa-book-ingest
+              HOME: /tmp
+            command: ['python', '-m', 'app'] # don't run startup script, since it doesn't work on a read-only fs
             securityContext:
               allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: {drop: ['ALL']}
             resources:
               requests:
                 cpu: 5m
@@ -75,3 +89,7 @@ spec:
           calibre-web-automated-book-downloader:
             app:
               - path: /cwa-book-ingest
+      tmp:
+        type: emptyDir
+        globalMounts:
+          - path: /tmp
