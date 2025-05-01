@@ -149,6 +149,14 @@ spec:
             editable: true
             options:
               path: /var/lib/grafana/dashboards/trivy-folder
+          - name: storage
+            orgId: 1
+            folder: Storage
+            type: file
+            disableDeletion: false
+            editable: true
+            options:
+              path: /var/lib/grafana/dashboards/storage-folder
     datasources:
       datasources.yaml:
         apiVersion: 1
@@ -179,12 +187,6 @@ spec:
               implementation: prometheus
     dashboards:
       default:
-        minio:
-          # renovate: depName="MinIO Dashboard"
-          gnetId: 13502
-          revision: 26
-          datasource:
-            - {name: DS_PROMETHEUS, value: Prometheus}
         cert-manager:
           gnetId: 11001
           revision: 1
@@ -248,6 +250,13 @@ spec:
           gnetId: 16337
           revision: 14
           datasource: Prometheus
+      storage:
+        minio:
+          # renovate: depName="MinIO Dashboard"
+          gnetId: 13502
+          revision: 26
+          datasource:
+            - {name: DS_PROMETHEUS, value: Prometheus}
     sidecar:
       dashboards:
         enabled: true
