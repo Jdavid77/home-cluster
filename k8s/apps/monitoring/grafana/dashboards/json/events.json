@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 53,
+  "id": 25,
   "links": [],
   "panels": [
     {
@@ -44,7 +44,7 @@
         "prettifyLogMessage": false,
         "showCommonLabels": false,
         "showLabels": false,
-        "showTime": false,
+        "showTime": true,
         "sortOrder": "Descending",
         "wrapLogMessage": false
       },
@@ -80,5 +80,5 @@
   "timezone": "browser",
   "title": "Warning/Error Events",
   "uid": "cekevncx8c83kd",
-  "version": 4
+  "version": 1
 }
