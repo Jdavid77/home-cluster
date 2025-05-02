@@ -35,6 +35,9 @@ k8sServicePort: 7445
 kubeProxyReplacement: true
 l2announcements:
   enabled: true
+  leaseDuration: 45s
+  leaseRenewDeadline: 15s
+  leaseRetryPeriod: 5s
 externalIPs:
   enabled: true
 securityContext:
