@@ -39,3 +39,4 @@ resources:
   - kubernetes-dashboard-charts.yaml
   - emqx-charts.yaml
   - trivy-charts.yaml
+  - enix-charts.yaml
