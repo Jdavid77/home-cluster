@@ -219,7 +219,8 @@ spec:
         node-problem-detector:
           gnetId: 15549
           revision: 1
-          datasource: Prometheus
+          datasource:
+            - {name: DS_PROMETHEUS, value: Prometheus}
       prometheus:
         prometheus:
           # renovate: depName="Prometheus"
