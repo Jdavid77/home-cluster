@@ -38,7 +38,7 @@ spec:
           app:
             image:
               repository: ghcr.io/calibrain/calibre-web-automated-book-downloader-tor
-              tag: 20250501@sha256:df411c3f4b2696740e2f10013bdec96deb8b272e8d0b0eaabf080e6813953640
+              tag: 20250506@sha256:4951d08ac434aed61a454f3c08dc84bdfdd5737cb1b2cfeb8440f78815f28c9a
             env:
               TZ: ${TIMEZONE}
               FLASK_PORT: &port 8084
