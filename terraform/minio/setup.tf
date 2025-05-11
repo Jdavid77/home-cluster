@@ -1,10 +1,8 @@
 locals {
   apps = [
-    "longhorn",
-    "loki",
-    "velero",
     "postgres",
-    "obsidian"
+    "obsidian",
+    "noco"
   ]
 }
 
