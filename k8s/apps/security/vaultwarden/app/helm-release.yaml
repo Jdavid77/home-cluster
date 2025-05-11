@@ -54,7 +54,7 @@ spec:
               SMTP_FROM: ${SMTP_FROM}
               SMTP_USERNAME: ${SMTP_USERNAME}
               SMTP_PASSWORD: ${SMTP_PASSWORD}
-              SMTP_FROM_NAME: ${SMTP_FROM_NAME}
+              SMTP_FROM_NAME: Vaultwarden
               SMTP_PORT: 587
               SMTP_SECURITY: "starttls"
               ADMIN_TOKEN: ${VAULTWARDEN_ADMIN_TOKEN_HASHED}
