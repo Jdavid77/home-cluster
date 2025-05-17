@@ -40,3 +40,4 @@ resources:
   - emqx-charts.yaml
   - trivy-charts.yaml
   - enix-charts.yaml
+  - control-plane-charts.yaml
