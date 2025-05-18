@@ -34,8 +34,6 @@ spec:
         enable: true
         selector: storage
     defaultSettings:
-      backupTarget: s3://longhorn@weur/
-      backupTargetCredentialSecret: longhorn-secret
       defaultReplicaCount: 3
       backupstorePollInterval: 0
       createDefaultDiskLabeledNodes: true
