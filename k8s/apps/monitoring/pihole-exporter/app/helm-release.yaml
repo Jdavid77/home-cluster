@@ -28,7 +28,7 @@ spec:
           pihole-exporter:
             image:
               repository: ekofr/pihole-exporter
-              tag: latest@sha256:61bd07030394a4cf069d5a19cd5f4d62180e9f25fd6e0e159af5ed90021fd7d3
+              tag: latest@sha256:5349b2ac5ef438f31e1b0816c6357be6f4df18df4b18298d07d9ce45050efc90
             env:
               PIHOLE_HOSTNAME: 192.168.1.139
               PORT: &port 9617
