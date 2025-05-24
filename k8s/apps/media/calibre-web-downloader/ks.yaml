@@ -10,6 +10,11 @@ spec:
   dependsOn:
     - name: media-nfs
   prune: true
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      name: calibre-web-downloader
+      namespace: media
   sourceRef:
     kind: GitRepository
     name: home-cluster

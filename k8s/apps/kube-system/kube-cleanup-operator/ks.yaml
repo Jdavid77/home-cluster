@@ -8,6 +8,11 @@ spec:
   targetNamespace: kube-system
   path: ./k8s/apps/kube-system/kube-cleanup-operator/app
   prune: true
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      name: kube-cleanup-operator
+      namespace: kube-system
   sourceRef:
     kind: GitRepository
     name: home-cluster

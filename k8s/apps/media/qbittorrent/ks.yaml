@@ -11,6 +11,11 @@ spec:
     - name: media-nfs
     - name: external-secrets-store
   prune: true
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      name: qbittorrent
+      namespace: media
   sourceRef:
     kind: GitRepository
     name: home-cluster

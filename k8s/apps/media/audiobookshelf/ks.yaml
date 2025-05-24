@@ -9,6 +9,11 @@ spec:
   path: ./k8s/apps/media/audiobookshelf/app
   dependsOn:
     - name: media-nfs
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      name: audiobookshelf
+      namespace: media
   prune: true
   sourceRef:
     kind: GitRepository
