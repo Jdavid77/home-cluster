@@ -52,11 +52,11 @@ spec:
                 enabled: true
             resources:
               requests:
-                cpu: 100m
-                memory: 249M
-              limits:
                 cpu: 250m
-                memory: 400M
+                memory: 500M
+              limits:
+                cpu: 500m
+                memory: 900M
     service:
       calibre-web:
         controller: calibre-web
