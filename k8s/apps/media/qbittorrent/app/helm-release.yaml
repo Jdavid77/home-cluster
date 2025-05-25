@@ -107,7 +107,7 @@ spec:
           - qb.${SECRET_DOMAIN}
         rules:
           - backendRefs:
-              - name: *app
+              - name: qbittorrent-app
                 port: *port
             matches:
               - path:

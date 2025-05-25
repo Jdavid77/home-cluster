@@ -65,7 +65,7 @@ spec:
             sectionName: websecure
         rules:
           - backendRefs:
-              - name: main
+              - name: dashy-main
                 port: *mainPort
       code-server:
         hostnames: ["dashboard-code.jnobrega.com"]
@@ -75,7 +75,7 @@ spec:
             sectionName: websecure
         rules:
           - backendRefs:
-              - name: code-server
+              - name: dashy-code-server
                 port: *codePort
     persistence:
       config:
