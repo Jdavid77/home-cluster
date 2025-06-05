@@ -6,6 +6,8 @@ metadata:
   namespace: flux-system
 spec:
   targetNamespace: default
+  dependsOn:
+    - name: volsync
   path: ./k8s/apps/default/adventurelog/app
   prune: true
   sourceRef:

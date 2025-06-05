@@ -8,7 +8,7 @@ spec:
   targetNamespace: automation
   path: ./k8s/apps/monitoring/gotify/app
   dependsOn:
-    - name: longhorn
+    - name: volsync
   prune: true
   sourceRef:
     kind: GitRepository

@@ -5,6 +5,8 @@ metadata:
   name: wallos
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: volsync
   targetNamespace: default
   path: ./k8s/apps/default/wallos/app
   prune: true

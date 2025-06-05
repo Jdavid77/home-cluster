@@ -5,6 +5,8 @@ metadata:
   name: dashy
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: volsync
   targetNamespace: default
   path: ./k8s/apps/default/dashy/app
   prune: true

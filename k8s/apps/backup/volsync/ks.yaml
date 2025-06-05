@@ -5,6 +5,9 @@ metadata:
   name: volsync
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: snapshot-controller
+    - name: longhorn-storageclasses
   targetNamespace: backup
   path: ./k8s/apps/backup/volsync/app
   prune: true

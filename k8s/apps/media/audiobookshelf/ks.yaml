@@ -9,6 +9,7 @@ spec:
   path: ./k8s/apps/media/audiobookshelf/app
   dependsOn:
     - name: media-nfs
+    - name: volsync
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease

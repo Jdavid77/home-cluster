@@ -5,6 +5,8 @@ metadata:
   name: linkding
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: volsync
   targetNamespace: default
   path: ./k8s/apps/default/linkding/app
   prune: true
