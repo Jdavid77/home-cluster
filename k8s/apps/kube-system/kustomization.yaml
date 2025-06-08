@@ -9,3 +9,4 @@ resources:
   - ./cilium/ks.yaml
   - ./kubelet-csr-approver/ks.yaml
   - ./kubernetes-dashboard/ks.yaml
+  - ./spegel/ks.yaml
