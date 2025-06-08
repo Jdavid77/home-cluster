@@ -63,7 +63,6 @@ spec:
       websecure:
         middlewares:
           - network-errors@kubernetescrd
-          - network-ratelimit@kubernetescrd
           - network-blockuseragent@kubernetescrd
         tls:
           enabled: true

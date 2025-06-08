@@ -72,7 +72,6 @@ spec:
       websecure:
         middlewares:
           - network-errors@kubernetescrd
-          - network-ratelimit@kubernetescrd
         tls:
           enabled: true
           options: default
