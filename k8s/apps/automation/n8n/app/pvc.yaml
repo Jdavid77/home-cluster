@@ -41,7 +41,7 @@ spec:
     pruneIntervalDays: 7
     repository: n8n-restic
     volumeSnapshotClassName: longhorn-snapshot-vsc
-    cacheCapacity: 512Mi
+    cacheCapacity: 1Gi
     cacheStorageClassName: "longhorn-cache"
     cacheAccessModes: ["ReadWriteOnce"]
     storageClassName: "longhorn-snapshot"
@@ -68,10 +68,10 @@ spec:
     volumeSnapshotClassName: longhorn-snapshot-vsc
     cacheStorageClassName: longhorn-cache
     cacheAccessModes: ["ReadWriteOnce"]
-    cacheCapacity: 512Mi
+    cacheCapacity: 1Gi
     storageClassName: "longhorn-snapshot"
     accessModes: ["ReadWriteOnce"]
-    capacity: 512Mi
+    capacity: 1Gi
     moverSecurityContext:
       runAsUser: 1000
       runAsGroup: 1000
@@ -90,5 +90,5 @@ spec:
     name: "n8n"
   resources:
     requests:
-      storage: "512Mi"
+      storage: "1Gi"
   storageClassName: "longhorn"
