@@ -41,3 +41,4 @@ resources:
   - trivy-charts.yaml
   - enix-charts.yaml
   - control-plane-charts.yaml
+  - spegel-charts.yaml
