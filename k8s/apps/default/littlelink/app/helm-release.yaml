@@ -79,5 +79,5 @@ spec:
             sectionName: websecure
         rules:
           - backendRefs:
-              - name: app
+              - name: littlelink
                 port: *port
