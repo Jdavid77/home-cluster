@@ -60,7 +60,7 @@ spec:
             sectionName: websecure
         rules:
           - backendRefs:
-              - name: app
+              - name: it-tools
                 port: *port
             filters:
               - type: ExtensionRef
