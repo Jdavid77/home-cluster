@@ -1,21 +1,19 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/budimanjojo/talhelper/master/pkg/config/schemas/talconfig.json
 clusterName: home-cluster
-endpoint: https://192.168.1.83:6443
-talosVersion: v1.9.3
-kubernetesVersion: v1.32.1
+endpoint: https://192.168.1.110:6443
+talosVersion: v1.10.3
+kubernetesVersion: v1.33.1
 additionalMachineCertSans:
-  - 192.168.1.140
+  - "192.168.1.110"
+  - "127.0.0.1"
 additionalApiServerCertSans:
-  - home-cluster.local
-  - "127.0.0.1" # KubePrism
+  - "127.0.0.1"
 cniConfig:
   name: none
 patches:
-  - "@patches/interface-names.yaml"
   - "@patches/kubelet-certificates.yaml"
 controlPlane:
   patches:
-    - "@patches/vip.yaml"
     # Disable search domain everywhere
     - &domainPatch |-
       machine:
@@ -34,6 +32,15 @@ controlPlane:
         allowSchedulingOnMasters: false
         proxy:
           disabled: true
+    # Configure containerd
+    - &containerdPatch |-
+      machine:
+        files:
+          - path: /etc/cri/conf.d/20-customization.part
+            op: create
+            content: |
+              [plugins."io.containerd.cri.v1.images"]
+                discard_unpacked_layers = false
     # Configure NFS mount options
     - &nfsPatch |-
       machine:
@@ -76,11 +83,11 @@ worker:
     node.longhorn.io/create-default-disk: "true"
     storage: longhorn
   patches:
-    - "@patches/worker.yaml"
     - *domainPatch
     - *kubePrismPatch
     - *proxyPatch
     - *nfsPatch
+    - *containerdPatch
     - |-
       machine:
         kubelet:
@@ -92,6 +99,10 @@ worker:
                 - bind
                 - rshared
                 - rw
+            - destination: /var/openebs/local
+              type: bind
+              source: /var/openebs/local
+              options: ["bind", "rshared", "rw"]
 nodes:
   - hostname: bmax1-master
     ipAddress: 192.168.1.83
@@ -100,11 +111,16 @@ nodes:
       installerImage: '{{ .MachineConfig.MachineInstall.InstallImage }}'
     installDisk: /dev/mmcblk0
     nameservers:
-      - "192.168.1.87"
+      - "192.168.1.139"
     networkInterfaces:
       - deviceSelector:
           hardwareAddr: "00:e0:4c:2f:69:52"
+          physical: true
+        addresses:
+          - 192.168.1.83/24
         dhcp: true
+        vip:
+          ip: 192.168.1.110
         mtu: 1500
     machineSpec:
       mode: metal
@@ -114,13 +130,18 @@ nodes:
     controlPlane: true
     nodeAnnotations:
       installerImage: '{{ .MachineConfig.MachineInstall.InstallImage }}'
-    installDisk: /dev/mmcblk1
+    installDisk: /dev/mmcblk0
     nameservers:
-      - "192.168.1.87"
+      - "192.168.1.139"
     networkInterfaces:
       - deviceSelector:
           hardwareAddr: "e0:51:d8:14:4b:b8"
+          physical: true
+        addresses:
+          - 192.168.1.90/24
         dhcp: true
+        vip:
+          ip: 192.168.1.110
         mtu: 1500
     machineSpec:
       mode: metal
@@ -132,11 +153,16 @@ nodes:
       installerImage: '{{ .MachineConfig.MachineInstall.InstallImage }}'
     installDisk: /dev/mmcblk0
     nameservers:
-      - "192.168.1.87"
+      - "192.168.1.139"
     networkInterfaces:
       - deviceSelector:
           hardwareAddr: "e0:51:d8:14:46:a2"
+          physical: true
+        addresses:
+          - 192.168.1.89/24
         dhcp: true
+        vip:
+          ip: 192.168.1.110
         mtu: 1500
     machineSpec:
       mode: metal
@@ -144,7 +170,7 @@ nodes:
   - hostname: hp-worker3
     ipAddress: 192.168.1.86
     nameservers:
-      - "192.168.1.87"
+      - "192.168.1.139"
     installDisk: /dev/sda
     controlPlane: false
     nodeAnnotations:
@@ -152,6 +178,9 @@ nodes:
     networkInterfaces:
       - deviceSelector:
           hardwareAddr: "74:46:a0:90:26:0f"
+          physical: true
+        addresses:
+          - 192.168.1.86/24
         dhcp: true
         mtu: 1500
     machineSpec:
@@ -160,7 +189,7 @@ nodes:
   - hostname: hp-worker2
     ipAddress: 192.168.1.85
     nameservers:
-      - "192.168.1.87"
+      - "192.168.1.139"
     installDisk: /dev/sda
     controlPlane: false
     nodeAnnotations:
@@ -168,7 +197,10 @@ nodes:
     networkInterfaces:
       - deviceSelector:
           hardwareAddr: "10:60:4b:73:34:97"
+          physical: true
         dhcp: true
+        addresses:
+          - 192.168.1.85/24
         mtu: 1500
     machineSpec:
       mode: metal
@@ -176,7 +208,7 @@ nodes:
   - hostname: hp-worker1
     ipAddress: 192.168.1.91
     nameservers:
-      - "192.168.1.87"
+      - "192.168.1.139"
     installDisk: /dev/sda
     controlPlane: false
     nodeAnnotations:
@@ -184,6 +216,9 @@ nodes:
     networkInterfaces:
       - deviceSelector:
           hardwareAddr: "c4:65:16:16:e2:b8"
+          physical: true
+        addresses:
+          - 192.168.1.91/24
         dhcp: true
         mtu: 1500
     machineSpec:
