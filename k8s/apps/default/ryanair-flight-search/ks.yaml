@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   targetNamespace: default
-  path: ./k8s/apps/default/ryanair-search-flights/app
+  path: ./k8s/apps/default/ryanair-flight-search/app
   prune: true
   sourceRef:
     kind: GitRepository
