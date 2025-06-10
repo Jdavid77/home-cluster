@@ -60,7 +60,7 @@ spec:
         kind: HTTPRoute
         parentRefs:
           - kind: Gateway
-            name: external
+            name: internal
             namespace: network
             sectionName: websecure
         hostnames:
