@@ -38,6 +38,9 @@ spec:
               DJANGO_ALLOWED_HOSTS: flightsearch.${SECRET_DOMAIN}
               DJANGO_TIME_ZONE: "UTC"
               DJANGO_LANGUAGE_CODE: "pt-pt"
+            envFrom:
+              - secretRef:
+                  name: ryanair-flight-search-secret
             probes:
               liveness: &probes
                 enabled: false
