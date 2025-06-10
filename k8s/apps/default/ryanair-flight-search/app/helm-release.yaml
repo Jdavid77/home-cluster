@@ -32,7 +32,12 @@ spec:
           app:
             image:
               repository: ghcr.io/jdavid77/ryanair-search-flights
-              tag: v0.3.0
+              tag: v0.4.0
+            env:
+              DJANGO_DEBUG: "False"
+              DJANGO_ALLOWED_HOSTS: https://flightsearch.${SECRET_DOMAIN}
+              DJANGO_TIME_ZONE: "UTC"
+              DJANGO_LANGUAGE_CODE: "pt-pt"
             probes:
               liveness: &probes
                 enabled: false
