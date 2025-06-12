@@ -33,7 +33,7 @@ spec:
           app:
             image:
               repository: ghcr.io/jdavid77/ryanair-api
-              tag: v0.6.0
+              tag: v0.6.0 # {"$imagepolicy": "flux-system:default:tag"}
             env:
               NODE_ENV: production
             probes:

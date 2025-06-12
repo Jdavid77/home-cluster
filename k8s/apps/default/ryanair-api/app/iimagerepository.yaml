@@ -1,0 +1,10 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: ryanair-api
+spec:
+  image: ghcr.io/jdavid77/ryanair-api
+  interval: 1h
+  provider: generic
+  secretRef:
+    name: ghcr-secret

@@ -1,0 +1,10 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: ryanair-api
+spec:
+  imageRepositoryRef:
+    name: ryanair-api
+  policy:
+    semver:
+      range: '>=0.1.0'
