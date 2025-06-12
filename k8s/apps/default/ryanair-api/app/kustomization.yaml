@@ -4,4 +4,4 @@ resources:
   - helm-release.yaml
   - secret.yaml
   - imagepolicy.yaml
-  - Imagerepository.yaml
+  - imagerepository.yaml
