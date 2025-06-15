@@ -7,4 +7,4 @@ spec:
     name: ryanair-api
   policy:
     semver:
-      range: '>=0.1.0'
+      range: '>=1.1.0'
