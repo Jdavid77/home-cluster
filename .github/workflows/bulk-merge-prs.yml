@@ -14,7 +14,7 @@ on:
 jobs:
   bulk-merge-prs:
     name: Bulk Merge PRs
-    runs-on: ubuntu-latest
+    runs-on: home-ops-runner
     steps:
       - name: Generate Token
         uses: actions/create-github-app-token@v2
