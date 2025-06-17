@@ -30,13 +30,7 @@ spec:
     minRunners: 1
     maxRunners: 3
     containerMode:
-      type: kubernetes
-      kubernetesModeWorkVolumeClaim:
-        accessModes: ["ReadWriteOnce"]
-        storageClassName: openebs-hostpath
-        resources:
-          requests:
-            storage: 5Gi
+      type: dind
     template:
       spec:
         containers:
@@ -44,8 +38,6 @@ spec:
             image: ghcr.io/home-operations/actions-runner:2.325.0@sha256:8345f634bbaaedbbdff1abb212649b1821baf295e5bcddf420f07847d7f35a87
             command: ["/home/runner/run.sh"]
             env:
-              - name: ACTIONS_RUNNER_REQUIRE_JOB_CONTAINER
-                value: "false"
               - name: NODE
                 valueFrom:
                   fieldRef:
