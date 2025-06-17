@@ -2,6 +2,7 @@ apiVersion: image.toolkit.fluxcd.io/v1beta2
 kind: ImageRepository
 metadata:
   name: ryanair-api
+  namespace: flux-system
 spec:
   image: ghcr.io/jdavid77/ryanair-api
   interval: 1h

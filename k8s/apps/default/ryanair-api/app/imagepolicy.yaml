@@ -2,6 +2,7 @@ apiVersion: image.toolkit.fluxcd.io/v1beta2
 kind: ImagePolicy
 metadata:
   name: ryanair-api
+  namespace: flux-system
 spec:
   imageRepositoryRef:
     name: ryanair-api
