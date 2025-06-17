@@ -5,7 +5,6 @@ metadata:
   name: ryanair-api
   namespace: flux-system
 spec:
-  targetNamespace: default
   path: ./k8s/apps/default/ryanair-api/app
   prune: true
   sourceRef:
