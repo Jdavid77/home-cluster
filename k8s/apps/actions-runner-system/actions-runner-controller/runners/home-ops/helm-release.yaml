@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app gha-runner-scale-set
+  name: &app home-ops-runner
 spec:
   interval: 30m
   chart:
@@ -31,13 +31,26 @@ spec:
     minRunners: 1
     maxRunners: 3
     containerMode:
-      type: dind
+      type: kubernetes
+      kubernetesModeWorkVolumeClaim:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: openebs-hostpath
+        resources:
+          requests:
+            storage: 20Gi
     template:
       spec:
         containers:
           - name: runner
             image: ghcr.io/home-operations/actions-runner:2.325.0@sha256:8345f634bbaaedbbdff1abb212649b1821baf295e5bcddf420f07847d7f35a87
             command: ["/home/runner/run.sh"]
+            env:
+              - name: ACTIONS_RUNNER_REQUIRE_JOB_CONTAINER
+                value: "false"
+              - name: NODE
+                valueFrom:
+                  fieldRef:
+                    fieldPath: status.hostIP
     controllerServiceAccount:
       name: gha-runner-scale-set-controller
       namespace: actions-runner-system
