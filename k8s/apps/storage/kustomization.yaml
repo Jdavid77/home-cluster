@@ -7,3 +7,4 @@ resources:
   - ./csi-driver-nfs/ks.yaml
   - ./dragonfly/ks.yaml
   - ./pgadmin/ks.yaml
+  - ./openebs/ks.yaml

@@ -42,3 +42,4 @@ resources:
   - enix-charts.yaml
   - control-plane-charts.yaml
   - spegel-charts.yaml
+  - openebs-charts.yaml
