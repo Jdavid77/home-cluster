@@ -71,7 +71,7 @@ spec:
         storage:
           volumeClaimTemplate:
             spec:
-              storageClassName: longhorn
+              storageClassName: openebs-hostpath
               resources:
                 requests:
                   storage: 1Gi
@@ -159,7 +159,7 @@ spec:
         storageSpec:
           volumeClaimTemplate:
             spec:
-              storageClassName: longhorn
+              storageClassName: openebs-hostpath
               resources:
                 requests:
                   storage: 20Gi
