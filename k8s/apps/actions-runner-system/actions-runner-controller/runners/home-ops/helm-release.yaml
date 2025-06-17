@@ -2,8 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app gha-runner-scale-set-ryanair
-  namespace: actions-runner-system
+  name: &app gha-runner-scale-set
 spec:
   interval: 30m
   chart:
@@ -27,7 +26,7 @@ spec:
   values:
     nameOverride: *app
     runnerScaleSetName: *app
-    githubConfigUrl: https://github.com/Jdavid77/ryanair-api
+    githubConfigUrl: https://github.com/Jdavid77/home-cluster
     githubConfigSecret: actions-runner-controller-secret
     minRunners: 1
     maxRunners: 3
@@ -37,7 +36,7 @@ spec:
       spec:
         containers:
           - name: runner
-            image: ghcr.io/actions/actions-runner:2.325.0
+            image: ghcr.io/home-operations/actions-runner:2.325.0@sha256:8345f634bbaaedbbdff1abb212649b1821baf295e5bcddf420f07847d7f35a87
             command: ["/home/runner/run.sh"]
     controllerServiceAccount:
       name: gha-runner-scale-set-controller
