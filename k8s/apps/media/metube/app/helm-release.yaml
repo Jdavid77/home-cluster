@@ -94,3 +94,7 @@ spec:
           metube:
             app:
               - path: /downloads
+      temp:
+        type: emptyDir
+        globalMounts:
+          - path: /temp
