@@ -89,9 +89,8 @@ spec:
       config:
         existingClaim: *app
       downloads:
-        type: nfs
-        server: truenas.rafaribe.com
-        path: /mnt/storage-0/media
-        globalMounts:
-          - path: /downloads
-            subPath: metube
+        existingClaim: youtube-nfs-share-pvc
+        advancedMounts:
+          metube:
+            app:
+              - path: /downloads
