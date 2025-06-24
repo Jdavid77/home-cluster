@@ -2,7 +2,7 @@
 apiVersion: external-secrets.io/v1
 kind: ExternalSecret
 metadata:
-  name: &secret youtube-restic
+  name: &secret metube-restic
 spec:
   refreshInterval: 5m
   secretStoreRef:
@@ -15,7 +15,7 @@ spec:
     template:
       engineVersion: v2
       data:
-        RESTIC_REPOSITORY: s3:http://minio.storage.svc.cluster.local:9000/youtube
+        RESTIC_REPOSITORY: s3:http://minio.storage.svc.cluster.local:9000/metube
         RESTIC_PASSWORD: "{{ .RESTIC_PASSWORD }}"
         AWS_ACCESS_KEY_ID: "{{ .MINIO_ROOT_USER }}"
         AWS_SECRET_ACCESS_KEY: "{{ .MINIO_ROOT_PASSWORD }}"
@@ -29,15 +29,15 @@ spec:
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
-  name: youtube
+  name: metube
 spec:
-  sourcePVC: youtube
+  sourcePVC: metube
   trigger:
     schedule: "0 0 * * *"
   restic:
     copyMethod: Snapshot
     pruneIntervalDays: 7
-    repository: youtube-restic
+    repository: metube-restic
     volumeSnapshotClassName: longhorn-snapshot-vsc
     cacheCapacity: 512Mi
     cacheStorageClassName: "longhorn-cache"
@@ -55,12 +55,12 @@ spec:
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationDestination
 metadata:
-  name: "youtube"
+  name: "metube"
 spec:
   trigger:
     manual: restore-once
   restic:
-    repository: "youtube-restic"
+    repository: "metube-restic"
     copyMethod: Snapshot
     volumeSnapshotClassName: longhorn-snapshot-vsc
     cacheStorageClassName: longhorn-cache
@@ -77,13 +77,13 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: youtube
+  name: metube
 spec:
   accessModes: ["ReadWriteOnce"]
   dataSourceRef:
     kind: ReplicationDestination
     apiGroup: volsync.backube
-    name: "youtube"
+    name: "metube"
   resources:
     requests:
       storage: "512Mi"

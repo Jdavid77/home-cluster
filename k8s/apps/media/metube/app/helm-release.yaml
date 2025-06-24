@@ -30,7 +30,7 @@ spec:
           app:
             image:
               repository: ghcr.io/alexta69/metube
-              tag: "2024-01-26"
+              tag: "2025-06-10"
             env:
               UID: 1002
               GID: 1002
