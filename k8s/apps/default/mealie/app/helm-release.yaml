@@ -71,7 +71,7 @@ spec:
             namespace: network
             sectionName: websecure
         hostnames:
-          - mealie.${SECRET_DOMAIN}
+          - food.${SECRET_DOMAIN}
         rules:
           - backendRefs:
               - name: *app
