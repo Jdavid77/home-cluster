@@ -11,3 +11,4 @@ resources:
   - ./dashy/ks.yaml
   - ./morphos/ks.yaml
   - ./ryanair-api/ks.yaml
+  - ./mealie/ks.yaml
