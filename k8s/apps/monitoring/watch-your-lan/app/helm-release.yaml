@@ -56,7 +56,7 @@ spec:
               THEME: quartz
               USE_DB: postgres
               PROMETHEUS_ENABLE: "true"
-              IFACES: en*
+              IFACES: en01
             securityContext:
               capabilities:
                 add:
