@@ -56,7 +56,7 @@ spec:
               THEME: cyborg
               USE_DB: postgres
               PROMETHEUS_ENABLE: "true"
-              IFACES: eth0
+              IFACES: en*
             envFrom: *secret
             probes:
               startup:
