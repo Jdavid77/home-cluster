@@ -5,6 +5,7 @@ metadata:
   name: watch-your-lan
   namespace: flux-system
 spec:
+  targetNamespace: default
   path: ./k8s/apps/default/watch-your-lan/app
   prune: true
   sourceRef:
