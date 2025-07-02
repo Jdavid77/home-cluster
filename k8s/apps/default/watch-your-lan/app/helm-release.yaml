@@ -1,0 +1,109 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/app-template-3.7.3/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app watch-your-lan
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 4.1.2
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-charts
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  values:
+    defaultPodOptions:
+      hostNetwork: true
+      dnsPolicy: "ClusterFirstWithHostNet"
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+        runAsGroup: 1001
+        seccompProfile: {type: RuntimeDefault}
+    controllers:
+      watch-your-lan:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/home-operations/postgres-init
+              tag: 17.5
+              pullPolicy: IfNotPresent
+            envFrom: &secret
+              - secretRef:
+                  name: watch-your-lan-secret
+        containers:
+          app:
+            image:
+              repository: ghcr.io/aceberg/watchyourlan
+              tag: 2.1.2@sha256:a78d41fe76e3774a2df6e9d2d2943f1d7e6271f21fe752c1b92961f21752a79e
+              pullPolicy: IfNotPresent
+            env:
+              TZ: ${TIMEZONE}
+              THEME: cyborg
+              USE_DB: postgres
+              PROMETHEUS_ENABLE: "true"
+              IFACES: eth0
+            envFrom: *secret
+            probes:
+              startup:
+                enabled: true
+                spec:
+                  failureThreshold: 30
+                  periodSeconds: 5
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+    service:
+      watch-your-lan:
+        controller: watch-your-lan
+        ports:
+          http:
+            port: &port 8840
+    persistence:
+      data:
+        enabled: true
+        type: emptyDir
+    route:
+      main:
+        enabled: true
+        kind: HTTPRoute
+        parentRefs:
+          - kind: Gateway
+            name: internal
+            namespace: network
+            sectionName: websecure
+        hostnames:
+          - lan.${SECRET_DOMAIN}
+        rules:
+          - backendRefs:
+              - name: *app
+                port: *port
+            matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+    serviceMonitor:
+      main:
+        enabled: true
+        serviceName: watch-your-lan
+        endpoints:
+          - port: http
+            scheme: http
+            path: /metrics
+            interval: 2m
+            scrapeTimeout: 10s
