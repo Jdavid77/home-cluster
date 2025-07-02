@@ -53,7 +53,7 @@ spec:
               pullPolicy: IfNotPresent
             env:
               TZ: ${TIMEZONE}
-              THEME: cyborg
+              THEME: quartz
               USE_DB: postgres
               PROMETHEUS_ENABLE: "true"
               IFACES: en*
