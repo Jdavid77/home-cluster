@@ -28,9 +28,6 @@ spec:
       dnsPolicy: "ClusterFirstWithHostNet"
       automountServiceAccountToken: false
       securityContext:
-        runAsNonRoot: true
-        runAsUser: 1001
-        runAsGroup: 1001
         seccompProfile: {type: RuntimeDefault}
     controllers:
       watch-your-lan:
