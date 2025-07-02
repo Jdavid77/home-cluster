@@ -54,6 +54,7 @@ spec:
               USE_DB: postgres
               PROMETHEUS_ENABLE: "true"
               IFACES: eno1
+              HIST_IN_DB: "true"
             securityContext:
               capabilities:
                 add:
