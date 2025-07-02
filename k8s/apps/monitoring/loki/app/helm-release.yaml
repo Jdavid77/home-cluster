@@ -79,7 +79,7 @@ spec:
       replicas: 1
       persistence:
         enabled: true
-        storageClass: longhorn
+        storageClass: openebs-hostpath
         size: 10Gi
     gateway:
       replicas: 3
