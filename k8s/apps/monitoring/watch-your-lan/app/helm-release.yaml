@@ -57,6 +57,11 @@ spec:
               USE_DB: postgres
               PROMETHEUS_ENABLE: "true"
               IFACES: en*
+            securityContext:
+              capabilities:
+                add:
+                  - NET_RAW
+                  - NET_ADMIN
             envFrom: *secret
             probes:
               startup:
