@@ -3,3 +3,14 @@ kind: Kustomization
 resources:
   - helm-release.yaml
   - secret.yaml
+configMapGenerator:
+  - name: watchyourlan
+    files:
+      - dashboard.json=./json/dashboard.json
+generatorOptions:
+  disableNameSuffixHash: true
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled
+    grafana_folder: "LAN"
+  labels:
+    grafana_dashboard: 'true'
