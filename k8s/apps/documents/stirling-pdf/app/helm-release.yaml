@@ -40,19 +40,26 @@ spec:
               SYSTEM_DEFAULTLOCALE: "en-GB"
               SECURITY_ENABLE_LOGIN: true
             probes:
-              liveness: &probes
-                enabled: false
-              readiness: *probes
-              startup: *probes
+              liveness: &probe
+                enabled: true
+                type: HTTP
+                path: /api/v1/info/status
+              readiness: *probe
+              startup:
+                !!merge <<: *probe
+                spec:
+                  failureThreshold: 90
+                  periodSeconds: 5
             securityContext:
+              allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
+              capabilities: {drop: ["ALL"]}
             resources:
               requests:
                 cpu: 50m
-                memory: 411M
+                memory: 400M
               limits:
-                cpu: 100m
-                memory: 600M
+                memory: 1000M
         pod:
           securityContext:
             runAsNonRoot: true
