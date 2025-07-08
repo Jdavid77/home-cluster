@@ -114,7 +114,7 @@ spec:
     sidecar:
       image:
         repository: ghcr.io/home-operations/k8s-sidecar
-        tag: 1.30.5
+        tag: 1.30.6
       rules:
         searchNamespace: ALL
         label_value: "true"
