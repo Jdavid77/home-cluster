@@ -48,10 +48,10 @@ spec:
               readOnlyRootFilesystem: true
             resources:
               requests:
-                cpu: 15m
+                cpu: 50m
                 memory: 411M
               limits:
-                cpu: 25m
+                cpu: 100m
                 memory: 600M
         pod:
           securityContext:
