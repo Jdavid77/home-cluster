@@ -12,3 +12,4 @@ resources:
   - ./morphos/ks.yaml
   - ./ryanair-api/ks.yaml
   - ./mealie/ks.yaml
+  - ./homebox/ks.yaml
