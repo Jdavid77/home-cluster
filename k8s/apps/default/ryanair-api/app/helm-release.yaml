@@ -33,7 +33,7 @@ spec:
           app:
             image:
               repository: ghcr.io/jdavid77/ryanair-api
-              tag: 1.2.2 # {"$imagepolicy": "flux-system:ryanair-api:tag"}
+              tag: 1.2.3 # {"$imagepolicy": "flux-system:ryanair-api:tag"}
             env:
               NODE_ENV: production
               API_URL: https://api-ryanair.${SECRET_DOMAIN}
