@@ -124,6 +124,7 @@ spec:
         serviceMonitor:
           enabled: true
     experimental:
+      abortOnPluginFailure: true
       plugins:
         traefik-plugin-blockuseragent:
           moduleName: "github.com/agence-gaya/traefik-plugin-blockuseragent"
