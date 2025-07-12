@@ -27,7 +27,8 @@ spec:
       sectionName: websecure
   rules:
     - backendRefs:
-        - name: traefik-dashboard
+        - name: api@internal
+          kind: TraefikService
           port: 8080
       matches:
         - path:
