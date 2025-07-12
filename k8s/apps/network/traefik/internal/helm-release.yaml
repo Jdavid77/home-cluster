@@ -82,6 +82,8 @@ spec:
     logs:
       general:
         level: DEBUG
+      access:
+        enabled: true
     gateway:
       enabled: true
       name: internal
