@@ -16,14 +16,9 @@ locals {
       authentik_proxy_external_host        = "https://n8n.${var.external_host}"
     },
     {
-      authentik_proxy_application_name     = "Drawio"
-      authentik_proxy_application_icon_url = "https://store-images.s-microsoft.com/image/apps.1409.13851527096222888.2b60149a-04a5-4578-a6b2-d7b7377332d5.c22d8e97-4d44-4304-9bd2-55f9d29c0f82"
-      authentik_proxy_external_host        = "https://draw.${var.external_host}"
-    },
-    {
-      authentik_proxy_application_name     = "Kubernetes-Dashboard"
-      authentik_proxy_application_icon_url = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7eOTub-DfX6pyyeyzBsPCHH2mAYPtVOp1Yw&s"
-      authentik_proxy_external_host        = "https://kubernetes.${var.external_host}"
+      authentik_proxy_application_name     = "Traefik"
+      authentik_proxy_application_icon_url = "https://upload.wikimedia.org/wikipedia/commons/1/1b/Traefik.logo.png"
+      authentik_proxy_external_host        = "https://traefik.${var.external_host}"
     }
   ]
 }
