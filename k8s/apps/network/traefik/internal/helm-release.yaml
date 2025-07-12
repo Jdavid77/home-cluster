@@ -70,8 +70,6 @@ spec:
         exposedPort: 8883
         protocol: TCP
       websecure:
-        middlewares:
-          - network-errors@kubernetescrd
         tls:
           enabled: true
           options: default
