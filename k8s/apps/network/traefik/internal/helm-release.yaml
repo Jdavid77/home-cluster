@@ -81,7 +81,7 @@ spec:
           enabled: true
     logs:
       general:
-        level: DEGUG
+        level: DEBUG
     gateway:
       enabled: true
       name: internal
