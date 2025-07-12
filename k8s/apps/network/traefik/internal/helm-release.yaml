@@ -79,6 +79,9 @@ spec:
       prometheus:
         serviceMonitor:
           enabled: true
+    logs:
+      general:
+        level: DEGUG
     gateway:
       enabled: true
       name: internal
