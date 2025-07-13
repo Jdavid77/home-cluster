@@ -49,7 +49,7 @@ spec:
       - --pihole-server=http://192.168.1.139
       - --gateway-name=internal
     registry: noop
-    policy: sync
+    policy: upsert-only
     sources: ["service", "gateway-httproute"]
     domainFilters: ["${SECRET_DOMAIN}"]
     serviceMonitor:
