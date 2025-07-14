@@ -69,7 +69,6 @@ spec:
               NODE_FUNCTION_ALLOW_EXTERNAL: databricks/sql
               # MCP
               N8N_COMMUNITY_PACKAGES_ALLOW_TOOL_USAGE: "true"
-              N8N_RUNNERS_ENABLED: "true"
             resources:
               requests:
                 cpu: 20m
