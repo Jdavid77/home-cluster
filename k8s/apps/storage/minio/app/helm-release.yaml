@@ -127,7 +127,8 @@ spec:
                   value: /
     persistence:
       data:
-        enabled: true
-        existingClaim: minio-storage-pvc
+        type: nfs
+        server: ${NFS_SERVER}
+        path: /minio
         globalMounts:
           - path: /data
