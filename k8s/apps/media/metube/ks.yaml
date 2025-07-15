@@ -8,7 +8,6 @@ spec:
   targetNamespace: media
   path: ./k8s/apps/media/metube/app
   dependsOn:
-    - name: media-nfs
     - name: volsync
   prune: true
   healthChecks:

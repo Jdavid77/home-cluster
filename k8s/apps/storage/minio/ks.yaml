@@ -7,7 +7,6 @@ metadata:
 spec:
   targetNamespace: storage
   dependsOn:
-    - name: storage-pvs
     - name: external-secrets-store
   path: ./k8s/apps/storage/minio/app
   prune: true

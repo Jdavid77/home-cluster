@@ -7,8 +7,6 @@ metadata:
 spec:
   targetNamespace: media
   path: ./k8s/apps/media/calibre-web-downloader/app
-  dependsOn:
-    - name: media-nfs
   prune: true
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2

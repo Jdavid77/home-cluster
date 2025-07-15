@@ -8,7 +8,6 @@ spec:
   targetNamespace: media
   path: ./k8s/apps/media/qbittorrent/app
   dependsOn:
-    - name: media-nfs
     - name: external-secrets-store
     - name: volsync
   prune: true
