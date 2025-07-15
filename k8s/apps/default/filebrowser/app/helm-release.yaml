@@ -103,3 +103,9 @@ spec:
         path: /youtube
         globalMounts:
           - path: /srv/youtube
+      ebooks:
+        type: nfs
+        server: ${NFS_SERVER}
+        path: /ebooks
+        globalMounts:
+          - path: /srv/ebooks
