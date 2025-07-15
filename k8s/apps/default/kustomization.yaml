@@ -13,3 +13,4 @@ resources:
   - ./ryanair-api/ks.yaml
   - ./mealie/ks.yaml
   - ./homebox/ks.yaml
+  - ./filebrowser/ks.yaml
