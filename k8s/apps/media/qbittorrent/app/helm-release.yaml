@@ -117,8 +117,8 @@ spec:
       config:
         existingClaim: qbittorrent
       downloads:
-        existingClaim: downloads-nfs-share-pvc
-        advancedMounts:
-          qbittorrent:
-            app:
-              - path: /torrents
+        type: nfs
+        server: ${NFS_SERVER}
+        path: /downloads
+        globalMounts:
+          - path: /torrents

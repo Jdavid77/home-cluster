@@ -78,7 +78,9 @@ spec:
     persistence:
       config:
         existingClaim: audiobookshelf
-      media:
-        existingClaim: downloads-nfs-share-pvc
+      downloads:
+        type: nfs
+        server: ${NFS_SERVER}
+        path: /downloads
         globalMounts:
           - path: /audiobooks

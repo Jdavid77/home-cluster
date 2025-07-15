@@ -90,17 +90,17 @@ spec:
             calibre-web:
               - path: /config
       media:
-        existingClaim: books-nfs-share-pvc
-        advancedMounts:
-          calibre-web:
-            calibre-web:
-              - path: /calibre-library
-      ingest:
-        existingClaim: book-ingests-nfs-share-pvc
-        advancedMounts:
-          calibre-web:
-            calibre-web:
-              - path: /cwa-book-ingest
+        type: nfs
+        server: ${NFS_SERVER}
+        path: /ebooks
+        globalMounts:
+          - path: /calibre-library
+      ingests:
+        type: nfs
+        server: ${NFS_SERVER}
+        path: /book-ingests
+        globalMounts:
+          - path: /cwa-book-ingest
       cache:
         type: emptyDir
         globalMounts:

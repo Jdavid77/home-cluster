@@ -89,11 +89,11 @@ spec:
       config:
         existingClaim: *app
       downloads:
-        existingClaim: youtube-nfs-share-pvc
-        advancedMounts:
-          metube:
-            app:
-              - path: /downloads
+        type: nfs
+        server: ${NFS_SERVER}
+        path: /youtube
+        globalMounts:
+          - path: /downloads
       temp:
         type: emptyDir
         globalMounts:

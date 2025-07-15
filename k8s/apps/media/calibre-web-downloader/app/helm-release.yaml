@@ -101,12 +101,12 @@ spec:
                   type: PathPrefix
                   value: /
     persistence:
-      ingest:
-        existingClaim: book-ingests-nfs-share-pvc
-        advancedMounts:
-          calibre-web-automated-book-downloader:
-            app:
-              - path: /cwa-book-ingest
+      ingests:
+        type: nfs
+        server: ${NFS_SERVER}
+        path: /book-ingests
+        globalMounts:
+          - path: /cwa-book-ingest
       tmp:
         type: emptyDir
         globalMounts:
