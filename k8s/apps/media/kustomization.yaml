@@ -10,4 +10,3 @@ resources:
   - ./audiobookshelf/ks.yaml
   - ./metube/ks.yaml
   # - ./readarr/ks.yaml
-  - ./_pvs/ks.yaml
