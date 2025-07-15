@@ -102,4 +102,4 @@ spec:
         server: ${NFS_SERVER}
         path: /youtube
         globalMounts:
-          - path: /youtute
+          - path: /srv/youtube
