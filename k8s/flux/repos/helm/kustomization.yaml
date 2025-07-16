@@ -44,3 +44,4 @@ resources:
   - spegel-charts.yaml
   - openebs-charts.yaml
   - mattermost-charts.yaml
+  - movetokube-charts.yaml

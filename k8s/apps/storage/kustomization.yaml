@@ -6,3 +6,4 @@ resources:
   - ./dragonfly/ks.yaml
   - ./pgadmin/ks.yaml
   - ./openebs/ks.yaml
+  - ./postgres-operator/ks.yaml
