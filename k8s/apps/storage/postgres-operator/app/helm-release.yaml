@@ -38,6 +38,7 @@ spec:
     postgres:
       host: ${NFS_SERVER}
       default_database: "postgres"
+      uri_args: "sslmode=disable"
     resources:
       requests:
         cpu: 5m
