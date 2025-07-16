@@ -14,3 +14,4 @@ resources:
   - ./mealie/ks.yaml
   - ./homebox/ks.yaml
   - ./filebrowser/ks.yaml
+  - ./mattermost/ks.yaml

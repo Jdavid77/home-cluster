@@ -43,3 +43,4 @@ resources:
   - control-plane-charts.yaml
   - spegel-charts.yaml
   - openebs-charts.yaml
+  - mattermost-charts.yaml
