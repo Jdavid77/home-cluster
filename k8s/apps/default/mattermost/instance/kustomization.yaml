@@ -4,3 +4,4 @@ resources:
   - db.yaml
   - secret.yaml
   - instance.yaml
+  - route.yaml
