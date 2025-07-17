@@ -21,7 +21,7 @@ spec:
   podExtensions:
     initContainers:
       - name: init-db
-        image: ghcr.io/home-operations/postgres-init
+        image: ghcr.io/home-operations/postgres-init:17.5
         imagePullPolicy: IfNotPresent
         envFrom:
           - secretRef:
