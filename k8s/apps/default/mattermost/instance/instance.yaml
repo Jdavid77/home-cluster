@@ -12,9 +12,17 @@ spec:
     enabled: false
   database:
     external:
-      secret: mattermost-db-secret-mattermost-user
+      secret: mattermost-db-secret
   fileStore:
     external:
       url: minio.storage.svc.cluster.local:9000
       bucket: mattermost
       secret: mattermost-s3
+  podExtensions:
+    initContainers:
+      - name: init-db
+        image: ghcr.io/home-operations/postgres-init
+        imagePullPolicy: IfNotPresent
+        envFrom:
+          - secretRef:
+              name: mattermost-db-secret
