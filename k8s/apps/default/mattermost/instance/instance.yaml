@@ -11,7 +11,7 @@ spec:
     enabled: false
   database:
     external:
-      secret: mattermost-db-secret
+      secret: mattermost-db-secret-mattermost-user
   fileStore:
     external:
       url: minio.storage.svc.cluster.local:9000
