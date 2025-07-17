@@ -10,6 +10,9 @@ spec:
   useServiceLoadBalancer: false
   ingress:
     enabled: false
+  mattermostEnv: # Custom environment variables that Mattermost installation should use.
+    - name: MM_SERVICESETTINGS_SITEURL
+      value: "mattermost.${SECRET_DOMAIN}"
   database:
     external:
       secret: mattermost-db-secret-mattermost-user
