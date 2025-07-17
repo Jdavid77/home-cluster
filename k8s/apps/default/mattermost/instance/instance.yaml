@@ -1,0 +1,19 @@
+apiVersion: installation.mattermost.com/v1beta1
+kind: Mattermost
+metadata:
+  name: mattermost
+spec:
+  imagePullPolicy: IfNotPresent
+  version: 5.28.0
+  size: 10users
+  useServiceLoadBalancer: false
+  ingress:
+    enabled: false
+  database:
+    external:
+      secret: mattermost-db-secret
+  fileStore:
+    external:
+      url: minio.storage.svc.cluster.local:9000
+      bucket: mattermost
+      secret: mattermost-s3
