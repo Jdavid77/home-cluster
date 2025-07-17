@@ -3,6 +3,7 @@ kind: Mattermost
 metadata:
   name: mattermost
 spec:
+  replicas: 1
   imagePullPolicy: IfNotPresent
   version: 5.28.0
   size: 10users
