@@ -18,6 +18,27 @@ spec:
       url: minio.storage.svc.cluster.local:9000
       bucket: mattermost
       secret: mattermost-s3
+  mattermostEnv:
+    - name: MM_FILESETTINGS_AMAZONS3SSL
+      value: "false"
+    - name: MM_OPENIDSETTINGS_ENABLE
+      value: "true"
+    - name: MM_OPENIDSETTINGS_BUTTONTEXT
+      value: "Authentik"
+    - name: MM_OPENIDSETTINGS_BUTTONCOLOR
+      value: "#145DBF"
+    - name: MM_OPENIDSETTINGS_DISCOVERYENDPOINT
+      value: "https://auth.${SECRET_DOMAIN}/application/o/Mattermost/.well-known/openid-configuration"
+    - name: MM_OPENIDSETTINGS_ID
+      valueFrom:
+        secretKeyRef:
+          name: mattermost-oauth
+          key: MM_OPENIDSETTINGS_ID
+    - name: MM_OPENIDSETTINGS_SECRET
+      valueFrom:
+        secretKeyRef:
+          name: mattermost-oauth
+          key: MM_OPENIDSETTINGS_SECRET
   podExtensions:
     initContainers:
       - name: init-db

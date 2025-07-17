@@ -24,6 +24,11 @@ locals {
       authentik_oidc_application_name        = "Adventurelog"
       authentik_oidc_application_icon_url    = "https://github.com/seanmorley15/AdventureLog/raw/main/brand/adventurelog.png"
       authentik_oidc_application_description = "AdventureLog OAuth application"
+    },
+    {
+      authentik_oidc_application_name        = "Mattermost"
+      authentik_oidc_application_icon_url    = "https://play-lh.googleusercontent.com/P9AOcfnzuDjgJjGNGsjjMWBNJy5FDZbOCM98khg6Lr2lPvjPTGVm_MRLcl0YU61zNQ"
+      authentik_oidc_application_description = "Mattermost OAuth application"
     }
   ]
 }
