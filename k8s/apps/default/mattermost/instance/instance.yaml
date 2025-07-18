@@ -21,6 +21,14 @@ spec:
   mattermostEnv:
     - name: MM_FILESETTINGS_AMAZONS3SSL
       value: "false"
+    - name: MM_LOGSETTINGS_ENABLECOLOR
+      value: "true"
+    - name: MM_EMAILSETTINGS_SENDPUSHNOTIFICATIONS
+      value: "true"
+    - name: MM_EMAILSETTINGS_REQUIREEMAILVERIFICATION
+      value: "true"
+    - name: "MM_PLUGINSETTINGS_ENABLEUPLOADS"
+      value: "true"
       # Only available in professional in enterprise plans ....
       # - name: MM_OPENIDSETTINGS_ENABLE
       #   value: "true"
