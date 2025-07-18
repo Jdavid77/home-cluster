@@ -5,7 +5,7 @@ metadata:
 spec:
   replicas: 1
   imagePullPolicy: IfNotPresent
-  version: 10.10
+  version: "10.10"
   size: 10users
   useServiceLoadBalancer: false
   ingress:
