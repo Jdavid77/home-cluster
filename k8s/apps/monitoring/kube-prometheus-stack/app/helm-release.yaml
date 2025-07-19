@@ -45,17 +45,17 @@ spec:
           resolve_timeout: 5m
         receivers:
           - name: "null"
-          - name: "gotify"
+          - name: "mattermost"
             webhook_configs:
               - url: http://mattermost.default.svc.cluster.local:8065/plugins/alertmanager/api/webhook?token='${MATTERMOST_AM_TOKEN}'
                 send_resolved: true
         route:
-          receiver: "gotify"
+          receiver: "mattermost"
           routes:
             - receiver: "null"
               matchers:
                 - alertname =~ "InfoInhibitor|Watchdog|RebootScheduled"
-            - receiver: "gotify"
+            - receiver: "mattermost"
               matchers:
                 - severity = "critical"
               continue: true
