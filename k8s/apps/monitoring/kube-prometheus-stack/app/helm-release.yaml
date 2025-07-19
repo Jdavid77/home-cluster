@@ -45,12 +45,12 @@ spec:
           resolve_timeout: 5m
         receivers:
           - name: "null"
-          - name: "gotify"
+          - name: "mattermost"
             webhook_configs:
-              - url: http://alertmanager-gotify:8080/gotify_webhook
+              - url: "https://mattermost.${SECRET_DOMAIN}/plugins/alertmanager/api/webhook?token=${MATTERMOST_AM_TOKEN}"
                 send_resolved: true
         route:
-          receiver: "gotify"
+          receiver: "mattermost"
           routes:
             - receiver: "null"
               matchers:
