@@ -42,7 +42,7 @@ spec:
                 value: /
       config:
         global:
-          resolve_timeout: 5m
+          resolve_timeout: 1h
         receivers:
           - name: "null"
           - name: "mattermost"
