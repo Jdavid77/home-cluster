@@ -45,12 +45,12 @@ spec:
           resolve_timeout: 5m
         receivers:
           - name: "null"
-          - name: "mattermost"
+          - name: "gotify"
             webhook_configs:
-              - url: "https://mattermost.${SECRET_DOMAIN}/plugins/alertmanager/api/webhook?token=${MATTERMOST_AM_TOKEN}"
+              - url: http://mattermost.default.svc.cluster.local:8065/plugins/alertmanager/api/webhook?token='${MATTERMOST_AM_TOKEN}'
                 send_resolved: true
         route:
-          receiver: "mattermost"
+          receiver: "gotify"
           routes:
             - receiver: "null"
               matchers:
