@@ -10,4 +10,3 @@ resources:
   - ./opentelemetry/ks.yaml
   - ./prometheus-operator-crds/ks.yaml
   - ./watch-your-lan/ks.yaml
-  - ./test/ks.yaml
