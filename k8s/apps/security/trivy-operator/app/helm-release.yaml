@@ -28,6 +28,7 @@ spec:
   values:
     excludeNamespaces: "kube-system"
     operator:
+      logDevMode: true
       replicas: 1
       scanJobsConcurrentLimit: 5
       scanJobTTL: 10s
