@@ -45,10 +45,10 @@ spec:
                   name: pgadmin-secret
             resources:
               requests:
-                cpu: 15m
-                memory: 164M
+                cpu: 50m
+                memory: 100Mi
               limits:
-                memory: 236M
+                memory: 500Mi
     service:
       pgadmin:
         controller: pgadmin
