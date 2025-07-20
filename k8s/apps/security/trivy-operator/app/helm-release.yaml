@@ -38,6 +38,7 @@ spec:
         reloader.stakater.com/auto: "true"
       webhookBroadcastURL: ${TRIVY_WEBHOOK_URL}
     trivy:
+      debug: true
       slow: true # flag is to use less CPU/memory for scanning though it takes more time than normal scanning
       ignoreUnfixed: true
       mode: ClientServer
