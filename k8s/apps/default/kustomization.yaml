@@ -15,3 +15,4 @@ resources:
   - ./homebox/ks.yaml
   - ./filebrowser/ks.yaml
   - ./mattermost/ks.yaml
+  - ./13ft/ks.yaml
