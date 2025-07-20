@@ -18,7 +18,7 @@ spec:
     keepHistory: false
   values:
     controllers:
-      13ft:
+      thirteen-ft:
         containers:
           app:
             image:
