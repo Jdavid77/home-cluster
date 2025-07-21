@@ -1,0 +1,105 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app immich
+spec:
+  interval: 1h
+  chart:
+    spec:
+      chart: app-template
+      version: 4.1.2
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-charts
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controllers:
+      server:
+        strategy: RollingUpdate
+        annotations:
+          secret.reloader.stakater.com/reload: immich-secret
+          configmap.reloader.stakater.com/reload: immich-configmap
+        pod:
+          enableServiceLinks: false
+          securityContext:
+            runAsUser: 1002
+            runAsGroup: 100
+            runAsNonRoot: true
+            fsGroup: 100
+            fsGroupChangePolicy: OnRootMismatch
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/home-operations/postgres-init
+              tag: 17.5
+              pullPolicy: IfNotPresent
+            envFrom:
+              - secretRef:
+                  name: immich-secret
+        containers:
+          main:
+            image:
+              repository: ghcr.io/immich-app/immich-server
+              tag: v1.135.3@sha256:df5bbf4e29eff4688063a005708f8b96f13073200b4a7378f7661568459b31e9
+            envFrom:
+              - secretRef:
+                  name: immich-secret
+              - configMapRef:
+                  name: immich-configmap
+    service:
+      server:
+        controller: server
+        ports:
+          http:
+            port: &port 2283
+    route:
+      frontend:
+        enabled: true
+        kind: HTTPRoute
+        parentRefs:
+          - kind: Gateway
+            name: internal
+            namespace: network
+            sectionName: websecure
+        hostnames:
+          - photos.${SECRET_DOMAIN}
+        rules:
+          - backendRefs:
+              - name: *app
+                port: *port
+            matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+    persistence:
+      matplotlib:
+        type: emptyDir
+        globalMounts:
+          - path: /config/matplotlib
+      library:
+        type: nfs
+        server: ${NFS_SERVER}
+        path: /photos
+        globalMounts:
+          - path: /usr/src/app/upload
+      tmpfs:
+        type: emptyDir
+        advancedMounts:
+          server:
+            main:
+              - path: /usr/src/app/.reverse-geocoding-dump
+                subPath: geocoding
+              - path: /usr/src/app/.transformers_cache
+                subPath: transformers

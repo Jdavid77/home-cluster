@@ -9,4 +9,5 @@ resources:
   # - ./prowlarr/ks.yaml
   - ./audiobookshelf/ks.yaml
   - ./metube/ks.yaml
+  - ./immich/ks.yaml
   # - ./readarr/ks.yaml
