@@ -46,7 +46,7 @@ spec:
               tag: latest@sha256:6585a380f355f6cac04c6d8cfb71c9627def9d5feac0414bd331f801c56e59b0
             env:
               PUBLIC_SERVER_URL: "https://adventurelog-backend.${SECRET_DOMAIN}"
-              BODY_SIZE_LIMIT: "1000000"
+              BODY_SIZE_LIMIT: Infinity
             probes:
               liveness: &probes
                 enabled: false
