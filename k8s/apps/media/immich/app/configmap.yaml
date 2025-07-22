@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: immich-configmap
 data:
-  DB_PORT: "5432"
+  DB_PORT: "6001"
   DB_SSL_MODE: disable
   DISABLE_REVERSE_GEOCODING: "true"
   ENABLE_MAPBOX: "false"
@@ -11,3 +11,4 @@ data:
   NODE_ENV: "production"
   REDIS_HOSTNAME: dragonfly.storage.svc.cluster.local
   REDIS_PORT: "6379"
+  PUBLIC_IMMICH_SERVER_URL: https://immich.${SECRET_DOMAIN}
