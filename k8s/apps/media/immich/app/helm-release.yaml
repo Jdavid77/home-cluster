@@ -26,6 +26,12 @@ spec:
     keepHistory: false
   values:
     controllers:
+      valkey:
+        containers:
+          app:
+            image:
+              repository: ghcr.io/ahinko/valkey
+              tag: 8.1.3-alpine3.22
       server:
         strategy: RollingUpdate
         annotations:
@@ -64,6 +70,11 @@ spec:
         ports:
           http:
             port: &port 2283
+      valkey:
+        controller: valkey
+        ports:
+          http:
+            port: 6379
     route:
       frontend:
         enabled: true
