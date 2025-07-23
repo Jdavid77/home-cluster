@@ -42,8 +42,18 @@ spec:
     persistentVolume:
       enabled: true
       existingClaim: *app
+    extraSecretMounts:
+      - name: pgpassmain
+        secret: pgadmin-servers
+        subPath: main.pgpass
+        mountPath: "/var/lib/pgadmin/storage/main.pgpass"
+        readOnly: true
+      - name: pgpassimmich
+        secret: pgadmin-servers
+        subPath: immich.pgpass
+        mountPath: "/var/lib/pgadmin/storage/immich.pgpass"
+        readOnly: true
     resources:
-      # required to initialize
       requests:
         cpu: 25m
         memory: 256Mi
