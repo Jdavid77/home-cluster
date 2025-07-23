@@ -5,3 +5,4 @@ resources:
   - ./minio/ks.yaml
   - ./dragonfly/ks.yaml
   - ./openebs/ks.yaml
+  - ./pgadmin/ks.yaml

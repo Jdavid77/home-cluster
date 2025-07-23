@@ -45,3 +45,4 @@ resources:
   - openebs-charts.yaml
   - mattermost-charts.yaml
   - movetokube-charts.yaml
+  - runix-charts.yaml
