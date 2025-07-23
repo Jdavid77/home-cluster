@@ -35,6 +35,8 @@ spec:
       type: Recreate
     ingress:
       enabled: false
+    containerSecurityContext:
+      enabled: true
     networkPolicy:
       enabled: false
     persistentVolume:
