@@ -4,10 +4,11 @@ kind: HelmRelease
 metadata:
   name: dragonfly-operator
 spec:
-  interval: 1h
+  interval: 30m
   chartRef:
     kind: OCIRepository
     name: dragonfly-operator
+    namespace: flux-system
   install:
     remediation:
       retries: 3
