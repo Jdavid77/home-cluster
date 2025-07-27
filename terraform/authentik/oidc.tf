@@ -11,24 +11,9 @@ locals {
       authentik_oidc_application_description = "Paperless OAuth application"
     },
     {
-      authentik_oidc_application_name        = "PGAdmin"
-      authentik_oidc_application_icon_url    = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Postgresql_elephant.svg/1200px-Postgresql_elephant.svg.png"
-      authentik_oidc_application_description = "PGAdmin OAuth application"
-    },
-    {
       authentik_oidc_application_name        = "Backstage-Dev"
       authentik_oidc_application_icon_url    = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBzHHyxg-LtRQ5iGOxRQeP5VzxFoNjzDY3Lg&s"
       authentik_oidc_application_description = "Backstage-Dev OAuth application"
-    },
-    {
-      authentik_oidc_application_name        = "Adventurelog"
-      authentik_oidc_application_icon_url    = "https://github.com/seanmorley15/AdventureLog/raw/main/brand/adventurelog.png"
-      authentik_oidc_application_description = "AdventureLog OAuth application"
-    },
-    {
-      authentik_oidc_application_name        = "Mattermost"
-      authentik_oidc_application_icon_url    = "https://play-lh.googleusercontent.com/P9AOcfnzuDjgJjGNGsjjMWBNJy5FDZbOCM98khg6Lr2lPvjPTGVm_MRLcl0YU61zNQ"
-      authentik_oidc_application_description = "Mattermost OAuth application"
     }
   ]
 }
