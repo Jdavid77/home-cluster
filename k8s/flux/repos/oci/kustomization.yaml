@@ -3,3 +3,8 @@ kind: Kustomization
 resources:
   - dragonfly-operator.yaml
   - app-template.yaml
+  - gha-runner-scale-set-controller.yaml
+  - gha-runner-scale-set.yaml
+  - snapshot-controller.yaml
+  - volsync.yaml
+  - cert-manager.yaml

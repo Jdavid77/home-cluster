@@ -11,14 +11,13 @@ locals {
       authentik_proxy_external_host        = "https://it-tools.${var.external_host}"
     },
     {
-      authentik_proxy_application_name     = "N8N"
-      authentik_proxy_application_icon_url = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTEiB39xDx7ypCCzO8_H3Oot9L_MnGz9XgkQ&s"
-      authentik_proxy_external_host        = "https://n8n.${var.external_host}"
-    },
-    {
       authentik_proxy_application_name     = "Traefik"
       authentik_proxy_application_icon_url = "https://upload.wikimedia.org/wikipedia/commons/1/1b/Traefik.logo.png"
       authentik_proxy_external_host        = "https://traefik.${var.external_host}"
+    },{
+      authentik_proxy_application_name     = "N8n"
+      authentik_proxy_application_icon_url = "https://www.drupal.org/files/project-images/n8n-color.png"
+      authentik_proxy_external_host        = "https://n8n.${var.external_host}"
     }
   ]
 }

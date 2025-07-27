@@ -2,7 +2,7 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: OCIRepository
 metadata:
-  name: app-template
+  name: gha-runner-scale-set-controller
   namespace: flux-system
 spec:
   interval: 5m
@@ -10,5 +10,5 @@ spec:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
     operation: copy
   ref:
-    tag: 4.1.2
-  url: oci://ghcr.io/bjw-s-labs/helm/app-template
+    tag: 0.12.1
+  url: oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set-controller
