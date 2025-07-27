@@ -5,7 +5,7 @@ metadata:
   namespace: default
 spec:
   forwardAuth:
-    address: http://authentik-server.security.svc.cluster.local:80/outpost.goauthentik.io/auth/traefik
+    address: http://ak-outpost-proxy.security.svc.cluster.local:9000/outpost.goauthentik.io/auth/traefik
     authResponseHeaders:
       - X-authentik-username
       - X-authentik-groups
@@ -28,7 +28,7 @@ metadata:
   namespace: documents
 spec:
   forwardAuth:
-    address: http://authentik-server.security.svc.cluster.local:80/outpost.goauthentik.io/auth/traefik
+    address: http://ak-outpost-proxy.security.svc.cluster.local:9000/outpost.goauthentik.io/auth/traefik
     authResponseHeaders:
       - X-authentik-username
       - X-authentik-groups
@@ -51,7 +51,7 @@ metadata:
   namespace: network
 spec:
   forwardAuth:
-    address: http://authentik-server.security.svc.cluster.local:80/outpost.goauthentik.io/auth/traefik
+    address: http://ak-outpost-proxy.security.svc.cluster.local:9000/outpost.goauthentik.io/auth/traefik
     authResponseHeaders:
       - X-authentik-username
       - X-authentik-groups
@@ -74,7 +74,7 @@ metadata:
   namespace: automation
 spec:
   forwardAuth:
-    address: http://authentik-server.security.svc.cluster.local:80/outpost.goauthentik.io/auth/traefik
+    address: http://ak-outpost-proxy.security.svc.cluster.local:9000/outpost.goauthentik.io/auth/traefik
     authResponseHeaders:
       - X-authentik-username
       - X-authentik-groups

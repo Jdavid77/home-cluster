@@ -36,3 +36,13 @@ module "proxy" {
   authentik_proxy_application_icon_url = each.value.authentik_proxy_application_icon_url
   authentik_proxy_external_host        = each.value.authentik_proxy_external_host
 }
+
+data "authentik_service_connection_kubernetes" "local" {
+  name = "Local Kubernetes Cluster"
+}
+
+resource "authentik_outpost" "proxy" {
+  name = "proxy"
+  protocol_providers = values(module.proxy)[*].proxy_provider_id
+  service_connection = data.authentik_service_connection_kubernetes.local.id
+}
