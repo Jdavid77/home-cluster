@@ -24,7 +24,7 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          wallos:
+          app:
             image:
               repository: bellamy/wallos
               tag: 3.3.1
@@ -60,7 +60,12 @@ spec:
                   type: PathPrefix
                   value: /
     persistence:
-      config:
-        existingClaim: wallos
-        globalMounts:
-          - path: /var/www/html/db
+      data:
+        existingClaim: *app
+        advancedMounts:
+          wallos:
+            app:
+              - path: /var/www/html/db
+                subPath: db
+              - path: /var/www/html/images/uploads/logos
+                subPath: logos
