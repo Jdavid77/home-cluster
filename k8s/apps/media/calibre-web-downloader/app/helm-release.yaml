@@ -1,57 +1,53 @@
-# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: &app calibre-web-downloader
 spec:
+  interval: 1h
   chartRef:
     kind: OCIRepository
     name: app-template
     namespace: flux-system
-  interval: 30m
   install:
     remediation:
       retries: 3
   upgrade:
     cleanupOnFail: true
     remediation:
-      strategy: rollback
       retries: 3
   values:
-    defaultPodOptions:
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 1002
-        runAsGroup: 100
-        fsGroup: 100
-        supplementalGroups: [65534] # nobody group, required since calibre-web-automated tries to use root on startup
-        fsGroupChangePolicy: 'OnRootMismatch'
-        seccompProfile: {type: RuntimeDefault}
     controllers:
-      calibre-web-automated-book-downloader:
+      *app:
+        initContainers:
+          init:
+            image: &image
+              repository: ghcr.io/calibrain/calibre-web-automated-book-downloader
+              tag: 20250714@sha256:518908641a2260249513f349eef9f30e580f8f428d1adfa830096b43a818e97b
+            command:
+              - bash
+              - -c
+              - 'exec cp -r /usr/local/lib/python3.10/site-packages/seleniumbase/drivers/* /mnt'
+            securityContext: &securityContext
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: {drop: ['ALL']}
         containers:
           app:
-            image:
-              repository: ghcr.io/calibrain/calibre-web-automated-book-downloader-tor
-              tag: 20250714@sha256:937c80b952d42a332264c5b25140d33a6438dc13432a9d05062fc053ef959261
+            image: *image
             env:
+              FLASK_DEBUG: false
+              AA_BASE_URL: https://annas-archive.li
+              INGEST_DIR: &ingest /cwa-book-ingest
+              BOOK_LANGUAGE: en
               TZ: ${TIMEZONE}
               FLASK_PORT: &port 8084
               UID: 1002
               GID: 100
-              BOOK_LANGUAGE: en
-              # CUSTOM_DNS: cloudflare
-              # USE_DOH: "true"
-              INGEST_URL: /cwa-book-ingest
               HOME: /tmp
               USING_TOR: "true"
               APP_ENV: prod
-            # props
-            # https://github.com/tholinka/home-ops/blob/main/kubernetes/apps/media/calibre-downloader/app/helmrelease.yaml#L35C13-L38C112
-            command: # don't run startup script, since it doesn't work on a read-only fs
-              - bash
-              - -c
-              - touch /usr/local/lib/python3.10/site-packages/seleniumbase/drivers/__init__.py && python -m app
+            command: [python, -m, app] # don't run annoying init script
             probes:
               liveness: &probe
                 enabled: true
@@ -62,17 +58,25 @@ spec:
                     port: *port
               readiness: *probe
               startup: *probe
-            securityContext:
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
-              capabilities:
-                add: ["NET_ADMIN", "NET_RAW"]
+            securityContext: *securityContext
             resources:
               requests:
                 cpu: 5m
+                memory: 128Mi
+              limits:
+                memory: 512Mi
+    defaultPodOptions:
+      automountServiceAccountToken: false
+      enableServiceLinks: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1002
+        runAsGroup: 100
+        fsGroup: 100
+        supplementalGroups: [65534] # nobody group, required since calibre-web-automated tries to use root on startup
+        fsGroupChangePolicy: 'OnRootMismatch'
     service:
       app:
-        controller: calibre-web-automated-book-downloader
         ports:
           http:
             port: *port
@@ -96,25 +100,32 @@ spec:
                   type: PathPrefix
                   value: /
     persistence:
+      tmpfs:
+        type: emptyDir
+        advancedMounts:
+          *app:
+            app:
+              # chromium needs the XDG_CONFIG_HOME created
+              # because user 1000 doesn't exist, ~ = /
+              - path: /.config
+                subPath: config
+              - path: /tmp
+                subPath: tmp
+              - path: /var/log/cwa-book-downloader/
+                subPath: log
+              - path: /app/downloaded_files
+                subPath: download
+              - path: /usr/local/lib/python3.10/site-packages/seleniumbase/drivers
+                subPath: drivers
+            init:
+              - path: /mnt
+                subPath: drivers
       ingests:
         type: nfs
         server: ${NFS_SERVER}
         path: /book-ingests
-        globalMounts:
-          - path: /cwa-book-ingest
-      tmp:
-        type: emptyDir
-        globalMounts:
-          - path: /tmp
-      log:
-        type: emptyDir
-        globalMounts:
-          - path: /var/log/cwa-book-downloader/
-      downloaded:
-        type: emptyDir
-        globalMounts:
-          - path: /app/downloaded_files
-      drivers:
-        type: emptyDir
-        globalMounts:
-          - path: /usr/local/lib/python3.10/site-packages/seleniumbase/drivers
+        advancedMounts:
+          *app:
+            app:
+              - path: *ingest
+                subPath: downloads/openbooks
