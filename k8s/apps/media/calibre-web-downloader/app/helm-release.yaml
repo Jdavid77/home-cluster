@@ -128,4 +128,3 @@ spec:
           *app:
             app:
               - path: *ingest
-                subPath: downloads/openbooks
