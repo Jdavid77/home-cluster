@@ -1,0 +1,33 @@
+apiVersion: fluxcd.controlplane.io/v1
+kind: ResourceSet
+metadata:
+  name: flux-alerts
+  annotations:
+    fluxcd.controlplane.io/reconcile: "enabled"
+    fluxcd.controlplane.io/reconcileEvery: "30m"
+    fluxcd.controlplane.io/reconcileTimeout: "5m"
+spec:
+  inputs:
+    - provider: alertmanager
+  resources:
+    - apiVersion: notification.toolkit.fluxcd.io/v1beta3
+      kind: Provider
+      metadata:
+        name: << inputs.provider >>
+        namespace: flux-system
+      spec:
+        type: << inputs.provider >>
+        address: http://<< inputs.provider >>-operated.monitoring.svc.cluster.local:9093/api/v2/alerts/
+    - apiVersion: notification.toolkit.fluxcd.io/v1beta3
+      kind: Alert
+      metadata:
+        name: kustomization-alert
+        namespace: flux-system
+      spec:
+        summary: "Kustomization"
+        eventSeverity: error
+        eventSources:
+          - kind: Kustomization
+            name: "*"
+        providerRef:
+          name: << inputs.provider >>
