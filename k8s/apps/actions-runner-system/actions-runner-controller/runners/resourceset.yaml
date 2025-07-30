@@ -8,6 +8,7 @@ metadata:
     fluxcd.controlplane.io/reconcileEvery: "30m"
     fluxcd.controlplane.io/reconcileTimeout: "5m"
 spec:
+  wait: true
   inputs:
     - name: home-ops
       configUrl: https://github.com/Jdavid77/home-cluster
