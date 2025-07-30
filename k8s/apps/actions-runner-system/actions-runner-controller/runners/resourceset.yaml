@@ -52,7 +52,7 @@ spec:
         nameOverride: *app
         runnerScaleSetName: *app
         githubConfigUrl: << inputs.configUrl >>
-        githubConfigSecret: actions-runner-controller-secret
+        githubConfigSecret: << inputs.name >>-secret
         minRunners: 1
         maxRunners: 3
         containerMode:
@@ -77,3 +77,22 @@ spec:
         controllerServiceAccount:
           name: gha-runner-scale-set-controller
           namespace: actions-runner-system
+    ---
+    apiVersion: external-secrets.io/v1
+    kind: ExternalSecret
+    metadata:
+      name: &secret << inputs.name >>-secret
+      namespace: actions-runner-system
+    spec:
+      refreshInterval: 5m
+      secretStoreRef:
+        kind: ClusterSecretStore
+        name: akeyless-secret-store
+      target:
+        name: *secret
+        creationPolicy: Owner
+        template:
+          engineVersion: v2
+      dataFrom:
+        - extract:
+            key: /actions-runner-system/actions-runner-controller
