@@ -87,7 +87,7 @@ spec:
               app:
                 image:
                   repository: ghcr.io/jdavid77/pg-backup-s3
-                  tag: main@sha256:c2562c3a3ffccf1c3844b5b659152def74680de981b2d0ee2fe5e0c80a683ecc
+                  tag: main@sha256:d4854eb878f60dccc13a99dcf55583c4671934ccc18c70cfda386d5128d26c68
                 env:
                   S3_REGION: << inputs.region >>
                   S3_BUCKET: << inputs.bucket >>
