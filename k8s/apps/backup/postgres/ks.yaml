@@ -13,16 +13,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: home-cluster
-  healthChecks:
-    - apiVersion: helm.toolkit.fluxcd.io/v2
-      kind: HelmRelease
-      name: pg-backup-s3
-      namespace: backup
-  healthCheckExprs:
-    - apiVersion: external-secrets.io/v1
-      kind: ExternalSecret
-      failed: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSyncedError')
-      current: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSynced')
   wait: true
   interval: 30m
   retryInterval: 1m
