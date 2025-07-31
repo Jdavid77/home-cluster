@@ -2,7 +2,6 @@ apiVersion: fluxcd.controlplane.io/v1
 kind: ResourceSet
 metadata:
   name: postgresbackup
-  namespace: backup
   annotations:
     fluxcd.controlplane.io/reconcile: "enabled"
     fluxcd.controlplane.io/reconcileEvery: "30m"
@@ -24,6 +23,7 @@ spec:
     kind: ExternalSecret
     metadata:
       name: &secret postgres-backup-<< inputs.backend >>
+      namespace: backup
     spec:
       refreshInterval: 5m
       secretStoreRef:
