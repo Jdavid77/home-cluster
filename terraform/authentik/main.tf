@@ -1,11 +1,11 @@
 terraform {
 
   backend "s3" {
-    bucket = "authentik-state"
+    bucket = "jnobrega-tf-state"
     key    = "authentik.tfstate"
-    region = "weur"
+    region = "eu-central-003"
     endpoints = {
-      s3 = "https://015ce648cc705f6d069fe6068434a576.r2.cloudflarestorage.com/authentik-state"
+      s3 = "https://s3.eu-central-003.backblazeb2.com"
     }
     skip_credentials_validation = true
     skip_region_validation      = true
