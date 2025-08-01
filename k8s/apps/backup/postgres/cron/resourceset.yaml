@@ -87,7 +87,7 @@ spec:
               app:
                 image:
                   repository: ghcr.io/jdavid77/pg-backup-s3
-                  tag: main@sha256:3d400083c40ec8f1e0a9b55890aa0fb432127944af41f1bc1839eff116d82c1a
+                  tag: main@sha256:3d400083c40ec8f1e0a9b55890aa0fb432127944af41f1bc1839eff116d82c1a # {"$imagepolicy": "flux-system:pg-backup-s3:tag"}
                 env:
                   S3_REGION: << inputs.region >>
                   S3_BUCKET: << inputs.bucket >>
