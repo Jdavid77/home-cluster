@@ -35,7 +35,7 @@ spec:
             - name: NODE_ENV
               value: production
             - name: PORT
-              value: "3001"
+              value: "3030"
             - name: TRAEFIK_LOG_FILE
               value: /var/log/traefik/access.log
           volumeMounts:
@@ -47,7 +47,7 @@ spec:
             - name: BACKEND_SERVICE
               value: localhost
             - name: BACKEND_PORT
-              value: "3001"
+              value: "3030"
     additionalVolumeMounts:
       - name: logs
         mountPath: /var/log/traefik
