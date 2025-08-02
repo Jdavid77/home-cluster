@@ -48,6 +48,8 @@ spec:
               value: localhost
             - name: BACKEND_PORT
               value: "3001"
+          securityContext:
+            readOnlyRootFilesystem: false
     additionalVolumeMounts:
       - name: logs
         mountPath: /var/log/traefik
