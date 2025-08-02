@@ -29,6 +29,7 @@ spec:
       additionalVolumes:
         - name: logs
           emptyDir: {}
+        # can't wait to remove this ...
         - name: nginx
           emptyDir: {}
         - name: cache
@@ -55,6 +56,7 @@ spec:
               value: localhost
             - name: BACKEND_PORT
               value: "3001"
+          # can't wait to remove this ...
           volumeMounts:
             - name: nginx
               mountPath: /etc/nginx/conf.d
