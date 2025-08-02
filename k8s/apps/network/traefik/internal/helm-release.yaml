@@ -24,12 +24,12 @@ spec:
       retries: 3
   values:
     # for now
-    securityContext:
-      readOnlyRootFilesystem: false
     deployment:
       kind: DaemonSet
       additionalVolumes:
         - name: logs
+          emptyDir: {}
+        - name: nginx
           emptyDir: {}
       additionalContainers:
         - name: traefik-log-dashboard-backend
@@ -51,6 +51,9 @@ spec:
               value: localhost
             - name: BACKEND_PORT
               value: "3001"
+          volumeMounts:
+            - name: nginx
+              mountPath: /etc/nginx/conf.d
     additionalVolumeMounts:
       - name: logs
         mountPath: /var/log/traefik
