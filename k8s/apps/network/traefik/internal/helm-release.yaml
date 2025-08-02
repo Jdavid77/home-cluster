@@ -33,6 +33,8 @@ spec:
           emptyDir: {}
         - name: cache
           emptyDir: {}
+        - name: run
+          emptyDir: {}
       additionalContainers:
         - name: traefik-log-dashboard-backend
           image: ghcr.io/hhftechnology/traefik-log-dashboard-backend:1.0.3
@@ -58,6 +60,8 @@ spec:
               mountPath: /etc/nginx/conf.d
             - name: cache
               mountPath: /var/cache/nginx
+            - name: run
+              mountPath: /run
     additionalVolumeMounts:
       - name: logs
         mountPath: /var/log/traefik
