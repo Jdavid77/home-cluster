@@ -42,7 +42,7 @@ spec:
             - name: logs
               mountPath: /var/log/traefik
         - name: traefik-log-dashboard-frontend
-          image: ghcr.io/hhftechnology/traefik-log-dashboard-backend:1.0.3
+          image: ghcr.io/hhftechnology/traefik-log-dashboard-frontend:1.0.3
           env:
             - name: BACKEND_SERVICE
               value: localhost
