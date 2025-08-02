@@ -28,26 +28,26 @@ spec:
       additionalVolumes:
         - name: logs
           emptyDir: {}
-          additionalContainers:
-            - name: traefik-log-dashboard-backend
-              image: ghcr.io/hhftechnology/traefik-log-dashboard-backend:1.0.3
-              env:
-                - name: NODE_ENV
-                  value: production
-                - name: PORT
-                  value: "3001"
-                - name: TRAEFIK_LOG_FILE
-                  value: /var/log/traefik/access.log
-              volumeMounts:
-                - name: logs
-                  mountPath: /var/log/traefik
-            - name: traefik-log-dashboard-frontend
-              image: ghcr.io/hhftechnology/traefik-log-dashboard-backend:1.0.3
-              env:
-                - name: BACKEND_SERVICE
-                  value: localhost
-                - name: BACKEND_PORT
-                  value: "3001"
+      additionalContainers:
+        - name: traefik-log-dashboard-backend
+          image: ghcr.io/hhftechnology/traefik-log-dashboard-backend:1.0.3
+          env:
+            - name: NODE_ENV
+              value: production
+            - name: PORT
+              value: "3001"
+            - name: TRAEFIK_LOG_FILE
+              value: /var/log/traefik/access.log
+          volumeMounts:
+            - name: logs
+              mountPath: /var/log/traefik
+        - name: traefik-log-dashboard-frontend
+          image: ghcr.io/hhftechnology/traefik-log-dashboard-backend:1.0.3
+          env:
+            - name: BACKEND_SERVICE
+              value: localhost
+            - name: BACKEND_PORT
+              value: "3001"
     additionalVolumeMounts:
       - name: logs
         mountPath: /var/log/traefik
