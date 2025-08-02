@@ -25,6 +25,12 @@ spec:
   values:
     deployment:
       kind: DaemonSet
+      additionalVolumes:
+        - name: logs
+          emptyDir: {}
+      additionalVolumeMounts:
+        - name: logs
+          mountPath: /var/log/traefik
     service:
       enabled: true
       type: LoadBalancer
@@ -84,6 +90,11 @@ spec:
         level: DEBUG
       access:
         enabled: true
+        format: json
+        filePath: "/var/log/traefik/access.log"
+        fields:
+          headers:
+            defaultmode: keep
     gateway:
       enabled: true
       name: internal
