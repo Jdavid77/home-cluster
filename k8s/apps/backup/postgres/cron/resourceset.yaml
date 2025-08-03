@@ -13,10 +13,12 @@ spec:
       region: weur
       bucket: postgres
       endpoint: http://minio.storage.svc.cluster.local:9000
+      encryption: false
     - backend: b2
       region: eu-central-003
       bucket: jnobrega-postgres-backup
       endpoint: https://s3.eu-central-003.backblazeb2.com
+      encryption: true
   resourcesTemplate: |
     ---
     apiVersion: external-secrets.io/v1
@@ -38,6 +40,9 @@ spec:
             POSTGRES_PASSWORD: "{{ .POSTGRES_SUPER_PASS }}"
             S3_ACCESS_KEY_ID: "{{ .S3_ACCESS_KEY_ID }}"
             S3_SECRET_ACCESS_KEY: "{{ .S3_SECRET_ACCESS_KEY }}"
+            <<- if inputs.encryption >>
+            ENCRYPTION_PASSWORD: "{{ .ENCRYPTION_PASSWORD }}"
+            <<- end >>
       dataFrom:
         - extract:
             key: /postgres/<< inputs.backend >>
