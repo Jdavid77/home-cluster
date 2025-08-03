@@ -31,10 +31,11 @@ spec:
               tag: 1.1.1@sha256:12de648818f4ec139dacad50acb90c302c6077986f70cf09708c8c38d041c285
               pullPolicy: IfNotPresent
             env:
-              DOCKER_ENABLE_SECURITY: "true"
+              TZ: ${TIMEZONE}
+              DOCKER_ENABLE_SECURITY: "false"
               INSTALL_BOOK_AND_ADVANCED_HTML_OPS: "false"
               SYSTEM_DEFAULTLOCALE: "en-GB"
-              SECURITY_ENABLE_LOGIN: true
+              SECURITY_ENABLE_LOGIN: "false"
             probes:
               liveness: &probe
                 enabled: true
