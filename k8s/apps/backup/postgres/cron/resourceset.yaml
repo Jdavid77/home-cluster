@@ -108,7 +108,7 @@ spec:
                 image:
                   repository: ghcr.io/jdavid77/pg-backup-s3
                   tag: pg<< $server.version >>
-                  pullPolicy: AlwaysPull
+                  pullPolicy: Always
                 env:
                   S3_REGION: << inputs.region >>
                   S3_BUCKET: << inputs.bucket >>
