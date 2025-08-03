@@ -64,20 +64,21 @@ spec:
             fsGroup: 1000
             fsGroupChangePolicy: OnRootMismatch
     persistence:
-      configs:
-        enabled: true
+      tmpfs:
         type: emptyDir
-      logs:
-        enabled: true
-        type: emptyDir
-      tmp:
-        enabled: true
-        type: emptyDir
-      tessdata:
-        enabled: true
-        type: emptyDir
-        globalMounts:
-          - path: /usr/share/tessdata
+        advancedMounts:
+          stirling-pdf:
+            app:
+              - path: /logs
+                subPath: logs
+              - path: /pipeline
+                subPath: pipeline
+              - path: /usr/share/tessdata
+                subPath: tessdata
+              - path: /tmp
+                subPath: tmp
+              - path: /config
+                subpath: config
     service:
       stirling:
         controller: stirling
