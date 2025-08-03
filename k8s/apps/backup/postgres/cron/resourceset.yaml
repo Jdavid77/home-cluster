@@ -74,7 +74,7 @@ spec:
     apiVersion: helm.toolkit.fluxcd.io/v2
     kind: HelmRelease
     metadata:
-      name: pg-backup-<< inputs.backend >>
+      name: pg-backup-<< inputs.server_name >>-<< inputs.backend >>
       namespace: backup
     spec:
       interval: 5m
@@ -129,4 +129,4 @@ spec:
                   REMOVE_BEFORE: "15"
                 envFrom:
                   - secretRef:
-                      name: postgres-backup-<< inputs.backend >>
+                      name: postgres-backup-<< inputs.server_name >>-<< inputs.backend >>
