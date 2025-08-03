@@ -14,17 +14,39 @@ spec:
       bucket: postgres
       endpoint: http://minio.storage.svc.cluster.local:9000
       encryption: false
+      server_version: 17
+      server_port: 5432
+      server_name: main
+    - backend: minio
+      region: weur
+      bucket: postgres
+      endpoint: http://minio.storage.svc.cluster.local:9000
+      encryption: false
+      server_version: 16
+      server_port: 6001
+      server_name: immich
     - backend: b2
       region: eu-central-003
       bucket: jnobrega-postgres-backup
       endpoint: https://s3.eu-central-003.backblazeb2.com
       encryption: true
+      server_version: 17
+      server_port: 5432
+      server_name: main
+    - backend: b2
+      region: eu-central-003
+      bucket: jnobrega-postgres-backup
+      endpoint: https://s3.eu-central-003.backblazeb2.com
+      encryption: true
+      server_version: 16
+      server_port: 6001
+      server_name: immich
   resourcesTemplate: |
     ---
     apiVersion: external-secrets.io/v1
     kind: ExternalSecret
     metadata:
-      name: &secret postgres-backup-<< inputs.backend >>
+      name: &secret postgres-backup-<< inputs.server_name >>-<< inputs.backend >>
       namespace: backup
     spec:
       refreshInterval: 5m
@@ -92,15 +114,18 @@ spec:
               app:
                 image:
                   repository: ghcr.io/jdavid77/pg-backup-s3
-                  tag: main@sha256:e0a29dfd431404a29292510072964c8db2ccc419068b2b2aecb4326ac6bb7141 # {"$imagepolicy": "flux-system:pg-backup-s3:tag"}
+                  tag: pg<< inputs.postgres_version >>
+                  pullPolicy: AlwaysPull
                 env:
                   S3_REGION: << inputs.region >>
                   S3_BUCKET: << inputs.bucket >>
                   S3_PREFIX: "backup"
                   S3_ENDPOINT: << inputs.endpoint >>
+                  SERVER_NAME: << inputs.server_name >>
                   POSTGRES_BACKUP_ALL: "true"
                   POSTGRES_HOST: "${NFS_SERVER}"
                   POSTGRES_EXTRA_OPTS: "--schema=public --blobs"
+                  POSTGRES_PORT: << inputs.server_port >>
                   REMOVE_BEFORE: "15"
                 envFrom:
                   - secretRef:
