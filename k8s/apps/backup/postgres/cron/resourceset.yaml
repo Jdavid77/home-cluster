@@ -18,27 +18,31 @@ spec:
         - name: main
           port: 5432
           version: 17
+          secret: main
         - name: immich
           port: 6001
           version: 16
+          secret: vector
     - backend: b2
       region: eu-central-003
       bucket: jnobrega-postgres-backup
       endpoint: https://s3.eu-central-003.backblazeb2.com
-      encryption: true
       servers:
         - name: main
           port: 5432
           version: 17
+          secret: main
         - name: immich
           port: 6001
           version: 16
+          secret: vector
   resourcesTemplate: |
+    <<- range $server := inputs.servers >>
     ---
     apiVersion: external-secrets.io/v1
     kind: ExternalSecret
     metadata:
-      name: &secret postgres-backup-<< inputs.backend >>
+      name: &secret postgres-backup-<< $server.secret >>-<< inputs.backend >>
       namespace: backup
     spec:
       refreshInterval: 5m
@@ -61,8 +65,7 @@ spec:
         - extract:
             key: /postgres/<< inputs.backend >>
         - extract:
-            key: /postgres/super-user
-    <<- range $server := inputs.servers >>
+            key: /postgres/<< $server.secret >>
     ---
     apiVersion: helm.toolkit.fluxcd.io/v2
     kind: HelmRelease
