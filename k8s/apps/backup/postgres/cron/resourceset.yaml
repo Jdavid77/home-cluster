@@ -27,6 +27,7 @@ spec:
       region: eu-central-003
       bucket: jnobrega-postgres-backup
       endpoint: https://s3.eu-central-003.backblazeb2.com
+      encryption: true
       servers:
         - name: main
           port: 5432
