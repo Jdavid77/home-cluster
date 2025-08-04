@@ -126,5 +126,5 @@ spec:
                   REMOVE_BEFORE: "15"
                 envFrom:
                   - secretRef:
-                      name: postgres-backup-<< inputs.backend >>
+                      name: postgres-backup-<< $server.secret >>-<< inputs.backend >>
     <<- end >>
