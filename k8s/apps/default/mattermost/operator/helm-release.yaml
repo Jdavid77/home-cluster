@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: mattermost-operator
-      version: 1.0.3
+      version: 1.0.4
       interval: 30m
       sourceRef:
         kind: HelmRepository
