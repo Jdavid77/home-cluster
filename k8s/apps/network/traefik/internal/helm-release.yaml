@@ -38,7 +38,7 @@ spec:
           emptyDir: {}
       additionalContainers:
         - name: traefik-log-dashboard-backend
-          image: ghcr.io/hhftechnology/traefik-log-dashboard-backend:1.0.3
+          image: ghcr.io/hhftechnology/traefik-log-dashboard-backend:1.0.6
           env:
             - name: NODE_ENV
               value: production
