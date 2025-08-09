@@ -39,7 +39,7 @@ spec:
     pruneIntervalDays: 7
     repository: calibre-web-restic
     volumeSnapshotClassName: longhorn-snapshot-vsc
-    cacheCapacity: 512Mi
+    cacheCapacity: 1Gi
     cacheStorageClassName: "longhorn-cache"
     cacheAccessModes: ["ReadWriteOnce"]
     storageClassName: "longhorn-snapshot"
@@ -65,10 +65,10 @@ spec:
     volumeSnapshotClassName: longhorn-snapshot-vsc
     cacheStorageClassName: longhorn-cache
     cacheAccessModes: ["ReadWriteOnce"]
-    cacheCapacity: 512Mi
+    cacheCapacity: 1Gi
     storageClassName: "longhorn-snapshot"
     accessModes: ["ReadWriteOnce"]
-    capacity: 512Mi
+    capacity: 1Gi
     moverSecurityContext:
       runAsUser: 1002
       runAsGroup: 100
@@ -86,5 +86,5 @@ spec:
     name: "calibre-web"
   resources:
     requests:
-      storage: "512Mi"
+      storage: "1Gi"
   storageClassName: "longhorn"
