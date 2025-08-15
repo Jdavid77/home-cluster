@@ -64,6 +64,12 @@ spec:
               NODE_FUNCTION_ALLOW_EXTERNAL: databricks/sql
               # MCP
               N8N_COMMUNITY_PACKAGES_ALLOW_TOOL_USAGE: "true"
+              # SMTP
+              N8N_SMTP_HOST: ${SMTP_MAIL_SERVER}
+              N8N_SMTP_PORT: 587
+              N8N_SMTP_USER: ${SMTP_USERNAME}
+              N8N_SMTP_PASS: ${SMTP_PASSWORD}
+              N8N_SMTP_SENDER: ${SMTP_FROM}
             resources:
               requests:
                 cpu: 20m
