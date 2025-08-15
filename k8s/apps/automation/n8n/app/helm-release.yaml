@@ -70,6 +70,7 @@ spec:
               N8N_SMTP_USER: ${SMTP_USERNAME}
               N8N_SMTP_PASS: ${SMTP_PASSWORD}
               N8N_SMTP_SENDER: ${SMTP_FROM}
+              N8N_MFA_ENABLED: "false"
             resources:
               requests:
                 cpu: 20m
