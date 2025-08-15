@@ -1,7 +1,8 @@
 locals {
   buckets = [
     # names must be globally unique....
-    "jnobrega-postgres-backup"
+    "jnobrega-postgres-backup",
+    "jnobrega-obsidian"
   ]
 }
 
