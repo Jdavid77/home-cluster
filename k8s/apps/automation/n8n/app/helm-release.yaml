@@ -47,6 +47,7 @@ spec:
               N8N_TEMPLATES_ENABLED: true
               # URL
               N8N_PORT: &port 5678
+              N8N_PROTOCOL: "https"
               N8N_HOST: &host "n8n.${SECRET_DOMAIN}"
               WEBHOOK_URL: "https://n8n.${SECRET_DOMAIN}"
               # Public API
@@ -72,6 +73,9 @@ spec:
               N8N_SMTP_SENDER: ${SMTP_FROM}
               N8N_SMTP_SSL: "false"
               N8N_MFA_ENABLED: "false"
+              # Executions
+              EXECUTIONS_DATA_PRUNE: true
+              EXECUTIONS_DATA_MAX_AGE: 7
             resources:
               requests:
                 cpu: 20m
