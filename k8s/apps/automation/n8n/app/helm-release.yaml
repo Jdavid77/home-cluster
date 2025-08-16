@@ -105,6 +105,16 @@ spec:
             matches:
               - path:
                   type: PathPrefix
+                  value: /rest/
+              - path:
+                  type: PathPrefix
+                  value: /api/
+          - backendRefs:
+              - name: n8n
+                port: *port
+            matches:
+              - path:
+                  type: PathPrefix
                   value: /
             filters:
               - type: ExtensionRef
