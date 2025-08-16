@@ -27,7 +27,7 @@ spec:
           app:
             image:
               repository: filebrowser/filebrowser
-              tag: v2.42.4
+              tag: v2.42.5
             env:
               TZ: ${TIMEZONE}
               FB_DATABASE: /config/filebrowser.db
