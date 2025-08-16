@@ -78,6 +78,7 @@ spec:
               N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS: "true"
               # https://community.n8n.io/t/x-forwarded-for-header-is-set-but-the-express-trust-proxy-s/51208/7
               N8N_PROXY_HOPS: "1"
+              N8N_RUNNERS_ENABLED: "true"
             resources:
               requests:
                 cpu: 20m
