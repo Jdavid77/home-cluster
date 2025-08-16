@@ -55,7 +55,7 @@ spec:
               NODE_FUNCTION_ALLOW_BUILTIN: "*"
               GENERIC_TIMEZONE: ${TIMEZONE}
               N8N_LOG_LEVEL: debug
-              N8N_LOG_OUTPUT: console, file
+              N8N_LOG_OUTPUT: console
               N8N_DIAGONISTICS_ENABLED: false
               N8N_HIRING_BANNER_ENABLED: false
               N8N_USER_MANAGEMENT_DISABLED: true
