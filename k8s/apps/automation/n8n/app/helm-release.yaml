@@ -58,7 +58,7 @@ spec:
               N8N_LOG_OUTPUT: console
               N8N_DIAGONISTICS_ENABLED: false
               N8N_HIRING_BANNER_ENABLED: false
-              N8N_USER_MANAGEMENT_DISABLED: true
+              N8N_USER_MANAGEMENT_DISABLED: false
               N8N_METRICS: true
               N8N_USER_FOLDER: /home/jnobrega/n8n
               NODE_FUNCTION_ALLOW_EXTERNAL: databricks/sql
