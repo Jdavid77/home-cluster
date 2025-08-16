@@ -76,6 +76,7 @@ spec:
               # Executions
               EXECUTIONS_DATA_PRUNE: true
               EXECUTIONS_DATA_MAX_AGE: 7
+              N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS: "true"
             resources:
               requests:
                 cpu: 20m
