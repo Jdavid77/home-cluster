@@ -4,15 +4,15 @@ metadata:
   name: kubernetes-dashboard
 spec:
   hostnames:
-    - kubernetes.jnobrega.com
+    - kubernetes.${SECRET_DOMAIN}
   parentRefs:
     - name: internal
       namespace: network
       sectionName: websecure
   rules:
     - backendRefs:
-        - name: kubernetes-dashboard-kong-proxy
-          port: 443
+        - name: kubernetes-dashboard-web
+          port: 8080
       matches:
         - path:
             type: PathPrefix
