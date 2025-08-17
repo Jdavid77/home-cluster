@@ -12,7 +12,7 @@ spec:
   rules:
     - backendRefs:
         - name: kubernetes-dashboard-web
-          port: 8080
+          port: 8000
       matches:
         - path:
             type: PathPrefix
