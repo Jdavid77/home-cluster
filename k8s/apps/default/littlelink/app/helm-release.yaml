@@ -19,8 +19,8 @@ spec:
       retries: 3
   values:
     controllers:
-      replicas: 1
       littlelink:
+        replicas: 1
         containers:
           app:
             image:
