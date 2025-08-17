@@ -8,6 +8,8 @@ spec:
     kind: OCIRepository
     name: app-template
     namespace: flux-system
+  driftDetection:
+    mode: enabled
   install:
     remediation:
       retries: 3
@@ -17,6 +19,7 @@ spec:
       retries: 3
   values:
     controllers:
+      replicas: 1
       littlelink:
         containers:
           app:
