@@ -28,3 +28,6 @@ spec:
         pullPolicy: IfNotPresent
     metricsScraper:
       enabled: true
+    extraArgs:
+      - --enable-insecure-login
+      - --token-ttl=43200
