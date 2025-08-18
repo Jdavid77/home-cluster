@@ -26,47 +26,6 @@ spec:
     # for now
     deployment:
       kind: DaemonSet
-      additionalVolumes:
-        - name: logs
-          emptyDir: {}
-        # can't wait to remove this ...
-        - name: nginx
-          emptyDir: {}
-        - name: cache
-          emptyDir: {}
-        - name: run
-          emptyDir: {}
-      additionalContainers:
-        - name: traefik-log-dashboard-backend
-          image: ghcr.io/hhftechnology/traefik-log-dashboard-backend:1.0.6
-          env:
-            - name: NODE_ENV
-              value: production
-            - name: PORT
-              value: "3001"
-            - name: TRAEFIK_LOG_FILE
-              value: /var/log/traefik/access.log
-          volumeMounts:
-            - name: logs
-              mountPath: /var/log/traefik
-        - name: traefik-log-dashboard-frontend
-          image: ghcr.io/hhftechnology/traefik-log-dashboard-frontend:1.0.6
-          env:
-            - name: BACKEND_SERVICE
-              value: localhost
-            - name: BACKEND_PORT
-              value: "3001"
-          # can't wait to remove this ...
-          volumeMounts:
-            - name: nginx
-              mountPath: /etc/nginx/conf.d
-            - name: cache
-              mountPath: /var/cache/nginx
-            - name: run
-              mountPath: /run
-    additionalVolumeMounts:
-      - name: logs
-        mountPath: /var/log/traefik
     service:
       enabled: true
       type: LoadBalancer
