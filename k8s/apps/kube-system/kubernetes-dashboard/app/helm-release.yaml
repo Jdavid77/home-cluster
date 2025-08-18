@@ -23,12 +23,12 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    app:
-      image:
-        pullPolicy: IfNotPresent
     metricsScraper:
       enabled: true
-    extraArgs:
-      - --enable-insecure-login
-      - --token-ttl=43200
-      - --serversTransport.insecureSkipVerify=true
+    app:
+      env:
+        TZ: ${TIMEZONE}
+      extraArgs:
+        - --enable-insecure-login
+        - --token-ttl=43200
+        - --serversTransport.insecureSkipVerify=true
