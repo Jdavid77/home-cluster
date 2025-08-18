@@ -31,4 +31,3 @@ spec:
       extraArgs:
         - --enable-insecure-login
         - --token-ttl=43200
-        - --serversTransport.insecureSkipVerify=true

@@ -82,11 +82,10 @@ spec:
         - "IPv4"
     ingressClass:
       enabled: false
-    globalArguments:
-      - "--api.insecure=true"
-      - "--serverstransport.insecureskipverify=true"
     additionalArguments:
       - "--providers.kubernetesgateway.labelselector=app.kubernetes.io/instance=traefik-internal-network"
+      - "--api.insecure=true"
+      - "--serversTransport.insecureSkipVerify=true"
     providers:
       kubernetesCRD:
         enabled: true

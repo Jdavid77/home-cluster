@@ -43,9 +43,6 @@ spec:
         format: json
     ingressClass:
       enabled: false
-    globalArguments:
-      - "--api.insecure=true"
-      - "--serverstransport.insecureskipverify=true"
     additionalArguments:
       - "--providers.kubernetesgateway.labelselector=app.kubernetes.io/instance=traefik-network"
     providers:
