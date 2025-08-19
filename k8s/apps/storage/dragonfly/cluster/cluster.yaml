@@ -6,7 +6,7 @@ metadata:
 spec:
   labels:
     dragonflydb.io/cluster: dragonfly
-  image: docker.dragonflydb.io/dragonflydb/dragonfly:v1.32.0
+  image: docker.dragonflydb.io/dragonflydb/dragonfly:v1.33.0
   replicas: 3
   topologySpreadConstraints:
     - maxSkew: 1
