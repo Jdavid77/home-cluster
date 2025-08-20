@@ -61,7 +61,7 @@ spec:
           <<- if eq inputs.type "kubernetes" >>
           kubernetesModeWorkVolumeClaim:
             accessModes: ["ReadWriteOnce"]
-            storageClassName: openebs-hostpath
+            storageClassName: longhorn
             resources:
               requests:
                 storage: 5Gi
