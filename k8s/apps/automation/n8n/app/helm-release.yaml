@@ -39,7 +39,7 @@ spec:
           n8n:
             image:
               repository: docker.io/n8nio/n8n
-              tag: 1.108.1
+              tag: 1.109.0
             env:
               #===CORE SETTINGS===
               N8N_VERSION_NOTIFICATIONS_ENABLED: false
