@@ -32,6 +32,11 @@ spec:
     - name: flux-operator
   path: ./k8s/apps/flux-system/flux-operator/instance
   prune: true
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      name: flux-instance
+      namespace: flux-system
   sourceRef:
     kind: GitRepository
     name: home-cluster

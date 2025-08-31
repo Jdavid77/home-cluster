@@ -16,6 +16,11 @@ spec:
       kind: HelmRelease
       name: qbittorrent
       namespace: media
+  healthCheckExprs:
+    - apiVersion: external-secrets.io/v1
+      kind: ExternalSecret
+      failed: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSyncedError')
+      current: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSynced')
   sourceRef:
     kind: GitRepository
     name: home-cluster

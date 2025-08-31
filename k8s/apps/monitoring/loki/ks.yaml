@@ -8,9 +8,16 @@ spec:
   targetNamespace: monitoring
   path: ./k8s/apps/monitoring/loki/app
   prune: true
+  dependsOn:
+    - name: longhorn
   sourceRef:
     kind: GitRepository
     name: home-cluster
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      name: loki
+      namespace: monitoring
   wait: true
   interval: 30m
   retryInterval: 1m

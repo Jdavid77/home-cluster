@@ -4,4 +4,3 @@ resources:
   - ./namespace.yaml
   - ./n8n/ks.yaml
   - ./dragonfly/ks.yaml
-  # - ./nocodb/ks.yaml

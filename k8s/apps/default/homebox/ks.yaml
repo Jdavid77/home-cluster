@@ -8,6 +8,7 @@ spec:
   targetNamespace: default
   dependsOn:
     - name: volsync
+    - name: external-secrets-store
   path: ./k8s/apps/default/homebox/app
   prune: true
   sourceRef:

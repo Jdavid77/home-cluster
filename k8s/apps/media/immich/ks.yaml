@@ -8,6 +8,8 @@ spec:
   targetNamespace: media
   path: ./k8s/apps/media/immich/app
   prune: true
+  dependsOn:
+    - name: external-secrets-store
   sourceRef:
     kind: GitRepository
     name: home-cluster

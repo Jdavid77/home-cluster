@@ -9,6 +9,7 @@ spec:
   path: ./k8s/apps/automation/n8n/app
   dependsOn:
     - name: volsync
+    - name: external-secrets-store
   prune: true
   sourceRef:
     kind: GitRepository

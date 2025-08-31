@@ -32,15 +32,6 @@ spec:
   dependsOn:
     - name: gha-runner-scale-set-controller
     - name: external-secrets-store
-  # healthChecks:
-  #   - apiVersion: helm.toolkit.fluxcd.io/v2
-  #     kind: HelmRelease
-  #     name: home-ops-runner
-  #     namespace: actions-runner-system
-  #   - apiVersion: helm.toolkit.fluxcd.io/v2
-  #     kind: HelmRelease
-  #     name: ryanair-runner
-  #     namespace: actions-runner-system
   path: ./k8s/apps/actions-runner-system/actions-runner-controller/runners
   prune: true
   sourceRef:

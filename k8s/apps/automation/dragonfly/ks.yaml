@@ -8,6 +8,9 @@ spec:
   targetNamespace: automation
   path: ./k8s/apps/automation/dragonfly/cluster
   prune: true
+  dependsOn:
+    - name: dragonfly
+    - name: external-secrets-store
   sourceRef:
     kind: GitRepository
     name: home-cluster

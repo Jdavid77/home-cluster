@@ -14,7 +14,7 @@ spec:
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
-      name: 13ft
+      name: thirteen-ft
       namespace: default
   wait: true
   interval: 30m

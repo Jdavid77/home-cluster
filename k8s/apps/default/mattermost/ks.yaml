@@ -31,11 +31,21 @@ spec:
   targetNamespace: default
   dependsOn:
     - name: mattermost-operator
+    - name: external-secrets-store
   path: ./k8s/apps/default/mattermost/instance
   prune: true
   sourceRef:
     kind: GitRepository
     name: home-cluster
+  healthCheckExprs:
+    - apiVersion: installation.mattermost.com/v1beta1
+      kind: Mattermost
+      failed: status.state != 'stable'
+      current: status.state == 'stable'
+    - apiVersion: external-secrets.io/v1
+      kind: ExternalSecret
+      failed: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSyncedError')
+      current: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSynced')
   wait: true
   interval: 30m
   retryInterval: 1m
