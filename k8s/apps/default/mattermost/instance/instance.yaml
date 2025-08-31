@@ -26,7 +26,7 @@ spec:
     - name: MM_EMAILSETTINGS_SENDPUSHNOTIFICATIONS
       value: "true"
     - name: MM_EMAILSETTINGS_REQUIREEMAILVERIFICATION
-      value: "true"
+      value: "false"
     - name: "MM_PLUGINSETTINGS_ENABLEUPLOADS"
       value: "true"
       # Only available in professional in enterprise plans ....
