@@ -1,5 +1,6 @@
 output "key_id" {
   value = garage_access_key.this.access_key_id
+  sensitive = true
 }
 
 output "key_secret" {

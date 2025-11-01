@@ -4,7 +4,7 @@ resource "garage_bucket" "this" {
 }
 
 resource "garage_access_key" "this" {
-  name          = "volsync"
+  name          = "main"
   never_expires = true
 }
 
@@ -12,9 +12,8 @@ resource "garage_access_key" "this" {
 resource "garage_permission" "this" {
   for_each      = var.buckets
   access_key_id = garage_access_key.this.id
-  bucket_id     = each.value
+  bucket_id     = garage_bucket.this[each.key].id
   read          = true
   write         = true
-  owner         = true
   depends_on    = [garage_bucket.this]
 }
