@@ -48,7 +48,7 @@ spec:
           s3:
             port: &port 3900
           api:
-            port: 3903
+            port: &api-port 3903
     route:
       s3:
         enabled: true
@@ -64,6 +64,24 @@ spec:
           - backendRefs:
               - name: *app
                 port: *port
+            matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+      api:
+        enabled: true
+        kind: HTTPRoute
+        parentRefs:
+          - kind: Gateway
+            name: internal
+            namespace: network
+            sectionName: websecure
+        hostnames:
+          - api-garage.${SECRET_DOMAIN}
+        rules:
+          - backendRefs:
+              - name: *app
+                port: *api-port
             matches:
               - path:
                   type: PathPrefix
