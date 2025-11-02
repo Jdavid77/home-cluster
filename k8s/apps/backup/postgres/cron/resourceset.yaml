@@ -9,10 +9,10 @@ metadata:
 spec:
   wait: true
   inputs:
-    - backend: minio
-      region: weur
+    - backend: garage
+      region: us-east-1
       bucket: postgres
-      endpoint: http://minio.storage.svc.cluster.local:9000
+      endpoint: http://garage.storage.svc.cluster.local:3900
       encryption: false
       servers:
         - name: main
