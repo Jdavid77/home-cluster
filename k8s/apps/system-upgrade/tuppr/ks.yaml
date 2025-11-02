@@ -5,8 +5,8 @@ metadata:
   name: tuppr
   namespace: flux-system
 spec:
-  targetNamespace: kube-system
-  path: ./k8s/apps/kube-system/tuppr/app
+  targetNamespace: system-upgrade
+  path: ./k8s/apps/system-upgrade/tuppr/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -15,7 +15,7 @@ spec:
     - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
       name: tuppr
-      namespace: kube-system
+      namespace: system-upgrade
   wait: true
   interval: 30m
   retryInterval: 1m
