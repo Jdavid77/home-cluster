@@ -14,7 +14,7 @@ spec:
         name: sonarqube-charts
         namespace: flux-system
       interval: 15m
-  maxHistory: 3
+  maxHistory: 2
   install:
     remediation:
       retries: 3
@@ -22,6 +22,8 @@ spec:
     cleanupOnFail: true
     remediation:
       retries: 3
+  uninstall:
+    keepHistory: false
   valuesFrom:
     - targetPath: jdbcOverwrite.jdbcUrl
       kind: Secret
@@ -63,12 +65,12 @@ spec:
       enable: true
 
     extraInitContainers:
-      name: init-db
-      image: ghcr.io/home-operations/postgres-init:17.6
-      imagePullPolicy: IfNotPresent
-      envFrom:
-        - secretRef:
-            name: sonarqube-db-secret
+      - name: init-db
+        image: ghcr.io/home-operations/postgres-init:17.6
+        imagePullPolicy: IfNotPresent
+        envFrom:
+          - secretRef:
+              name: sonarqube-db-secret
 
     annotations:
       reloader.stakater.com/auto: 'true'
