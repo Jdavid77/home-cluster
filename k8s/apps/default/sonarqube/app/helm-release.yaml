@@ -29,7 +29,7 @@ spec:
       valuesKey: POSTGRES_JDBC_URL
     - targetPath: jdbcOverwrite.jdbcUsername
       kind: Secret
-      name: ssonarqube-db-secret
+      name: sonarqube-db-secret
       valuesKey: POSTGRES_JDBC_USERNAME
     - targetPath: jdbcOverwrite.jdbcPassword
       kind: Secret
