@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - secret.yaml
   - helm-release.yaml
+  - http-route.yaml

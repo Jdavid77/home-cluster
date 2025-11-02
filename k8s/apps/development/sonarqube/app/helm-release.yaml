@@ -45,12 +45,7 @@ spec:
       enabled: true
 
     httproute:
-      enabled: true
-      gateway: internal
-      gatewayNamespace: network
-      sectionName: websecure
-      hostnames:
-        - sonarqube.${SECRET_DOMAIN}
+      enabled: false
 
     prometheusExporter:
       enabled: true
