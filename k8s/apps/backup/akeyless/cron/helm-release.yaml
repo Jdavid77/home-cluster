@@ -48,7 +48,7 @@ spec:
               BASE_PATH: "/"
               AWS_REGION: "us-east-1"
               S3_BUCKET: akeyless-backups
-              S3_ENDPOINT: "http://garage.storage.svc.cluster.local:3903"
+              S3_ENDPOINT: "http://garage.storage.svc.cluster.local:3900"
               LOG_LEVEL: info
               LOG_FORMAT: console
             envFrom:
