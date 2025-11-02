@@ -1,0 +1,82 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: sonarqube
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: sonarqube
+      version: 2025.5.0
+      sourceRef:
+        kind: HelmRepository
+        name: sonarqube-charts
+        namespace: flux-charts
+      interval: 15m
+  maxHistory: 3
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  valuesFrom:
+    - targetPath: jdbcOverwrite.jdbcUrl
+      kind: Secret
+      name: sonarqube-db-secret
+      valuesKey: POSTGRES_JDBC_URL
+    - targetPath: jdbcOverwrite.jdbcUsername
+      kind: Secret
+      name: ssonarqube-db-secret
+      valuesKey: POSTGRES_JDBC_USERNAME
+    - targetPath: jdbcOverwrite.jdbcPassword
+      kind: Secret
+      name: sonarqube-db-secret
+      valuesKey: POSTGRES_JDBC_PASSWORD
+
+  values:
+    deploymentType: 'Deployment'
+
+    community:
+      enabled: true
+
+    httproute:
+      enabled: true
+      gateway: internal
+      gatewayNamespace: network
+      hostnames:
+        - sonarqube.${SECRET_DOMAIN}
+
+    prometheusExporter:
+      enabled: true
+
+    prometheusMonitoring:
+      podMonitor:
+        enabled: true
+
+    postgresql:
+      enabled: false
+
+    jdbcOverwrite:
+      enable: true
+
+    extraInitContainers:
+      name: init-db
+      image: ghcr.io/home-operations/postgres-init:17.6
+      imagePullPolicy: IfNotPresent
+      envFrom:
+        - secretRef:
+            name: sonarqube-db-secret
+
+    annotations:
+      reloader.stakater.com/auto: 'true'
+
+    resources:
+      limits:
+        cpu: 2000m
+        memory: 4Gi
+      requests:
+        cpu: 400m
+        memory: 2Gi

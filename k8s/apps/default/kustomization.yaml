@@ -16,3 +16,4 @@ resources:
   - ./filebrowser/ks.yaml
   - ./mattermost/ks.yaml
   - ./13ft/ks.yaml
+  - ./sonarqube/ks.yaml

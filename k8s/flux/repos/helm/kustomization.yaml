@@ -46,3 +46,4 @@ resources:
   - mattermost-charts.yaml
   - movetokube-charts.yaml
   - runix-charts.yaml
+  - sonarqube-charts.yaml
