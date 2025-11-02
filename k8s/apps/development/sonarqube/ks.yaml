@@ -8,7 +8,7 @@ spec:
   dependsOn:
     - name: external-secrets-store
   targetNamespace: default
-  path: ./k8s/apps/default/sonarqube/app
+  path: ./k8s/apps/development/sonarqube/app
   prune: true
   sourceRef:
     kind: GitRepository
