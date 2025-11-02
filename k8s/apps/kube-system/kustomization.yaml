@@ -10,3 +10,4 @@ resources:
   - ./kubelet-csr-approver/ks.yaml
   - ./kubernetes-dashboard/ks.yaml
   - ./spegel/ks.yaml
+  - ./tuppr/ks.yaml

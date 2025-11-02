@@ -8,3 +8,4 @@ resources:
   - snapshot-controller.yaml
   - volsync.yaml
   - cert-manager.yaml
+  - tuppr.yaml
