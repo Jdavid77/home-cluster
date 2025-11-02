@@ -15,15 +15,15 @@ spec:
     template:
       engineVersion: v2
       data:
-        RESTIC_REPOSITORY: s3:http://minio.storage.svc.cluster.local:9000/mealie
+        RESTIC_REPOSITORY: s3:http://garage.storage.svc.cluster.local:3900/mealie
         RESTIC_PASSWORD: "{{ .RESTIC_PASSWORD }}"
-        AWS_ACCESS_KEY_ID: "{{ .MINIO_ROOT_USER }}"
-        AWS_SECRET_ACCESS_KEY: "{{ .MINIO_ROOT_PASSWORD }}"
+        AWS_ACCESS_KEY_ID: "{{ .GARAGE_KEY_ID }}"
+        AWS_SECRET_ACCESS_KEY: "{{ .GARAGE_KEY_SECRET }}"
   dataFrom:
     - extract:
         key: /volsync/restic
     - extract:
-        key: /minio/credentials
+        key: /garage/key
 ---
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/volsync.backube/replicationsource_v1alpha1.json
 apiVersion: volsync.backube/v1alpha1
