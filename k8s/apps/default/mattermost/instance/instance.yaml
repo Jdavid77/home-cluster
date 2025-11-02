@@ -15,7 +15,7 @@ spec:
       secret: mattermost-db-secret
   fileStore:
     external:
-      url: minio.storage.svc.cluster.local:9000
+      url: garage.storage.svc.cluster.local:3900
       bucket: mattermost
       secret: mattermost-s3
   mattermostEnv:
