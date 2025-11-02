@@ -73,6 +73,9 @@ spec:
     annotations:
       reloader.stakater.com/auto: 'true'
 
+    monitoringPasscodeSecretName: sonarqube-monitoring-secret
+    monitoringPasscodeSecretKey: MONITORING_SECRET
+
     resources:
       limits:
         cpu: 2000m
