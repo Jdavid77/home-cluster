@@ -5,3 +5,4 @@ resources:
   - ./snapshot-controller/ks.yaml
   - ./postgres/ks.yaml
   - ./volsync/ks.yaml
+  - ./akeyless/ks.yaml
