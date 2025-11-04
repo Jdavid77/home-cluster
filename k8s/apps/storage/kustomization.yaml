@@ -6,3 +6,4 @@ resources:
   - ./dragonfly/ks.yaml
   # - ./pgadmin/ks.yaml
   - ./garage/ks.yaml
+  - ./postgresus/ks.yaml
