@@ -20,10 +20,30 @@ spec:
             image:
               repository: rostislavdugin/postgresus
               tag: v1.23.0@sha256:7fabcd94c70631615b921645430e33e85bbd76735a6d9ca8e3ede180698a13ca
-            securityContext:
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
-              capabilities: { drop: [ALL] }
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/v1/system/health
+                    port: &port 4005
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+              startup:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/v1/system/health
+                    port: *port
+                  initialDelaySeconds: 0
+                  periodSeconds: 20
+                  timeoutSeconds: 1
+                  failureThreshold: 3
             resources:
               requests:
                 cpu: 100m
@@ -37,7 +57,7 @@ spec:
       app:
         ports:
           http:
-            port: &port 4005
+            port: *port
     route:
       app:
         enabled: true
@@ -57,3 +77,9 @@ spec:
               - path:
                   type: PathPrefix
                   value: /
+    persistence:
+      data:
+        existingClaim: *app
+        globalMounts:
+          - path: /postgresus-data
+            readOnly: false
