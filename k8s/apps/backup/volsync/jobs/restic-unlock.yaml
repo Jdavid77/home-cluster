@@ -1,0 +1,35 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: restic-unlock
+  namespace: default
+spec:
+  ttlSecondsAfterFinished: 60
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: restic
+          image: restic/restic:0.17.3
+          command:
+            - restic
+            - unlock
+          env:
+            - name: RESTIC_REPOSITORY
+              value: "s3:http://garage.storage.svc.cluster.local:3900/adventurelog"
+            - name: RESTIC_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: adventurelog-restic
+                  key: RESTIC_PASSWORD
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: adventurelog-restic
+                  key: AWS_ACCESS_KEY_ID
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: adventurelog-restic
+                  key: AWS_SECRET_ACCESS_KEY

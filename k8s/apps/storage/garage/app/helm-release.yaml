@@ -92,11 +92,11 @@ spec:
           configuration.toml: |
             metadata_dir = "/meta"
             data_dir = "/data"
-            db_engine = "sqlite"
+            db_engine = "lmdb"
             metadata_auto_snapshot_interval = "6h"
 
             replication_factor = 1
-            compression_level = 2
+            compression_level = 1
 
             rpc_bind_addr = "[::]:3901"
             rpc_public_addr = "127.0.0.1:3901"
