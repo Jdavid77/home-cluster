@@ -23,7 +23,7 @@ spec:
           init:
             image: &image
               repository: ghcr.io/calibrain/calibre-web-automated-book-downloader
-              tag: v0.1.1@sha256:9b1e514c3ae7f1b002fa6c1b8eabe69bec42372e013f014237f5d9dfef6a0a53
+              tag: v0.2.4@sha256:b147cdd491a8e28dafbd28c75c8be2047994bc703ca34bd981e3ff5f4775edb5
             command:
               - bash
               - -c
@@ -45,7 +45,6 @@ spec:
               UID: 1002
               GID: 100
               HOME: /tmp
-              USING_TOR: "true"
               APP_ENV: prod
             command: [python, -m, app] # don't run annoying init script
             probes:
