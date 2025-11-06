@@ -12,7 +12,6 @@ resources:
   - ./morphos/ks.yaml
   - ./ryanair-api/ks.yaml
   - ./mealie/ks.yaml
-  - ./homebox/ks.yaml
   - ./filebrowser/ks.yaml
   - ./mattermost/ks.yaml
   - ./13ft/ks.yaml
