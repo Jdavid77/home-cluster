@@ -7,3 +7,4 @@ resources:
   # - ./pgadmin/ks.yaml
   - ./garage/ks.yaml
   - ./postgresus/ks.yaml
+  - ./openebs/ks.yaml
