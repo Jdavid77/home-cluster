@@ -1,8 +1,8 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/budimanjojo/talhelper/master/pkg/config/schemas/talconfig.json
 clusterName: home-cluster
 endpoint: https://192.168.1.110:6443
-talosVersion: v1.10.6
-kubernetesVersion: v1.33.3
+talosVersion: v1.11.4
+kubernetesVersion: v1.34.1
 additionalMachineCertSans:
   - "192.168.1.110"
   - "127.0.0.1"
@@ -219,6 +219,34 @@ nodes:
           physical: true
         addresses:
           - 192.168.1.91/24
+        dhcp: true
+        mtu: 1500
+    machineSpec:
+      mode: metal
+      arch: amd64
+  - hostname: observability-worker1
+    ipAddress: 192.168.1.105
+    nameservers:
+      - "192.168.1.139"
+    installDisk: /dev/sdb
+    controlPlane: false
+    nodeAnnotations:
+      installerImage: '{{ .MachineConfig.MachineInstall.InstallImage }}'
+    patches:
+      - |-
+        machine:
+          kubelet:
+            extraConfig:
+              registerWithTaints:
+                - effect: NoSchedule
+                  key: node.kubernetes.io/dedicated
+                  value: signoz
+    networkInterfaces:
+      - deviceSelector:
+          hardwareAddr: "00:e0:4c:73:3b:3b"
+          physical: true
+        addresses:
+          - 192.168.1.105/24
         dhcp: true
         mtu: 1500
     machineSpec:
