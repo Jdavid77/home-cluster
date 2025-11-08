@@ -9,3 +9,4 @@ resources:
   - volsync.yaml
   - cert-manager.yaml
   - tuppr.yaml
+  - openebs.yaml
