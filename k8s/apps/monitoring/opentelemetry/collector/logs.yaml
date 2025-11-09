@@ -130,6 +130,13 @@ spec:
           receivers: [filelog]
           processors: [k8sattributes, batch, resource, memory_limiter]
           exporters: [otlphttp/loki, debug]
+  tolerations:
+    - key: node.kubernetes.io/dedicated
+      operator: Equal
+      value: localstorage
+      effect: NoSchedule
+    - key: node-role.kubernetes.io/control-plane
+      effect: NoSchedule
   securityContext:
     runAsUser: 0
     runAsGroup: 0
