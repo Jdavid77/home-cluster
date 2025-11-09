@@ -61,7 +61,7 @@ spec:
           <<- if eq inputs.type "kubernetes" >>
           kubernetesModeWorkVolumeClaim:
             accessModes: ["ReadWriteOnce"]
-            storageClassName: longhorn
+            storageClassName: openebs-hostpath
             resources:
               requests:
                 storage: 5Gi
@@ -71,6 +71,8 @@ spec:
             <<- if eq inputs.type "kubernetes" >>
             securityContext:
               fsGroup: 123
+            nodeSelector:
+              kubernetes.io/hostname: localstorage-worker1
             <<- end >>
             containers:
               - name: runner
