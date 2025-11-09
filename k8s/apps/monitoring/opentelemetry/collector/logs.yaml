@@ -120,8 +120,6 @@ spec:
             key: loki.format
             value: json
     exporters:
-      debug:
-        verbosity: detailed
       otlphttp/loki:
         endpoint: http://loki-gateway.monitoring/otlp
     service:
