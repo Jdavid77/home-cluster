@@ -73,6 +73,11 @@ spec:
               fsGroup: 123
             nodeSelector:
               kubernetes.io/hostname: localstorage-worker1
+            tolerations:
+            - key: "node.kubernetes.io/dedicated"
+              operator: "Equal"
+              value: "localstorage"
+              effect: "NoSchedule"
             <<- end >>
             containers:
               - name: runner
