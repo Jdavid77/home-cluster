@@ -23,6 +23,9 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    memberlist:
+      service:
+        publishNotReadyAddresses: true
     deploymentMode: SingleBinary
     loki:
       analytics:
