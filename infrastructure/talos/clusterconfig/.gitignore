@@ -6,3 +6,4 @@ home-cluster-soyo1-master.yaml
 home-cluster-soyo2-master.yaml
 home-cluster-hp-worker1.yaml
 home-cluster-observability-worker1.yaml
+home-cluster-localstorage-worker1.yaml

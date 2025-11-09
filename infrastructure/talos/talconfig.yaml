@@ -224,7 +224,7 @@ nodes:
     machineSpec:
       mode: metal
       arch: amd64
-  - hostname: observability-worker1
+  - hostname: localstorage-worker1
     ipAddress: 192.168.1.105
     nameservers:
       - "192.168.1.139"
@@ -240,7 +240,7 @@ nodes:
               registerWithTaints:
                 - effect: NoSchedule
                   key: node.kubernetes.io/dedicated
-                  value: signoz
+                  value: localstorage
     networkInterfaces:
       - deviceSelector:
           hardwareAddr: "00:e0:4c:73:3b:3b"
