@@ -127,7 +127,7 @@ spec:
         logs:
           receivers: [filelog]
           processors: [k8sattributes, batch, resource, memory_limiter]
-          exporters: [otlphttp/loki, debug]
+          exporters: [otlphttp/loki]
   tolerations:
     - key: node.kubernetes.io/dedicated
       operator: Equal
