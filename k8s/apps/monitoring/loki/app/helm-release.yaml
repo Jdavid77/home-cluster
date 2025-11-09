@@ -23,20 +23,11 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    global:
-      extraVolumes:
-        - name: wal
-          emptyDir: {}
-      extraVolumeMounts:
-        - name: wal
-          mountPath: /loki/ruler-wal
     deploymentMode: SingleBinary
     loki:
-      auth_enabled: false
       analytics:
         reporting_enabled: false
-      server:
-        log_level: info
+      auth_enabled: false
       commonConfig:
         replication_factor: 1
       compactor:
@@ -45,8 +36,9 @@ spec:
         retention_enabled: true
       ingester:
         chunk_encoding: snappy
-      storage:
-        type: filesystem
+      limits_config:
+        retention_period: 14d
+        allow_structured_metadata: true
       schemaConfig:
         configs:
           - from: "2024-04-01" # quote
@@ -56,6 +48,12 @@ spec:
             index:
               prefix: loki_index_
               period: 24h
+      server:
+        grpc_server_max_recv_msg_size: 10485760 # 10 MiB
+        grpc_server_max_send_msg_size: 10485760 # 10 MiB
+        log_level: info
+      storage:
+        type: filesystem
       structuredConfig:
         ruler:
           enable_api: true
@@ -65,29 +63,11 @@ spec:
             type: local
             local:
               directory: /rules
-          wal:
-            dir: /loki/ruler-wal
           rule_path: /rules/fake
           remote_write:
             enabled: true
             client:
               url: http://prometheus-operated:9090/api/v1/write
-      limits_config:
-        retention_period: 14d
-        allow_structured_metadata: true
-    singleBinary:
-      replicas: 1
-      nodeSelector:
-        kubernetes.io/hostname: localstorage-worker1
-      tolerations:
-        - key: node.kubernetes.io/dedicated
-          operator: Equal
-          value: localstorage
-          effect: NoSchedule
-      persistence:
-        enabled: true
-        storageClass: openebs-hostpath
-        size: 10Gi
     gateway:
       replicas: 3
       enabled: true
@@ -106,24 +86,37 @@ spec:
               app.kubernetes.io/component: gateway
     backend:
       replicas: 0
-    read:
-      replicas: 0
-    write:
-      replicas: 0
     chunksCache:
-      enabled: false
-    resultsCache:
       enabled: false
     lokiCanary:
       enabled: false
-    test:
+    read:
+      replicas: 0
+    resultsCache:
       enabled: false
     sidecar:
       image:
         repository: ghcr.io/home-operations/k8s-sidecar
         tag: 2.1.1
+      enableUniqueFilenames: true
       rules:
         searchNamespace: ALL
         label_value: "true"
         resource: configmap
-        folder: /rules/fake
+    singleBinary:
+      replicas: 1
+      persistence:
+        enabled: true
+        storageClass: openebs-hostpath
+        size: 50Gi
+      nodeSelector:
+        kubernetes.io/hostname: localstorage-worker1
+      tolerations:
+        - key: node.kubernetes.io/dedicated
+          operator: Equal
+          value: localstorage
+          effect: NoSchedule
+    test:
+      enabled: false
+    write:
+      replicas: 0
