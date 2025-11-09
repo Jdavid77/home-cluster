@@ -6,7 +6,7 @@ resources:
   - ./metrics-server/ks.yaml
   - ./grafana/ks.yaml
   - ./pihole-exporter/ks.yaml
-  - ./loki/ks.yaml
+  # - ./loki/ks.yaml
   - ./opentelemetry/ks.yaml
   - ./prometheus-operator-crds/ks.yaml
   - ./watch-your-lan/ks.yaml
