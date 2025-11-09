@@ -146,7 +146,7 @@ spec:
       thanosServiceMonitor:
         enabled: false
       prometheusSpec:
-        replicas: 2
+        replicas: 1
         replicaExternalLabelName: __replica__
         scrapeInterval: 1m # Must match interval in Grafana Helm chart
         ruleSelectorNilUsesHelmValues: false
@@ -161,8 +161,8 @@ spec:
           - auto-gomemlimit
           - memory-snapshot-on-shutdown
           - new-service-discovery-manager
-        retention: 7d
-        retentionSize: 20GB
+        retention: 14d
+        retentionSize: 80GB
         nodeSelector:
           kubernetes.io/hostname: localstorage-worker1
         tolerations:
@@ -174,16 +174,16 @@ spec:
           cluster: main
         resources:
           requests:
-            cpu: 100m
+            cpu: 500m
           limits:
-            memory: 1500Mi
+            memory: 4Gi
         storageSpec:
           volumeClaimTemplate:
             spec:
               storageClassName: openebs-hostpath
               resources:
                 requests:
-                  storage: 50Gi
+                  storage: 100Gi
     nodeExporter:
       enabled: true
     prometheus-node-exporter:
