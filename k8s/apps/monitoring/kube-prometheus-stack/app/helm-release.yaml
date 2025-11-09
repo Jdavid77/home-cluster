@@ -68,10 +68,17 @@ spec:
       alertmanagerSpec:
         replicas: 1
         podAntiAffinity: hard
+        nodeSelector:
+          kubernetes.io/hostname: localstorage-worker1
+        tolerations:
+          - key: node.kubernetes.io/dedicated
+            operator: Equal
+            value: localstorage
+            effect: NoSchedule
         storage:
           volumeClaimTemplate:
             spec:
-              storageClassName: longhorn
+              storageClassName: openebs-hostpath
               resources:
                 requests:
                   storage: 1Gi
@@ -105,6 +112,13 @@ spec:
     kubeProxy:
       enabled: false
     prometheusOperator:
+      nodeSelector:
+        kubernetes.io/hostname: localstorage-worker1
+      tolerations:
+        - key: node.kubernetes.io/dedicated
+          operator: Equal
+          value: localstorage
+          effect: NoSchedule
       prometheusConfigReloader:
         resources:
           requests:
@@ -148,7 +162,14 @@ spec:
           - memory-snapshot-on-shutdown
           - new-service-discovery-manager
         retention: 7d
-        retentionSize: 15GB
+        retentionSize: 20GB
+        nodeSelector:
+          kubernetes.io/hostname: localstorage-worker1
+        tolerations:
+          - key: node.kubernetes.io/dedicated
+            operator: Equal
+            value: localstorage
+            effect: NoSchedule
         externalLabels:
           cluster: main
         resources:
@@ -159,10 +180,10 @@ spec:
         storageSpec:
           volumeClaimTemplate:
             spec:
-              storageClassName: longhorn
+              storageClassName: openebs-hostpath
               resources:
                 requests:
-                  storage: 20Gi
+                  storage: 50Gi
     nodeExporter:
       enabled: true
     prometheus-node-exporter:

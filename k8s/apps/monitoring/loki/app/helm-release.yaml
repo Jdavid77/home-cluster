@@ -77,9 +77,16 @@ spec:
         allow_structured_metadata: true
     singleBinary:
       replicas: 1
+      nodeSelector:
+        kubernetes.io/hostname: localstorage-worker1
+      tolerations:
+        - key: node.kubernetes.io/dedicated
+          operator: Equal
+          value: localstorage
+          effect: NoSchedule
       persistence:
         enabled: true
-        storageClass: longhorn
+        storageClass: openebs-hostpath
         size: 10Gi
     gateway:
       replicas: 3
