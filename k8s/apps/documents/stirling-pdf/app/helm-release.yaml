@@ -36,6 +36,7 @@ spec:
               INSTALL_BOOK_AND_ADVANCED_HTML_OPS: "false"
               SYSTEM_DEFAULTLOCALE: "en-GB"
               SECURITY_ENABLE_LOGIN: "false"
+              SYSTEM_ENABLEURLTOPDF: false
             probes:
               liveness: &probe
                 enabled: true
