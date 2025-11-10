@@ -1,49 +1,13 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - metallb-charts.yaml
-  - cloudnative-pg-charts.yaml
-  - external-dns-charts.yaml
-  - emberstack-charts.yaml
-  - grafana-charts.yaml
-  - jetstack-charts.yaml
-  - traefik-charts.yaml
-  - opentelemetry-charts.yaml
-  - dirsigler-charts.yaml
-  - hajimari-charts.yaml
-  - authentik-charts.yaml
-  - nfs-provisioner-charts.yaml
-  - bjw-s-charts.yaml
-  - prometheus-community-charts.yaml
-  - csi-driver-nfs.yaml
-  - kubernetes-sigs-charts.yaml
-  - ingress-nginx-charts.yaml
-  - kyverno-charts.yaml
-  - external-secrets-charts.yaml
-  - longhorn-charts.yaml
-  - descheduler-charts.yaml
-  - skakater-charts.yaml
-  - crowdsec-charts.yaml
-  - backube-charts.yaml
-  - piraeus-charts.yaml
-  - actions-runner-controller-charts.yaml
-  - lwolf-charts.yaml
-  - weave-gitops-charts.yaml
-  - woodpecker-charts.yaml
-  - deliveryhero-charts.yaml
-  - postfinance-charts.yaml
   - cilium-charts.yaml
-  - tailscale-charts.yaml
-  - vmware-tanzu-charts.yaml
-  - fairwind-charts.yaml
-  - kubernetes-dashboard-charts.yaml
-  - emqx-charts.yaml
-  - trivy-charts.yaml
+  - deliveryhero-charts.yaml
   - enix-charts.yaml
-  - control-plane-charts.yaml
-  - spegel-charts.yaml
-  - openebs-charts.yaml
+  - grafana-charts.yaml
+  - kubernetes-dashboard-charts.yaml
+  - kubernetes-sigs-charts.yaml
+  - lwolf-charts.yaml
   - mattermost-charts.yaml
-  - movetokube-charts.yaml
   - runix-charts.yaml
   - sonarqube-charts.yaml

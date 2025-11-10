@@ -5,15 +5,10 @@ metadata:
   name: tailscale-operator
 spec:
   interval: 30m
-  chart:
-    spec:
-      chart: tailscale-operator
-      version: 1.90.6
-      interval: 30m
-      sourceRef:
-        kind: HelmRepository
-        name: tailscale-charts
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: tailscale-operator
+    namespace: flux-system
   install:
     remediation:
       retries: 3

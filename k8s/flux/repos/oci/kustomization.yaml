@@ -10,3 +10,22 @@ resources:
   - cert-manager.yaml
   - tuppr.yaml
   - openebs.yaml
+  - external-secrets.yaml
+  - flux-operator.yaml
+  - flux-instance.yaml
+  - kubelet-csr-approver.yaml
+  - reflector.yaml
+  - reloader.yaml
+  - spegel.yaml
+  - kube-prometheus-stack.yaml
+  - loki.yaml
+  - longhorn.yaml
+  - opentelemetry-operator.yaml
+  - prometheus-operator-crds.yaml
+  - external-dns.yaml
+  - tailscale-operator.yaml
+  - traefik.yaml
+  - authentik.yaml
+  - trivy-operator.yaml
+  - traefik-crds.yaml
+  - weave-gitops.yaml

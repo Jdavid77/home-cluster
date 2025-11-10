@@ -5,14 +5,10 @@ metadata:
   name: flux-instance
 spec:
   interval: 1h
-  chart:
-    spec:
-      chart: flux-instance
-      version: 0.33.0
-      sourceRef:
-        kind: HelmRepository
-        name: control-plane-charts
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: flux-instance
+    namespace: flux-system
   install:
     remediation:
       retries: 3

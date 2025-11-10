@@ -6,15 +6,10 @@ metadata:
   namespace: monitoring
 spec:
   interval: 5m
-  chart:
-    spec:
-      chart: opentelemetry-operator
-      version: 0.99.0
-      sourceRef:
-        kind: HelmRepository
-        name: open-telemetry-charts
-        namespace: flux-system
-      interval: 5m
+  chartRef:
+    kind: OCIRepository
+    name: opentelemetry-operator
+    namespace: flux-system
   install:
     crds: CreateReplace
     remediation:

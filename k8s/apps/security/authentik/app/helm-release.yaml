@@ -5,16 +5,10 @@ metadata:
   name: authentik
 spec:
   interval: 30m
-  chart:
-    spec:
-      chart: authentik
-      # https://github.com/goauthentik/authentik/issues/17923
-      version: 2025.10.0
-      sourceRef:
-        kind: HelmRepository
-        name: authentik-charts
-        namespace: flux-system
-      interval: 5m
+  chartRef:
+    kind: OCIRepository
+    name: authentik
+    namespace: flux-system
   install:
     remediation:
       retries: 3
