@@ -40,31 +40,6 @@ spec:
             - path:
                 type: PathPrefix
                 value: /
-      config:
-        global:
-          resolve_timeout: 1h
-        receivers:
-          - name: "null"
-          - name: "mattermost"
-            webhook_configs:
-              - url: http://mattermost.default.svc.cluster.local:8065/plugins/alertmanager/api/webhook?token='${MATTERMOST_AM_TOKEN}'
-                send_resolved: true
-        route:
-          receiver: "mattermost"
-          routes:
-            - receiver: "null"
-              matchers:
-                - alertname =~ "InfoInhibitor|Watchdog|RebootScheduled"
-            - receiver: "mattermost"
-              matchers:
-                - severity = "critical"
-              continue: true
-        inhibit_rules:
-          - source_matchers:
-              - severity = "critical"
-            target_matchers:
-              - severity = "warning"
-            equal: ["alertname", "namespace"]
       alertmanagerSpec:
         replicas: 1
         podAntiAffinity: hard
