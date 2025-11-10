@@ -79,7 +79,7 @@ spec:
               - path: /tmp
                 subPath: tmp
               - path: /config
-                subpath: config
+                subPath: config
     service:
       stirling:
         controller: stirling
