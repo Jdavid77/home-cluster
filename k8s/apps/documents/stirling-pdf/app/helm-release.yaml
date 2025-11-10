@@ -79,8 +79,8 @@ spec:
                 subPath: tessdata
               - path: /tmp
                 subPath: tmp
-              - path: /config
-                subPath: config
+              - path: /configs
+                subPath: configs
     service:
       stirling:
         controller: stirling
