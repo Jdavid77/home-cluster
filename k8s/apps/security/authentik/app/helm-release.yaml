@@ -9,7 +9,7 @@ spec:
     spec:
       chart: authentik
       # https://github.com/goauthentik/authentik/issues/17923
-      version: 2025.10.0
+      version: 2025.10.1
       sourceRef:
         kind: HelmRepository
         name: authentik-charts
