@@ -35,20 +35,19 @@ spec:
           - type: regex_parser
             regex: '^(?P<timestamp>.+?) (?P<streamm>stdout|stderr) (?P<flag>[A-Z]{1}) (?P<log>.*)$'
             id: pre_process
-          - type: move
-            from: attributes.log
-            to: body
+          - type: recombine
+            id: crio-recombine
+            output: extract_metadata_from_filepath
+            combine_field: attributes.log
+            source_identifier: attributes["log.file.path""]
+            is_last_entry: "attributes.flag == 'F'"
+            combine_with: ""
+            max_log_size: 124000
           - type: regex_parser
             id: extract_metadata_from_filepath
             regex: '^.*\/(?P<namespace>[^_]+)_(?P<pod_name>[^_]+)_(?P<uid>[a-f0-9\-]{36})\/(?P<container_name>[^\._]+)\/(?P<restart_count>\d+)\.log(.*)$'
             parse_from: attributes["log.file.path"]
-          - type: router
-            routes:
-              - output: recombine
-                expr: 'body matches "^ "'
-            default: first_move
           - type: move
-            id: first_move
             from: attributes.streamm
             to: resource["log.iostream"]
           - type: copy
@@ -74,10 +73,9 @@ spec:
             to: resource["k8s.pod.uid"]
           - type: remove
             field: attributes.flag
-          - type: recombine
-            combine_field: body
-            is_first_entry: body matches "^ "
-            source_identifier: attributes["log.file.path"]
+          - type: move
+            from: attributes.log
+            to: body
     processors:
       batch:
       k8sattributes:
