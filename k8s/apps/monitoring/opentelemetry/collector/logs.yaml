@@ -50,12 +50,6 @@ spec:
           - type: move
             from: attributes.streamm
             to: resource["log.iostream"]
-          - type: copy
-            from: attributes.namespace
-            to: resource["service.namespace"]
-          - type: copy
-            from: attributes.container_name
-            to: resource["service.name"]
           - type: move
             from: attributes.container_name
             to: resource["k8s.container.name"]
