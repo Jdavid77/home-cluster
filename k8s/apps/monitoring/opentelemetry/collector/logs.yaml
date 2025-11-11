@@ -39,7 +39,7 @@ spec:
             id: crio-recombine
             output: extract_metadata_from_filepath
             combine_field: attributes.log
-            source_identifier: attributes["log.file.path""]
+            source_identifier: attributes["log.file.path"]
             is_last_entry: "attributes.flag == 'F'"
             combine_with: ""
             max_log_size: 124000
