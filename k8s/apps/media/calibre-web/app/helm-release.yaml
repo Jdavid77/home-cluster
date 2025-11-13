@@ -33,7 +33,7 @@ spec:
           calibre-web:
             image:
               repository: docker.io/crocodilestick/calibre-web-automated
-              tag: V3.1.2
+              tag: V3.1.4
             env:
               CACHE_DIR: /cache
               CALIBRE_PORT: &port 8083
