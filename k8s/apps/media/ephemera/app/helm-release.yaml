@@ -116,7 +116,7 @@ spec:
         advancedMounts:
           ephemera:
             app:
-              - path: /app/ingests
+              - path: /app/ingest
       tmpfs:
         type: emptyDir
         advancedMounts:
