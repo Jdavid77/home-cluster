@@ -1,0 +1,128 @@
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app ephemera
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+    namespace: flux-system
+  interval: 30m
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  values:
+    controllers:
+      ephemera:
+        replicas: 1
+        annotations:
+          reloader.stakater.com/auto: "true"
+        # pod:
+        #   securityContext:
+        #     runAsUser: 1002
+        #     runAsGroup: 100
+        #     fsGroup: 100
+        #     fsGroupChangePolicy: "OnRootMismatch"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/orwellianepilogue/ephemera
+              tag: 1.3.0@sha256:9b683eda71a6506b25d9301fc6bf733542e8c7c012e62eba3c2f47b2291adfd7
+            env:
+              AA_BASE_URL: https://annas-archive.li
+              FLARESOLVERR_URL: http://localhost:8191
+              LG_BASE_URL: https://gen.com
+              TZ: ${TIMEZONE}
+              PUID: 1002
+              PGID: 100
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: &port 8286
+                  initialDelaySeconds: 40
+                  periodSeconds: 30
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+            resources:
+              requests:
+                cpu: 250m
+                memory: 500M
+              limits:
+                cpu: 500m
+                memory: 900M
+          flaresolver:
+            image:
+              repository: ghcr.io/flaresolverr/flaresolverr
+              tag: latest #for now
+            env:
+              LOG_LEVEL: info
+              LOG_HTML: "false"
+              CAPTCHA_SOLVER: none
+              TZ: ${TIMEZONE}
+            probes:
+              liveness: &probes-solver
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: 8191
+                  initialDelaySeconds: 30
+                  periodSeconds: 30
+                  timeoutSeconds: 10
+                  failureThreshold: 3
+              readiness: *probes-solver
+    service:
+      ephemera:
+        controller: ephemera
+        ports:
+          http:
+            port: *port
+    route:
+      main:
+        enabled: true
+        kind: HTTPRoute
+        parentRefs:
+          - kind: Gateway
+            name: internal
+            namespace: network
+            sectionName: websecure
+        hostnames:
+          - ephemera.${SECRET_DOMAIN}
+        rules:
+          - backendRefs:
+              - name: *app
+                port: *port
+            matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+    persistence:
+      ingests:
+        type: nfs
+        server: ${NFS_SERVER}
+        path: /book-ingests
+        advancedMounts:
+          ephemera:
+            app:
+              - path: /app/ingests
+      tmpfs:
+        type: emptyDir
+        advancedMounts:
+          ephemera:
+            app:
+              - path: /app/downloads
+                subPath: downloads
+              - path: /app/data
+                subPath: data

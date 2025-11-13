@@ -11,3 +11,4 @@ resources:
   - ./metube/ks.yaml
   - ./immich/ks.yaml
   # - ./readarr/ks.yaml
+  - ./ephemera/ks.yaml
