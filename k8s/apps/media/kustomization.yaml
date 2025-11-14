@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./calibre-web/ks.yaml
-  - ./calibre-web-downloader/ks.yaml
+  # - ./calibre-web-downloader/ks.yaml
   # - ./calibre/ks.yaml
   - ./qbittorrent/ks.yaml
   # - ./prowlarr/ks.yaml
