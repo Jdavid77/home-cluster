@@ -99,7 +99,7 @@ spec:
             namespace: network
             sectionName: websecure
         hostnames:
-          - ephemera.${SECRET_DOMAIN}
+          - books-downloader.${SECRET_DOMAIN}
         rules:
           - backendRefs:
               - name: *app
