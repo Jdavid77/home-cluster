@@ -2,7 +2,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  # - ./reflector/ks.yaml
+  - ./reflector/ks.yaml
   - ./reloader/ks.yaml
   - ./kube-cleanup-operator/ks.yaml
   - ./node-problem-detector/ks.yaml
