@@ -33,7 +33,7 @@ spec:
           app:
             image:
               repository: ghcr.io/orwellianepilogue/ephemera
-              tag: 1.3.0@sha256:9b683eda71a6506b25d9301fc6bf733542e8c7c012e62eba3c2f47b2291adfd7
+              tag: 1.3.1@sha256:087895b568c8dcf1138a773a54e129864a75edd3bb8c1e299a91314109459cb2
             env:
               AA_BASE_URL: https://annas-archive.li
               FLARESOLVERR_URL: http://localhost:8191
