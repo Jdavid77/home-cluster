@@ -17,7 +17,7 @@ spec:
       servers:
         - name: main
           port: 5432
-          version: 17
+          version: 18
           secret: main
         - name: immich
           port: 6001
