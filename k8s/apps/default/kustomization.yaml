@@ -15,4 +15,4 @@ resources:
   - ./filebrowser/ks.yaml
   # - ./mattermost/ks.yaml
   - ./13ft/ks.yaml
-  - ./excalidash/ks.yaml
+  # - ./excalidash/ks.yaml
