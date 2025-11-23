@@ -26,11 +26,9 @@ spec:
       defaultClass: true
       defaultClassReplicaCount: 3
       reclaimPolicy: Retain
-      defaultNodeSelector:
-        enable: true
-        selector: storage
     defaultSettings:
       defaultReplicaCount: "3"
+      autoCleanupSystemGeneratedSnapshot: true
       backupstorePollInterval: 0
       createDefaultDiskLabeledNodes: true
       restoreVolumeRecurringJobs: true
