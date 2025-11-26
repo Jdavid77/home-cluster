@@ -6,7 +6,7 @@ metadata:
 spec:
   labels:
     dragonflydb.io/cluster: dragonfly
-  image: docker.dragonflydb.io/dragonflydb/dragonfly:v1.35.0
+  image: docker.dragonflydb.io/dragonflydb/dragonfly:v1.35.1
   authentication:
     passwordFromSecret:
       key: REDIS_PASSWORD
