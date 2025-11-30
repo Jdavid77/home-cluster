@@ -41,11 +41,6 @@ spec:
         podAntiAffinity: hard
         nodeSelector:
           kubernetes.io/hostname: localstorage-worker1
-        tolerations:
-          - key: node.kubernetes.io/dedicated
-            operator: Equal
-            value: localstorage
-            effect: NoSchedule
         storage:
           volumeClaimTemplate:
             spec:
@@ -85,11 +80,6 @@ spec:
     prometheusOperator:
       nodeSelector:
         kubernetes.io/hostname: localstorage-worker1
-      tolerations:
-        - key: node.kubernetes.io/dedicated
-          operator: Equal
-          value: localstorage
-          effect: NoSchedule
       prometheusConfigReloader:
         resources:
           requests:
@@ -136,11 +126,6 @@ spec:
         retentionSize: 80GB
         nodeSelector:
           kubernetes.io/hostname: localstorage-worker1
-        tolerations:
-          - key: node.kubernetes.io/dedicated
-            operator: Equal
-            value: localstorage
-            effect: NoSchedule
         externalLabels:
           cluster: main
         resources:

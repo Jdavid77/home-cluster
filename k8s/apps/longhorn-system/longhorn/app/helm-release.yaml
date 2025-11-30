@@ -22,12 +22,6 @@ spec:
     metrics:
       serviceMonitor:
         enabled: true
-    global:
-      tolerations:
-      - key: "node"
-        operator: "Equal"
-        value: "storage"
-        effect: "NoSchedule"
     persistence:
       defaultClass: true
       defaultClassReplicaCount: 2

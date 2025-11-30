@@ -57,6 +57,14 @@ controlPlane:
               rsize=131072
               wsize=131072
               nconnect=8
+    
+    - |-
+      cluster:
+        apiServer:
+          extraArgs:
+            enable-aggregator-routing: true
+            feature-gates: ImageVolume=true,MutatingAdmissionPolicy=true,ResourceHealthStatus=true
+            runtime-config: admissionregistration.k8s.io/v1beta1=true
     # ETCD configuration
     - |-
       cluster:
@@ -91,7 +99,9 @@ nodes:
     controlPlane: true
     nodeAnnotations:
       installerImage: '{{ .MachineConfig.MachineInstall.InstallImage }}'
-    installDisk: /dev/mmcblk0
+    installDiskSelector:
+      serial: "0x6da3dcf4"
+      size: "125074145280"
     nameservers:
       - "192.168.1.139"
     networkInterfaces:
@@ -111,7 +121,9 @@ nodes:
     ipAddress: 192.168.1.93
     nameservers:
       - "192.168.1.139"
-    installDisk: /dev/sda
+    installDiskSelector:
+      wwid: naa.5000039fd2d5861c
+      model: "TOSHIBA DT01ACA0"
     controlPlane: false
     nodeAnnotations:
       installerImage: '{{ .MachineConfig.MachineInstall.InstallImage }}'
@@ -138,11 +150,6 @@ nodes:
       - |-
         machine:
           kubelet:
-            extraConfig:
-              registerWithTaints:
-                - effect: NoSchedule
-                  key: node
-                  value: storage
             extraMounts:
               - destination: /var/mnt/longhorn
                 type: bind
@@ -155,7 +162,9 @@ nodes:
     ipAddress: 192.168.1.92
     nameservers:
       - "192.168.1.139"
-    installDisk: /dev/sda
+    installDiskSelector:
+      wwid: naa.50014ee6597e703e
+      model: "WDC WD10JPVX-22J"
     controlPlane: false
     nodeAnnotations:
       installerImage: '{{ .MachineConfig.MachineInstall.InstallImage }}'
@@ -182,11 +191,6 @@ nodes:
       - |-
         machine:
           kubelet:
-            extraConfig:
-              registerWithTaints:
-                - effect: NoSchedule
-                  key: node
-                  value: storage
             extraMounts:
               - destination: /var/mnt/longhorn
                 type: bind
@@ -199,7 +203,8 @@ nodes:
     ipAddress: 192.168.1.91
     nameservers:
       - "192.168.1.139"
-    installDisk: /dev/sda
+    installDiskSelector:
+      model: "LITEONIT LCS-256"
     controlPlane: false
     nodeAnnotations:
       installerImage: '{{ .MachineConfig.MachineInstall.InstallImage }}'
@@ -218,7 +223,8 @@ nodes:
     ipAddress: 192.168.1.101
     nameservers:
       - "192.168.1.139"
-    installDisk: /dev/sdb
+    installDiskSelector:
+      model: "M.2 SSD 512GB"
     controlPlane: false
     nodeAnnotations:
       installerImage: '{{ .MachineConfig.MachineInstall.InstallImage }}'
