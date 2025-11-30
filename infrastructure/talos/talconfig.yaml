@@ -1,8 +1,8 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/budimanjojo/talhelper/master/pkg/config/schemas/talconfig.json
 clusterName: home-cluster
 endpoint: https://192.168.1.110:6443
-talosVersion: v1.11.4
-kubernetesVersion: v1.34.1
+talosVersion: v1.11.5
+kubernetesVersion: v1.34.2
 additionalMachineCertSans:
   - "192.168.1.110"
   - "127.0.0.1"
@@ -79,33 +79,15 @@ worker:
         officialExtensions:
           - siderolabs/iscsi-tools
           - siderolabs/util-linux-tools
-  nodeLabels:
-    node.longhorn.io/create-default-disk: "true"
-    storage: longhorn
   patches:
     - *domainPatch
     - *kubePrismPatch
     - *proxyPatch
     - *nfsPatch
     - *containerdPatch
-    - |-
-      machine:
-        kubelet:
-          extraMounts:
-            - destination: /var/lib/longhorn
-              type: bind
-              source: /var/lib/longhorn
-              options:
-                - bind
-                - rshared
-                - rw
-            - destination: /var/openebs/local
-              type: bind
-              source: /var/openebs/local
-              options: ["bind", "rshared", "rw"]
 nodes:
   - hostname: bmax1-master
-    ipAddress: 192.168.1.83
+    ipAddress: 192.168.1.81
     controlPlane: true
     nodeAnnotations:
       installerImage: '{{ .MachineConfig.MachineInstall.InstallImage }}'
@@ -117,49 +99,7 @@ nodes:
           hardwareAddr: "00:e0:4c:2f:69:52"
           physical: true
         addresses:
-          - 192.168.1.83/24
-        dhcp: true
-        vip:
-          ip: 192.168.1.110
-        mtu: 1500
-    machineSpec:
-      mode: metal
-      arch: amd64
-  - hostname: soyo1-master
-    ipAddress: 192.168.1.90
-    controlPlane: true
-    nodeAnnotations:
-      installerImage: '{{ .MachineConfig.MachineInstall.InstallImage }}'
-    installDisk: /dev/mmcblk0
-    nameservers:
-      - "192.168.1.139"
-    networkInterfaces:
-      - deviceSelector:
-          hardwareAddr: "e0:51:d8:14:4b:b8"
-          physical: true
-        addresses:
-          - 192.168.1.90/24
-        dhcp: true
-        vip:
-          ip: 192.168.1.110
-        mtu: 1500
-    machineSpec:
-      mode: metal
-      arch: amd64
-  - hostname: soyo2-master
-    ipAddress: 192.168.1.89
-    controlPlane: true
-    nodeAnnotations:
-      installerImage: '{{ .MachineConfig.MachineInstall.InstallImage }}'
-    installDisk: /dev/mmcblk0
-    nameservers:
-      - "192.168.1.139"
-    networkInterfaces:
-      - deviceSelector:
-          hardwareAddr: "e0:51:d8:14:46:a2"
-          physical: true
-        addresses:
-          - 192.168.1.89/24
+          - 192.168.1.81/24
         dhcp: true
         vip:
           ip: 192.168.1.110
@@ -168,7 +108,7 @@ nodes:
       mode: metal
       arch: amd64
   - hostname: hp-worker3
-    ipAddress: 192.168.1.86
+    ipAddress: 192.168.1.93
     nameservers:
       - "192.168.1.139"
     installDisk: /dev/sda
@@ -180,14 +120,39 @@ nodes:
           hardwareAddr: "74:46:a0:90:26:0f"
           physical: true
         addresses:
-          - 192.168.1.86/24
+          - 192.168.1.93/24
         dhcp: true
         mtu: 1500
     machineSpec:
       mode: metal
       arch: amd64
+    userVolumes:
+      - name: longhorn
+        provisioning:
+          diskSelector:
+            match: disk.model == "SanDisk SSD PLUS" && !system_disk
+          minSize: "200GiB"
+        filesystem:
+          type: xfs
+    patches:
+      - |-
+        machine:
+          kubelet:
+            extraConfig:
+              registerWithTaints:
+                - effect: NoSchedule
+                  key: node
+                  value: storage
+            extraMounts:
+              - destination: /var/mnt/longhorn
+                type: bind
+                source: /var/mnt/longhorn
+                options:
+                  - bind
+                  - rshared
+                  - rw
   - hostname: hp-worker2
-    ipAddress: 192.168.1.85
+    ipAddress: 192.168.1.92
     nameservers:
       - "192.168.1.139"
     installDisk: /dev/sda
@@ -200,11 +165,36 @@ nodes:
           physical: true
         dhcp: true
         addresses:
-          - 192.168.1.85/24
+          - 192.168.1.92/24
         mtu: 1500
     machineSpec:
       mode: metal
       arch: amd64
+    userVolumes:
+      - name: longhorn
+        provisioning:
+          diskSelector:
+            match: disk.model == "Apacer AS340 240" && !system_disk
+          minSize: "200GiB"
+        filesystem:
+          type: xfs
+    patches:
+      - |-
+        machine:
+          kubelet:
+            extraConfig:
+              registerWithTaints:
+                - effect: NoSchedule
+                  key: node
+                  value: storage
+            extraMounts:
+              - destination: /var/mnt/longhorn
+                type: bind
+                source: /var/mnt/longhorn
+                options:
+                  - bind
+                  - rshared
+                  - rw
   - hostname: hp-worker1
     ipAddress: 192.168.1.91
     nameservers:
@@ -225,7 +215,7 @@ nodes:
       mode: metal
       arch: amd64
   - hostname: localstorage-worker1
-    ipAddress: 192.168.1.105
+    ipAddress: 192.168.1.101
     nameservers:
       - "192.168.1.139"
     installDisk: /dev/sdb
@@ -233,20 +223,20 @@ nodes:
     nodeAnnotations:
       installerImage: '{{ .MachineConfig.MachineInstall.InstallImage }}'
     patches:
-      - |-
-        machine:
-          kubelet:
-            extraConfig:
-              registerWithTaints:
-                - effect: NoSchedule
-                  key: node.kubernetes.io/dedicated
-                  value: localstorage
+    - |-
+      machine:
+        kubelet:
+          extraMounts:
+            - destination: /var/openebs/local
+              type: bind
+              source: /var/openebs/local
+              options: ["bind", "rshared", "rw"]
     networkInterfaces:
       - deviceSelector:
           hardwareAddr: "00:e0:4c:73:3b:3b"
           physical: true
         addresses:
-          - 192.168.1.105/24
+          - 192.168.1.101/24
         dhcp: true
         mtu: 1500
     machineSpec:

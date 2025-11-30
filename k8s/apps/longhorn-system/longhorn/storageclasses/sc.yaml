@@ -8,6 +8,7 @@ parameters:
   replicaAutoBalance: best-effort
   staleReplicaTimeout: "30"
   dataEngine: v1
+  nodeSelector: storage
 allowVolumeExpansion: true
 volumeBindingMode: WaitForFirstConsumer
 metadata:
@@ -23,6 +24,7 @@ parameters:
   replicaAutoBalance: best-effort
   staleReplicaTimeout: "30"
   dataEngine: v1
+  nodeSelector: storage
 allowVolumeExpansion: true
 volumeBindingMode: WaitForFirstConsumer
 metadata:

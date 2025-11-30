@@ -1,14 +1,17 @@
+---
 helmDefaults:
   wait: true
   waitForJobs: true
   timeout: 600
   recreatePods: true
   force: true
+
 repositories:
   - name: cilium
     url: https://helm.cilium.io
   - name: postfinance
     url: https://postfinance.github.io/kubelet-csr-approver
+
 releases:
   - name: prometheus-operator-crds
     namespace: kube-system
@@ -36,20 +39,43 @@ releases:
     values:
       - ../../../k8s/apps/kube-system/cilium/app/values.yaml
     needs:
-      - prometheus-operator-crds
+      - kube-system/prometheus-operator-crds
+
   - name: kubelet-csr-approver
     namespace: kube-system
     chart: postfinance/kubelet-csr-approver
     version: 1.2.12
-    wait: true
     values:
       - ../../../k8s/apps/kube-system/kubelet-csr-approver/app/values.yaml
     needs:
-      - cilium
+      - kube-system/cilium
+
   - name: spegel
     namespace: kube-system
     chart: oci://ghcr.io/spegel-org/helm-charts/spegel
     version: 0.5.1
-    values: ["../../../k8s/apps/kube-system/spegel/app/values.yaml"]
+    values:
+      - ../../../k8s/apps/kube-system/spegel/app/values.yaml
     needs:
-      - "kubelet-csr-approver"
+      - kube-system/kubelet-csr-approver
+
+  - name: flux-operator
+    namespace: flux-system
+    chart: oci://ghcr.io/controlplaneio-fluxcd/charts/flux-operator
+    version: 0.33.0
+    atomic: true
+    values:
+      - ../../../k8s/apps/flux-system/flux-operator/app/values.yaml
+    needs:
+      - kube-system/cilium
+
+  - name: flux-instance
+    namespace: flux-system
+    chart: oci://ghcr.io/controlplaneio-fluxcd/charts/flux-instance
+    version: 0.33.0
+    atomic: true
+    values:
+      - ../../../k8s/apps/flux-system/flux-operator/instance/values.yaml
+    needs:
+      - flux-system/flux-operator
+
