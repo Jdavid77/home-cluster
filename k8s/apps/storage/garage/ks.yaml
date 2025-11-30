@@ -8,11 +8,17 @@ spec:
   targetNamespace: storage
   dependsOn:
     - name: external-secrets-store
+    - name: longhorn
   path: ./k8s/apps/storage/garage/app
   prune: true
   sourceRef:
     kind: GitRepository
     name: home-cluster
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      name: garage
+      namespace: storage
   wait: true
   interval: 30m
   retryInterval: 1m
