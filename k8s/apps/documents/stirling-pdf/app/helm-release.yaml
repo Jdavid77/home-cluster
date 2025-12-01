@@ -20,9 +20,6 @@ spec:
   values:
     controllers:
       stirling:
-        labels:
-          sablier.enable: "true"
-          sablier.group: books
         strategy: RollingUpdate
         containers:
           app:
@@ -48,22 +45,12 @@ spec:
                 spec:
                   failureThreshold: 90
                   periodSeconds: 5
-            securityContext:
-              allowPrivilegeEscalation: false
-              capabilities: {drop: ["ALL"]}
             resources:
               requests:
                 cpu: 50m
                 memory: 400M
               limits:
                 memory: 1000M
-        pod:
-          securityContext:
-            runAsNonRoot: true
-            runAsUser: 1000
-            runAsGroup: 1000
-            fsGroup: 1000
-            fsGroupChangePolicy: OnRootMismatch
     persistence:
       tmpfs:
         type: emptyDir
