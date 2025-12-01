@@ -34,6 +34,11 @@ spec:
             env:
               REGISTER_ENABLE: "false"
               TZ: ${TIMEZONE}
+              OIDC_DISCOVERY_URL: "https://auth.${SECRET_DOMAIN}/application/o/Trip/.well-known/openid-configuration"
+              OIDC_REDIRECT_URI: "https://trip.${SECRET_DOMAIN}/auth"
+            envFrom:
+              - secretRef:
+                  name: trip-secret
             resources:
               requests:
                 cpu: 50m
