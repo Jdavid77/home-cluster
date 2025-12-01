@@ -34,7 +34,6 @@ spec:
             env:
               REGISTER_ENABLE: "false"
               TZ: ${TIMEZONE}
-              ATTACHMENT_MAX_SIZE: 104857600
             resources:
               requests:
                 cpu: 50m
