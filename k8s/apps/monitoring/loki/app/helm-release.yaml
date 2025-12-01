@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -24,9 +25,6 @@ spec:
       extraVolumes:
         - name: tmp
           emptyDir: {}
-      extraVolumeMounts:
-        - name: tmp
-          mountPath: /tmp
     memberlist:
       service:
         publishNotReadyAddresses: true
@@ -122,3 +120,16 @@ spec:
       enabled: false
     write:
       replicas: 0
+  postRenderers:
+    - kustomize:
+        patches:
+          - target:
+              version: apps/v1
+              kind: StatefulSet
+              name: loki
+            patch: |
+              - op: add
+                path: /spec/template/spec/containers/1/volumeMounts/-
+                value:
+                  - name: tmp
+                    mountPath: /tmp
