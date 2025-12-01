@@ -2,7 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ./namespace.yaml
-  - ./calibre-web/ks.yaml
+  # - ./calibre-web/ks.yaml
   # - ./calibre-web-downloader/ks.yaml
   # - ./calibre/ks.yaml
   - ./qbittorrent/ks.yaml
@@ -12,3 +12,4 @@ resources:
   - ./immich/ks.yaml
   # - ./readarr/ks.yaml
   - ./ephemera/ks.yaml
+  - ./booklore/ks.yaml

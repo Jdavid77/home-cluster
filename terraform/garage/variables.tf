@@ -22,7 +22,9 @@ variable "buckets" {
     "qbittorrent",
     "wallos",
     "youtube",
-    "excalidash"
+    "excalidash",
+    "booklore",
+    "mariadb"
   ]
 }
 
