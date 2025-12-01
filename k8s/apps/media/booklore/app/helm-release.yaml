@@ -70,14 +70,14 @@ spec:
 
             env:
               TZ: ${TIMEZONE}
-              MARIADB_USER: booklore
-              MARIADB_PASSWORD:
+              MYSQL_USER: booklore
+              MYSQL_PASSWORD:
                 valueFrom:
                   secretKeyRef:
                     name: booklore-secret
                     key: DATABASE_PASSWORD
-              MARIADB_DATABASE: booklore
-              MARIADB_ROOT_PASSWORD:
+              MYSQL_DATABASE: booklore
+              MYSQL_ROOT_PASSWORD:
                 valueFrom:
                   secretKeyRef:
                     name: booklore-secret
