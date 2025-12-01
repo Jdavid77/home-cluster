@@ -24,7 +24,8 @@ variable "buckets" {
     "youtube",
     "excalidash",
     "booklore",
-    "mariadb"
+    "mariadb",
+    "trip"
   ]
 }
 
