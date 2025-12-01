@@ -50,7 +50,6 @@ spec:
                   periodSeconds: 5
             securityContext:
               allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
               capabilities: {drop: ["ALL"]}
             resources:
               requests:
@@ -81,7 +80,6 @@ spec:
                 subPath: tmp
               - path: /configs
                 subPath: configs
-              - path: /etc/nginx
     service:
       stirling:
         controller: stirling
