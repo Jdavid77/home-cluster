@@ -81,6 +81,7 @@ spec:
                 subPath: tmp
               - path: /configs
                 subPath: configs
+              - path: /etc/nginx
     service:
       stirling:
         controller: stirling
