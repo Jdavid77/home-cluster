@@ -100,7 +100,7 @@ spec:
             namespace: network
             sectionName: websecure
         hostnames:
-          - booklore.${SECRET_DOMAIN}
+          - books.${SECRET_DOMAIN}
         rules:
           - backendRefs:
               - name: *app
@@ -117,14 +117,14 @@ spec:
           *app :
             *app :
               - path: /app/data
-      
+
       config:
         existingClaim: mariadb
         advancedMounts:
           *app :
             mariadb:
               - path: /config
-      
+
       books:
         type: nfs
         server: ${NFS_SERVER}
@@ -142,4 +142,3 @@ spec:
           *app :
             *app :
               - path: /bookdrop
-
