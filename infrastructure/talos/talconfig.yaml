@@ -127,6 +127,8 @@ nodes:
     controlPlane: false
     nodeAnnotations:
       installerImage: '{{ .MachineConfig.MachineInstall.InstallImage }}'
+    nodeLabels:
+      node.longhorn.io/create-default-disk: "true"
     networkInterfaces:
       - deviceSelector:
           hardwareAddr: "74:46:a0:90:26:0f"
@@ -168,6 +170,8 @@ nodes:
     controlPlane: false
     nodeAnnotations:
       installerImage: '{{ .MachineConfig.MachineInstall.InstallImage }}'
+    nodeLabels:
+      node.longhorn.io/create-default-disk: "true"
     networkInterfaces:
       - deviceSelector:
           hardwareAddr: "10:60:4b:73:34:97"
