@@ -66,7 +66,7 @@ spec:
           mariadb:
             image:
               repository: lscr.io/linuxserver/mariadb
-              tag: 11.4.5
+              tag: 11.4.8
 
             env:
               TZ: ${TIMEZONE}
