@@ -14,6 +14,11 @@ locals {
       authentik_oidc_application_name        = "Backstage-Dev"
       authentik_oidc_application_icon_url    = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBzHHyxg-LtRQ5iGOxRQeP5VzxFoNjzDY3Lg&s"
       authentik_oidc_application_description = "Backstage-Dev OAuth application"
+    },
+    {
+      authentik_oidc_application_name        = "Trip"
+      authentik_oidc_application_icon_url    = "https://itskovacs-trip.netlify.app/favicon.png"
+      authentik_oidc_application_description = "Trip OAuth application"
     }
   ]
 }
