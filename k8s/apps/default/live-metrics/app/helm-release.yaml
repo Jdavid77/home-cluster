@@ -22,14 +22,14 @@ spec:
     keepHistory: false
   values:
     controllers:
-      *app :
+      *app:
         replicas: 1
         strategy: RollingUpdate
         containers:
           backend:
             image:
               repository: ghcr.io/jdavid77/kubernetes-live-metrics-dashboard-backend
-              tag: 1.0.2 # {"$imagepolicy": "flux-system:kubernetes-live-metrics-dashboard-backend:tag"}
+              tag: 1.1.0 # {"$imagepolicy": "flux-system:kubernetes-live-metrics-dashboard-backend:tag"}
             env:
               CORS_ORIGIN: https://live.jnobrega.com
               PORT: "8000"
@@ -53,7 +53,7 @@ spec:
           frontend:
             image:
               repository: ghcr.io/jdavid77/kubernetes-live-metrics-dashboard-frontend
-              tag: 1.0.2 # {"$imagepolicy": "flux-system:kubernetes-live-metrics-dashboard-frontend:tag"}
+              tag: 1.1.0 # {"$imagepolicy": "flux-system:kubernetes-live-metrics-dashboard-frontend:tag"}
             env:
               REACT_APP_API_URL: http://localhost:8000
               REACT_APP_WS_URL: ws://localhost:8000
@@ -143,4 +143,3 @@ spec:
             identifier: live-metrics-role
           subjects:
             - identifier: live-metrics
-
