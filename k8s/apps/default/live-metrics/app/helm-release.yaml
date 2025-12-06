@@ -111,7 +111,7 @@ spec:
           http:
             port: *port
     serviceAccount:
-      live-metrics:
+      default:
         enabled: true
     rbac:
       roles:
@@ -142,4 +142,5 @@ spec:
             kind: ClusterRole
             identifier: live-metrics-role
           subjects:
-            - identifier: live-metrics
+            - identifier: default
+
