@@ -17,3 +17,4 @@ resources:
   - ./13ft/ks.yaml
   - ./excalidash/ks.yaml
   - ./trip/ks.yaml
+  - ./live-metrics/ks.yaml

@@ -1,0 +1,21 @@
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: &repo kubernetes-live-metrics-dashboard-backend
+spec:
+  imageRepositoryRef:
+    name: *repo
+  policy:
+    semver:
+      range: '>=1.0.0'
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: &repo kubernetes-live-metrics-dashboard-frontend
+spec:
+  imageRepositoryRef:
+    name: *repo
+  policy:
+    semver:
+      range: '>=1.0.0'

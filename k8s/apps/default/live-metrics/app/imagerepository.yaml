@@ -1,0 +1,21 @@
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: kubernetes-live-metrics-dashboard-frontend
+spec:
+  image: ghcr.io/jdavid77/kubernetes-live-metrics-dashboard-frontend
+  interval: 5m
+  provider: generic
+  secretRef:
+    name: live-metrics-gh
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: kubernetes-live-metrics-dashboard-backend
+spec:
+  image: ghcr.io/jdavid77/kubernetes-live-metrics-dashboard-backend
+  interval: 5m
+  provider: generic
+  secretRef:
+    name: live-metrics-gh
