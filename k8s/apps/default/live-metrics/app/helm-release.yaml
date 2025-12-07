@@ -22,7 +22,7 @@ spec:
     keepHistory: false
   values:
     controllers:
-      *app:
+      *app :
         replicas: 1
         strategy: RollingUpdate
         containers:
@@ -57,7 +57,7 @@ spec:
             env:
               REACT_APP_REFRESH_INTERVAL: "5000"
               REACT_APP_LOGO_URL: https://media.licdn.com/dms/image/v2/D4D03AQHorpRD5YgBMg/profile-displayphoto-scale_200_200/B4DZjw1Nr0GsAY-/0/1756387141407?e=1766620800&v=beta&t=Klud8NwaNYXKRDhGgIwghYaZM1XqSpZRTNE-E_ZSuo8
-              REACT_APP_GITHUB_URL: https://github.com/Jdavid77
+              REACT_APP_GITHUB_URL: https://github.com/Jdavid77/home-cluster
               REACT_APP_LINKEDIN_URL: https://www.linkedin.com/in/joaodavid77/
               REACT_APP_INFRA_OS: Talos
               REACT_APP_INFRA_STORAGE: Longhorn/OpenEBS
