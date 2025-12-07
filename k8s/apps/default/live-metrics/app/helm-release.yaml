@@ -29,7 +29,7 @@ spec:
           backend:
             image:
               repository: ghcr.io/jdavid77/kubernetes-live-metrics-dashboard-backend
-              tag: 1.1.0 # {"$imagepolicy": "flux-system:kubernetes-live-metrics-dashboard-backend:tag"}
+              tag: 1.1.1 # {"$imagepolicy": "flux-system:kubernetes-live-metrics-dashboard-backend:tag"}
             env:
               CORS_ORIGIN: https://live.jnobrega.com
               PORT: "8000"
@@ -143,4 +143,3 @@ spec:
             identifier: live-metrics-role
           subjects:
             - identifier: default
-
