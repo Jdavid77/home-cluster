@@ -46,7 +46,7 @@ spec:
               BUTTON_ORDER: GITHUB,LINKED_IN,MEDIUM,HOMELAB,LIVEMETRICS,EMAIL
               CUSTOM_BUTTON_TEXT: 'HomeLab,HomeLab Live Metrics'
               CUSTOM_BUTTON_URL: 'https://github.com/Jdavid77/home-cluster,https://live.${SECRET_DOMAIN}'
-              CUSTOM_BUTTON_COLOR: '#784212,#ffb266'
+              CUSTOM_BUTTON_COLOR: '#D97706,#F59E0B'
               CUSTOM_BUTTON_TEXT_COLOR: '#ffffff,#ffffff'
               CUSTOM_BUTTON_ALT_TEXT: 'HomeLab,HomeLab Live Metrics'
               CUSTOM_BUTTON_NAME: 'HOMELAB,LIVEMETRICS'
