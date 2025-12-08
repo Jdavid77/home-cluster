@@ -43,14 +43,14 @@ spec:
               NAME: "@joaodavid77"
               THEME: Dark
               BIO: "DevOps Engineer | Homelab | 🇵🇹"
-              BUTTON_ORDER: GITHUB,LINKED_IN,MEDIUM,HOMELAB,EMAIL
-              CUSTOM_BUTTON_TEXT: HomeLab
-              CUSTOM_BUTTON_URL: https://github.com/Jdavid77/home-cluster
-              CUSTOM_BUTTON_COLOR: "#784212"
-              CUSTOM_BUTTON_TEXT_COLOR: "#ffffff"
-              CUSTOM_BUTTON_ALT_TEXT: HomeLab
-              CUSTOM_BUTTON_NAME: HOMELAB
-              CUSTOM_BUTTON_ICON: fas fa-computer
+              BUTTON_ORDER: GITHUB,LINKED_IN,MEDIUM,HOMELAB,LIVEMETRICS,EMAIL
+              CUSTOM_BUTTON_TEXT: HomeLab,Home Cluster Live Metrics
+              CUSTOM_BUTTON_URL: https://github.com/Jdavid77/home-cluster,https://live.${SECRET_DOMAIN}
+              CUSTOM_BUTTON_COLOR: "#784212","#ffb266"
+              CUSTOM_BUTTON_TEXT_COLOR: "#ffffff","#ffffff"
+              CUSTOM_BUTTON_ALT_TEXT: HomeLab, HomeLab Live Metrics
+              CUSTOM_BUTTON_NAME: HOMELAB,LIVEMETRICS
+              CUSTOM_BUTTON_ICON: fas fa-computer,fas fa-computer
               GITHUB: https://github.com/Jdavid77
               LINKED_IN: https://www.linkedin.com/in/joaodavid77/
               MEDIUM: https://medium.com/@johnynobrega17
