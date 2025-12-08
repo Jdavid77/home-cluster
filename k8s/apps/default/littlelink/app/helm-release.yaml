@@ -38,8 +38,8 @@ spec:
               OG_TITLE: João David Nóbrega Links
               OG_DESCRIPTION: A collection of all of my relevant links
               OG_URL: https://links.${SECRET_DOMAIN}
-              AVATAR_URL: https://media.licdn.com/dms/image/v2/D4D03AQHy9TDTu7zkCg/profile-displayphoto-shrink_200_200/B4DZS.wWQhH0AY-/0/1738367133219?e=1758153600&v=beta&t=s4XqbVNpHP5PT3RAiXK9PWA-kkBlnAlhXC89yH4z7Oo
-              AVATAR_2X_URL: https://media.licdn.com/dms/image/v2/D4D03AQHy9TDTu7zkCg/profile-displayphoto-shrink_200_200/B4DZS.wWQhH0AY-/0/1738367133219?e=1758153600&v=beta&t=s4XqbVNpHP5PT3RAiXK9PWA-kkBlnAlhXC89yH4z7Oo
+              AVATAR_URL: https://avatars.githubusercontent.com/u/49655819?v=4
+              AVATAR_2X_URL: https://avatars.githubusercontent.com/u/49655819?v=4
               NAME: "@joaodavid77"
               THEME: Dark
               BIO: "DevOps Engineer | Homelab | 🇵🇹"
