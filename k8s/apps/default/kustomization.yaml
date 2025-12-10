@@ -18,3 +18,4 @@ resources:
   - ./excalidash/ks.yaml
   - ./trip/ks.yaml
   - ./live-metrics/ks.yaml
+  - ./expenseowl/ks.yaml
