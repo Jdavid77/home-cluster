@@ -20,7 +20,7 @@ spec:
       retries: 3
   values:
     controllers:
-      filebrowser:
+      *app :
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
