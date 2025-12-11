@@ -28,9 +28,6 @@ spec:
             image:
               repository: tanq16/expenseowl
               tag: v4.1@sha256:f9097cf2890b45e6bbf39311bf0fccaf58c3c7c06ec39dc39d8b013e176391b5
-            env:
-              EXPENSE_CATEGORIES: "Food,Groceries,Travel(Stay),Travel(Trips),Activities"
-              CURRENCY: eur
             probes:
               liveness: &probes
                 enabled: false
