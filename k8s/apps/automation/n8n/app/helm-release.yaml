@@ -118,6 +118,22 @@ spec:
                   #       group: traefik.io
                   #       kind: Middleware
                   #       name: authentik-outpost
+      webhook:
+        enabled: true
+        kind: HTTPRoute
+        parentRefs:
+          - kind: Gateway
+            name: external
+            namespace: network
+            sectionName: websecure
+        hostnames:
+          - n8n-webhook.${SECRET_DOMAIN}
+        rules:
+          - matches:
+              - path:
+                  value: /webhook
+            backendRefs:
+              - {}
     persistence:
       config:
         existingClaim: n8n
