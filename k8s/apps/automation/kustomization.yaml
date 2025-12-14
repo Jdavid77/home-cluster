@@ -4,3 +4,4 @@ resources:
   - ./namespace.yaml
   - ./n8n/ks.yaml
   - ./dragonfly/ks.yaml
+  - ./grist/ks.yaml
