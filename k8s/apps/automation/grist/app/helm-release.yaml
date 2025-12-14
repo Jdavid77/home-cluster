@@ -15,6 +15,15 @@ spec:
       *app :
         annotations:
           reloader.stakater.com/auto: "true"
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/home-operations/postgres-init
+              tag: 18.1
+              pullPolicy: IfNotPresent
+            envFrom:
+              - secretRef:
+                  name: n8n-secret
         containers:
           app:
             image:
