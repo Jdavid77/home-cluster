@@ -23,7 +23,7 @@ spec:
               pullPolicy: IfNotPresent
             envFrom:
               - secretRef:
-                  name: n8n-secret
+                  name: grist-secret
         containers:
           app:
             image:
@@ -39,8 +39,6 @@ spec:
               GRIST_SANDBOX_FLAVOR: gvisor
               GRIST_WIDGET_LIST_URL: "https://github.com/gristlabs/grist-widget/releases/download/latest/manifest.json"
               TYPEORM_TYPE: postgres
-
-
             resources:
               requests:
                 cpu: 10m
