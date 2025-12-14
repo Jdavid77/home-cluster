@@ -38,6 +38,7 @@ spec:
               APP_HOME_URL: https://sheets.${SECRET_DOMAIN}
               GRIST_SANDBOX_FLAVOR: gvisor
               GRIST_WIDGET_LIST_URL: "https://github.com/gristlabs/grist-widget/releases/download/latest/manifest.json"
+              GRIST_OIDC_SP_IGNORE_EMAIL_VERIFIED: true
               TYPEORM_TYPE: postgres
             resources:
               requests:
