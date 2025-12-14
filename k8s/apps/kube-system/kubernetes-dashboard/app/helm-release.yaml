@@ -28,7 +28,7 @@ spec:
     app:
       env:
         TZ: ${TIMEZONE}
-      extraArgs:
-        - --enable-insecure-login
-        - --enable-skip-login
-        - --disable-settings-authorizer
+    extraArgs:
+      - --enable-insecure-login
+      - --enable-skip-login
+      - --disable-settings-authorizer
