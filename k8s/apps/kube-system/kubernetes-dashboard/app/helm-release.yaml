@@ -30,4 +30,5 @@ spec:
         TZ: ${TIMEZONE}
       extraArgs:
         - --enable-insecure-login
-        - --token-ttl=43200
+        - --enable-skip-login
+        - --disable-settings-authorizer
