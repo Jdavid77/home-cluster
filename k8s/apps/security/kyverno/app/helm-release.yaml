@@ -5,17 +5,12 @@ kind: HelmRelease
 metadata:
   name: kyverno
 spec:
-  interval: 15m
-  chart:
-    spec:
-      chart: kyverno
-      version: 3.6.1
-      sourceRef:
-        kind: OCIRepository
-        name: kyverno
-        namespace: flux-system
+  interval: 5m
+  chartRef:
+    kind: OCIRepository
+    name: reflector
+    namespace: flux-system
   install:
-    createNamespace: true
     remediation:
       retries: 3
   upgrade:
