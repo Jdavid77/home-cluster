@@ -29,3 +29,4 @@ resources:
   - trivy-operator.yaml
   - traefik-crds.yaml
   - weave-gitops.yaml
+  - kyverno.yaml
