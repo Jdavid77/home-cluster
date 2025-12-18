@@ -1,0 +1,10 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: tekton
+  namespace: flux-system
+spec:
+  interval: 30m
+  url: https://github.com/tektoncd/operator
+  ref:
+    tag: v0.78.1
