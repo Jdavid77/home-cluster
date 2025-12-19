@@ -26,7 +26,7 @@ spec:
           app:
             image:
               repository: rostislavdugin/postgresus
-              tag: v2.6.0@sha256:9718ad5ae7e20eb94f47fbaca45dd9c47b5e30db9acbd13f0d42276df7ea9366
+              tag: v2.10.0@sha256:981098090adf927cf1a1808404a169e192da2b66793472c7cd50247dbf0e0ffd
             probes:
               liveness: &probes
                 enabled: true
