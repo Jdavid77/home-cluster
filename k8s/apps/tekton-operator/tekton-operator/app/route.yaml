@@ -2,6 +2,7 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   name: tekton-dashboard
+  namespace: tekton-pipelines
 spec:
   hostnames:
   - tekton.${SECRET_DOMAIN}
@@ -14,7 +15,6 @@ spec:
   rules:
   - backendRefs:
     - name: tekton-dashboard
-      namespace: tekton-pipelines
       port: 9097
       weight: 1
     matches:
