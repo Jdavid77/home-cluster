@@ -29,7 +29,7 @@ spec:
           backend:
             image:
               repository: zimengxiong/excalidash-backend
-              tag: 0.1.7@sha256:367ab136b8ec76766c450ff2285f51d94f8a99848113d924dd31aae02049ecbe
+              tag: 0.1.8@sha256:7378ef7b4757a2e8a1ba026c583be941c1361cda0749d80d76ec65be268ffe0f
             env:
               DATABASE_URL: file:/app/prisma/dev.db
               PORT: 8000
