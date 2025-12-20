@@ -1,0 +1,7 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - https://raw.githubusercontent.com/tektoncd/catalog/refs/heads/main/task/github-app-token/0.2/github-app-token.yaml
+  - https://raw.githubusercontent.com/tektoncd/catalog/refs/heads/main/task/git-clone/0.10/git-clone.yaml
+  - show-readme.yaml
+  - merge-prs.yaml

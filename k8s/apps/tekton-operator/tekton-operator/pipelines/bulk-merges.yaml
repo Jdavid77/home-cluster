@@ -1,0 +1,60 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: bulk-merges
+  namespace: tekton-operator
+spec:
+  description: |
+    This pipeline merges PR's from Renovate based on labels.
+  params:
+  - name: repo-url
+    type: string
+    description: The git repo URL to clone from.
+  - name: installation_id
+    type: string
+    description: GitHub App Installation ID.
+  - name: application_id
+    type: string
+    description: GitHub App ID.
+  workspaces:
+  - name: shared-data
+    description: |
+      This workspace contains the cloned repo files, so they can be read by the
+      next task.
+  - name: git-credentials
+    description: My Git credentials
+  - name: secrets
+    description: GitHub App private key
+  tasks:
+  - name: get-app-token
+    taskRef:
+      name: github-app-token
+    workspaces:
+    - name: secrets
+      workspace: secrets
+    params:
+    - name: installation_id
+      value: $(params.installation_id)
+    - name: application_id
+      value: $(params.application_id)
+  - name: fetch-source
+    taskRef:
+      name: git-clone
+    workspaces:
+    - name: output
+      workspace: shared-data
+    - name: basic-auth
+      workspace: git-credentials
+    params:
+    - name: url
+      value: $(params.repo-url)
+  - name: merge-prs
+    runAfter: ["get-app-token", "fetch-source"]
+    taskRef:
+      name: merge-prs
+    params:
+    - name: token
+      value: $(tasks.get-app-token.results.token)
+    workspaces:
+    - name: source
+      workspace: shared-data

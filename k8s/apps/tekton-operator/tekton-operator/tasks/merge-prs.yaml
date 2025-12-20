@@ -1,0 +1,63 @@
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: merge-prs
+spec:
+  description: Merge PR's from Renovate based on labels.
+  workspaces:
+  - name: source
+  params:
+    - name: labels
+      type: string
+      description: "Comma-separated list of labels to filter PRs, or 'any' for all PRs"
+      default: "any"
+    - name: dryRun
+      type: string
+      description: "Set to 'true' to preview merges without executing them"
+      default: "false"
+    - name: token
+      type: string
+      description: "Token to authenticate with Github"
+  steps:
+    - name: merge-prs
+      image: maniator/gh:latest
+      env:
+        - name: LABELS
+          value: $(params.labels)
+        - name: DRY_RUN
+          value: $(params.dryRun)
+        - name: GITHUB_TOKEN
+          value: $(params.token)
+      script: |
+        #!/bin/sh
+        set -e
+
+        git config --global --add safe.directory /workspace/source
+        cd $(workspaces.source.path)
+
+        # Build base arguments
+        ARGS="--state open"
+
+        # Add label filters
+        if [ "${LABELS}" != "any" ]; then
+            # Split labels by comma
+            OLD_IFS="$IFS"
+            IFS=','
+            for label in ${LABELS}; do
+                ARGS="${ARGS} --label ${label}"
+            done
+            IFS="$OLD_IFS"
+        fi
+
+        # Get PR list and merge
+        gh pr list ${ARGS} --search "-label:hold" --search "-label:type/major" --jq '.[].number' --json number | while read -r id; do
+            if [ -n "$id" ]; then
+                if [ "${DRY_RUN}" = "true" ]; then
+                    echo "Dry run: gh pr merge ${id} --squash"
+                else
+                    echo "Merging PR #${id}..."
+                    gh pr merge "${id}" --squash
+                    sleep 2
+                fi
+            fi
+        done
