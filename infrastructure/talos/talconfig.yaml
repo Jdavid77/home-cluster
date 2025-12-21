@@ -117,6 +117,50 @@ nodes:
     machineSpec:
       mode: metal
       arch: amd64
+  - hostname: soyo2-master
+    ipAddress: 192.168.1.82
+    controlPlane: true
+    nodeAnnotations:
+      installerImage: '{{ .MachineConfig.MachineInstall.InstallImage }}'
+    installDiskSelector:
+      size: "512110190592"
+    nameservers:
+      - "192.168.1.139"
+    networkInterfaces:
+      - deviceSelector:
+          hardwareAddr: "00:e0:9d:87:ac:99"
+          physical: true
+        addresses:
+          - 192.168.1.82/24
+        dhcp: true
+        vip:
+          ip: 192.168.1.110
+        mtu: 1500
+    machineSpec:
+      mode: metal
+      arch: amd64
+  - hostname: soyo3-master
+    ipAddress: 192.168.1.83
+    controlPlane: true
+    nodeAnnotations:
+      installerImage: '{{ .MachineConfig.MachineInstall.InstallImage }}'
+    installDiskSelector:
+      size: "512110190592"
+    nameservers:
+      - "192.168.1.139"
+    networkInterfaces:
+      - deviceSelector:
+          hardwareAddr: "00:e0:9d:87:26:a7"
+          physical: true
+        addresses:
+          - 192.168.1.83/24
+        dhcp: true
+        vip:
+          ip: 192.168.1.110
+        mtu: 1500
+    machineSpec:
+      mode: metal
+      arch: amd64
   - hostname: hp-worker3
     ipAddress: 192.168.1.93
     nameservers:
