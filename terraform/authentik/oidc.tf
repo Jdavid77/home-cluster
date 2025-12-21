@@ -19,8 +19,14 @@ locals {
       authentik_oidc_application_name        = "Trip"
       authentik_oidc_application_icon_url    = "https://itskovacs-trip.netlify.app/favicon.png"
       authentik_oidc_application_description = "Trip OAuth application"
+    },
+    {
+      authentik_oidc_application_name        = "Grist"
+      authentik_oidc_application_icon_url    = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfk_azr3viemtVCXVBck6Hd0QcYWBUwY72DQ&s"
+      authentik_oidc_application_description = "Grist OAuth application"
     }
   ]
+
 }
 
 module "oidc" {

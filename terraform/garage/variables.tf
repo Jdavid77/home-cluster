@@ -25,7 +25,9 @@ variable "buckets" {
     "excalidash",
     "booklore",
     "mariadb",
-    "trip"
+    "trip",
+    "expenseowl",
+    "grist"
   ]
 }
 
