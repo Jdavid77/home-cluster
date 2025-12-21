@@ -45,6 +45,12 @@ The setup is based on Talos OS. I used [Talhelper](https://budimanjojo.github.io
 ```
 ---
 
+## Topology
+
+<img src="./assets/hometopology.svg" align="center" width="500px" height="500px"/>
+
+---
+
 ## :wrench:&nbsp; External Third-Party Components
 
 These tools complement the Kubernetes infrastructure by providing essential functionality for **security**, **automation** and **infrastructure** management
