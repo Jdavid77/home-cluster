@@ -39,7 +39,7 @@ The setup is based on Talos OS. I used [Talhelper](https://budimanjojo.github.io
 📁 terraform
 ├── 📁 authentik
 ├── 📁 akeyless
-├── 📁 cloudflare
+├── 📁 backblaze
 ├── 📁 garage
 └── 📁 minio
 
