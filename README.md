@@ -110,7 +110,7 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
             <tr>
                 <th>Devices</th>
                 <th>Count</th>
-                <th>OS Disk Size</th>
+                <th>Disk Size</th>
                 <th>RAM</th>
                 <th>Operating System</th>
                 <th>Purpose</th>
@@ -121,7 +121,7 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
             <tr>
                 <td>Bmax1-master</td>
                 <td>1</td>
-                <td>128GB</td>
+                <td>128GB SSD</td>
                 <td>8GB</td>
                 <td>Talos v1.11.6</td>
                 <td>Kubernetes Control</td>
@@ -130,25 +130,25 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
             <tr>
                 <td>Soyo2-master</td>
                 <td>1</td>
-                <td>512GB</td>
+                <td>512GB SSD</td>
                 <td>16GB</td>
                 <td>Talos v1.11.6</td>
                 <td>Kubernetes Control</td>
-                <td><a href="https://es.aliexpress.com/item/1005006460890415.html?aff_fcid=505c2a4499e846b2a13fde87aa7c7385-1733566005358-08415-_DBcuZW1&tt=CPS_NORMAL&aff_fsk=_DBcuZW1&aff_platform=portals-tool&sk=_DBcuZW1&aff_trace_key=505c2a4499e846b2a13fde87aa7c7385-1733566005358-08415-_DBcuZW1&terminal_id=bb14814936f042d6a7ff280cc2d52e01&afSmartRedirect=y">AliExpress Link</a></td>
+                <td><a href="https://pt.aliexpress.com/item/1005008257112432.html?spm=a2g0o.order_list.order_list_main.5.31e5caa4rryhvS&gatewayAdapt=glo2bra">AliExpress Link</a></td>
             </tr>
             <tr>
                 <td>Soyo3-master</td>
                 <td>1</td>
-                <td>512GB</td>
+                <td>512GB SSD</td>
                 <td>16GB</td>
                 <td>Talos v1.11.6</td>
                 <td>Kubernetes Control</td>
-                <td><a href="https://es.aliexpress.com/item/1005006460890415.html?aff_fcid=505c2a4499e846b2a13fde87aa7c7385-1733566005358-08415-_DBcuZW1&tt=CPS_NORMAL&aff_fsk=_DBcuZW1&aff_platform=portals-tool&sk=_DBcuZW1&aff_trace_key=505c2a4499e846b2a13fde87aa7c7385-1733566005358-08415-_DBcuZW1&terminal_id=bb14814936f042d6a7ff280cc2d52e01&afSmartRedirect=y">AliExpress Link</a></td>
+                <td><a href="https://pt.aliexpress.com/item/1005008257112432.html?spm=a2g0o.order_list.order_list_main.5.31e5caa4rryhvS&gatewayAdapt=glo2bra">AliExpress Link</a></td>
             </tr>
             <tr>
                 <td>Hp-worker1</td>
                 <td>1</td>
-                <td>240GB</td>
+                <td>240GB SSD</td>
                 <td>20GB</td>
                 <td>Talos v1.11.6</td>
                 <td>Kubernetes Worker</td>
@@ -157,7 +157,7 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
             <tr>
                 <td>Hp-worker2</td>
                 <td>1</td>
-                <td>1TB + 240GB</td>
+                <td>1TB HDD + 240GB SSD</td>
                 <td>28GB</td>
                 <td>Talos v1.11.6</td>
                 <td>Kubernetes Worker</td>
@@ -166,7 +166,7 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
             <tr>
                 <td>Hp-worker3</td>
                 <td>1</td>
-                <td>500GB + 240GB</td>
+                <td>500GB HDD + 240GB SSD</td>
                 <td>32GB</td>
                 <td>Talos v1.11.6</td>
                 <td>Kubernetes Worker</td>
@@ -175,11 +175,11 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
             <tr>
                 <td>LocalStorage-worker1</td>
                 <td>1</td>
-                <td>512GB</td>
+                <td>512GB SSD</td>
                 <td>16GB</td>
                 <td>Talos v1.11.6</td>
                 <td>Kubernetes Worker</td>
-                <td><a href="https://www.amazon.es/dp/B0792TQ4XS?ref=ppx_yo2ov_dt_b_fed_asin_title">Amazon Link</a></td>
+                <td><a href="https://pt.aliexpress.com/item/1005008701353415.html?spm=a2g0o.order_list.order_list_main.21.6e64caa418TlWq&gatewayAdapt=glo2bra">Aliexpress Link</a></td>
             </tr>
             <tr>
                 <td>Raspberry PI 4</td>
