@@ -40,6 +40,7 @@ The setup is based on Talos OS. I used [Talhelper](https://budimanjojo.github.io
 ├── 📁 authentik
 ├── 📁 akeyless
 ├── 📁 cloudflare
+├── 📁 garage
 └── 📁 minio
 
 ```
@@ -73,7 +74,7 @@ These tools complement the Kubernetes infrastructure by providing essential func
                 <td>Ensures consistency and quality of YAML and shell scripts in the repository.</td>
             </tr>
             <tr>
-                <td><img width="32" src="https://www.svgrepo.com/download/374041/renovate.svg" alt="Renovate logo" /></td>
+                <td><img width="32" src="https://docs.renovatebot.com/assets/images/logo.png" alt="Renovate logo" /></td>
                 <td><a href="https://docs.renovatebot.com/">Renovate</a></td>
                 <td>Automates the detection of new releases and creates pull requests accordingly.</td>
             </tr>
@@ -83,17 +84,17 @@ These tools complement the Kubernetes infrastructure by providing essential func
                 <td>A centralized platform for managing and securing certificates, credentials, and keys.</td>
             </tr>
             <tr>
-                <td><img width="32" src="https://www.svgrepo.com/download/353564/cloudflare.svg" alt="Cloudflare logo" /></td>
+                <td><img width="32" src="https://icon.icepanel.io/Technology/svg/Cloudflare.svg" alt="Cloudflare logo" /></td>
                 <td><a href="https://www.cloudflare.com/en-gb/">Cloudflare</a></td>
                 <td>DNS management service for handling domain name resolutions.</td>
             </tr>
             <tr>
-                <td><img width="32" src="https://www.svgrepo.com/download/331413/gmx.svg" alt="GMX logo" /></td>
+                <td><img width="32" src="https://images.icon-icons.com/699/PNG/512/gmx_icon-icons.com_61633.png" alt="GMX logo" /></td>
                 <td><a href="https://www.gmx.com">GMX</a></td>
                 <td>SMTP service provider for managing email communications.</td>
             </tr>
             <tr>
-                <td><img width="32" src="https://www.svgrepo.com/download/354447/terraform-icon.svg" alt="Terraform logo" /></td>
+                <td><img width="32" src="https://icon.icepanel.io/Technology/svg/HashiCorp-Terraform.svg" alt="Terraform logo" /></td>
                 <td><a href="https://www.terraform.io/">Terraform</a></td>
                 <td>IAC tool for automating the provisioning and management of outside dependencies (Akeyless, Cloudflare, etc...).</td>
             </tr>
@@ -122,25 +123,25 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
                 <td>1</td>
                 <td>128GB</td>
                 <td>8GB</td>
-                <td>Talos v1.10.6</td>
+                <td>Talos v1.11.6</td>
                 <td>Kubernetes Control</td>
                 <td><a href="https://www.amazon.es/dp/B0CJM1TDHL?ref=ppx_yo2ov_dt_b_fed_asin_title">Amazon Link</a></td>
             </tr>
             <tr>
-                <td>Soyo1-master</td>
+                <td>Soyo2-master</td>
                 <td>1</td>
-                <td>128GB</td>
-                <td>6GB</td>
-                <td>Talos v1.10.6</td>
+                <td>512GB</td>
+                <td>16GB</td>
+                <td>Talos v1.11.6</td>
                 <td>Kubernetes Control</td>
                 <td><a href="https://es.aliexpress.com/item/1005006460890415.html?aff_fcid=505c2a4499e846b2a13fde87aa7c7385-1733566005358-08415-_DBcuZW1&tt=CPS_NORMAL&aff_fsk=_DBcuZW1&aff_platform=portals-tool&sk=_DBcuZW1&aff_trace_key=505c2a4499e846b2a13fde87aa7c7385-1733566005358-08415-_DBcuZW1&terminal_id=bb14814936f042d6a7ff280cc2d52e01&afSmartRedirect=y">AliExpress Link</a></td>
             </tr>
             <tr>
-                <td>Soyo2-master</td>
+                <td>Soyo3-master</td>
                 <td>1</td>
-                <td>128GB</td>
-                <td>6GB</td>
-                <td>Talos v1.10.6</td>
+                <td>512GB</td>
+                <td>16GB</td>
+                <td>Talos v1.11.6</td>
                 <td>Kubernetes Control</td>
                 <td><a href="https://es.aliexpress.com/item/1005006460890415.html?aff_fcid=505c2a4499e846b2a13fde87aa7c7385-1733566005358-08415-_DBcuZW1&tt=CPS_NORMAL&aff_fsk=_DBcuZW1&aff_platform=portals-tool&sk=_DBcuZW1&aff_trace_key=505c2a4499e846b2a13fde87aa7c7385-1733566005358-08415-_DBcuZW1&terminal_id=bb14814936f042d6a7ff280cc2d52e01&afSmartRedirect=y">AliExpress Link</a></td>
             </tr>
@@ -149,25 +150,34 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
                 <td>1</td>
                 <td>240GB</td>
                 <td>20GB</td>
-                <td>Talos v1.10.6</td>
+                <td>Talos v1.11.6</td>
                 <td>Kubernetes Worker</td>
                 <td><a href="https://www.amazon.es/HP-Ultra-i5-6500T-Windows-reacondicionado/dp/B09N7RDZS4/ref=sr_1_6?__mk_es_ES=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=5P820ES85Z7&dib=eyJ2IjoiMSJ9.9qQ4-jcMh6rXQhtkqIYNbkuJggelF1M_SJlqlGQCAHcPjfxWlB_RU0FJjyMfb5oLuK-EeHupVLktRPePaLSwtwdZ7UQAqRcTE5AMdeSt_JjvXJwN9xP6tJkSVZjvfnjWuzPe8JcUNuhgvE089AjHcfb12wMdPstVMotSvYjhYQ_05eUlY7gpmrHbT2Jft-Ljk2Ix8umRel2DZfzKF0IlCsnZKfNFdo3iZJw2ZBARp1hkbWDRgB75yWnJt-AB_L4kQz10EiF2DByt4qxn3lz0RHoxzUSz9KPzSKDfTF2atRiZXWV8Ey9c5a32K-jHafQLTMc8p4kq9g-CEAYojjwSNLr7Da6Rjk1jvH6aH-tEAREpncDfcedtqGgQm9icJW9kNtFuZVyKm4-X5I3Rdn_l9jFVhkBINkUZngDQFjwQCS-ILYQlFBjqnBatzGrkQI-u.QPP6rbbL-trb_zb96HCzozMA-Gitd5ibCVXwhXsrAf0&dib_tag=se&keywords=hp+minipc+800+g4&qid=1740177891&sprefix=hp+mini+pc+800+g%2Caps%2C213&sr=8-6">Amazon Link</a></td>
             </tr>
             <tr>
                 <td>Hp-worker2</td>
                 <td>1</td>
-                <td>240GB</td>
+                <td>1TB + 240GB</td>
                 <td>28GB</td>
-                <td>Talos v1.10.6</td>
+                <td>Talos v1.11.6</td>
                 <td>Kubernetes Worker</td>
                 <td><a href="https://www.amazon.es/dp/B0792TQ4XS?ref=ppx_yo2ov_dt_b_fed_asin_title">Amazon Link</a></td>
             </tr>
             <tr>
                 <td>Hp-worker3</td>
                 <td>1</td>
-                <td>240GB</td>
+                <td>500GB + 240GB</td>
                 <td>32GB</td>
-                <td>Talos v1.10.6</td>
+                <td>Talos v1.11.6</td>
+                <td>Kubernetes Worker</td>
+                <td><a href="https://www.amazon.es/dp/B0792TQ4XS?ref=ppx_yo2ov_dt_b_fed_asin_title">Amazon Link</a></td>
+            </tr>
+            <tr>
+                <td>LocalStorage-worker1</td>
+                <td>1</td>
+                <td>512GB</td>
+                <td>16GB</td>
+                <td>Talos v1.11.6</td>
                 <td>Kubernetes Worker</td>
                 <td><a href="https://www.amazon.es/dp/B0792TQ4XS?ref=ppx_yo2ov_dt_b_fed_asin_title">Amazon Link</a></td>
             </tr>
@@ -221,12 +231,12 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
     </tr>
     </tr>
         <tr>
-        <td><img width="32" src="https://cdn.worldvectorlogo.com/logos/minio-1.svg"></td>
-        <td><a href="https://min.io/">Minio</a></td>
+        <td><img width="32" src="https://garagehq.deuxfleurs.fr/images/garage-logo.svg"></td>
+        <td><a href="https://garagehq.deuxfleurs.fr/">Garage</a></td>
         <td>S3 Object storage</td>
     </tr>
     <tr>
-        <td><img width="32" src="https://www.svgrepo.com/download/530451/dns.svg"></td>
+        <td><img width="32" src="https://github.com/kubernetes-sigs/external-dns/raw/master/docs/img/external-dns.png"></td>
         <td><a href="https://github.com/kubernetes-sigs/external-dns">External DNS</a></td>
         <td>Synchronizes exposed Kubernetes Services and Ingresses with DNS providers.</td>
     </tr>
@@ -246,14 +256,9 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
         <td>Secure access to Kubernetes</td>
     </tr>
     <tr>
-        <td><img width="32" src="https://www.svgrepo.com/download/353564/cloudflare.svg"></td>
+        <td><img width="32" src="https://avatars.githubusercontent.com/u/314135?s=48&v=4"></td>
         <td><a href="https://github.com/cloudflare/cloudflared">Cloudflared</a></td>
         <td>Cloudflare Tunnel client</td>
-    </tr>
-    <tr>
-        <td><img width="32" src="https://avatars.githubusercontent.com/u/33050221?v=4"></td>
-        <td><a href="https://github.com/kubernetes-csi/csi-driver-nfs">CSI Driver NFS</a></td>
-        <td>Allows Kubernetes to access NFS server</td>
     </tr>
     <tr>
         <td><img width="32" src="https://avatars.githubusercontent.com/u/104819355?v=4"></td>
@@ -266,7 +271,7 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
         <td>PVC backups using Restic</td>
     </tr>
     <tr>
-        <td><img width="32" src="https://static-00.iconduck.com/assets.00/authentik-orange-icon-512x391-4kzut6y1.png"></td>
+        <td><img width="32" src="https://images.saasworthy.com/authentik_45882_logo_1698387041_24xfy.png"></td>
         <td><a href="https://goauthentik.io/">Authentik</a></td>
         <td>Open source identity provider</td>
     </tr>
