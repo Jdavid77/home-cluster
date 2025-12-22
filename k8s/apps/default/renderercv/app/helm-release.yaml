@@ -57,6 +57,17 @@ spec:
             securityContext:
               runAsUser: 0
             args: ["--auth", "none", "--disable-telemetry", "--disable-update-check", "--user-data-dir", "/tmp/.vscode", "--extensions-dir", "/tmp/.vs1ode", "--port", "8081", "/config"]
+          nginx:
+            image:
+              repository: nginxinc/nginx-unprivileged
+              tag: stable-alpine@sha256:0311b6bdb4aeb2e202408cb981d489c019cc3d03839a43368546a89dc6753d92
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities: {drop: ["ALL"]}
+              runAsNonRoot: true
+              runAsUser: 101
+              runAsGroup: 101
+              seccompProfile: {type: RuntimeDefault}
     defaultPodOptions:
       automountServiceAccountToken: false
     service:
@@ -65,8 +76,13 @@ spec:
         ports:
           http:
             port: &codePort 8081
+      nginx:
+        controller: *app
+        ports:
+          http:
+            port: &nginxPort 8080
     route:
-      main:
+      code:
         enabled: true
         kind: HTTPRoute
         parentRefs:
@@ -78,8 +94,26 @@ spec:
           - code-cv.${SECRET_DOMAIN}
         rules:
           - backendRefs:
-              - name: *app
+              - name: renderercv-code-server
                 port: *codePort
+            matches:
+              - path:
+                  type: PathPrefix
+                  value: /
+      nginx:
+        enabled: true
+        kind: HTTPRoute
+        parentRefs:
+          - kind: Gateway
+            name: external
+            namespace: network
+            sectionName: websecure
+        hostnames:
+          - cv.${SECRET_DOMAIN}
+        rules:
+          - backendRefs:
+              - name: renderercv-nginx
+                port: *nginxPort
             matches:
               - path:
                   type: PathPrefix
@@ -94,6 +128,9 @@ spec:
               - path: /work
             code-server:
               - path: /config
+            nginx:
+              - path: /usr/share/nginx/html/index.html
+                subPath: index.html
       temp:
         enabled: true
         type: emptyDir
