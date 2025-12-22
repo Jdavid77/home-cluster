@@ -40,9 +40,9 @@ spec:
                 memory: 100Mi
               requests:
                 cpu: 50m
-            args:
-              - "new"
-              - "João Nóbrega"
+            workingDir: /work
+            command: ["tail"]
+            args: ["-f", "/dev/null"]
             securityContext:
               allowPrivilegeEscalation: false
               capabilities: {drop: ["ALL"]}
@@ -90,9 +90,8 @@ spec:
         existingClaim: *app
         advancedMounts:
           *app :
-            # the working dir is /app...
             app:
-              - path: /app
+              - path: /work
             code-server:
               - path: /config
       temp:
