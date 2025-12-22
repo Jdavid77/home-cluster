@@ -47,8 +47,8 @@ spec:
               allowPrivilegeEscalation: false
               capabilities: {drop: ["ALL"]}
               runAsNonRoot: true
-              runAsUser: 1002
-              runAsGroup: 100
+              runAsUser: 999
+              runAsGroup: 999
               seccompProfile: {type: RuntimeDefault}
           code-server:
             image:
@@ -78,7 +78,7 @@ spec:
           - code-cv.${SECRET_DOMAIN}
         rules:
           - backendRefs:
-              - name: renderercv-code-server
+              - name: *app
                 port: *codePort
             matches:
               - path:
@@ -86,9 +86,8 @@ spec:
                   value: /
     persistence:
       config:
-        type: nfs
-        server: ${NFS_SERVER}
-        path: /docs
+        enabled: true
+        existingClaim: *app
         advancedMounts:
           *app :
             app:
