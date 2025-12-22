@@ -45,7 +45,6 @@ spec:
               - "João Nóbrega"
             securityContext:
               allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
               capabilities: {drop: ["ALL"]}
               runAsNonRoot: true
               runAsUser: 1002
