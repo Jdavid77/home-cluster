@@ -43,6 +43,13 @@ spec:
             args:
               - "new"
               - "João Nóbrega"
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities: {drop: ["ALL"]}
+              runAsNonRoot: true
+              runAsUser: 1002
+              runAsGroup: 100
+              seccompProfile: {type: RuntimeDefault}
           code-server:
             image:
               repository: ghcr.io/coder/code-server
