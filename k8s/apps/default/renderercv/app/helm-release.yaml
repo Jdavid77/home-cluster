@@ -40,10 +40,9 @@ spec:
                 memory: 100Mi
               requests:
                 cpu: 50m
-            command:
-              - tail
-               -f
-              - /dev/null
+            args:
+              - "new"
+              - "João Nóbrega"
             securityContext:
               allowPrivilegeEscalation: false
               capabilities: {drop: ["ALL"]}
