@@ -19,3 +19,4 @@ resources:
   - ./trip/ks.yaml
   - ./live-metrics/ks.yaml
   - ./expenseowl/ks.yaml
+  - ./renderercv/ks.yaml
