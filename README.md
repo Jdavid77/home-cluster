@@ -48,7 +48,7 @@ The setup is based on Talos OS. I used [Talhelper](https://budimanjojo.github.io
 
 ## Topology
 
-<img src="./assets/hometopology.svg" align="center" width="500px" height="500px"/>
+<img src="./assets/hometopology.svg" align="center" width="1000px" height="1000px"/>
 
 ---
 
