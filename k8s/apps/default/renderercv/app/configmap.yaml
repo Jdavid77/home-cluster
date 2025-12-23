@@ -9,8 +9,8 @@ data:
         server_name localhost;
 
         location / {
-            alias /work/cv.pdf;
-            default_type application/pdf;
+            root /work;
+            rewrite ^ /cv.pdf break;
             add_header Content-Disposition 'inline';
         }
     }
