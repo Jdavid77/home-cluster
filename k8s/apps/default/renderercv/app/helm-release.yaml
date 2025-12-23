@@ -119,6 +119,14 @@ spec:
                   type: PathPrefix
                   value: /
     persistence:
+      nginx:
+        enabled: true
+        type: configMap
+        name: nginx-config
+        advancedMounts:
+          nginx:
+            - path: /etc/nginx/conf.d/default.conf
+              subPath: default.conf
       config:
         enabled: true
         existingClaim: *app
@@ -129,8 +137,8 @@ spec:
             code-server:
               - path: /config
             nginx:
-              - path: /usr/share/nginx/html/index.html
-                subPath: index.html
+              - path: /work/cv.pdf
+                subPath: cv.pdf
       temp:
         enabled: true
         type: emptyDir

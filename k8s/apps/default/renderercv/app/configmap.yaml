@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+data:
+  default.conf: |
+    server {
+        listen 8080;
+        server_name localhost;
+
+        location / {
+            alias /work/cv.pdf;
+            default_type application/pdf;
+            add_header Content-Disposition 'inline';
+        }
+    }
