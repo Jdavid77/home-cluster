@@ -124,9 +124,10 @@ spec:
         type: configMap
         name: nginx-config
         advancedMounts:
-          nginx:
-            - path: /etc/nginx/conf.d/default.conf
-              subPath: default.conf
+          *app :
+            nginx:
+              - path: /etc/nginx/conf.d/default.conf
+                subPath: default.conf
       config:
         enabled: true
         existingClaim: *app
