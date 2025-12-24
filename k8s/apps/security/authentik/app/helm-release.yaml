@@ -19,10 +19,6 @@ spec:
       retries: 3
   values:
     global:
-      securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
       topologySpreadConstraints:
         - maxSkew: 1
           topologyKey: kubernetes.io/hostname
@@ -38,17 +34,23 @@ spec:
         - secretRef:
             name: *secret
     authentik:
-      redis:
-        host: dragonfly.storage.svc.cluster.local
-        db: 1
     server:
       replicas: 3
       initContainers:
         - name: init-db
-          image: ghcr.io/onedr0p/postgres-init:17.4@sha256:43dd04e91e861cf912378bad987afa168fa4f13d05528304907ad0aa351195d6
+          image: ghcr.io/home-operations/postgres-init:18.1
           envFrom:
             - secretRef:
                 name: *secret
+      route:
+        main:
+          enabled: true
+          hostnames:
+            - "auth.${SECRET_DOMAIN}"
+          parentRefs:
+            - name: internal
+              namespace: network
+              sectionName: websecure
       metrics:
         enabled: false
         serviceMonitor:
@@ -56,15 +58,6 @@ spec:
       pdb:
         enabled: true
         maxUnavailable: 1
-      containerSecurityContext:
-        runAsNonRoot: true
-        readOnlyRootFilesystem: true
-        allowPrivilegeEscalation: false
-        seccomProfile:
-          type: RuntimeDefault
-        capabilities:
-          drop:
-            - ALL
       resources:
         requests:
           cpu: 100m
@@ -73,7 +66,7 @@ spec:
           cpu: 150m
           memory: 1Gi
     worker:
-      replicas: 3
+      replicas: 1
     prometheus:
       rules:
         enabled: true
