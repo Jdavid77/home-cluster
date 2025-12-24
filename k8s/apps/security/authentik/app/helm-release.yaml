@@ -33,7 +33,6 @@ spec:
       envFrom:
         - secretRef:
             name: *secret
-    authentik:
     server:
       replicas: 3
       initContainers:
