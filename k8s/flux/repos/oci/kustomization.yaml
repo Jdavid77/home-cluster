@@ -30,3 +30,5 @@ resources:
   - traefik-crds.yaml
   - weave-gitops.yaml
   - kyverno.yaml
+  - kmcp.yaml
+  - kmcp-crds.yaml

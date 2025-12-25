@@ -5,3 +5,4 @@ resources:
   - ./n8n/ks.yaml
   - ./dragonfly/ks.yaml
   - ./grist/ks.yaml
+  - ./kmcp/ks.yaml
