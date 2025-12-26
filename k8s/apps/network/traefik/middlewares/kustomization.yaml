@@ -6,3 +6,4 @@ resources:
   - errors.yaml
   - auth.yaml
   - agents.yaml
+  - basicauth.yaml
