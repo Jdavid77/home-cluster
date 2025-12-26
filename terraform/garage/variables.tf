@@ -27,7 +27,8 @@ variable "buckets" {
     "mariadb",
     "trip",
     "expenseowl",
-    "grist"
+    "grist",
+    "renderercv"
   ]
 }
 
