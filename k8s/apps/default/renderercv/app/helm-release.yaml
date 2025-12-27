@@ -22,7 +22,7 @@ spec:
           app:
             image:
               repository: ghcr.io/rendercv/rendercv
-              tag: v2.5@sha256:5416b2f6f3ef827ffc3d8b81f6918e7b29722fd27d46baaf73dab64a5054b81e
+              tag: v2.6@sha256:96bc75aa2a170174fc22a253aa478671495a99bbf9476fa46d9620a96989306e
             probes:
               liveness: &probes
                 enabled: false
