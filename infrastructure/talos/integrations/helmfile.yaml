@@ -17,6 +17,11 @@ releases:
     namespace: kube-system
     chart: oci://ghcr.io/prometheus-community/charts/prometheus-operator-crds
     version: 25.0.1
+  
+  - name: traefik-crds
+    namespace: traefik
+    chart: oci://ghcr.io/traefik/helm/traefik-crds
+    version: 1.13.0
 
   - name: cilium
     namespace: kube-system
@@ -64,4 +69,5 @@ releases:
       - ../../../k8s/apps/flux-system/flux-operator/instance/values.yaml
     needs:
       - flux-system/flux-operator
+      - traefik/traefik-crds
 
