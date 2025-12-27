@@ -3,7 +3,6 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: mattermost-operator
-  namespace: flux-system
 spec:
   targetNamespace: default
   path: ./k8s/apps/default/mattermost/operator
@@ -11,6 +10,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: home-cluster
+    namespace: flux-system
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
@@ -26,7 +26,6 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: mattermost-instance
-  namespace: flux-system
 spec:
   targetNamespace: default
   dependsOn:
@@ -37,6 +36,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: home-cluster
+    namespace: flux-system
   healthCheckExprs:
     - apiVersion: installation.mattermost.com/v1beta1
       kind: Mattermost

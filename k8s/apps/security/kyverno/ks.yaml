@@ -3,7 +3,6 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: kyverno
-  namespace: flux-system
 spec:
   targetNamespace: security
   path: ./k8s/apps/security/kyverno/app
@@ -11,6 +10,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: home-cluster
+    namespace: flux-system
   wait: true
   interval: 30m
   retryInterval: 1m

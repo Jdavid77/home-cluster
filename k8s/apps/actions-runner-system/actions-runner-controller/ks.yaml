@@ -3,7 +3,6 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: gha-runner-scale-set-controller
-  namespace: flux-system
 spec:
   targetNamespace: actions-runner-system
   path: ./k8s/apps/actions-runner-system/actions-runner-controller/app
@@ -11,6 +10,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: home-cluster
+    namespace: flux-system
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
@@ -26,7 +26,6 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: gha-runner-scale-set
-  namespace: flux-system
 spec:
   targetNamespace: actions-runner-system
   dependsOn:
@@ -37,6 +36,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: home-cluster
+    namespace: flux-system
   wait: true
   interval: 30m
   retryInterval: 1m

@@ -3,7 +3,6 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: flux-monitoring
-  namespace: flux-system
 spec:
   targetNamespace: flux-system
   path: ./k8s/apps/flux-system/addons/monitoring
@@ -11,6 +10,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: home-cluster
+    namespace: flux-system
   wait: true
   interval: 30m
   retryInterval: 1m
@@ -21,7 +21,6 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: flux-alerts
-  namespace: flux-system
 spec:
   targetNamespace: flux-system
   path: ./k8s/apps/flux-system/addons/alerts
@@ -29,6 +28,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: home-cluster
+    namespace: flux-system
   wait: true
   interval: 30m
   retryInterval: 1m
@@ -39,7 +39,6 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: flux-webhook
-  namespace: flux-system
 spec:
   targetNamespace: flux-system
   path: ./k8s/apps/flux-system/addons/webhook
@@ -47,6 +46,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: home-cluster
+    namespace: flux-system
   wait: true
   interval: 30m
   retryInterval: 1m
@@ -57,7 +57,6 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: flux-image-automation
-  namespace: flux-system
 spec:
   targetNamespace: flux-system
   path: ./k8s/apps/flux-system/addons/image-automation
@@ -65,6 +64,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: home-cluster
+    namespace: flux-system
   wait: true
   interval: 30m
   retryInterval: 1m

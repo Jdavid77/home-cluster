@@ -3,7 +3,6 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: dragonfly
-  namespace: flux-system
 spec:
   targetNamespace: storage
   path: ./k8s/apps/storage/dragonfly/app
@@ -11,6 +10,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: home-cluster
+    namespace: flux-system
   wait: true
   interval: 30m
   retryInterval: 1m
@@ -21,7 +21,6 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: dragonfly-cluster
-  namespace: flux-system
 spec:
   targetNamespace: storage
   path: ./k8s/apps/storage/dragonfly/cluster
@@ -29,6 +28,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: home-cluster
+    namespace: flux-system
   wait: true
   interval: 30m
   retryInterval: 1m

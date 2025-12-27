@@ -3,7 +3,6 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: pihole-exporter
-  namespace: flux-system
 spec:
   targetNamespace: monitoring
   path: ./k8s/apps/monitoring/pihole-exporter/app
@@ -13,6 +12,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: home-cluster
+    namespace: flux-system
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease

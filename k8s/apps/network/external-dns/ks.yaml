@@ -3,7 +3,6 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: external-dns-cloudflare
-  namespace: flux-system
 spec:
   path: ./k8s/apps/network/external-dns/cloudflare
   dependsOn:
@@ -12,6 +11,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: home-cluster
+    namespace: flux-system
   wait: true
   interval: 30m
   retryInterval: 1m
@@ -22,7 +22,6 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: external-dns-pihole
-  namespace: flux-system
 spec:
   path: ./k8s/apps/network/external-dns/pihole
   dependsOn:
@@ -31,6 +30,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: home-cluster
+    namespace: flux-system
   wait: true
   interval: 30m
   retryInterval: 1m
