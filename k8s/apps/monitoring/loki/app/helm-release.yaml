@@ -123,5 +123,5 @@ spec:
               - op: add
                 path: /spec/template/spec/containers/1/volumeMounts/-
                 value:
-                  - name: tmp
-                    mountPath: /tmp
+                  name: tmp
+                  mountPath: /tmp
