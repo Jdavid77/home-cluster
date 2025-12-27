@@ -10,15 +10,6 @@ spec:
     kind: OCIRepository
     name: cert-manager
     namespace: flux-system
-  install:
-    createNamespace: true
-    crds: CreateReplace
-    remediation:
-      retries: 3
-  upgrade:
-    crds: CreateReplace
-    remediation:
-      retries: 3
   values:
     global:
       nodeSelector:

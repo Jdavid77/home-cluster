@@ -10,16 +10,6 @@ spec:
     name: app-template
     namespace: flux-system
   maxHistory: 3
-  install:
-    crds: CreateReplace
-    remediation:
-      retries: 3
-  upgrade:
-    cleanupOnFail: true
-    crds: CreateReplace
-    remediation:
-      strategy: rollback
-      retries: 3
   values:
     controllers:
       main:

@@ -10,15 +10,6 @@ spec:
     kind: OCIRepository
     name: openebs
     namespace: flux-system
-  install:
-    disableHooks: true
-    remediation:
-      retries: 3
-  upgrade:
-    cleanupOnFail: true
-    disableHooks: true
-    remediation:
-      retries: 3
   values:
     alloy:
       enabled: false
