@@ -8,7 +8,9 @@ spec:
   path: ./k8s/apps/documents/paperless/app
   dependsOn:
     - name: dragonfly-cluster
+      namespace: storage
     - name: external-secrets-store
+      namespace: external-secrets
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease

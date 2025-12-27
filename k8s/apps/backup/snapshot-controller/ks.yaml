@@ -8,6 +8,7 @@ spec:
   path: ./k8s/apps/backup/snapshot-controller/app
   dependsOn:
     - name: longhorn
+      namespace: longhorn-system
   prune: true
   sourceRef:
     kind: GitRepository

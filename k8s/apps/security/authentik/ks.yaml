@@ -7,7 +7,9 @@ spec:
   targetNamespace: security
   dependsOn:
     - name: external-secrets-store
+      namespace: external-secrets
     - name: dragonfly-cluster
+      namespace: storage
   path: ./k8s/apps/security/authentik/app
   prune: true
   sourceRef:

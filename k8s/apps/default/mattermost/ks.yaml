@@ -31,6 +31,7 @@ spec:
   dependsOn:
     - name: mattermost-operator
     - name: external-secrets-store
+      namespace: external-secrets
   path: ./k8s/apps/default/mattermost/instance
   prune: true
   sourceRef:

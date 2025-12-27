@@ -7,6 +7,7 @@ spec:
   targetNamespace: default
   dependsOn:
     - name: volsync
+      namespace: backup
   path: ./k8s/apps/default/filebrowser/app
   prune: true
   sourceRef:

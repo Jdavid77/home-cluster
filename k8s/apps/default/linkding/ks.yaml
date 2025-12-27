@@ -6,7 +6,9 @@ metadata:
 spec:
   dependsOn:
     - name: volsync
+      namespace: backup
     - name: external-secrets-store
+      namespace: external-secrets
   targetNamespace: default
   path: ./k8s/apps/default/linkding/app
   prune: true

@@ -7,6 +7,7 @@ spec:
   targetNamespace: monitoring
   dependsOn:
     - name: external-secrets-store
+      namespace: external-secrets
   path: ./k8s/apps/monitoring/grafana/app
   prune: true
   sourceRef:

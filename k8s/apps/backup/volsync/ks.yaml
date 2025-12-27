@@ -8,6 +8,7 @@ spec:
     - name: snapshot-controller
     - name: longhorn-storageclasses
     - name: garage
+      namespace: storage
   targetNamespace: backup
   path: ./k8s/apps/backup/volsync/app
   prune: true

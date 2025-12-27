@@ -8,6 +8,7 @@ spec:
   path: ./k8s/apps/backup/akeyless/cron
   dependsOn:
     - name: external-secrets-store
+      namespace: external-secrets
   prune: true
   sourceRef:
     kind: GitRepository

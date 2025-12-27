@@ -8,6 +8,7 @@ spec:
   path: ./k8s/apps/media/audiobookshelf/app
   dependsOn:
     - name: volsync
+      namespace: backup
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease

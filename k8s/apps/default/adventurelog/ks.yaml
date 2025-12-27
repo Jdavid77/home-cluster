@@ -7,7 +7,9 @@ spec:
   targetNamespace: default
   dependsOn:
     - name: volsync
+      namespace: backup
     - name: external-secrets-store
+      namespace: external-secrets
   path: ./k8s/apps/default/adventurelog/app
   prune: true
   sourceRef:

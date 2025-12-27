@@ -25,6 +25,7 @@ spec:
   targetNamespace: network
   dependsOn:
     - name: cilium-resources
+      namespace: kube-system
     - name: traefik-crds
   path: ./k8s/apps/network/traefik/external
   prune: true
@@ -46,6 +47,7 @@ spec:
   targetNamespace: network
   dependsOn:
     - name: cilium-resources
+      namespace: kube-system
     - name: traefik-crds
   path: ./k8s/apps/network/traefik/internal
   prune: true
@@ -88,6 +90,7 @@ spec:
   dependsOn:
     - name: traefik
     - name: cert-manager
+      namespace: cert-manager
   path: ./k8s/apps/network/traefik/certificates
   prune: true
   sourceRef:

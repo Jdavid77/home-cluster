@@ -7,7 +7,9 @@ spec:
   targetNamespace: storage
   dependsOn:
     - name: external-secrets-store
+      namespace: external-secrets
     - name: longhorn
+      namespace: longhorn-system
   path: ./k8s/apps/storage/garage/app
   prune: true
   sourceRef:

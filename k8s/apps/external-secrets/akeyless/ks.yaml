@@ -16,6 +16,7 @@ spec:
   timeout: 5m
   dependsOn:
     - name: external-secrets
+      namespace: external-secrets
   healthCheckExprs:
     - apiVersion: external-secrets.io/v1
       kind: ClusterSecretStore

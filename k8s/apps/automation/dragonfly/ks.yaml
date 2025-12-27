@@ -9,7 +9,9 @@ spec:
   prune: true
   dependsOn:
     - name: dragonfly
+      namespace: storage
     - name: external-secrets-store
+      namespace: external-secrets
   sourceRef:
     kind: GitRepository
     name: home-cluster

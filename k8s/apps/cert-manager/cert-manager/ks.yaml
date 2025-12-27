@@ -30,6 +30,7 @@ spec:
   dependsOn:
     - name: cert-manager
     - name: external-secrets-store
+      namespace: external-secrets
   path: ./k8s/apps/cert-manager/cert-manager/issuers
   prune: true
   sourceRef:

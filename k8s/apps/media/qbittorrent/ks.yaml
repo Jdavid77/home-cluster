@@ -8,7 +8,9 @@ spec:
   path: ./k8s/apps/media/qbittorrent/app
   dependsOn:
     - name: external-secrets-store
+      namespace: external-secrets
     - name: volsync
+      namespace: backup
   prune: true
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2

@@ -7,6 +7,7 @@ spec:
   targetNamespace: security
   dependsOn:
     - name: external-secrets-store
+      namespace: external-secrets
   path: ./k8s/apps/security/vaultwarden/app
   prune: true
   sourceRef:

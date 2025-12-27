@@ -8,7 +8,9 @@ spec:
   path: ./k8s/apps/default/mealie/app
   dependsOn:
     - name: volsync
+      namespace: backup
     - name: external-secrets-store
+      namespace: external-secrets
   prune: true
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2

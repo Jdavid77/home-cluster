@@ -7,6 +7,7 @@ spec:
   targetNamespace: storage
   dependsOn:
     - name: external-secrets-store
+      namespace: external-secrets
   path: ./k8s/apps/storage/minio/app
   prune: true
   sourceRef:

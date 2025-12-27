@@ -6,6 +6,7 @@ metadata:
 spec:
   dependsOn:
     - name: external-secrets-store
+      namespace: external-secrets
   targetNamespace: development
   path: ./k8s/apps/development/sonarqube/app
   prune: true

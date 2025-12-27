@@ -18,3 +18,4 @@ spec:
   dependsOn:
     - name: external-dns-cloudflare
     - name: external-secrets-store
+      namespace: external-secrets

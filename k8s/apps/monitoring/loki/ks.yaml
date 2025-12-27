@@ -9,6 +9,7 @@ spec:
   prune: true
   dependsOn:
     - name: longhorn
+      namespace: longhorn-system
   sourceRef:
     kind: GitRepository
     name: home-cluster

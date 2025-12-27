@@ -7,6 +7,7 @@ spec:
   path: ./k8s/apps/network/external-dns/cloudflare
   dependsOn:
     - name: external-secrets-store
+      namespace: external-secrets
   prune: true
   sourceRef:
     kind: GitRepository
@@ -26,6 +27,7 @@ spec:
   path: ./k8s/apps/network/external-dns/pihole
   dependsOn:
     - name: external-secrets-store
+      namespace: external-secrets
   prune: true
   sourceRef:
     kind: GitRepository

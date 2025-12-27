@@ -6,6 +6,7 @@ metadata:
 spec:
   dependsOn:
     - name: volsync
+      namespace: backup
   targetNamespace: default
   path: ./k8s/apps/default/expenseowl/app
   prune: true
