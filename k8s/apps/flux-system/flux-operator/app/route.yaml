@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   hostnames:
-  - flux.${SECRET_DOMAIN}
+  - flux.jnobrega.com
   parentRefs:
   - group: gateway.networking.k8s.io
     kind: Gateway

@@ -44,15 +44,15 @@ spec:
       auth:
         oauth_allow_insecure_email_lookup: true
         oauth_auto_login: false
-        signout_redirect_url: "https://auth.${SECRET_DOMAIN}/application/o/grafana/end-session/"
+        signout_redirect_url: "https://auth.jnobrega.com/application/o/grafana/end-session/"
       auth.anonymous:
         enabled: false
       auth.basic:
         enabled: true
       auth.generic_oauth:
         allow_sign_up: true
-        api_url: https://auth.${SECRET_DOMAIN}/application/o/userinfo/
-        auth_url: https://auth.${SECRET_DOMAIN}/application/o/authorize/
+        api_url: https://auth.jnobrega.com/application/o/userinfo/
+        auth_url: https://auth.jnobrega.com/application/o/authorize/
         empty_scopes: false
         enabled: true
         groups_attribute_path: groups
@@ -63,7 +63,7 @@ spec:
         role_attribute_path: |
           contains(groups[*], 'Grafana Admin') && 'Admin' || 'Viewer'
         scopes: "openid profile email groups"
-        token_url: https://auth.${SECRET_DOMAIN}/application/o/token/
+        token_url: https://auth.jnobrega.com/application/o/token/
         use_pkce: true
       date_formats:
         full_date: "DD.MM.YYYY hh:mm:ss"
@@ -80,7 +80,7 @@ spec:
         allow_embedding: true
         cookie_samesite: disabled
       server:
-        root_url: https://grafana.${SECRET_DOMAIN}
+        root_url: https://grafana.jnobrega.com
     dashboardProviders:
       dashboardproviders.yaml:
         apiVersion: 1
@@ -268,7 +268,7 @@ spec:
       main:
         enabled: true
         hostnames:
-          - grafana.${SECRET_DOMAIN}
+          - grafana.jnobrega.com
         parentRefs:
           - name: external
             namespace: network

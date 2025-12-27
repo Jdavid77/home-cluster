@@ -54,8 +54,8 @@ spec:
               PAPERLESS_DBNAME: paperless
               PAPERLESS_REDIS: redis://dragonfly.storage.svc.cluster.local:6379
               PAPERLESS_TASK_WORKERS: 2
-              PAPERLESS_TIME_ZONE: ${TIMEZONE}
-              PAPERLESS_URL: https://paperless.${SECRET_DOMAIN}
+              PAPERLESS_TIME_ZONE: Europe/Lisbon
+              PAPERLESS_URL: https://paperless.jnobrega.com
               PAPERLESS_APPS: allauth.socialaccount.providers.openid_connect
               PAPERLESS_OCR_USER_ARGS: '{"invalidate_digital_signatures": true}'
             envFrom: *envFrom
@@ -82,7 +82,7 @@ spec:
             namespace: network
             sectionName: websecure
         hostnames:
-          - paperless.${SECRET_DOMAIN}
+          - paperless.jnobrega.com
         rules:
           - backendRefs:
               - name: *app
@@ -94,25 +94,25 @@ spec:
     persistence:
       data:
         type: nfs
-        server: ${NFS_SERVER}
+        server: 192.168.1.84
         path: /paperless-data
         globalMounts:
           - path: /usr/src/paperless/data
       media:
         type: nfs
-        server: ${NFS_SERVER}
+        server: 192.168.1.84
         path: /paperless-media
         globalMounts:
           - path: /usr/src/paperless/media
       consume:
         type: nfs
-        server: ${NFS_SERVER}
+        server: 192.168.1.84
         path: /paperless-consume
         globalMounts:
           - path: /usr/src/paperless/consume
       export:
         type: nfs
-        server: ${NFS_SERVER}
+        server: 192.168.1.84
         path: /paperless-export
         globalMounts:
           - path: /usr/src/paperless/export

@@ -37,7 +37,7 @@ spec:
             env:
               CACHE_DIR: /cache
               CALIBRE_PORT: &port 8083
-              TZ: ${TIMEZONE}
+              TZ: Europe/Lisbon
               PUID: 1002
               PGID: 100
             probes:
@@ -68,7 +68,7 @@ spec:
             namespace: network
             sectionName: websecure
         hostnames:
-          - books.${SECRET_DOMAIN}
+          - books.jnobrega.com
         rules:
           - backendRefs:
               - name: *app
@@ -86,13 +86,13 @@ spec:
               - path: /config
       media:
         type: nfs
-        server: ${NFS_SERVER}
+        server: 192.168.1.84
         path: /ebooks
         globalMounts:
           - path: /calibre-library
       ingests:
         type: nfs
-        server: ${NFS_SERVER}
+        server: 192.168.1.84
         path: /book-ingests
         globalMounts:
           - path: /cwa-book-ingest

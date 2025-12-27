@@ -4,7 +4,7 @@ metadata:
   name: hubble-ui
 spec:
   hostnames:
-    - hubble.${SECRET_DOMAIN}
+    - hubble.jnobrega.com
   parentRefs:
     - name: internal
       namespace: network

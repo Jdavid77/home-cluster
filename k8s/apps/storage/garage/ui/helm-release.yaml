@@ -63,7 +63,7 @@ spec:
             namespace: network
             sectionName: websecure
         hostnames:
-          - garage.${SECRET_DOMAIN}
+          - garage.jnobrega.com
         rules:
           - backendRefs:
               - name: *app

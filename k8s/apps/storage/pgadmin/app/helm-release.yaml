@@ -23,7 +23,7 @@ spec:
       retries: 3
   values:
     env:
-      email: admin@${SECRET_DOMAIN}
+      email: admin@jnobrega.com
     existingSecret: pgadmin-credentials
     secretKeys:
       pgadminPasswordKey: PGADMIN_DEFAULT_PASSWORD

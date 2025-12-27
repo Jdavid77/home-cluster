@@ -55,7 +55,7 @@ spec:
     txtPrefix: "k8s."
     txtOwnerId: "network"
     domainFilters:
-      - "${SECRET_DOMAIN}"
+      - "jnobrega.com"
     podAnnotations:
       secret.reloader.stakater.com/reload: externaldns-secrets
     serviceMonitor:

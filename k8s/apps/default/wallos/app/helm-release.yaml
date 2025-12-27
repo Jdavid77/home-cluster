@@ -29,7 +29,7 @@ spec:
               repository: bellamy/wallos
               tag: 4.6.0
             env:
-              TZ: ${TIMEZONE}
+              TZ: Europe/Lisbon
             resources:
               requests:
                 cpu: 50m
@@ -50,7 +50,7 @@ spec:
             namespace: network
             sectionName: websecure
         hostnames:
-          - subs.${SECRET_DOMAIN}
+          - subs.jnobrega.com
         rules:
           - backendRefs:
               - name: *app

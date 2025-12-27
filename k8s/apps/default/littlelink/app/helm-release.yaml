@@ -27,7 +27,7 @@ spec:
               repository: ghcr.io/techno-tim/littlelink-server
               tag: latest@sha256:e84ea9d93b60362cf9e292dba43adb604e375d9206d5fcf1de6bb766a20aabd1
             env:
-              TZ: ${TIMEZONE}
+              TZ: Europe/Lisbon
               META_TITLE: João David Nóbrega
               META_DESCRIPTION: João David Nóbrega Link Page
               META_KEYWORDS: Devops
@@ -37,7 +37,7 @@ spec:
               OG_SITE_NAME: João David Nóbrega Links
               OG_TITLE: João David Nóbrega Links
               OG_DESCRIPTION: A collection of all of my relevant links
-              OG_URL: https://links.${SECRET_DOMAIN}
+              OG_URL: https://links.jnobrega.com
               AVATAR_URL: https://avatars.githubusercontent.com/u/49655819?v=4
               AVATAR_2X_URL: https://avatars.githubusercontent.com/u/49655819?v=4
               NAME: "@joaodavid77"
@@ -45,7 +45,7 @@ spec:
               BIO: "DevOps Engineer | Homelab | 🇵🇹"
               BUTTON_ORDER: GITHUB,LINKED_IN,MEDIUM,HOMELAB,LIVEMETRICS,CV,EMAIL
               CUSTOM_BUTTON_TEXT: 'HomeLab,HomeLab Live Metrics, Curriculum Vitae'
-              CUSTOM_BUTTON_URL: 'https://github.com/Jdavid77/home-cluster,https://live.${SECRET_DOMAIN},https://cv.${SECRET_DOMAIN}'
+              CUSTOM_BUTTON_URL: 'https://github.com/Jdavid77/home-cluster,https://live.jnobrega.com,https://cv.jnobrega.com'
               CUSTOM_BUTTON_COLOR: '#D97706,#F59E0B,#00CC00'
               CUSTOM_BUTTON_TEXT_COLOR: '#ffffff,#ffffff,#ffffff'
               CUSTOM_BUTTON_ALT_TEXT: 'HomeLab,HomeLab Live Metrics,Curriculum Vitae'
@@ -70,7 +70,7 @@ spec:
             port: &port 3000
     route:
       main:
-        hostnames: ["links.${SECRET_DOMAIN}"]
+        hostnames: ["links.jnobrega.com"]
         parentRefs:
           - name: external
             namespace: network

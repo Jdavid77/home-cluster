@@ -11,4 +11,4 @@ data:
   NODE_ENV: "production"
   REDIS_HOSTNAME: immich-valkey.media
   REDIS_PORT: "6379"
-  PUBLIC_IMMICH_SERVER_URL: https://immich.${SECRET_DOMAIN}
+  PUBLIC_IMMICH_SERVER_URL: https://immich.jnobrega.com

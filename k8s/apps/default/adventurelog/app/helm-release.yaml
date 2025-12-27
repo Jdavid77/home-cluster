@@ -41,7 +41,7 @@ spec:
               repository: ghcr.io/seanmorley15/adventurelog-frontend
               tag: latest@sha256:ebf515de0ff344fe8c6c30d0eb2033ac4de3f2d5e89ad29c91f1c3727883339e
             env:
-              PUBLIC_SERVER_URL: "https://adventurelog-backend.${SECRET_DOMAIN}"
+              PUBLIC_SERVER_URL: "https://adventurelog-backend.jnobrega.com"
               BODY_SIZE_LIMIT: Infinity
             probes:
               liveness: &probes
@@ -57,9 +57,9 @@ spec:
               repository: ghcr.io/seanmorley15/adventurelog-backend
               tag: latest@sha256:f385c8158aec211097e64c3130cef5ad2ba05f0643a653f2aae82aeadff24fd0
             env:
-              PUBLIC_URL: https://adventurelog-backend.${SECRET_DOMAIN}
-              FRONTEND_URL: https://adventurelog.${SECRET_DOMAIN}
-              CSRF_TRUSTED_ORIGINS: https://adventurelog-backend.${SECRET_DOMAIN},https://adventurelog.${SECRET_DOMAIN}
+              PUBLIC_URL: https://adventurelog-backend.jnobrega.com
+              FRONTEND_URL: https://adventurelog.jnobrega.com
+              CSRF_TRUSTED_ORIGINS: https://adventurelog-backend.jnobrega.com,https://adventurelog.jnobrega.com
               DEBUG: "true"
               DJANGO_ADMIN_USERNAME: admin
             envFrom: *secret
@@ -90,7 +90,7 @@ spec:
             namespace: network
             sectionName: websecure
         hostnames:
-          - adventurelog.${SECRET_DOMAIN}
+          - adventurelog.jnobrega.com
         rules:
           - backendRefs:
               - name: *app
@@ -108,7 +108,7 @@ spec:
             namespace: network
             sectionName: websecure
         hostnames:
-          - adventurelog-backend.${SECRET_DOMAIN}
+          - adventurelog-backend.jnobrega.com
         rules:
           - backendRefs:
               - name: *app

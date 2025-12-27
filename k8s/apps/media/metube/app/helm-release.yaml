@@ -72,7 +72,7 @@ spec:
             namespace: network
             sectionName: websecure
         hostnames:
-          - yt-downloader.${SECRET_DOMAIN}
+          - yt-downloader.jnobrega.com
         rules:
           - backendRefs:
               - name: *app
@@ -86,7 +86,7 @@ spec:
         existingClaim: *app
       downloads:
         type: nfs
-        server: ${NFS_SERVER}
+        server: 192.168.1.84
         path: /youtube
         globalMounts:
           - path: /downloads

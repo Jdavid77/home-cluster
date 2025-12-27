@@ -32,7 +32,7 @@ spec:
               tag: 1.4.0 # {"$imagepolicy": "flux-system:ryanair-api:tag"}
             env:
               NODE_ENV: production
-              API_URL: https://api-ryanair.${SECRET_DOMAIN}
+              API_URL: https://api-ryanair.jnobrega.com
             probes:
               liveness: &probes
                 enabled: false

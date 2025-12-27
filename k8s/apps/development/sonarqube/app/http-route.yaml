@@ -4,7 +4,7 @@ metadata:
   name: sonarqube
 spec:
   hostnames:
-    - sonarqube.${SECRET_DOMAIN}
+    - sonarqube.jnobrega.com
   parentRefs:
     - name: internal
       namespace: network

@@ -26,10 +26,10 @@ spec:
       enabled: true
       type: LoadBalancer
       loadBalancerIPs:
-        - ${LB_INTERNAL_IP}
+        - 192.168.1.251
       annotations:
-        io.cilium/lb-ipam-ips: ${LB_INTERNAL_IP}
-        external-dns.alpha.kubernetes.io/hostname: "internal.${SECRET_DOMAIN}"
+        io.cilium/lb-ipam-ips: 192.168.1.251
+        external-dns.alpha.kubernetes.io/hostname: "internal.jnobrega.com"
       labels:
         cilium.l2.announce: "true"
       externalTrafficPolicy: Cluster
@@ -51,7 +51,7 @@ spec:
         enabled: true
         experimentalChannel: true
         statusAddress:
-          ip: ${LB_INTERNAL_IP}
+          ip: 192.168.1.251
     ports:
       mqtt:
         port: 1883
@@ -91,7 +91,7 @@ spec:
       name: internal
       annotations:
         # https://kubernetes-sigs.github.io/external-dns/v0.14.2/sources/gateway/#targets
-        external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
+        external-dns.alpha.kubernetes.io/target: internal.jnobrega.com
       listeners:
         web:
           port: 8000
@@ -105,7 +105,7 @@ spec:
             from: All
           protocol: HTTPS
           certificateRefs:
-            - name: ${SECRET_DOMAIN}-tls
+            - name: jnobrega.com-tls
           mode: Terminate
         tcp:
           port: 1883

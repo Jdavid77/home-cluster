@@ -4,7 +4,7 @@ metadata:
   name: kubernetes-dashboard
 spec:
   hostnames:
-    - kubernetes.${SECRET_DOMAIN}
+    - kubernetes.jnobrega.com
   parentRefs:
     - name: internal
       namespace: network

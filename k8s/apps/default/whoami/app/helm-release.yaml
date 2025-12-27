@@ -47,7 +47,7 @@ spec:
             namespace: network
             sectionName: websecure
         hostnames:
-          - whoami.${SECRET_DOMAIN}
+          - whoami.jnobrega.com
         rules:
           - backendRefs:
               - name: *app

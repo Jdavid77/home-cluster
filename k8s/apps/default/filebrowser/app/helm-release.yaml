@@ -29,7 +29,7 @@ spec:
               repository: filebrowser/filebrowser
               tag: v2.52.0
             env:
-              TZ: ${TIMEZONE}
+              TZ: Europe/Lisbon
               FB_DATABASE: /config/filebrowser.db
               FB_ROOT: /srv
               FB_LOG: stdout
@@ -82,7 +82,7 @@ spec:
             namespace: network
             sectionName: websecure
         hostnames:
-          - files.${SECRET_DOMAIN}
+          - files.jnobrega.com
         rules:
           - backendRefs:
               - name: *app
@@ -96,13 +96,13 @@ spec:
         existingClaim: filebrowser
       youtube:
         type: nfs
-        server: ${NFS_SERVER}
+        server: 192.168.1.84
         path: /youtube
         globalMounts:
           - path: /srv/youtube
       ebooks:
         type: nfs
-        server: ${NFS_SERVER}
+        server: 192.168.1.84
         path: /ebooks
         globalMounts:
           - path: /srv/ebooks

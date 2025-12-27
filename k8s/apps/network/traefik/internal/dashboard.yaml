@@ -4,7 +4,7 @@ metadata:
   name: traefik-internal
 spec:
   hostnames:
-    - traefik-internal.${SECRET_DOMAIN}
+    - traefik-internal.jnobrega.com
   parentRefs:
     - name: internal
       namespace: network

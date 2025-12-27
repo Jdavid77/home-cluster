@@ -27,7 +27,7 @@ spec:
       enabled: true
     app:
       env:
-        TZ: ${TIMEZONE}
+        TZ: Europe/Lisbon
     extraArgs:
       - --enable-insecure-login
       - --enable-skip-login

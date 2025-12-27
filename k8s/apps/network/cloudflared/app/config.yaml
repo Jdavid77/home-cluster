@@ -1,8 +1,8 @@
 originRequest:
-  originServerName: ${SECRET_DOMAIN}
+  originServerName: jnobrega.com
 ingress:
-  - hostname: "${SECRET_DOMAIN}"
+  - hostname: "jnobrega.com"
     service: https://traefik.network.svc.cluster.local:443
-  - hostname: "*.${SECRET_DOMAIN}"
+  - hostname: "*.jnobrega.com"
     service: https://traefik.network.svc.cluster.local:443
   - service: http_status:404

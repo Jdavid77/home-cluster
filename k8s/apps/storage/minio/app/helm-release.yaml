@@ -35,13 +35,13 @@ spec:
               repository: minio/minio
               tag: RELEASE.2025-04-22T22-12-26Z@sha256:a1ea29fa28355559ef137d71fc570e508a214ec84ff8083e39bc5428980b015e
             env:
-              TZ: "${TIMEZONE}"
+              TZ: "Europe/Lisbon"
               MINIO_UPDATE: "off"
-              MINIO_BROWSER_REDIRECT_URL: https://minio.${SECRET_DOMAIN}
-              MINIO_SERVER_URL: https://s3.${SECRET_DOMAIN}
-              MINIO_API_CORS_ALLOW_ORIGIN: https://minio.${SECRET_DOMAIN},https://s3.${SECRET_DOMAIN}
+              MINIO_BROWSER_REDIRECT_URL: https://minio.jnobrega.com
+              MINIO_SERVER_URL: https://s3.jnobrega.com
+              MINIO_API_CORS_ALLOW_ORIGIN: https://minio.jnobrega.com,https://s3.jnobrega.com
               MINIO_PROMETHEUS_JOB_ID: minio
-              MINIO_PROMETHEUS_URL: https://prometheus.${SECRET_DOMAIN}
+              MINIO_PROMETHEUS_URL: https://prometheus.jnobrega.com
               MINIO_PROMETHEUS_AUTH_TYPE: public
             envFrom:
               - secretRef:
@@ -94,7 +94,7 @@ spec:
             namespace: network
             sectionName: websecure
         hostnames:
-          - minio.${SECRET_DOMAIN}
+          - minio.jnobrega.com
         rules:
           - backendRefs:
               - name: *app
@@ -112,7 +112,7 @@ spec:
             namespace: network
             sectionName: websecure
         hostnames:
-          - s3.${SECRET_DOMAIN}
+          - s3.jnobrega.com
         rules:
           - backendRefs:
               - name: *app
@@ -124,7 +124,7 @@ spec:
     persistence:
       data:
         type: nfs
-        server: ${NFS_SERVER}
+        server: 192.168.1.84
         path: /minio
         globalMounts:
           - path: /data

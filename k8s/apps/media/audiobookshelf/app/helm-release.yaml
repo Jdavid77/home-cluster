@@ -25,7 +25,7 @@ spec:
               repository: ghcr.io/advplyr/audiobookshelf
               tag: 2.32.1
             env:
-              TZ: ${TIMEZONE}
+              TZ: Europe/Lisbon
               PORT: &port 8080
               AUDIOBOOKSHELF_UID: *uid
               AUDIOBOOKSHELF_GID: *gid
@@ -62,7 +62,7 @@ spec:
             namespace: network
             sectionName: websecure
         hostnames:
-          - audiobooks.${SECRET_DOMAIN}
+          - audiobooks.jnobrega.com
         rules:
           - backendRefs:
               - name: *app
@@ -76,7 +76,7 @@ spec:
         existingClaim: audiobookshelf
       downloads:
         type: nfs
-        server: ${NFS_SERVER}
+        server: 192.168.1.84
         path: /downloads
         globalMounts:
           - path: /audiobooks

@@ -85,7 +85,7 @@ spec:
             namespace: network
             sectionName: websecure
         hostnames:
-          - reddit.${SECRET_DOMAIN}
+          - reddit.jnobrega.com
         rules:
           - backendRefs:
               - name: redlib

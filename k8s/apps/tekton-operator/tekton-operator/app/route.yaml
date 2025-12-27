@@ -5,7 +5,7 @@ metadata:
   namespace: tekton-pipelines
 spec:
   hostnames:
-  - tekton.${SECRET_DOMAIN}
+  - tekton.jnobrega.com
   parentRefs:
   - group: gateway.networking.k8s.io
     kind: Gateway

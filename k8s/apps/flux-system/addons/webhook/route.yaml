@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   hostnames:
-    - flux-webhook.${SECRET_DOMAIN}
+    - flux-webhook.jnobrega.com
   parentRefs:
     - name: external
       namespace: network

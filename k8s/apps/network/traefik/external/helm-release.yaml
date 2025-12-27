@@ -24,9 +24,9 @@ spec:
       enabled: true
       type: LoadBalancer
       loadBalancerIPs:
-        - "${LB_IP}"
+        - "192.168.1.252"
       annotations:
-        io.cilium/lb-ipam-ips: "${LB_IP}"
+        io.cilium/lb-ipam-ips: "192.168.1.252"
       externalTrafficPolicy: Local
       ipFamilies:
         - "IPv4"
@@ -51,7 +51,7 @@ spec:
         enabled: true
         experimentalChannel: false
         statusAddress:
-          ip: "${LB_IP}"
+          ip: "192.168.1.252"
     ports:
       websecure:
         middlewares:
@@ -130,7 +130,7 @@ spec:
       name: external
       annotations:
         # https://kubernetes-sigs.github.io/external-dns/v0.14.2/sources/gateway/#targets
-        external-dns.alpha.kubernetes.io/target: ${SECRET_DOMAIN}
+        external-dns.alpha.kubernetes.io/target: jnobrega.com
       listeners:
         web:
           port: 8000
@@ -144,7 +144,7 @@ spec:
             from: All
           protocol: HTTPS
           certificateRefs:
-            - name: ${SECRET_DOMAIN}-tls
+            - name: jnobrega.com-tls
           mode: Terminate
     gatewayClass:
       enabled: true

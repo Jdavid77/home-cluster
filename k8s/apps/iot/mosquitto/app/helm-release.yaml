@@ -116,7 +116,7 @@ spec:
               - path: /tmp/secret
       certs:
         type: secret
-        name: ${SECRET_DOMAIN}-tls
+        name: jnobrega.com-tls
         advancedMounts:
           mosquitto:
             app:

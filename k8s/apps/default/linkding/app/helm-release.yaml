@@ -69,7 +69,7 @@ spec:
             namespace: network
             sectionName: websecure
         hostnames:
-          - bookmarks.${SECRET_DOMAIN}
+          - bookmarks.jnobrega.com
         rules:
           - backendRefs:
               - name: *app

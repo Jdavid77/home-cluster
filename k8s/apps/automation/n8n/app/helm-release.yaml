@@ -49,12 +49,12 @@ spec:
               N8N_USER_MANAGEMENT_DISABLED: false
               N8N_MFA_ENABLED: "false"
               N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS: "true"
-              GENERIC_TIMEZONE: ${TIMEZONE}
+              GENERIC_TIMEZONE: Europe/Lisbon
               #===NETWORK & URL CONFIGURATION===
               N8N_PORT: &port 5678
               N8N_PROTOCOL: "https"
-              N8N_HOST: &host "n8n.${SECRET_DOMAIN}"
-              WEBHOOK_URL: "https://n8n.${SECRET_DOMAIN}"
+              N8N_HOST: &host "n8n.jnobrega.com"
+              WEBHOOK_URL: "https://n8n.jnobrega.com"
               N8N_PROXY_HOPS: "1"
               #===API CONFIGURATION===
               N8N_PUBLIC_API_DISABLED: false
@@ -72,11 +72,8 @@ spec:
               N8N_COMMUNITY_PACKAGES_ALLOW_TOOL_USAGE: "true"
               NODE_FUNCTION_ALLOW_BUILTIN: "*"
               #===SMTP CONFIGURATION===
-              N8N_SMTP_HOST: ${SMTP_MAIL_SERVER}
+              N8N_SMTP_HOST: mail.gmx.com
               N8N_SMTP_PORT: 587
-              N8N_SMTP_USER: ${SMTP_USERNAME}
-              N8N_SMTP_PASS: ${SMTP_PASSWORD}
-              N8N_SMTP_SENDER: ${SMTP_FROM}
               N8N_SMTP_SSL: "false"
             resources:
               requests:
@@ -103,7 +100,7 @@ spec:
             namespace: network
             sectionName: websecure
         hostnames:
-          - n8n.${SECRET_DOMAIN}
+          - n8n.jnobrega.com
         rules:
           - backendRefs:
               - name: n8n
@@ -127,7 +124,7 @@ spec:
             namespace: network
             sectionName: websecure
         hostnames:
-          - n8n-webhook.${SECRET_DOMAIN}
+          - n8n-webhook.jnobrega.com
         rules:
           - matches:
               - path:

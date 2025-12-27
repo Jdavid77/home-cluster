@@ -4,7 +4,7 @@ metadata:
   name: traefik
 spec:
   hostnames:
-    - traefik.${SECRET_DOMAIN}
+    - traefik.jnobrega.com
   parentRefs:
     - name: external
       namespace: network

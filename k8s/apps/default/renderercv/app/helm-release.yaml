@@ -91,7 +91,7 @@ spec:
             namespace: network
             sectionName: websecure
         hostnames:
-          - code-cv.${SECRET_DOMAIN}
+          - code-cv.jnobrega.com
         rules:
           - backendRefs:
               - name: renderercv-code-server
@@ -109,7 +109,7 @@ spec:
             namespace: network
             sectionName: websecure
         hostnames:
-          - cv.${SECRET_DOMAIN}
+          - cv.jnobrega.com
         rules:
           - backendRefs:
               - name: renderercv-nginx

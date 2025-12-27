@@ -38,10 +38,10 @@ spec:
               repository: ghcr.io/mealie-recipes/mealie
               tag: v3.8.0
             env:
-              BASE_URL: https://food.${SECRET_DOMAIN}
+              BASE_URL: https://food.jnobrega.com
               ALLOW_SIGNUP: false
               API_DOCS: true
-              TZ: ${TIMEZONE}
+              TZ: Europe/Lisbon
               PUID: 1000
               PGID: 1000
               DB_ENGINE: postgres
@@ -67,7 +67,7 @@ spec:
             namespace: network
             sectionName: websecure
         hostnames:
-          - food.${SECRET_DOMAIN}
+          - food.jnobrega.com
         rules:
           - backendRefs:
               - name: *app

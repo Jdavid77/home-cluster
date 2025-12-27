@@ -45,7 +45,7 @@ spec:
               tag: 2.1.4@sha256:f77532ca7c3c9a4398cb094df7674013a3d7fcf4699386f1e456c24df6fef00e
               pullPolicy: IfNotPresent
             env:
-              TZ: ${TIMEZONE}
+              TZ: Europe/Lisbon
               THEME: quartz
               USE_DB: postgres
               PROMETHEUS_ENABLE: "true"
@@ -87,7 +87,7 @@ spec:
             namespace: network
             sectionName: websecure
         hostnames:
-          - lan.${SECRET_DOMAIN}
+          - lan.jnobrega.com
         rules:
           - backendRefs:
               - name: *app

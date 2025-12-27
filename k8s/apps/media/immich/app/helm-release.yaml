@@ -81,7 +81,7 @@ spec:
             namespace: network
             sectionName: websecure
         hostnames:
-          - photos.${SECRET_DOMAIN}
+          - photos.jnobrega.com
         rules:
           - backendRefs:
               - name: immich-server
@@ -97,7 +97,7 @@ spec:
           - path: /config/matplotlib
       library:
         type: nfs
-        server: ${NFS_SERVER}
+        server: 192.168.1.84
         path: /photos
         globalMounts:
           - path: /usr/src/app/upload

@@ -38,17 +38,14 @@ spec:
               repository: vaultwarden/server
               tag: 1.34.3-alpine
             env:
-              DOMAIN: "https://vaultwarden.${SECRET_DOMAIN}"
-              TZ: ${TIMEZONE}
+              DOMAIN: "https://vaultwarden.jnobrega.com"
+              TZ: Europe/Lisbon
               SIGNUPS_ALLOWED: "false"
               INVITATIONS_ALLOWED: "true"
               WEBSOCKET_ENABLED: "true"
               WEBSOCKET_ADDRESS: 0.0.0.0
               WEBSOCKET_PORT: 3012
-              SMTP_HOST: ${SMTP_MAIL_SERVER}
-              SMTP_FROM: ${SMTP_FROM}
-              SMTP_USERNAME: ${SMTP_USERNAME}
-              SMTP_PASSWORD: ${SMTP_PASSWORD}
+              SMTP_HOST: mail.gmx.com
               SMTP_FROM_NAME: Vaultwarden
               SMTP_PORT: 587
               SMTP_SECURITY: "starttls"
@@ -85,7 +82,7 @@ spec:
             namespace: network
             sectionName: websecure
         hostnames:
-          - vaultwarden.${SECRET_DOMAIN}
+          - vaultwarden.jnobrega.com
         rules:
           - backendRefs:
               - name: *app

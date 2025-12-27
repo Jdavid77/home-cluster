@@ -19,7 +19,7 @@ spec:
               repository: ghcr.io/danvergara/morphos-server
               tag: 0.6.0@sha256:3d6f64ef386cbb6a7c5d55526e1a69da2d3661a1996d757897e92bf4369088f5
             env:
-              TZ: ${TIMEZONE}
+              TZ: Europe/Lisbon
             probes:
               liveness: &probes
                 enabled: true
@@ -56,7 +56,7 @@ spec:
             port: *port
     route:
       main:
-        hostnames: ["convert.${SECRET_DOMAIN}"]
+        hostnames: ["convert.jnobrega.com"]
         parentRefs:
           - name: internal
             namespace: network

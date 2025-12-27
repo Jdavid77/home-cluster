@@ -50,9 +50,9 @@ spec:
             args:
               - run
             env:
-              TZ: ${TIMEZONE}
+              TZ: Europe/Lisbon
               LLDAP_HTTP_PORT: &port 80
-              LLDAP_HTTP_URL: https://lldap.${SECRET_DOMAIN}
+              LLDAP_HTTP_URL: https://lldap.jnobrega.com
               LLDAP_LDAP_PORT: &ldapPort 389
             envFrom:
               - secretRef:
@@ -103,7 +103,7 @@ spec:
             namespace: network
             sectionName: websecure
         hostnames:
-          - lldap.${SECRET_DOMAIN}
+          - lldap.jnobrega.com
         rules:
           - backendRefs:
               - name: *app

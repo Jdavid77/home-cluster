@@ -27,7 +27,7 @@ spec:
         main:
           enabled: true
           hostnames:
-            - alerts.${SECRET_DOMAIN}
+            - alerts.jnobrega.com
           parentRefs:
             - name: internal
               namespace: network
@@ -93,7 +93,7 @@ spec:
         main:
           enabled: true
           hostnames:
-            - prometheus.${SECRET_DOMAIN}
+            - prometheus.jnobrega.com
           parentRefs:
             - name: internal
               namespace: network

@@ -4,7 +4,7 @@ metadata:
   name: loki-gateway
 spec:
   hostnames:
-    - loki.${SECRET_DOMAIN}
+    - loki.jnobrega.com
   parentRefs:
     - name: internal
       namespace: network

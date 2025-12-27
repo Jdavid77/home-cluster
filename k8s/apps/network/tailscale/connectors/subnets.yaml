@@ -7,5 +7,5 @@ spec:
   proxyClass: kernel-org-tun
   subnetRouter:
     advertiseRoutes:
-      - ${LB_INTERNAL_IP}/32
+      - 192.168.1.251/32
       - 192.168.1.139/32

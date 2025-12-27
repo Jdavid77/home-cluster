@@ -4,4 +4,4 @@ metadata:
   name: default
 spec:
   defaultCertificate:
-    secretName: "${SECRET_DOMAIN}-tls"
+    secretName: "jnobrega.com-tls"

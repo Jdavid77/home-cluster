@@ -42,6 +42,6 @@ spec:
     registry: noop
     policy: upsert-only
     sources: ["service", "gateway-httproute"]
-    domainFilters: ["${SECRET_DOMAIN}"]
+    domainFilters: ["jnobrega.com"]
     serviceMonitor:
       enabled: true

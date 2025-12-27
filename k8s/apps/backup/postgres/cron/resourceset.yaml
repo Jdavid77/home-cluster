@@ -100,7 +100,7 @@ spec:
             cronjob:
               suspend: false
               concurrencyPolicy: Forbid
-              timeZone: ${TIMEZONE}
+              timeZone: Europe/Lisbon
               schedule: "0 0 * * 0"
               startingDeadlineSeconds: 30
               successfulJobsHistory: 1
@@ -120,7 +120,7 @@ spec:
                   S3_ENDPOINT: << inputs.endpoint >>
                   SERVER_NAME: << $server.name >>
                   POSTGRES_BACKUP_ALL: "true"
-                  POSTGRES_HOST: "${NFS_SERVER}"
+                  POSTGRES_HOST: "192.168.1.84"
                   POSTGRES_EXTRA_OPTS: "--schema=public --blobs"
                   POSTGRES_PORT: << $server.port >>
                   REMOVE_BEFORE: "15"

@@ -59,7 +59,7 @@ spec:
             namespace: network
             sectionName: websecure
         hostnames:
-          - expenses.${SECRET_DOMAIN}
+          - expenses.jnobrega.com
         rules:
           - backendRefs:
               - name: *app

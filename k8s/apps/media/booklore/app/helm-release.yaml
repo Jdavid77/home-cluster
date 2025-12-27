@@ -28,7 +28,7 @@ spec:
               tag: v1.15.0
 
             env:
-              TZ: ${TIMEZONE}
+              TZ: Europe/Lisbon
               PUID: 1002
               PGID: 100
               DATABASE_URL: "jdbc:mariadb://localhost:3306/booklore"
@@ -69,7 +69,7 @@ spec:
               tag: 11.4.8
 
             env:
-              TZ: ${TIMEZONE}
+              TZ: Europe/Lisbon
               MYSQL_USER: booklore
               MYSQL_PASSWORD:
                 valueFrom:
@@ -100,7 +100,7 @@ spec:
             namespace: network
             sectionName: websecure
         hostnames:
-          - books.${SECRET_DOMAIN}
+          - books.jnobrega.com
         rules:
           - backendRefs:
               - name: *app
@@ -127,7 +127,7 @@ spec:
 
       books:
         type: nfs
-        server: ${NFS_SERVER}
+        server: 192.168.1.84
         path: /ebooks
         advancedMounts:
           *app :
@@ -136,7 +136,7 @@ spec:
 
       bookdrop:
         type: nfs
-        server: ${NFS_SERVER}
+        server: 192.168.1.84
         path: /book-ingests
         advancedMounts:
           *app :

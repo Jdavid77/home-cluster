@@ -4,7 +4,7 @@ metadata:
   name: pgadmin
 spec:
   hostnames:
-    - pgadmin.${SECRET_DOMAIN}
+    - pgadmin.jnobrega.com
   parentRefs:
     - group: gateway.networking.k8s.io
       kind: Gateway

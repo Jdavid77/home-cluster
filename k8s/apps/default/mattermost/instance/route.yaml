@@ -4,7 +4,7 @@ metadata:
   name: mattermost
 spec:
   hostnames:
-    - mattermost.${SECRET_DOMAIN}
+    - mattermost.jnobrega.com
   parentRefs:
     - name: internal
       namespace: network

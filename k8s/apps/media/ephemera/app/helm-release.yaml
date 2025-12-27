@@ -38,7 +38,7 @@ spec:
               AA_BASE_URL: https://annas-archive.li
               FLARESOLVERR_URL: http://localhost:8191
               LG_BASE_URL: https://gen.com
-              TZ: ${TIMEZONE}
+              TZ: Europe/Lisbon
               PUID: 1002
               PGID: 100
             probes:
@@ -69,7 +69,7 @@ spec:
               LOG_LEVEL: info
               LOG_HTML: "false"
               CAPTCHA_SOLVER: none
-              TZ: ${TIMEZONE}
+              TZ: Europe/Lisbon
             probes:
               liveness: &probes-solver
                 enabled: true
@@ -99,7 +99,7 @@ spec:
             namespace: network
             sectionName: websecure
         hostnames:
-          - books-downloader.${SECRET_DOMAIN}
+          - books-downloader.jnobrega.com
         rules:
           - backendRefs:
               - name: *app
@@ -111,7 +111,7 @@ spec:
     persistence:
       ingests:
         type: nfs
-        server: ${NFS_SERVER}
+        server: 192.168.1.84
         path: /book-ingests
         advancedMounts:
           ephemera:
