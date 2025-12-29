@@ -1,0 +1,30 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: spegel
+spec:
+  hostnames:
+    - spegel.jnobrega.com
+  parentRefs:
+    - name: internal
+      namespace: network
+      sectionName: websecure
+  rules:
+    - matches:
+        - path:
+            type: Exact
+            value: /
+      filters:
+        - type: RequestRedirect
+          requestRedirect:
+            path:
+              type: ReplaceFullPath
+              replaceFullPath: /debug/web
+            statusCode: 302
+    - backendRefs:
+        - name: spegel
+          port: 9090
+      matches:
+        - path:
+            type: PathPrefix
+            value: /debug/web
