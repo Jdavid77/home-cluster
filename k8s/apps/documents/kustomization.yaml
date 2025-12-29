@@ -5,3 +5,5 @@ resources:
   - ./namespace.yaml
   - ./paperless/ks.yaml
   - ./stirling-pdf/ks.yaml
+components:
+  - ../../components/middlewares

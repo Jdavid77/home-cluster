@@ -7,5 +7,5 @@ resources:
   - ./dragonfly/ks.yaml
   - ./grist/ks.yaml
   - ./kmcp/ks.yaml
-# components:
-#   - ../../components/middlewares
+components:
+  - ../../components/middlewares
