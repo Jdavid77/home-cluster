@@ -107,12 +107,6 @@ spec:
           - backendRefs:
               - name: renderercv-nginx
                 port: *nginxPort
-            filters:
-              - type: ExtensionRef
-                extensionRef:
-                  group: traefik.io
-                  kind: Middleware
-                  name: basic-auth-renderercv
             matches:
               - path:
                   type: PathPrefix
