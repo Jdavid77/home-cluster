@@ -7,3 +7,5 @@ resources:
   - ./postgres/ks.yaml
   - ./volsync/ks.yaml
   - ./akeyless/ks.yaml
+components:
+  - ../../components/alerts

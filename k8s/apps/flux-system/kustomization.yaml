@@ -5,3 +5,5 @@ resources:
   - ./weave/ks.yaml
   - ./flux-operator/ks.yaml
   - ./addons/ks.yaml
+components:
+  - ../../components/alerts

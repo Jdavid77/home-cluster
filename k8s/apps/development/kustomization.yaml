@@ -4,3 +4,5 @@ namespace: development
 resources:
   - ./namespace.yaml
   - ./sonarqube/ks.yaml
+components:
+  - ../../components/alerts

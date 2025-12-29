@@ -4,3 +4,5 @@ namespace: system-upgrade
 resources:
   - ./namespace.yaml
   - ./tuppr/ks.yaml
+components:
+  - ../../components/alerts

@@ -10,3 +10,4 @@ resources:
   - ./tailscale/ks.yaml
 components:
   - ../../components/middlewares
+  - ../../components/alerts

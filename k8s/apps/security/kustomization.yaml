@@ -8,3 +8,5 @@ resources:
   - ./authentik/ks.yaml
   - ./trivy-operator/ks.yaml
   - ./kyverno/ks.yaml
+components:
+  - ../../components/alerts

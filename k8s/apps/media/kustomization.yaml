@@ -14,3 +14,5 @@ resources:
   # - ./readarr/ks.yaml
   - ./ephemera/ks.yaml
   - ./booklore/ks.yaml
+components:
+  - ../../components/alerts

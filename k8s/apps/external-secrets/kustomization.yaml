@@ -5,3 +5,5 @@ resources:
   - ./namespace.yaml
   - ./external-secrets/ks.yaml
   - ./akeyless/ks.yaml
+components:
+  - ../../components/alerts

@@ -9,3 +9,5 @@ resources:
   - ./garage/ks.yaml
   - ./postgresus/ks.yaml
   - ./openebs/ks.yaml
+components:
+  - ../../components/alerts

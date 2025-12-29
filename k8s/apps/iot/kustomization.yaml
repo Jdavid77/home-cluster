@@ -4,3 +4,5 @@ namespace: iot
 resources:
   - ./namespace.yaml
   - ./mosquitto/ks.yaml
+components:
+  - ../../components/alerts
