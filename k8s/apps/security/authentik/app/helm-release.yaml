@@ -41,15 +41,18 @@ spec:
           enabled: false
       resources:
         requests:
-          cpu: 100m
-          memory: 512Mi
+          cpu: 200m
         limits:
-          cpu: 150m
           memory: 1Gi
     worker:
       autoscaling:
         enabled: true
         minReplicas: 1
+      resources:
+        requests:
+          cpu: 200m
+        limits:
+          memory: 1Gi
     prometheus:
       rules:
         enabled: true
