@@ -5,18 +5,10 @@ metadata:
   name: node-problem-detector
 spec:
   interval: 30m
-  chart:
-    spec:
-      chart: node-problem-detector
-      version: 2.3.14
-      sourceRef:
-        kind: HelmRepository
-        name: deliveryhero-charts
-        namespace: flux-system
-      interval: 15m
-  maxHistory: 2
-  uninstall:
-    keepHistory: false
+  chartRef:
+    kind: OCIRepository
+    name: node-problem-detector
+    namespace: flux-system
   values:
     metrics:
       enabled: true
