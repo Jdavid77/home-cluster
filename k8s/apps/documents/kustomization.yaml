@@ -6,5 +6,4 @@ resources:
   - ./paperless/ks.yaml
   - ./stirling-pdf/ks.yaml
 components:
-  - ../../components/middlewares
   - ../../components/alerts

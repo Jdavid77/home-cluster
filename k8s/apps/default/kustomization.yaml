@@ -23,5 +23,4 @@ resources:
   - ./renderercv/ks.yaml
 
 components:
-  - ../../components/middlewares
   - ../../components/alerts

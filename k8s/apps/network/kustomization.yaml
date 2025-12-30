@@ -3,11 +3,10 @@ kind: Kustomization
 namespace: network
 resources:
   - ./namespace.yaml
-  - ./traefik/ks.yaml
   - ./external-dns/ks.yaml
   - ./cloudflared/ks.yaml
   - ./error-pages/ks.yaml
   - ./tailscale/ks.yaml
+  - ./envoy-gateway/ks.yaml
 components:
-  - ../../components/middlewares
   - ../../components/alerts
