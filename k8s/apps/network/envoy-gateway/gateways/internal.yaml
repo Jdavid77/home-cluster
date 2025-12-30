@@ -15,13 +15,13 @@ spec:
     labels:
       cilium.l2.announce: "true"
   listeners:
-    - name: http
+    - name: web
       protocol: HTTP
       port: 80
       allowedRoutes:
         namespaces:
           from: Same
-    - name: https
+    - name: websecure
       protocol: HTTPS
       port: 443
       allowedRoutes:
@@ -41,7 +41,7 @@ spec:
   parentRefs:
     - name: internal
       namespace: network
-      sectionName: http
+      sectionName: web
   rules:
     - filters:
         - type: RequestRedirect
