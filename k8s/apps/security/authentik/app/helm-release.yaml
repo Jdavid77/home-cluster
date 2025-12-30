@@ -39,7 +39,7 @@ spec:
           hostnames:
             - "auth.jnobrega.com"
           parentRefs:
-            - name: internal
+            - name: external
               namespace: network
               sectionName: websecure
       metrics:
