@@ -95,12 +95,6 @@ spec:
           - backendRefs:
               - name: n8n
                 port: *port
-                  # filters:
-                  #   - type: ExtensionRef
-                  #     extensionRef:
-                  #       group: traefik.io
-                  #       kind: Middleware
-                  #       name: ak-outpost-proxy
       webhook:
         parentRefs:
           - kind: Gateway
