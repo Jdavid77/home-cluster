@@ -14,7 +14,7 @@ locals {
       authentik_proxy_application_name     = "Traefik"
       authentik_proxy_application_icon_url = "https://upload.wikimedia.org/wikipedia/commons/1/1b/Traefik.logo.png"
       authentik_proxy_external_host        = "https://traefik.${var.external_host}"
-    },{
+      }, {
       authentik_proxy_application_name     = "N8n"
       authentik_proxy_application_icon_url = "https://www.drupal.org/files/project-images/n8n-color.png"
       authentik_proxy_external_host        = "https://n8n.${var.external_host}"
@@ -65,7 +65,7 @@ resource "authentik_outpost" "proxy" {
     kubernetes_ingress_class_name    = null
     kubernetes_disabled_components   = ["ingress"]
     kubernetes_ingress_annotations   = {}
-    kubernetes_ingress_secret_name   = "authentik-outpost-tls"
+    kubernetes_ingress_secret_name   = "ak-outpost-proxy-tls"
     kubernetes_httproute_annotations = {}
     kubernetes_httproute_parent_refs = [
       {

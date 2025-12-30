@@ -55,4 +55,4 @@ spec:
                 extensionRef:
                   group: traefik.io
                   kind: Middleware
-                  name: authentik-outpost
+                  name: ak-outpost-proxy
