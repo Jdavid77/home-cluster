@@ -65,8 +65,6 @@ spec:
             port: 6379
     route:
       frontend:
-        enabled: true
-        kind: HTTPRoute
         parentRefs:
           - kind: Gateway
             name: internal
@@ -78,10 +76,6 @@ spec:
           - backendRefs:
               - name: immich-server
                 port: *port
-            matches:
-              - path:
-                  type: PathPrefix
-                  value: /
     persistence:
       matplotlib:
         type: emptyDir

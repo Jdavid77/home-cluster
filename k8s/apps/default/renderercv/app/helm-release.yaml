@@ -76,8 +76,6 @@ spec:
             port: &nginxPort 8080
     route:
       code:
-        enabled: true
-        kind: HTTPRoute
         parentRefs:
           - kind: Gateway
             name: internal
@@ -89,13 +87,7 @@ spec:
           - backendRefs:
               - name: renderercv-code-server
                 port: *codePort
-            matches:
-              - path:
-                  type: PathPrefix
-                  value: /
       nginx:
-        enabled: true
-        kind: HTTPRoute
         parentRefs:
           - kind: Gateway
             name: external
@@ -107,10 +99,6 @@ spec:
           - backendRefs:
               - name: renderercv-nginx
                 port: *nginxPort
-            matches:
-              - path:
-                  type: PathPrefix
-                  value: /
     persistence:
       nginx:
         enabled: true

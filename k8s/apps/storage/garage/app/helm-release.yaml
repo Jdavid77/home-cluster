@@ -51,8 +51,6 @@ spec:
             port: &api-port 3903
     route:
       s3:
-        enabled: true
-        kind: HTTPRoute
         parentRefs:
           - kind: Gateway
             name: internal
@@ -64,13 +62,7 @@ spec:
           - backendRefs:
               - name: *app
                 port: *port
-            matches:
-              - path:
-                  type: PathPrefix
-                  value: /
       api:
-        enabled: true
-        kind: HTTPRoute
         parentRefs:
           - kind: Gateway
             name: internal
@@ -82,10 +74,6 @@ spec:
           - backendRefs:
               - name: *app
                 port: *api-port
-            matches:
-              - path:
-                  type: PathPrefix
-                  value: /
     configMaps:
       config:
         data:

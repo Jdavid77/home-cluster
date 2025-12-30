@@ -42,8 +42,6 @@ spec:
             port: &port 5000
     route:
       frontend:
-        enabled: true
-        kind: HTTPRoute
         parentRefs:
           - kind: Gateway
             name: internal
@@ -55,7 +53,3 @@ spec:
           - backendRefs:
               - name: *app
                 port: *port
-            matches:
-              - path:
-                  type: PathPrefix
-                  value: /

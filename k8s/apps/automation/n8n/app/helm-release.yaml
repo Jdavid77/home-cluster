@@ -84,8 +84,6 @@ spec:
             port: *port
     route:
       main:
-        enabled: true
-        kind: HTTPRoute
         parentRefs:
           - kind: Gateway
             name: internal
@@ -97,10 +95,6 @@ spec:
           - backendRefs:
               - name: n8n
                 port: *port
-            matches:
-              - path:
-                  type: PathPrefix
-                  value: /
                   # filters:
                   #   - type: ExtensionRef
                   #     extensionRef:
@@ -108,8 +102,6 @@ spec:
                   #       kind: Middleware
                   #       name: ak-outpost-proxy
       webhook:
-        enabled: true
-        kind: HTTPRoute
         parentRefs:
           - kind: Gateway
             name: external
@@ -118,10 +110,7 @@ spec:
         hostnames:
           - n8n-webhook.jnobrega.com
         rules:
-          - matches:
-              - path:
-                  value: /webhook
-            backendRefs:
+          - backendRefs:
               - {}
     persistence:
       config:

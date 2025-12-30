@@ -63,7 +63,6 @@ spec:
             name: internal
             namespace: network
             sectionName: websecure
-
         rules:
           - backendRefs:
               - name: *app

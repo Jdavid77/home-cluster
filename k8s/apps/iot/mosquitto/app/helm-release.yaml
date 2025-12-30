@@ -57,8 +57,6 @@ spec:
             port: &mqtt-port 1883
     route:
       tcp:
-        enabled: true
-        kind: TCPRoute
         parentRefs:
           - kind: Gateway
             name: internal
@@ -68,13 +66,7 @@ spec:
           - backendRefs:
               - name: *app
                 port: *mqtt-port
-            matches:
-              - path:
-                  type: PathPrefix
-                  value: /
       tls:
-        enabled: true
-        kind: TLSRoute
         parentRefs:
           - kind: Gateway
             name: internal
@@ -84,10 +76,6 @@ spec:
           - backendRefs:
               - name: *app
                 port: *mqtts-port
-            matches:
-              - path:
-                  type: PathPrefix
-                  value: /
     persistence:
       config-file:
         type: configMap

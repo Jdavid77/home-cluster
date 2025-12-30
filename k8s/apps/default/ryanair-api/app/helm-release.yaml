@@ -51,8 +51,6 @@ spec:
         seccompProfile: {type: RuntimeDefault}
     route:
       main:
-        enabled: true
-        kind: HTTPRoute
         parentRefs:
           - kind: Gateway
             name: internal
@@ -64,10 +62,6 @@ spec:
           - backendRefs:
               - name: ryanair-api
                 port: &port 3000
-            matches:
-              - path:
-                  type: PathPrefix
-                  value: /
     service:
       main:
         controller: ryanair-api

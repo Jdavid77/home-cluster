@@ -73,8 +73,6 @@ spec:
             port: &server-port 8000
     route:
       frontend:
-        enabled: true
-        kind: HTTPRoute
         parentRefs:
           - kind: Gateway
             name: internal
@@ -86,13 +84,7 @@ spec:
           - backendRefs:
               - name: *app
                 port: *frontend-port
-            matches:
-              - path:
-                  type: PathPrefix
-                  value: /
       server:
-        enabled: true
-        kind: HTTPRoute
         parentRefs:
           - kind: Gateway
             name: internal
@@ -104,10 +96,6 @@ spec:
           - backendRefs:
               - name: *app
                 port: *server-port
-            matches:
-              - path:
-                  type: PathPrefix
-                  value: /
     persistence:
       config:
         enabled: true

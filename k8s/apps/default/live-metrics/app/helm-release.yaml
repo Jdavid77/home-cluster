@@ -78,8 +78,6 @@ spec:
         - name: live-metrics-gh
     route:
       main:
-        enabled: true
-        kind: HTTPRoute
         parentRefs:
           - kind: Gateway
             name: external
@@ -91,10 +89,6 @@ spec:
           - backendRefs:
               - name: *app
                 port: &port 8080
-            matches:
-              - path:
-                  type: PathPrefix
-                  value: /
     service:
       main:
         controller: *app

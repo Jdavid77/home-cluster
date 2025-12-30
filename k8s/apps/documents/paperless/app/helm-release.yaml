@@ -65,8 +65,6 @@ spec:
             port: 8000
     route:
       main:
-        enabled: true
-        kind: HTTPRoute
         parentRefs:
           - kind: Gateway
             name: internal
@@ -78,10 +76,6 @@ spec:
           - backendRefs:
               - name: *app
                 port: *port
-            matches:
-              - path:
-                  type: PathPrefix
-                  value: /
     persistence:
       data:
         type: nfs

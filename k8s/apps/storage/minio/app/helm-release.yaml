@@ -78,8 +78,6 @@ spec:
             scrapeTimeout: 10s
     route:
       main:
-        enabled: true
-        kind: HTTPRoute
         parentRefs:
           - kind: Gateway
             name: internal
@@ -91,13 +89,7 @@ spec:
           - backendRefs:
               - name: *app
                 port: *port
-            matches:
-              - path:
-                  type: PathPrefix
-                  value: /
       s3:
-        enabled: true
-        kind: HTTPRoute
         parentRefs:
           - kind: Gateway
             name: internal
@@ -109,10 +101,6 @@ spec:
           - backendRefs:
               - name: *app
                 port: *api-port
-            matches:
-              - path:
-                  type: PathPrefix
-                  value: /
     persistence:
       data:
         type: nfs
