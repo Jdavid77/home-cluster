@@ -2,7 +2,7 @@ originRequest:
   originServerName: jnobrega.com
 ingress:
   - hostname: "jnobrega.com"
-    service: https://traefik.network.svc.cluster.local:443
+    service: https://external.network.svc.cluster.local:443
   - hostname: "*.jnobrega.com"
-    service: https://traefik.network.svc.cluster.local:443
+    service: https://external.network.svc.cluster.local:443
   - service: http_status:404
