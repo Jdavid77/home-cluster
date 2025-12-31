@@ -10,3 +10,4 @@ resources:
   - ./kyverno/ks.yaml
 components:
   - ../../components/alerts/alertmanager
+  - ../../components/grafana/folder
