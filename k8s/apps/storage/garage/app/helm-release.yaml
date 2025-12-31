@@ -121,7 +121,7 @@ spec:
         enabled: true
         serviceName: *app
         endpoints:
-        - port: 3903
+        - port: api
           scheme: http
           path: /metrics
           interval: 1m
