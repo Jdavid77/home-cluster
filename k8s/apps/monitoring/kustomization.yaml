@@ -13,3 +13,4 @@ resources:
   - ./watch-your-lan/ks.yaml
 components:
   - ../../components/alerts/alertmanager
+  - ../../components/grafana/folder

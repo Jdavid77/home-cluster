@@ -9,3 +9,4 @@ resources:
   - ./envoy-gateway/ks.yaml
 components:
   - ../../components/alerts/alertmanager
+  - ../../components/grafana/folder
