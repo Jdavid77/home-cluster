@@ -9,3 +9,4 @@ resources:
   - ./kmcp/ks.yaml
 components:
   - ../../components/alerts/alertmanager
+  - ../../components/grafana/folder
