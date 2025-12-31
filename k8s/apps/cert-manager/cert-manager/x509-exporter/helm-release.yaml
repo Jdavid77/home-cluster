@@ -20,6 +20,4 @@ spec:
       warningDaysLeft: 14
       criticalDaysleft: 7
     grafana:
-      createDashboard: true
-      annotations:
-        grafana_folder: Cert-Manager
+      createDashboard: false
