@@ -19,7 +19,7 @@ spec:
       oauth_auto_login: "false"
       signout_redirect_url: "https://auth.jnobrega.com/application/o/Grafana/end-session/"
     auth.anonymous:
-      enabled: "true"
+      enabled: "false"
     auth.basic:
       enabled: "true"
     auth.generic_oauth:
