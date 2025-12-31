@@ -64,7 +64,10 @@ spec:
     kubeControllerManager:
       enabled: false
     kubeEtcd:
-      enabled: false
+      service:
+        selector:
+          k8s-app: kube-controller-manager
+
     kubeScheduler:
       enabled: false
     kubeProxy:
