@@ -33,5 +33,5 @@ resources:
   - kmcp.yaml
   - kmcp-crds.yaml
   - node-problem-detector.yaml
-  - grafana.yaml
+  - grafana-operator.yaml
   - envoy-gateway.yaml

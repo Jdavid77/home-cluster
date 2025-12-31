@@ -5,7 +5,7 @@ resources:
   - ./namespace.yaml
   - ./kube-prometheus-stack/ks.yaml
   - ./metrics-server/ks.yaml
-  - ./grafana/ks.yaml
+  - ./grafana-operator/ks.yaml
   - ./pihole-exporter/ks.yaml
   - ./loki/ks.yaml
   - ./opentelemetry/ks.yaml

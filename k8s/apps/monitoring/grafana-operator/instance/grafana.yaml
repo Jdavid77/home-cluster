@@ -1,0 +1,89 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/grafana.integreatly.org/grafana_v1beta1.json
+apiVersion: grafana.integreatly.org/v1beta1
+kind: Grafana
+metadata:
+  name: grafana
+spec:
+  config:
+    analytics:
+      check_for_updates: "false"
+      check_for_plugin_updates: "false"
+      feedback_links_enabled: "false"
+      reporting_enabled: "false"
+    auth:
+      disable_login_form: "false"
+      oauth_allow_insecure_email_lookup: "true"
+      oauth_auto_login: "false"
+      signout_redirect_url: "https://auth.jnobrega.com/application/o/grafana/end-session/"
+    auth.anonymous:
+      enabled: "true"
+    auth.basic:
+      enabled: "true"
+    auth.generic_oauth:
+      allow_sign_up: "true"
+      api_url: https://auth.jnobrega.com/application/o/userinfo/
+      auth_url: https://auth.jnobrega.com/application/o/authorize/
+      empty_scopes: "false"
+      enabled: "true"
+      groups_attribute_path: groups
+      icon: signin
+      login_attribute_path: user
+      name: Authentik
+      name_attribute_path: user
+      role_attribute_path: |
+        contains(groups[*], 'grafana_admin') && 'Admin' || 'Viewer'
+      scopes: "openid profile email groups"
+      token_url: https://auth.jnobrega.com/application/o/token/
+      use_pkce: "true"
+    log:
+      mode: console
+    metrics:
+      enabled: "true"
+    news:
+      news_feed_enabled: "false"
+    date_formats:
+      full_date: "DD.MM.YYYY hh:mm:ss"
+      use_browser_locale: "true"
+    explore:
+      enabled: "true"
+    panels:
+      disable_sanitize_html: "true"
+    plugins:
+      plugin_admin_enabled: "false"
+      preinstall_sync: "grafana-clock-panel,grafana-piechart-panel,grafana-worldmap-panel,grafana-mqtt-datasource"
+    security:
+      angular_support_enabled: "true"
+      allow_embedding: "true"
+      cookie_samesite: disabled
+    server:
+      enable_gzip: "true"
+      root_url: https://grafana.jnobrega.com
+  deployment:
+    spec:
+      strategy:
+        type: Recreate
+      template:
+        spec:
+          containers:
+            - name: grafana
+              env:
+                - name: GF_SECURITY_ADMIN_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: grafana-admin
+                      key: GRAFANA_ADMIN_PASSWORD
+              envFrom:
+                - secretRef:
+                    name: grafana-secret
+              securityContext:
+                allowPrivilegeEscalation: false
+                readOnlyRootFilesystem: true
+                capabilities: { drop: ["ALL"] }
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+            fsGroupChangePolicy: OnRootMismatch
+  disableDefaultSecurityContext: All
