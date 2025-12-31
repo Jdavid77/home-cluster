@@ -116,3 +116,16 @@ spec:
         path: /garage-meta
         globalMounts:
           - path: /meta
+    serviceMonitor:
+      main:
+        enabled: true
+        serviceName: *app
+        endpoints:
+        - port: 3903
+          scheme: http
+          path: /metrics
+          interval: 1m
+          scrapeTimeout: 10s
+          bearerTokenSecret:
+            name: garage-secret
+            key: GARAGE_METRICS_TOKEN
