@@ -47,7 +47,7 @@ spec:
         name: Authentik
         name_attribute_path: user
         role_attribute_path: |
-          contains(groups[*], 'Grafana Admin') && 'Admin' || 'Viewer'
+          contains(groups[*], 'grafana_admin') && 'Admin' || 'Viewer'
         scopes: "openid profile email groups"
         token_url: https://auth.jnobrega.com/application/o/token/
         use_pkce: true
