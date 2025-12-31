@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    fluxcd.controlplane.io/prune: disabled
+  labels:
+    fluxcd.controlplane.io/name: flux
+    fluxcd.controlplane.io/namespace: flux-system
+    pod-security.kubernetes.io/warn: restricted
+    pod-security.kubernetes.io/warn-version: latest
+  name: flux-system
