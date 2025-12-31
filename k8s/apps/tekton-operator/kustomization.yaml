@@ -5,4 +5,4 @@ resources:
   - ./namespace.yaml
   - ./tekton-operator/ks.yaml
 components:
-  - ../../components/alerts
+  - ../../components/alerts/alertmanager

@@ -15,4 +15,4 @@ resources:
   - ./ephemera/ks.yaml
   - ./booklore/ks.yaml
 components:
-  - ../../components/alerts
+  - ../../components/alerts/alertmanager

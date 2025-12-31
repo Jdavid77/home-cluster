@@ -5,4 +5,4 @@ resources:
   - ./namespace.yaml
   - ./sonarqube/ks.yaml
 components:
-  - ../../components/alerts
+  - ../../components/alerts/alertmanager

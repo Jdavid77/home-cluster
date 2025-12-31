@@ -23,4 +23,4 @@ resources:
   - ./renderercv/ks.yaml
 
 components:
-  - ../../components/alerts
+  - ../../components/alerts/alertmanager

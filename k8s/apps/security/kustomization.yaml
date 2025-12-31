@@ -9,4 +9,4 @@ resources:
   - ./trivy-operator/ks.yaml
   - ./kyverno/ks.yaml
 components:
-  - ../../components/alerts
+  - ../../components/alerts/alertmanager

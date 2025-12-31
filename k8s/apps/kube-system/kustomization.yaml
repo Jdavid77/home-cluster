@@ -13,4 +13,4 @@ resources:
   - ./kubernetes-dashboard/ks.yaml
   - ./spegel/ks.yaml
 components:
-  - ../../components/alerts
+  - ../../components/alerts/alertmanager

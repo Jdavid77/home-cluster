@@ -10,4 +10,4 @@ resources:
   - ./postgresus/ks.yaml
   - ./openebs/ks.yaml
 components:
-  - ../../components/alerts
+  - ../../components/alerts/alertmanager

@@ -2,7 +2,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: stirling-pdf
+  name: &app stirling-pdf
 spec:
   targetNamespace: documents
   path: ./k8s/apps/documents/stirling-pdf/app
@@ -12,6 +12,11 @@ spec:
       kind: HelmRelease
       name: stirling-pdf
       namespace: documents
+  components:
+    - ../../../components/middlewares/authentik
+  postBuild:
+    substitute:
+      APP: *app
   sourceRef:
     kind: GitRepository
     name: home-cluster

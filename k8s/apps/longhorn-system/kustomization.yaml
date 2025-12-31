@@ -8,4 +8,4 @@ resources:
   # - ./csi-driver-nfs/ks.yaml
   - ./longhorn/ks.yaml
 components:
-  - ../../components/alerts
+  - ../../components/alerts/alertmanager

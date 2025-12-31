@@ -9,4 +9,4 @@ resources:
   - ./tailscale/ks.yaml
   - ./envoy-gateway/ks.yaml
 components:
-  - ../../components/alerts
+  - ../../components/alerts/alertmanager
