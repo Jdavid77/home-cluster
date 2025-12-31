@@ -6,3 +6,4 @@ resources:
   - ./envoy.yaml
   - ./external.yaml
   - ./internal.yaml
+  - ./referencegrant.yaml
