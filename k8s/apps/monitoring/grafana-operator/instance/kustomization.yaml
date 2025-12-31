@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - grafana.yaml
   - route.yaml
+  - datasources.yaml
