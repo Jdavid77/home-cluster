@@ -3,9 +3,9 @@
 apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
 metadata:
-  name: cert-manager
+  name: external-secrets
 spec:
-  folderRef: "cert-manager"
+  folderRef: "external-secrets"
   allowCrossNamespaceImport: true
   instanceSelector:
     matchLabels:
@@ -13,4 +13,4 @@ spec:
   datasources:
     - datasourceName: prometheus
       inputName: DS_PROMETHEUS
-  url: https://grafana.com/api/dashboards/20842/revisions/3/download
+  url: https://raw.githubusercontent.com/external-secrets/external-secrets/main/docs/snippets/dashboard.json

@@ -5,7 +5,7 @@ kind: GrafanaDashboard
 metadata:
   name: cert-manager-x509-exporter
 spec:
-  folder: "cert-manager"
+  folderRef: "cert-manager"
   allowCrossNamespaceImport: true
   instanceSelector:
     matchLabels:
