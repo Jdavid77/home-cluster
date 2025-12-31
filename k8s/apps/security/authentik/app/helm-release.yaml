@@ -17,9 +17,7 @@ spec:
         - secretRef:
             name: *secret
     server:
-      autoscaling:
-        enabled: true
-        minReplicas: 1
+      replicas: 2
       initContainers:
         - name: init-db
           image: ghcr.io/home-operations/postgres-init:18.1
@@ -43,16 +41,14 @@ spec:
         requests:
           cpu: 200m
         limits:
-          memory: 1Gi
+          memory: 2Gi
     worker:
-      autoscaling:
-        enabled: true
-        minReplicas: 1
+      replicas: 2
       resources:
         requests:
           cpu: 200m
         limits:
-          memory: 1Gi
+          memory: 2Gi
     prometheus:
       rules:
         enabled: true

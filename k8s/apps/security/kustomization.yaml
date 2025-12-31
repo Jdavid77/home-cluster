@@ -5,7 +5,7 @@ resources:
   - ./namespace.yaml
   - ./lldap/ks.yaml
   - ./vaultwarden/ks.yaml
-  #- ./authentik/ks.yaml
+  - ./authentik/ks.yaml
   - ./trivy-operator/ks.yaml
   - ./kyverno/ks.yaml
 components:
