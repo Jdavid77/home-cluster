@@ -11,3 +11,4 @@ resources:
   - ./openebs/ks.yaml
 components:
   - ../../components/alerts/alertmanager
+  - ../../components/grafana/folder
