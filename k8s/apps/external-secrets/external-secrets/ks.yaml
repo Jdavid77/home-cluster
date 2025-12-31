@@ -4,6 +4,7 @@ kind: Kustomization
 metadata:
   name: external-secrets
 spec:
+  targetNamespace: external-secrets
   path: ./k8s/apps/external-secrets/external-secrets/app
   prune: true
   sourceRef:
