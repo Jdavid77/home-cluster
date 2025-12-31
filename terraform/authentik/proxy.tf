@@ -9,15 +9,6 @@ locals {
       authentik_proxy_application_name     = "IT-Tools"
       authentik_proxy_application_icon_url = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbQfvQ0xke1DiSodQnuPd9ayiH4LKkEfUDOA&s"
       authentik_proxy_external_host        = "https://it-tools.${var.external_host}"
-    },
-    {
-      authentik_proxy_application_name     = "Traefik"
-      authentik_proxy_application_icon_url = "https://upload.wikimedia.org/wikipedia/commons/1/1b/Traefik.logo.png"
-      authentik_proxy_external_host        = "https://traefik.${var.external_host}"
-      }, {
-      authentik_proxy_application_name     = "N8n"
-      authentik_proxy_application_icon_url = "https://www.drupal.org/files/project-images/n8n-color.png"
-      authentik_proxy_external_host        = "https://n8n.${var.external_host}"
     }
   ]
 }
@@ -48,7 +39,7 @@ resource "authentik_outpost" "proxy" {
   config = jsonencode({
     log_level                        = "info"
     docker_labels                    = null
-    authentik_host                   = var.authentik_api_url
+    authentik_host                   = "http://authentik-server.security.svc.cluster.local:80"
     docker_network                   = null
     container_image                  = null
     docker_map_ports                 = true
