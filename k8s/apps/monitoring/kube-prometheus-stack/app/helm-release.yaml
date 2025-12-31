@@ -67,7 +67,6 @@ spec:
       service:
         selector:
           k8s-app: kube-controller-manager
-
     kubeScheduler:
       enabled: false
     kubeProxy:
