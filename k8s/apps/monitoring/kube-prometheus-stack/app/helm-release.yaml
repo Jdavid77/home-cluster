@@ -10,6 +10,10 @@ spec:
     kind: OCIRepository
     name: kube-prometheus-stack
     namespace: flux-system
+  valuesFrom:
+  - kind: ConfigMap
+    name: kube-state-metrics-config
+    valuesKey: kube-state-metrics-config.yaml
   values:
     crds:
       enabled: false
@@ -157,10 +161,6 @@ spec:
       enabled: true
     kube-state-metrics:
       fullnameOverride: kube-state-metrics
-      metricLabelsAllowlist:
-        - pods=[*]
-        - deployments=[*]
-        - persistentvolumeclaims=[*]
       prometheus:
         monitor:
           enabled: true
