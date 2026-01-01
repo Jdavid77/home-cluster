@@ -370,50 +370,6 @@ kube-state-metrics:
                       parent_section_name: [ "parentRef", "sectionName" ]
                       parent_port: [ "parentRef", "port" ]
           - groupVersionKind:
-              group: gateway.networking.k8s.io
-              kind: "BackendTLSPolicy"
-              version: "v1alpha3"
-            metricNamePrefix: gatewayapi_backendtlspolicy
-            labelsFromPath:
-              name:
-                - metadata
-                - name
-              namespace:
-                - metadata
-                - namespace
-            metrics:
-              - name: "labels"
-                help: "Kubernetes labels converted to Prometheus labels."
-                each:
-                  type: Info
-                  info:
-                    path: [ metadata ]
-                    labelsFromPath:
-                      "*": [ labels ]
-              - name: "created"
-                help: "created timestamp"
-                each:
-                  type: Gauge
-                  gauge:
-                    path: [ metadata, creationTimestamp ]
-              - name: "deleted"
-                help: "deletion timestamp"
-                each:
-                  type: Gauge
-                  gauge:
-                    path: [ metadata, deletionTimestamp ]
-              - name: "target_info"
-                help: "Target references that the backendtlspolicy wants to be attached to"
-                each:
-                  type: Info
-                  info:
-                    path: [ spec, targetRef ]
-                    labelsFromPath:
-                      target_group: [ "group" ]
-                      target_kind: [ "kind" ]
-                      target_name: [ "name" ]
-                      target_namespace: [ "namespace" ]
-          - groupVersionKind:
               group: kustomize.toolkit.fluxcd.io
               version: v1
               kind: Kustomization
