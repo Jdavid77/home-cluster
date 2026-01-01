@@ -1,7 +1,4 @@
 kube-state-metrics:
-  collectors: [ ]
-  extraArgs:
-    - --custom-resource-state-only=true
   rbac:
     extraRules:
       - apiGroups:
