@@ -15,7 +15,7 @@ spec:
     keepHistory: false
   values:
     controllers:
-      *app:
+      *app :
         replicas: 1
         strategy: RollingUpdate
         containers:
@@ -55,7 +55,7 @@ spec:
               REACT_APP_INFRA_OS: Talos
               REACT_APP_INFRA_STORAGE: Longhorn/OpenEBS
               REACT_APP_INFRA_CNI: Cilium
-              REACT_APP_INFRA_LOAD_BALANCER: Traefik
+              REACT_APP_INFRA_LOAD_BALANCER: Envoy Gateway
               REACT_APP_INFRA_GITOPS: "Flux CD"
             probes:
               liveness: &probes
