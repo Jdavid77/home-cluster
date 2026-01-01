@@ -11,6 +11,8 @@ spec:
     name: external-secrets
     namespace: flux-system
   values:
+    grafanaDashboard:
+      enabled: true
     global:
       nodeSelector:
         node-role.kubernetes.io/control-plane: ""

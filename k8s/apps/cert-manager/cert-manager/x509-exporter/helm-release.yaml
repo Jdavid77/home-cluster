@@ -20,4 +20,4 @@ spec:
       warningDaysLeft: 14
       criticalDaysleft: 7
     grafana:
-      createDashboard: false
+      createDashboard: true

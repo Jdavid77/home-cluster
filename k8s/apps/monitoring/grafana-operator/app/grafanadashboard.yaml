@@ -3,9 +3,9 @@
 apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
 metadata:
-  name: cert-manager-x509-exporter
+  name: grafana-operator
 spec:
-  folderRef: "cert-manager"
+  folderRef: "monitoring"
   allowCrossNamespaceImport: true
   instanceSelector:
     matchLabels:
@@ -14,5 +14,5 @@ spec:
     - datasourceName: prometheus
       inputName: DS_PROMETHEUS
   configMapRef:
-    name: x509-certificate-exporter-dashboard
-    key: x509-certificate-exporter.json
+    name: grafana-operator-dashboard
+    key: grafana-operator.json

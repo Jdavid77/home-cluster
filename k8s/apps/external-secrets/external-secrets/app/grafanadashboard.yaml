@@ -13,4 +13,6 @@ spec:
   datasources:
     - datasourceName: prometheus
       inputName: DS_PROMETHEUS
-  url: https://raw.githubusercontent.com/external-secrets/external-secrets/main/docs/snippets/dashboard.json
+  configMapRef:
+    name: external-secrets-dashboard
+    key: external-secrets.json
