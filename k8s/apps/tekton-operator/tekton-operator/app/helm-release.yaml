@@ -16,4 +16,4 @@ spec:
   values:
     installCRDs: true
     service:
-      createServiceMonitor: true
+      createServiceMonitor: false
