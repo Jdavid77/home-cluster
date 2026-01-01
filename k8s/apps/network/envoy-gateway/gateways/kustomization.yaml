@@ -7,3 +7,5 @@ resources:
   - ./external.yaml
   - ./internal.yaml
   - ./referencegrant.yaml
+  - ./monitor.yaml
+  - ./grafanadashboard.yaml
