@@ -18,6 +18,15 @@ connectivity:
     target: 1.1.1.1:53
     interval: 60s
 
+# Gatus needs at least one endpoint to start
+endpoints:
+  - name: Cloudflare
+    group: connectivity
+    url: icmp://1.1.1.1
+    interval: 1m
+    conditions:
+      - "[CONNECTED] == true"
+
 metrics: true
 
 storage:
