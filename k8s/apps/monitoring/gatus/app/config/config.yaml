@@ -21,11 +21,20 @@ connectivity:
 # Gatus needs at least one endpoint to start
 endpoints:
   - name: Cloudflare
-    group: connectivity
+    group: "Third-Party"
     url: icmp://1.1.1.1
     interval: 1m
     conditions:
       - "[CONNECTED] == true"
+
+  - name: Akeyless API
+    group: "Third-Party"
+    url: https://api.akeyless.io/health
+    interval: 1m
+    client:
+      dns-resolver: tcp://1.1.1.1:53
+    conditions:
+      - "[STATUS] == 200"
 
 metrics: true
 
@@ -44,5 +53,6 @@ ui:
       link: https://github.com/Jdavid77
     - name: "Cluster Live Status"
       link: https://live.jnobrega.com
+
 web:
   port: ${GATUS_WEB_PORT}
