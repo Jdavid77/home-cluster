@@ -1,0 +1,40 @@
+---
+alerting:
+  pushover:
+    title: Gatus
+    application-token: ${PUSHOVER_GATUS_KEY}
+    user-key: ${PUSHOVER_USER_KEY}
+    priority: 1
+    resolved-priority: 0
+    default-alert:
+      description: "Health Check Failed"
+      send-on-resolved: true
+      failure-threshold: 3
+      success-threshold: 3
+
+# Prevent Gatus from reporting endpoints as unhealthy when Gatus itself is unhealthy, you may configure Gatus to periodically check for internet connectivity.
+connectivity:
+  checker:
+    target: 1.1.1.1:53
+    interval: 60s
+
+metrics: true
+
+storage:
+  type: postgres
+  path: postgres://${INIT_POSTGRES_USER}:${INIT_POSTGRES_PASS}@${INIT_POSTGRES_HOST}:5432/${INIT_POSTGRES_DBNAME}?sslmode=disable
+  caching: true
+
+ui:
+  title: Status | Gatus
+  header: Status
+  logo: https://avatars.githubusercontent.com/u/49655819?v=4
+  link: https://github.com/Jdavid77
+  buttons:
+    - name: Github
+      link: https://github.com/Jdavid77
+    - name: Homelab
+      link: https://github.com/Jdavid77/home-cluster
+
+web:
+  port: ${GATUS_WEB_PORT}

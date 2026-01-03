@@ -11,6 +11,7 @@ resources:
   - ./opentelemetry/ks.yaml
   - ./prometheus-operator-crds/ks.yaml
   - ./watch-your-lan/ks.yaml
+  - ./gatus/ks.yaml
 components:
   - ../../components/alerts/alertmanager
   - ../../components/grafana/folder
