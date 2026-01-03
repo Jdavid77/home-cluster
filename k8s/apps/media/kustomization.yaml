@@ -3,15 +3,10 @@ kind: Kustomization
 namespace: media
 resources:
   - ./namespace.yaml
-  # - ./calibre-web/ks.yaml
-  # - ./calibre-web-downloader/ks.yaml
-  # - ./calibre/ks.yaml
   - ./qbittorrent/ks.yaml
-  # - ./prowlarr/ks.yaml
   - ./audiobookshelf/ks.yaml
   - ./metube/ks.yaml
   - ./immich/ks.yaml
-  # - ./readarr/ks.yaml
   - ./ephemera/ks.yaml
   - ./booklore/ks.yaml
 components:
