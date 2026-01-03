@@ -58,6 +58,9 @@ spec:
             sectionName: websecure
         hostnames:
           - s3-garage.jnobrega.com
+        annotations:
+          gatus.home-operations.com/endpoint: |-
+            conditions: ["[STATUS] == 403"]
         rules:
           - backendRefs:
               - name: *app
@@ -70,6 +73,9 @@ spec:
             sectionName: websecure
         hostnames:
           - api-garage.jnobrega.com
+        annotations:
+          gatus.home-operations.com/endpoint: |-
+            conditions: ["[STATUS] == 400"]
         rules:
           - backendRefs:
               - name: *app
