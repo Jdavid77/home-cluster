@@ -36,14 +36,13 @@ storage:
 
 ui:
   title: Status | Gatus
-  header: Status
+  dashboard-heading: "Application's Health Dashboard"
   logo: https://avatars.githubusercontent.com/u/49655819?v=4
   link: https://github.com/Jdavid77
   buttons:
     - name: Github
       link: https://github.com/Jdavid77
-    - name: Homelab
-      link: https://github.com/Jdavid77/home-cluster
-
+    - name: "Cluster Live Status"
+      link: https://live.jnobrega.com
 web:
   port: ${GATUS_WEB_PORT}
