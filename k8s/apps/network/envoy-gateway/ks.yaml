@@ -11,6 +11,11 @@ spec:
     kind: GitRepository
     name: home-cluster
     namespace: flux-system
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      name: envoy-gateway
+      namespace: network
   wait: true
   interval: 30m
   retryInterval: 1m
@@ -33,6 +38,11 @@ spec:
     kind: GitRepository
     name: home-cluster
     namespace: flux-system
+  healthCheckExprs:
+    - apiVersion: gateway.networking.k8s.io/v1
+      kind: Gateway
+      failed: status.conditions.filter(e, e.type == 'Programmed').all(e, e.status == 'False')
+      current: status.conditions.filter(e, e.type == 'Programmed').all(e, e.status == 'True')
   wait: true
   interval: 30m
   retryInterval: 1m
@@ -55,6 +65,11 @@ spec:
     kind: GitRepository
     name: home-cluster
     namespace: flux-system
+  healthCheckExprs:
+    - apiVersion: cert-manager.io/v1
+      kind: Certificate
+      failed: status.conditions.filter(e, e.type == 'Ready').all(e, e.status == 'False')
+      current: status.conditions.filter(e, e.type == 'Ready').all(e, e.status == 'True')
   wait: true
   interval: 30m
   retryInterval: 1m

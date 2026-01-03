@@ -43,6 +43,11 @@ spec:
       kind: ResourceSet
       name: ghrunners
       namespace: actions-runner-system
+  healthCheckExprs:
+    - apiVersion: external-secrets.io/v1
+      kind: ExternalSecret
+      failed: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSyncedError')
+      current: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSynced')
   wait: true
   interval: 30m
   retryInterval: 1m
