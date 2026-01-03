@@ -8,7 +8,6 @@ resources:
   - ./littlelink/ks.yaml
   - ./linkding/ks.yaml
   - ./adventurelog/ks.yaml
-  - ./it-tools/ks.yaml
   - ./dashy/ks.yaml
   - ./morphos/ks.yaml
   - ./ryanair-api/ks.yaml
