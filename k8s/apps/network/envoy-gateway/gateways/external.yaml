@@ -28,6 +28,20 @@ spec:
         certificateRefs:
           - kind: Secret
             name: jnobrega.com-tls
+    - name: tcp
+      protocol: TCP
+      port: 1883
+      allowedRoutes:
+        namespaces:
+          from: All
+    - name: tls
+      protocol: TLS
+      port: 8883
+      tls:
+        mode: Passthrough
+      allowedRoutes:
+        namespaces:
+          from: All
 ---
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/gateway.networking.k8s.io/httproute_v1.json
 apiVersion: gateway.networking.k8s.io/v1

@@ -57,6 +57,7 @@ spec:
             port: &mqtt-port 1883
     route:
       tcp:
+        kind: TCPRoute
         parentRefs:
           - kind: Gateway
             name: internal
@@ -67,6 +68,7 @@ spec:
               - name: *app
                 port: *mqtt-port
       tls:
+        kind: TLSRoute
         parentRefs:
           - kind: Gateway
             name: internal
