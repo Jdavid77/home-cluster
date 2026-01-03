@@ -38,7 +38,7 @@ spec:
               pullPolicy: IfNotPresent
             env:
               TZ: Europe/Lisbon
-              THEME: quartz
+              THEME: darkly
               USE_DB: postgres
               PROMETHEUS_ENABLE: "true"
               IFACES: eno1
