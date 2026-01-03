@@ -4,6 +4,7 @@ kind: Kustomization
 metadata:
   name: metrics-server
 spec:
+  targetNamespace: monitoring
   path: ./k8s/apps/monitoring/metrics-server/app
   prune: true
   sourceRef:

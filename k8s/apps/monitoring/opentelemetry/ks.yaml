@@ -4,6 +4,7 @@ kind: Kustomization
 metadata:
   name: open-telemetry-operator
 spec:
+  targetNamespace: monitoring
   path: ./k8s/apps/monitoring/opentelemetry/app
   prune: true
   sourceRef:

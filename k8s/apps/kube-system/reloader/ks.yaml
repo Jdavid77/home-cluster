@@ -4,6 +4,7 @@ kind: Kustomization
 metadata:
   name: reloader
 spec:
+  targetNamespace: kube-system
   path: ./k8s/apps/kube-system/reloader/app
   prune: true
   sourceRef:

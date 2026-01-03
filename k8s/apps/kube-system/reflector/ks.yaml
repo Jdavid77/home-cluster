@@ -4,6 +4,7 @@ kind: Kustomization
 metadata:
   name: reflector
 spec:
+  targetNamespace: kube-system
   path: ./k8s/apps/kube-system/reflector/app
   prune: true
   sourceRef:

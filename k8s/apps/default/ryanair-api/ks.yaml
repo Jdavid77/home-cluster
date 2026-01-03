@@ -4,6 +4,7 @@ kind: Kustomization
 metadata:
   name: ryanair-api
 spec:
+  targetNamespace: default
   path: ./k8s/apps/default/ryanair-api/app
   prune: true
   sourceRef:

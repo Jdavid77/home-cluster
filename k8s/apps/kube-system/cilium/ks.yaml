@@ -4,6 +4,7 @@ kind: Kustomization
 metadata:
   name: cilium
 spec:
+  targetNamespace: kube-system
   path: ./k8s/apps/kube-system/cilium/app
   prune: true
   sourceRef:
@@ -26,6 +27,7 @@ kind: Kustomization
 metadata:
   name: cilium-resources
 spec:
+  targetNamespace: kube-system
   path: ./k8s/apps/kube-system/cilium/resources
   prune: true
   dependsOn:

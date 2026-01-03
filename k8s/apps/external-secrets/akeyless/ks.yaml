@@ -4,6 +4,7 @@ kind: Kustomization
 metadata:
   name: external-secrets-store
 spec:
+  targetNamespace: external-secrets
   path: ./k8s/apps/external-secrets/akeyless/store
   prune: true
   sourceRef:

@@ -4,6 +4,7 @@ kind: Kustomization
 metadata:
   name: tekton-operator
 spec:
+  targetNamespace: tekton-operator
   path: ./k8s/apps/tekton-operator/tekton-operator/app
   prune: true
   sourceRef:

@@ -38,6 +38,11 @@ spec:
     kind: GitRepository
     name: home-cluster
     namespace: flux-system
+  healthChecks:
+    - apiVersion: fluxcd.controlplane.io/v1
+      kind: ResourceSet
+      name: ghrunners
+      namespace: actions-runner-system
   wait: true
   interval: 30m
   retryInterval: 1m

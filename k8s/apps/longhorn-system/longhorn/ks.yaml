@@ -47,6 +47,7 @@ kind: Kustomization
 metadata:
   name: longhorn-storageclasses
 spec:
+  targetNamespace: longhorn-system
   path: ./k8s/apps/longhorn-system/longhorn/storageclasses
   dependsOn:
     - name: longhorn
