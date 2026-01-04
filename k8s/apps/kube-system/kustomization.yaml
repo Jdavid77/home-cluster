@@ -10,7 +10,6 @@ resources:
   - ./node-problem-detector/ks.yaml
   - ./cilium/ks.yaml
   - ./kubelet-csr-approver/ks.yaml
-  - ./kubernetes-dashboard/ks.yaml
   - ./spegel/ks.yaml
 components:
   - ../../components/alerts/alertmanager
