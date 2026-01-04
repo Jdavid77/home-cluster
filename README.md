@@ -98,6 +98,11 @@ These tools complement the Kubernetes infrastructure by providing essential func
                 <td><a href="https://www.terraform.io/">Terraform</a></td>
                 <td>IAC tool for automating the provisioning and management of outside dependencies (Akeyless, Cloudflare, etc...).</td>
             </tr>
+            <tr>
+                <td><img width="32" src="https://avatars.githubusercontent.com/u/10283486?s=200&v=4" alt="Backblaze logo" /></td>
+                <td><a href="https://www.backblaze.com/">Backblaze B2</a></td>
+                <td>S3 Object Storage ( Mainly for Backups )</td>
+            </tr>
     </table>
 
 ## 🔧 Hardware
@@ -246,9 +251,9 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
         <td>Used with Akeyless Platform to retrieve and push secrets</td>
     </tr>
     <tr>
-        <td><img width="32" src="https://cdn.worldvectorlogo.com/logos/traefik-1.svg"></td>
-        <td><a href="https://traefik.io/traefik/">Traefik</a></td>
-        <td>Reverse proxy and Ingress controller</td>
+        <td><img width="32" src="https://gateway.envoyproxy.io/icons/logo-white.svg"></td>
+        <td><a href="https://gateway.envoyproxy.io/">Envoy Gateway</a></td>
+        <td>Kubernetes-based Application Gateway</td>
     </tr>
     <tr>
         <td><img width="32" src="https://cdn.brandfetch.io/id7QyaLp8E/w/768/h/768/theme/dark/logo.png?c=1dxbfHSJFAPEGdCLU4o5B"></td>
