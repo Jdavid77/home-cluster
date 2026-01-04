@@ -27,6 +27,13 @@ endpoints:
     conditions:
       - "[CONNECTED] == true"
 
+  - name: Pi-Hole
+    group: "Third-Party"
+    url: icmp://192.168.1.139
+    interval: 1m
+    conditions:
+      - "[CONNECTED] == true"
+
   - name: Akeyless API
     group: "Third-Party"
     url: https://api.akeyless.io/health
