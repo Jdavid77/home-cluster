@@ -4,6 +4,7 @@ namespace: monitoring
 resources:
   - ./namespace.yaml
   - ./kube-prometheus-stack/ks.yaml
+  - ./node-problem-detector/ks.yaml
   - ./metrics-server/ks.yaml
   - ./grafana-operator/ks.yaml
   - ./pihole-exporter/ks.yaml

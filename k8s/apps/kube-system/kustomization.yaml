@@ -7,7 +7,6 @@ resources:
   - ./reflector/ks.yaml
   - ./reloader/ks.yaml
   - ./kube-cleanup-operator/ks.yaml
-  - ./node-problem-detector/ks.yaml
   - ./cilium/ks.yaml
   - ./kubelet-csr-approver/ks.yaml
   - ./spegel/ks.yaml

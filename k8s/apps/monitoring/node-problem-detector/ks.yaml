@@ -4,8 +4,8 @@ kind: Kustomization
 metadata:
   name: node-problem-detector
 spec:
-  targetNamespace: kube-system
-  path: ./k8s/apps/kube-system/node-problem-detector/app
+  targetNamespace: monitoring
+  path: ./k8s/apps/monitoring/node-problem-detector/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -15,7 +15,7 @@ spec:
     - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
       name: node-problem-detector
-      namespace: kube-system
+      namespace: monitoring
   wait: true
   interval: 30m
   retryInterval: 1m
