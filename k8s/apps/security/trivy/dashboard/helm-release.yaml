@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: trivy-operator-dashboard
+spec:
+  interval: 15m
+  chartRef:
+    kind: OCIRepository
+    name: trivy-operator-dashboard
+    namespace: flux-system
+  maxHistory: 2
+  values:
+    gitHub:
+      serverCheckForUpdates: false
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: true
+      runAsNonRoot: true
+      runAsUser: 1000
+    resources:
+      requests:
+        cpu: 100m
+      limits:
+        memory: 384Mi

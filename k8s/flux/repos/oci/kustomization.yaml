@@ -35,3 +35,4 @@ resources:
   - node-problem-detector.yaml
   - grafana-operator.yaml
   - envoy-gateway.yaml
+  - trivy-operator-dashboard.yaml
