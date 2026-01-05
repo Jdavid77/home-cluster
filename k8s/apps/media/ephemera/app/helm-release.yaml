@@ -95,7 +95,15 @@ spec:
           - backendRefs:
               - name: *app
                 port: *port
+
     persistence:
+      data:
+        existingClaim: *app
+        advancedMounts:
+          ephemera:
+            app:
+              - path: /app/data
+
       ingests:
         type: nfs
         server: 192.168.1.84
@@ -104,12 +112,10 @@ spec:
           ephemera:
             app:
               - path: /app/ingest
+
       tmpfs:
         type: emptyDir
         advancedMounts:
           ephemera:
             app:
               - path: /app/downloads
-                subPath: downloads
-              - path: /app/data
-                subPath: data
