@@ -3,7 +3,6 @@ kind: Kustomization
 resources:
   - cilium-charts.yaml
   - enix-charts.yaml
-  - kubernetes-dashboard-charts.yaml
   - kubernetes-sigs-charts.yaml
   - lwolf-charts.yaml
   - mattermost-charts.yaml
