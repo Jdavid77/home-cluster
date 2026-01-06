@@ -5,6 +5,5 @@ resources:
   - enix-charts.yaml
   - kubernetes-sigs-charts.yaml
   - lwolf-charts.yaml
-  - mattermost-charts.yaml
   - runix-charts.yaml
   - sonarqube-charts.yaml
