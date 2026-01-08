@@ -29,6 +29,7 @@ spec:
           - /var/log/pods/**/trim-filesystem/*.log
           - /var/log/pods/**/config-reloader/*.log
           - /var/log/pods/**/init-config-reloader/*.log
+          - /var/log/pods/security_scan-vulnerability*/*/*.log
         include_file_path: true
         include_file_name: false
         operators:
