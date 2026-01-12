@@ -28,7 +28,7 @@ spec:
           vaultwarden:
             image:
               repository: vaultwarden/server
-              tag: 1.35.1-alpine
+              tag: 1.35.2-alpine
             env:
               DOMAIN: "https://vaultwarden.jnobrega.com"
               TZ: Europe/Lisbon
