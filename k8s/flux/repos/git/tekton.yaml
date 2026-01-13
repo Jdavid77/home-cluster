@@ -8,3 +8,8 @@ spec:
   url: https://github.com/tektoncd/operator
   ref:
     tag: v0.78.1
+  ignore: |-
+    # exclude all
+    /*
+    # include charts directory
+    !/charts/tekton-operator/

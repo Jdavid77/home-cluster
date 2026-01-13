@@ -15,5 +15,18 @@ spec:
       interval: 10m
   values:
     installCRDs: true
+    operator:
+      autoInstallComponents: false
+      deployment:
+        initContainers:
+          enabled: true
+          containers:
+            - envFrom:
+              - secretRef:
+                  name: tekton-secret
+              image: ghcr.io/home-operations/postgres-init:18.1
+              name: init-db
     service:
       createServiceMonitor: false
+    nodeSelector:
+      kubernetes.io/hostname: localstorage-worker1

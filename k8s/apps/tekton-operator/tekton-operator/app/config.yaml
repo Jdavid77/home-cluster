@@ -1,0 +1,29 @@
+---
+# yaml-language-server: $schema=https://k8s-schemas.m00nlit.dev/operator.tekton.dev/tektonconfig_v1alpha1.json
+apiVersion: operator.tekton.dev/v1alpha1
+kind: TektonConfig
+metadata:
+  name: config
+spec:
+  targetNamespace: tekton-operator
+  profile: all
+  config:
+    nodeSelector:
+      kubernetes.io/hostname: localstorage-worker1
+  pruner:
+    disabled: false
+    schedule: "0 8 * * *"
+    resources:
+      - taskrun
+      - pipelinerun
+    keep: 50
+  dashboard:
+    readonly: false
+  result:
+    disabled: false
+    is_external_db: true # By default, this is set to false, TektonOperator will create Tekton Results database. If set to true, an external database will be used, and Tekton Results will retrieve its database credentials from the Kubernetes secret named tekton-results-postgres
+    db_host: "192.168.1.84"
+    db_port: 5432
+    db_sslmode: disable
+    db_enable_auto_migration: true
+    secret_name: tekton-secret
