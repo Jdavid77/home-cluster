@@ -23,7 +23,7 @@ spec:
           containers:
             - envFrom:
               - secretRef:
-                  name: tekton-secret
+                  name: tekton-results-postgres
               image: ghcr.io/home-operations/postgres-init:18.1
               name: init-db
     service:
