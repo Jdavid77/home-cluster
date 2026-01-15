@@ -25,8 +25,8 @@ spec:
         containers:
           app:
             image:
-              repository: rostislavdugin/postgresus
-              tag: v2.15.3@sha256:cabf722849a193be5351fe0d189f5baef40fa3b01ddd73d6083600a68a392672
+              repository: databasus/databasus
+              tag: v2.24.1@sha256:16d62916a8eed7b992b2cf5e4b1e21dfd2fad43bde27b4f02c9152c974461ec1
             probes:
               liveness: &probes
                 enabled: true
