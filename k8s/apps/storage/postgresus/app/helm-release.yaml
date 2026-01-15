@@ -82,5 +82,5 @@ spec:
       data:
         existingClaim: *app
         globalMounts:
-          - path: /postgresus-data
+          - path: /databasus-data
             readOnly: false
