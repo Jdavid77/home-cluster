@@ -30,7 +30,7 @@ spec:
           frontend:
             image:
               repository: ghcr.io/seanmorley15/adventurelog-frontend
-              tag: latest@sha256:ebf515de0ff344fe8c6c30d0eb2033ac4de3f2d5e89ad29c91f1c3727883339e
+              tag: latest@sha256:7247ee113cd1ce24de958f71f00bc05c0de87102f2807a516bdb35c7294b3d19
             env:
               PUBLIC_SERVER_URL: "https://adventurelog-backend.jnobrega.com"
               BODY_SIZE_LIMIT: Infinity
