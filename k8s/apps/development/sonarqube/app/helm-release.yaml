@@ -36,7 +36,7 @@ spec:
 
     image:
       repository: dhi.io/sonarqube
-      tag: 25
+      tag: "25"
       pullPolicy: IfNotPresent
       pullSecrets:
         - name: dockerhub-secret
