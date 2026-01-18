@@ -52,6 +52,9 @@ spec:
     httproute:
       enabled: false
 
+    initSysctl:
+      enabled: false
+
     prometheusExporter:
       enabled: true
 
