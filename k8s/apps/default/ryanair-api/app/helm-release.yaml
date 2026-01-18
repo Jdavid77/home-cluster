@@ -22,7 +22,7 @@ spec:
           app:
             image:
               repository: ghcr.io/jdavid77/ryanair-api
-              tag: 1.4.0 # {"$imagepolicy": "flux-system:ryanair-api:tag"}
+              tag: 1.4.0@sha256:e659bb24e72784fbd0938a2f9965c7b95a7638b42b9525cf9bdd077059ce8201 # {"$imagepolicy": "flux-system:ryanair-api:tag"}
             env:
               NODE_ENV: production
               API_URL: https://api-ryanair.jnobrega.com

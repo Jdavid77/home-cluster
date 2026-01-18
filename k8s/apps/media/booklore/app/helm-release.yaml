@@ -17,7 +17,7 @@ spec:
           *app :
             image:
               repository: ghcr.io/booklore-app/booklore
-              tag: v1.17.0
+              tag: v1.17.0@sha256:f3fc1c0f2cfc0e7827c30ef2107318226969dfda04d80e55b736e016aac0464c
 
             env:
               TZ: Europe/Lisbon
@@ -58,7 +58,7 @@ spec:
           mariadb:
             image:
               repository: lscr.io/linuxserver/mariadb
-              tag: 11.4.8
+              tag: 11.4.8@sha256:874744fda0354cb74045eaeff7ab75c0cc4664bb6190780649b8337b93117eaf
 
             env:
               TZ: Europe/Lisbon

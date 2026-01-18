@@ -19,7 +19,7 @@ spec:
           app:
             image:
               repository: valkey/valkey
-              tag: 9.0.0-alpine3.22
+              tag: 9.0.0-alpine3.22@sha256:b11c030847a3bc5b386a6ab6e5273d55b9154586c4670956908cbc880576fb25
       server:
         strategy: RollingUpdate
         annotations:
@@ -37,7 +37,7 @@ spec:
           init-db:
             image:
               repository: ghcr.io/onedr0p/postgres-init
-              tag: 16.8
+              tag: 16.8@sha256:a65be52d07a4ccd0c42ac2fd9a7937011a37594bf3d0d51b5277b0524e210cd5
               pullPolicy: IfNotPresent
             envFrom:
               - secretRef:
@@ -46,7 +46,7 @@ spec:
           main:
             image:
               repository: ghcr.io/immich-app/immich-server
-              tag: v2.4.1
+              tag: v2.4.1@sha256:e6a6298e67ae077808fdb7d8d5565955f60b0708191576143fc02d30ab1389d1
             envFrom:
               - secretRef:
                   name: immich-secret

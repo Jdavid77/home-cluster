@@ -14,10 +14,10 @@ spec:
     manager:
       image:
         repository: ghcr.io/open-telemetry/opentelemetry-operator/opentelemetry-operator
-        tag: v0.143.0
+        tag: v0.143.0@sha256:6f649eef4ba8494e57026322f960849aee96d35e1eeb18b914baf0de7b9cbf78
       collectorImage:
         repository: ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-contrib
-        tag: 0.143.1
+        tag: 0.143.1@sha256:7794d89a5ddc75049bb9d351aa1115a166c4614b939b50d41092ef5d1f2817aa
     admissionWebhooks:
       certManager:
         enabled: false
