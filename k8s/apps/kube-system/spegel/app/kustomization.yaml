@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - ./helm-release.yaml
   - ./route.yaml
+  - ./secret.yaml
 configMapGenerator:
   - name: spegel-values
     files:

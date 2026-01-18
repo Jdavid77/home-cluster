@@ -34,6 +34,18 @@ spec:
   values:
     deploymentType: 'Deployment'
 
+    image:
+      repository: dhi.io/sonarqube
+      tag: 25
+      pullPolicy: IfNotPresent
+      pullSecrets:
+        - name: dockerhub-secret
+
+    containerSecurityContext:
+      runAsNonRoot: true
+      runAsUser: 65532
+      runAsGroup: 65532
+
     community:
       enabled: true
 
