@@ -19,7 +19,7 @@ spec:
           app:
             image:
               repository: filebrowser/filebrowser
-              tag: v2.55.0-s6@sha256:5713598458972723c6d56bb1e5464d433a8151d2cbf6c205582fa2a1e07c47ac
+              tag: v2.55.0@sha256:34d3398f9e7985483e183cc1286de3c79cfdc685f9748a71721b33af16528a84
             env:
               TZ: Europe/Lisbon
               FB_DATABASE: /config/filebrowser.db
