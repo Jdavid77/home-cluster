@@ -36,7 +36,7 @@ spec:
           lldap:
             image:
               repository: lldap/lldap
-              tag: 2025-04-25-alpine-rootless
+              tag: 2026-01-06-alpine-rootless@sha256:824adeb6f765994d09ab2b28b7a5656c13f6d5fbd311b6f6039f07b99f2b3b0e
             command:
               - /app/lldap
             args:

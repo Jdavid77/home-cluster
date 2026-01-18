@@ -20,8 +20,8 @@ spec:
         containers:
           app:
             image:
-              repository: sissbruecker/linkding
-              tag: 1.45.0-alpine
+              repository: ghcr.io/sissbruecker/linkding
+              tag: 1.45.0-alpine@sha256:8404735cf38363507c478ebb726c67c58023564609552b9cf52eefc38ad37863
             envFrom:
               - secretRef:
                   name: linkding-secret
