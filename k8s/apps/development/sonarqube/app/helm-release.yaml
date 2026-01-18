@@ -53,10 +53,11 @@ spec:
       enabled: false
 
     initSysctl:
-      enabled: false
+      image: busybox:1.37.0
 
     prometheusExporter:
       enabled: true
+      image: curlimages/curl:8.18.0
 
     prometheusMonitoring:
       podMonitor:
