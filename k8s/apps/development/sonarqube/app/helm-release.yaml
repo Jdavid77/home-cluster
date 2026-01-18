@@ -53,7 +53,7 @@ spec:
       enabled: false
 
     initSysctl:
-      image: busybox:1.37.0
+      enabled: false
 
     prometheusExporter:
       enabled: true
