@@ -3,11 +3,9 @@ kind: Kustomization
 namespace: storage
 resources:
   - ./namespace.yaml
-  # - ./minio/ks.yaml
   - ./dragonfly/ks.yaml
   # - ./pgadmin/ks.yaml
   - ./garage/ks.yaml
-  - ./postgresus/ks.yaml
   - ./openebs/ks.yaml
 components:
   - ../../components/alerts/alertmanager
