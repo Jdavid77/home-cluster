@@ -81,7 +81,7 @@ spec:
                 spec:
                   httpGet:
                     path: /api/system/status
-                    port: http
+                    port: &port 9000
                   initialDelaySeconds: 30
                   periodSeconds: 10
                   timeoutSeconds: 1
@@ -109,7 +109,7 @@ spec:
         controller: *app
         ports:
           http:
-            port: &port 9000
+            port: *port
           monitoring-web:
             port: 8000
           monitoring-ce:
