@@ -1,0 +1,31 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: dhi-sonarqube
+  namespace: development
+  labels:
+    app: dhi-sonarqube
+spec:
+  namespaceSelector:
+    matchNames:
+      - development
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: dhi-sonarqube
+  podMetricsEndpoints:
+    - port: http
+      scheme: http
+      path: /api/monitoring/metrics
+      interval: 30s
+      bearerTokenSecret:
+        name: sonarqube-monitoring-secret
+        key: MONITORING_SECRET
+    - port: monitoring-ce
+      scheme: http
+      path: /
+      interval: 30s
+    - port: monitoring-web
+      scheme: http
+      path: /
+      interval: 30s

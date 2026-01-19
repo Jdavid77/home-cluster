@@ -1,92 +1,185 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: sonarqube
+  name: &app dhi-sonarqube
 spec:
-  interval: 15m
-  chart:
-    spec:
-      chart: sonarqube
-      version: 2025.6.1
-      sourceRef:
-        kind: HelmRepository
-        name: sonarqube-charts
-        namespace: flux-system
-      interval: 15m
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+    namespace: flux-system
   maxHistory: 2
   uninstall:
     keepHistory: false
-  valuesFrom:
-    - targetPath: jdbcOverwrite.jdbcUrl
-      kind: Secret
-      name: sonarqube-db-secret
-      valuesKey: POSTGRES_JDBC_URL
-    - targetPath: jdbcOverwrite.jdbcUsername
-      kind: Secret
-      name: sonarqube-db-secret
-      valuesKey: POSTGRES_JDBC_USERNAME
-    - targetPath: jdbcOverwrite.jdbcPassword
-      kind: Secret
-      name: sonarqube-db-secret
-      valuesKey: POSTGRES_JDBC_PASSWORD
-
   values:
-    deploymentType: 'Deployment'
+    controllers:
+      *app :
+        annotations:
+          reloader.stakater.com/auto: "true"
+        strategy: Recreate
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/home-operations/postgres-init
+              tag: 18.1@sha256:3c54d39f19fdb82ed5b3f286450e4071133cc6025bd0e25856bc2c522f8fc030
+            envFrom:
+              - secretRef:
+                  name: sonarqube-db-secret
+          inject-prometheus-exporter:
+            image:
+              repository: curlimages/curl
+              tag: 8.12.1
+            command:
+              - /bin/sh
+              - -c
+            args:
+              - curl -s 'https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.17.2/jmx_prometheus_javaagent-0.17.2.jar' --output /data/jmx_prometheus_javaagent.jar -v
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+        containers:
+          app:
+            image:
+              repository: dhi.io/sonarqube
+              tag: "25"
+              pullPolicy: IfNotPresent
+            env:
+              SONAR_JDBC_URL:
+                valueFrom:
+                  secretKeyRef:
+                    name: sonarqube-db-secret
+                    key: POSTGRES_JDBC_URL
+              SONAR_JDBC_USERNAME:
+                valueFrom:
+                  secretKeyRef:
+                    name: sonarqube-db-secret
+                    key: POSTGRES_JDBC_USERNAME
+              SONAR_JDBC_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: sonarqube-db-secret
+                    key: POSTGRES_JDBC_PASSWORD
+              SONAR_WEB_SYSTEMPASSCODE:
+                valueFrom:
+                  secretKeyRef:
+                    name: sonarqube-monitoring-secret
+                    key: MONITORING_SECRET
+              SONAR_WEB_CONTEXT: /
+              SONAR_WEB_JAVAOPTS: -javaagent:/opt/sonarqube/data/jmx_prometheus_javaagent.jar=8000:/opt/sonarqube/conf/prometheus-config.yaml
+              SONAR_CE_JAVAOPTS: -javaagent:/opt/sonarqube/data/jmx_prometheus_javaagent.jar=8001:/opt/sonarqube/conf/prometheus-ce-config.yaml
+            probes:
+              liveness:
+                enabled: false
+              readiness:
+                enabled: false
+              startup:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/system/status
+                    port: http
+                  initialDelaySeconds: 30
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 24
+            resources:
+              requests:
+                cpu: 400m
+                memory: 2Gi
+              limits:
+                cpu: 2000m
+                memory: 4Gi
+        pod:
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 65532
+            runAsGroup: 65532
+            fsGroup: 65532
+            fsGroupChangePolicy: OnRootMismatch
+          automountServiceAccountToken: false
+          imagePullSecrets:
+            - name: dockerhub-secret
 
-    image:
-      repository: dhi.io/sonarqube
-      tag: "25"
-      pullPolicy: IfNotPresent
-      pullSecrets:
-        - name: dockerhub-secret
+    service:
+      app:
+        controller: *app
+        ports:
+          http:
+            port: &port 9000
+          monitoring-web:
+            port: 8000
+          monitoring-ce:
+            port: 8001
 
-    containerSecurityContext:
-      runAsNonRoot: true
-      runAsUser: 65532
-      runAsGroup: 65532
+    route:
+      app:
+        parentRefs:
+          - kind: Gateway
+            name: internal
+            namespace: network
+            sectionName: websecure
+        hostnames:
+          - sonarqube.jnobrega.com
+        rules:
+          - backendRefs:
+              - identifier: *app
+                port: *port
+            matches:
+              - path:
+                  type: PathPrefix
+                  value: /
 
-    community:
-      enabled: true
+    persistence:
+      data:
+        type: emptyDir
+        globalMounts:
+          - path: /opt/sonarqube/data
+            subPath: data
+          - path: /opt/sonarqube/temp
+            subPath: temp
+          - path: /opt/sonarqube/logs
+            subPath: logs
+          - path: /opt/sonarqube/extensions
+            subPath: extensions
+        advancedMounts:
+          sonarqube:
+            inject-prometheus-exporter:
+              - path: /data
+                subPath: data
 
-    httproute:
-      enabled: false
+      tmp:
+        type: emptyDir
+        globalMounts:
+          - path: /tmp
 
-    initSysctl:
-      enabled: false
+      prometheus-config:
+        type: configMap
+        name: sonarqube-prometheus-config
+        globalMounts:
+          - path: /opt/sonarqube/conf/prometheus-config.yaml
+            subPath: prometheus-config.yaml
+            readOnly: true
 
-    prometheusExporter:
-      enabled: true
-      image: curlimages/curl:8.18.0
+      prometheus-ce-config:
+        type: configMap
+        name: sonarqube-prometheus-ce-config
+        globalMounts:
+          - path: /opt/sonarqube/conf/prometheus-ce-config.yaml
+            subPath: prometheus-ce-config.yaml
+            readOnly: true
 
-    prometheusMonitoring:
-      podMonitor:
-        enabled: true
-
-    postgresql:
-      enabled: false
-
-    jdbcOverwrite:
-      enable: true
-
-    extraInitContainers:
-      - name: init-db
-        image: ghcr.io/home-operations/postgres-init:18.1@sha256:3c54d39f19fdb82ed5b3f286450e4071133cc6025bd0e25856bc2c522f8fc030
-        imagePullPolicy: IfNotPresent
-        envFrom:
-          - secretRef:
-              name: sonarqube-db-secret
-
-    annotations:
-      reloader.stakater.com/auto: 'true'
-
-    monitoringPasscodeSecretName: sonarqube-monitoring-secret
-    monitoringPasscodeSecretKey: MONITORING_SECRET
-
-    resources:
-      limits:
-        cpu: 2000m
-        memory: 4Gi
-      requests:
-        cpu: 400m
-        memory: 2Gi
+    configMaps:
+      prometheus-config:
+        data:
+          prometheus-config.yaml: |
+            rules:
+              - pattern: ".*"
+      prometheus-ce-config:
+        data:
+          prometheus-ce-config.yaml: |
+            rules:
+              - pattern: ".*"
