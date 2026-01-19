@@ -126,12 +126,8 @@ spec:
           - sonarqube.jnobrega.com
         rules:
           - backendRefs:
-              - identifier: *app
+              - name: *app
                 port: *port
-            matches:
-              - path:
-                  type: PathPrefix
-                  value: /
 
     persistence:
       data:
