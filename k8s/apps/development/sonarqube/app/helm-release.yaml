@@ -154,7 +154,7 @@ spec:
 
       prometheus-config:
         type: configMap
-        name: sonarqube-prometheus-config
+        name: dhi-sonarqube-prometheus-config
         globalMounts:
           - path: /opt/sonarqube/conf/prometheus-config.yaml
             subPath: prometheus-config.yaml
@@ -162,7 +162,7 @@ spec:
 
       prometheus-ce-config:
         type: configMap
-        name: sonarqube-prometheus-ce-config
+        name: dhi-sonarqube-prometheus-ce-config
         globalMounts:
           - path: /opt/sonarqube/conf/prometheus-ce-config.yaml
             subPath: prometheus-ce-config.yaml
