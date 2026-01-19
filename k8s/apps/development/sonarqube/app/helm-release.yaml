@@ -30,7 +30,7 @@ spec:
           inject-prometheus-exporter:
             image:
               repository: curlimages/curl
-              tag: 8.12.1
+              tag: 8.18.0
             command:
               - /bin/sh
               - -c
