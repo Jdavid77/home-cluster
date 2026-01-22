@@ -19,7 +19,7 @@ spec:
           app:
             image:
               repository: valkey/valkey
-              tag: 9.0.0-alpine3.22@sha256:b11c030847a3bc5b386a6ab6e5273d55b9154586c4670956908cbc880576fb25
+              tag: 9.0.0-alpine3.22@sha256:bef37d06d4856710973ee31dd1eac1482e4c8e6e7b847f999ad25433e646587b
       server:
         strategy: RollingUpdate
         annotations:
