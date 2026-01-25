@@ -20,7 +20,7 @@ releases:
   - name: traefik-crds
     namespace: traefik
     chart: oci://ghcr.io/traefik/helm/traefik-crds
-    version: 1.13.1
+    version: 1.14.0
 
   - name: cilium
     namespace: kube-system
