@@ -21,7 +21,7 @@ spec:
           *app :
             image:
               repository: ghcr.io/itskovacs/trip
-              tag: 1.38@sha256:eb456fdd69d0a5764635e79ca10896b368f7d084e931ed0d858b07c0cac48919
+              tag: 1.39@sha256:c86c5e7e565b824c22cff03d8ff0a6c86e8e84c2045387d26814c3e0477061a9
             env:
               REGISTER_ENABLE: "false"
               TZ: Europe/Lisbon
