@@ -9,5 +9,6 @@ resources:
   - ./immich/ks.yaml
   - ./ephemera/ks.yaml
   - ./booklore/ks.yaml
+  - ./shelfmark/ks.yaml
 components:
   - ../../components/alerts/alertmanager
