@@ -28,7 +28,9 @@ variable "buckets" {
     "trip",
     "expenseowl",
     "grist",
-    "renderercv"
+    "renderercv",
+    "ephemera",
+    "shelfmark"
   ]
 }
 
