@@ -4,7 +4,7 @@ endpoint: https://192.168.1.110:6443
 # renovate: datasource=docker depName=ghcr.io/siderolabs/installer
 talosVersion: v1.12.3
 # renovate: datasource=docker depName=ghcr.io/siderolabs/kubelet
-kubernetesVersion: v1.35.0
+kubernetesVersion: v1.35.1
 additionalMachineCertSans:
   - "192.168.1.110"
   - "127.0.0.1"
