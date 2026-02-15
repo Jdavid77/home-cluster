@@ -53,7 +53,7 @@ spec:
           nginx:
             image:
               repository: nginxinc/nginx-unprivileged
-              tag: stable-alpine@sha256:bace58a4f3082dcbbbb60fe50d6cf65e43a099a5ab12387c78b25e35fd41e80b
+              tag: stable-alpine@sha256:2e591d129fa67ec9724a5a418891cd33c8ef0ade90c80bccb91b14e7119f6961
             securityContext:
               allowPrivilegeEscalation: false
               capabilities: {drop: ["ALL"]}
