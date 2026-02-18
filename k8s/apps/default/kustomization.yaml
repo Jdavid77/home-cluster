@@ -3,7 +3,7 @@ kind: Kustomization
 namespace: default
 resources:
   - ./whoami/ks.yaml
-  - ./redlib/ks.yaml
+  # - ./redlib/ks.yaml
   - ./wallos/ks.yaml
   - ./littlelink/ks.yaml
   - ./linkding/ks.yaml
