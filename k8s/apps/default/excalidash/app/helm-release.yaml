@@ -43,7 +43,7 @@ spec:
           frontend:
             image:
               repository: zimengxiong/excalidash-frontend
-              tag: 0.3.2@sha256:084929ac0035acb5fcc2f3551562820d61bab0c3d7b7a4aee00503fb55795ae3
+              tag: 0.4.27@sha256:242629350b06189234ff59900d302570220d0c91c1882d3acb512b737bf95931
             env:
               BACKEND_URL: localhost:8000
             probes:
