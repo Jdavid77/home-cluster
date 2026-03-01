@@ -32,7 +32,7 @@ spec:
               repository: ghcr.io/seanmorley15/adventurelog-frontend
               tag: latest@sha256:73d3b1167e6c878532244238b892472393cdee6035e38be6a9ef1564f8bb888a
             env:
-              PUBLIC_SERVER_URL: "https://adventurelog-backend.jnobrega.com"
+              PUBLIC_SERVER_URL: "http://adventurelog.default.svc.cluster.local:8000"
               BODY_SIZE_LIMIT: Infinity
               ORIGIN: "https://adventurelog.jnobrega.com"
             probes:
