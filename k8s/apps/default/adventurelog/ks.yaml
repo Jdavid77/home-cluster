@@ -27,7 +27,7 @@ spec:
       failed: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSyncedError')
       current: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSynced')
   components:
-    - ../../../components/volsync/remote
+    - ../../../../components/volsync/remote
   postBuild:
     substitute:
       APP: *app
