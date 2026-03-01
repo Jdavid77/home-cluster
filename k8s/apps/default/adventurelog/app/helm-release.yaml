@@ -34,6 +34,7 @@ spec:
             env:
               PUBLIC_SERVER_URL: "https://adventurelog-backend.jnobrega.com"
               BODY_SIZE_LIMIT: Infinity
+              ORIGIN: "https://adventurelog.jnobrega.com"
             probes:
               liveness: &probes
                 enabled: false
