@@ -33,7 +33,7 @@ metadata:
 spec:
   sourcePVC: ${APP}
   trigger:
-    schedule: "0 0 * * *"
+    schedule: "0 2 * * *"
   restic:
     copyMethod: Snapshot
     pruneIntervalDays: 7
