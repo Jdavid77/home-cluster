@@ -2,7 +2,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: trip
+  name: &app trip
 spec:
   targetNamespace: default
   dependsOn:
@@ -19,6 +19,14 @@ spec:
       kind: HelmRelease
       name: trip
       namespace: default
+  components:
+    - ../../../../components/volsync/remote
+  postBuild:
+    substitute:
+      APP: *app
+      VOLSYNC_PGID: &uid "568"
+      VOLSYNC_PUID: *uid
+      VOLSYNC_CACHE_CAPACITY: 1Gi
   wait: true
   interval: 30m
   retryInterval: 1m

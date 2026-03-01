@@ -15,7 +15,7 @@ spec:
     template:
       engineVersion: v2
       data:
-        RESTIC_REPOSITORY: s3:https://s3.eu-central-003.backblazeb2.com/${APP}
+        RESTIC_REPOSITORY: s3:https://s3.eu-central-003.backblazeb2.com/jnobrega-${APP}
         RESTIC_PASSWORD: "{{ .RESTIC_PASSWORD }}"
         AWS_ACCESS_KEY_ID: "{{ .BACKBLAZE_KEY_ID }}"
         AWS_SECRET_ACCESS_KEY: "{{ .BACKBLAZE_KEY_SECRET }}"
