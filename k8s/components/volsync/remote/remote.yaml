@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/external-secrets.io/externalsecret_v1beta1.json
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: "${APP}-restic-remote"
+spec:
+  refreshInterval: 5m
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: akeyless-secret-store
+  target:
+    name: "${APP}-restic-remote"
+    creationPolicy: Owner
+    deletionPolicy: "Delete"
+    template:
+      engineVersion: v2
+      data:
+        RESTIC_REPOSITORY: s3:https://s3.eu-central-003.backblazeb2.com/${APP}
+        RESTIC_PASSWORD: "{{ .RESTIC_PASSWORD }}"
+        AWS_ACCESS_KEY_ID: "{{ .BACKBLAZE_KEY_ID }}"
+        AWS_SECRET_ACCESS_KEY: "{{ .BACKBLAZE_KEY_SECRET }}"
+  dataFrom:
+    - extract:
+        key: /volsync/restic
+    - extract:
+        key: /backblaze/key
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/volsync.backube/replicationsource_v1alpha1.json
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: ${APP}
+spec:
+  sourcePVC: ${APP}
+  trigger:
+    schedule: "0 0 * * *"
+  restic:
+    copyMethod: Snapshot
+    pruneIntervalDays: 7
+    repository: "${APP}-restic-remote"
+    volumeSnapshotClassName: longhorn-snapshot-vsc
+    cacheCapacity: "${VOLSYNC_CACHE_CAPACITY:-2Gi}"
+    cacheStorageClassName: "longhorn-cache"
+    cacheAccessModes: ["ReadWriteOnce"]
+    storageClassName: "longhorn-snapshot"
+    accessModes: ["ReadWriteOnce"]
+    moverSecurityContext:
+      runAsUser: ${VOLSYNC_PUID:-1000}
+      runAsGroup: ${VOLSYNC_PGID:-1000}
+      fsGroup: ${VOLSYNC_PGID:-1000}
+    retain:
+      daily: 7
