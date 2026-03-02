@@ -20,6 +20,7 @@ spec:
       name: trip
       namespace: default
   components:
+    - ../../../../components/volsync/local
     - ../../../../components/volsync/remote
   postBuild:
     substitute:
