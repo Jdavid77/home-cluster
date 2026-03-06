@@ -106,7 +106,7 @@ spec:
                   "credentialsFile": "/secret/sync-credentials.json",
                   "registries": [
                     {
-                      "urls": ["http://<< inputs.syncPeer >>-zot.storage.svc.cluster.local:5000"],
+                      "urls": ["http://<< inputs.syncPeer >>.storage.svc.cluster.local:5000"],
                       "onDemand": false,
                       "tlsVerify": false,
                       "pollInterval": "1m",
