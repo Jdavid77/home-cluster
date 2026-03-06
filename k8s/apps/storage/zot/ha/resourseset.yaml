@@ -121,6 +121,10 @@ spec:
               }
             }
 
+        externalSecrets:
+          - secretName: zot-credentials-<< inputs.name >>
+            mountPath: /secret/sync-credentials.json
+
         mountSecret: true
         secretFiles:
           htpasswd: |-
@@ -142,7 +146,3 @@ spec:
           name: zot-secret
           valuesKey: BASIC_AUTH_HEADER
           targetPath: authHeader
-        - kind: Secret
-          name: zot-credentials-<< inputs.name >>
-          valuesKey: sync-credentials.json
-          targetPath: secretFiles.sync-credentials\.json
