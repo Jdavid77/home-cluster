@@ -121,9 +121,16 @@ spec:
               }
             }
 
-        externalSecrets:
-          - secretName: zot-credentials-<< inputs.name >>
-            mountPath: /secret
+        extraVolumes:
+          - name: zot-credentials-<< inputs.name >>
+            secret:
+              secretName: zot-credentials-<< inputs.name >>
+
+        extraVolumeMounts:
+          - name: zot-credentials-<< inputs.name >>
+            mountPath: /secret/sync-credentials.json
+            subPath: sync-credentials.json
+            readOnly: true
 
         mountSecret: true
         secretFiles:
