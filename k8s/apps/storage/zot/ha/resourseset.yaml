@@ -10,8 +10,35 @@ spec:
   wait: true
   inputs:
     - name: zot-ha-1
+      syncPeer: zot-ha-2
     - name: zot-ha-2
+      syncPeer: zot-ha-1
   resourcesTemplate: |
+    ---
+    apiVersion: external-secrets.io/v1
+    kind: ExternalSecret
+    metadata:
+      name: &secret zot-credentials-<< inputs.name >>
+    spec:
+      refreshInterval: 5m
+      secretStoreRef:
+        kind: ClusterSecretStore
+        name: akeyless-secret-store
+      target:
+        name: *secret
+        template:
+          engineVersion: v2
+          data:
+            sync-credentials.json: |
+              {
+                "<< inputs.syncPeer >>-zot.storage.svc.cluster.local:5000": {
+                  "username": "admin",
+                  "password": "{{ .PASSWORD }}"
+                }
+              }
+      dataFrom:
+        - extract:
+            key: /zot/auth
     ---
     apiVersion: helm.toolkit.fluxcd.io/v2
     kind: HelmRelease
@@ -72,6 +99,23 @@ spec:
                 },
                 "search": {
                   "enable": true
+                },
+                "sync": {
+                  "enable": true,
+                  "credentialsFile": "/secret/sync-credentials.json"
+                  "registries": [
+                    {
+                      "urls": ["http://<< inputs.syncPeer >>-zot.storage.svc.cluster.local:5000"],
+                      "onDemand": false,
+                      "tlsVerify": false,
+                      "pollInterval": "1m",
+                      "content": [
+                        {
+                          "prefix": "**"
+                        }
+                      ]
+                    }
+                  ]
                 }
               }
             }
@@ -80,6 +124,9 @@ spec:
         secretFiles:
           htpasswd: |-
             admin:$2y$05$DbI9Wqdhiuw27TuarKdREufBB0TxOFbC.eeytixQvyYNCvsAp1/uG
+
+        service:
+          type: ClusterIP
 
         persistence: true
         pvc:
@@ -94,3 +141,7 @@ spec:
           name: zot-secret
           valuesKey: BASIC_AUTH_HEADER
           targetPath: authHeader
+        - kind: Secret
+          name: zot-credentials-<< inputs.name >>
+          valuesKey: sync-credentials.json
+          targetPath: secretFiles.sync-credentials\.json
