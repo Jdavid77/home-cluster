@@ -7,3 +7,4 @@ resources:
   - lwolf-charts.yaml
   - runix-charts.yaml
   - sonarqube-charts.yaml
+  - zot-charts.yaml
