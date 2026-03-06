@@ -103,7 +103,7 @@ spec:
                 },
                 "sync": {
                   "enable": true,
-                  "credentialsFile": "/credentials/sync-credentials.json",
+                  "credentialsFile": "/tmp/sync-credentials.json",
                   "registries": [
                     {
                       "urls": ["http://<< inputs.syncPeer >>.storage.svc.cluster.local:5000"],
@@ -125,6 +125,16 @@ spec:
         secretFiles:
           htpasswd: |-
             admin:$2y$05$DbI9Wqdhiuw27TuarKdREufBB0TxOFbC.eeytixQvyYNCvsAp1/uG
+
+        extraVolumes:
+          - name: zot-credentials-<< inputs.name >>
+            secret:
+              secretName: zot-credentials-<< inputs.name >>
+        extraVolumeMounts:
+          - name: zot-credentials-<< inputs.name >>
+            mountPath: /tmp/sync-credentials.json
+            subPath: sync-credentials.json
+            readOnly: true
 
         service:
           type: ClusterIP
