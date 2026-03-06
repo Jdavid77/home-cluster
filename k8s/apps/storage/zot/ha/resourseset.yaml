@@ -94,5 +94,3 @@ spec:
           name: zot-secret
           valuesKey: BASIC_AUTH_HEADER
           targetPath: authHeader
-
-    <<- end >>
