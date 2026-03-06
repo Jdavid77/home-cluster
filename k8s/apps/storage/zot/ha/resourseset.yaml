@@ -103,7 +103,7 @@ spec:
                 },
                 "sync": {
                   "enable": true,
-                  "credentialsFile": "/secret/sync-credentials.json",
+                  "credentialsFile": "/credentials/sync-credentials.json",
                   "registries": [
                     {
                       "urls": ["http://<< inputs.syncPeer >>.storage.svc.cluster.local:5000"],
@@ -128,7 +128,7 @@ spec:
 
         extraVolumeMounts:
           - name: zot-credentials-<< inputs.name >>
-            mountPath: /secret/sync-credentials.json
+            mountPath: /credentials/sync-credentials.json
             subPath: sync-credentials.json
             readOnly: true
 
