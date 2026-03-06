@@ -19,6 +19,7 @@ spec:
     kind: ExternalSecret
     metadata:
       name: &secret zot-credentials-<< inputs.name >>
+      namespace: storage
     spec:
       refreshInterval: 5m
       secretStoreRef:
