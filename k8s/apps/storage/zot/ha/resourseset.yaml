@@ -32,7 +32,7 @@ spec:
           data:
             sync-credentials.json: |
               {
-                "<< inputs.syncPeer >>-zot.storage.svc.cluster.local:5000": {
+                "<< inputs.syncPeer >>.storage.svc.cluster.local:5000": {
                   "username": "admin",
                   "password": "{{ .PASSWORD }}"
                 }
