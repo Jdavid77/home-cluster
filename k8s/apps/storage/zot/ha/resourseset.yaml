@@ -103,7 +103,7 @@ spec:
                 },
                 "sync": {
                   "enable": true,
-                  "credentialsFile": "/secret/sync-credentials.json"
+                  "credentialsFile": "/secret/sync-credentials.json",
                   "registries": [
                     {
                       "urls": ["http://<< inputs.syncPeer >>-zot.storage.svc.cluster.local:5000"],
