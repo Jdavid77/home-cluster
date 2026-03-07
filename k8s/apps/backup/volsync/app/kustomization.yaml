@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - helm-release.yaml
   - grafanadashboard.yaml
+  - volume-snapshot-class.yaml
