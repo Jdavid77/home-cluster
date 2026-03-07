@@ -9,8 +9,6 @@ spec:
     name: grafana-operator
     namespace: flux-system
   interval: 1h
-  values:
-    dashboard:
-      enabled: true
-    serviceMonitor:
-      enabled: true
+  valuesFrom:
+    - kind: ConfigMap
+      name: grafana-values

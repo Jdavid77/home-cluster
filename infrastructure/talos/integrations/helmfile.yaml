@@ -48,6 +48,15 @@ releases:
       - ../../../k8s/apps/kube-system/spegel/app/values.yaml
     needs:
       - kube-system/kubelet-csr-approver
+  
+  - name: grafana-operator
+    namespace: monitoring
+    chart: oci://ghcr.io/grafana/helm-charts/grafana-operator
+    version: 5.22.0
+    values:
+      - ../../../k8s/apps/monitoring/grafana-operator/app/values.yaml
+    needs:
+      - kube-system/kubelet-csr-approver
 
   - name: flux-operator
     namespace: flux-system
