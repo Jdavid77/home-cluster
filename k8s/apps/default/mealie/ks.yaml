@@ -16,7 +16,7 @@ spec:
     - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
       name: mealie
-      namespace: media
+      namespace: default
   healthCheckExprs:
     - apiVersion: external-secrets.io/v1
       kind: ExternalSecret

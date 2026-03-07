@@ -59,6 +59,8 @@ metadata:
   name: cert-manager-x509-exporter
 spec:
   targetNamespace: cert-manager
+  dependsOn:
+    - name: cert-manager
   path: ./k8s/apps/cert-manager/cert-manager/x509-exporter
   prune: true
   sourceRef:

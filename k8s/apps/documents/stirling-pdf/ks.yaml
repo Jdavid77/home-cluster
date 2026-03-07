@@ -5,6 +5,9 @@ metadata:
   name: &app stirling-pdf
 spec:
   targetNamespace: documents
+  dependsOn:
+    - name: authentik
+      namespace: security
   path: ./k8s/apps/documents/stirling-pdf/app
   prune: true
   healthChecks:

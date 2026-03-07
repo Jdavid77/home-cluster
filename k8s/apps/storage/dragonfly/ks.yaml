@@ -29,6 +29,8 @@ metadata:
 spec:
   targetNamespace: storage
   path: ./k8s/apps/storage/dragonfly/cluster
+  dependsOn:
+    - name: dragonfly
   prune: true
   sourceRef:
     kind: GitRepository
