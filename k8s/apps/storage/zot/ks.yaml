@@ -9,6 +9,8 @@ spec:
   dependsOn:
     - name: external-secrets-store
       namespace: external-secrets
+    - name: longhorn-storageclasses
+      namespace: longhorn-system
   prune: true
   sourceRef:
     kind: GitRepository
