@@ -57,6 +57,15 @@ releases:
       - ../../../k8s/apps/monitoring/grafana-operator/app/values.yaml
     needs:
       - kube-system/kubelet-csr-approver
+  
+  - name: envoy-gateway
+    namespace: network
+    chart: oci://mirror.gcr.io/envoyproxy/gateway-helm
+    version: v1.7.0
+    values:
+      - ../../../k8s/apps/network/envoy-gateway/app/values.yaml
+    needs:
+      - kube-system/kubelet-csr-approver
 
   - name: flux-operator
     namespace: flux-system
