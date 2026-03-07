@@ -13,20 +13,5 @@ spec:
     controller:
       serviceMonitor:
         create: true
-    volumeSnapshotClasses:
-      - name: longhorn-snapshot-vsc
-        annotations:
-          snapshot.storage.kubernetes.io/is-default-class: "true"
-        driver: driver.longhorn.io
-        deletionPolicy: Delete
-        parameters:
-          type: snap
-    resources:
-      requests:
-        cpu: 15m
-        memory: 105M
-      limits:
-        cpu: 15m
-        memory: 150M
     webhook:
       enabled: false
