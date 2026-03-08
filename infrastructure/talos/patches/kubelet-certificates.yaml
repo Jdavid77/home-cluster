@@ -1,7 +1,6 @@
 machine:
   kubelet:
     extraArgs:
-      rotate-server-certificates: true
       feature-gates: GracefulNodeShutdown=true
     extraConfig:
       maxPods: 150

@@ -10,50 +10,7 @@ spec:
     kind: OCIRepository
     name: longhorn
     namespace: flux-system
-  values:
-    metrics:
-      serviceMonitor:
-        enabled: true
-    persistence:
-      defaultClass: true
-      defaultClassReplicaCount: 2
-      reclaimPolicy: Retain
-      defaultNodeSelector:
-        enable: true
-        selector: storage
-    defaultSettings:
-      taintToleration: "node=storage:NoSchedule" 
-      defaultReplicaCount: 2
-      defaultDataPath: /var/mnt/longhorn
-      autoCleanupSystemGeneratedSnapshot: true
-      backupstorePollInterval: 0
-      createDefaultDiskLabeledNodes: true
-      restoreVolumeRecurringJobs: true
-      storageMinimalAvailablePercentage: 0
-      storageReservedPercentageForDefaultDisk: 5
-      guaranteedEngineManagerCPU: 20
-      guaranteedReplicaManagerCPU: 20
-      orphanAutoDeletion: true
-      concurrentAutomaticEngineUpgradePerNodeLimit: 3
-      defaultLonghornStaticStorageClass: longhorn
-      nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
-      upgradeChecker: false
-  postRenderers:
-    - kustomize:
-        patches:
-          - target:
-              version: longhorn.io/v1beta2
-              kind: Node
-              name: hp-worker2
-            patch: |
-              - op: add
-                path: /spec/tags/-
-                value: storage
-          - target:
-              version: longhorn.io/v1beta2
-              kind: Node
-              name: hp-worker3
-            patch: |
-              - op: add
-                path: /spec/tags/-
-                value: storage
+  valuesFrom:
+    - kind: ConfigMap
+      name: longhorn-values
+

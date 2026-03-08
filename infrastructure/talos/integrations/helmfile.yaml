@@ -17,11 +17,6 @@ releases:
     chart: oci://ghcr.io/prometheus-community/charts/prometheus-operator-crds
     version: 27.0.0
   
-  - name: traefik-crds
-    namespace: traefik
-    chart: oci://ghcr.io/traefik/helm/traefik-crds
-    version: 1.14.0
-
   - name: cilium
     namespace: kube-system
     chart: cilium/cilium
@@ -67,6 +62,15 @@ releases:
     needs:
       - kube-system/kubelet-csr-approver
 
+  - name: longhorn
+    namespace: longhorn-system
+    chart: oci://ghcr.io/home-operations/charts-mirror/longhorn
+    version: 1.11.0
+    values:
+      - ../../../k8s/apps/longhorn-system/longhorn/app/values.yaml
+    needs:
+      - kube-system/kubelet-csr-approver
+
   - name: flux-operator
     namespace: flux-system
     chart: oci://ghcr.io/controlplaneio-fluxcd/charts/flux-operator
@@ -86,5 +90,6 @@ releases:
       - ../../../k8s/apps/flux-system/flux-operator/instance/values.yaml
     needs:
       - flux-system/flux-operator
-      - traefik/traefik-crds
+      - network/envoy-gateway
+
 

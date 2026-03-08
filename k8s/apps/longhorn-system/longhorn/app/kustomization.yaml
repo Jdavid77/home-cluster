@@ -5,3 +5,9 @@ resources:
   - rules
   - route.yaml
   - grafanadashboard.yaml
+configMapGenerator:
+  - name: longhorn-values
+    files:
+      - values.yaml=./values.yaml
+configurations:
+  - kustomizeconfig.yaml
