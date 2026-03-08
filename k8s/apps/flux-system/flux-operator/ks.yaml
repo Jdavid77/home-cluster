@@ -17,7 +17,7 @@ spec:
       name: flux-operator
       namespace: flux-system
   interval: 30m
-  retryInterval: 1m
+  retryInterval: 2m
   timeout: 3m
 ---
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
@@ -41,5 +41,5 @@ spec:
     name: home-cluster
     namespace: flux-system
   interval: 30m
-  retryInterval: 1m
+  retryInterval: 2m
   timeout: 3m

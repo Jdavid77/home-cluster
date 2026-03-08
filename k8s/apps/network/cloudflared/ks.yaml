@@ -23,8 +23,8 @@ spec:
       current: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSynced')
   wait: true
   interval: 30m
-  retryInterval: 1m
-  timeout: 5m
+  retryInterval: 2m
+  timeout: 15m
   dependsOn:
     - name: external-dns-cloudflare
     - name: external-secrets-store
