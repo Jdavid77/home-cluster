@@ -1,3 +1,11 @@
+autoDirectNodeRoutes: true
+bandwidthManager:
+  bbr: true
+  enabled: true
+bpf:
+  datapathMode: netkit
+  masquerade: true
+bpfClockProbe: true
 cgroup:
   automount:
     enabled: false
@@ -5,6 +13,14 @@ cgroup:
 cluster:
   id: 1
   name: main
+devices: eth+,en+
+enableIPv4BIGTCP: true
+endpointRoutes:
+  enabled: true
+envoy:
+  enabled: false
+externalIPs:
+  enabled: true
 hubble:
   enabled: true
   metrics:
@@ -22,14 +38,11 @@ hubble:
     enabled: true
   ui:
     enabled: true
-routingMode: "native"
-ipv4NativeRoutingCIDR: 10.244.0.0/16
 ipam:
   mode: kubernetes
-devices: eth+,en+
-autoDirectNodeRoutes: true
-endpointRoutes:
+ipv4:
   enabled: true
+ipv4NativeRoutingCIDR: 10.244.0.0/16
 k8sServiceHost: 127.0.0.1
 k8sServicePort: 7445
 kubeProxyReplacement: true
@@ -38,8 +51,9 @@ l2announcements:
   leaseDuration: 45s
   leaseRenewDeadline: 15s
   leaseRetryPeriod: 5s
-externalIPs:
+pmtuDiscovery:
   enabled: true
+routingMode: "native"
 securityContext:
   capabilities:
     ciliumAgent:
@@ -50,6 +64,7 @@ securityContext:
       - IPC_LOCK
       - SYS_ADMIN
       - SYS_RESOURCE
+      - BPF
       - DAC_OVERRIDE
       - FOWNER
       - SETGID
@@ -58,3 +73,6 @@ securityContext:
       - NET_ADMIN
       - SYS_ADMIN
       - SYS_RESOURCE
+socketLB:
+  enabled: true
+  hostNamespaceOnly: true
