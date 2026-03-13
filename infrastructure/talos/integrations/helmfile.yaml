@@ -56,7 +56,7 @@ releases:
   - name: envoy-gateway
     namespace: network
     chart: oci://mirror.gcr.io/envoyproxy/gateway-helm
-    version: v1.7.0
+    version: v1.7.1
     values:
       - ../../../k8s/apps/network/envoy-gateway/app/values.yaml
     needs:
