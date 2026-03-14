@@ -33,7 +33,6 @@ spec:
               runAsNonRoot: true
               runAsUser: 1002
               runAsGroup: 100
-              fsGroup: 100
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: false
               capabilities: {drop: ["ALL"]}
