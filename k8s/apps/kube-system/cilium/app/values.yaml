@@ -13,7 +13,7 @@ cgroup:
 cluster:
   id: 1
   name: main
-devices: eth+,en+
+devices: "eth+ en+"
 enableIPv4BIGTCP: true
 endpointRoutes:
   enabled: true
@@ -21,23 +21,6 @@ envoy:
   enabled: false
 externalIPs:
   enabled: true
-hubble:
-  enabled: true
-  metrics:
-    enabled:
-      - dns:query
-      - drop
-      - tcp
-      - flow
-      - port-distribution
-      - icmp
-      - http
-    serviceMonitor:
-      enabled: true
-  relay:
-    enabled: true
-  ui:
-    enabled: true
 ipam:
   mode: kubernetes
 ipv4:

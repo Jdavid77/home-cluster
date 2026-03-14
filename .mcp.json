@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "flux-operator-mcp":{
+        "command":"flux-operator-mcp",
+        "args":["serve"],
+        "env":{
+            "KUBECONFIG":"$HOME/.kube/config"
+        }
+    }
+  }
+}
