@@ -4,3 +4,11 @@ resources:
   - helm-release.yaml
   - secret.yaml
   - grafanadashboard.yaml
+configMapGenerator:
+  - name: grafana-values
+    files:
+      - values.yaml=./values.yaml
+generatorOptions:
+  disableNameSuffixHash: true
+configurations:
+  - kustomizeconfig.yaml
