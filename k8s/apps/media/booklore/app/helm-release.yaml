@@ -17,7 +17,7 @@ spec:
           *app :
             image:
               repository: ghcr.io/booklore-app/booklore
-              tag: v2.0.4@sha256:0a2a85ba20add749a3222d66a16f1e017bd28c0c446c795d875149e35194ed61
+              tag: v2.2.1@sha256:0684bbbd4e2d81a49d35004391cc3d9d6eb104bc68abb96069d9e6324b37ad90
 
             env:
               TZ: Europe/Lisbon
