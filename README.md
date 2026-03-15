@@ -1,6 +1,6 @@
 <h1 align="center"><div align="center">
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Kubernetes_logo_without_workmark.svg/1055px-Kubernetes_logo_without_workmark.svg.png" align="center" width="200px" height="194px"/>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Kubernetes_logo_without_workmark.svg/1280px-Kubernetes_logo_without_workmark.svg.png" align="center" width="200px" height="194px"/>
 
 ### Kubernetes cluster
 
@@ -128,7 +128,7 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
                 <td>1</td>
                 <td>128GB SSD</td>
                 <td>8GB</td>
-                <td>Talos v1.11.6</td>
+                <td>Talos v1.12.0</td>
                 <td>Kubernetes Control</td>
                 <td>Bmax B1Pro Gemini Lake N4000</td>
             </tr>
@@ -137,7 +137,7 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
                 <td>1</td>
                 <td>512GB SSD</td>
                 <td>16GB</td>
-                <td>Talos v1.11.6</td>
+                <td>Talos v1.12.0</td>
                 <td>Kubernetes Control</td>
                 <td>SOYO m2 plus v1</td>
             </tr>
@@ -146,7 +146,7 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
                 <td>1</td>
                 <td>512GB SSD</td>
                 <td>16GB</td>
-                <td>Talos v1.11.6</td>
+                <td>Talos v1.12.0</td>
                 <td>Kubernetes Control</td>
                 <td>SOYO m2 plus v1</td>
             </tr>
@@ -155,7 +155,7 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
                 <td>1</td>
                 <td>240GB SSD</td>
                 <td>20GB</td>
-                <td>Talos v1.11.6</td>
+                <td>Talos v1.12.0</td>
                 <td>Kubernetes Worker</td>
                 <td>Hp Elite Desk 800 G3</td>
             </tr>
@@ -164,7 +164,7 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
                 <td>1</td>
                 <td>1TB HDD + 240GB SSD</td>
                 <td>28GB</td>
-                <td>Talos v1.11.6</td>
+                <td>Talos v1.12.0</td>
                 <td>Kubernetes Worker</td>
                 <td>HP Compaq 8300 SFF</td>
             </tr>
@@ -173,7 +173,7 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
                 <td>1</td>
                 <td>500GB HDD + 240GB SSD</td>
                 <td>32GB</td>
-                <td>Talos v1.11.6</td>
+                <td>Talos v1.12.0</td>
                 <td>Kubernetes Worker</td>
                 <td>HP Compaq 8300 SFF</td>
             </tr>
@@ -182,7 +182,7 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
                 <td>1</td>
                 <td>512GB SSD</td>
                 <td>16GB</td>
-                <td>Talos v1.11.6</td>
+                <td>Talos v1.12.0</td>
                 <td>Kubernetes Worker</td>
                 <td>SOYO Intel Alder Lake N95</td>
             </tr>
