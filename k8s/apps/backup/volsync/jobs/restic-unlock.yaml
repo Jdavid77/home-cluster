@@ -3,7 +3,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: restic-unlock
-  namespace: default
+  namespace: media
 spec:
   ttlSecondsAfterFinished: 60
   template:
@@ -17,19 +17,19 @@ spec:
             - unlock
           env:
             - name: RESTIC_REPOSITORY
-              value: "s3:http://garage.storage.svc.cluster.local:3900/adventurelog"
+              value: "s3:http://garage.storage.svc.cluster.local:3900/audiobookshelf"
             - name: RESTIC_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: adventurelog-restic
+                  name: audiobookshelf-restic
                   key: RESTIC_PASSWORD
             - name: AWS_ACCESS_KEY_ID
               valueFrom:
                 secretKeyRef:
-                  name: adventurelog-restic
+                  name: audiobookshelf-restic
                   key: AWS_ACCESS_KEY_ID
             - name: AWS_SECRET_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
-                  name: adventurelog-restic
+                  name: audiobookshelf-restic
                   key: AWS_SECRET_ACCESS_KEY

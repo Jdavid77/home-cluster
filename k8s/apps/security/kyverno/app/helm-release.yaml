@@ -29,6 +29,8 @@ spec:
             verbs: ["get", "list", "watch"]
       serviceMonitor:
         enabled: true
+      certManager:
+        enabled: true
     backgroundController:
       clusterRole:
         extraResources: *extraResources
