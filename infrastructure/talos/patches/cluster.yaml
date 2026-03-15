@@ -1,0 +1,4 @@
+cluster:
+  allowSchedulingOnMasters: false
+  proxy:
+    disabled: true

@@ -2,7 +2,7 @@
 clusterName: home-cluster
 endpoint: https://192.168.1.110:6443
 # renovate: datasource=docker depName=ghcr.io/siderolabs/installer
-talosVersion: v1.12.5
+talosVersion: v1.12.0
 # renovate: datasource=docker depName=ghcr.io/siderolabs/kubelet
 kubernetesVersion: v1.35.2
 additionalMachineCertSans:
@@ -14,90 +14,17 @@ cniConfig:
   name: none
 patches:
   - "@patches/kubelet-certificates.yaml"
+  - "@patches/kubePrism.yaml"
+  - "@patches/containerd.yaml"
+  - "@patches/sysctls.yaml"
+
 controlPlane:
   patches:
-    - &dnsPatch |-
-      machine:
-        features:
-          hostDNS:
-            enabled: true
-            forwardKubeDNSToHost: false
-    - &domainPatch |-
-      machine:
-        network:
-          disableSearchDomain: true
-    # Enable KubePrism
-    - &kubePrismPatch |-
-      machine:
-        features:
-          kubePrism:
-            enabled: true
-            port: 7445
-    # Cluster configuration
-    - &proxyPatch |-
-      cluster:
-        allowSchedulingOnMasters: false
-        proxy:
-          disabled: true
-    # Configure containerd
-    - &containerdPatch |-
-      machine:
-        files:
-          - path: /etc/cri/conf.d/20-customization.part
-            op: create
-            content: |
-              [plugins."io.containerd.cri.v1.images"]
-                discard_unpacked_layers = false
-    - &sysctlPatch |-
-      machine:
-        sysctls:
-          net.core.rmem_max: "16777216"
-          net.core.wmem_max: "16777216"
-          net.ipv4.tcp_rmem: "4096 87380 16777216"
-          net.ipv4.tcp_wmem: "4096 65536 16777216"
-          net.netfilter.nf_conntrack_max: "131072"
-          net.core.default_qdisc: "fq"
-          net.ipv4.tcp_congestion_control: "bbr"
-          user.max_user_namespaces: 11255
-    # Configure NFS mount options
-    - &nfsPatch |-
-      machine:
-        files:
-          - op: overwrite
-            path: /etc/nfsmount.conf
-            permissions: 0o644
-            content: |
-              [ NFSMount_Global_Options ]
-              nfsvers=4.2
-              hard=True
-              noatime=True
-              nodiratime=True
-              rsize=131072
-              wsize=131072
-              nconnect=8
+    - "@patches/cluster.yaml"
+    - "@patches/apiserver.yaml"
+    - "@patches/etcd.yaml"
+    - "@patches/talos-api-access.yaml"
 
-    - |-
-      cluster:
-        apiServer:
-          extraArgs:
-            enable-aggregator-routing: true
-            feature-gates: ImageVolume=true,MutatingAdmissionPolicy=true,ResourceHealthStatus=true
-            runtime-config: admissionregistration.k8s.io/v1beta1=true
-    # ETCD configuration
-    - |-
-      cluster:
-        etcd:
-          extraArgs:
-            listen-metrics-urls: http://0.0.0.0:2381
-    - |-
-      machine:
-        features:
-          kubernetesTalosAPIAccess:
-            enabled: true
-            allowedRoles:
-              - os:admin
-            allowedKubernetesNamespaces:
-              - system-upgrade
 worker:
   schematic:
     customization:
@@ -106,13 +33,9 @@ worker:
           - siderolabs/iscsi-tools
           - siderolabs/util-linux-tools
   patches:
-    - *kubePrismPatch
-    - *proxyPatch
-    - *nfsPatch
-    - *containerdPatch
-    - *sysctlPatch
-    - *domainPatch
-    - *dnsPatch
+    - "@patches/nfs.yaml"
+    - "@patches/kernel-modules.yaml"
+
 nodes:
   - hostname: bmax1-master
     ipAddress: 192.168.1.81
@@ -129,12 +52,13 @@ nodes:
       - deviceSelector:
           hardwareAddr: "00:e0:4c:2f:69:52"
           physical: true
-        addresses:
-          - 192.168.1.81/24
         dhcp: true
+        dhcpOptions:
+          routeMetric: 1024
         vip:
           ip: 192.168.1.110
         mtu: 1500
+    disableSearchDomain: true
     machineSpec:
       mode: metal
       arch: amd64
@@ -152,12 +76,13 @@ nodes:
       - deviceSelector:
           hardwareAddr: "00:e0:9d:87:ac:99"
           physical: true
-        addresses:
-          - 192.168.1.82/24
         dhcp: true
+        dhcpOptions:
+          routeMetric: 1024
         vip:
           ip: 192.168.1.110
         mtu: 1500
+    disableSearchDomain: true
     machineSpec:
       mode: metal
       arch: amd64
@@ -175,12 +100,13 @@ nodes:
       - deviceSelector:
           hardwareAddr: "00:e0:9d:87:26:a7"
           physical: true
-        addresses:
-          - 192.168.1.83/24
         dhcp: true
+        dhcpOptions:
+          routeMetric: 1024
         vip:
           ip: 192.168.1.110
         mtu: 1500
+    disableSearchDomain: true
     machineSpec:
       mode: metal
       arch: amd64
@@ -201,10 +127,11 @@ nodes:
       - deviceSelector:
           hardwareAddr: "74:46:a0:90:26:0f"
           physical: true
-        addresses:
-          - 192.168.1.93/24
         dhcp: true
+        dhcpOptions:
+          routeMetric: 1024
         mtu: 1500
+    disableSearchDomain: true
     machineSpec:
       mode: metal
       arch: amd64
@@ -214,8 +141,7 @@ nodes:
           diskSelector:
             match: disk.model == "SanDisk SSD PLUS" && !system_disk
           minSize: "200GiB"
-        filesystem:
-          type: xfs
+          grow: false
     patches:
       - |-
         machine:
@@ -246,9 +172,10 @@ nodes:
           hardwareAddr: "10:60:4b:73:34:97"
           physical: true
         dhcp: true
-        addresses:
-          - 192.168.1.92/24
+        dhcpOptions:
+          routeMetric: 1024
         mtu: 1500
+    disableSearchDomain: true
     machineSpec:
       mode: metal
       arch: amd64
@@ -258,8 +185,7 @@ nodes:
           diskSelector:
             match: disk.model == "Apacer AS340 240" && !system_disk
           minSize: "200GiB"
-        filesystem:
-          type: xfs
+          grow: false
     patches:
       - |-
         machine:
@@ -286,10 +212,11 @@ nodes:
       - deviceSelector:
           hardwareAddr: "c4:65:16:16:e2:b8"
           physical: true
-        addresses:
-          - 192.168.1.91/24
         dhcp: true
+        dhcpOptions:
+          routeMetric: 1024
         mtu: 1500
+    disableSearchDomain: true
     machineSpec:
       mode: metal
       arch: amd64
@@ -304,22 +231,23 @@ nodes:
     nodeAnnotations:
       installerImage: '{{ .MachineConfig.MachineInstall.InstallImage }}'
     patches:
-    - |-
-      machine:
-        kubelet:
-          extraMounts:
-            - destination: /var/openebs/local
-              type: bind
-              source: /var/openebs/local
-              options: ["bind", "rshared", "rw"]
+      - |-
+        machine:
+          kubelet:
+            extraMounts:
+              - destination: /var/openebs/local
+                type: bind
+                source: /var/openebs/local
+                options: ["bind", "rshared", "rw"]
     networkInterfaces:
       - deviceSelector:
           hardwareAddr: "00:e0:4c:73:3b:3b"
           physical: true
-        addresses:
-          - 192.168.1.101/24
         dhcp: true
+        dhcpOptions:
+          routeMetric: 1024
         mtu: 1500
+    disableSearchDomain: true
     machineSpec:
       mode: metal
       arch: amd64
