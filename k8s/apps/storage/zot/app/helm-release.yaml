@@ -29,7 +29,7 @@ spec:
               "name": "s3",
               "region": "us-east-1",
               "bucket": "zot",
-              "regionendpoint"."http://garage.storage.svc.cluster.local:3900"
+              "regionendpoint": "http://garage.storage.svc.cluster.local:3900",
               "secure": false,
               "skipverify": true
             }
