@@ -4,7 +4,6 @@ bandwidthManager:
   enabled: true
 bpf:
   datapathMode: netkit
-  masquerade: true
 bpfClockProbe: true
 cgroup:
   automount:
