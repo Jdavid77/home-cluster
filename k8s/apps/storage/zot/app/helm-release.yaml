@@ -70,7 +70,7 @@ spec:
     mountSecret: true
     secretFiles:
       htpasswd: |-
-        admin:$2y$05$DbI9Wqdhiuw27TuarKdREufBB0TxOFbC.eeytixQvyYNCvsAp1/uG
+        admin:$2y$05$qxv8Yo6lqgRnXU4QDjMBLu.kx3zC03CFeSMq1NBokMG6qOfWkRhNC
 
     env:
       - name: AWS_ACCESS_KEY_ID
