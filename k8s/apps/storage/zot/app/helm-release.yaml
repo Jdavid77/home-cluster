@@ -24,7 +24,7 @@ spec:
           "distSpecVersion": "1.1.1",
           "storage": {
             "rootDirectory": "/tmp/zot",
-            "gc": "true",
+            "gc": true,
             "storageDriver": {
               "name": "s3",
               "region": "us-east-1",
