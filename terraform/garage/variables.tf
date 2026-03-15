@@ -30,7 +30,8 @@ variable "buckets" {
     "grist",
     "renderercv",
     "ephemera",
-    "shelfmark"
+    "shelfmark",
+    "zot"
   ]
 }
 
