@@ -21,7 +21,7 @@ spec:
           secret: main
         - name: immich
           port: 6001
-          version: 16
+          version: 18
           secret: vector
     - backend: b2
       region: eu-central-003
@@ -35,7 +35,7 @@ spec:
           secret: main
         - name: immich
           port: 6001
-          version: 16
+          version: 18
           secret: vector
   resourcesTemplate: |
     <<- range $server := inputs.servers >>
