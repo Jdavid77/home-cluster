@@ -4,3 +4,4 @@ resources:
   - ./resourseset.yaml
   - ./secret.yaml
   - ./service.yaml
+  - ./route.yaml

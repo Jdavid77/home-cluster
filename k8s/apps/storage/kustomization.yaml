@@ -7,7 +7,7 @@ resources:
   # - ./pgadmin/ks.yaml
   - ./garage/ks.yaml
   - ./openebs/ks.yaml
-  # - ./zot/ks.yaml
+  - ./zot/ks.yaml
 components:
   - ../../components/alerts/alertmanager
   - ../../components/grafana/folder
