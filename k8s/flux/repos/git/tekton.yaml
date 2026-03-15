@@ -7,7 +7,7 @@ spec:
   interval: 30m
   url: https://github.com/tektoncd/operator
   ref:
-    tag: v0.79.0
+    tag: v0.78.0
   ignore: |-
     # exclude all
     /*
