@@ -34,5 +34,6 @@ resource "authentik_source_ldap" "this" {
   group_membership_field  = "member"
   object_uniqueness_field = "uid"
   start_tls               = false
+  delete_not_found_objects = true
 
 }

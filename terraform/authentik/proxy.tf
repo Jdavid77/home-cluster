@@ -39,7 +39,7 @@ resource "authentik_outpost" "proxy" {
   config = jsonencode({
     log_level                        = "info"
     docker_labels                    = null
-    authentik_host                   = "http://authentik-server.security.svc.cluster.local:80"
+    authentik_host                   = "https://auth.jnobrega.com"
     docker_network                   = null
     container_image                  = null
     docker_map_ports                 = true
