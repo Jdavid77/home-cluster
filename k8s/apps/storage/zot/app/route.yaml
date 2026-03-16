@@ -13,6 +13,12 @@ spec:
     - backendRefs:
         - name: zot
           port: 5000
+      sessionPersistence:
+        sessionName: Session-A
+        type: Cookie
+        absoluteTimeout: 10s
+        cookieConfig:
+          lifetimeType: Permanent
       matches:
         - path:
             type: PathPrefix
