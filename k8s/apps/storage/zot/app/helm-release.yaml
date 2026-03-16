@@ -43,7 +43,7 @@ spec:
               "openid": {
                 "providers": {
                   "oidc": {
-                    "credentialsFile": "/etc/zot/oidc/oidc-credentials.json",
+                    "credentialsFile": "/oidc/oidc-credentials.json",
                     "name": "Authentik SSO",
                     "issuer": "https://auth.jnobrega.com/application/o/Zot/",
                     "keypath": "",
@@ -88,7 +88,7 @@ spec:
     # Extra Volume Mounts
     extraVolumeMounts:
       - name: oidc-credentials
-        mountPath: /etc/zot/oidc/oidc-credentials.json
+        mountPath: /oidc/oidc-credentials.json
         subPath: oidc-credentials.json
         readOnly: true
 
