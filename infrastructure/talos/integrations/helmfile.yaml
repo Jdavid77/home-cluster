@@ -65,7 +65,7 @@ releases:
   - name: longhorn
     namespace: longhorn-system
     chart: oci://ghcr.io/home-operations/charts-mirror/longhorn
-    version: 1.11.0
+    version: 1.11.1
     values:
       - ../../../k8s/apps/longhorn-system/longhorn/app/values.yaml
     needs:
