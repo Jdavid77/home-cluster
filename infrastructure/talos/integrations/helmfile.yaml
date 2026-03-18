@@ -6,8 +6,6 @@ helmDefaults:
   force: true
 
 repositories:
-  - name: cilium
-    url: https://helm.cilium.io
   - name: postfinance
     url: https://postfinance.github.io/kubelet-csr-approver
 
@@ -16,10 +14,10 @@ releases:
     namespace: kube-system
     chart: oci://ghcr.io/prometheus-community/charts/prometheus-operator-crds
     version: 27.0.0
-  
+
   - name: cilium
     namespace: kube-system
-    chart: cilium/cilium
+    chart: oci://quay.io/cilium/charts/cilium
     version: 1.19.1
     values:
       - ../../../k8s/apps/kube-system/cilium/app/values.yaml
@@ -43,7 +41,7 @@ releases:
       - ../../../k8s/apps/kube-system/spegel/app/values.yaml
     needs:
       - kube-system/kubelet-csr-approver
-  
+
   - name: grafana-operator
     namespace: monitoring
     chart: oci://ghcr.io/grafana/helm-charts/grafana-operator
@@ -52,7 +50,7 @@ releases:
       - ../../../k8s/apps/monitoring/grafana-operator/app/values.yaml
     needs:
       - kube-system/kubelet-csr-approver
-  
+
   - name: envoy-gateway
     namespace: network
     chart: oci://mirror.gcr.io/envoyproxy/gateway-helm
@@ -91,5 +89,3 @@ releases:
     needs:
       - flux-system/flux-operator
       - network/envoy-gateway
-
-
