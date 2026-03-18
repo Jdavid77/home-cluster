@@ -14,7 +14,7 @@ spec:
     manager:
       image:
         repository: ghcr.io/open-telemetry/opentelemetry-operator/opentelemetry-operator
-        tag: v0.146.0@sha256:18540af3a9166413f52968ce8d4fe997bc2a7431f24f73ee70ad5430772cd288
+        tag: v0.147.0@sha256:54f414ccd807852ef4c10449dff532a343e1e41e1e60c116912a3f8022be55cc
       collectorImage:
         repository: ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-contrib
         tag: 0.147.0@sha256:2a7e7dc22a0969f1500b281c8f84ed820f62cda87b624c91ac87cabd5572ee5b
