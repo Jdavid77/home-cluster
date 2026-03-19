@@ -35,3 +35,4 @@ resources:
   - envoy-gateway.yaml
   - trivy-operator-dashboard.yaml
   - cilium.yaml
+  - portager.yaml

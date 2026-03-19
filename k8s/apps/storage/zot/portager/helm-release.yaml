@@ -1,0 +1,17 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: portager
+  namespace: storage
+spec:
+  interval: 15m
+  chartRef:
+    kind: OCIRepository
+    name: portager
+    namespace: flux-system
+  values:
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
