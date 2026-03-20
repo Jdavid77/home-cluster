@@ -24,7 +24,7 @@ spec:
               TZ: Europe/Lisbon
             securityContext:
               allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
+              readOnlyRootFilesystem: false
               capabilities: {drop: ["ALL"]}
             resources:
               requests:
@@ -35,8 +35,8 @@ spec:
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
-        runAsUser: 1000
-        runAsGroup: 100
+        runAsUser: 101
+        runAsGroup: 101
         seccompProfile: {type: RuntimeDefault}
     service:
       app:
