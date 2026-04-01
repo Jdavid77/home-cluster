@@ -36,3 +36,4 @@ resources:
   - trivy-operator-dashboard.yaml
   - cilium.yaml
   - portager.yaml
+  - x509-certificate-exporter.yaml

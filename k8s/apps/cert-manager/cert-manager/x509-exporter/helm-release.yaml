@@ -4,15 +4,11 @@ kind: HelmRelease
 metadata:
   name: x509-certificate-exporter
 spec:
-  interval: 30m
-  chart:
-    spec:
-      chart: x509-certificate-exporter
-      version: 3.20.0
-      sourceRef:
-        kind: HelmRepository
-        name: enix-charts
-        namespace: flux-system
+  interval: 15m
+  chartRef:
+    kind: OCIRepository
+    name: x509-certificate-exporter
+    namespace: flux-system
   values:
     image:
       registry: quay.io
