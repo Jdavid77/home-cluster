@@ -11,31 +11,44 @@ spec:
     namespace: flux-system
   maxHistory: 2
   values:
+
     excludeNamespaces: "kube-system"
+
     operator:
       logDevMode: true
       replicas: 1
-      scanJobsConcurrentLimit: 5
-      scanJobTTL: 10s
+      scanJobsConcurrentLimit: 3
+      scanJobTTL: 30s
+      scanJobTimeout: "10m"
       builtInTrivyServer: true
+      vulnerabilityScannerScanInterval: "24h"
+      configAuditScannerScanInterval: "24h"
       vulnerabilityScannerScanOnlyCurrentRevisions: true
       configAuditScannerScanOnlyCurrentRevisions: true
       annotations:
         reloader.stakater.com/auto: "true"
+
     trivy:
       debug: true
       slow: true # flag is to use less CPU/memory for scanning though it takes more time than normal scanning
       ignoreUnfixed: true
-      mode: ClientServer
+      mode: Standalone
       severity: HIGH,CRITICAL
       storageClassEnabled: false # ephemeral storage
       resources:
         limits:
           cpu: 500m
           memory: 1Gi
-    # https://github.com/aquasecurity/trivy-operator/issues/2202
+
     nodeCollector:
-      useNodeSelector: false
-      excludeNodes: kubernetes.io/arch=amd64
+      volumeMounts:
+        - name: etc-os-release
+          mountPath: /host/etc/os-release
+          readOnly: true
+      volumes:
+        - name: etc-os-release
+          hostPath:
+            path: /etc/os-release
+
     serviceMonitor:
       enabled: true
