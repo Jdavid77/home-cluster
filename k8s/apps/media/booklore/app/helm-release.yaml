@@ -16,13 +16,12 @@ spec:
         containers:
           *app :
             image:
-              repository: ghcr.io/booklore-app/booklore
-              tag: v2.2.1@sha256:0684bbbd4e2d81a49d35004391cc3d9d6eb104bc68abb96069d9e6324b37ad90
-
+              repository: ghcr.io/grimmory-tools/grimmory
+              tag: v2.3.0@sha256:9014247f591074529894f81115ca40f899db697e89f72c2fe91ec530e3f19597
             env:
               TZ: Europe/Lisbon
-              PUID: 1002
-              PGID: 100
+              USER_ID: 1002
+              GROUP_ID: 100
               DATABASE_URL: "jdbc:mariadb://localhost:3306/booklore"
               DATABASE_USERNAME: booklore
               DATABASE_PASSWORD:
@@ -33,27 +32,31 @@ spec:
               SWAGGER_ENABLED: "false"
 
             probes:
-              liveness: &probes
+              liveness:
                 enabled: true
                 custom: true
                 spec:
-                  tcpSocket:
+                  httpGet:
+                    path: /api/v1/healthcheck
                     port: &port 6060
-                  initialDelaySeconds: 30
+                  periodSeconds: 30
+                  timeoutSeconds: 5
+                  failureThreshold: 5
+              readiness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/v1/healthcheck
+                    port: *port
                   periodSeconds: 10
                   timeoutSeconds: 5
-                  failureThreshold: 3
-              readiness: *probes
+                  failureThreshold: 5
               startup:
                 enabled: true
-                custom: true
                 spec:
-                  tcpSocket:
-                    port: 3306
-                  initialDelaySeconds: 0
-                  periodSeconds: 5
-                  timeoutSeconds: 3
                   failureThreshold: 30
+                  periodSeconds: 10
 
           mariadb:
             image:
