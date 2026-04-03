@@ -75,7 +75,7 @@ spec:
               capabilities: {drop: ["ALL"]}
     defaultPodOptions:
       imagePullSecrets:
-        - name: live-metrics-gh
+        - name: gh-secret
     route:
       main:
         parentRefs:

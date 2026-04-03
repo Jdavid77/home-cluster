@@ -18,6 +18,7 @@ resources:
   - ./live-metrics/ks.yaml
   - ./expenseowl/ks.yaml
   - ./renderercv/ks.yaml
+  - ./curve-tracker/ks.yaml
 
 components:
   - ../../components/alerts/alertmanager

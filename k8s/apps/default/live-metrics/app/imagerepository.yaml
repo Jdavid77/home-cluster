@@ -7,7 +7,7 @@ spec:
   interval: 5m
   provider: generic
   secretRef:
-    name: live-metrics-gh
+    name: gh-secret
 ---
 apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImageRepository
@@ -18,4 +18,4 @@ spec:
   interval: 5m
   provider: generic
   secretRef:
-    name: live-metrics-gh
+    name: gh-secret
