@@ -18,7 +18,7 @@ spec:
           app:
             image:
               repository: ghcr.io/alexta69/metube
-              tag: "2026.03.21@sha256:afd3fa2b229e3e6d4c8750618fe148af33a1f70b32af4441ecbd2d08f29d8221"
+              tag: "2026.04.04@sha256:27b7155264c6b572017259bf3016a118cf5bf852529ec92653eb22966d2a58f9"
             env:
               UID: 1002
               GID: 1002
