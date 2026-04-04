@@ -1,0 +1,24 @@
+# TODO
+apiVersion: portager.portager.io/v1alpha1
+kind: ImageSync
+metadata:
+  name: curve-tracker
+  namespace: storage
+spec:
+  schedule: "0 0 * * *"
+  source:
+    registry: ghcr.io/jdavid77
+    authSecretRef:
+      name: gh-secret
+      namespace: default
+  destination:
+    registry: registry.jnobrega.com
+    authSecretRef:
+      name: source-creds
+      namespace: default
+    repositoryPrefix: mirror
+  createDestinationRepos: true
+  images:
+    - name: curve-tracker
+      semver: ">= 1.0.0"
+      maxTags: 5
