@@ -16,7 +16,7 @@ spec:
         namespace: flux-system
       interval: 15m
   values:
-    replicaCount: 3
+    replicaCount: 1
     mountConfig: true
     configFiles:
       config.json: |
