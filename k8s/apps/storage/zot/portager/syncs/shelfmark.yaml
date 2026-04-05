@@ -1,0 +1,22 @@
+# TODO
+apiVersion: portager.portager.io/v1alpha1
+kind: ImageSync
+metadata:
+  name: shelfmark
+  namespace: storage
+spec:
+  schedule: "0 0 * * *"
+  source:
+    registry: ghcr.io
+  destination:
+    registry: registry.jnobrega.com
+    auth:
+      method: secret
+      secretRef:
+        name: zot-registry-secret
+    repositoryPrefix: mirror
+  createDestinationRepos: true
+  images:
+    - name: calibrain/shelfmark
+      semver: ">= 1.0.0"
+      maxTags: 5
