@@ -1,0 +1,10 @@
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: grimmory
+spec:
+  image: registry.jnobrega.com/mirror/grimmory-tools/grimmory
+  interval: 5m
+  provider: generic
+  secretRef:
+    name: zot-registry-secret

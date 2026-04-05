@@ -16,8 +16,8 @@ spec:
         containers:
           *app :
             image:
-              repository: ghcr.io/grimmory-tools/grimmory
-              tag: v2.3.0@sha256:9014247f591074529894f81115ca40f899db697e89f72c2fe91ec530e3f19597
+              repository: registry.jnobrega.com/mirror/grimmory-tools/grimmory
+              tag: v2.3.0 # {"$imagepolicy": "flux-system:grimmory:tag"}
             env:
               TZ: Europe/Lisbon
               USER_ID: 1002
