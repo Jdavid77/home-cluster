@@ -40,6 +40,9 @@ spec:
             "port": "5000",
             "externalUrl": "https://registry.jnobrega.com",
             "auth": {
+              "htpasswd": {
+                "path": "/secret/htpasswd"
+              },
               "openid": {
                 "providers": {
                   "oidc": {
@@ -66,7 +69,7 @@ spec:
     mountSecret: true
     secretFiles:
       htpasswd: |-
-        admin:$2y$05$qxv8Yo6lqgRnXU4QDjMBLu.kx3zC03CFeSMq1NBokMG6qOfWkRhNC
+        admin:$2y$05$PAt5S8lT65jElESxVpaH/uzyFBgbAkRETa5sl7BT94ong0iqfhcHu
 
     env:
       - name: AWS_ACCESS_KEY_ID
