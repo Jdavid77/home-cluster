@@ -13,9 +13,10 @@ spec:
       namespace: storage
   destination:
     registry: registry.jnobrega.com
-    authSecretRef:
-      name: zot-registry-secret
-      namespace: storage
+    auth:
+      method: secret
+      secretRef:
+        name: zot-registry-secret
     repositoryPrefix: mirror
   createDestinationRepos: true
   images:
