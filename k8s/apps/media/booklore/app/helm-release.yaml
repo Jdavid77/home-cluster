@@ -85,6 +85,10 @@ spec:
           http:
             port: *port
 
+    defaultPodOptions:
+      imagePullSecrets:
+        - name: zot-registry-secret
+
     route:
       main:
         parentRefs:
