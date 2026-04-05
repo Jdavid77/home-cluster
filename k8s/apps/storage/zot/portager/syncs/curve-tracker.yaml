@@ -10,12 +10,12 @@ spec:
     registry: ghcr.io/jdavid77
     authSecretRef:
       name: gh-secret
-      namespace: default
+      namespace: storage
   destination:
     registry: registry.jnobrega.com
     authSecretRef:
-      name: source-creds
-      namespace: default
+      name: zot-registry-secret
+      namespace: storage
     repositoryPrefix: mirror
   createDestinationRepos: true
   images:
