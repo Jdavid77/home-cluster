@@ -19,7 +19,3 @@ toolsets = ["core", "config", "helm"]
 group = ""
 version = "v1"
 kind = "Secret"
-
-# Telemetry (OpenTelemetry)
-[telemetry]
-endpoint = "http://localhost:4317"
