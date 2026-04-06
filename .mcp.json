@@ -1,11 +1,8 @@
 {
   "mcpServers": {
     "flux-operator-mcp":{
-        "command":"flux-operator-mcp",
-        "args":["serve"],
-        "env":{
-            "KUBECONFIG":"/home/jnobrega/.kube/config"
-        }
+        "type": "http",
+        "url": "http://localhost:9090/mcp"
     }
   }
 }
