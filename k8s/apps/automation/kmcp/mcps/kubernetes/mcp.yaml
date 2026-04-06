@@ -11,5 +11,22 @@ spec:
     image: ghcr.io/containers/kubernetes-mcp-server:v0.0.60
     port: 8080
     serviceAccountName: kubernetes-mcp
-    env:
-      READ_ONLY: "true"
+    args:
+      - "--config"
+      - "/etc/kubernetes-mcp-server/config.toml"
+    securityContext:
+      runAsNonRoot: true
+      readOnlyRootFilesystem: true
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+          - "ALL"
+      seccompProfile:
+        type: RuntimeDefault
+    volumeMounts:
+      - name: config
+        mountPath: /etc/kubernetes-mcp-server
+    volumes:
+      - name: config
+        configMap:
+          name: kubernetes-mcp-config

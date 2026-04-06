@@ -3,3 +3,9 @@ kind: Kustomization
 resources:
   - ./rbac.yaml
   - ./mcp.yaml
+configMapGenerator:
+  - name: kubernetes-mcp-config
+    files:
+      - config.toml=./config/config.toml
+generatorOptions:
+  disableNameSuffixHash: true
