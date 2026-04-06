@@ -1,0 +1,20 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: kubernetes-mcp
+  namespace: automation
+spec:
+  hostnames:
+    - k8s-mcp.jnobrega.com
+  parentRefs:
+    - name: internal
+      namespace: network
+      sectionName: websecure
+  rules:
+    - backendRefs:
+        - name: kubernetes-mcp
+          port: 8080
+      matches:
+        - path:
+            type: PathPrefix
+            value: /mcp

@@ -45,3 +45,24 @@ spec:
   interval: 30m
   retryInterval: 2m
   timeout: 15m
+---
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: kmcp-mcps
+spec:
+  targetNamespace: automation
+  path: ./k8s/apps/automation/kmcp/mcps
+  prune: true
+  dependsOn:
+    - name: kmcp
+  sourceRef:
+    kind: GitRepository
+    name: home-cluster
+    namespace: flux-system
+  wait: true
+  interval: 30m
+  retryInterval: 2m
+  timeout: 15m

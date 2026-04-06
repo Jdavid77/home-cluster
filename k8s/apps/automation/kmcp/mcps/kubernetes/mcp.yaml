@@ -1,0 +1,15 @@
+apiVersion: kagent.dev/v1alpha1
+kind: MCPServer
+metadata:
+  name: kubernetes-mcp
+  namespace: automation
+spec:
+  transportType: http
+  httpTransport:
+    targetPort: 8080
+  deployment:
+    image: ghcr.io/containers/kubernetes-mcp-server:v0.0.60
+    port: 8080
+    serviceAccountName: kubernetes-mcp
+    env:
+      READ_ONLY: "true"
