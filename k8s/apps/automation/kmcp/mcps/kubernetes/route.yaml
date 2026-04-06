@@ -3,6 +3,9 @@ kind: HTTPRoute
 metadata:
   name: kubernetes-mcp
   namespace: automation
+  annotations:
+    gatus.home-operations.com/endpoint: |-
+      conditions: ["[STATUS] == 404"]
 spec:
   hostnames:
     - k8s-mcp.jnobrega.com
