@@ -17,4 +17,4 @@ spec:
       matches:
         - path:
             type: PathPrefix
-            value: /mcp
+            value: /
