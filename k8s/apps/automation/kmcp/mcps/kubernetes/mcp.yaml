@@ -24,9 +24,9 @@ spec:
       seccompProfile:
         type: RuntimeDefault
     volumeMounts:
-      - name: config
+      - name: mcp-config
         mountPath: /etc/kubernetes-mcp-server
     volumes:
-      - name: config
+      - name: mcp-config
         configMap:
           name: kubernetes-mcp-config
