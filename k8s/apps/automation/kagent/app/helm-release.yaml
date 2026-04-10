@@ -5,11 +5,16 @@ metadata:
   name: &app kagent
 spec:
   interval: 30m
-  releaseName: kagent
-  chartRef:
-    kind: OCIRepository
-    name: *app
-    namespace: flux-system
+  # https://github.com/kagent-dev/kagent/issues/695
+  chart:
+    spec:
+      chart: *app
+      version: 0.8.6
+      sourceRef:
+        kind: HelmRepository
+        name: kagent-charts
+        namespace: flux-system
+      interval: 5m
   values:
     provider: "gemini"
     kmcp:

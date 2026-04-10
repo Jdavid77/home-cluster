@@ -6,3 +6,4 @@ resources:
   - runix-charts.yaml
   - sonarqube-charts.yaml
   - zot-charts.yaml
+  - kagent-charts.yaml
