@@ -16,7 +16,8 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
-    provider: "gemini"
+    providers:
+      default: "gemini"
     kmcp:
       enabled: false
     tools:
