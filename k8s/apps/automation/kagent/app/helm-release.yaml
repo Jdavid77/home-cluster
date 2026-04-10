@@ -24,3 +24,24 @@ spec:
         enabled: false
       querydoc:
         enabled: false
+    agents:
+      k8s-agent:
+        enabled: true
+      promql-agent:
+        enabled: true
+      observability-agent:
+        enabled: true
+      helm-agent:
+        enabled: true
+      kgateway-agent:
+        enabled: false
+      istio-agent:
+        enabled: false
+      argo-rollouts-agent:
+        enabled: false
+      cilium-policy-agent:
+        enabled: false
+      cilium-manager-agent:
+        enabled: false
+      cilium-debug-agent:
+        enabled: false
