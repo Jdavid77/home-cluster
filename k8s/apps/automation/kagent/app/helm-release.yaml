@@ -4,7 +4,8 @@ kind: HelmRelease
 metadata:
   name: &app kagent
 spec:
-  interval: 5m
+  interval: 30m
+  releaseName: kagent
   chartRef:
     kind: OCIRepository
     name: *app
