@@ -37,3 +37,5 @@ resources:
   - cilium.yaml
   - portager.yaml
   - x509-certificate-exporter.yaml
+  - kagent.yaml
+  - kagent-crds.yaml
