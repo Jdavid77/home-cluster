@@ -91,3 +91,24 @@ spec:
   interval: 30m
   retryInterval: 2m
   timeout: 15m
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: kagent-agents
+spec:
+  targetNamespace: automation
+  path: ./k8s/apps/automation/kagent/agents
+  prune: true
+  dependsOn:
+    - name: kagent
+    - name: kagent-crds
+  sourceRef:
+    kind: GitRepository
+    name: home-cluster
+    namespace: flux-system
+  wait: true
+  interval: 30m
+  retryInterval: 2m
+  timeout: 15m
