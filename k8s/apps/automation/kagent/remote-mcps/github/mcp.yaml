@@ -1,0 +1,15 @@
+apiVersion: kagent.dev/v1alpha2
+kind: RemoteMCPServer
+metadata:
+  name: github-mcp
+spec:
+  transport:
+    type: STREAMABLE_HTTP
+    streamableHTTP:
+      url: https://api.githubcopilot.com/mcp/
+      timeout: 5s
+      headersFrom:
+        - name: Authorization
+          valueFrom:
+            type: Secret
+            name: github-mcp-server
