@@ -7,7 +7,7 @@ spec:
   - name: &header Authorization
     valueFrom:
       type: Secret
-      name: github-mcp-server
+      name: github-mcp-secret
       key: *header
   description: "GitHub MCP Server"
   protocol: STREAMABLE_HTTP
