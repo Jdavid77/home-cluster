@@ -3,3 +3,4 @@ age.ageKey
 .decrypted
 *.tmp.yaml
 .tmp.env
+.mcp.json
