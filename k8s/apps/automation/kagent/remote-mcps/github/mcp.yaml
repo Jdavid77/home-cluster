@@ -4,7 +4,7 @@ metadata:
   name: github-mcp
 spec:
   transport:
-    type: STREAMABLE_HTTP
+    protocol: STREAMABLE_HTTP
     streamableHTTP:
       url: https://api.githubcopilot.com/mcp/
       timeout: 5s
