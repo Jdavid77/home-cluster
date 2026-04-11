@@ -12,7 +12,7 @@ spec:
       sectionName: websecure
   rules:
     - backendRefs:
-        - name: kagent
+        - name: kagent-ui
           namespace: automation
           port: 8080
       matches:
