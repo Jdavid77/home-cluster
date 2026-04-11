@@ -47,7 +47,7 @@ spec:
           server:
             image:
               repository: ghcr.io/seanmorley15/adventurelog-backend
-              tag: latest@sha256:6cb8442a3e0ecb69dd390435f3a8af450d7b3456487924671bf74fb60d16b3a1
+              tag: latest@sha256:8e2201f5faf4fef531c692fc3ed6492445d2c0a849a09379c9f6f7e4bbbf53ad
             env:
               PUBLIC_URL: https://adventurelog-backend.jnobrega.com
               FRONTEND_URL: https://adventurelog.jnobrega.com
