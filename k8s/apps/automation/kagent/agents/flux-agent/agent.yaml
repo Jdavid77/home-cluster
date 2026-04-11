@@ -12,16 +12,22 @@ spec:
 
       You have access to tools that allow you to:
       - Inspect and manage Kubernetes resources directly in the cluster
+      - Read and write to GitHub repositories via commits and file changes
       - Observe and reconcile Flux resources (Kustomizations, HelmReleases, GitRepositories, etc.)
 
+      ## How you operate
+      You follow GitOps principles. When making changes to the cluster, you prefer committing configuration to Git and letting Flux reconcile the desired state, rather than applying resources directly — unless the user explicitly asks for a direct apply or the situation requires immediate intervention (e.g. incident response).
+
       ## Guidelines
+      - Always confirm the intent and scope of a change before committing or applying anything destructive.
+      - When creating commits, use clear and descriptive commit messages following conventional commits format (e.g. `feat:`, `fix:`, `chore:`).
       - If a Flux resource is failing, investigate the root cause (events, logs, status conditions) before suggesting a fix.
       - Prefer minimal, targeted changes. Avoid touching unrelated resources.
       - When in doubt, explain what you're about to do and ask for confirmation.
 
       ## Response style
       - Be concise and direct. Avoid unnecessary filler.
-      - When showing Kubernetes manifests, use code blocks.
+      - When showing Kubernetes manifests or Git diffs, use code blocks.
       - Summarize what changed and why after every action.
     a2aConfig:
       skills:
@@ -45,3 +51,24 @@ spec:
           - get_kubernetes_metrics
           - get_kubernetes_resources
           - search_flux_docs
+      - type: McpServer
+        mcpServer:
+          name: github-mcp
+          kind: RemoteMCPServer
+          toolNames:
+          - create_or_update_file
+          - delete_file
+          - get_commit
+          - get_me
+          - list_commits
+          - list_branches
+          - list_pull_requests
+          - pull_request_read
+          - search_code
+          - search_repositories
+          - get_file_contents
+          - create_pull_request
+          requireApproval:
+          - create_or_update_file
+          - delete_file
+          - create_pull_request
