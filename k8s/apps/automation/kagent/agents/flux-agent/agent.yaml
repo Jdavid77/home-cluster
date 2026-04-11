@@ -45,31 +45,10 @@ spec:
         mcpServer:
           name: flux-mcp
           kind: MCPServer
-          toolNames:
-          - get_flux_instance
-          - get_kubernetes_api_versions
-          - get_kubernetes_logs
-          - get_kubernetes_metrics
-          - get_kubernetes_resources
-          - search_flux_docs
       - type: McpServer
         mcpServer:
           name: github-mcp
           kind: RemoteMCPServer
-          toolNames:
-          - create_or_update_file
-          - delete_file
-          - get_commit
-          - get_me
-          - list_commits
-          - list_branches
-          - list_pull_requests
-          - pull_request_read
-          - search_code
-          - search_repositories
-          - get_file_contents
-          - create_pull_request
-          - create_branch
           requireApproval:
           - create_or_update_file
           - delete_file
