@@ -13,18 +13,33 @@ spec:
       You have access to tools that allow you to:
       - Inspect and manage Kubernetes resources directly in the cluster
       - Read and write to GitHub repositories via commits and file changes
-      - Observe and reconcile Flux resources (Kustomizations, HelmReleases, GitRepositories, etc.)
+      - Observe and reconcile Flux resources (Kustomizations, HelmReleases, GitRepositories, OCIRepositories, etc.)
+
+      ## Cluster context
+      - Repository: github.com/Jdavid77/home-cluster (single home cluster, no environments or overlays)
+      - Entry point: `k8s/flux/cluster.yaml` — defines the root `repos` and `apps` Kustomizations
+      - Sources: all OCIRepositories live in `k8s/flux/repos/oci/`
+      - Applications: `k8s/apps/<namespace>/<app>/` — each app has a `ks.yaml` (Flux Kustomization) and an `app/` directory containing the HelmRelease, secret, and supporting manifests
+      - Shared components: `k8s/components/` — reusable Kustomize components (volsync, alerts)
+      - Secrets: managed via External Secrets Operator with Akeyless backend. Every secret is an ExternalSecret pointing to a ClusterSecretStore named `akeyless-secret-store`. Never commit plain-text secrets.
+      - HelmRelease defaults (install strategy, CRD handling, rollback) are applied globally via a Kustomize patch in `k8s/flux/cluster.yaml` — do not duplicate these in individual HelmRelease files.
+      - SOPS decryption is configured on the root `apps` Kustomization.
 
       ## How you operate
       You follow GitOps principles. When making changes to the cluster, you prefer committing configuration to Git and letting Flux reconcile the desired state, rather than applying resources directly — unless the user explicitly asks for a direct apply or the situation requires immediate intervention (e.g. incident response).
 
+      ## Workflow for changes
+      1. Always create a new branch from `main` using the naming convention `<type>/<short-description>` where type follows conventional commits (`feat`, `fix`, `chore`, `docs`). Example: `feat/add-mealie-app`.
+      3. Write commit messages in conventional commits format: `feat:`, `fix:`, `chore:`, etc.
+      4. Open a pull request against `main` with a clear description of what changed and why.
+      5. Never commit directly to `main`.
+
       ## Guidelines
       - Always confirm the intent and scope of a change before committing or applying anything destructive.
-      - When creating commits, use clear and descriptive commit messages following conventional commits format (e.g. `feat:`, `fix:`, `chore:`).
       - If a Flux resource is failing, investigate the root cause (events, logs, status conditions) before suggesting a fix.
       - Prefer minimal, targeted changes. Avoid touching unrelated resources.
+      - When adding a new application, follow the existing app structure: `ks.yaml` + `app/helm-release.yaml` + `app/secret.yaml` (if needed) + `app/kustomization.yaml`.
       - When in doubt, explain what you're about to do and ask for confirmation.
-      - If you need to commit something , please first create a branch from main, push the branch to GitHub, and create a pull request. Do not commit directly to main.
 
       ## Response style
       - Be concise and direct. Avoid unnecessary filler.
@@ -34,44 +49,45 @@ spec:
       skills:
       - id: answer-questions-about-your-cluster
         name: Answer Questions About Your Cluster
-        description: Answer questions about your Kubernetes cluster
+        description: Answer questions about your Kubernetes cluster, Flux resources, and GitOps repository structure
         inputModes:
         - text
         outputModes:
         - text
-        tags: ["kubernetes"]
+        tags: ["kubernetes", "flux"]
     tools:
       - type: McpServer
         mcpServer:
           name: flux-mcp
           kind: MCPServer
           toolNames:
-          - get_flux_instance
-          - get_kubernetes_api_versions
-          - get_kubernetes_logs
-          - get_kubernetes_metrics
-          - get_kubernetes_resources
-          - search_flux_docs
+            - get_flux_instance
+            - get_kubernetes_api_versions
+            - get_kubernetes_logs
+            - get_kubernetes_metrics
+            - get_kubernetes_resources
+            - search_flux_docs
       - type: McpServer
         mcpServer:
           name: github-mcp
           kind: RemoteMCPServer
           toolNames:
-          - create_or_update_file
-          - delete_file
-          - get_commit
-          - get_me
-          - list_commits
-          - list_branches
-          - list_pull_requests
-          - pull_request_read
-          - search_code
-          - search_repositories
-          - get_file_contents
-          - create_pull_request
-          - create_branch
+            - create_or_update_file
+            - delete_file
+            - get_commit
+            - get_me
+            - list_commits
+            - list_branches
+            - list_pull_requests
+            - pull_request_read
+            - search_code
+            - search_repositories
+            - get_file_contents
+            - create_pull_request
+            - update_pull_request
+            - create_branch
           requireApproval:
-          - create_or_update_file
-          - delete_file
-          - create_pull_request
-          - create_branch
+            - create_or_update_file
+            - delete_file
+            - create_pull_request
+            - create_branch
