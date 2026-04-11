@@ -3,13 +3,12 @@ kind: RemoteMCPServer
 metadata:
   name: github-mcp
 spec:
-  transport:
-    protocol: STREAMABLE_HTTP
-    streamableHTTP:
-      url: https://api.githubcopilot.com/mcp/
-      timeout: 5s
-      headersFrom:
-        - name: Authorization
-          valueFrom:
-            type: Secret
-            name: github-mcp-server
+  headersFrom:
+  - name: Authorization
+    valueFrom:
+      type: Secret
+      name: github-mcp-server
+  protocol: STREAMABLE_HTTP
+  terminateOnClose: true
+  timeout: 5s
+  url: https://api.githubcopilot.com/mcp/
