@@ -17,7 +17,7 @@ spec:
       interval: 5m
   values:
     providers:
-      default: "gemini"
+      default: "openAI"
     kmcp:
       enabled: false
     tools:
