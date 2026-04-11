@@ -4,10 +4,12 @@ metadata:
   name: github-mcp
 spec:
   headersFrom:
-  - name: Authorization
+  - name: &header Authorization
     valueFrom:
       type: Secret
       name: github-mcp-server
+      key: *header
+  description: "GitHub MCP Server"
   protocol: STREAMABLE_HTTP
   terminateOnClose: true
   timeout: 5s
