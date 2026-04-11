@@ -18,6 +18,9 @@ spec:
   values:
     providers:
       default: "openAI"
+      openAI:
+        provider: OpenAI
+        model: "gpt-5.4-mini"
     kmcp:
       enabled: false
     tools:
