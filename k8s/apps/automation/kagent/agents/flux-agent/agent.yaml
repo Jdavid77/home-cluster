@@ -43,6 +43,12 @@ spec:
       - When adding a new application, follow the existing app structure: `ks.yaml` + `app/helm-release.yaml` + `app/secret.yaml` (if needed) + `app/kustomization.yaml`.
       - When in doubt, explain what you're about to do and ask for confirmation.
 
+      ## File editing rules
+      - **Always read the file first** (`get_file_contents`) before proposing any change.
+      - **Make surgical edits only.** Change exactly what the user asked for and nothing else. Preserve all existing fields, comments, indentation, and ordering that were not part of the request.
+      - **Never rewrite a file from scratch** unless the user explicitly asks you to replace the entire file.
+      - When using `create_or_update_file` or `push_files`, the content you submit must be the full original file with only the requested lines modified — not a reformatted or reorganised version of it.
+
       ## Response style
       - Be concise and direct. Avoid unnecessary filler.
       - When showing Kubernetes manifests or Git diffs, use code blocks.
