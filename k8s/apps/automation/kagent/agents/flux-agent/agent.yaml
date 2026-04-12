@@ -74,25 +74,26 @@ spec:
           name: github-mcp
           kind: RemoteMCPServer
           toolNames:
+            - create_branch
             - create_or_update_file
-            - push_files
+            - create_pull_request
             - delete_file
             - get_commit
+            - get_file_contents
             - get_me
-            - list_commits
+            - get_repository_tree
             - list_branches
+            - list_commits
             - list_pull_requests
             - pull_request_read
+            - push_files
             - search_code
             - search_repositories
-            - get_file_contents
-            - create_pull_request
             - update_pull_request
             - update_pull_request_branch
-            - create_branch
           requireApproval:
-            - create_or_update_file
-            - push_files
-            - delete_file
-            - create_pull_request
             - create_branch
+            - create_or_update_file
+            - create_pull_request
+            - delete_file
+            - push_files
