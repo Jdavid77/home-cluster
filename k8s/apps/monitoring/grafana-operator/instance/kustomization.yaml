@@ -5,3 +5,4 @@ resources:
   - route.yaml
   - datasources.yaml
   - service-account.yaml
+  - push-secret.yaml
