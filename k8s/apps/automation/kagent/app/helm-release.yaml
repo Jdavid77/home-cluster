@@ -49,6 +49,11 @@ spec:
         enabled: false
       cilium-debug-agent:
         enabled: false
+    database:
+      postgres:
+        bundled:
+          enabled: false
+        urlFile: /secrets/POSTGRES_DATABASE_URL
   postRenderers:
     - kustomize:
         patches:
@@ -63,6 +68,13 @@ spec:
               spec:
                 template:
                   spec:
+                    volumes:
+                      - name: kagent-secret-vol
+                        secret:
+                          secretName: kagent-secret
+                          items:
+                            - key: POSTGRES_DATABASE_URL
+                              path: POSTGRES_DATABASE_URL
                     initContainers:
                       - name: init-db
                         image: ghcr.io/home-operations/postgres-init:18.3@sha256:6fa1f331cddd2eb0b6afa7b8d3685c864127a81ab01c3d9400bc3ff5263a51cf
@@ -71,3 +83,9 @@ spec:
                         envFrom:
                           - secretRef:
                               name: kagent-secret
+                    containers:
+                      - name: controller
+                        volumeMounts:
+                          - name: kagent-secret-vol
+                            mountPath: /secrets
+                            readOnly: true
