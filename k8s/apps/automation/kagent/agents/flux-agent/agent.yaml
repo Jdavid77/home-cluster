@@ -6,6 +6,7 @@ spec:
   description: Flux Agent for Kubernetes cluster management
   type: Declarative
   declarative:
+    runtime: go
     modelConfig: default-model-config
     systemMessage: |-
       You are an expert Kubernetes platform engineer with deep knowledge of GitOps workflows, Flux CD, and Kubernetes cluster management.
