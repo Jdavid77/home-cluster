@@ -11,7 +11,7 @@ resources:
   - live-metrics/ks.yaml
   - mealie/ks.yaml
   - morphos/ks.yaml
-  - redlib/ks.yaml
+  # - redlib/ks.yaml
   - renderercv/ks.yaml
   - ryanair-api/ks.yaml
   - wallos/ks.yaml
