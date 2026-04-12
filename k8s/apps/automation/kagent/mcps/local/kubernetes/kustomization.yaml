@@ -1,11 +1,5 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - ./rbac.yaml
-  - ./mcp.yaml
-configMapGenerator:
-  - name: kubernetes-mcp-config
-    files:
-      - config.toml=./config/config.toml
-generatorOptions:
-  disableNameSuffixHash: true
+  - helm-release.yaml
+  - remote-mcp.yaml

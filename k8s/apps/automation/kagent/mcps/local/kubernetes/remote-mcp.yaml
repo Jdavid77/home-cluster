@@ -1,0 +1,8 @@
+apiVersion: kagent.dev/v1alpha2
+kind: RemoteMCPServer
+metadata:
+  name: kubernetes-mcp
+spec:
+  description: Kubernetes MCP Server
+  protocol: STREAMABLE_HTTP
+  url: http://kubernetes-mcp-server.automation.svc.cluster.local:8080

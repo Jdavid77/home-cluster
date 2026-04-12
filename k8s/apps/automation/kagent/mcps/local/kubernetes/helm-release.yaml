@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app kubernetes-mcp-server
+spec:
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: *app
+    namespace: flux-system
+  values:
+    ingress:
+      enabled: false
+    rbac:
+      create: true
+      extraClusterRoleBindings:
+        - name: view
+          roleRef:
+            name: view
+            external: true
+    config:
+      log_level: 2
+      list_output: table
+      stateless: true
+      cluster_provider_strategy: in-cluster
+      read_only: true
+      disable_destructive: true
+      toolsets:
+        - core
+        - config
+        - helm
+      denied_resources:
+        - group: ""
+          version: v1
+          kind: Secret

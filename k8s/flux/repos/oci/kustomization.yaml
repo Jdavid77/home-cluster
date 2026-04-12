@@ -38,3 +38,4 @@ resources:
   - kagent.yaml
   - kagent-crds.yaml
   - kmcp-crds.yaml
+  - kubernetes-mcp.yaml
