@@ -25,7 +25,7 @@ spec:
                   name: kagent-discord-bot-secret
             env:
               DISCORD_MENTION_ONLY: true
-              KAGENT_A2A_URL: http://kagent-controller.automation.svc.cluster.local:8083/api/a2a/automation/flux-agent
+              KAGENT_A2A_URL: http://kagent-controller.automation.svc.cluster.local:8083/api/a2a/automation/flux-agent/
             resources:
               requests:
                 cpu: 100m
