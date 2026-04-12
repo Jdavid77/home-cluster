@@ -4,3 +4,4 @@ resources:
   - grafana.yaml
   - route.yaml
   - datasources.yaml
+  - service-account.yaml

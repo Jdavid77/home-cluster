@@ -4,4 +4,3 @@ resources:
   - helm-release.yaml
   - route.yaml
   - secret.yaml
-  - service-account.yaml
