@@ -40,9 +40,9 @@ spec:
             resources:
               requests:
                 cpu: 50m
-                memory: 400M
+                memory: 700M
               limits:
-                memory: 1000M
+                memory: 2Gi
     persistence:
       tmpfs:
         type: emptyDir
