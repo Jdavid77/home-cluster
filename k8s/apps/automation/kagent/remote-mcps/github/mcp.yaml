@@ -9,6 +9,8 @@ spec:
       type: Secret
       name: github-mcp-secret
       key: *header
+  - name: X-MCP-Toolsets
+    value: "repos,pull_requests,context,git"
   description: "GitHub MCP Server"
   protocol: STREAMABLE_HTTP
   terminateOnClose: true
