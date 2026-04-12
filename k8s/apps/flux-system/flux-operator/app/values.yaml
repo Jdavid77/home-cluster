@@ -3,3 +3,11 @@ serviceMonitor:
 web:
   networkPolicy:
     create: false
+  httpRoute:
+    enabled: true
+    parentRefs:
+      - name: internal
+        namespace: network
+        sectionName: websecure
+    hostnames:
+      - flux.jnobrega.com
