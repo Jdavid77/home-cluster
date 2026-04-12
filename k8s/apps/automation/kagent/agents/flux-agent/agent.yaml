@@ -61,7 +61,7 @@ spec:
       - type: McpServer
         mcpServer:
           name: flux-mcp
-          kind: MCPServer
+          kind: RemoteMCPServer
           toolNames:
             - get_flux_instance
             - get_kubernetes_api_versions

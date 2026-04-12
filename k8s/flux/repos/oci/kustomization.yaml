@@ -39,3 +39,4 @@ resources:
   - kagent-crds.yaml
   - kmcp-crds.yaml
   - kubernetes-mcp.yaml
+  - flux-mcp.yaml

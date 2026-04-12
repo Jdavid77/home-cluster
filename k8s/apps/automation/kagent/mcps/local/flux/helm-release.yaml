@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app flux-mcp
+spec:
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: *app
+    namespace: flux-system
+  values:
+    transport: http
+    readonly: true
+    networkPolicy:
+      create: false
+    httpRoute:
+      enabled: true
+      parentRefs:
+        - kind: Gateway
+          name: internal
+          namespace: network
+          sectionName: websecure
+      hostnames:
+        - flux-mcp.jnobrega.com

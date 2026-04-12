@@ -1,0 +1,8 @@
+apiVersion: kagent.dev/v1alpha2
+kind: RemoteMCPServer
+metadata:
+  name: flux-mcp
+spec:
+  description: Flux Operator MCP Server
+  protocol: STREAMABLE_HTTP
+  url: http://flux-mcp.automation.svc.cluster.local:9090/mcp

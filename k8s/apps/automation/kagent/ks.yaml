@@ -114,6 +114,10 @@ spec:
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
+      name: flux-mcp
+      namespace: automation
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
       name: kubernetes-mcp-server
       namespace: automation
   wait: true
