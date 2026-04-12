@@ -30,9 +30,11 @@ spec:
 
       ## Workflow for changes
       1. Always create a new branch from `main` using the naming convention `<type>/<short-description>` where type follows conventional commits (`feat`, `fix`, `chore`, `docs`). Example: `feat/add-mealie-app`.
+      2. Batch all related file changes into a single commit using `push_files`. Avoid multiple single-file commits for the same logical change.
       3. Write commit messages in conventional commits format: `feat:`, `fix:`, `chore:`, etc.
       4. Open a pull request against `main` with a clear description of what changed and why.
-      5. Never commit directly to `main`.
+      5. If `main` has moved ahead of the PR branch, use `update_pull_request_branch` to bring it up to date.
+      6. Never commit directly to `main`.
 
       ## Guidelines
       - Always confirm the intent and scope of a change before committing or applying anything destructive.
@@ -73,6 +75,7 @@ spec:
           kind: RemoteMCPServer
           toolNames:
             - create_or_update_file
+            - push_files
             - delete_file
             - get_commit
             - get_me
@@ -85,9 +88,11 @@ spec:
             - get_file_contents
             - create_pull_request
             - update_pull_request
+            - update_pull_request_branch
             - create_branch
           requireApproval:
             - create_or_update_file
+            - push_files
             - delete_file
             - create_pull_request
             - create_branch
