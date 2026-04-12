@@ -1,24 +1,21 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: default
 resources:
-  - ./whoami/ks.yaml
-  # - ./redlib/ks.yaml
-  - ./wallos/ks.yaml
-  - ./littlelink/ks.yaml
-  - ./linkding/ks.yaml
-  - ./adventurelog/ks.yaml
-  - ./dashy/ks.yaml
-  - ./morphos/ks.yaml
-  - ./ryanair-api/ks.yaml
-  - ./mealie/ks.yaml
-  - ./filebrowser/ks.yaml
-  - ./excalidash/ks.yaml
-  - ./trip/ks.yaml
-  - ./live-metrics/ks.yaml
-  - ./expenseowl/ks.yaml
-  - ./renderercv/ks.yaml
-  - ./curve-tracker/ks.yaml
+  - adventurelog/ks.yaml
+  - curve-tracker/ks.yaml
+  - dashy/ks.yaml
+  - excalidash/ks.yaml
+  - filebrowser/ks.yaml
+  - linkding/ks.yaml
+  - littlelink/ks.yaml
+  - live-metrics/ks.yaml
+  - mealie/ks.yaml
+  - morphos/ks.yaml
+  - redlib/ks.yaml
+  - renderercv/ks.yaml
+  - ryanair-api/ks.yaml
+  - wallos/ks.yaml
+  - whoami/ks.yaml
 
 components:
   - ../../components/alerts/alertmanager
