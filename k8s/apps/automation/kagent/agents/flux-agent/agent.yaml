@@ -89,6 +89,7 @@ spec:
             - push_files
             - search_code
             - search_repositories
+            - merge_pull_request
             - update_pull_request
             - update_pull_request_branch
           requireApproval:
@@ -96,4 +97,6 @@ spec:
             - create_or_update_file
             - create_pull_request
             - delete_file
+            - merge_pull_request
             - push_files
+            - update_pull_request
