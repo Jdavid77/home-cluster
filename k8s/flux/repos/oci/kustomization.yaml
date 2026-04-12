@@ -28,8 +28,6 @@ resources:
   - trivy-operator.yaml
   - weave-gitops.yaml
   - kyverno.yaml
-  - kmcp.yaml
-  - kmcp-crds.yaml
   - node-problem-detector.yaml
   - grafana-operator.yaml
   - envoy-gateway.yaml

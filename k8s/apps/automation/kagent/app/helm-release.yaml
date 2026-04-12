@@ -22,7 +22,7 @@ spec:
         provider: OpenAI
         model: "gpt-5.4-mini"
     kmcp:
-      enabled: false
+      enabled: true
     tools:
       grafana-mcp:
         enabled: false
