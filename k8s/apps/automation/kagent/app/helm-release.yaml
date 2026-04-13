@@ -25,9 +25,12 @@ spec:
       enabled: true
     tools:
       grafana-mcp:
-        enabled: false
+        enabled: true
       querydoc:
         enabled: false
+    grafana:
+      url: "grafana.monitoring.svc.cluster.local:3000/api"
+      serviceAccountToken: ""
     agents:
       k8s-agent:
         enabled: true
@@ -54,6 +57,11 @@ spec:
         bundled:
           enabled: false
         urlFile: /secrets/POSTGRES_DATABASE_URL
+  valuesFrom:
+    - kind: Secret
+      name: grafana-service-account-token
+      valuesKey: token
+      targetPath: grafana.serviceAccountToken
   postRenderers:
     - kustomize:
         patches:
