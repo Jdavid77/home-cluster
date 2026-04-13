@@ -5,3 +5,9 @@ resources:
   - route.yaml
   - datasources.yaml
   - service-account.yaml
+
+patches:
+  - path: service-account-patch.yaml
+    target:
+      kind: Secret
+      name: grafana-service-account-token
