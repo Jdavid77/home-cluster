@@ -61,7 +61,7 @@ spec:
     - kind: Secret
       name: grafana-service-account-token
       valuesKey: token
-      targetPath: grafana.serviceAccountToken
+      targetPath: grafana-mcp.grafana.serviceAccountToken
   postRenderers:
     - kustomize:
         patches:
