@@ -37,7 +37,7 @@ spec:
       promql-agent:
         enabled: true
       observability-agent:
-        enabled: false
+        enabled: true
       helm-agent:
         enabled: true
       kgateway-agent:
