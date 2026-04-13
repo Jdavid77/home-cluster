@@ -30,7 +30,7 @@ spec:
         enabled: false
     grafana-mcp:
       grafana:
-        url: "grafana.monitoring.svc.cluster.local:3000/api"
+        url: "grafana-service.monitoring.svc.cluster.local:3000/api"
     agents:
       k8s-agent:
         enabled: true
