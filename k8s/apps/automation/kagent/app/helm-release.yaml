@@ -41,7 +41,7 @@ spec:
       helm-agent:
         enabled: true
       kgateway-agent:
-        enabled: false
+        enabled: true
       istio-agent:
         enabled: false
       argo-rollouts-agent:
