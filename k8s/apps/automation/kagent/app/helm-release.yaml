@@ -28,9 +28,10 @@ spec:
         enabled: true
       querydoc:
         enabled: false
-    grafana:
-      url: "grafana.monitoring.svc.cluster.local:3000/api"
-      serviceAccountToken: ""
+    grafana-mcp:
+      grafana:
+        url: "grafana.monitoring.svc.cluster.local:3000/api"
+        serviceAccountToken: ""
     agents:
       k8s-agent:
         enabled: true
