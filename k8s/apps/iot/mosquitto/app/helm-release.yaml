@@ -30,7 +30,7 @@ spec:
           app:
             image:
               repository: public.ecr.aws/docker/library/eclipse-mosquitto
-              tag: 2.0.22-openssl@sha256:10b94cc46bad579465e423e6979709f9cee9a778fca9ee0ee12c8590711eec6b
+              tag: 2.0.22-openssl@sha256:33b9c46306039e7c918442c7359e94fa2edf4d2c60fa0d176c00f89cf1137f1c
             resources:
               requests:
                 cpu: 5m
