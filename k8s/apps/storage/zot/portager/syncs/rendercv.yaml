@@ -1,0 +1,22 @@
+# TODO
+apiVersion: portager.portager.io/v1alpha1
+kind: ImageSync
+metadata:
+  name: rendercv
+  namespace: storage
+spec:
+  schedule: "0 0 * * *"
+  source:
+    registry: ghcr.io
+  destination:
+    registry: registry.jnobrega.com
+    auth:
+      method: secret
+      secretRef:
+        name: zot-registry-secret
+    repositoryPrefix: mirror
+  createDestinationRepos: true
+  images:
+    - name: rendercv/rendercv
+      semver: ">= 2.0.0"
+      maxTags: 5
