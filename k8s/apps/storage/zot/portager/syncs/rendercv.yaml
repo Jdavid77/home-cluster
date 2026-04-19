@@ -19,4 +19,4 @@ spec:
   images:
     - name: rendercv/rendercv
       semver: ">= 2.0.0"
-      maxTags: 5
+      maxTags: 1
