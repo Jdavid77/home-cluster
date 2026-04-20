@@ -61,7 +61,7 @@ spec:
           mariadb:
             image:
               repository: lscr.io/linuxserver/mariadb
-              tag: 11.4.9@sha256:fb08cdd24380d24e5288e72be2632d52f0ef4ecfb23c41952f7ef216d155cdb9
+              tag: 11.4.10@sha256:1050ee04feb6638c6225a75992f531cec1354e04ff8b4890bdcb7a8bd130d293
 
             env:
               TZ: Europe/Lisbon
