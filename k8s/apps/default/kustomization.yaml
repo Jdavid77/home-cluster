@@ -4,7 +4,6 @@ namespace: default
 resources:
   - adventurelog/ks.yaml
   - curve-tracker/ks.yaml
-  - dashy/ks.yaml
   - excalidash/ks.yaml
   - filebrowser/ks.yaml
   - linkding/ks.yaml
