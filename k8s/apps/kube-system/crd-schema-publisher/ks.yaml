@@ -9,6 +9,8 @@ spec:
   dependsOn:
     - name: prometheus-operator-crds
       namespace: monitoring
+    - name: grafana-operator
+      namespace: monitoring
   prune: true
   sourceRef:
     kind: GitRepository

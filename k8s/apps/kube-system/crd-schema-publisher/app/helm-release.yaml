@@ -26,6 +26,9 @@ spec:
           remoteRef:
             key: /crd-schema-publisher/cloudflare
             property: CLOUDFLARE_ACCOUNT_ID
+    grafana:
+      dashboard:
+        enabled: true
     resources:
       requests:
         cpu: 50m

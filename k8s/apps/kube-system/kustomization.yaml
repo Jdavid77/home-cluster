@@ -13,3 +13,4 @@ resources:
   - ./crd-schema-publisher/ks.yaml
 components:
   - ../../components/alerts/alertmanager
+  - ../../components/grafana/folder
