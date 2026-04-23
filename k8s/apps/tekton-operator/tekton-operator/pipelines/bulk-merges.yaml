@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/tekton.dev/pipeline_v1.json
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:

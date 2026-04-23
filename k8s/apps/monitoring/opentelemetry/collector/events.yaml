@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/opentelemetry.io/opentelemetrycollector_v1beta1.json
 apiVersion: opentelemetry.io/v1beta1
 kind: OpenTelemetryCollector
 metadata:

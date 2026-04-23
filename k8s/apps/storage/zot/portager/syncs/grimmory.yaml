@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/portager.portager.io/imagesync_v1alpha1.json
 # TODO
 apiVersion: portager.portager.io/v1alpha1
 kind: ImageSync

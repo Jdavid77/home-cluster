@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/kagent.dev/remotemcpserver_v1alpha2.json
 apiVersion: kagent.dev/v1alpha2
 kind: RemoteMCPServer
 metadata:

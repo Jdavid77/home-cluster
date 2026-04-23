@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/image.toolkit.fluxcd.io/imagerepository_v1.json
 apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImageRepository
 metadata:
