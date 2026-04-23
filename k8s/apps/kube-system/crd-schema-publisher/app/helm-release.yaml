@@ -10,7 +10,7 @@ spec:
     namespace: flux-system
   values:
     config:
-      cfPagesProject: k8s-schemas
+      cfPagesProject: k8s-schemas-jnobrega
     externalSecret:
       enabled: true
       secretStoreRef:
