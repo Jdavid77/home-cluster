@@ -5,6 +5,9 @@ metadata:
   name: morphos
 spec:
   targetNamespace: default
+  dependsOn:
+    - name: envoy
+      namespace: network
   path: ./k8s/apps/default/morphos/app
   prune: true
   sourceRef:

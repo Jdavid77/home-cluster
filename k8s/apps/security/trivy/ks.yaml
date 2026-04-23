@@ -5,6 +5,9 @@ metadata:
   name: trivy-operator
 spec:
   targetNamespace: security
+  dependsOn:
+    - name: grafana-operator
+      namespace: monitoring
   path: ./k8s/apps/security/trivy/operator
   prune: true
   sourceRef:
@@ -28,6 +31,9 @@ metadata:
   name: trivy-dashboard-operator
 spec:
   targetNamespace: security
+  dependsOn:
+    - name: envoy
+      namespace: network
   path: ./k8s/apps/security/trivy/dashboard
   prune: true
   sourceRef:

@@ -10,6 +10,8 @@ spec:
   dependsOn:
     - name: longhorn
       namespace: longhorn-system
+    - name: envoy
+      namespace: network
   sourceRef:
     kind: GitRepository
     name: home-cluster

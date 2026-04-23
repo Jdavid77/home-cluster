@@ -11,6 +11,8 @@ spec:
       namespace: external-secrets
     - name: volsync
       namespace: backup
+    - name: envoy
+      namespace: network
   prune: true
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2

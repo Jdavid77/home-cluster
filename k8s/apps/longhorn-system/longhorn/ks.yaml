@@ -5,6 +5,13 @@ metadata:
   name: longhorn
 spec:
   targetNamespace: longhorn-system
+  dependsOn:
+    - name: grafana-operator
+      namespace: monitoring
+    - name: envoy
+      namespace: network
+    - name: prometheus-operator-crds
+      namespace: monitoring
   path: ./k8s/apps/longhorn-system/longhorn/app
   prune: true
   sourceRef:

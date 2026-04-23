@@ -5,6 +5,9 @@ metadata:
   name: whoami
 spec:
   targetNamespace: default
+  dependsOn:
+    - name: envoy
+      namespace: network
   path: ./k8s/apps/default/whoami/app
   prune: true
   sourceRef:

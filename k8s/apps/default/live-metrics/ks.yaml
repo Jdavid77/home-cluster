@@ -5,6 +5,9 @@ metadata:
   name: live-metrics-dashboard
 spec:
   targetNamespace: default
+  dependsOn:
+    - name: envoy
+      namespace: network
   path: ./k8s/apps/default/live-metrics/app
   prune: true
   sourceRef:

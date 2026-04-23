@@ -8,6 +8,8 @@ spec:
   dependsOn:
     - name: authentik
       namespace: security
+    - name: envoy
+      namespace: network
   path: ./k8s/apps/documents/stirling-pdf/app
   prune: true
   healthChecks:

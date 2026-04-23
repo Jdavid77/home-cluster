@@ -9,6 +9,8 @@ spec:
   dependsOn:
     - name: longhorn
       namespace: longhorn-system
+    - name: prometheus-operator-crds
+      namespace: monitoring
   prune: true
   sourceRef:
     kind: GitRepository

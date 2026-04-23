@@ -5,6 +5,11 @@ metadata:
   name: tekton-operator
 spec:
   targetNamespace: tekton-operator
+  dependsOn:
+    - name: external-secrets-store
+      namespace: external-secrets
+    - name: envoy
+      namespace: network
   path: ./k8s/apps/tekton-operator/tekton-operator/app
   prune: true
   sourceRef:
@@ -30,6 +35,8 @@ spec:
   targetNamespace: tekton-operator
   dependsOn:
     - name: tekton-operator
+    - name: external-secrets-store
+      namespace: external-secrets
   path: ./k8s/apps/tekton-operator/tekton-operator/resources
   prune: true
   sourceRef:

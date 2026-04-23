@@ -9,6 +9,12 @@ spec:
   dependsOn:
     - name: longhorn
       namespace: longhorn-system
+    - name: external-secrets-store
+      namespace: external-secrets
+    - name: grafana-operator
+      namespace: monitoring
+    - name: envoy
+      namespace: network
   prune: true
   sourceRef:
     kind: GitRepository

@@ -10,6 +10,8 @@ spec:
       namespace: external-secrets
     - name: dragonfly-cluster
       namespace: storage
+    - name: envoy
+      namespace: network
   path: ./k8s/apps/security/authentik/app
   prune: true
   sourceRef:

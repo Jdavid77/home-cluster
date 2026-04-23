@@ -9,6 +9,8 @@ spec:
   dependsOn:
     - name: external-secrets-store
       namespace: external-secrets
+    - name: grafana-operator
+      namespace: monitoring
   prune: true
   sourceRef:
     kind: GitRepository

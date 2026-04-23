@@ -8,6 +8,8 @@ spec:
   dependsOn:
     - name: external-secrets-store
       namespace: external-secrets
+    - name: envoy
+      namespace: network
   path: ./k8s/apps/security/vaultwarden/app
   prune: true
   sourceRef:

@@ -6,6 +6,9 @@ metadata:
 spec:
   targetNamespace: documents
   path: ./k8s/apps/documents/bentopdf/app
+  dependsOn:
+    - name: envoy
+      namespace: network
   prune: true
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2

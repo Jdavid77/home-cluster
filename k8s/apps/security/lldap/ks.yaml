@@ -8,6 +8,8 @@ spec:
   dependsOn:
     - name: external-secrets-store
       namespace: external-secrets
+    - name: envoy
+      namespace: network
   path: ./k8s/apps/security/lldap/app
   prune: true
   sourceRef:

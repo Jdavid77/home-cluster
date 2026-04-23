@@ -8,6 +8,8 @@ spec:
   dependsOn:
     - name: volsync
       namespace: backup
+    - name: envoy
+      namespace: network
   path: ./k8s/apps/default/filebrowser/app
   prune: true
   sourceRef:

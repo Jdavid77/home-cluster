@@ -11,6 +11,8 @@ spec:
       namespace: storage
     - name: external-secrets-store
       namespace: external-secrets
+    - name: envoy
+      namespace: network
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease

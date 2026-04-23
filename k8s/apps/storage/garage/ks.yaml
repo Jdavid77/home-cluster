@@ -10,6 +10,10 @@ spec:
       namespace: external-secrets
     - name: longhorn
       namespace: longhorn-system
+    - name: grafana-operator
+      namespace: monitoring
+    - name: envoy
+      namespace: network
   path: ./k8s/apps/storage/garage/app
   prune: true
   sourceRef:
@@ -40,6 +44,8 @@ spec:
   targetNamespace: storage
   dependsOn:
     - name: garage
+    - name: envoy
+      namespace: network
   path: ./k8s/apps/storage/garage/ui
   prune: true
   sourceRef:

@@ -5,6 +5,11 @@ metadata:
   name: curve-tracker
 spec:
   targetNamespace: default
+  dependsOn:
+    - name: envoy
+      namespace: network
+    - name: external-secrets-store
+      namespace: external-secrets
   path: ./k8s/apps/default/curve-tracker/app
   prune: true
   sourceRef:

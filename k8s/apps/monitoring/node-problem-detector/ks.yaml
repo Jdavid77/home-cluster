@@ -6,6 +6,9 @@ metadata:
 spec:
   targetNamespace: monitoring
   path: ./k8s/apps/monitoring/node-problem-detector/app
+  dependsOn:
+    - name: prometheus-operator-crds
+      namespace: monitoring
   prune: true
   sourceRef:
     kind: GitRepository

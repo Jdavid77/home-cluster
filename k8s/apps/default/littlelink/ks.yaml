@@ -5,6 +5,9 @@ metadata:
   name: littlelink
 spec:
   targetNamespace: default
+  dependsOn:
+    - name: envoy
+      namespace: network
   path: ./k8s/apps/default/littlelink/app
   prune: true
   sourceRef:

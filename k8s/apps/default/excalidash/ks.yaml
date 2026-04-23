@@ -7,6 +7,8 @@ spec:
   dependsOn:
     - name: volsync
       namespace: backup
+    - name: envoy
+      namespace: network
   targetNamespace: default
   path: ./k8s/apps/default/excalidash/app
   prune: true

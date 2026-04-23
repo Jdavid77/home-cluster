@@ -6,6 +6,11 @@ metadata:
 spec:
   targetNamespace: kube-system
   path: ./k8s/apps/kube-system/cilium/app
+  dependsOn:
+    - name: envoy
+      namespace: network
+    - name: prometheus-operator-crds
+      namespace: monitoring
   prune: true
   sourceRef:
     kind: GitRepository

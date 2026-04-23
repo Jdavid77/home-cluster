@@ -29,9 +29,14 @@ metadata:
 spec:
   targetNamespace: network
   dependsOn:
+    - name: envoy
     - name: cilium-resources
       namespace: kube-system
     - name: envoy-certificates
+    - name: grafana-operator
+      namespace: monitoring
+    - name: prometheus-operator-crds
+      namespace: monitoring
   path: ./k8s/apps/network/envoy-gateway/gateways
   prune: true
   sourceRef:
@@ -59,6 +64,8 @@ spec:
     - name: envoy
     - name: cert-manager
       namespace: cert-manager
+    - name: external-secrets-store
+      namespace: external-secrets
   path: ./k8s/apps/network/envoy-gateway/certificates
   prune: true
   sourceRef:

@@ -9,6 +9,8 @@ spec:
   dependsOn:
     - name: external-secrets-store
       namespace: external-secrets
+    - name: envoy
+      namespace: network
   prune: true
   sourceRef:
     kind: GitRepository

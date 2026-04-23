@@ -5,6 +5,9 @@ metadata:
   name: flux-monitoring
 spec:
   targetNamespace: flux-system
+  dependsOn:
+    - name: prometheus-operator-crds
+      namespace: monitoring
   path: ./k8s/apps/flux-system/addons/monitoring
   prune: true
   sourceRef:
@@ -23,6 +26,9 @@ metadata:
   name: flux-webhook
 spec:
   targetNamespace: flux-system
+  dependsOn:
+    - name: envoy
+      namespace: network
   path: ./k8s/apps/flux-system/addons/webhook
   prune: true
   sourceRef:
@@ -41,6 +47,9 @@ metadata:
   name: flux-image-automation
 spec:
   targetNamespace: flux-system
+  dependsOn:
+    - name: external-secrets-store
+      namespace: external-secrets
   path: ./k8s/apps/flux-system/addons/image-automation
   prune: true
   sourceRef:

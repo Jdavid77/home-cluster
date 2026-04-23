@@ -5,6 +5,9 @@ metadata:
   name: ryanair-api
 spec:
   targetNamespace: default
+  dependsOn:
+    - name: envoy
+      namespace: network
   path: ./k8s/apps/default/ryanair-api/app
   prune: true
   sourceRef:

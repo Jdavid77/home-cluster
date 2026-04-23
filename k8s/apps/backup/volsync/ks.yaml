@@ -10,6 +10,8 @@ spec:
       namespace: longhorn-system
     - name: garage
       namespace: storage
+    - name: grafana-operator
+      namespace: monitoring
   targetNamespace: backup
   path: ./k8s/apps/backup/volsync/app
   prune: true

@@ -36,6 +36,10 @@ spec:
   prune: true
   dependsOn:
     - name: kagent-crds
+    - name: external-secrets-store
+      namespace: external-secrets
+    - name: envoy
+      namespace: network
   sourceRef:
     kind: GitRepository
     name: home-cluster
@@ -61,6 +65,8 @@ spec:
   prune: true
   dependsOn:
     - name: kagent
+    - name: external-secrets-store
+      namespace: external-secrets
   sourceRef:
     kind: GitRepository
     name: home-cluster
@@ -107,6 +113,10 @@ spec:
   prune: true
   dependsOn:
     - name: kagent
+    - name: external-secrets-store
+      namespace: external-secrets
+    - name: envoy
+      namespace: network
   sourceRef:
     kind: GitRepository
     name: home-cluster
