@@ -10,5 +10,6 @@ resources:
   - ./cilium/ks.yaml
   - ./kubelet-csr-approver/ks.yaml
   - ./spegel/ks.yaml
+  - ./crd-schema-publisher/ks.yaml
 components:
   - ../../components/alerts/alertmanager

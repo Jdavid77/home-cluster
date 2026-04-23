@@ -40,3 +40,4 @@ resources:
   - kmcp-crds.yaml
   - kubernetes-mcp.yaml
   - flux-mcp.yaml
+  - crd-schema-publisher.yaml
