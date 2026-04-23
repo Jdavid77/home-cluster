@@ -1,0 +1,47 @@
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: kubernetes-live-metrics-dashboard-backend
+  namespace: flux-system
+spec:
+  image: ghcr.io/jdavid77/kubernetes-live-metrics-dashboard-backend
+  interval: 5m
+  provider: generic
+  secretRef:
+    name: gh-secret
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: kubernetes-live-metrics-dashboard-frontend
+  namespace: flux-system
+spec:
+  image: ghcr.io/jdavid77/kubernetes-live-metrics-dashboard-frontend
+  interval: 5m
+  provider: generic
+  secretRef:
+    name: gh-secret
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: &repo kubernetes-live-metrics-dashboard-backend
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: *repo
+  policy:
+    semver:
+      range: '>=1.0.0'
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: &repo kubernetes-live-metrics-dashboard-frontend
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: *repo
+  policy:
+    semver:
+      range: '>=1.0.0'

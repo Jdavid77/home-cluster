@@ -1,0 +1,23 @@
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: curve-tracker
+  namespace: flux-system
+spec:
+  image: ghcr.io/jdavid77/curve-tracker
+  interval: 5m
+  provider: generic
+  secretRef:
+    name: gh-secret
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: &repo curve-tracker
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: *repo
+  policy:
+    semver:
+      range: '>=1.0.0'
