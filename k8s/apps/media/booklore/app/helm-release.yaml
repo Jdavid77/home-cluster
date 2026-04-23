@@ -17,7 +17,7 @@ spec:
           *app :
             image:
               repository: registry.jnobrega.com/mirror/grimmory-tools/grimmory
-              tag: v2.3.0 # {"$imagepolicy": "media:grimmory:tag"}
+              tag: v2.3.0 # {"$imagepolicy": "flux-system:grimmory:tag"}
             env:
               TZ: Europe/Lisbon
               USER_ID: 1002
