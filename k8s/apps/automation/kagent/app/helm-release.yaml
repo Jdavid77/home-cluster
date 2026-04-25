@@ -14,7 +14,7 @@ spec:
         kind: HelmRepository
         name: kagent-charts
         namespace: flux-system
-      version: 0.8.6
+      version: 0.9.0
   install:
     crds: CreateReplace
     remediation:
