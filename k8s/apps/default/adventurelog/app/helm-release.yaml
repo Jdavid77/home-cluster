@@ -54,6 +54,7 @@ spec:
               CSRF_TRUSTED_ORIGINS: https://adventurelog-backend.jnobrega.com,https://adventurelog.jnobrega.com
               DEBUG: "true"
               DJANGO_ADMIN_USERNAME: admin
+              ENABLE_RATE_LIMITS: "true"
             envFrom: *secret
             probes:
               liveness: &probes
