@@ -92,6 +92,14 @@ spec:
         ports:
           http:
             port: 8080
+    serviceMonitor:
+      cloudflared:
+        serviceName: cloudflared
+        endpoints:
+          - port: http
+            metricRelabelings:
+              - action: labeldrop
+                regex: (pod)
     persistence:
       config:
         type: configMap

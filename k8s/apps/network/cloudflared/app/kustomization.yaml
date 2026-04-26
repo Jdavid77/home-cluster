@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - ./secret.yaml
   - ./helm-release.yaml
+  - ./grafanadashboard.yaml
 configMapGenerator:
   - name: cloudflared-configmap
     files:
