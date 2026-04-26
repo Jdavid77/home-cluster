@@ -23,7 +23,6 @@
   "reviewersFromCodeOwners": true,
   "ignorePaths": [
     "**/*.sops.*",
-    "terraform/**",
     "k8s/archive/**"
   ],
   "kubernetes": {
