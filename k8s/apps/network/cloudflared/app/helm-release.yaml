@@ -26,13 +26,18 @@ spec:
               - --config
               - /etc/cloudflared/config/config.yaml
               - run
-              - "${CLOUDFLARE_TUNNEL_ID}"
+              - "${TUNNEL_ID}"
             env:
               NO_AUTOUPDATE: true
               TUNNEL_CRED_FILE: /etc/cloudflared/creds/credentials.json
               TUNNEL_METRICS: 0.0.0.0:8080
               TUNNEL_TRANSPORT_PROTOCOL: quic
               TUNNEL_POST_QUANTUM: true
+              TUNNEL_ID:
+                valueFrom:
+                  secretKeyRef:
+                    name: cloudflared-secret
+                    key: TUNNEL_ID
             probes:
               liveness:
                 enabled: true

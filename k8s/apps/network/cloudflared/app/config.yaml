@@ -1,5 +1,6 @@
 originRequest:
   originServerName: jnobrega.com
+  http2Origin: true
 ingress:
   - hostname: "jnobrega.com"
     service: https://external.network.svc.cluster.local:443
