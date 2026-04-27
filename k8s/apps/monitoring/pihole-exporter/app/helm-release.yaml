@@ -24,6 +24,18 @@ spec:
             envFrom:
               - secretRef:
                   name: pihole-exporter-secret
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /metrics
+                    port: *port
+                  initialDelaySeconds: 15
+                  periodSeconds: 30
+                  failureThreshold: 3
+              readiness: *probes
             resources:
               requests:
                 cpu: 15m
