@@ -15,9 +15,13 @@ spec:
         branch: main
     commit:
       author:
-        email: flux@jnobrega.com
-        name: Flux Automated Updates
-      messageTemplate: '{{range .Changed.Changes}}{{print .OldValue}} -> {{println .NewValue}}{{end}}'
+        email: fluxcdbot@users.noreply.github.com
+        name: fluxcdbot
+      messageTemplate: |
+        chore(images): automated image updates
+        {{range .Changed.Changes}}
+        - {{.OldValue}} -> {{.NewValue}}
+        {{end}}
     push:
       branch: main
   update:
