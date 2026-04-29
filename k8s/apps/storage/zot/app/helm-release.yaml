@@ -17,7 +17,7 @@ spec:
         namespace: flux-system
       interval: 15m
   values:
-    replicaCount: 1
+    replicaCount: 4
     mountConfig: true
     configFiles:
       config.json: |
@@ -86,6 +86,18 @@ spec:
 
     service:
       type: ClusterIP
+      externalTrafficPolicy: Local
+
+    httproute:
+      enabled: true
+      parentRefs:
+        - name: internal
+          namespace: network
+          sectionName: websecure
+      hostnames:
+        - "registry.jnobrega.com"
+      pathType: PathPrefix
+      path: /
 
     persistence: false
 
