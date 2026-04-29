@@ -86,7 +86,6 @@ spec:
 
     service:
       type: ClusterIP
-      internalTrafficPolicy: Local
 
     httproute:
       enabled: true
@@ -96,8 +95,18 @@ spec:
           sectionName: websecure
       hostnames:
         - "registry.jnobrega.com"
-      pathType: PathPrefix
-      path: /
+      rules:
+        - matches:
+          - path:
+              type: PathPrefix
+              value: /
+          sessionPersistence:
+            sessionName: zot-registry-session
+            type: Cookie
+            absoluteTimeout: 30m
+            cookieConfig:
+              lifetimeType: Permanent
+
 
     persistence: false
 
