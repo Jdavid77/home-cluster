@@ -5,4 +5,3 @@ resources:
   - ./helm-release.yaml
   - ./secret.yaml
   - ./service.yaml
-  - ./route.yaml
