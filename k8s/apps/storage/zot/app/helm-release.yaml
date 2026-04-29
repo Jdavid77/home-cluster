@@ -86,7 +86,7 @@ spec:
 
     service:
       type: ClusterIP
-      externalTrafficPolicy: Local
+      internalTrafficPolicy: Local
 
     httproute:
       enabled: true
