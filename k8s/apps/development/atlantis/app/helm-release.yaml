@@ -18,7 +18,7 @@ spec:
     podTemplate:
       annotations:
         reloader.stakater.com/auto: "true"
-        secrets.reloader.stakater.com/auto: "atlantis-secret, atlantis-gh-app-key, atlantis-aws"
+        secrets.reloader.stakater.com/auto: "atlantis-secret, atlantis-gh-app-key, atlantis-aws, atlantis-tfvars"
 
     atlantisUrl: "https://atlantis.jnobrega.com"
     orgAllowlist: "github.com/Jdavid77/home-cluster"
@@ -42,6 +42,9 @@ spec:
         secretKeyRef:
           name: atlantis-secret
           key: ATLANTIS_GH_WEBHOOK_SECRET
+
+    loadEnvFromSecrets:
+      - atlantis-tfvars
 
     extraVolumes:
       - name: gh-app-key
