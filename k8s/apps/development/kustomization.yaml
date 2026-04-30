@@ -5,5 +5,6 @@ namespace: development
 resources:
   - ./namespace.yaml
   #- ./sonarqube/ks.yaml
+  - ./atlantis/ks.yaml
 components:
   - ../../components/alerts/alertmanager
