@@ -18,10 +18,12 @@ spec:
     podTemplate:
       annotations:
         reloader.stakater.com/auto: "true"
-        secrets.reloader.stakater.com/auto: "atlantis-secret, atlantis-gh-app-key"
+        secrets.reloader.stakater.com/auto: "atlantis-secret, atlantis-gh-app-key, atlantis-aws"
 
     atlantisUrl: "https://atlantis.jnobrega.com"
     orgAllowlist: "github.com/Jdavid77/home-cluster"
+
+    awsSecretName: atlantis-aws
 
     environment:
       ATLANTIS_WRITE_GIT_CREDS: "true"
