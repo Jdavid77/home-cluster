@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/gateway.envoyproxy.io/securitypolicy_v1alpha1.json
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: atlantis-github-allowlist
+  namespace: development
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: atlantis
+  authorization:
+    defaultAction: Deny
+    rules:
+      - action: Allow
+        principal:
+          clientCIDRs:
+            - 192.30.252.0/22
+            - 185.199.108.0/22
+            - 140.82.112.0/20
+            - 143.55.64.0/20
