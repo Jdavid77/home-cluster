@@ -59,6 +59,7 @@ spec:
 
     service:
       type: ClusterIP
+      targetPort: 4141
 
     ingress:
       enabled: false
