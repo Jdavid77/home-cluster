@@ -72,7 +72,7 @@ spec:
         hostnames:
           - atlantis.jnobrega.com
         parentRefs:
-          - name: internal
+          - name: external
             namespace: network
             sectionName: websecure
         matches:
