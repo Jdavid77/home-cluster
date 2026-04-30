@@ -21,7 +21,7 @@ spec:
         secrets.reloader.stakater.com/auto: "atlantis-secret, atlantis-gh-app-key"
 
     atlantisUrl: "https://atlantis.jnobrega.com"
-    orgAllowlist: "github.com/Jdavid77/*"
+    orgAllowlist: "github.com/Jdavid77/home-cluster"
 
     environment:
       ATLANTIS_WRITE_GIT_CREDS: "true"
