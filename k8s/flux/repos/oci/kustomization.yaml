@@ -41,3 +41,4 @@ resources:
   - kubernetes-mcp.yaml
   - flux-mcp.yaml
   - crd-schema-publisher.yaml
+  - atlantis.yaml
