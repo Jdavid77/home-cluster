@@ -62,6 +62,8 @@ spec:
                     remediation:
                       strategy: rollback
                       retries: 3
+                  uninstall:
+                    keepHistory: false
               target:
                 group: helm.toolkit.fluxcd.io
                 kind: HelmRelease

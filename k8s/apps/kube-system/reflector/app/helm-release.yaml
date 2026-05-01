@@ -5,7 +5,9 @@ metadata:
   name: reflector
   namespace: kube-system
 spec:
-  interval: 5m
+  interval: 15m
+  timeout: 5m
+  maxHistory: 2
   chartRef:
     kind: OCIRepository
     name: reflector

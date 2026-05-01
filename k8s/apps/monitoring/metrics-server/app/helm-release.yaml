@@ -5,7 +5,8 @@ metadata:
   name: metrics-server
   namespace: monitoring
 spec:
-  interval: 30m
+  interval: 15m
+  timeout: 5m
   chart:
     spec:
       chart: metrics-server
@@ -15,8 +16,6 @@ spec:
         name: kubernetes-sigs-charts
         namespace: flux-system
   maxHistory: 2
-  uninstall:
-    keepHistory: false
   values:
     args:
       - --kubelet-insecure-tls

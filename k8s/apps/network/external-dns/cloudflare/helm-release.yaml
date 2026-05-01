@@ -6,6 +6,8 @@ metadata:
   namespace: network
 spec:
   interval: 15m
+  timeout: 5m
+  maxHistory: 2
   chartRef:
     kind: OCIRepository
     name: external-dns

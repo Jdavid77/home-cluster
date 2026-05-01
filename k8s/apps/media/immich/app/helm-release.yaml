@@ -4,14 +4,13 @@ kind: HelmRelease
 metadata:
   name: &app immich
 spec:
-  interval: 1h
+  interval: 15m
+  timeout: 5m
   chartRef:
     kind: OCIRepository
     name: app-template
     namespace: flux-system
-  maxHistory: 3
-  uninstall:
-    keepHistory: false
+  maxHistory: 2
   values:
     controllers:
       valkey:

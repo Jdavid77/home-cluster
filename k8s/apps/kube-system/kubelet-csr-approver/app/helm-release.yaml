@@ -4,7 +4,9 @@ kind: HelmRelease
 metadata:
   name: kubelet-csr-approver
 spec:
-  interval: 30m
+  interval: 15m
+  timeout: 5m
+  maxHistory: 2
   chartRef:
     kind: OCIRepository
     name: kubelet-csr-approver

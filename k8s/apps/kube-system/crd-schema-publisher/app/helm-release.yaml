@@ -5,6 +5,8 @@ metadata:
   name: &app crd-schema-publisher
 spec:
   interval: 15m
+  timeout: 5m
+  maxHistory: 2
   chartRef:
     kind: OCIRepository
     name: *app

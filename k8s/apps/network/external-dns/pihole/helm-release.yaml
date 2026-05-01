@@ -5,7 +5,9 @@ metadata:
   name: &app external-dns-pihole
   namespace: network
 spec:
-  interval: 30m
+  interval: 15m
+  timeout: 5m
+  maxHistory: 2
   chartRef:
     kind: OCIRepository
     name: external-dns

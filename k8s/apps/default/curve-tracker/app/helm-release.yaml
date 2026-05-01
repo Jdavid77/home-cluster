@@ -5,11 +5,12 @@ metadata:
   name: &app curve-tracker
 spec:
   interval: 15m
+  timeout: 5m
   chartRef:
     kind: OCIRepository
     name: app-template
     namespace: flux-system
-  maxHistory: 3
+  maxHistory: 2
   values:
     controllers:
       *app :

@@ -5,14 +5,13 @@ kind: HelmRelease
 metadata:
   name: &app atlantis
 spec:
-  interval: 30m
+  interval: 15m
+  timeout: 5m
   chartRef:
     kind: OCIRepository
     name: *app
     namespace: flux-system
   maxHistory: 2
-  uninstall:
-    keepHistory: false
   values:
 
     podTemplate:

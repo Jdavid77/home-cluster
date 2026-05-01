@@ -5,6 +5,7 @@ metadata:
   name: trivy-operator-dashboard
 spec:
   interval: 15m
+  timeout: 5m
   chartRef:
     kind: OCIRepository
     name: trivy-operator-dashboard

@@ -5,14 +5,13 @@ metadata:
   name: &app kubernetes-live-metrics-dashboard
   namespace: flux-system
 spec:
-  interval: 30m
+  interval: 15m
+  timeout: 5m
   chartRef:
     kind: OCIRepository
     name: app-template
     namespace: flux-system
   maxHistory: 2
-  uninstall:
-    keepHistory: false
   values:
     controllers:
       *app :

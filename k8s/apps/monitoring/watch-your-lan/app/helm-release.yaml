@@ -5,6 +5,7 @@ metadata:
   name: &app watch-your-lan
 spec:
   interval: 15m
+  timeout: 5m
   chartRef:
     kind: OCIRepository
     name: app-template

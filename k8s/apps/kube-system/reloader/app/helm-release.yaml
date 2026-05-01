@@ -6,13 +6,12 @@ metadata:
   namespace: kube-system
 spec:
   interval: 15m
+  timeout: 5m
   chartRef:
     kind: OCIRepository
     name: reloader
     namespace: flux-system
-  maxHistory: 3
-  uninstall:
-    keepHistory: false
+  maxHistory: 2
   values:
     reloader:
       containerSecurityContext:

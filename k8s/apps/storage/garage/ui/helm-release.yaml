@@ -5,7 +5,9 @@ kind: HelmRelease
 metadata:
   name: &app garage-ui
 spec:
-  interval: 1h
+  interval: 15m
+  timeout: 5m
+  maxHistory: 2
   chartRef:
     kind: OCIRepository
     name: app-template

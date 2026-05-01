@@ -4,11 +4,13 @@ kind: HelmRelease
 metadata:
   name: grafana-operator
 spec:
+  interval: 15m
+  timeout: 5m
+  maxHistory: 2
   chartRef:
     kind: OCIRepository
     name: grafana-operator
     namespace: flux-system
-  interval: 1h
   valuesFrom:
     - kind: ConfigMap
       name: grafana-values

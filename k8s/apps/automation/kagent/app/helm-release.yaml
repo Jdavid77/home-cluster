@@ -21,7 +21,9 @@ spec:
       retries: 3
     strategy:
       name: RetryOnFailure
-  interval: 30m
+  interval: 15m
+  timeout: 5m
+  maxHistory: 2
   postRenderers:
   - kustomize:
       patches:

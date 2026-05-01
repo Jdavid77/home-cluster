@@ -5,11 +5,13 @@ kind: HelmRelease
 metadata:
   name: &app gatus
 spec:
+  interval: 15m
+  timeout: 5m
+  maxHistory: 2
   chartRef:
     kind: OCIRepository
     name: app-template
     namespace: flux-system
-  interval: 30m
   values:
     controllers:
       *app :

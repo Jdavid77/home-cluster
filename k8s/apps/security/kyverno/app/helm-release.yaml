@@ -5,13 +5,13 @@ kind: HelmRelease
 metadata:
   name: kyverno
 spec:
-  interval: 5m
+  interval: 15m
+  timeout: 5m
+  maxHistory: 2
   chartRef:
     kind: OCIRepository
     name: kyverno
     namespace: flux-system
-  uninstall:
-    keepHistory: false
   values:
     crds:
       install: true
