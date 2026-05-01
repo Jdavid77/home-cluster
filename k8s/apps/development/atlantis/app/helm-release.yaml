@@ -100,7 +100,7 @@ spec:
           namespace: development
         spec:
           hostnames:
-            - atlantis-webhook.jnobrega.com
+            - atlantis.jnobrega.com
           parentRefs:
             - name: external
               namespace: network
