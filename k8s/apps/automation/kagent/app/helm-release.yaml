@@ -67,47 +67,54 @@ spec:
       retries: 3
       strategy: rollback
   values:
-    agents:
-      argo-rollouts-agent:
-        enabled: false
-      cilium-debug-agent:
-        enabled: false
-      cilium-manager-agent:
-        enabled: false
-      cilium-policy-agent:
-        enabled: true
-      helm-agent:
-        enabled: true
-      istio-agent:
-        enabled: false
-      k8s-agent:
-        enabled: true
-      kgateway-agent:
-        enabled: true
-      observability-agent:
-        enabled: true
-      promql-agent:
-        enabled: true
     database:
       postgres:
         bundled:
           enabled: false
         urlFile: /secrets/POSTGRES_DATABASE_URL
-    grafana-mcp:
-      grafana:
-        url: http://grafana-service.monitoring.svc.cluster.local:3000
-    kmcp:
-      enabled: true
+
     providers:
       default: openAI
       openAI:
-        model: gpt-5.4-mini
         provider: OpenAI
-    tools:
-      grafana-mcp:
-        enabled: true
-      querydoc:
-        enabled: false
+        model: gpt-5.4-mini
+        apiKeySecretRef: kagent-openai
+        apiKeySecretKey: OPENAI_API_KEY
+
+    kmcp:
+      enabled: true
+
+    kagent-tools:
+      enabled: true
+
+    grafana-mcp:
+      enabled: true
+      grafana:
+        url: http://grafana-service.monitoring.svc.cluster.local:3000
+
+    querydoc:
+      enabled: false
+
+    k8s-agent:
+      enabled: true
+    kgateway-agent:
+      enabled: true
+    helm-agent:
+      enabled: true
+    cilium-policy-agent:
+      enabled: true
+    observability-agent:
+      enabled: true
+    promql-agent:
+      enabled: true
+    argo-rollouts-agent:
+      enabled: false
+    istio-agent:
+      enabled: false
+    cilium-manager-agent:
+      enabled: false
+    cilium-debug-agent:
+      enabled: false
   valuesFrom:
   - kind: Secret
     name: grafana-service-account-token
