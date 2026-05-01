@@ -122,6 +122,9 @@ spec:
     nodeSelector:
       kubernetes.io/hostname: localstorage-worker1
 
+    serviceMonitor:
+      enabled: true
+
     lockingDbType: "redis"
 
     redis:
