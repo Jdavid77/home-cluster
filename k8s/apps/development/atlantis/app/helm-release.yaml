@@ -18,7 +18,6 @@ spec:
     podTemplate:
       annotations:
         reloader.stakater.com/auto: "true"
-        secrets.reloader.stakater.com/auto: "atlantis-secret, atlantis-gh-app-key, atlantis-aws, atlantis-sops-age"
 
     atlantisUrl: "https://atlantis.jnobrega.com"
     orgAllowlist: "github.com/Jdavid77/home-cluster"
