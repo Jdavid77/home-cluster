@@ -24,9 +24,6 @@ spec:
 
     awsSecretName: atlantis-aws
 
-    image:
-      tag: v0.42.0-alpine
-
     environment:
       ATLANTIS_WRITE_GIT_CREDS: "true"
       ATLANTIS_GH_APP_KEY_FILE: /tmp/atlantis-app-key.pem
