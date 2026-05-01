@@ -23,7 +23,7 @@ spec:
     atlantisUrl: "https://atlantis.jnobrega.com"
     orgAllowlist: "github.com/Jdavid77/home-cluster"
 
-    awsSecretName: atlantis-as
+    awsSecretName: atlantis-aws
 
     environment:
       ATLANTIS_WRITE_GIT_CREDS: "true"
