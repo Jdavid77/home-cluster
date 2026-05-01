@@ -31,8 +31,7 @@ variable "buckets" {
     "renderercv",
     "ephemera",
     "shelfmark",
-    "zot",
-    "sops"
+    "zot"
   ]
 }
 
