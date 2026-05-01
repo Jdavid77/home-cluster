@@ -1,0 +1,33 @@
+version: 3
+projects:
+  - name: akeyless
+    dir: terraform/akeyless
+    autoplan:
+      when_modified:
+        - "**/*.tf"
+        - "**/.env"
+      enabled: true
+
+  - name: authentik
+    dir: terraform/authentik
+    autoplan:
+      when_modified:
+        - "**/*.tf"
+        - "**/.env"
+      enabled: true
+
+  - name: backblaze
+    dir: terraform/backblaze
+    autoplan:
+      when_modified:
+        - "**/*.tf"
+        - "**/.env"
+      enabled: true
+
+  - name: garage
+    dir: terraform/garage
+    autoplan:
+      when_modified:
+        - "**/*.tf"
+        - "**/.env"
+      enabled: true
