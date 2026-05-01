@@ -18,7 +18,7 @@ spec:
     podTemplate:
       annotations:
         reloader.stakater.com/auto: "true"
-        secrets.reloader.stakater.com/auto: "atlantis-secret, atlantis-gh-app-key, atlantis-aws, atlantis-tfvars"
+        secrets.reloader.stakater.com/auto: "atlantis-secret, atlantis-gh-app-key, atlantis-aws, atlantis-sops-age"
 
     atlantisUrl: "https://atlantis.jnobrega.com"
     orgAllowlist: "github.com/Jdavid77/home-cluster"
@@ -29,6 +29,7 @@ spec:
       ATLANTIS_WRITE_GIT_CREDS: "true"
       ATLANTIS_GH_APP_KEY_FILE: /tmp/atlantis-app-key.pem
       ATLANTIS_GH_APP_SLUG: jnobrega-atlantis
+      SOPS_AGE_KEY_FILE: /tmp/sops/age.agekey
     environmentSecrets:
       - name: ATLANTIS_GH_APP_ID
         secretKeyRef:
@@ -43,9 +44,6 @@ spec:
           name: atlantis-secret
           key: ATLANTIS_GH_WEBHOOK_SECRET
 
-    loadEnvFromSecrets:
-      - atlantis-tfvars
-
     extraVolumes:
       - name: gh-app-key
         secret:
@@ -53,11 +51,21 @@ spec:
           items:
             - key: atlantis-app-key.pem
               path: atlantis-app-key.pem
+      - name: sops-age-key
+        secret:
+          secretName: atlantis-sops-age
+          items:
+            - key: age.agekey
+              path: age.agekey
 
     extraVolumeMounts:
       - name: gh-app-key
         mountPath: /tmp/atlantis-app-key.pem
         subPath: atlantis-app-key.pem
+        readOnly: true
+      - name: sops-age-key
+        mountPath: /tmp/sops/age.agekey
+        subPath: age.agekey
         readOnly: true
 
     defaultTFVersion: "1.9.0"
