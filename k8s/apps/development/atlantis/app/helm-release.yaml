@@ -122,6 +122,12 @@ spec:
     nodeSelector:
       kubernetes.io/hostname: localstorage-worker1
 
+    repoConfig: |
+      ---
+      metrics:
+        prometheus:
+          endpoint: "/metrics"
+
     servicemonitor:
       enabled: true
 
