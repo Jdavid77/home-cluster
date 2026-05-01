@@ -21,8 +21,8 @@ resource "authentik_source_ldap" "this" {
   slug = "lldap"
 
   server_uri              = "ldap://lldap.security.svc.cluster.local"
-  bind_cn                 = var.bind_cn
-  bind_password           = var.bind_password
+  bind_cn                 = local.bind_cn
+  bind_password           = local.bind_password
   base_dn                 = "dc=jnobrega,dc=com"
   user_path_template      = "LDAP/users"
   property_mappings       = data.authentik_property_mapping_source_ldap.this.ids

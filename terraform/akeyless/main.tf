@@ -5,6 +5,10 @@ terraform {
       version = "2.0.1"
       source  = "akeyless-community/akeyless"
     }
+    sops = {
+      source  = "carlpett/sops"
+      version = "~> 1.0"
+    }
   }
 
   backend "s3" {

@@ -1,4 +1,4 @@
 provider "garage" {
-  host  = var.server
-  token = var.token
+  host  = local.server
+  token = local.token
 }

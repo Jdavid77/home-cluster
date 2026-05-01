@@ -35,10 +35,3 @@ variable "buckets" {
   ]
 }
 
-variable "server" {
-  type = string
-}
-
-variable "token" {
-  type = string
-}

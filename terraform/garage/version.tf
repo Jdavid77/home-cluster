@@ -19,6 +19,10 @@ terraform {
       source  = "henrywhitaker3/garage"
       version = "1.0.3"
     }
+    sops = {
+      source  = "carlpett/sops"
+      version = "~> 1.0"
+    }
   }
 
 }
