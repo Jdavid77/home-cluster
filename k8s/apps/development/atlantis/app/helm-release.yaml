@@ -127,6 +127,11 @@ spec:
       metrics:
         prometheus:
           endpoint: "/metrics"
+      repos:
+        - id: github.com/Jdavid77/home-cluster
+          apply_requirements:
+            - approved
+          automerge: true
 
     servicemonitor:
       enabled: true
