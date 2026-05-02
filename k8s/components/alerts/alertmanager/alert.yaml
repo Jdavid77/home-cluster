@@ -20,6 +20,12 @@ spec:
       name: "*"
     - kind: OCIRepository
       name: "*"
+    - kind: ImageRepository
+      name: "*"
+    - kind: ImagePolicy
+      name: "*"
+    - kind: ImageUpdateAutomation
+      name: "*"
   exclusionList:
     - error.*lookup.*github
     - dial.*tcp.*timeout
