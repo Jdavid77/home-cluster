@@ -102,14 +102,14 @@ spec:
       - When in doubt about destructive or broad changes, explain the plan and ask for confirmation first.
     a2aConfig:
       skills:
-      - id: answer-questions-about-your-cluster
-        name: Answer Questions About Your Cluster
-        description: Answer questions about your Kubernetes cluster, Flux resources, and GitOps repository structure
-        inputModes:
-        - text
-        outputModes:
-        - text
-        tags: ["kubernetes", "flux"]
+        - id: answer-questions-about-your-cluster
+          name: Answer Questions About Your Cluster
+          description: Answer questions about your Kubernetes cluster, Flux resources, and GitOps repository structure
+          inputModes:
+            - text
+          outputModes:
+            - text
+          tags: ["kubernetes", "flux"]
     tools:
       - type: McpServer
         mcpServer:

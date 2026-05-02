@@ -33,7 +33,7 @@ kube-state-metrics:
           - imagerepositories
           - imagepolicies
           - imageupdateautomations
-        verbs: [ "list", "watch" ]
+        verbs: ["list", "watch"]
   customResourceState:
     enabled: true
     config:
@@ -58,67 +58,67 @@ kube-state-metrics:
                   type: Info
                   info:
                     labelsFromPath:
-                      gatewayclass_name: [ spec, gatewayClassName ]
+                      gatewayclass_name: [spec, gatewayClassName]
               - name: "labels"
                 help: "Kubernetes labels converted to Prometheus labels."
                 each:
                   type: Info
                   info:
-                    path: [ metadata ]
+                    path: [metadata]
                     labelsFromPath:
-                      "*": [ labels ]
+                      "*": [labels]
               - name: "created"
                 help: "created timestamp"
                 each:
                   type: Gauge
                   gauge:
-                    path: [ metadata, creationTimestamp ]
+                    path: [metadata, creationTimestamp]
               - name: "deleted"
                 help: "deletion timestamp"
                 each:
                   type: Gauge
                   gauge:
-                    path: [ metadata, deletionTimestamp ]
+                    path: [metadata, deletionTimestamp]
               - name: "listener_info"
                 help: "Gateway listener information"
                 each:
                   type: Info
                   info:
-                    path: [ spec, listeners ]
+                    path: [spec, listeners]
                     labelsFromPath:
-                      listener_name: [ "name" ]
-                      port: [ "port" ]
-                      protocol: [ "protocol" ]
-                      hostname: [ "hostname" ]
-                      tls_mode: [ "tls","mode" ]
-                      allowed_routes_namespaces_from: [ "allowedRoutes", "namespaces", "from" ]
+                      listener_name: ["name"]
+                      port: ["port"]
+                      protocol: ["protocol"]
+                      hostname: ["hostname"]
+                      tls_mode: ["tls", "mode"]
+                      allowed_routes_namespaces_from: ["allowedRoutes", "namespaces", "from"]
               - name: "status"
                 help: "status condition"
                 each:
                   type: Gauge
                   gauge:
-                    path: [ status, conditions ]
+                    path: [status, conditions]
                     labelsFromPath:
-                      type: [ "type" ]
-                    valueFrom: [ "status" ]
+                      type: ["type"]
+                    valueFrom: ["status"]
               - name: "status_listener_attached_routes"
                 help: "Number of attached routes for a listener"
                 each:
                   type: Gauge
                   gauge:
-                    path: [ status, listeners ]
+                    path: [status, listeners]
                     labelsFromPath:
-                      listener_name: [ "name" ]
-                    valueFrom: [ "attachedRoutes" ]
+                      listener_name: ["name"]
+                    valueFrom: ["attachedRoutes"]
               - name: "status_address_info"
                 help: "Gateway address types and values"
                 each:
                   type: Info
                   info:
-                    path: [ status, addresses ]
+                    path: [status, addresses]
                     labelsFromPath:
-                      type: [ "type" ]
-                      value: [ "value" ]
+                      type: ["type"]
+                      value: ["value"]
           - groupVersionKind:
               group: gateway.networking.k8s.io
               kind: "GatewayClass"
@@ -135,44 +135,44 @@ kube-state-metrics:
                   type: Info
                   info:
                     labelsFromPath:
-                      controller_name: [ spec, controllerName ]
+                      controller_name: [spec, controllerName]
               - name: "labels"
                 help: "Kubernetes labels converted to Prometheus labels."
                 each:
                   type: Info
                   info:
-                    path: [ metadata ]
+                    path: [metadata]
                     labelsFromPath:
-                      "*": [ labels ]
+                      "*": [labels]
               - name: "created"
                 help: "created timestamp"
                 each:
                   type: Gauge
                   gauge:
-                    path: [ metadata, creationTimestamp ]
+                    path: [metadata, creationTimestamp]
               - name: "deleted"
                 help: "deletion timestamp"
                 each:
                   type: Gauge
                   gauge:
-                    path: [ metadata, deletionTimestamp ]
+                    path: [metadata, deletionTimestamp]
               - name: "status"
                 help: "status condition"
                 each:
                   type: Gauge
                   gauge:
-                    path: [ status, conditions ]
+                    path: [status, conditions]
                     labelsFromPath:
-                      type: [ "type" ]
-                    valueFrom: [ "status" ]
+                      type: ["type"]
+                    valueFrom: ["status"]
               - name: "status_supported_features"
                 help: "List of supported features for the GatewayClass"
                 each:
                   type: Info
                   info:
-                    path: [ status, supportedFeatures ]
+                    path: [status, supportedFeatures]
                     labelsFromPath:
-                      features: [ ]
+                      features: []
           - groupVersionKind:
               group: gateway.networking.k8s.io
               kind: "HTTPRoute"
@@ -191,56 +191,56 @@ kube-state-metrics:
                 each:
                   type: Info
                   info:
-                    path: [ metadata ]
+                    path: [metadata]
                     labelsFromPath:
-                      "*": [ labels ]
+                      "*": [labels]
               - name: "created"
                 help: "created timestamp"
                 each:
                   type: Gauge
                   gauge:
-                    path: [ metadata, creationTimestamp ]
+                    path: [metadata, creationTimestamp]
               - name: "deleted"
                 help: "deletion timestamp"
                 each:
                   type: Gauge
                   gauge:
-                    path: [ metadata, deletionTimestamp ]
+                    path: [metadata, deletionTimestamp]
               - name: "hostname_info"
                 help: "Hostname information"
                 each:
                   type: Info
                   info:
-                    path: [ spec, hostnames ]
+                    path: [spec, hostnames]
                     labelsFromPath:
-                      hostname: [ ]
+                      hostname: []
               - name: "parent_info"
                 help: "Parent references that the httproute wants to be attached to"
                 each:
                   type: Info
                   info:
-                    path: [ spec, parentRefs ]
+                    path: [spec, parentRefs]
                     labelsFromPath:
-                      parent_group: [ "group" ]
-                      parent_kind: [ "kind" ]
-                      parent_name: [ "name" ]
-                      parent_namespace: [ "namespace" ]
-                      parent_section_name: [ "sectionName" ]
-                      parent_port: [ "port" ]
+                      parent_group: ["group"]
+                      parent_kind: ["kind"]
+                      parent_name: ["name"]
+                      parent_namespace: ["namespace"]
+                      parent_section_name: ["sectionName"]
+                      parent_port: ["port"]
               - name: "status_parent_info"
                 help: "Parent references that the httproute is attached to"
                 each:
                   type: Info
                   info:
-                    path: [ status, parents ]
+                    path: [status, parents]
                     labelsFromPath:
-                      controller_name: [ "controllerName" ]
-                      parent_group: [ "parentRef", "group" ]
-                      parent_kind: [ "parentRef", "kind" ]
-                      parent_name: [ "parentRef", "name" ]
-                      parent_namespace: [ "parentRef", "namespace" ]
-                      parent_section_name: [ "parentRef", "sectionName" ]
-                      parent_port: [ "parentRef", "port" ]
+                      controller_name: ["controllerName"]
+                      parent_group: ["parentRef", "group"]
+                      parent_kind: ["parentRef", "kind"]
+                      parent_name: ["parentRef", "name"]
+                      parent_namespace: ["parentRef", "namespace"]
+                      parent_section_name: ["parentRef", "sectionName"]
+                      parent_port: ["parentRef", "port"]
           - groupVersionKind:
               group: gateway.networking.k8s.io
               kind: "TCPRoute"
@@ -259,48 +259,48 @@ kube-state-metrics:
                 each:
                   type: Info
                   info:
-                    path: [ metadata ]
+                    path: [metadata]
                     labelsFromPath:
-                      "*": [ labels ]
+                      "*": [labels]
               - name: "created"
                 help: "created timestamp"
                 each:
                   type: Gauge
                   gauge:
-                    path: [ metadata, creationTimestamp ]
+                    path: [metadata, creationTimestamp]
               - name: "deleted"
                 help: "deletion timestamp"
                 each:
                   type: Gauge
                   gauge:
-                    path: [ metadata, deletionTimestamp ]
+                    path: [metadata, deletionTimestamp]
               - name: "parent_info"
                 help: "Parent references that the tcproute wants to be attached to"
                 each:
                   type: Info
                   info:
-                    path: [ spec, parentRefs ]
+                    path: [spec, parentRefs]
                     labelsFromPath:
-                      parent_group: [ "group" ]
-                      parent_kind: [ "kind" ]
-                      parent_name: [ "name" ]
-                      parent_namespace: [ "namespace" ]
-                      parent_section_name: [ "sectionName" ]
-                      parent_port: [ "port" ]
+                      parent_group: ["group"]
+                      parent_kind: ["kind"]
+                      parent_name: ["name"]
+                      parent_namespace: ["namespace"]
+                      parent_section_name: ["sectionName"]
+                      parent_port: ["port"]
               - name: "status_parent_info"
                 help: "Parent references that the tcproute is attached to"
                 each:
                   type: Info
                   info:
-                    path: [ status, parents ]
+                    path: [status, parents]
                     labelsFromPath:
-                      controller_name: [ "controllerName" ]
-                      parent_group: [ "parentRef", "group" ]
-                      parent_kind: [ "parentRef", "kind" ]
-                      parent_name: [ "parentRef", "name" ]
-                      parent_namespace: [ "parentRef", "namespace" ]
-                      parent_section_name: [ "parentRef", "sectionName" ]
-                      parent_port: [ "parentRef", "port" ]
+                      controller_name: ["controllerName"]
+                      parent_group: ["parentRef", "group"]
+                      parent_kind: ["parentRef", "kind"]
+                      parent_name: ["parentRef", "name"]
+                      parent_namespace: ["parentRef", "namespace"]
+                      parent_section_name: ["parentRef", "sectionName"]
+                      parent_port: ["parentRef", "port"]
           - groupVersionKind:
               group: gateway.networking.k8s.io
               kind: "TLSRoute"
@@ -319,56 +319,56 @@ kube-state-metrics:
                 each:
                   type: Info
                   info:
-                    path: [ metadata ]
+                    path: [metadata]
                     labelsFromPath:
-                      "*": [ labels ]
+                      "*": [labels]
               - name: "created"
                 help: "created timestamp"
                 each:
                   type: Gauge
                   gauge:
-                    path: [ metadata, creationTimestamp ]
+                    path: [metadata, creationTimestamp]
               - name: "deleted"
                 help: "deletion timestamp"
                 each:
                   type: Gauge
                   gauge:
-                    path: [ metadata, deletionTimestamp ]
+                    path: [metadata, deletionTimestamp]
               - name: "hostname_info"
                 help: "Hostname information"
                 each:
                   type: Info
                   info:
-                    path: [ spec, hostnames ]
+                    path: [spec, hostnames]
                     labelsFromPath:
-                      hostname: [ ]
+                      hostname: []
               - name: "parent_info"
                 help: "Parent references that the tlsroute wants to be attached to"
                 each:
                   type: Info
                   info:
-                    path: [ spec, parentRefs ]
+                    path: [spec, parentRefs]
                     labelsFromPath:
-                      parent_group: [ "group" ]
-                      parent_kind: [ "kind" ]
-                      parent_name: [ "name" ]
-                      parent_namespace: [ "namespace" ]
-                      parent_section_name: [ "sectionName" ]
-                      parent_port: [ "port" ]
+                      parent_group: ["group"]
+                      parent_kind: ["kind"]
+                      parent_name: ["name"]
+                      parent_namespace: ["namespace"]
+                      parent_section_name: ["sectionName"]
+                      parent_port: ["port"]
               - name: "status_parent_info"
                 help: "Parent references that the tlsroute is attached to"
                 each:
                   type: Info
                   info:
-                    path: [ status, parents ]
+                    path: [status, parents]
                     labelsFromPath:
-                      controller_name: [ "controllerName" ]
-                      parent_group: [ "parentRef", "group" ]
-                      parent_kind: [ "parentRef", "kind" ]
-                      parent_name: [ "parentRef", "name" ]
-                      parent_namespace: [ "parentRef", "namespace" ]
-                      parent_section_name: [ "parentRef", "sectionName" ]
-                      parent_port: [ "parentRef", "port" ]
+                      controller_name: ["controllerName"]
+                      parent_group: ["parentRef", "group"]
+                      parent_kind: ["parentRef", "kind"]
+                      parent_name: ["parentRef", "name"]
+                      parent_namespace: ["parentRef", "namespace"]
+                      parent_section_name: ["parentRef", "sectionName"]
+                      parent_port: ["parentRef", "port"]
           - groupVersionKind:
               group: kustomize.toolkit.fluxcd.io
               version: v1
@@ -381,13 +381,13 @@ kube-state-metrics:
                   type: Info
                   info:
                     labelsFromPath:
-                      name: [ metadata, name ]
+                      name: [metadata, name]
                 labelsFromPath:
-                  exported_namespace: [ metadata, namespace ]
-                  ready: [ status, conditions, "[type=Ready]", status ]
-                  suspended: [ spec, suspend ]
-                  revision: [ status, lastAppliedRevision ]
-                  source_name: [ spec, sourceRef, name ]
+                  exported_namespace: [metadata, namespace]
+                  ready: [status, conditions, "[type=Ready]", status]
+                  suspended: [spec, suspend]
+                  revision: [status, lastAppliedRevision]
+                  source_name: [spec, sourceRef, name]
           - groupVersionKind:
               group: helm.toolkit.fluxcd.io
               version: v2
@@ -400,16 +400,16 @@ kube-state-metrics:
                   type: Info
                   info:
                     labelsFromPath:
-                      name: [ metadata, name ]
+                      name: [metadata, name]
                 labelsFromPath:
-                  exported_namespace: [ metadata, namespace ]
-                  ready: [ status, conditions, "[type=Ready]", status ]
-                  suspended: [ spec, suspend ]
-                  revision: [ status, history, "0", chartVersion ]
-                  chart_name: [ status, history, "0", chartName ]
-                  chart_app_version: [ status, history, "0", appVersion ]
-                  chart_ref_name: [ spec, chartRef, name ]
-                  chart_source_name: [ spec, chart, spec, sourceRef, name ]
+                  exported_namespace: [metadata, namespace]
+                  ready: [status, conditions, "[type=Ready]", status]
+                  suspended: [spec, suspend]
+                  revision: [status, history, "0", chartVersion]
+                  chart_name: [status, history, "0", chartName]
+                  chart_app_version: [status, history, "0", appVersion]
+                  chart_ref_name: [spec, chartRef, name]
+                  chart_source_name: [spec, chart, spec, sourceRef, name]
           - groupVersionKind:
               group: source.toolkit.fluxcd.io
               version: v1
@@ -422,13 +422,13 @@ kube-state-metrics:
                   type: Info
                   info:
                     labelsFromPath:
-                      name: [ metadata, name ]
+                      name: [metadata, name]
                 labelsFromPath:
-                  exported_namespace: [ metadata, namespace ]
-                  ready: [ status, conditions, "[type=Ready]", status ]
-                  suspended: [ spec, suspend ]
-                  revision: [ status, artifact, revision ]
-                  url: [ spec, url ]
+                  exported_namespace: [metadata, namespace]
+                  ready: [status, conditions, "[type=Ready]", status]
+                  suspended: [spec, suspend]
+                  revision: [status, artifact, revision]
+                  url: [spec, url]
           - groupVersionKind:
               group: source.toolkit.fluxcd.io
               version: v1
@@ -441,14 +441,14 @@ kube-state-metrics:
                   type: Info
                   info:
                     labelsFromPath:
-                      name: [ metadata, name ]
+                      name: [metadata, name]
                 labelsFromPath:
-                  exported_namespace: [ metadata, namespace ]
-                  ready: [ status, conditions, "[type=Ready]", status ]
-                  suspended: [ spec, suspend ]
-                  revision: [ status, artifact, revision ]
-                  endpoint: [ spec, endpoint ]
-                  bucket_name: [ spec, bucketName ]
+                  exported_namespace: [metadata, namespace]
+                  ready: [status, conditions, "[type=Ready]", status]
+                  suspended: [spec, suspend]
+                  revision: [status, artifact, revision]
+                  endpoint: [spec, endpoint]
+                  bucket_name: [spec, bucketName]
           - groupVersionKind:
               group: source.toolkit.fluxcd.io
               version: v1
@@ -461,13 +461,13 @@ kube-state-metrics:
                   type: Info
                   info:
                     labelsFromPath:
-                      name: [ metadata, name ]
+                      name: [metadata, name]
                 labelsFromPath:
-                  exported_namespace: [ metadata, namespace ]
-                  ready: [ status, conditions, "[type=Ready]", status ]
-                  suspended: [ spec, suspend ]
-                  revision: [ status, artifact, revision ]
-                  url: [ spec, url ]
+                  exported_namespace: [metadata, namespace]
+                  ready: [status, conditions, "[type=Ready]", status]
+                  suspended: [spec, suspend]
+                  revision: [status, artifact, revision]
+                  url: [spec, url]
           - groupVersionKind:
               group: source.toolkit.fluxcd.io
               version: v1
@@ -480,14 +480,14 @@ kube-state-metrics:
                   type: Info
                   info:
                     labelsFromPath:
-                      name: [ metadata, name ]
+                      name: [metadata, name]
                 labelsFromPath:
-                  exported_namespace: [ metadata, namespace ]
-                  ready: [ status, conditions, "[type=Ready]", status ]
-                  suspended: [ spec, suspend ]
-                  revision: [ status, artifact, revision ]
-                  chart_name: [ spec, chart ]
-                  chart_version: [ spec, version ]
+                  exported_namespace: [metadata, namespace]
+                  ready: [status, conditions, "[type=Ready]", status]
+                  suspended: [spec, suspend]
+                  revision: [status, artifact, revision]
+                  chart_name: [spec, chart]
+                  chart_version: [spec, version]
           - groupVersionKind:
               group: source.toolkit.fluxcd.io
               version: v1
@@ -500,13 +500,13 @@ kube-state-metrics:
                   type: Info
                   info:
                     labelsFromPath:
-                      name: [ metadata, name ]
+                      name: [metadata, name]
                 labelsFromPath:
-                  exported_namespace: [ metadata, namespace ]
-                  ready: [ status, conditions, "[type=Ready]", status ]
-                  suspended: [ spec, suspend ]
-                  revision: [ status, artifact, revision ]
-                  url: [ spec, url ]
+                  exported_namespace: [metadata, namespace]
+                  ready: [status, conditions, "[type=Ready]", status]
+                  suspended: [spec, suspend]
+                  revision: [status, artifact, revision]
+                  url: [spec, url]
           - groupVersionKind:
               group: notification.toolkit.fluxcd.io
               version: v1beta3
@@ -519,10 +519,10 @@ kube-state-metrics:
                   type: Info
                   info:
                     labelsFromPath:
-                      name: [ metadata, name ]
+                      name: [metadata, name]
                 labelsFromPath:
-                  exported_namespace: [ metadata, namespace ]
-                  suspended: [ spec, suspend ]
+                  exported_namespace: [metadata, namespace]
+                  suspended: [spec, suspend]
           - groupVersionKind:
               group: notification.toolkit.fluxcd.io
               version: v1beta3
@@ -535,10 +535,10 @@ kube-state-metrics:
                   type: Info
                   info:
                     labelsFromPath:
-                      name: [ metadata, name ]
+                      name: [metadata, name]
                 labelsFromPath:
-                  exported_namespace: [ metadata, namespace ]
-                  suspended: [ spec, suspend ]
+                  exported_namespace: [metadata, namespace]
+                  suspended: [spec, suspend]
           - groupVersionKind:
               group: notification.toolkit.fluxcd.io
               version: v1
@@ -551,12 +551,12 @@ kube-state-metrics:
                   type: Info
                   info:
                     labelsFromPath:
-                      name: [ metadata, name ]
+                      name: [metadata, name]
                 labelsFromPath:
-                  exported_namespace: [ metadata, namespace ]
-                  ready: [ status, conditions, "[type=Ready]", status ]
-                  suspended: [ spec, suspend ]
-                  webhook_path: [ status, webhookPath ]
+                  exported_namespace: [metadata, namespace]
+                  ready: [status, conditions, "[type=Ready]", status]
+                  suspended: [spec, suspend]
+                  webhook_path: [status, webhookPath]
           - groupVersionKind:
               group: image.toolkit.fluxcd.io
               version: v1
@@ -569,12 +569,12 @@ kube-state-metrics:
                   type: Info
                   info:
                     labelsFromPath:
-                      name: [ metadata, name ]
+                      name: [metadata, name]
                 labelsFromPath:
-                  exported_namespace: [ metadata, namespace ]
-                  ready: [ status, conditions, "[type=Ready]", status ]
-                  suspended: [ spec, suspend ]
-                  image: [ spec, image ]
+                  exported_namespace: [metadata, namespace]
+                  ready: [status, conditions, "[type=Ready]", status]
+                  suspended: [spec, suspend]
+                  image: [spec, image]
           - groupVersionKind:
               group: image.toolkit.fluxcd.io
               version: v1
@@ -587,12 +587,12 @@ kube-state-metrics:
                   type: Info
                   info:
                     labelsFromPath:
-                      name: [ metadata, name ]
+                      name: [metadata, name]
                 labelsFromPath:
-                  exported_namespace: [ metadata, namespace ]
-                  ready: [ status, conditions, "[type=Ready]", status ]
-                  suspended: [ spec, suspend ]
-                  source_name: [ spec, imageRepositoryRef, name ]
+                  exported_namespace: [metadata, namespace]
+                  ready: [status, conditions, "[type=Ready]", status]
+                  suspended: [spec, suspend]
+                  source_name: [spec, imageRepositoryRef, name]
           - groupVersionKind:
               group: image.toolkit.fluxcd.io
               version: v1
@@ -605,9 +605,9 @@ kube-state-metrics:
                   type: Info
                   info:
                     labelsFromPath:
-                      name: [ metadata, name ]
+                      name: [metadata, name]
                 labelsFromPath:
-                  exported_namespace: [ metadata, namespace ]
-                  ready: [ status, conditions, "[type=Ready]", status ]
-                  suspended: [ spec, suspend ]
-                  source_name: [ spec, sourceRef, name ]
+                  exported_namespace: [metadata, namespace]
+                  ready: [status, conditions, "[type=Ready]", status]
+                  suspended: [spec, suspend]
+                  source_name: [spec, sourceRef, name]

@@ -1,4 +1,3 @@
----
 # yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -14,7 +13,7 @@ spec:
     namespace: flux-system
   values:
     controllers:
-      *app :
+      *app:
         annotations:
           reloader.stakater.com/auto: "true"
         initContainers:
@@ -48,14 +47,12 @@ spec:
                 memory: 250Mi
               limits:
                 memory: 750Mi
-
     service:
       app:
         controller: *app
         ports:
           http:
             port: &port 8484
-
     route:
       app:
         hostnames:
@@ -72,7 +69,6 @@ spec:
             timeouts:
               request: 0s # websocket, never time out
               backendRequest: 0s # websocket, never time out
-
     persistence:
       data:
         existingClaim: *app

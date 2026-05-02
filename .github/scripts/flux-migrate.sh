@@ -20,7 +20,7 @@ log "Starting flux migration across all directories in ${K8S_DIR}"
 # Find all directories recursively in k8s and run flux migrate
 find "${K8S_DIR}" -type d | while read -r dir; do
     log "Processing directory: ${dir}"
-    
+
     # Change to the directory and run flux migrate
     if cd "${dir}"; then
         if flux migrate -v 2.6 -f .; then

@@ -1,4 +1,3 @@
----
 # yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/tuppr.home-operations.com/kubernetesupgrade_v1alpha1.json
 apiVersion: tuppr.home-operations.com/v1alpha1
 kind: KubernetesUpgrade

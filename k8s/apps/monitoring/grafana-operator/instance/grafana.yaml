@@ -1,4 +1,3 @@
----
 # yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/grafana.integreatly.org/grafana_v1beta1.json
 apiVersion: grafana.integreatly.org/v1beta1
 kind: Grafana
@@ -81,7 +80,7 @@ spec:
               securityContext:
                 allowPrivilegeEscalation: false
                 readOnlyRootFilesystem: true
-                capabilities: { drop: ["ALL"] }
+                capabilities: {drop: ["ALL"]}
           securityContext:
             runAsNonRoot: true
             runAsUser: 1000

@@ -17,14 +17,12 @@ patches:
   - "@patches/kubePrism.yaml"
   - "@patches/containerd.yaml"
   - "@patches/sysctls.yaml"
-
 controlPlane:
   patches:
     - "@patches/cluster.yaml"
     - "@patches/apiserver.yaml"
     - "@patches/etcd.yaml"
     - "@patches/talos-api-access.yaml"
-
 worker:
   schematic:
     customization:
@@ -35,7 +33,6 @@ worker:
   patches:
     - "@patches/nfs.yaml"
     - "@patches/kernel-modules.yaml"
-
 nodes:
   - hostname: bmax1-master
     ipAddress: 192.168.1.81

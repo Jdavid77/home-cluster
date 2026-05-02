@@ -1,4 +1,3 @@
----
 # yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/monitoring.coreos.com/podmonitor_v1.json
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor

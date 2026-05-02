@@ -13,7 +13,7 @@ spec:
   maxHistory: 2
   values:
     controllers:
-      *app :
+      *app:
         annotations:
           reloader.stakater.com/auto: "true"
         pod:
@@ -36,18 +36,15 @@ spec:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
               capabilities: {drop: ["ALL"]}
-
     service:
       main:
         controller: *app
         ports:
           http:
             port: &port 3000
-
     defaultPodOptions:
       imagePullSecrets:
         - name: gh-secret
-
     route:
       main:
         hostnames: ["curve.jnobrega.com"]
@@ -59,7 +56,6 @@ spec:
           - backendRefs:
               - name: *app
                 port: *port
-
     persistence:
       config:
         enabled: true

@@ -1,5 +1,4 @@
 # yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
----
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -13,16 +12,12 @@ spec:
     namespace: flux-system
   maxHistory: 2
   values:
-
     podTemplate:
       annotations:
         reloader.stakater.com/auto: "true"
-
     atlantisUrl: "https://atlantis.jnobrega.com"
     orgAllowlist: "github.com/Jdavid77/home-cluster"
-
     awsSecretName: atlantis-aws
-
     environment:
       ATLANTIS_WRITE_GIT_CREDS: "true"
       ATLANTIS_GH_APP_KEY_FILE: /tmp/atlantis-app-key.pem
@@ -41,7 +36,6 @@ spec:
         secretKeyRef:
           name: atlantis-secret
           key: ATLANTIS_GH_WEBHOOK_SECRET
-
     extraVolumes:
       - name: gh-app-key
         secret:
@@ -55,7 +49,6 @@ spec:
           items:
             - key: age.agekey
               path: age.agekey
-
     extraVolumeMounts:
       - name: gh-app-key
         mountPath: /tmp/atlantis-app-key.pem
@@ -65,16 +58,12 @@ spec:
         mountPath: /tmp/sops/age.agekey
         subPath: age.agekey
         readOnly: true
-
     defaultTFVersion: "1.9.0"
-
     service:
       type: ClusterIP
       targetPort: 4141
-
     ingress:
       enabled: false
-
     route:
       main:
         enabled: true
@@ -90,7 +79,6 @@ spec:
           - path:
               type: PathPrefix
               value: /
-
     extraManifests:
       - apiVersion: gateway.networking.k8s.io/v1
         kind: HTTPRoute
@@ -112,16 +100,13 @@ spec:
               backendRefs:
                 - name: atlantis
                   port: 80
-
     volumeClaim:
       enabled: true
       dataStorage: 5Gi
       storageClassName: "openebs-hostpath"
       accessModes: ["ReadWriteOnce"]
-
     nodeSelector:
       kubernetes.io/hostname: localstorage-worker1
-
     repoConfig: |
       ---
       metrics:
@@ -137,12 +122,9 @@ spec:
             ignore_paths:
               - "k8s/**"
               - "infrastructure/**"
-
     servicemonitor:
       enabled: true
-
     lockingDbType: "redis"
-
     redis:
       host: dragonfly.storage.svc.cluster.local
       port: 6379

@@ -6,5 +6,5 @@
   },
   "remoteUser": "vscode",
   "containerUser": "vscode",
-	"updateRemoteUserUID": true
+    "updateRemoteUserUID": true
 }

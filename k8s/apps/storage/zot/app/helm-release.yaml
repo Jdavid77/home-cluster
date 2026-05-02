@@ -1,5 +1,4 @@
 # yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
----
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -83,12 +82,10 @@ spec:
             "scrub": { "enable": true, "interval": "24h" }
           }
         }
-
     mountSecret: true
     secretFiles:
       htpasswd: |-
         admin:$2y$05$PAt5S8lT65jElESxVpaH/uzyFBgbAkRETa5sl7BT94ong0iqfhcHu
-
     env:
       - name: AWS_ACCESS_KEY_ID
         valueFrom:
@@ -100,10 +97,8 @@ spec:
           secretKeyRef:
             name: zot-s3
             key: AWS_SECRET_ACCESS_KEY
-
     service:
       type: ClusterIP
-
     httproute:
       enabled: true
       parentRefs:
@@ -114,26 +109,22 @@ spec:
         - "registry.jnobrega.com"
       rules:
         - matches:
-          - path:
-              type: PathPrefix
-              value: /
+            - path:
+                type: PathPrefix
+                value: /
           sessionPersistence:
             sessionName: zot-registry-session
             type: Cookie
             absoluteTimeout: 30m
             cookieConfig:
               lifetimeType: Permanent
-
-
     persistence: false
-
     # Extra Volume Mounts
     extraVolumeMounts:
       - name: oidc-credentials
         mountPath: /oidc/oidc-credentials.json
         subPath: oidc-credentials.json
         readOnly: true
-
     # Extra Volumes
     extraVolumes:
       - name: oidc-credentials

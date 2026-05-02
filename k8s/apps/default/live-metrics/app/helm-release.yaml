@@ -14,7 +14,7 @@ spec:
   maxHistory: 2
   values:
     controllers:
-      *app :
+      *app:
         replicas: 1
         strategy: RollingUpdate
         containers:

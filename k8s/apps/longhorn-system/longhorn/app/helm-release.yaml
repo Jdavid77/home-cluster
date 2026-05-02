@@ -14,4 +14,3 @@ spec:
   valuesFrom:
     - kind: ConfigMap
       name: longhorn-values
-

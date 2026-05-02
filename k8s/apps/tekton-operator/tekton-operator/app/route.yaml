@@ -6,19 +6,19 @@ metadata:
   namespace: tekton-operator
 spec:
   hostnames:
-  - tekton.jnobrega.com
+    - tekton.jnobrega.com
   parentRefs:
-  - group: gateway.networking.k8s.io
-    kind: Gateway
-    name: internal
-    namespace: network
-    sectionName: websecure
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: internal
+      namespace: network
+      sectionName: websecure
   rules:
-  - backendRefs:
-    - name: tekton-dashboard
-      port: 9097
-      weight: 1
-    matches:
-    - path:
-        type: PathPrefix
-        value: /
+    - backendRefs:
+        - name: tekton-dashboard
+          port: 9097
+          weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /

@@ -1,4 +1,3 @@
----
 # yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/source.toolkit.fluxcd.io/ocirepository_v1.json
 apiVersion: tuppr.home-operations.com/v1alpha1
 kind: TalosUpgrade

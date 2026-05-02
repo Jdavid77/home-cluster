@@ -1,4 +1,3 @@
----
 alerting:
   pushover:
     title: Gatus
@@ -11,13 +10,11 @@ alerting:
       send-on-resolved: true
       failure-threshold: 3
       success-threshold: 3
-
 # Prevent Gatus from reporting endpoints as unhealthy when Gatus itself is unhealthy, you may configure Gatus to periodically check for internet connectivity.
 connectivity:
   checker:
     target: 1.1.1.1:53
     interval: 60s
-
 # Gatus needs at least one endpoint to start
 endpoints:
   - name: Cloudflare
@@ -26,14 +23,12 @@ endpoints:
     interval: 1m
     conditions:
       - "[CONNECTED] == true"
-
   - name: Pi-Hole
     group: "Third-Party"
     url: icmp://192.168.1.139
     interval: 1m
     conditions:
       - "[CONNECTED] == true"
-
   - name: Akeyless API
     group: "Third-Party"
     url: https://api.akeyless.io/health
@@ -42,14 +37,11 @@ endpoints:
       dns-resolver: tcp://1.1.1.1:53
     conditions:
       - "[STATUS] == 200"
-
 metrics: true
-
 storage:
   type: postgres
   path: postgres://${INIT_POSTGRES_USER}:${INIT_POSTGRES_PASS}@${INIT_POSTGRES_HOST}:5432/${INIT_POSTGRES_DBNAME}?sslmode=disable
   caching: true
-
 ui:
   title: Status | Gatus
   dashboard-heading: "Application's Health Dashboard"
@@ -60,6 +52,5 @@ ui:
       link: https://github.com/Jdavid77
     - name: "Cluster Live Status"
       link: https://live.jnobrega.com
-
 web:
   port: ${GATUS_WEB_PORT}

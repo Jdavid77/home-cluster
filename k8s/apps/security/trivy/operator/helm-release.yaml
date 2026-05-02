@@ -12,9 +12,7 @@ spec:
     namespace: flux-system
   maxHistory: 2
   values:
-
     excludeNamespaces: "kube-system"
-
     operator:
       logDevMode: true
       replicas: 1
@@ -28,7 +26,6 @@ spec:
       configAuditScannerScanOnlyCurrentRevisions: true
       annotations:
         reloader.stakater.com/auto: "true"
-
     trivy:
       debug: true
       slow: true # flag is to use less CPU/memory for scanning though it takes more time than normal scanning
@@ -40,7 +37,6 @@ spec:
         limits:
           cpu: 500m
           memory: 1Gi
-
     nodeCollector:
       volumeMounts:
         - name: etc-os-release
@@ -50,6 +46,5 @@ spec:
         - name: etc-os-release
           hostPath:
             path: /etc/os-release
-
     serviceMonitor:
       enabled: true

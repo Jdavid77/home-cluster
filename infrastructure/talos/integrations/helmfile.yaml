@@ -1,16 +1,13 @@
----
 helmDefaults:
   wait: true
   waitForJobs: true
   timeout: 600
   force: true
-
 releases:
   - name: prometheus-operator-crds
     namespace: kube-system
     chart: oci://ghcr.io/prometheus-community/charts/prometheus-operator-crds
     version: 28.0.1
-
   - name: cilium
     namespace: kube-system
     chart: oci://quay.io/cilium/charts/cilium
@@ -19,7 +16,6 @@ releases:
       - ../../../k8s/apps/kube-system/cilium/app/values.yaml
     needs:
       - kube-system/prometheus-operator-crds
-
   - name: kubelet-csr-approver
     namespace: kube-system
     chart: oci://ghcr.io/postfinance/charts/kubelet-csr-approver
@@ -28,7 +24,6 @@ releases:
       - ../../../k8s/apps/kube-system/kubelet-csr-approver/app/values.yaml
     needs:
       - kube-system/cilium
-
   - name: spegel
     namespace: kube-system
     chart: oci://ghcr.io/spegel-org/helm-charts/spegel
@@ -37,7 +32,6 @@ releases:
       - ../../../k8s/apps/kube-system/spegel/app/values.yaml
     needs:
       - kube-system/kubelet-csr-approver
-
   - name: grafana-operator
     namespace: monitoring
     chart: oci://ghcr.io/grafana/helm-charts/grafana-operator
@@ -46,7 +40,6 @@ releases:
       - ../../../k8s/apps/monitoring/grafana-operator/app/values.yaml
     needs:
       - kube-system/kubelet-csr-approver
-
   - name: envoy-gateway
     namespace: network
     chart: oci://mirror.gcr.io/envoyproxy/gateway-helm
@@ -55,7 +48,6 @@ releases:
       - ../../../k8s/apps/network/envoy-gateway/app/values.yaml
     needs:
       - kube-system/kubelet-csr-approver
-
   - name: longhorn
     namespace: longhorn-system
     chart: oci://ghcr.io/home-operations/charts-mirror/longhorn
@@ -64,7 +56,6 @@ releases:
       - ../../../k8s/apps/longhorn-system/longhorn/app/values.yaml
     needs:
       - kube-system/kubelet-csr-approver
-
   - name: flux-operator
     namespace: flux-system
     chart: oci://ghcr.io/controlplaneio-fluxcd/charts/flux-operator
@@ -74,7 +65,6 @@ releases:
       - ../../../k8s/apps/flux-system/flux-operator/app/values.yaml
     needs:
       - kube-system/kubelet-csr-approver
-
   - name: flux-instance
     namespace: flux-system
     chart: oci://ghcr.io/controlplaneio-fluxcd/charts/flux-instance

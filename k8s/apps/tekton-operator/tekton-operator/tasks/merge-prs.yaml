@@ -6,7 +6,7 @@ metadata:
 spec:
   description: Merge PR's from Renovate based on labels.
   workspaces:
-  - name: source
+    - name: source
   params:
     - name: labels
       type: string

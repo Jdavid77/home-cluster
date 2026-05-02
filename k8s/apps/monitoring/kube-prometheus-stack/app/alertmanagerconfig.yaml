@@ -1,4 +1,3 @@
----
 # yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/monitoring.coreos.com/alertmanagerconfig_v1alpha1.json
 apiVersion: monitoring.coreos.com/v1alpha1
 kind: AlertmanagerConfig
@@ -24,7 +23,6 @@ spec:
       - job
     groupInterval: 5m
     groupWait: 1m
-
   inhibitRules:
     - equal:
         - alertname
@@ -37,7 +35,6 @@ spec:
         - name: severity
           value: warning
           matchType: =
-
   receivers:
     - name: blackhole
     - name: pushover

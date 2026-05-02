@@ -1,5 +1,4 @@
 # yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
----
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -14,7 +13,7 @@ spec:
   maxHistory: 2
   values:
     controllers:
-      *app :
+      *app:
         annotations:
           reloader.stakater.com/auto: "true"
         strategy: Recreate
@@ -38,7 +37,7 @@ spec:
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
+              capabilities: {drop: ["ALL"]}
         containers:
           app:
             image:
@@ -101,7 +100,6 @@ spec:
           automountServiceAccountToken: false
           imagePullSecrets:
             - name: dockerhub-secret
-
     service:
       app:
         controller: *app
@@ -112,7 +110,6 @@ spec:
             port: 8000
           monitoring-ce:
             port: 8001
-
     route:
       app:
         parentRefs:
@@ -126,7 +123,6 @@ spec:
           - backendRefs:
               - name: *app
                 port: *port
-
     persistence:
       data:
         type: emptyDir
@@ -140,16 +136,14 @@ spec:
           - path: /opt/sonarqube/extensions
             subPath: extensions
         advancedMounts:
-          *app :
+          *app:
             inject-prometheus-exporter:
               - path: /data
                 subPath: data
-
       tmp:
         type: emptyDir
         globalMounts:
           - path: /tmp
-
       prometheus-config:
         type: configMap
         name: dhi-sonarqube-prometheus-config
@@ -157,7 +151,6 @@ spec:
           - path: /opt/sonarqube/conf/prometheus-config.yaml
             subPath: prometheus-config.yaml
             readOnly: true
-
       prometheus-ce-config:
         type: configMap
         name: dhi-sonarqube-prometheus-ce-config
@@ -165,7 +158,6 @@ spec:
           - path: /opt/sonarqube/conf/prometheus-ce-config.yaml
             subPath: prometheus-ce-config.yaml
             readOnly: true
-
     configMaps:
       prometheus-config:
         data:

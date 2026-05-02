@@ -3,12 +3,9 @@ automerge: true
 projects:
   - name: akeyless
     dir: terraform/akeyless
-
   - name: authentik
     dir: terraform/authentik
-
   - name: backblaze
     dir: terraform/backblaze
-
   - name: garage
     dir: terraform/garage

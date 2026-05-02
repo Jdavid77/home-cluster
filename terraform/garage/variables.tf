@@ -24,4 +24,3 @@ variable "buckets" {
     "zot"
   ]
 }
-

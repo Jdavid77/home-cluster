@@ -15,7 +15,7 @@ persistence:
     enable: true
     selector: storage
 defaultSettings:
-  taintToleration: "node=storage:NoSchedule" 
+  taintToleration: "node=storage:NoSchedule"
   defaultReplicaCount: 2
   defaultDataPath: /var/mnt/longhorn
   autoCleanupSystemGeneratedSnapshot: true

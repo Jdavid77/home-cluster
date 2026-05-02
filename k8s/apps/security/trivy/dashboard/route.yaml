@@ -5,19 +5,19 @@ metadata:
   name: trivy-dashboard
 spec:
   hostnames:
-  - trivy.jnobrega.com
+    - trivy.jnobrega.com
   parentRefs:
-  - group: gateway.networking.k8s.io
-    kind: Gateway
-    name: internal
-    namespace: network
-    sectionName: websecure
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: internal
+      namespace: network
+      sectionName: websecure
   rules:
-  - backendRefs:
-    - name: trivy-operator-dashboard
-      port: 8900
-      weight: 1
-    matches:
-    - path:
-        type: PathPrefix
-        value: /
+    - backendRefs:
+        - name: trivy-operator-dashboard
+          port: 8900
+          weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
