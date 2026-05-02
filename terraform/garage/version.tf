@@ -16,8 +16,8 @@ terraform {
 
   required_providers {
     garage = {
-      source  = "henrywhitaker3/garage"
-      version = "1.0.3"
+      source  = "jkossis/garage"
+      version = "1.0.4"
     }
     sops = {
       source  = "carlpett/sops"
