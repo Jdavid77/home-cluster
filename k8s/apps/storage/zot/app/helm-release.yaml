@@ -29,6 +29,21 @@ spec:
             "rootDirectory": "/tmp/zot",
             "gc": true,
             "dedupe": false,
+            "retention": {
+              "dryRun": false,
+              "delay": "24h",
+              "policies": [
+                {
+                  "repositories": ["**"],
+                  "deleteReferrers": true,
+                  "keepTags": [
+                    {
+                      "mostRecentlyPushedCount": 5
+                    }
+                  ]
+                }
+              ]
+            },
             "storageDriver": {
               "name": "s3",
               "region": "us-east-1",
