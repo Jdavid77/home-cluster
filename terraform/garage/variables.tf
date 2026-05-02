@@ -21,8 +21,7 @@ variable "buckets" {
     "grist",
     "renderercv",
     "shelfmark",
-    "zot",
-    "test"
+    "zot"
   ]
 }
 
