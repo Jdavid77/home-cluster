@@ -129,6 +129,8 @@ spec:
           endpoint: "/metrics"
       repos:
         - id: github.com/Jdavid77/home-cluster
+          apply_requirements:
+            - approved
           delete_source_branch_on_merge: true
           autodiscover:
             mode: auto
