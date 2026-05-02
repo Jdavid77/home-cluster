@@ -5,3 +5,4 @@ resources:
   - secret.yaml
   - helm-release.yaml
   - security-policy.yaml
+  - grafanadashboard.yaml
