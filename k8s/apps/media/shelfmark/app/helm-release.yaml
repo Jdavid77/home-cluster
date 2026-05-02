@@ -14,6 +14,8 @@ spec:
     namespace: flux-system
   values:
     defaultPodOptions:
+      imagePullSecrets:
+        - name: zot-registry-secret
       automountServiceAccountToken: false
       enableServiceLinks: false
       securityContext:
@@ -31,8 +33,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/calibrain/shelfmark
-              tag: v1.2.2@sha256:31738aa40006f97841eef3048612578681211f64a803fb51fac10e04127f3d0f
+              repository: registry.jnobrega.com/mirror/calibrain/shelfmark
+              tag: v1.2.2 # {"$imagepolicy": "flux-system:shelfmark:tag"}
             command:
               - gunicorn
             args:

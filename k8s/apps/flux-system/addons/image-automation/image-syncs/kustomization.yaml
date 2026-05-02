@@ -6,3 +6,4 @@ resources:
   - grimmory.yaml
   - live-metrics.yaml
   - ryanair-api.yaml
+  - shelfmark.yaml

@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/image.toolkit.fluxcd.io/imagerepository_v1.json
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: shelfmark
+  namespace: flux-system
+spec:
+  image: registry.jnobrega.com/mirror/calibrain/shelfmark
+  interval: 5m
+  provider: generic
+  secretRef:
+    name: zot-registry-secret
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: &repo shelfmark
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: *repo
+  policy:
+    semver:
+      range: '>=1.0.0'
