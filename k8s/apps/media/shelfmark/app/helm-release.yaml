@@ -1,4 +1,3 @@
----
 # yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -27,14 +26,14 @@ spec:
         seccompProfile:
           type: RuntimeDefault
     controllers:
-      *app :
+      *app:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
           app:
             image:
               repository: registry.jnobrega.com/mirror/calibrain/shelfmark
-              tag: v1.2.2 # {"$imagepolicy": "flux-system:shelfmark:tag"}
+              tag: v1.2.3 # {"$imagepolicy": "flux-system:shelfmark:tag"}
             command:
               - gunicorn
             args:
@@ -96,7 +95,6 @@ spec:
         existingClaim: *app
         globalMounts:
           - path: /config
-
       tmpfs:
         type: emptyDir
         globalMounts:
@@ -106,7 +104,6 @@ spec:
             subPath: tmp
           - path: /run
             subPath: run
-
       ingests:
         type: nfs
         server: 192.168.1.84
