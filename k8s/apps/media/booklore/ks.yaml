@@ -7,6 +7,8 @@ spec:
   targetNamespace: media
   path: ./k8s/apps/media/booklore/app
   dependsOn:
+    - name: zot
+      namespace: storage
     - name: volsync
       namespace: backup
     - name: external-secrets-store
