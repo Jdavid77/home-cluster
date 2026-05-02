@@ -19,6 +19,9 @@ metadata:
 spec:
   imageRepositoryRef:
     name: *repo
+  filterTags:
+    pattern: '^v(?P<version>[0-9]+\.[0-9]+)$'
+    extract: '$version'
   policy:
     semver:
-      range: '>=2.0.0'
+      range: '>=2.0'
