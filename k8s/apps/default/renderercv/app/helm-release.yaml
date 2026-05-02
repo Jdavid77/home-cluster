@@ -20,8 +20,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/rendercv/rendercv
-              tag: v2.8@sha256:61c8a58da0dd87ddbefe0566651775d34a5070931c3894229b192ce57ecbaa07
+              repository: registry.jnobrega.com/mirror/rendercv/rendercv
+              tag: v2.8 # {"$imagepolicy": "flux-system:rendercv:tag"}
             probes:
               liveness: &probes
                 enabled: false
@@ -61,6 +61,8 @@ spec:
               runAsGroup: 101
               seccompProfile: {type: RuntimeDefault}
     defaultPodOptions:
+      imagePullSecrets:
+        - name: zot-registry-secret
       automountServiceAccountToken: false
     service:
       code-server:

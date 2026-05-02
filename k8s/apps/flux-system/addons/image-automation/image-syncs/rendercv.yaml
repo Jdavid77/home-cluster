@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/image.toolkit.fluxcd.io/imagerepository_v1.json
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: rendercv
+  namespace: flux-system
+spec:
+  image: registry.jnobrega.com/mirror/rendercv/rendercv
+  interval: 5m
+  provider: generic
+  secretRef:
+    name: zot-registry-secret
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: &repo rendercv
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: *repo
+  policy:
+    semver:
+      range: '>=2.0.0'
