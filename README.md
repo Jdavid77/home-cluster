@@ -36,12 +36,17 @@ The setup is based on Talos OS. I used [Talhelper](https://budimanjojo.github.io
 ├── 📁 apps           # applications
 ├── 📁 bootstrap      # bootstrap procedures
 └── 📁 flux           # core flux configuration
+📁 omv
+└── 📁 docker # containers running on OpenMediaVault
+    ├── 📁 exit-node
+    ├── 📁 pihole
+    ├── 📁 postgres18
+    └── 📁 vectorchord
 📁 terraform
 ├── 📁 authentik
 ├── 📁 akeyless
 ├── 📁 backblaze
-├── 📁 garage
-└── 📁 minio
+└── 📁 garage
 
 ```
 ---
@@ -314,10 +319,16 @@ The NAS hosts several essential containers:
         <td>Network-wide ad blocking and local DNS management</td>
     </tr>
     <tr>
-        <td><a href="Tailscale exit node egressing over NordVPN">TailNord</a></td>
+        <td>Exit Node</td>
         <td>Tailscale exit node egressing over NordVPN</td>
     </tr>
+    <tr>
+        <td><a href="https://github.com/tensorchord/VectorChord">VectorChord</a></td>
+        <td>Postgres with pgvector + VectorChord extensions for Immich</td>
+    </tr>
 </table>
+
+Docker Compose files for all NAS services are stored in [`omv/docker/`](./omv/docker/) and imported via OMV's Compose plugin.
 
 
 ---
