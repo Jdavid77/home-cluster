@@ -2,7 +2,7 @@
 # Tailscale with NordVPN
 services:
   tailscale:
-    image: "tailscale/tailscale:v1.84.0"
+    image: "tailscale/tailscale:v1.96.5"
     container_name: tailnord-tailscale
     hostname: tailnord-tailscale
     command:
