@@ -1,4 +1,5 @@
 age.ageKey
+omv/**/.env
 .terraform/
 .decrypted
 *.tmp.yaml

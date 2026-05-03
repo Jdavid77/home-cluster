@@ -1,0 +1,17 @@
+services:
+  database:
+    container_name: immich_postgres
+    image: ghcr.io/immich-app/postgres:18-vectorchord0.5.3-pgvector0.8.1
+    env_file:
+      - ./vectorchord.env
+    environment:
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+      POSTGRES_INITDB_ARGS: "--data-checksums"
+    volumes:
+      - "CHANGE_TO_COMPOSE_DATA_PATH/immich_postgres/data:/var/lib/postgresql/data/pgdata"
+    ports:
+      - "6001:5432"
+    shm_size: 128mb
+    restart: always
+    healthcheck:
+      disable: false

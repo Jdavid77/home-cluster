@@ -1,0 +1,13 @@
+services:
+  db:
+    container_name: postgres18
+    image: ghcr.io/baosystems/postgis:18-3.6
+    restart: always
+    environment:
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    env_file:
+      - ./postgres18.env
+    volumes:
+      - "CHANGE_TO_COMPOSE_DATA_PATH/postgres18/data:/var/lib/postgresql/data/pgdata"
+    ports:
+      - "5432:5432"
