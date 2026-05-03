@@ -11,7 +11,7 @@ services:
       pih_network:
         ipv4_address: 192.168.1.139
     container_name: pihole
-    image: pihole/pihole:2025.03.1
+    image: pihole/pihole:2026.04.1
     # For DHCP it is recommended to remove these ports and instead add: network_mode: "host"
     ports:
       - "53:53/tcp"
