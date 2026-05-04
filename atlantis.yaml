@@ -3,9 +3,34 @@ automerge: true
 projects:
   - name: akeyless
     dir: terraform/akeyless
+    workspace: default
+    autoplan:
+      when_modified:
+        - "*.tf"
+        - ".env"
+      enabled: true
   - name: authentik
     dir: terraform/authentik
+    workspace: default
+    autoplan:
+      when_modified:
+        - "*.tf"
+        - ".env"
+        - "modules/**/*.tf"
+      enabled: true
   - name: backblaze
     dir: terraform/backblaze
+    workspace: default
+    autoplan:
+      when_modified:
+        - "*.tf"
+        - ".env"
+      enabled: true
   - name: garage
     dir: terraform/garage
+    workspace: default
+    autoplan:
+      when_modified:
+        - "*.tf"
+        - ".env"
+      enabled: true
