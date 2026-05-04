@@ -73,6 +73,7 @@ spec:
               allowPrivilegeEscalation: false
               capabilities: {drop: ["ALL"]}
     defaultPodOptions:
+      automountServiceAccountToken: true
       imagePullSecrets:
         - name: gh-secret
     route:
