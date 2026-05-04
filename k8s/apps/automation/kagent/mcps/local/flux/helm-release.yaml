@@ -18,6 +18,9 @@ spec:
       create: false
     httpRoute:
       enabled: true
+      annotations:
+        gatus.home-operations.com/endpoint: |-
+          conditions: ["[STATUS] == 404"]
       parentRefs:
         - kind: Gateway
           name: internal

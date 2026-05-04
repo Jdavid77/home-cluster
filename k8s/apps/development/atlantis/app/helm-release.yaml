@@ -85,6 +85,8 @@ spec:
         metadata:
           name: atlantis-webhook
           namespace: development
+          annotations:
+            gatus.home-operations.com/enabled: "false"
         spec:
           hostnames:
             - atlantis.jnobrega.com
