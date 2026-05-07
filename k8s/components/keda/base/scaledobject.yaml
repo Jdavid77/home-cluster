@@ -1,7 +1,7 @@
 apiVersion: keda.sh/v1alpha1
 kind: ScaledObject
 metadata:
-  name: ${APP}-postgres
+  name: ${APP}
 spec:
   cooldownPeriod: ${COOLDOWN_PERIOD:=300}
   minReplicaCount: ${MIN_REPLICAS:=0}
@@ -12,10 +12,4 @@ spec:
     apiVersion: apps/v1
     kind: ${CONTROLLER:=Deployment}
     name: ${APP}
-  triggers:
-    - type: prometheus
-      metadata:
-        serverAddress: http://prometheus-operated.monitoring.svc.cluster.local:9090
-        query: max_over_time(probe_success{instance=~".+:5432"}[1m])
-        threshold: "1"
-        ignoreNullValues: "0"
+  triggers: []
