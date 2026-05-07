@@ -26,8 +26,8 @@ spec:
   components:
     - ../../../../components/volsync/local
     - ../../../../components/volsync/remote
-    - ../../../../components/keda/base
-    - ../../../../components/keda/nfs
+    - ../../../../components/keda/triggers/base
+    - ../../../../components/keda/triggers/nfs
   postBuild:
     substitute:
       APP: *app

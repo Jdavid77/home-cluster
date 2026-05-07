@@ -27,8 +27,8 @@ spec:
       failed: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSyncedError')
       current: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSynced')
   components:
-    - ../../../../components/keda/base
-    - ../../../../components/keda/nfs
+    - ../../../../components/keda/triggers/base
+    - ../../../../components/keda/triggers/nfs
   postBuild:
     substitute:
       APP: *app

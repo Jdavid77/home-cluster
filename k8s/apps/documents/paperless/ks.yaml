@@ -29,19 +29,10 @@ spec:
     name: home-cluster
     namespace: flux-system
   components:
-    - ../../../../components/keda/base
-    - ../../../../components/keda/nfs
-    - ../../../../components/keda/postgres
-  patches:
-    - target:
-        kind: ScaledObject
-      patch: |
-        - op: add
-          path: /spec/advanced/scalingModifiers
-          value:
-            formula: "trig_nfs * trig_postgres"
-            target: "1"
-            activationTarget: "0"
+    - ../../../../components/keda/triggers/base
+    - ../../../../components/keda/triggers/nfs
+    - ../../../../components/keda/triggers/postgres
+    - ../../../../components/keda/modifiers/nfs-postgres
   postBuild:
     substitute:
       APP: *app

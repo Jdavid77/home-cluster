@@ -27,19 +27,10 @@ spec:
       failed: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSyncedError')
       current: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSynced')
   components:
-    - ../../../../components/keda/base
-    - ../../../../components/keda/nfs
-    - ../../../../components/keda/vectorchord
-  patches:
-    - target:
-        kind: ScaledObject
-      patch: |
-        - op: add
-          path: /spec/advanced/scalingModifiers
-          value:
-            formula: "trig_nfs * trig_vectorchord"
-            target: "1"
-            activationTarget: "0"
+    - ../../../../components/keda/triggers/base
+    - ../../../../components/keda/triggers/nfs
+    - ../../../../components/keda/triggers/vectorchord
+    - ../../../../components/keda/modifiers/nfs-vectorchord
   postBuild:
     substitute:
       APP: immich-server
