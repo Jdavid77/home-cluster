@@ -39,9 +39,9 @@ spec:
         - op: add
           path: /spec/advanced/scalingModifiers
           value:
-            formula: "trig_nfs > 0 && trig_postgres > 0"
+            formula: "trig_nfs * trig_postgres"
             target: "1"
-            activationTarget: "1"
+            activationTarget: "0"
   postBuild:
     substitute:
       APP: *app

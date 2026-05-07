@@ -37,9 +37,9 @@ spec:
         - op: add
           path: /spec/advanced/scalingModifiers
           value:
-            formula: "trig_nfs > 0 && trig_vectorchord > 0"
+            formula: "trig_nfs * trig_vectorchord"
             target: "1"
-            activationTarget: "1"
+            activationTarget: "0"
   postBuild:
     substitute:
       APP: immich-server
