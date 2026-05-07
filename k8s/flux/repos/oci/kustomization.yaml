@@ -42,3 +42,4 @@ resources:
   - flux-mcp.yaml
   - crd-schema-publisher.yaml
   - atlantis.yaml
+  - blackbox-exporter.yaml
