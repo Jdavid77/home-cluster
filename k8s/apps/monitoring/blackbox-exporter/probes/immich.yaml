@@ -1,0 +1,13 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Probe
+metadata:
+  name: immich
+  namespace: monitoring
+spec:
+  module: tcp_connect
+  prober:
+    url: blackbox-exporter-prometheus-blackbox-exporter.monitoring.svc.cluster.local:9115
+  targets:
+    staticConfig:
+      static:
+        - 192.168.1.84:6001
