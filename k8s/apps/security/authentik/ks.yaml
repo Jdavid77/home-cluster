@@ -33,7 +33,7 @@ spec:
     - ../../../../components/keda/postgres
   postBuild:
     substitute:
-      APP: *app
+      APP: authentik-server
   wait: true
   interval: 30m
   retryInterval: 2m

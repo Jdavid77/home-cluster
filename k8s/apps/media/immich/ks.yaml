@@ -32,7 +32,7 @@ spec:
     - ../../../../components/keda/vectorchord
   postBuild:
     substitute:
-      APP: *app
+      APP: immich-server
   wait: true
   interval: 30m
   retryInterval: 2m
