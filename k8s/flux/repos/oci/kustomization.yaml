@@ -43,3 +43,4 @@ resources:
   - crd-schema-publisher.yaml
   - atlantis.yaml
   - blackbox-exporter.yaml
+  - keda.yaml
