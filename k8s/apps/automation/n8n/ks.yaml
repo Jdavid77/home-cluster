@@ -33,6 +33,7 @@ spec:
   components:
     - ../../../../components/volsync/local
     - ../../../../components/volsync/remote
+    - ../../../../components/keda/postgres
   postBuild:
     substitute:
       APP: *app
