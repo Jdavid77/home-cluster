@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: blackbox-exporter
+  namespace: monitoring
+spec:
+  interval: 15m
+  timeout: 5m
+  maxHistory: 2
+  chartRef:
+    kind: OCIRepository
+    name: blackbox-exporter
+    namespace: flux-system
+  values:
+    config:
+      modules:
+        tcp_connect:
+          prober: tcp
+          timeout: 5s
+          tcp:
+            preferred_ip_protocol: ip4
+    serviceMonitor:
+      enabled: true
