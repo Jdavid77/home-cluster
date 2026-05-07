@@ -8,6 +8,7 @@ patches:
       - op: add
         path: /spec/triggers/-
         value:
+          name: trig_nfs
           type: prometheus
           metadata:
             serverAddress: http://prometheus-operated.monitoring.svc.cluster.local:9090

@@ -32,6 +32,16 @@ spec:
     - ../../../../components/keda/base
     - ../../../../components/keda/nfs
     - ../../../../components/keda/postgres
+  patches:
+    - target:
+        kind: ScaledObject
+      patch: |
+        - op: add
+          path: /spec/advanced/scalingModifiers
+          value:
+            formula: "trig_nfs > 0 && trig_postgres > 0"
+            target: "1"
+            activationTarget: "1"
   postBuild:
     substitute:
       APP: *app
