@@ -14,6 +14,7 @@ resources:
   - ./prometheus-operator-crds/ks.yaml
   - ./gatus/ks.yaml
   - ./blackbox-exporter/ks.yaml
+  - ./keda/ks.yaml
 components:
   - ../../components/alerts/alertmanager
   - ../../components/grafana/folder
