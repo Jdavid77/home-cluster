@@ -36,9 +36,9 @@ spec:
               namespace: network
               sectionName: websecure
       metrics:
-        enabled: false
+        enabled: true
         serviceMonitor:
-          enabled: false
+          enabled: true
       resources:
         requests:
           cpu: 200m
@@ -53,4 +53,4 @@ spec:
           memory: 2Gi
     prometheus:
       rules:
-        enabled: true
+        enabled: false
