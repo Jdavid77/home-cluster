@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/monitoring.coreos.com/prometheusrule_v1.json
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: authentik-outpost-rules
+  namespace: monitoring
+spec:
+  groups:
+    - name: authentik.outpost.rules
+      rules:
+        - alert: AuthentikOutpostDisconnected
+          expr: authentik_outposts_connected{outpost="proxy"} == 0
+          for: 2m
+          labels:
+            severity: high
+          annotations:
+            summary: Authentik proxy outpost is disconnected
+            description: The Authentik outpost "proxy" has been disconnected for more than 2 minutes.
