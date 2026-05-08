@@ -4,11 +4,6 @@ locals {
       authentik_proxy_application_name     = "Stirling PDF"
       authentik_proxy_application_icon_url = "https://raw.githubusercontent.com/Stirling-Tools/Stirling-PDF/main/docs/stirling.png"
       authentik_proxy_external_host        = "https://pdf.${local.external_host}"
-    },
-    {
-      authentik_proxy_application_name     = "IT-Tools"
-      authentik_proxy_application_icon_url = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbQfvQ0xke1DiSodQnuPd9ayiH4LKkEfUDOA&s"
-      authentik_proxy_external_host        = "https://it-tools.${local.external_host}"
     }
   ]
 }
