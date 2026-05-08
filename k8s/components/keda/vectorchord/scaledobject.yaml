@@ -12,4 +12,10 @@ spec:
     apiVersion: apps/v1
     kind: ${CONTROLLER:=Deployment}
     name: ${APP}
-  triggers: []
+  triggers:
+    - type: prometheus
+      metadata:
+        serverAddress: http://prometheus-operated.monitoring.svc.cluster.local:9090
+        query: max_over_time(probe_success{instance=~".+:6001"}[1m])
+        threshold: "1"
+        ignoreNullValues: "0"

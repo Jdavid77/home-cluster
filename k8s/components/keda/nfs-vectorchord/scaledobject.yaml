@@ -1,0 +1,33 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: ${APP}
+spec:
+  cooldownPeriod: ${COOLDOWN_PERIOD:=300}
+  minReplicaCount: ${MIN_REPLICAS:=0}
+  maxReplicaCount: ${MAX_REPLICAS:=1}
+  advanced:
+    restoreToOriginalReplicaCount: true
+    scalingModifiers:
+      formula: "trig_nfs * trig_vectorchord"
+      target: "1"
+      activationTarget: "0"
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: ${CONTROLLER:=Deployment}
+    name: ${APP}
+  triggers:
+    - name: trig_nfs
+      type: prometheus
+      metadata:
+        serverAddress: http://prometheus-operated.monitoring.svc.cluster.local:9090
+        query: max_over_time(probe_success{instance=~".+:2049"}[1m])
+        threshold: "1"
+        ignoreNullValues: "0"
+    - name: trig_vectorchord
+      type: prometheus
+      metadata:
+        serverAddress: http://prometheus-operated.monitoring.svc.cluster.local:9090
+        query: max_over_time(probe_success{instance=~".+:6001"}[1m])
+        threshold: "1"
+        ignoreNullValues: "0"
