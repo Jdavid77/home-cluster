@@ -32,27 +32,29 @@ resource "authentik_outpost" "proxy" {
   protocol_providers = values(module.proxy)[*].proxy_provider_id
   service_connection = data.authentik_service_connection_kubernetes.local.id
   config = jsonencode({
-    log_level                        = "info"
-    docker_labels                    = null
-    authentik_host                   = "https://auth.jnobrega.com"
-    docker_network                   = null
-    container_image                  = null
-    docker_map_ports                 = true
-    refresh_interval                 = "minutes=5"
-    kubernetes_replicas              = 1
-    kubernetes_namespace             = "security"
-    authentik_host_browser           = ""
-    object_naming_template           = "ak-outpost-%(name)s"
-    authentik_host_insecure          = false
-    kubernetes_json_patches          = null
-    kubernetes_service_type          = "ClusterIP"
-    kubernetes_ingress_path_type     = null
-    kubernetes_image_pull_secrets    = []
-    kubernetes_ingress_class_name    = null
-    kubernetes_disabled_components   = ["ingress"]
-    kubernetes_ingress_annotations   = {}
-    kubernetes_ingress_secret_name   = "ak-outpost-proxy-tls"
-    kubernetes_httproute_annotations = {}
+    log_level                      = "info"
+    docker_labels                  = null
+    authentik_host                 = "https://auth.jnobrega.com"
+    docker_network                 = null
+    container_image                = null
+    docker_map_ports               = true
+    refresh_interval               = "minutes=5"
+    kubernetes_replicas            = 1
+    kubernetes_namespace           = "security"
+    authentik_host_browser         = ""
+    object_naming_template         = "ak-outpost-%(name)s"
+    authentik_host_insecure        = false
+    kubernetes_json_patches        = null
+    kubernetes_service_type        = "ClusterIP"
+    kubernetes_ingress_path_type   = null
+    kubernetes_image_pull_secrets  = []
+    kubernetes_ingress_class_name  = null
+    kubernetes_disabled_components = ["ingress"]
+    kubernetes_ingress_annotations = {}
+    kubernetes_ingress_secret_name = "ak-outpost-proxy-tls"
+    kubernetes_httproute_annotations = {
+      "gatus.home-operations.com/enabled" = "false"
+    }
     kubernetes_httproute_parent_refs = [
       {
         kind        = "Gateway"
