@@ -14,6 +14,8 @@ spec:
     - name: home-ops
       configUrl: https://github.com/Jdavid77/home-cluster
       type: kubernetes
+      minRunners: 1
+      maxRunners: 3
       envs:
         - name: ACTIONS_RUNNER_REQUIRE_JOB_CONTAINER
           value: "false"
@@ -24,6 +26,8 @@ spec:
     - name: ryanair
       configUrl: https://github.com/Jdavid77/ryanair-api
       type: dind
+      minRunners: 1
+      maxRunners: 5
       envs:
         - name: NODE
           valueFrom:
@@ -55,8 +59,8 @@ spec:
         runnerScaleSetName: *app
         githubConfigUrl: << inputs.configUrl >>
         githubConfigSecret: << inputs.name >>-secret
-        minRunners: 1
-        maxRunners: 3
+        minRunners: << inputs.minRunners >>
+        maxRunners: << inputs.maxRunners >>
         containerMode:
           type: << inputs.type >>
           <<- if eq inputs.type "kubernetes" >>
