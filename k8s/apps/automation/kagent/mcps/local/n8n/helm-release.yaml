@@ -31,7 +31,7 @@ spec:
             env:
               MCP_MODE: http
               PORT: "3000"
-              N8N_API_URL: http://n8n.home.svc.cluster.local:8080
+              N8N_API_URL: http://n8n.automation.svc.cluster.local:5678
               # SSRF protection mode: 'moderate' allows in-cluster n8n;
               # 'strict' would refuse the cluster-DNS upstream.
               SSRF_PROTECTION_MODE: moderate
