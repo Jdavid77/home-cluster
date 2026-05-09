@@ -51,8 +51,8 @@ spec:
             args: ["--auth", "none", "--disable-telemetry", "--disable-update-check", "--user-data-dir", "/tmp/.vscode", "--extensions-dir", "/tmp/.vs1ode", "--port", "8081", "/config"]
           nginx:
             image:
-              repository: nginxinc/nginx-unprivileged
-              tag: stable-alpine@sha256:35a4455cd4153d7cd0ae1fcfa42451884ef19848202606f144d9a089376c7e6c
+              repository: public.ecr.aws/nginx/nginx-unprivileged
+              tag: stable-alpine
             securityContext:
               allowPrivilegeEscalation: false
               capabilities: {drop: ["ALL"]}
