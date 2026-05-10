@@ -11,6 +11,7 @@ variable "buckets" {
     "metube",
     "n8n",
     "pgadmin",
+    "pins",
     "postgres",
     "qbittorrent",
     "wallos",
