@@ -9,6 +9,9 @@ spec:
     - group: gateway.envoyproxy.io
       kind: SecurityPolicy
       namespace: documents
+    - group: gateway.envoyproxy.io
+      kind: SecurityPolicy
+      namespace: automation
   to:
     - group: ""
       kind: Service
