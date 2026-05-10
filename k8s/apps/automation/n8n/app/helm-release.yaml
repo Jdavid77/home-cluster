@@ -97,17 +97,19 @@ spec:
           - backendRefs:
               - name: n8n
                 port: *port
-      webhook:
+      form:
         parentRefs:
           - kind: Gateway
             name: external
             namespace: network
             sectionName: websecure
         hostnames:
-          - n8n-webhook.jnobrega.com
+          - n8n-form.jnobrega.com
         rules:
-          - backendRefs:
-              - {}
+          - matches:
+              - path:
+                  value: /form
+            backendRefs: [{}]
     persistence:
       config:
         existingClaim: n8n
