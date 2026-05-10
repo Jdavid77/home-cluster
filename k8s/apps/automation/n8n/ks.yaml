@@ -37,6 +37,7 @@ spec:
   postBuild:
     substitute:
       APP: *app
+      EXT_AUTH_TARGET: n8n-form
       VOLSYNC_PGID: &uid "1000"
       VOLSYNC_PUID: *uid
       VOLSYNC_CACHE_CAPACITY: 1Gi
