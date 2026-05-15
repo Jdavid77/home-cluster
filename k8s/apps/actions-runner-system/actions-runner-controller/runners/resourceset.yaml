@@ -23,6 +23,18 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: status.hostIP
+    - name: artifacts-mirror
+      configUrl: https://github.com/Jdavid77/artifacts-mirror
+      type: kubernetes
+      minRunners: 1
+      maxRunners: 2
+      envs:
+        - name: ACTIONS_RUNNER_REQUIRE_JOB_CONTAINER
+          value: "false"
+        - name: NODE
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP
     - name: ryanair
       configUrl: https://github.com/Jdavid77/ryanair-api
       type: dind
