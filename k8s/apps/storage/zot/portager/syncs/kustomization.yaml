@@ -5,3 +5,4 @@ resources:
   - ./grimmory.yaml
   - ./shelfmark.yaml
   - ./rendercv.yaml
+  - ./adventurelog.yaml
