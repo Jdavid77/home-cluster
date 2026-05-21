@@ -35,7 +35,7 @@ releases:
   - name: grafana-operator
     namespace: monitoring
     chart: oci://ghcr.io/grafana/helm-charts/grafana-operator
-    version: 5.22.2
+    version: 5.23.0
     values:
       - ../../../k8s/apps/monitoring/grafana-operator/app/values.yaml
     needs:
