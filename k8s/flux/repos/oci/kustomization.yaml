@@ -44,3 +44,4 @@ resources:
   - atlantis.yaml
   - blackbox-exporter.yaml
   - keda.yaml
+  - trust-manager.yaml
