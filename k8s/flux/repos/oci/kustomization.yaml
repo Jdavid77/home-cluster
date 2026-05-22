@@ -45,3 +45,4 @@ resources:
   - blackbox-exporter.yaml
   - keda.yaml
   - trust-manager.yaml
+  - kguardian.yaml
