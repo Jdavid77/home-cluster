@@ -6,7 +6,7 @@ metadata:
   namespace: system-upgrade
 spec:
   kubernetes:
-    version: v1.35.2
+    version: v1.36.1
   healthChecks:
     - apiVersion: volsync.backube/v1alpha1
       kind: ReplicationSource
