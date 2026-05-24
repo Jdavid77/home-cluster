@@ -7,7 +7,6 @@ variable "buckets" {
     "audiobookshelf",
     "filebrowser",
     "linkding",
-    "mealie",
     "metube",
     "n8n",
     "pgadmin",
