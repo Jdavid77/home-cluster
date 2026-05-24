@@ -6,7 +6,7 @@ metadata:
   namespace: system-upgrade
 spec:
   talos:
-    version: v1.12.4
+    version: v1.13.0
   policy:
     rebootMode: powercycle
   healthChecks:
