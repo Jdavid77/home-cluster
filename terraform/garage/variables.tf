@@ -8,6 +8,7 @@ variable "buckets" {
     "filebrowser",
     "linkding",
     "metube",
+    "mealie",
     "n8n",
     "pgadmin",
     "pins",
