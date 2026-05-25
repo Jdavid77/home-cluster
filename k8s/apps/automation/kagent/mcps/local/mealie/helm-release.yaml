@@ -19,7 +19,7 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/jdavid77/mealie-mcp-ts:1.1.0
+              repository: ghcr.io/jdavid77/mealie-mcp-ts
               tag: 1.1.0@sha256:ac6c0e402ac9a6707624baa0037591444156031f74e3dfac32b5091652d02722
             env:
               MEALIE_URL: http://mealie.default.svc.cluster.local:9000
