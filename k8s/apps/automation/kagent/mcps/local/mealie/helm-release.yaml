@@ -20,7 +20,7 @@ spec:
           app:
             image:
               repository: ghcr.io/jdavid77/mealie-mcp-ts
-              tag: 1.1.1@sha256:f88bef0a5c63481fa6e8b30f0d965db26169584f88b9187436d5dd5c054b22c7
+              tag: 1.1.2@sha256:088bade90e7588be5062e6c6cda8933c0bea72effee9ee62ec417b7bbf1b1244
             env:
               MEALIE_URL: http://mealie.default.svc.cluster.local:9000
               ALLOWED_HOSTS: "mealie-mcp.jnobrega.com,localhost"
@@ -39,8 +39,12 @@ spec:
               capabilities:
                 drop:
                   - ALL
-              seccompProfile:
-                type: RuntimeDefault
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        seccompProfile: {type: RuntimeDefault}
     service:
       app:
         controller: *app
