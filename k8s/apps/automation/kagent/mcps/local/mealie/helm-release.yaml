@@ -20,7 +20,7 @@ spec:
           app:
             image:
               repository: ghcr.io/jdavid77/mealie-mcp-ts
-              tag: 1.1.0@sha256:ac6c0e402ac9a6707624baa0037591444156031f74e3dfac32b5091652d02722
+              tag: 1.1.1@sha256:f88bef0a5c63481fa6e8b30f0d965db26169584f88b9187436d5dd5c054b22c7
             env:
               MEALIE_URL: http://mealie.default.svc.cluster.local:9000
               ALLOWED_HOSTS: "mealie-mcp.jnobrega.com,localhost"
