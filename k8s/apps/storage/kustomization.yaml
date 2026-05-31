@@ -4,7 +4,6 @@ kind: Kustomization
 namespace: storage
 resources:
   - ./namespace.yaml
-  - ./dragonfly/ks.yaml
   # - ./pgadmin/ks.yaml
   - ./garage/ks.yaml
   - ./openebs/ks.yaml
