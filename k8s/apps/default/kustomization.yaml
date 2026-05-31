@@ -16,5 +16,7 @@ resources:
   - ryanair-api/ks.yaml
   - wallos/ks.yaml
   - whoami/ks.yaml
+  - dragonfly/ks.yaml
 components:
   - ../../components/alerts/alertmanager
+  - ../../components/storage/dragonfly

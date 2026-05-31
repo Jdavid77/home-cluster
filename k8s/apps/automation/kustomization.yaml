@@ -5,8 +5,8 @@ namespace: automation
 resources:
   - ./namespace.yaml
   - ./n8n/ks.yaml
-  - ./dragonfly/ks.yaml
   - ./grist/ks.yaml
   - ./kagent/ks.yaml
 components:
   - ../../components/alerts/alertmanager
+  - ../../components/storage/dragonfly

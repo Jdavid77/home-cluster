@@ -16,6 +16,15 @@ spec:
       *app:
         annotations:
           reloader.stakater.com/auto: "true"
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/home-operations/postgres-init
+              tag: 18.4@sha256:5086f94abc783f1147d7c2a32c01db00ab594820026e4f6a82ac2af3dbde7fc7
+              pullPolicy: IfNotPresent
+            envFrom: &secret
+              - secretRef:
+                  name: curve-tracker-secret
         pod:
           securityContext:
             runAsNonRoot: true
@@ -29,9 +38,13 @@ spec:
               tag: 1.1.1 # {"$imagepolicy": "flux-system:curve-tracker:tag"}
             env:
               APP_BASE_URL: "https://curve.jnobrega.com"
+              CACHE_TTL_MS: "18000000"
+              REDIS_URL: redis://dragonfly.default.svc.cluster.local:6379/1
             envFrom:
               - secretRef:
                   name: curve-tracker-secret
+              - secretRef:
+                  name: curve-tracker-google
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
