@@ -7,8 +7,6 @@ spec:
   targetNamespace: documents
   path: ./k8s/apps/documents/paperless/app
   dependsOn:
-    - name: dragonfly-cluster
-      namespace: storage
     - name: external-secrets-store
       namespace: external-secrets
     - name: envoy
