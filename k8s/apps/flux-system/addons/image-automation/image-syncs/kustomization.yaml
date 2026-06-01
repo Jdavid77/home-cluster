@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - akeyless-to-s3.yaml
   - curve-tracker.yaml
+  - mealie-mcp-ts.yaml
   - grimmory.yaml
   - live-metrics.yaml
   - rendercv.yaml
