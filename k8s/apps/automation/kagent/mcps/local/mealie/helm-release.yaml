@@ -20,7 +20,7 @@ spec:
           app:
             image:
               repository: ghcr.io/jdavid77/mealie-mcp-ts
-              tag: 1.1.2 # {"$imagepolicy": "flux-system:mealie-mcp-ts:tag"}
+              tag: 2026.06.01 # {"$imagepolicy": "flux-system:mealie-mcp-ts:tag"}
             env:
               MEALIE_URL: http://mealie.default.svc.cluster.local:9000
               ALLOWED_HOSTS: "mealie-mcp.jnobrega.com,localhost,mealie-agent.automation.svc.cluster.local"
