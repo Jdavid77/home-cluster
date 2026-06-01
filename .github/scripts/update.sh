@@ -19,7 +19,7 @@ suspend() {
     done
 
     echo "==> Suspending Flux helm releases..."
-    flux get helmreleases -A | awk 'NR>1 {print $1}' | while read ns; do
+    flux get helmreleases -A | awk 'NR>1 {print $1}' | uniq | while read ns; do
         flux suspend helmrelease --all -n "$ns"
     done
 
@@ -46,7 +46,7 @@ resume() {
     done
 
     echo "==> Resuming Flux helm releases..."
-    flux get helmreleases -A | awk 'NR>1 {print $1}' | while read ns; do
+    flux get helmreleases -A | awk 'NR>1 {print $1}' | uniq | while read ns; do
         flux resume helmrelease --all -n "$ns"
     done
 
