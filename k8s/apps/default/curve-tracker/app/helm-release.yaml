@@ -35,7 +35,7 @@ spec:
           app:
             image:
               repository: ghcr.io/jdavid77/curve-tracker
-              tag: 1.3.1 # {"$imagepolicy": "flux-system:curve-tracker:tag"}
+              tag: 2026.06.02 # {"$imagepolicy": "flux-system:curve-tracker:tag"}
             env:
               APP_BASE_URL: "https://curve.jnobrega.com"
               CACHE_TTL_MS: "18000000"
