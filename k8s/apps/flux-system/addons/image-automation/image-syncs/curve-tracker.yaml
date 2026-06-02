@@ -19,6 +19,8 @@ metadata:
 spec:
   imageRepositoryRef:
     name: *repo
+  filterTags:
+    pattern: '^\d{4}\.\d{2}\.\d{2}$'
   policy:
-    semver:
-      range: '>=1.0.0'
+    alphabetical:
+      order: asc
