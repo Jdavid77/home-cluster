@@ -104,6 +104,8 @@ spec:
             subPath: tmp
           - path: /run
             subPath: run
+          - path: /var/log
+            subPath: var-log
       ingests:
         type: nfs
         server: 192.168.1.84
