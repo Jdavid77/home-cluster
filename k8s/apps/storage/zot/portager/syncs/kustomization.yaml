@@ -6,3 +6,4 @@ resources:
   - ./shelfmark.yaml
   - ./rendercv.yaml
   - ./adventurelog.yaml
+  - ./n8n-mcp.yaml
