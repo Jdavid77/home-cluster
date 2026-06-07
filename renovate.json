@@ -26,12 +26,18 @@
     "k8s/archive/**"
   ],
   "kubernetes": {
-    "fileMatch": ["k8s/.+\\.yaml$"]
+    "managerFilePatterns": [
+      "/k8s/.+\\.yaml$/"
+    ]
   },
   "helm-values": {
-    "fileMatch": ["k8s/.+\\.yaml$"]
+    "managerFilePatterns": [
+      "/k8s/.+\\.yaml$/"
+    ]
   },
   "flux": {
-    "fileMatch": ["k8s/.+\\.yaml$"]
+    "managerFilePatterns": [
+      "/k8s/.+\\.yaml$/"
+    ]
   }
 }
