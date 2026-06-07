@@ -22,6 +22,7 @@ spec:
               - matchPattern: "*"
     - toFQDNs:
         - matchName: "api.akeyless.io"
+        - matchName: "api.github.com"
     - toEntities:
         - kube-apiserver
   ingress:
