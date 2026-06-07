@@ -10,3 +10,4 @@ resources:
   - rendercv.yaml
   - ryanair-api.yaml
   - shelfmark.yaml
+  - n8n-mcp.yaml
