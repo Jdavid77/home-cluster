@@ -1,0 +1,54 @@
+# 1. fetch GitHub App Private Key from Akeyless
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: &secret jnobrega-bot-pem
+spec:
+  refreshInterval: 1h
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: akeyless-secret-store
+  target:
+    name: *secret
+  data:
+    - secretKey: private_key_pem
+      remoteRef:
+        key: /github/jnobrega-bot-key
+        property: private_key_pem # change to your secret key
+---
+# 2. create a GithubAccessToken using GitHub App Credentials
+apiVersion: generators.external-secrets.io/v1alpha1
+kind: GithubAccessToken
+metadata:
+  name: jnobrega-bot-auth-token
+spec:
+  appID: "1087240"
+  installID: "62936655"
+  auth:
+    privateKey:
+      secretRef:
+        name: jnobrega-bot-pem
+        key: private_key_pem
+---
+# 3. create a secret containing the required keys
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: &secret jnobrega-bot-auth-token
+spec:
+  refreshInterval: "5m0s"
+  target:
+    name: *secret
+    template:
+      type: Opaque
+      engineVersion: v2
+      data:
+        GITHUB_COM_TOKEN: "{{ .token }}"
+        GITHUB_COM_USER: SmRhdmlkNzcK # replace with your base64-encoded GitHub username
+        RENOVATE_TOKEN: "{{ .token }}"
+  dataFrom:
+    - sourceRef:
+        generatorRef:
+          apiVersion: generators.external-secrets.io/v1alpha1
+          kind: GithubAccessToken
+          name: jnobrega-bot-auth-token # reference from step 2.

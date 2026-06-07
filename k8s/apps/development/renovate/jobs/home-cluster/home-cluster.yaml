@@ -1,0 +1,28 @@
+apiVersion: renovate-operator.mogenius.com/v1alpha1
+kind: RenovateJob
+metadata:
+  name: renovate-github
+  namespace: development
+spec:
+  discoveryFilters:
+    - "Jdavid77/home-cluster"
+  extraEnv:
+    - name: LOG_LEVEL
+      value: debug
+    - name: RENOVATE_ALLOWED_COMMANDS
+      value: '["pnpm run bundle"]'
+    - name: RENOVATE_PLATFORM_COMMIT
+      value: "true"
+  image: ghcr.io/renovatebot/renovate:43.176.2
+  parallelism: 5
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  schedule: 0 */12 * * * # Run every 12 hours
+  secretRef: jnobrega-bot-auth-token
+  webhook:
+    enabled: false
+  provider:
+    name: github
+    endpoint: https://api.github.com
