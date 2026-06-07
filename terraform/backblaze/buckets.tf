@@ -7,9 +7,9 @@ locals {
 }
 
 module "bucket" {
-  source = "./modules/bucket"
+  source   = "./modules/bucket"
   for_each = toset(local.buckets)
-  name = each.value
+  name     = each.value
 
   providers = {
     b2 = b2

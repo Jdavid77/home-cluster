@@ -1,5 +1,5 @@
 output "flux_access_id" {
-  value     = akeyless_auth_method_api_key.this.access_id
+  value = akeyless_auth_method_api_key.this.access_id
 }
 
 output "flux_access_key" {
@@ -8,7 +8,7 @@ output "flux_access_key" {
 }
 
 output "omv_access_id" {
-  value     = akeyless_auth_method_api_key.omv.access_id
+  value = akeyless_auth_method_api_key.omv.access_id
 }
 
 output "omv_access_key" {
