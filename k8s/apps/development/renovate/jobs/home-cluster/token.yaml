@@ -4,7 +4,7 @@ kind: ExternalSecret
 metadata:
   name: &secret jnobrega-bot-pem
 spec:
-  refreshInterval: 1h
+  refreshInterval: 5m0s
   secretStoreRef:
     kind: ClusterSecretStore
     name: akeyless-secret-store
