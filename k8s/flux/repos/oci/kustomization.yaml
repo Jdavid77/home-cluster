@@ -46,3 +46,4 @@ resources:
   - keda.yaml
   - trust-manager.yaml
   - kguardian.yaml
+  - renovate-operator.yaml
