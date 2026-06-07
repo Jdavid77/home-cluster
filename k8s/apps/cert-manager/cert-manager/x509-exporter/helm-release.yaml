@@ -13,9 +13,6 @@ spec:
     namespace: flux-system
   values:
     image:
-      registry: quay.io
-    prometheusRules:
-      warningDaysLeft: 14
-      criticalDaysleft: 7
+      registry: ghcr.io
     grafana:
       createDashboard: true
