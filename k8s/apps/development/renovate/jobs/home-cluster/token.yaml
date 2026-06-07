@@ -14,7 +14,6 @@ spec:
     - secretKey: private_key_pem
       remoteRef:
         key: /github/jnobrega-bot-key
-        property: private_key_pem # change to your secret key
 ---
 # 2. create a GithubAccessToken using GitHub App Credentials
 apiVersion: generators.external-secrets.io/v1alpha1
