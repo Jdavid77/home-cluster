@@ -26,8 +26,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/czlonkowski/n8n-mcp
-              tag: 2.51.1
+              repository: registry.jnobrega.com/mirror/czlonkowski/n8n-mcp
+              tag: 2.51.1 # {"$imagepolicy": "flux-system:n8n-mcp:tag"}
             env:
               MCP_MODE: http
               PORT: "3000"
