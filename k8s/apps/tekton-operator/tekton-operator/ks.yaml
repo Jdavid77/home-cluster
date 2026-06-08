@@ -10,7 +10,7 @@ spec:
       namespace: external-secrets
     - name: envoy
       namespace: network
-  path: ./k8s/apps/tekton-operator/tekton-operator/app
+  path: ./k8s/apps/tekton-operator/tekton-operator/operator
   prune: true
   sourceRef:
     kind: GitRepository
@@ -37,7 +37,7 @@ spec:
     - name: tekton-operator
     - name: external-secrets-store
       namespace: external-secrets
-  path: ./k8s/apps/tekton-operator/tekton-operator/resources
+  path: ./k8s/apps/tekton-operator/tekton-operator/config
   prune: true
   sourceRef:
     kind: GitRepository
