@@ -36,7 +36,7 @@ spec:
           app:
             image:
               repository: ghcr.io/jdavid77/akeyless-to-s3
-              tag: 2026.06.01 # {"$imagepolicy": "flux-system:akeyless-to-s3:tag"}
+              tag: 2026.06.08 # {"$imagepolicy": "flux-system:akeyless-to-s3:tag"}
               pullPolicy: Always
             env:
               AKEYLESS_GATEWAY_URL: "https://api.akeyless.io"
