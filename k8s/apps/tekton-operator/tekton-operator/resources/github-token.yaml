@@ -1,27 +1,34 @@
 # yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/external-secrets.io/externalsecret_v1.json
+# 1. fetch GitHub App Private Key from Akeyless
 apiVersion: external-secrets.io/v1
 kind: ExternalSecret
 metadata:
-  name: &name tekton-private-key
-  namespace: tekton-operator
+  name: &secret tekton-app-pem
 spec:
-  refreshInterval: 5m
+  refreshInterval: 5m0s
   secretStoreRef:
     kind: ClusterSecretStore
     name: akeyless-secret-store
   target:
-    name: *name
-    creationPolicy: Owner
-    deletionPolicy: "Delete"
-    template:
-      engineVersion: v2
-      data:
-        private.key: |-
-          {{ .privatekey }}
+    name: *secret
   data:
-    - secretKey: privatekey
+    - secretKey: private_key_pem
       remoteRef:
-        key: /github/privatekey
+        key: /github/tekton-app-key
+---
+# 2. create a GithubAccessToken using GitHub App Credentials
+apiVersion: generators.external-secrets.io/v1alpha1
+kind: GithubAccessToken
+metadata:
+  name: tekton-app-auth-token
+spec:
+  appID: "3999938"
+  installID: "138916138"
+  auth:
+    privateKey:
+      secretRef:
+        name: tekton-app-pem
+        key: private_key_pem
 ---
 # yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/external-secrets.io/externalsecret_v1.json
 apiVersion: external-secrets.io/v1
@@ -44,11 +51,15 @@ spec:
         annotations:
           tekton.dev/git-0: https://github.com
       data:
+        token: "{{ .token }}"
         .gitconfig: |
           [credential "https://github.com"]
             helper = store
         .git-credentials: |
-          https://{{ .username }}:{{ .password }}@github.com
+          https://tekton:{{ .token }}@github.com
   dataFrom:
-    - extract:
-        key: /github/tekton
+    - sourceRef:
+        generatorRef:
+          apiVersion: generators.external-secrets.io/v1alpha1
+          kind: GithubAccessToken
+          name: tekton-app-auth-token # reference from step 2.

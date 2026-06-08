@@ -16,19 +16,19 @@ spec:
       type: string
       description: "Set to 'true' to preview merges without executing them"
       default: "false"
-    - name: token
-      type: string
-      description: "Token to authenticate with Github"
   steps:
     - name: merge-prs
-      image: maniator/gh:latest
+      image: maniator/gh:v2.93.0
       env:
         - name: LABELS
           value: $(params.labels)
         - name: DRY_RUN
           value: $(params.dryRun)
         - name: GITHUB_TOKEN
-          value: $(params.token)
+          valueFrom:
+            secretKeyRef:
+              name: tekton-github-secret
+              key: token
       script: |
         #!/bin/sh
         set -e
