@@ -39,5 +39,10 @@
     "managerFilePatterns": [
       "/k8s/.+\\.yaml$/"
     ]
+  },
+  "tekton": {
+    "managerFilePatterns": [
+      "/k8s/.+\\.yaml$/"
+    ]
   }
 }
