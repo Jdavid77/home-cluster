@@ -25,7 +25,7 @@ spec:
           key: DOCKERHUB_TOKEN
     - name: RENOVATE_HOST_RULES
       value: '[{"hostType":"docker","matchHost":"docker.io","username":"$(DOCKERHUB_USERNAME)","password":"$(DOCKERHUB_TOKEN)"}]'
-  image: ghcr.io/renovatebot/renovate:43.214.6
+  image: ghcr.io/renovatebot/renovate:43.216.1
   parallelism: 5
   resources:
     requests:
