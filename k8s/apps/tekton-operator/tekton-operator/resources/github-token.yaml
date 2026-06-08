@@ -38,9 +38,6 @@ metadata:
   namespace: tekton-operator
 spec:
   refreshInterval: 30m
-  secretStoreRef:
-    kind: ClusterSecretStore
-    name: akeyless-secret-store
   target:
     name: *name
     creationPolicy: Owner
