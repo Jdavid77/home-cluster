@@ -37,7 +37,7 @@ metadata:
   name: &name tekton-github-secret
   namespace: tekton-operator
 spec:
-  refreshInterval: 5m
+  refreshInterval: 30m
   secretStoreRef:
     kind: ClusterSecretStore
     name: akeyless-secret-store
