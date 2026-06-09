@@ -21,7 +21,14 @@ spec:
   tasks:
     - name: fetch-source
       taskRef:
-        name: git-clone
+        resolver: bundles
+        params:
+          - name: bundle
+            value: ghcr.io/tektoncd-catalog/git-clone/bundle:v1.7.0
+          - name: name
+            value: git-clone
+          - name: kind
+            value: task
       workspaces:
         - name: output
           workspace: shared-data
