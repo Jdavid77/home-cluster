@@ -18,7 +18,12 @@ spec:
       interval: 10m
   values:
     installCRDs: true
+    webhook:
+      image:
+        tag: v0.80.0
     operator:
+      image:
+        tag: v0.80.0
       autoInstallComponents: false
       deployment:
         initContainers:
