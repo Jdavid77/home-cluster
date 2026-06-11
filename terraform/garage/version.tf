@@ -1,5 +1,4 @@
 terraform {
-
   backend "s3" {
     bucket = "jnobrega-tf-state"
     key    = "garage.tfstate"
@@ -13,16 +12,4 @@ terraform {
     skip_requesting_account_id  = true
     skip_s3_checksum            = true
   }
-
-  required_providers {
-    garage = {
-      source  = "jkossis/garage"
-      version = "1.0.4"
-    }
-    sops = {
-      source  = "carlpett/sops"
-      version = "~> 1.0"
-    }
-  }
-
 }
