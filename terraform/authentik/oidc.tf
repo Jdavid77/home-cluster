@@ -11,11 +11,6 @@ locals {
       authentik_oidc_application_description = "Paperless OAuth application"
     },
     {
-      authentik_oidc_application_name        = "Backstage-Dev"
-      authentik_oidc_application_icon_url    = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBzHHyxg-LtRQ5iGOxRQeP5VzxFoNjzDY3Lg&s"
-      authentik_oidc_application_description = "Backstage-Dev OAuth application"
-    },
-    {
       authentik_oidc_application_name        = "Grist"
       authentik_oidc_application_icon_url    = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfk_azr3viemtVCXVBck6Hd0QcYWBUwY72DQ&s"
       authentik_oidc_application_description = "Grist OAuth application"

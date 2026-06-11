@@ -1,7 +1,7 @@
 version: 3
 automerge: true
 workflows:
-  default:
+  upgrade:
     plan:
       steps:
         - init:
@@ -11,6 +11,7 @@ projects:
   - name: akeyless
     dir: terraform/akeyless
     workspace: default
+    workflow: upgrade
     autoplan:
       when_modified:
         - "*.tf"
@@ -19,6 +20,7 @@ projects:
   - name: authentik
     dir: terraform/authentik
     workspace: default
+    workflow: upgrade
     autoplan:
       when_modified:
         - "*.tf"
@@ -28,6 +30,7 @@ projects:
   - name: backblaze
     dir: terraform/backblaze
     workspace: default
+    workflow: upgrade
     autoplan:
       when_modified:
         - "*.tf"
@@ -36,6 +39,7 @@ projects:
   - name: garage
     dir: terraform/garage
     workspace: default
+    workflow: upgrade
     autoplan:
       when_modified:
         - "*.tf"

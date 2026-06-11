@@ -19,6 +19,7 @@ spec:
     orgAllowlist: "github.com/Jdavid77/home-cluster"
     awsSecretName: atlantis-aws
     environment:
+      ATLANTIS_ALLOW_CUSTOM_WORKFLOWS: "true"
       ATLANTIS_WRITE_GIT_CREDS: "true"
       ATLANTIS_GH_APP_KEY_FILE: /tmp/atlantis-app-key.pem
       ATLANTIS_GH_APP_SLUG: jnobrega-atlantis
