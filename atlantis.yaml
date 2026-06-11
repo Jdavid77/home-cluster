@@ -1,5 +1,12 @@
 version: 3
 automerge: true
+workflows:
+  default:
+    plan:
+      steps:
+        - init:
+            extra_args: ["-upgrade"]
+        - plan
 projects:
   - name: akeyless
     dir: terraform/akeyless
