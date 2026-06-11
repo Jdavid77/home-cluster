@@ -118,7 +118,7 @@ spec:
       repos:
         - id: github.com/Jdavid77/home-cluster
           allow_custom_workflows: true
-          allow_overrides: [workflows]
+          allowed_overrides: [workflow]
           apply_requirements:
             - mergeable
           delete_source_branch_on_merge: true
