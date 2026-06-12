@@ -18,7 +18,7 @@ spec:
       default: "false"
   steps:
     - name: merge-prs
-      image: maniator/gh:v2.93.0
+      image: maniator/gh:v2.94.0
       env:
         - name: LABELS
           value: $(params.labels)
