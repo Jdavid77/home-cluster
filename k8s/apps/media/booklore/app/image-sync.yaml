@@ -2,21 +2,21 @@
 apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImageRepository
 metadata:
-  name: ryanair-api
-  namespace: flux-system
+  name: grimmory
 spec:
-  image: ghcr.io/jdavid77/ryanair-api
+  image: registry.jnobrega.com/mirror/grimmory-tools/grimmory
   interval: 5m
   provider: generic
+  secretRef:
+    name: zot-registry-secret
 ---
 apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImagePolicy
 metadata:
-  name: ryanair-api
-  namespace: flux-system
+  name: &repo grimmory
 spec:
   imageRepositoryRef:
-    name: ryanair-api
+    name: *repo
   policy:
     semver:
-      range: '>=1.1.0'
+      range: '>=2.0.0'

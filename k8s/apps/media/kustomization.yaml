@@ -12,3 +12,5 @@ resources:
   - ./shelfmark/ks.yaml
 components:
   - ../../components/alerts/alertmanager
+  - ../../components/flux/ghcr
+  - ../../components/flux/image-automation

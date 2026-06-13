@@ -11,3 +11,4 @@ resources:
 components:
   - ../../components/alerts/alertmanager
   - ../../components/grafana/folder
+  - ../../components/flux/image-automation

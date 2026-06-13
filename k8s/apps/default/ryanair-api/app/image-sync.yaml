@@ -2,23 +2,19 @@
 apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImageRepository
 metadata:
-  name: n8n-mcp
-  namespace: flux-system
+  name: ryanair-api
 spec:
-  image: registry.jnobrega.com/mirror/czlonkowski/n8n-mcp
+  image: ghcr.io/jdavid77/ryanair-api
   interval: 5m
   provider: generic
-  secretRef:
-    name: zot-registry-secret
 ---
 apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImagePolicy
 metadata:
-  name: &repo n8n-mcp
-  namespace: flux-system
+  name: ryanair-api
 spec:
   imageRepositoryRef:
-    name: *repo
+    name: ryanair-api
   policy:
     semver:
-      range: '>=2.0.0'
+      range: '>=1.1.0'

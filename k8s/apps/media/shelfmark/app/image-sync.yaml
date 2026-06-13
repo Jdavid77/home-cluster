@@ -2,23 +2,21 @@
 apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImageRepository
 metadata:
-  name: mealie-mcp-ts
-  namespace: flux-system
+  name: shelfmark
 spec:
-  image: ghcr.io/jdavid77/mealie-mcp-ts
+  image: registry.jnobrega.com/mirror/calibrain/shelfmark
   interval: 5m
   provider: generic
+  secretRef:
+    name: zot-registry-secret
 ---
 apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImagePolicy
 metadata:
-  name: mealie-mcp-ts
-  namespace: flux-system
+  name: &repo shelfmark
 spec:
   imageRepositoryRef:
-    name: mealie-mcp-ts
-  filterTags:
-    pattern: '^\d{4}\.\d{2}\.\d{2}$'
+    name: *repo
   policy:
-    alphabetical:
-      order: asc
+    semver:
+      range: '>=1.0.0'

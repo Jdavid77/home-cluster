@@ -3,12 +3,12 @@ apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImageUpdateAutomation
 metadata:
   name: image-automation
-  namespace: flux-system
 spec:
   interval: 1m0s
   sourceRef:
     kind: GitRepository
     name: home-cluster
+    namespace: flux-system
   git:
     checkout:
       ref:

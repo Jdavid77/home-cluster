@@ -2,23 +2,21 @@
 apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImageRepository
 metadata:
-  name: shelfmark
-  namespace: flux-system
+  name: akeyless-to-s3
 spec:
-  image: registry.jnobrega.com/mirror/calibrain/shelfmark
+  image: ghcr.io/jdavid77/akeyless-to-s3
   interval: 5m
   provider: generic
-  secretRef:
-    name: zot-registry-secret
 ---
 apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImagePolicy
 metadata:
-  name: &repo shelfmark
-  namespace: flux-system
+  name: akeyless-to-s3
 spec:
   imageRepositoryRef:
-    name: *repo
+    name: akeyless-to-s3
+  filterTags:
+    pattern: '^\d{4}\.\d{2}\.\d{2}$'
   policy:
-    semver:
-      range: '>=1.0.0'
+    alphabetical:
+      order: asc

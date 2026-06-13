@@ -2,23 +2,21 @@
 apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImageRepository
 metadata:
-  name: akeyless-to-s3
-  namespace: flux-system
+  name: n8n-mcp
 spec:
-  image: ghcr.io/jdavid77/akeyless-to-s3
+  image: registry.jnobrega.com/mirror/czlonkowski/n8n-mcp
   interval: 5m
   provider: generic
+  secretRef:
+    name: zot-registry-secret
 ---
 apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImagePolicy
 metadata:
-  name: akeyless-to-s3
-  namespace: flux-system
+  name: &repo n8n-mcp
 spec:
   imageRepositoryRef:
-    name: akeyless-to-s3
-  filterTags:
-    pattern: '^\d{4}\.\d{2}\.\d{2}$'
+    name: *repo
   policy:
-    alphabetical:
-      order: asc
+    semver:
+      range: '>=2.0.0'
