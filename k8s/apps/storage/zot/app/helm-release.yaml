@@ -8,15 +8,10 @@ spec:
   interval: 15m
   timeout: 5m
   maxHistory: 2
-  chart:
-    spec:
-      chart: zot
-      version: 0.1.117
-      sourceRef:
-        kind: HelmRepository
-        name: zot-charts
-        namespace: flux-system
-      interval: 15m
+  chartRef:
+    kind: OCIRepository
+    name: zot
+    namespace: flux-system
   values:
     replicaCount: 3
     mountConfig: true

@@ -47,3 +47,5 @@ resources:
   - trust-manager.yaml
   - kguardian.yaml
   - renovate-operator.yaml
+  - zot.yaml
+  - metrics-server.yaml
