@@ -11,6 +11,7 @@ spec:
   chart:
     spec:
       chart: ./charts/tekton-operator
+      reconcileStrategy: Revision
       sourceRef:
         kind: GitRepository
         name: tekton
