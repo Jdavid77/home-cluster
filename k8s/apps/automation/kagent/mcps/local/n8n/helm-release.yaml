@@ -12,6 +12,9 @@ spec:
     name: app-template
     namespace: flux-system
   values:
+    defaultPodOptions:
+      imagePullSecrets:
+        - name: zot-registry-secret
     controllers:
       *app:
         annotations:
