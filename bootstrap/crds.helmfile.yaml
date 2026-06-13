@@ -1,0 +1,33 @@
+helmDefaults:
+  args: ['--include-crds', '--no-hooks']
+  postRenderer: bash
+  postRendererArgs: [-c, "yq ea --exit-status 'select(.kind == \"CustomResourceDefinition\")'"]
+releases:
+  - name: prometheus-operator-crds
+    namespace: kube-system
+    chart: oci://ghcr.io/prometheus-community/charts/prometheus-operator-crds
+    version: 29.0.0
+  - name: envoy-gateway
+    namespace: network
+    chart: oci://mirror.gcr.io/envoyproxy/gateway-helm
+    version: v1.8.1
+  - name: keda
+    namespace: observability
+    chart: oci://ghcr.io/home-operations/charts-mirror/keda
+    version: 2.20.1
+  - name: grafana-operator
+    namespace: monitoring
+    chart: oci://ghcr.io/grafana/helm-charts/grafana-operator
+    version: 5.24.0
+  - name: external-secrets
+    namespace: external-secrets
+    chart: oci://ghcr.io/external-secrets/charts/external-secrets
+    version: 2.6.0
+  - name: volsync
+    namespace: backup
+    chart: oci://ghcr.io/home-operations/charts-mirror/volsync
+    version: 0.16.0
+  - name: dragonfly-operator
+    namespace: storage
+    chart: oci://ghcr.io/dragonflydb/dragonfly-operator/helm/dragonfly-operator
+    version: v1.5.0

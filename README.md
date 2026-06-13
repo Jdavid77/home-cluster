@@ -25,23 +25,25 @@ The setup is based on Talos OS. I used [Talhelper](https://budimanjojo.github.io
 ## Repository Structure
 
 ```
-📁 infrastructure
-└── 📁 talos
-    ├── 📁 clusterconfig  # holds the talos configuration for each node
-    ├── 📁 integrations   # helmfile for initial deployments
-    ├── 📁 patches        # talos patches
-    └── talconfig.yaml
-    └── talsecret.sops.yaml
+📁 bootstrap
+├── 📁 secrets          # encrypted secrets applied once at cluster bootstrap
+├── crds.helmfile.yaml  # pre-installs CRDs before operators
+└── helmfile.yaml       # installs core cluster components
 📁 k8s
-├── 📁 apps           # applications
-├── 📁 bootstrap      # bootstrap procedures
-└── 📁 flux           # core flux configuration
+├── 📁 apps             # applications and infrastructure workloads
+├── 📁 components       # reusable kustomize components (volsync, keda, alerts...)
+└── 📁 flux             # root flux kustomizations and source repositories
 📁 omv
-└── 📁 docker # containers running on OpenMediaVault
+└── 📁 docker           # containers running on OpenMediaVault
     ├── 📁 exit-node
     ├── 📁 pihole
     ├── 📁 postgres18
     └── 📁 vectorchord
+📁 talos
+├── 📁 clusterconfig    # talos machine configs for each node
+├── 📁 patches          # talos config patches
+├── talconfig.yaml
+└── talsecret.sops.yaml
 📁 terraform
 ├── 📁 authentik
 ├── 📁 akeyless
