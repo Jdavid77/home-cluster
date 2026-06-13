@@ -21,10 +21,10 @@ spec:
     installCRDs: true
     webhook:
       image:
-        tag: v0.80.0
+        tag: v0.79.1
     operator:
       image:
-        tag: v0.80.0
+        tag: v0.79.1
       autoInstallComponents: false
       deployment:
         initContainers:
