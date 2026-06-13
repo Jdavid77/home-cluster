@@ -21,7 +21,7 @@ spec:
           app:
             image:
               repository: registry.jnobrega.com/mirror/rendercv/rendercv
-              tag: v2.8 # {"$imagepolicy": "flux-system:rendercv:tag"}
+              tag: v2.8 # {"$imagepolicy": "default:rendercv:tag"}
             probes:
               liveness: &probes
                 enabled: false
