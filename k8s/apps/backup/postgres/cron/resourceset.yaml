@@ -15,7 +15,7 @@ spec:
       bucket: postgres
       endpoint: http://garage.storage.svc.cluster.local:3900
       encryption: false
-      tag: "20260614"
+      tag: "20260614" # {"$imagepolicy": "backup:pg-backup-s3:tag"}
       servers:
         - name: main
           port: 5432
@@ -30,7 +30,7 @@ spec:
       bucket: jnobrega-postgres-backup
       endpoint: https://s3.eu-central-003.backblazeb2.com
       encryption: true
-      tag: "20260614"
+      tag: "20260614" # {"$imagepolicy": "backup:pg-backup-s3:tag"}
       servers:
         - name: main
           port: 5432
