@@ -15,7 +15,6 @@ spec:
       bucket: postgres
       endpoint: http://garage.storage.svc.cluster.local:3900
       encryption: false
-      tag: "pg18-20260614" # {"$imagepolicy": "backup:pg-backup-s3:tag"}
       servers:
         - name: main
           port: 5432
@@ -30,7 +29,6 @@ spec:
       bucket: jnobrega-postgres-backup
       endpoint: https://s3.eu-central-003.backblazeb2.com
       encryption: true
-      tag: "pg18-20260614" # {"$imagepolicy": "backup:pg-backup-s3:tag"}
       servers:
         - name: main
           port: 5432
@@ -114,7 +112,7 @@ spec:
               app:
                 image:
                   repository: ghcr.io/jdavid77/pg-backup-s3
-                  tag: pg<< $server.version >>-<< inputs.tag >>
+                  tag: pg<< $server.version >>-20260614
                   pullPolicy: Always
                 env:
                   S3_REGION: << inputs.region >>
