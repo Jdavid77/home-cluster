@@ -102,7 +102,7 @@ spec:
               suspend: false
               concurrencyPolicy: Forbid
               timeZone: Europe/Lisbon
-              schedule: "0 0 * * 0"
+              schedule: "0 0 */4 * *"
               startingDeadlineSeconds: 30
               successfulJobsHistory: 1
               failedJobsHistory: 1
