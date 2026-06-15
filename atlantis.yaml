@@ -7,6 +7,7 @@ workflows:
         - init:
             extra_args: ["-upgrade"]
         - plan
+        #  run: terraform show -json $PLANFILE | /plugins/tfplan2md --render-target github
 projects:
   - name: akeyless
     dir: terraform/akeyless

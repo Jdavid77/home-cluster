@@ -24,6 +24,7 @@ spec:
       ATLANTIS_GH_APP_KEY_FILE: /tmp/atlantis-app-key.pem
       ATLANTIS_GH_APP_SLUG: jnobrega-atlantis
       SOPS_AGE_KEY_FILE: /tmp/sops/age.agekey
+      ATLANTIS_ENABLE_DIFF_MARKDOWN_FORMAT: "true"
     environmentSecrets:
       - name: ATLANTIS_GH_APP_ID
         secretKeyRef:
@@ -37,6 +38,16 @@ spec:
         secretKeyRef:
           name: atlantis-secret
           key: ATLANTIS_GH_WEBHOOK_SECRET
+    # initConfig:
+    #   enabled: true
+    #   image: alpine:3.24.0
+    #   sharedDir: /plugins
+    #   sharedDirReadOnly: true
+    #   script: |
+    #     #!/bin/sh
+    #     wget -qO- https://github.com/oocx/tfplan2md/releases/download/v1.45.2/tfplan2md_1.45.2_linux-x64.tar.gz \
+    #       | tar xz -C ${INIT_SHARED_DIR}
+    #     chmod +x ${INIT_SHARED_DIR}/tfplan2md
     extraVolumes:
       - name: gh-app-key
         secret:
