@@ -21,7 +21,7 @@ spec:
     httpRoute:
       enabled: true
       parentRefs:
-        - name: internal
+        - name: external
           namespace: network
           sectionName: websecure
       hostnames:
