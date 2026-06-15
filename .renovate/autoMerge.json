@@ -2,73 +2,72 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "packageRules": [
     {
-      "description": ["Auto-merge generic apps"],
-      "datasources": ["docker"],
-      "automerge": true,
-      "automergeType": "branch",
-      "requiredStatusChecks": null,
-      "schedule": "after 1am and before 7am",
-      "updateTypes": ["minor", "patch", "digest"],
-      "packageNames": [
-        "bellamy/wallos",
-        "docker.io/traefik/whoami",
-        "ghcr.io/stirling-tools/s-pdf",
-        "ghcr.io/requarks/wiki",
-        "ghcr.io/advplyr/audiobookshelf",
-        "ekofr/pihole-exporter",
-        "docker.io/n8nio/n8n",
-        "ghcr.io/miguelndecarvalho/speedtest-exporter",
-        "ghcr.io/tarampampam/error-pages",
-        "jgraph/drawio",
-        "ghcr.io/corentinth/it-tools",
-        "quay.io/redlib/redlib",
-        "docker.io/dpage/pgadmin4"
-      ]
-    },
-    {
-      "description": ["Auto merge Github Actions"],
-      "matchManagers": ["github-actions"],
-      "automerge": true,
-      "automergeType": "branch",
-      "ignoreTests": true,
-      "matchUpdateTypes": ["minor", "patch", "digest"]
-    },
-    {
-      "description": ["Auto-merge container digests updates for trusted containers"],
+      "description": "Auto-merge trusted OCI digests",
       "matchDatasources": ["docker"],
-      "automerge": true,
-      "automergeType": "branch",
       "matchUpdateTypes": ["digest"],
-      "matchPackagePatterns": ["ghcr.io/bjw-s", "ghcr.io/onedr0p"]
-    },
-    {
-      "description": ["Auto merge KPS minors and patches"],
-      "matchDatasources": ["helm"],
+      "matchPackageNames": ["/home-operations/"],
       "automerge": true,
-      "automergeType": "branch",
-      "ignoreTests": true,
-      "matchUpdateTypes": ["minor", "patch"],
-      "matchPackageNames": ["kube-prometheus-stack"]
+      "automergeType": "pr",
+      "ignoreTests": false,
+      "schedule": ["after 1am and before 7am"]
     },
     {
-      "description": ["Auto merge Otel minors and patches"],
-      "matchDatasources": ["helm"],
+      "description": "Auto-merge high-cadence OCI packages weekly",
+      "matchDatasources": ["docker"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchPackageNames": ["/kube-prometheus-stack/"],
       "automerge": true,
-      "automergeType": "branch",
-      "ignoreTests": true,
-      "matchUpdateTypes": ["minor", "patch"],
-      "matchPackageNames": ["opentelemetry-operator"]
+      "automergeType": "pr",
+      "ignoreTests": false,
+      "schedule": ["before 6am on Monday"]
     },
     {
-      "description": ["Auto-merge Otel Collector updates"],
+      "description": "Auto-merge Otel Collector updates",
       "matchDatasources": ["docker"],
       "automerge": true,
-      "automergeType": "branch",
+      "automergeType": "pr",
+      "ignoreTests": false,
       "matchUpdateTypes": ["minor", "patch"],
       "packageNames": [
-        "ghcr.io/open-telemetry/opentelemetry-operator/opentelemetry-operator",
-        "ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-contrib"
-      ]
+        "/opentelemetry-operator/",
+        "/opentelemetry-collector-releases/"
+      ],
+      "schedule": ["after 1am and before 7am"]
+    },
+    {
+      "description": "Auto-merge GitHub Actions",
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["minor", "patch", "digest"],
+      "automerge": true,
+      "automergeType": "branch",
+      "minimumReleaseAge": "3 days",
+      "ignoreTests": true
+    },
+    {
+      "description": "Auto-merge trusted GitHub Actions",
+      "matchManagers": ["github-actions"],
+      "matchPackageNames": ["/^actions\\//", "/^renovatebot\\//"],
+      "matchUpdateTypes": ["minor", "patch", "digest"],
+      "automerge": true,
+      "automergeType": "branch",
+      "minimumReleaseAge": "1 minute",
+      "ignoreTests": true
+    },
+    {
+      "description": "Auto-merge Grafana dashboards",
+      "matchDatasources": ["custom.grafana-dashboards"],
+      "matchUpdateTypes": ["major"],
+      "automerge": true,
+      "automergeType": "branch",
+      "ignoreTests": true
+    },
+    {
+      "description": "Auto-merge Renovate Presets",
+      "matchManagers": ["renovate-config"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true,
+      "automergeType": "branch",
+      "ignoreTests": true
     }
   ]
 }

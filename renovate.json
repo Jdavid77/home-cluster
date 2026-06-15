@@ -1,20 +1,11 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended",
-    ":dependencyDashboard",
-    ":disableRateLimiting",
-    "docker:enableMajor",
-    ":automergeBranch",
-    ":semanticCommits",
-    ":skipStatusChecks",
-    "replacements:k8s-registry-move",
-    ":timezone(Europe/Lisbon)",
+    "github>home-operations/renovate-presets#2.0.0",
     "github>Jdavid77/home-cluster//.renovate/autoMerge.json",
-    "github>Jdavid77/home-cluster//.renovate/commitMessage.json",
-    "github>Jdavid77/home-cluster//.renovate/customManagers.json",
+    "github>Jdavid77/home-cluster//.renovate/groups.json",
     "github>Jdavid77/home-cluster//.renovate/labels.json",
-    "github>Jdavid77/home-cluster//.renovate/semanticCommits.json"
+    ":timezone(Europe/Lisbon)"
   ],
   "dependencyDashboardTitle": "Home-Ops Renovate Dashboard",
   "suppressNotifications": ["prEditedNotification", "prIgnoreNotification"],
@@ -25,21 +16,6 @@
     "**/*.sops.*",
     "k8s/archive/**"
   ],
-  "kubernetes": {
-    "managerFilePatterns": [
-      "/k8s/.+\\.yaml$/"
-    ]
-  },
-  "helm-values": {
-    "managerFilePatterns": [
-      "/k8s/.+\\.yaml$/"
-    ]
-  },
-  "flux": {
-    "managerFilePatterns": [
-      "/k8s/.+\\.yaml$/"
-    ]
-  },
   "tekton": {
     "managerFilePatterns": [
       "/k8s/.+\\.yaml$/"
