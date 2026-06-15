@@ -6,6 +6,7 @@ resources:
   - ./namespace.yaml
   - ./atlantis/ks.yaml
   - ./renovate/ks.yaml
+  - ./konflate/ks.yaml
 components:
   - ../../components/alerts/alertmanager
   - ../../components/grafana/folder
