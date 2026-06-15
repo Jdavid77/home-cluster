@@ -7,6 +7,8 @@
   color: "8250df"
 - name: renovate/helm
   color: "8250df"
+- name: renovate/pre-commit
+  color: "f9c513"
 # Semantic Types
 - name: type/digest
   color: "29b6f6"
