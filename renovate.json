@@ -20,5 +20,8 @@
     "managerFilePatterns": [
       "/k8s/.+\\.yaml$/"
     ]
+  },
+  "pre-commit": {
+    "enabled": true
   }
 }

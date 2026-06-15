@@ -32,6 +32,10 @@
     {
       "matchDatasources": ["github-releases"],
       "addLabels": ["renovate/github-release"]
+    },
+    {
+      "matchManagers": ["pre-commit"],
+      "addLabels": ["renovate/pre-commit"]
     }
   ]
 }
