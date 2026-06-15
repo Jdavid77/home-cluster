@@ -6,4 +6,4 @@ spec:
   interval: 30m
   timeout: 3m
   type: oci
-  url: oci://ghcr.io/kagent-dev/kagent/helm/
+  url: oci://ghcr.io/kagent-dev/kagent/helm
