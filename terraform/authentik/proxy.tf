@@ -9,6 +9,11 @@ locals {
       authentik_proxy_application_name     = "N8N Form"
       authentik_proxy_application_icon_url = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8b13FupbJiqRDcYQbK4BfEcAJ6S7eA8I5oQ&s"
       authentik_proxy_external_host        = "https://n8n-form.${local.external_host}"
+    },
+    {
+      authentik_proxy_application_name     = "Dummy"
+      authentik_proxy_application_icon_url = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8b13FupbJiqRDcYQbK4BfEcAJ6S7eA8I5oQ&s"
+      authentik_proxy_external_host        = "https://dummy.${local.external_host}"
     }
   ]
 }
