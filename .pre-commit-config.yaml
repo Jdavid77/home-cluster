@@ -6,7 +6,7 @@ repos:
       - id: forbid-secrets
         exclude: k8s/apps/monitoring/grafana-operator/instance/service-account-patch.yaml
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       - id: check-merge-conflict
       - id: check-added-large-files
