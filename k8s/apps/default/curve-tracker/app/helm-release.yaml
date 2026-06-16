@@ -13,7 +13,7 @@ spec:
   maxHistory: 2
   values:
     controllers:
-      *app:
+      *app :
         annotations:
           reloader.stakater.com/auto: "true"
         initContainers:

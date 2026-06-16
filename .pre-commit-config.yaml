@@ -17,6 +17,7 @@ repos:
     rev: 43.224.0
     hooks:
       - id: renovate-config-validator
+        args: [--strict]
   - repo: https://github.com/google/yamlfmt
     rev: v0.21.0
     hooks:
