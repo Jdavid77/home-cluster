@@ -97,19 +97,6 @@ spec:
           - backendRefs:
               - name: n8n
                 port: *port
-      form:
-        parentRefs:
-          - kind: Gateway
-            name: external
-            namespace: network
-            sectionName: websecure
-        hostnames:
-          - n8n-form.jnobrega.com
-        rules:
-          - matches:
-              - path:
-                  value: /form
-            backendRefs: [{}]
     persistence:
       config:
         existingClaim: n8n
