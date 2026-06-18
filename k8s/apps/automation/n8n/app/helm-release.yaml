@@ -33,7 +33,7 @@ spec:
           n8n:
             image:
               repository: ghcr.io/n8n-io/n8n
-              tag: 2.26.4@sha256:ddb5204bc8c7b71c446dfe1c1dce296df138bcfadb7f5e27d7de35ec2889d026
+              tag: 2.27.2@sha256:77a649a752e07c417c3dad8ac094611f0e4aa79674964ad338ef702752a5988c
             env:
               #===CORE SETTINGS===
               N8N_VERSION_NOTIFICATIONS_ENABLED: false
