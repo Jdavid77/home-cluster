@@ -20,8 +20,9 @@ variable "authentik_oidc_application_description" {
 
 variable "authentik_oidc_redirect_uris" {
   type = list(object({
-    matching_mode = optional(string, "strict")
-    url           = string
+    matching_mode     = optional(string, "strict")
+    redirect_uri_type = optional(string, "authorization")
+    url               = string
   }))
   description = "List of allowed redirect URIs for the OIDC provider"
   default     = []
