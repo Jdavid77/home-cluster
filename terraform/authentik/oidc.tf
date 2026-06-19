@@ -16,13 +16,13 @@ locals {
       authentik_oidc_application_name        = "Grist"
       authentik_oidc_application_icon_url    = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfk_azr3viemtVCXVBck6Hd0QcYWBUwY72DQ&s"
       authentik_oidc_application_description = "Grist OAuth application"
-      authentik_oidc_redirect_uris           = [{ url = "https://grist.${local.external_host}/oauth2/callback" }]
+      authentik_oidc_redirect_uris           = [{ url = "https://sheets.${local.external_host}/oauth2/callback" }]
     },
     {
       authentik_oidc_application_name        = "Zot"
       authentik_oidc_application_icon_url    = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFyoFpFCCGUMA9HfEuKI7EWRx6mM_ujQ7Y-g&s"
       authentik_oidc_application_description = "Zot OAuth application"
-      authentik_oidc_redirect_uris           = [{ url = "https://zot.${local.external_host}/auth/callback/oidc" }]
+      authentik_oidc_redirect_uris           = [{ url = "https://registry.${local.external_host}/auth/callback/oidc" }]
     }
   ]
 
