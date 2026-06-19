@@ -29,7 +29,7 @@ spec:
           app:
             image:
               repository: gristlabs/grist
-              tag: 1.7.13@sha256:006104fac45b6c59a05315f66dc37635ed11641b56519528ddf586bf0ed65e52
+              tag: 1.7.15@sha256:0263064906e2fa88063129d1b84a6ae3d33acb090062e510b32f87b7a1c84917
             envFrom:
               - secretRef:
                   name: grist-secret
