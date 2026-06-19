@@ -17,3 +17,12 @@ variable "authentik_oidc_application_description" {
   description = "Application Description"
   default     = "This is an OIDC Provider for the application"
 }
+
+variable "authentik_oidc_redirect_uris" {
+  type = list(object({
+    matching_mode = optional(string, "strict")
+    url           = string
+  }))
+  description = "List of allowed redirect URIs for the OIDC provider"
+  default     = []
+}

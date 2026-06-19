@@ -4,21 +4,25 @@ locals {
       authentik_oidc_application_name        = "Grafana"
       authentik_oidc_application_icon_url    = "https://w1.pngwing.com/pngs/950/813/png-transparent-github-logo-grafana-influxdb-dashboard-visualization-web-application-installation-data-plugin-thumbnail.png"
       authentik_oidc_application_description = "Grafana OAuth application"
+      authentik_oidc_redirect_uris           = [{ url = "https://grafana.${local.external_host}/login/generic_oauth" }]
     },
     {
       authentik_oidc_application_name        = "Paperless-Ngx"
       authentik_oidc_application_icon_url    = "https://avatars.githubusercontent.com/u/99562962?s=280&v=4"
       authentik_oidc_application_description = "Paperless OAuth application"
+      authentik_oidc_redirect_uris           = [{ url = "https://paperless.${local.external_host}/accounts/oidc/authentik/login/callback/" }]
     },
     {
       authentik_oidc_application_name        = "Grist"
       authentik_oidc_application_icon_url    = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfk_azr3viemtVCXVBck6Hd0QcYWBUwY72DQ&s"
       authentik_oidc_application_description = "Grist OAuth application"
+      authentik_oidc_redirect_uris           = [{ url = "https://grist.${local.external_host}/oauth2/callback" }]
     },
     {
       authentik_oidc_application_name        = "Zot"
       authentik_oidc_application_icon_url    = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFyoFpFCCGUMA9HfEuKI7EWRx6mM_ujQ7Y-g&s"
       authentik_oidc_application_description = "Zot OAuth application"
+      authentik_oidc_redirect_uris           = [{ url = "https://zot.${local.external_host}/auth/callback/oidc" }]
     }
   ]
 
@@ -37,4 +41,5 @@ module "oidc" {
   authentik_oidc_application_name        = each.value.authentik_oidc_application_name
   authentik_oidc_application_icon_url    = each.value.authentik_oidc_application_icon_url
   authentik_oidc_application_description = each.value.authentik_oidc_application_description
+  authentik_oidc_redirect_uris           = each.value.authentik_oidc_redirect_uris
 }
