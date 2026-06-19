@@ -54,7 +54,7 @@ spec:
             namespace: network
             sectionName: websecure
         hostnames:
-          - status.jnobrega.com
+          - logs.jnobrega.com
         rules:
           - backendRefs:
               - name: *app
