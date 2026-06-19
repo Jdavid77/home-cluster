@@ -15,6 +15,7 @@ resources:
   - ./gatus/ks.yaml
   - ./blackbox-exporter/ks.yaml
   - ./keda/ks.yaml
+  - ./dozzle.yaml
 components:
   - ../../components/alerts/alertmanager
   - ../../components/grafana/folder
