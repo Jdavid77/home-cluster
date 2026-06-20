@@ -31,8 +31,6 @@ This repository contains the configuration for my home Kubernetes cluster — a 
 - **[Flux](https://fluxcd.io/)** continuously reconciles the cluster state from this repository
 - **[Renovate](https://docs.renovatebot.com/)** automates dependency updates via pull requests
 - **[Terraform](https://www.terraform.io/)** provisions external dependencies (Cloudflare, Akeyless, Backblaze)
-- **[SOPS](https://github.com/mozilla/sops) + [Akeyless](https://www.akeyless.io/)** handle secret encryption and distribution
-
 
 ---
 
