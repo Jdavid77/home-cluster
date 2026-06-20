@@ -21,7 +21,7 @@ spec:
       parentRefs:
         - name: external
           namespace: network
-          sectionName: https
+          sectionName: websecure
       hostnames:
         - kromgo.jnobrega.com
       matches:
