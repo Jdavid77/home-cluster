@@ -18,7 +18,7 @@ badges:
     valueExpr: labels["git_version"]
 
   - id: flux_version
-    colorExpr: '"07ddf5"'
+    colorExpr: '"#07ddf5"'
     icon: si:flux
     query: label_replace(flux_instance_info, "revision", "$1", "revision", "v(.+)@sha256:.+")
     title: Flux
