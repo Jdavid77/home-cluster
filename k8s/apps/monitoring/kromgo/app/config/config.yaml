@@ -4,21 +4,21 @@ prometheus: http://prometheus-operated.monitoring.svc.cluster.local:9090
 
 badges:
   - id: talos_version
-    color: "FF8C00"
+    colorExpr: '"FF8C00"'
     icon: si:talos
     query: label_replace(node_os_info{name="Talos"}, "version_id", "$1", "version_id", "v(.+)")
     title: Talos
     valueExpr: labels["version_id"]
 
   - id: kubernetes_version
-    color: "326CE5"
+    colorExpr: '"326CE5"'
     icon: si:kubernetes
     query: label_replace(kubernetes_build_info{service="kubernetes"}, "git_version", "$1", "git_version", "v(.+)")
     title: Kubernetes
     valueExpr: labels["git_version"]
 
   - id: flux_version
-    color: "5BC0EB"
+    colorExpr: '"5BC0EB"'
     icon: si:flux
     query: label_replace(flux_instance_info, "revision", "$1", "revision", "v(.+)@sha256:.+")
     title: Flux
