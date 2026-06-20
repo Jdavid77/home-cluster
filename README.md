@@ -25,14 +25,18 @@
 
 ## 📖 Overview
 
-This repository houses the code responsible for managing my home infrastructure.
+This repository contains the configuration for my home Kubernetes cluster — a 7-node bare-metal setup running on [Talos OS](https://www.talos.dev/), managed entirely through GitOps.
 
-The setup is based on Talos OS. I used [Talhelper](https://budimanjojo.github.io/talhelper/latest/) to generate the initial configs. Following the cluster deployment, Flux continuously monitors this repository for changes, and Renovate is used to handle automated dependency updates.
+- **[Talhelper](https://budimanjojo.github.io/talhelper/latest/)** generates and maintains Talos machine configs
+- **[Flux](https://fluxcd.io/)** continuously reconciles the cluster state from this repository
+- **[Renovate](https://docs.renovatebot.com/)** automates dependency updates via pull requests
+- **[Terraform](https://www.terraform.io/)** provisions external dependencies (Cloudflare, Akeyless, Backblaze)
+- **[SOPS](https://github.com/mozilla/sops) + [Akeyless](https://www.akeyless.io/)** handle secret encryption and distribution
 
 
 ---
 
-## Repository Structure
+## 📂 Repository Structure
 
 ```
 📁 bootstrap
@@ -63,13 +67,13 @@ The setup is based on Talos OS. I used [Talhelper](https://budimanjojo.github.io
 ```
 ---
 
-## Topology
+## 🏗️ Topology
 
 <img src="./assets/hometopology.svg" align="center" width="1000px" height="1000px"/>
 
 ---
 
-## :wrench:&nbsp; External Third-Party Components
+## 🌐 External Third-Party Services
 
 These tools complement the Kubernetes infrastructure by providing essential functionality for **security**, **automation** and **infrastructure** management
 
@@ -134,7 +138,6 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
                 <th>Count</th>
                 <th>Disk Size</th>
                 <th>RAM</th>
-                <th>Operating System</th>
                 <th>Purpose</th>
                 <th>Model</th>
             </tr>
@@ -145,7 +148,6 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
                 <td>1</td>
                 <td>128GB SSD</td>
                 <td>8GB</td>
-                <td>Talos v1.13.0</td>
                 <td>Kubernetes Control</td>
                 <td>Bmax B1Pro Gemini Lake N4000</td>
             </tr>
@@ -154,7 +156,6 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
                 <td>1</td>
                 <td>512GB SSD</td>
                 <td>16GB</td>
-                <td>Talos v1.13.0</td>
                 <td>Kubernetes Control</td>
                 <td>SOYO m2 plus v1</td>
             </tr>
@@ -163,7 +164,6 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
                 <td>1</td>
                 <td>512GB SSD</td>
                 <td>16GB</td>
-                <td>Talos v1.13.0</td>
                 <td>Kubernetes Control</td>
                 <td>SOYO m2 plus v1</td>
             </tr>
@@ -172,7 +172,6 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
                 <td>1</td>
                 <td>240GB SSD</td>
                 <td>20GB</td>
-                <td>Talos v1.13.0</td>
                 <td>Kubernetes Worker</td>
                 <td>Hp Elite Desk 800 G3</td>
             </tr>
@@ -181,7 +180,6 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
                 <td>1</td>
                 <td>1TB HDD + 240GB SSD</td>
                 <td>28GB</td>
-                <td>Talos v1.13.0</td>
                 <td>Kubernetes Worker</td>
                 <td>HP Compaq 8300 SFF</td>
             </tr>
@@ -190,7 +188,6 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
                 <td>1</td>
                 <td>500GB HDD + 240GB SSD</td>
                 <td>32GB</td>
-                <td>Talos v1.13.0</td>
                 <td>Kubernetes Worker</td>
                 <td>HP Compaq 8300 SFF</td>
             </tr>
@@ -199,7 +196,6 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
                 <td>1</td>
                 <td>512GB SSD</td>
                 <td>16GB</td>
-                <td>Talos v1.13.0</td>
                 <td>Kubernetes Worker</td>
                 <td>SOYO Intel Alder Lake N95</td>
             </tr>
@@ -208,14 +204,12 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
                 <td>1</td>
                 <td>3TB (2 + 1)</td>
                 <td>8GB</td>
-                <td>Pi OS</td>
                 <td>NAS - OpenMediaVault</td>
                 <td></td>
             </tr>
             <tr>
                 <td>TP-Link LS108G</td>
                 <td>1</td>
-                <td>-</td>
                 <td>-</td>
                 <td>-</td>
                 <td>Switch</td>
@@ -226,9 +220,7 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
 
   ---
 
-### Applications
-
-#### Infrastruture Related
+## ⚙️ Infrastructure
 
 <table>
     <tr>
@@ -273,7 +265,7 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
         <td>Kubernetes-based Application Gateway</td>
     </tr>
     <tr>
-        <td><img width="32" src="https://cdn.brandfetch.io/id7QyaLp8E/w/768/h/768/theme/dark/logo.png?c=1dxbfHSJFAPEGdCLU4o5B"></td>
+        <td><img width="32" src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/tailscale.svg"></td>
         <td><a href="https://tailscale.com/kb/1236/kubernetes-operator">Tailscale Operator</a></td>
         <td>Secure access to Kubernetes</td>
     </tr>
@@ -302,11 +294,36 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
         <td><a href="https://fluxcd.io/">Flux CD</a></td>
         <td>GitOps tool of choice</td>
     </tr>
+    <tr>
+        <td><img width="32" src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/prometheus.svg"></td>
+        <td><a href="https://prometheus.io/">Prometheus</a></td>
+        <td>Metrics collection and alerting</td>
+    </tr>
+    <tr>
+        <td><img width="32" src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/grafana.svg"></td>
+        <td><a href="https://grafana.com/">Grafana</a></td>
+        <td>Metrics visualization and dashboards</td>
+    </tr>
+    <tr>
+        <td><img width="32" src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/loki.svg"></td>
+        <td><a href="https://grafana.com/oss/loki/">Loki</a></td>
+        <td>Log aggregation</td>
+    </tr>
+    <tr>
+        <td><img width="32" src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/gatus.svg"></td>
+        <td><a href="https://gatus.io/">Gatus</a></td>
+        <td>Automated service health monitoring</td>
+    </tr>
+    <tr>
+        <td><img width="32" src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/keda.svg"></td>
+        <td><a href="https://keda.sh/">KEDA</a></td>
+        <td>Kubernetes event-driven autoscaling</td>
+    </tr>
 </table>
 
 ---
 
-### NAS
+### 💾 NAS
 
 The backbone of my home storage infrastructure is built on a Raspberry Pi 4 running [OpenMediaVault](https://www.openmediavault.org/), a dedicated network-attached storage solution. The system utilizes two SSDs (2TB + 1TB) configured to store:
 
@@ -345,7 +362,7 @@ Docker Compose files for all NAS services are stored in [`omv/docker/`](./omv/do
 
 ---
 
-## Gratitude and Thanks
+## 🙏 Gratitude and Thanks
 
 Thanks to all the people who donate their time to the [Home Operations](https://discord.gg/home-operations) Discord
 community. Be sure to check out [kubesearch.dev](https://kubesearch.dev/) for ideas on how to deploy applications or get
