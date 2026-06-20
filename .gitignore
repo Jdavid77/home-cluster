@@ -5,4 +5,5 @@ omv/**/.env
 *.tmp.yaml
 .tmp.env
 .mcp.json
-.claude
+.claude/*
+!.claude/skills
