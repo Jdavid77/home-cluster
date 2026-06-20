@@ -30,7 +30,7 @@ jobs:
         shell: bash
         env:
           GITHUB_TOKEN: "${{ steps.app-token.outputs.token }}"
-        run: |
+        run: |-
           args=()
           args+=(--state open)
           args+=(--search "-label:hold")

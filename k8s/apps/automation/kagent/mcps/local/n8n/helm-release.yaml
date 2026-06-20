@@ -16,7 +16,7 @@ spec:
       imagePullSecrets:
         - name: zot-registry-secret
     controllers:
-      *app:
+      *app :
         annotations:
           reloader.stakater.com/auto: "true"
         pod:

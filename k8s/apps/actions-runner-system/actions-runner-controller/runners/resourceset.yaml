@@ -45,7 +45,7 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: status.hostIP
-  resourcesTemplate: |
+  resourcesTemplate: |-
     ---
     apiVersion: helm.toolkit.fluxcd.io/v2
     kind: HelmRelease

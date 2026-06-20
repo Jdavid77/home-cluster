@@ -29,7 +29,7 @@ spec:
             secretKeyRef:
               name: tekton-github-secret
               key: token
-      script: |
+      script: |-
         #!/bin/sh
         set -e
 

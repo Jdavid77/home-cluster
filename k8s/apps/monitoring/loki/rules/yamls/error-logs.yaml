@@ -11,5 +11,5 @@ groups:
           service: "{{ $labels.service_name }}"
         annotations:
           summary: High frequency of error-level logs detected
-          description: |
+          description: |-
             More than 5 log entries with level "error" were detected within a 5-minute window in {{ $labels.k8s_deployment_name }}

@@ -1,0 +1,5 @@
+formatter:
+  retain_line_breaks: true
+  trim_trailing_whitespace: true
+  line_ending: lf
+  eof_newline: true
