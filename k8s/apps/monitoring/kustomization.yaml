@@ -16,6 +16,7 @@ resources:
   - ./blackbox-exporter/ks.yaml
   - ./keda/ks.yaml
   - ./dozzle/ks.yaml
+  - ./kromgo/ks.yaml
 components:
   - ../../components/alerts/alertmanager
   - ../../components/grafana/folder

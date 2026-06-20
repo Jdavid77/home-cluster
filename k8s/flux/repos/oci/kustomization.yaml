@@ -49,3 +49,4 @@ resources:
   - renovate-operator.yaml
   - zot.yaml
   - metrics-server.yaml
+  - kromgo.yaml
