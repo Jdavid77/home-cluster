@@ -237,7 +237,7 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
         <td>CNI </td>
     </tr>
         <tr>
-        <td><img width="32" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuQSJXRx5KbH4dtzk4dxVgw0Gtgk264x_TXw&s"></td>
+        <td><img width="32" src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/longhorn.svg"></td>
         <td><a href="https://longhorn.io/">Longhorn</a></td>
         <td>Distributed block storage for POD's persistent volumes </td>
     </tr>
@@ -253,12 +253,12 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
         <td>Synchronizes exposed Kubernetes Services and Ingresses with DNS providers.</td>
     </tr>
     <tr>
-        <td><img width="32" src="https://api.civo.com/k3s-marketplace/kubernetes-external-secrets.png"></td>
+        <td><img width="32" src="https://external-secrets.io/latest/pictures/eso-round-logo.svg"></td>
         <td><a href="https://external-secrets.io/latest/">External Secrets Operator</a></td>
         <td>Used with Akeyless Platform to retrieve and push secrets</td>
     </tr>
     <tr>
-        <td><img width="32" src="https://gateway.envoyproxy.io/icons/logo-white.svg"></td>
+        <td><img width="32" src="https://icon.icepanel.io/Technology/svg/Envoy.svg"></td>
         <td><a href="https://gateway.envoyproxy.io/">Envoy Gateway</a></td>
         <td>Kubernetes-based Application Gateway</td>
     </tr>
@@ -268,22 +268,22 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
         <td>Secure access to Kubernetes</td>
     </tr>
     <tr>
-        <td><img width="32" src="https://avatars.githubusercontent.com/u/314135?s=48&v=4"></td>
+        <td><img width="32" src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/cloudflare.svg"></td>
         <td><a href="https://github.com/cloudflare/cloudflared">Cloudflared</a></td>
         <td>Cloudflare Tunnel client</td>
     </tr>
     <tr>
-        <td><img width="32" src="https://avatars.githubusercontent.com/u/104819355?v=4"></td>
+        <td><img width="32" src="https://avatars.githubusercontent.com/u/104819355?s=200&v=4"></td>
         <td><a href="https://www.dragonflydb.io/docs/getting-started/kubernetes-operator">Dragonfly</a></td>
         <td>Modern in-memory datastore, fully compatible with Redis and Memcached APIs</td>
     </tr>
     <tr>
-        <td><img width="32" src="https://avatars.githubusercontent.com/u/47803932?s=48&v=4"></td>
+        <td><img width="32" src="https://avatars.githubusercontent.com/u/47803932?s=200&v=4"></td>
         <td><a href="https://volsync.readthedocs.io/en/stable/">Volsync</a></td>
         <td>PVC backups using Restic</td>
     </tr>
     <tr>
-        <td><img width="32" src="https://images.saasworthy.com/authentik_45882_logo_1698387041_24xfy.png"></td>
+        <td><img width="32" src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/authentik.svg"></td>
         <td><a href="https://goauthentik.io/">Authentik</a></td>
         <td>Open source identity provider</td>
     </tr>
