@@ -11,14 +11,14 @@ badges:
     valueExpr: labels["version_id"]
 
   - id: kubernetes_version
-    colorExpr: '"darkblue"'
+    colorExpr: '"#0e63eb"'
     icon: si:kubernetes
     query: label_replace(kubernetes_build_info{service="kubernetes"}, "git_version", "$1", "git_version", "v(.+)")
     title: Kubernetes
     valueExpr: labels["git_version"]
 
   - id: flux_version
-    colorExpr: '"lightblue"'
+    colorExpr: '"07ddf5"'
     icon: si:flux
     query: label_replace(flux_instance_info, "revision", "$1", "revision", "v(.+)@sha256:.+")
     title: Flux
