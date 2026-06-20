@@ -14,6 +14,10 @@ spec:
   values:
     gitHub:
       serverCheckForUpdates: false
+    history:
+      enabled: false
+    ingress:
+      enabled: false
     securityContext:
       capabilities:
         drop:
