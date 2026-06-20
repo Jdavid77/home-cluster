@@ -4,21 +4,18 @@ prometheus: http://prometheus-operated.monitoring.svc.cluster.local:9090
 
 badges:
   - id: talos_version
-    colorExpr: '"FF8C00"'
     icon: si:talos
     query: label_replace(node_os_info{name="Talos"}, "version_id", "$1", "version_id", "v(.+)")
     title: Talos
     valueExpr: labels["version_id"]
 
   - id: kubernetes_version
-    colorExpr: '"326CE5"'
     icon: si:kubernetes
     query: label_replace(kubernetes_build_info{service="kubernetes"}, "git_version", "$1", "git_version", "v(.+)")
     title: Kubernetes
     valueExpr: labels["git_version"]
 
   - id: flux_version
-    colorExpr: '"5BC0EB"'
     icon: si:flux
     query: label_replace(flux_instance_info, "revision", "$1", "revision", "v(.+)@sha256:.+")
     title: Flux
@@ -40,20 +37,3 @@ badges:
     query: alertmanager_alerts{state="active"} - 1 # Ignore Watchdog
     colorExpr: 'colorScale(result, [1.0], ["green", "red"])'
     title: Alerts
-
-graphs:
-  - id: cluster_cpu_usage
-    query: avg(instance:node_cpu_utilisation:rate5m{pod!=""}) * 100
-    title: CPU Usage
-    yMin: 0
-    yMax: 100
-    fill: true
-    maxDuration: 24h
-
-  - id: cluster_memory_usage
-    query: sum(node_memory_MemTotal_bytes{pod!=""} - node_memory_MemAvailable_bytes{pod!=""}) / sum(node_memory_MemTotal_bytes{pod!=""}) * 100
-    title: Memory Usage
-    yMin: 0
-    yMax: 100
-    fill: true
-    maxDuration: 24h

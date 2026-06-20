@@ -11,9 +11,10 @@
 
 <div align="center">
 
-[![Talos](https://kromgo.jnobrega.com/badges/talos_version?style=for-the-badge)](https://talos.dev)
-[![Kubernetes](https://kromgo.jnobrega.com/badges/kubernetes_version?style=for-the-badge)](https://kubernetes.io)
-[![Flux](https://kromgo.jnobrega.com/badges/flux_version?style=for-the-badge)](https://fluxcd.io)
+[![Talos](https://kromgo.jnobrega.com/badges/talos_version?style=for-the-badge&color=FF8C00)](https://talos.dev)
+[![Kubernetes](https://kromgo.jnobrega.com/badges/kubernetes_version?style=for-the-badge&color=326CE5)](https://kubernetes.io)
+[![Flux](https://kromgo.jnobrega.com/badges/flux_version?style=for-the-badge&color=5BC0EB)](https://fluxcd.io)
+
 [![Uptime](https://kromgo.jnobrega.com/badges/cluster_uptime_days?style=for-the-badge)](#)
 [![Age](https://kromgo.jnobrega.com/badges/cluster_age_days?style=for-the-badge)](#)
 [![Alerts](https://kromgo.jnobrega.com/badges/cluster_alert_count?style=for-the-badge)](#)
