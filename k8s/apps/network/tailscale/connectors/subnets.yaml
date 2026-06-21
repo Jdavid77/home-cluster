@@ -2,11 +2,12 @@
 apiVersion: tailscale.com/v1alpha1
 kind: Connector
 metadata:
-  name: dns-cidrs
+  name: home-network
 spec:
-  hostname: dns-cidrs
+  hostname: home-network
   proxyClass: kernel-org-tun
   subnetRouter:
     advertiseRoutes:
       - 192.168.1.251/32 # LB
       - 192.168.1.139/32 # DNS
+      - 192.168.1.110/32 # DNS
