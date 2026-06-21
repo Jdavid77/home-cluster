@@ -4,6 +4,6 @@ kind: Kustomization
 namespace: tekton-operator
 resources:
   - ./namespace.yaml
-  - ./tekton-operator/ks.yaml
+  # - ./tekton-operator/ks.yaml
 components:
   - ../../components/alerts/alertmanager
