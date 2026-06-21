@@ -25,25 +25,24 @@ spec:
   interval: 30m
   retryInterval: 2m
   timeout: 15m
----
-# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: tekton-resources
-spec:
-  targetNamespace: tekton-operator
-  dependsOn:
-    - name: tekton-operator
-    - name: external-secrets-store
-      namespace: external-secrets
-  path: ./k8s/apps/tekton-operator/tekton-operator/config
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: home-cluster
-    namespace: flux-system
-  wait: true
-  interval: 30m
-  retryInterval: 2m
-  timeout: 15m
+  # yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+  # apiVersion: kustomize.toolkit.fluxcd.io/v1
+  # kind: Kustomization
+  # metadata:
+  #   name: tekton-resources
+  # spec:
+  #   targetNamespace: tekton-operator
+  #   dependsOn:
+  #     - name: tekton-operator
+  #     - name: external-secrets-store
+  #       namespace: external-secrets
+  #   path: ./k8s/apps/tekton-operator/tekton-operator/config
+  #   prune: true
+  #   sourceRef:
+  #     kind: GitRepository
+  #     name: home-cluster
+  #     namespace: flux-system
+  #   wait: true
+  #   interval: 30m
+  #   retryInterval: 2m
+  #   timeout: 15m
