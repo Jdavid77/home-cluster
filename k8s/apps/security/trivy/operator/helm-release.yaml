@@ -26,6 +26,7 @@ spec:
       configAuditScannerScanOnlyCurrentRevisions: true
       annotations:
         reloader.stakater.com/auto: "true"
+      privateRegistryScanSecretsNames: storage:zot-registry-secret
     trivy:
       debug: true
       slow: true # flag is to use less CPU/memory for scanning though it takes more time than normal scanning
