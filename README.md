@@ -67,7 +67,50 @@ This repository contains the configuration for my home Kubernetes cluster — a 
 
 ## 🏗️ Topology
 
-<img src="./assets/hometopology.svg" align="center" width="1000px" height="1000px"/>
+A 7-node bare-metal cluster connected via a TP-Link gigabit switch, with a Raspberry Pi 4 serving as the NAS. Network segmentation is currently flat — VLAN separation across dedicated zones (servers, IoT, guest, ...) is planned as part of a future migration to Unifi networking gear.
+
+```mermaid
+graph LR
+    classDef wan fill:#f87171,stroke:#fff,stroke-width:2px,color:#fff,font-weight:bold;
+    classDef core fill:#60a5fa,stroke:#fff,stroke-width:2px,color:#fff,font-weight:bold;
+    classDef control fill:#34d399,stroke:#fff,stroke-width:2px,color:#fff,font-weight:bold;
+    classDef worker fill:#a78bfa,stroke:#fff,stroke-width:2px,color:#fff,font-weight:bold;
+    classDef storage fill:#facc15,stroke:#fff,stroke-width:2px,color:#000,font-weight:bold;
+
+    INET[🌐 ISP Router]:::wan
+    SW[🔌 TP-Link LS108G<br/>8-port GbE]:::core
+
+    subgraph CP [☸️ Control Plane]
+        direction TB
+        M1[bmax1-master<br/>N4000 · 8GB]:::control
+        M2[soyo2-master<br/>SOYO m2 · 16GB]:::control
+        M3[soyo3-master<br/>SOYO m2 · 16GB]:::control
+    end
+
+    subgraph HW [☸️ HP Workers]
+        direction TB
+        W1[hp-worker1<br/>HP 800 G3 · 20GB]:::worker
+        W2[hp-worker2<br/>HP 8300 · 28GB]:::worker
+        W3[hp-worker3<br/>HP 8300 · 32GB]:::worker
+    end
+
+    subgraph LSW [☸️ LocalStorage Workers]
+        direction TB
+        W4[ls-worker1<br/>SOYO N95 · 16GB]:::worker
+    end
+
+    NAS[💾 Raspberry Pi 4<br/>OpenMediaVault · 3TB]:::storage
+
+    INET --> SW
+    SW --> M1
+    SW --> M2
+    SW --> M3
+    SW --> W1
+    SW --> W2
+    SW --> W3
+    SW --> W4
+    SW --> NAS
+```
 
 ---
 
