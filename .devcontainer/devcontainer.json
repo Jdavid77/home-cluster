@@ -2,9 +2,20 @@
   "name": "Home Cluster",
   "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
   "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:3": {}
+    "ghcr.io/tailscale/codespace/tailscale": {
+      "version": "latest"
+    }
   },
-  "remoteUser": "vscode",
-  "containerUser": "vscode",
-    "updateRemoteUserUID": true
+  "postCreateCommand": "bash .devcontainer/postCreate.sh",
+  "remoteEnv": {
+    "SOPS_AGE_KEY_FILE": "/home/vscode/.config/sops/age/keys.txt",
+    "TS_AUTH_KEY": "${localEnv:TS_AUTH_KEY}",
+    "AKEYLESS_ACCESS_ID": "${localEnv:AKEYLESS_ACCESS_ID}",
+    "AKEYLESS_ACCESS_KEY": "${localEnv:AKEYLESS_ACCESS_KEY}"
+  },
+  "runArgs": [
+    "--cap-add=NET_ADMIN",
+    "--cap-add=MKNOD",
+    "--cap-add=NET_RAW"
+  ]
 }

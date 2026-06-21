@@ -1,0 +1,9 @@
+[tools]
+kubectl = "latest"
+helm = "latest"
+flux2 = "latest"
+sops = "latest"
+age = "latest"
+terraform = "latest"
+"aqua:siderolabs/talos" = {version = "latest", exe = "talosctl"}
+"aqua:budimanjojo/talhelper" = "latest"
