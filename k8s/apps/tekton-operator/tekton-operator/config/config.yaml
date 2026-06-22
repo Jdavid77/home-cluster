@@ -16,13 +16,12 @@ spec:
       - taskrun
       - pipelinerun
     keep: 50
-  # CRD's are broken ...
-  # platforms:
-  #   kubernetes:
-  #     pipelinesAsCode:
-  #       enable: true
   dashboard:
     readonly: false
+  platforms:
+    kubernetes:
+      pipelinesAsCode:
+        enable: false
   result:
     disabled: false
     is_external_db: true
