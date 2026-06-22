@@ -2,7 +2,7 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: atlantis-webhook
+  name: tekton-webhook
   annotations:
     gatus.home-operations.com/enabled: "false"
 spec:
