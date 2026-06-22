@@ -16,7 +16,7 @@ spec:
       imagePullSecrets:
         - name: zot-registry-secret
     controllers:
-      *app :
+      *app:
         annotations:
           reloader.stakater.com/auto: "true"
         pod:
@@ -30,7 +30,7 @@ spec:
           app:
             image:
               repository: registry.jnobrega.com/mirror/czlonkowski/n8n-mcp
-              tag: 2.59.2 # {"$imagepolicy": "automation:n8n-mcp:tag"}
+              tag: 2.59.3 # {"$imagepolicy": "automation:n8n-mcp:tag"}
             env:
               MCP_MODE: http
               PORT: "3000"
