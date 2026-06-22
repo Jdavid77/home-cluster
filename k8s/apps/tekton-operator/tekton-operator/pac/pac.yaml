@@ -5,6 +5,7 @@ metadata:
   name: pipelines-as-code
 spec:
   targetNamespace: tekton-operator
+  options: {}
   settings:
     # Must match the GitHub App name exactly as configured in GitHub settings
     application-name: "jnobrega-tekton-app"
