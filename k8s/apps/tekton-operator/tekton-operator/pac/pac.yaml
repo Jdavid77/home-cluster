@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/operator.tekton.dev/openshiftpipelinesascodes_v1alpha1.json
+apiVersion: operator.tekton.dev/v1alpha1
+kind: OpenShiftPipelinesAsCode
+metadata:
+  name: pipelines-as-code
+spec:
+  targetNamespace: tekton-operator
+  settings:
+    # Must match the GitHub App name exactly as configured in GitHub settings
+    application-name: "jnobrega-tekton-app"
+    # Automatically create a short-lived scoped token secret for git-clone tasks
+    secret-auto-create: "true"
+    # Scope the generated token to the triggering repo only (safer for mixed-access orgs)
+    secret-github-app-token-scoped: "true"
+    # Extra owner/repo pairs (comma-separated) the scoped token can also access
+    secret-github-app-scope-extra-repos: ""
+    # Allow fetching remote task definitions referenced in pipeline annotations
+    remote-tasks: "true"
+    # Tekton Dashboard URL for direct PipelineRun links in PR comments (empty = disabled)
+    tekton-dashboard-url: ""
+    # Show last N lines of failed task logs in GitHub PR comments
+    error-log-snippet: "true"
+    error-log-snippet-number-of-lines: "5"
+    # Inspect container logs to detect errors and post them as PR annotations (GitHub App only)
+    error-detection-from-container-logs: "true"
+    # How many log lines to scan for errors (-1 = unlimited)
+    error-detection-max-number-of-lines: "-1"
+    # Regexp to detect errors in container logs (matches file:line:column: error format)
+    error-detection-simple-regexp: "^(?P<filename>[^:]*):(?P<line>[0-9]+):(?P<column>[0-9]+)?([ ]*)?(?P<error>.*)"
+    # Cancel any in-progress PipelineRun for a PR when a new commit is pushed
+    enable-cancel-in-progress-on-pull-requests: "true"
+    # Cancel any in-progress PipelineRun for a branch when a new push occurs
+    enable-cancel-in-progress-on-push: "true"
+    # Validate Bitbucket Cloud webhooks come from known Atlassian IPs (not relevant for GitHub)
+    bitbucket-cloud-check-source-ip: "true"
+    bitbucket-cloud-additional-source-ip: ""
+    # Hard ceiling on max-keep-runs annotation value users can set (empty = no limit)
+    max-keep-run-upper-limit: ""
+    # Default number of PipelineRuns to keep when no max-keep-runs annotation is set
+    default-max-keep-runs: "3"
+    # Auto-create namespace and Repository CR when a new repo is added to the GitHub App (GitHub App only)
+    auto-configure-new-github-repo: "false"
+    auto-configure-repo-namespace-template: ""
+    auto-configure-repo-repository-template: ""
+    # Remember /ok-to-test approval across commits so maintainers don't need to re-approve each push
+    remember-ok-to-test: "true"
+    # Require the commit SHA in /ok-to-test comments to prevent race conditions
+    require-ok-to-test-sha: "false"
+    # Skip push events for commits that are part of an open PR to avoid duplicate runs
+    skip-push-event-for-pr-commits: "true"
+    # Task catalog to use for remote task resolution
+    hub-url: "https://artifacthub.io/api/v1"
+    hub-catalog-type: "artifacthub"
