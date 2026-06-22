@@ -14,12 +14,7 @@ spec:
     namespace: flux-system
   values:
     installCRDs: true
-    webhook:
-      image:
-        tag: v0.79.1
     operator:
-      image:
-        tag: v0.79.1
       autoInstallComponents: false
       deployment:
         initContainers:
