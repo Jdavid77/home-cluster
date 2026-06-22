@@ -8,15 +8,10 @@ spec:
   interval: 15m
   timeout: 5m
   maxHistory: 2
-  chart:
-    spec:
-      chart: ./charts/tekton-operator
-      reconcileStrategy: Revision
-      sourceRef:
-        kind: GitRepository
-        name: tekton
-        namespace: flux-system
-      interval: 10m
+  chartRef:
+    kind: OCIRepository
+    name: tekton-operator
+    namespace: flux-system
   values:
     installCRDs: true
     webhook:

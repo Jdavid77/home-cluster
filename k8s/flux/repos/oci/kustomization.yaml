@@ -50,3 +50,4 @@ resources:
   - zot.yaml
   - metrics-server.yaml
   - kromgo.yaml
+  - tekton-operator.yaml
