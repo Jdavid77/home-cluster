@@ -83,7 +83,7 @@ spec:
       tmp:
         type: emptyDir
         advancedMounts:
-          n8n-mcp:
+          n8n-mcp-server:
             app:
               - path: /tmp
                 subPath: tmp
