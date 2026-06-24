@@ -51,3 +51,5 @@ resources:
   - metrics-server.yaml
   - kromgo.yaml
   - tekton-operator.yaml
+  - substrate.yaml
+  - substrate-crds.yaml
