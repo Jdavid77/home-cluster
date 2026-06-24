@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app n8n-mcp
+  name: &app n8n-mcp-server
 spec:
   interval: 15m
   timeout: 5m
@@ -16,7 +16,7 @@ spec:
       imagePullSecrets:
         - name: zot-registry-secret
     controllers:
-      *app:
+      *app :
         annotations:
           reloader.stakater.com/auto: "true"
         pod:

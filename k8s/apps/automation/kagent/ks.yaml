@@ -58,33 +58,6 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: kagent-discord-bot
-spec:
-  targetNamespace: automation
-  path: ./k8s/apps/automation/kagent/bot
-  prune: true
-  dependsOn:
-    - name: kagent
-    - name: external-secrets-store
-      namespace: external-secrets
-  sourceRef:
-    kind: GitRepository
-    name: home-cluster
-    namespace: flux-system
-  healthChecks:
-    - apiVersion: helm.toolkit.fluxcd.io/v2
-      kind: HelmRelease
-      name: kagent-discord-bot
-      namespace: automation
-  wait: true
-  interval: 30m
-  retryInterval: 2m
-  timeout: 15m
----
-# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
   name: kagent-agents
 spec:
   targetNamespace: automation
@@ -129,6 +102,14 @@ spec:
     - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
       name: kubernetes-mcp-server
+      namespace: automation
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      name: n8n-mcp-server
+      namespace: automation
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      name: mealie-mcp-server
       namespace: automation
   wait: true
   interval: 30m
