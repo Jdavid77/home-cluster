@@ -1,11 +1,15 @@
-# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/kagent.dev/agent_v1alpha2.json
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/kagent.dev/sandboxagent_v1alpha2.json
 apiVersion: kagent.dev/v1alpha2
-kind: Agent
+kind: SandboxAgent
 metadata:
   name: flux-agent
 spec:
   description: A Flux CD / GitOps expert that inspects Flux CD Resources
   type: Declarative
+  platform: substrate
+  substrate:
+    workerPoolRef:
+      name: kagent-default
   declarative:
     runtime: go
     modelConfig: default-model-config
