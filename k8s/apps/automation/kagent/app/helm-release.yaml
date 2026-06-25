@@ -75,9 +75,9 @@ spec:
         ateApiInsecure: true
     substrateWorkerPool:
       create: true
+      ateomImage: ghcr.io/kagent-dev/substrate/ateom-gvisor:v0.0.6
       substrateWorkerPool:
         replicas: 1
-        ateomImage: ghcr.io/kagent-dev/substrate/ateom-gvisor:v0.0.6
     database:
       postgres:
         bundled:
