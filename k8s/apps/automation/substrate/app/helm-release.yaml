@@ -14,13 +14,13 @@ spec:
     auth:
       mode: jwt
       jwt:
-        issuer: https://kubernetes.default.svc.cluster.local
-        audience: api.automation.svc
+        issuer: https://192.168.1.110:6443
 
     createNamespace: false
 
     valkey:
-      enabled: false
+      enabled: true
+      replicas: 6
 
     rustfs:
       enabled: false
@@ -46,6 +46,3 @@ spec:
             secretKeyRef:
               name: substrate-secret
               key: AWS_SECRET_ACCESS_KEY
-
-    redis:
-      clusterAddress: "dragonfly.automation.svc.cluster.local:6379"
