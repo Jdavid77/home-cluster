@@ -14,11 +14,15 @@ spec:
     auth:
       mode: jwt
       jwt:
+        # Must match the actual SA token issuer — on bare-metal this is the API server IP, not kubernetes.default.svc.cluster.local.
+        # Verify with: kubectl get --raw /.well-known/openid-configuration | jq .issuer
         issuer: https://192.168.1.110:6443
 
     createNamespace: false
 
     valkey:
+      # Dragonfly cluster_mode=emulated advertises wrong ports in CLUSTER NODES on multi-replica setups,
+      # incompatible with ate-api-server's redis.ClusterClient. Use bundled Valkey instead.
       enabled: true
       replicas: 6
 
