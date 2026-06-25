@@ -68,6 +68,16 @@ spec:
       retries: 3
       strategy: rollback
   values:
+    controller:
+      substrate:
+        enabled: true
+        ateApiEndpoint: dns:///api.automation.svc:443
+        ateApiInsecure: true
+    substrateWorkerPool:
+      create: true
+      substrateWorkerPool:
+        replicas: 1
+        ateomImage: ghcr.io/kagent-dev/substrate/ateom-gvisor:v0.0.6
     database:
       postgres:
         bundled:
