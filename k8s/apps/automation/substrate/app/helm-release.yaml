@@ -48,4 +48,4 @@ spec:
               key: AWS_SECRET_ACCESS_KEY
 
     redis:
-      clusterAddress: "dragonfly.automation.svc.cluster.local:6379/2"
+      clusterAddress: "dragonfly.automation.svc.cluster.local:6379"
