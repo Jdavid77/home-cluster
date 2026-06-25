@@ -9,3 +9,43 @@ spec:
     kind: OCIRepository
     name: *app
     namespace: flux-system
+  values:
+
+    auth:
+      mode: jwt
+      jwt:
+        issuer: https://kubernetes.default.svc.cluster.local
+        audience: api.automation.svc
+
+    createNamespace: false
+
+    valkey:
+      enabled: false
+
+    rustfs:
+      enabled: false
+
+    atelet:
+      gcpAuthForImagePulls: false
+      storageBackend: s3
+      extraArgs: []
+      extraEnv:
+        - name: AWS_ENDPOINT_URL
+          value: http://garage.storage.svc.cluster.local:3900
+        - name: AWS_REGION
+          value: us-east-1
+        - name: AWS_S3_USE_PATH_STYLE
+          value: "true"
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: substrate-secret
+              key: AWS_ACCESS_KEY_ID
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: substrate-secret
+              key: AWS_SECRET_ACCESS_KEY
+
+    redis:
+      clusterAddress: "dragonfly.automation.svc.cluster.local:6379/2"
