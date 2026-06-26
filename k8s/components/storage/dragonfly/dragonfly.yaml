@@ -21,8 +21,6 @@ spec:
         resourceFieldRef:
           resource: limits.memory
           divisor: 1Mi
-    - name: AWS_ENDPOINT_URL
-      value: http://garage.storage.svc.cluster.local:3900
     - name: AWS_REGION
       value: us-east-1
     - name: AWS_S3_USE_PATH_STYLE
@@ -46,6 +44,10 @@ spec:
     - "--proactor_threads=1"
     - "--dbnum=1"
     - "--cluster_mode=${DRAGONFLY_CLUSTER_MODE:=emulated}"
+    - "--s3_endpoint=garage.storage.svc.cluster.local:3900"
+    - "--s3_use_https=false"
+    - "--s3_sign_payload=false"
+
 
   snapshot:
     cron: "0 */12 * * *"
