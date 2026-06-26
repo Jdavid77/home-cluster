@@ -22,6 +22,7 @@ variable "buckets" {
     "grist",
     "renderercv",
     "shelfmark",
-    "zot"
+    "zot",
+    "dragonfly-snapshots"
   ]
 }
