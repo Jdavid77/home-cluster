@@ -42,7 +42,7 @@ spec:
               PAPERLESS_OCR_LANGUAGE: por
               PAPERLESS_PORT: &port 8000
               PAPERLESS_DBNAME: paperless
-              PAPERLESS_REDIS: redis://dragonfly-paperless.documents.svc.cluster.local:6379/1
+              PAPERLESS_REDIS: redis://dragonfly-paperless.documents.svc.cluster.local:6379
               PAPERLESS_TASK_WORKERS: 2
               PAPERLESS_TIME_ZONE: Europe/Lisbon
               PAPERLESS_URL: https://paperless.jnobrega.com
