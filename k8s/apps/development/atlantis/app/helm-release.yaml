@@ -139,6 +139,6 @@ spec:
     redis:
       host: dragonfly-atlantis.development.svc.cluster.local
       port: 6379
-      db: 1
+      db: 0
       tlsEnabled: false
       insecureSkipVerify: false
