@@ -137,7 +137,7 @@ spec:
       enabled: true
     lockingDbType: "redis"
     redis:
-      host: dragonfly.development.svc.cluster.local
+      host: dragonfly-atlantis.development.svc.cluster.local
       port: 6379
       db: 1
       tlsEnabled: false

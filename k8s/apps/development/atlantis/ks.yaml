@@ -26,6 +26,11 @@ spec:
       kind: ExternalSecret
       failed: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSyncedError')
       current: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSynced')
+  components:
+    - ../../../../components/storage/dragonfly
+  postBuild:
+    substitute:
+      APP: atlantis
   wait: true
   interval: 30m
   retryInterval: 2m

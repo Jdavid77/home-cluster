@@ -18,6 +18,5 @@ resources:
   - whoami/ks.yaml
 components:
   - ../../components/alerts/alertmanager
-  - ../../components/storage/dragonfly
   - ../../components/flux/ghcr
   - ../../components/flux/image-automation

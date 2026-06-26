@@ -21,6 +21,11 @@ spec:
       kind: HelmRelease
       name: curve-tracker
       namespace: default
+  components:
+    - ../../../../components/storage/dragonfly
+  postBuild:
+    substitute:
+      APP: curve-tracker
   wait: true
   interval: 30m
   retryInterval: 2m

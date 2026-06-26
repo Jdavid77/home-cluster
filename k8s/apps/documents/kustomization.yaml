@@ -9,4 +9,3 @@ resources:
   - ./bentopdf/ks.yaml
 components:
   - ../../components/alerts/alertmanager
-  - ../../components/storage/dragonfly
