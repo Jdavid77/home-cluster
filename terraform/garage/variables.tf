@@ -23,6 +23,7 @@ variable "buckets" {
     "renderercv",
     "shelfmark",
     "zot",
-    "dragonfly-snapshots"
+    "dragonfly-snapshots",
+    "agent-snapshots"
   ]
 }
