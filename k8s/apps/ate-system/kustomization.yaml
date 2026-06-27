@@ -4,10 +4,6 @@ kind: Kustomization
 namespace: automation
 resources:
   - ./namespace.yaml
-  - ./n8n/ks.yaml
-  - ./grist/ks.yaml
-  - ./kagent/ks.yaml
+  - ./substrate/ks.yaml
 components:
   - ../../components/alerts/alertmanager
-  - ../../components/flux/ghcr
-  - ../../components/flux/image-automation

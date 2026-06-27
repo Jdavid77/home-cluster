@@ -4,8 +4,8 @@ kind: Kustomization
 metadata:
   name: substrate-crds
 spec:
-  targetNamespace: automation
-  path: ./k8s/apps/automation/substrate/crds
+  targetNamespace: ate-system
+  path: ./k8s/apps/ate-system/substrate/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -15,7 +15,7 @@ spec:
     - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
       name: substrate-crds
-      namespace: automation
+      namespace: ate-system
   wait: true
   interval: 30m
   retryInterval: 2m
@@ -27,8 +27,8 @@ kind: Kustomization
 metadata:
   name: substrate
 spec:
-  targetNamespace: automation
-  path: ./k8s/apps/automation/substrate/app
+  targetNamespace: ate-system
+  path: ./k8s/apps/ate-system/substrate/app
   prune: true
   dependsOn:
     - name: substrate-crds
@@ -40,7 +40,7 @@ spec:
     - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
       name: substrate
-      namespace: automation
+      namespace: ate-system
   wait: true
   interval: 30m
   retryInterval: 2m

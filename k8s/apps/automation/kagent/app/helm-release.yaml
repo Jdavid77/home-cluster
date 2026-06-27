@@ -71,7 +71,7 @@ spec:
     controller:
       substrate:
         enabled: true
-        ateApiEndpoint: dns:///api.automation.svc:443
+        ateApiEndpoint: dns:///api.ate-system.svc:443
         ateApiInsecure: true
     substrateWorkerPool:
       create: true
