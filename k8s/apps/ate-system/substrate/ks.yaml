@@ -5,7 +5,7 @@ metadata:
   name: substrate-crds
 spec:
   targetNamespace: ate-system
-  path: ./k8s/apps/ate-system/substrate/app
+  path: ./k8s/apps/ate-system/substrate/crds
   prune: true
   sourceRef:
     kind: GitRepository
