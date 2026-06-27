@@ -4,6 +4,6 @@ kind: Kustomization
 namespace: ate-system
 resources:
   - ./namespace.yaml
-  - ./substrate/ks.yaml
+  # - ./substrate/ks.yaml
 components:
   - ../../components/alerts/alertmanager

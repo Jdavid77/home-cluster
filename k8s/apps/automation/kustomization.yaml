@@ -6,7 +6,7 @@ resources:
   - ./namespace.yaml
   - ./n8n/ks.yaml
   - ./grist/ks.yaml
-  - ./kagent/ks.yaml
+  # - ./kagent/ks.yaml
 components:
   - ../../components/alerts/alertmanager
   - ../../components/flux/ghcr
