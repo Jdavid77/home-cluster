@@ -47,7 +47,6 @@ spec:
     substitute:
       APP: *app
       DRAGONFLY_REPLICAS: "3"
-      DRAGONFLY_CLUSTER_MODE: "yes"
   wait: true
   interval: 30m
   retryInterval: 2m
