@@ -10,6 +10,8 @@ spec:
   substrate:
     workerPoolRef:
       name: kagent-default
+    snapshotsConfig:
+      location: gs://agent-snapshots/flux-agent
   declarative:
     runtime: go
     modelConfig: default-model-config
