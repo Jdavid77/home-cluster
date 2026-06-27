@@ -39,7 +39,7 @@ spec:
             env:
               APP_BASE_URL: "https://curve.jnobrega.com"
               CACHE_TTL_MS: "18000000"
-              REDIS_URL: redis://dragonfly-curve-tracker.default.svc.cluster.local:6379/1
+              REDIS_URL: redis://dragonfly-curve-tracker.default.svc.cluster.local:6379
             envFrom:
               - secretRef:
                   name: curve-tracker-secret
