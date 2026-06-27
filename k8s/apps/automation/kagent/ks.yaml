@@ -36,6 +36,8 @@ spec:
   prune: true
   dependsOn:
     - name: kagent-crds
+    - name: substrate
+      namespace: ate-system
     - name: external-secrets-store
       namespace: external-secrets
     - name: envoy
