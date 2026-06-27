@@ -40,6 +40,8 @@ spec:
     - "--bind=::"
     - "--admin_bind=::"
     - "--admin_port=9999"
+    # save only one snapshot in storage
+    - "--dbfilename=dump"
     - "--maxmemory=$(MAX_MEMORY)Mi"
     - "--proactor_threads=1"
     - "--dbnum=1"
