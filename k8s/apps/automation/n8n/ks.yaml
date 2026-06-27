@@ -35,7 +35,7 @@ spec:
     - ../../../../components/volsync/remote
     - ../../../../components/keda/postgres
     - ../../../../components/middlewares/authentik
-    - ../../../../components/storage/dragonfly
+    - ../../../../components/storage/dragonfly/emulated
   postBuild:
     substitute:
       APP: *app

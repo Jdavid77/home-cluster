@@ -42,7 +42,7 @@ spec:
       name: substrate
       namespace: ate-system
   components:
-    - ../../../../components/storage/dragonfly
+    - ../../../../components/storage/dragonfly/cluster
   postBuild:
     substitute:
       APP: *app

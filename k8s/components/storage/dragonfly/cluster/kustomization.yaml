@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+resources:
+  - ./dragonfly.yaml
+  - ../secret.yaml
+  - ./headless-service.yaml
+  - ./cluster-init-job.yaml

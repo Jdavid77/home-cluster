@@ -22,7 +22,7 @@ spec:
       name: curve-tracker
       namespace: default
   components:
-    - ../../../../components/storage/dragonfly
+    - ../../../../components/storage/dragonfly/emulated
   postBuild:
     substitute:
       APP: curve-tracker

@@ -38,18 +38,14 @@ spec:
 
   args:
     - "--bind=::"
-    - "--admin_bind=::"
-    - "--admin_port=9999"
-    # save only one snapshot in storage
     - "--dbfilename=dump"
     - "--maxmemory=$(MAX_MEMORY)Mi"
     - "--proactor_threads=1"
     - "--dbnum=1"
-    - "--cluster_mode=${DRAGONFLY_CLUSTER_MODE:=emulated}"
+    - "--cluster_mode=emulated"
     - "--s3_endpoint=garage.storage.svc.cluster.local:3900"
     - "--s3_use_https=false"
     - "--s3_sign_payload=false"
-
 
   snapshot:
     cron: "0 */12 * * *"

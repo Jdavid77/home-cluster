@@ -1,0 +1,57 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/dragonflydb.io/dragonfly_v1alpha1.json
+apiVersion: dragonflydb.io/v1alpha1
+kind: Dragonfly
+metadata:
+  name: dragonfly-${APP}
+spec:
+
+  image: ghcr.io/dragonflydb/dragonfly:v1.39.0
+  replicas: ${DRAGONFLY_REPLICAS:=3}
+
+  networkPolicyEnabled: false
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      memory: 512Mi
+
+  env:
+    - name: MAX_MEMORY
+      valueFrom:
+        resourceFieldRef:
+          resource: limits.memory
+          divisor: 1Mi
+    - name: AWS_REGION
+      value: us-east-1
+    - name: AWS_S3_USE_PATH_STYLE
+      value: "true"
+    - name: AWS_ACCESS_KEY_ID
+      valueFrom:
+        secretKeyRef:
+          name: dragonfly-${APP}
+          key: AWS_ACCESS_KEY_ID
+    - name: AWS_SECRET_ACCESS_KEY
+      valueFrom:
+        secretKeyRef:
+          name: dragonfly-${APP}
+          key: AWS_SECRET_ACCESS_KEY
+
+  args:
+    - "--bind=::"
+    - "--admin_bind=::"
+    - "--admin_port=9999"
+    - "--dbfilename=dump"
+    - "--maxmemory=$(MAX_MEMORY)Mi"
+    - "--proactor_threads=1"
+    - "--dbnum=1"
+    - "--cluster_mode=yes"
+    - "--s3_endpoint=garage.storage.svc.cluster.local:3900"
+    - "--s3_use_https=false"
+    - "--s3_sign_payload=false"
+
+  snapshot:
+    cron: "0 */12 * * *"
+    dir: s3://dragonfly-snapshots/${APP}
+    enableOnMasterOnly: false

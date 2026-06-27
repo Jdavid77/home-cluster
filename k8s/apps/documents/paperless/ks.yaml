@@ -28,7 +28,7 @@ spec:
     namespace: flux-system
   components:
     - ../../../../components/keda/nfs-postgres
-    - ../../../../components/storage/dragonfly
+    - ../../../../components/storage/dragonfly/emulated
   postBuild:
     substitute:
       APP: *app
