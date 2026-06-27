@@ -6,6 +6,5 @@ resources:
   - ./namespace.yaml
   - ./paperless/ks.yaml
   - ./stirling-pdf/ks.yaml
-  - ./bentopdf/ks.yaml
 components:
   - ../../components/alerts/alertmanager

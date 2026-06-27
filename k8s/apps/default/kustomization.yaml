@@ -11,11 +11,9 @@ resources:
   - littlelink/ks.yaml
   - live-metrics/ks.yaml
   - mealie/ks.yaml
-  - morphos/ks.yaml
   - renderercv/ks.yaml
   - ryanair-api/ks.yaml
   - wallos/ks.yaml
-  - whoami/ks.yaml
 components:
   - ../../components/alerts/alertmanager
   - ../../components/flux/ghcr

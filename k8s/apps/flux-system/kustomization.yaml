@@ -4,7 +4,6 @@ kind: Kustomization
 namespace: flux-system
 resources:
   - ./namespace.yaml
-  - ./weave/ks.yaml
   - ./flux-operator/ks.yaml
   - ./addons/ks.yaml
 components:
