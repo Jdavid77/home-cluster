@@ -25,7 +25,7 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: substrate
+  name: &app substrate
 spec:
   targetNamespace: ate-system
   path: ./k8s/apps/ate-system/substrate/app
@@ -41,6 +41,13 @@ spec:
       kind: HelmRelease
       name: substrate
       namespace: ate-system
+  components:
+    - ../../../../components/storage/dragonfly
+  postBuild:
+    substitute:
+      APP: *app
+      DRAGONFLY_REPLICAS: "3"
+      DRAGONFLY_CLUSTER_MODE: "yes"
   wait: true
   interval: 30m
   retryInterval: 2m

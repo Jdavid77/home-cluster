@@ -21,10 +21,10 @@ spec:
     createNamespace: false
 
     valkey:
-      # Dragonfly cluster_mode=emulated advertises wrong ports in CLUSTER NODES on multi-replica setups,
-      # incompatible with ate-api-server's redis.ClusterClient. Use bundled Valkey instead.
-      enabled: true
-      replicas: 6
+      enabled: false
+
+    redis:
+      clusterAddress: dragonfly-substrate.ate-system.svc.cluster.local:6379
 
     rustfs:
       enabled: false
