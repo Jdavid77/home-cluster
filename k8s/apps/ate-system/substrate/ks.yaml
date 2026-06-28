@@ -42,11 +42,10 @@ spec:
       name: substrate
       namespace: ate-system
   components:
-    - ../../../../components/storage/dragonfly/cluster
+    - ../../../../components/storage/valkey/cluster
   postBuild:
     substitute:
       APP: *app
-      DRAGONFLY_REPLICAS: "3"
   wait: true
   interval: 30m
   retryInterval: 2m

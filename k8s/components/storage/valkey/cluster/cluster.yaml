@@ -1,0 +1,21 @@
+# Dragonfly required me to setup the nodes manually in cluster mode.
+apiVersion: valkey.io/v1alpha1
+kind: ValkeyCluster
+metadata:
+  name: valkey-${APP}
+spec:
+  shards: 1
+  replicas: 2
+  workloadType: StatefulSet
+  persistence:
+    size: 1Gi
+    storageClassName: longhorn
+    reclaimPolicy: Retain
+  config:
+    cluster-node-timeout: "5000"
+    appendonly: "yes"
+    protected-mode: "no"
+  topologySpreadConstraints:
+    - maxSkew: 1
+      topologyKey: kubernetes.io/hostname
+      whenUnsatisfiable: ScheduleAnyway

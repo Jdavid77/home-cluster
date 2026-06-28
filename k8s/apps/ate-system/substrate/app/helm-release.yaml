@@ -24,7 +24,7 @@ spec:
       enabled: false
 
     redis:
-      clusterAddress: dragonfly-substrate.ate-system.svc.cluster.local:6379
+      clusterAddress: valkey-valkey-substrate.ate-system.svc.cluster.local:6379
 
     rustfs:
       enabled: false
