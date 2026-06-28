@@ -20,12 +20,14 @@ spec:
 
     createNamespace: false
 
+    # i dont want 6 replicas of this LOL
     valkey:
       enabled: false
 
     redis:
       clusterAddress: valkey-valkey-substrate.ate-system.svc.cluster.local:6379
 
+    # Use garage
     rustfs:
       enabled: false
 
