@@ -10,7 +10,7 @@ spec:
       restartPolicy: OnFailure
       containers:
         - name: init
-          image: redis:7-alpine
+          image: redis:8-alpine
           command: ["/bin/sh", "-c"]
           args:
             - |-
