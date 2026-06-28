@@ -8,6 +8,7 @@ resources:
   - ./openebs/ks.yaml
   - ./zot/ks.yaml
   - ./dragonfly/ks.yaml
+  - ./valkey/ks.yaml
 components:
   - ../../components/alerts/alertmanager
   - ../../components/grafana/folder
