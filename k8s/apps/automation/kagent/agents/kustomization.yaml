@@ -5,5 +5,4 @@ resources:
   - ./cilium-policy-agent
   - ./flux-agent
   - ./k8s-agent
-  - ./observability-agent
   - ./promql-agent
