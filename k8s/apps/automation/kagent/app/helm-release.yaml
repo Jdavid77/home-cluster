@@ -90,6 +90,7 @@ spec:
         model: gpt-5.4-mini
         apiKeySecretRef: kagent-openai
         apiKeySecretKey: OPENAI_API_KEY
+    # Enable MCP Tools
     kmcp:
       enabled: true
     kagent-tools:
@@ -98,20 +99,21 @@ spec:
       enabled: true
       grafana:
         url: http://grafana-service.monitoring.svc.cluster.local:3000
+    # Disable Agent CR's , converted into Sandbox Agents
     querydoc:
       enabled: false
     k8s-agent:
-      enabled: true
+      enabled: false
     kgateway-agent:
-      enabled: true
+      enabled: false
     helm-agent:
-      enabled: true
+      enabled: false
     cilium-policy-agent:
-      enabled: true
+      enabled: false
     observability-agent:
-      enabled: true
+      enabled: false
     promql-agent:
-      enabled: true
+      enabled: false
     argo-rollouts-agent:
       enabled: false
     istio-agent:
