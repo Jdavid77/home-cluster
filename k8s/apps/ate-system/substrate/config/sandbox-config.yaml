@@ -1,0 +1,12 @@
+apiVersion: ate.dev/v1alpha1
+kind: SandboxConfig
+metadata:
+  name: gvisor-default
+spec:
+  sandboxClass: gvisor
+  default: true
+  assets:
+    amd64:
+      runsc:
+        url: "gs://gvisor/releases/nightly/2026-06-02/x86_64/runsc"
+        sha256: "efd12935f6654c91a1389710eb8dfa4d12b6b9be00db87526dc2eb584ad00119"
