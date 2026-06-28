@@ -50,3 +50,14 @@ spec:
             secretKeyRef:
               name: substrate-secret
               key: AWS_SECRET_ACCESS_KEY
+
+  postRenderers:
+    - kustomize:
+        patches:
+          - target:
+              kind: Deployment
+              name: ate-api-server-deployment
+            patch: |-
+              - op: add
+                path: /spec/template/metadata/annotations/reloader.stakater.com~1auto
+                value: "true"
