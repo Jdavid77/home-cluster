@@ -7,6 +7,8 @@ resources:
   - ./n8n/ks.yaml
   - ./grist/ks.yaml
   - ./kagent/ks.yaml
+  - ./openshell/ks.yaml
+  - ./agent-sandbox/ks.yaml
 components:
   - ../../components/alerts/alertmanager
   - ../../components/flux/ghcr
