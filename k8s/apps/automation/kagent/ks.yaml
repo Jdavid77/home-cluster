@@ -36,6 +36,7 @@ spec:
   prune: true
   dependsOn:
     - name: kagent-crds
+    - name: openshell
     - name: substrate
       namespace: ate-system
     - name: external-secrets-store
@@ -112,6 +113,32 @@ spec:
     - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
       name: mealie-mcp-server
+      namespace: automation
+  wait: true
+  interval: 30m
+  retryInterval: 2m
+  timeout: 15m
+---
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: openshell
+spec:
+  targetNamespace: automation
+  path: ./k8s/apps/automation/kagent/openshell
+  prune: true
+  dependsOn:
+    - name: external-secrets-store
+      namespace: external-secrets
+  sourceRef:
+    kind: GitRepository
+    name: home-cluster
+    namespace: flux-system
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      name: openshell
       namespace: automation
   wait: true
   interval: 30m

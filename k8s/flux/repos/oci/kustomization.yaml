@@ -53,3 +53,4 @@ resources:
   - tekton-operator.yaml
   - substrate.yaml
   - substrate-crds.yaml
+  - openshell.yaml

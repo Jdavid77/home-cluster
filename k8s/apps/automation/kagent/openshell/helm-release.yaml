@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app openshell
+  namespace: automation
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: *app
+    namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  maxHistory: 2
+  postRenderers:
+    - kustomize:
+        patches:
+          - patch: |-
+              apiVersion: apps/v1
+              kind: Deployment
+              metadata:
+                name: openshell
+              spec:
+                template:
+                  spec:
+                    initContainers:
+                      - name: init-db
+                        image: ghcr.io/home-operations/postgres-init:18.4@sha256:ebd9d30add17acdf935d73eb004758c7dfd9388aaa605fda70ad74378ab92aec
+                        securityContext:
+                          runAsUser: 65534
+                        envFrom:
+                          - secretRef:
+                              name: openshell-secret
+            target:
+              kind: Deployment
+              name: openshell
+  values:
+    replicaCount: 3
+    workload:
+      kind: deployment
+    server:
+      externalDbSecret: "openshell-secret"
+      disableTls: true
+      auth:
+        allowUnauthenticatedUsers: true
