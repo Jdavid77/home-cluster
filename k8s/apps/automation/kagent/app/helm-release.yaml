@@ -76,8 +76,7 @@ spec:
     substrateWorkerPool:
       create: true
       ateomImage: ghcr.io/kagent-dev/substrate/ateom-gvisor:v0.0.7
-      substrateWorkerPool:
-        replicas: 2
+      replicas: 2
     database:
       postgres:
         bundled:
