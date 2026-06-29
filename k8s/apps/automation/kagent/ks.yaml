@@ -37,6 +37,7 @@ spec:
   dependsOn:
     - name: kagent-crds
     - name: openshell
+    - name: agent-sandbox
     - name: substrate
       namespace: ate-system
     - name: external-secrets-store
