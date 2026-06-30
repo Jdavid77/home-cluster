@@ -69,10 +69,17 @@ spec:
       strategy: rollback
   values:
     controller:
+      openshell:
+        enabled: true
       substrate:
         enabled: true
         ateApiEndpoint: dns:///api.ate-system.svc:443
         ateApiInsecure: true
+      env:
+        - name: OPENSHELL_GATEWAY_URL
+          value: dns:///openshell.automation.svc:8080
+        - name: OPENSHELL_INSECURE
+          value: "true"
     substrateWorkerPool:
       create: true
       ateomImage: ghcr.io/kagent-dev/substrate/ateom-gvisor:v0.0.7
