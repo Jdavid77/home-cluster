@@ -13,12 +13,12 @@ spec:
     namespace: flux-system
   values:
     controllers:
-      *app :
+      *app:
         containers:
-          *app :
+          *app:
             image:
               repository: registry.jnobrega.com/mirror/grimmory-tools/grimmory
-              tag: v3.2.2 # {"$imagepolicy": "media:grimmory:tag"}
+              tag: v3.2.4 # {"$imagepolicy": "media:grimmory:tag"}
             env:
               TZ: Europe/Lisbon
               USER_ID: 1002
@@ -101,13 +101,13 @@ spec:
       data:
         existingClaim: *app
         advancedMounts:
-          *app :
-            *app :
+          *app:
+            *app:
               - path: /app/data
       config:
         existingClaim: mariadb
         advancedMounts:
-          *app :
+          *app:
             mariadb:
               - path: /config
       books:
@@ -115,14 +115,14 @@ spec:
         server: 192.168.1.84
         path: /ebooks
         advancedMounts:
-          *app :
-            *app :
+          *app:
+            *app:
               - path: /books
       bookdrop:
         type: nfs
         server: 192.168.1.84
         path: /book-ingests
         advancedMounts:
-          *app :
-            *app :
+          *app:
+            *app:
               - path: /bookdrop
