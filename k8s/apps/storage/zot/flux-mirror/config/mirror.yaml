@@ -31,3 +31,8 @@ artifacts:
     selector:
       semver: ">=1.0.0"
       limit: 5
+  - source: docker.io/mauriceboe/trek
+    destination: registry.jnobrega.com/mirror/mauriceboe/trek
+    selector:
+      semver: ">= 3.0.0"
+      limit: 5
