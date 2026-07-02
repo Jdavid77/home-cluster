@@ -33,7 +33,6 @@ resources:
   - envoy-gateway.yaml
   - trivy-operator-dashboard.yaml
   - cilium.yaml
-  - portager.yaml
   - x509-certificate-exporter.yaml
   - kagent-crds.yaml
   - kmcp-crds.yaml
