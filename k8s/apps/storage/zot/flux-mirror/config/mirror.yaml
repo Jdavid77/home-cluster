@@ -1,0 +1,33 @@
+apiVersion: mirror.plugin.fluxcd.io/v1beta1
+kind: Config
+artifacts:
+  - source: ghcr.io/seanmorley15/adventurelog-frontend
+    destination: registry.jnobrega.com/mirror/seanmorley15/adventurelog-frontend
+    selector:
+      semver: ">=0.0.0"
+      limit: 5
+  - source: ghcr.io/seanmorley15/adventurelog-backend
+    destination: registry.jnobrega.com/mirror/seanmorley15/adventurelog-backend
+    selector:
+      semver: ">=0.0.0"
+      limit: 5
+  - source: ghcr.io/grimmory-tools/grimmory
+    destination: registry.jnobrega.com/mirror/grimmory-tools/grimmory
+    selector:
+      semver: ">=2.0.0"
+      limit: 5
+  - source: ghcr.io/czlonkowski/n8n-mcp
+    destination: registry.jnobrega.com/mirror/czlonkowski/n8n-mcp
+    selector:
+      semver: ">=2.0.0"
+      limit: 5
+  - source: ghcr.io/rendercv/rendercv
+    destination: registry.jnobrega.com/mirror/rendercv/rendercv
+    selector:
+      semver: ">=2.0.0"
+      limit: 1
+  - source: ghcr.io/calibrain/shelfmark
+    destination: registry.jnobrega.com/mirror/calibrain/shelfmark
+    selector:
+      semver: ">=1.0.0"
+      limit: 5
