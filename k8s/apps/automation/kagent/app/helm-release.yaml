@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: kagent
-      version: 0.9.9
+      version: 0.9.11
       interval: 5m
       reconcileStrategy: ChartVersion
       sourceRef:
