@@ -43,7 +43,6 @@ spec:
               SMTP_FROM_NAME: Vaultwarden
               SMTP_PORT: 587
               SMTP_SECURITY: "starttls"
-              ADMIN_TOKEN: ${VAULTWARDEN_ADMIN_TOKEN_HASHED}
               TRASH_AUTO_DELETE_DAYS: 7
               PASSWORD_HINTS_ALLOWED: false
             envFrom:
