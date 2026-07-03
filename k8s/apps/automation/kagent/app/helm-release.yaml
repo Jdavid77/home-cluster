@@ -82,7 +82,7 @@ spec:
           value: "true"
     substrateWorkerPool:
       create: true
-      ateomImage: ghcr.io/kagent-dev/substrate/ateom-gvisor:v0.0.8
+      ateomImage: ghcr.io/kagent-dev/substrate/ateom-gvisor:v0.0.7
       replicas: 2
     database:
       postgres:
