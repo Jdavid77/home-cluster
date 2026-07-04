@@ -9,17 +9,20 @@ Run all three checks below and report issues. Do not auto-fix anything — warn 
 
 ## Check 1 — Missing `yaml-language-server` schema comment
 
-Find every `.yaml` file under `k8s/apps/` that:
+Find every `.yaml` file under `k8s/` that:
+
 1. Contains an `apiVersion:` field (i.e. is a Kubernetes manifest, not a config/values file), **and**
 2. Is missing a `# yaml-language-server: $schema=...` comment, **and**
 3. Has a **non-native** `apiVersion` (custom CRD group)
 
 **Native apiVersions to exclude** (skip files whose `apiVersion:` matches one of these):
+
 - `v1`, `apps/v1`, `batch/v1`, `rbac.authorization.k8s.io/v1`, `networking.k8s.io/v1`, `policy/v1`, `storage.k8s.io/v1`, `admissionregistration.k8s.io/v1`
 
 **How to find them:**
+
 ```bash
-find k8s/apps -name "*.yaml" | while read f; do
+find k8s/ -name "*.yaml" | while read f; do
   grep -q 'apiVersion:' "$f" || continue          # must have apiVersion
   grep -q '# yaml-language-server' "$f" && continue  # skip if already annotated
   api=$(grep -m1 '^apiVersion:' "$f" | awk '{print $2}')

@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/valkey.io/valkeycluster_v1alpha1.json
 # Dragonfly required me to setup the nodes manually in cluster mode.
 apiVersion: valkey.io/v1alpha1
 kind: ValkeyCluster

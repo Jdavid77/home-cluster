@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/ate.dev/sandboxconfig_v1alpha1.json
 apiVersion: ate.dev/v1alpha1
 kind: SandboxConfig
 metadata:
