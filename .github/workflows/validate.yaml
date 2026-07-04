@@ -25,5 +25,5 @@ jobs:
           persist-credentials: false
       - name: Setup Flux Schema CLI
         uses: fluxcd/flux-schema/actions/setup@main
-      - name: Validate
-        run: flux schema validate ./k8s --config .fluxschema.yaml
+      - name: Validate manifests
+        uses: fluxcd/flux-schema/actions/validate@main
