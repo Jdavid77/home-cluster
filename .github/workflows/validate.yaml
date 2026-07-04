@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: Validate
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - k8s/**
+      - .flux-schema.yaml
+  schedule:
+    - cron: 0 */12 * * * # Every 12 hours
+jobs:
+  schema:
+    name: Schema Validation
+    runs-on: home-ops-runner
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          persist-credentials: false
+      - name: Setup Flux Schema CLI
+        uses: fluxcd/flux-schema/actions/setup@main
+      - name: Validate
+        run: flux schema validate ./k8s --config .fluxschema.yaml

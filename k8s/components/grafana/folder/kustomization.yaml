@@ -1,21 +1,21 @@
 apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
 resources:
-  - folder.yaml
+  - _folder.yaml
 replacements:
-  - source:
+  - _source:
       kind: Namespace
       fieldPath: metadata.name
     targets:
-      - select:
+      - _select:
           kind: GrafanaFolder
         fieldPaths:
-          - metadata.name
-  - source:
+          - _metadata.name
+  - _source:
       kind: Namespace
       fieldPath: metadata.name
     targets:
-      - select:
+      - _select:
           kind: GrafanaFolder
         fieldPaths:
-          - spec.title
+          - _spec.title

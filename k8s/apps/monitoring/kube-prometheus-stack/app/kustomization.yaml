@@ -9,7 +9,7 @@ resources:
 configMapGenerator:
   - name: kube-state-metrics-config
     files:
-      - kube-state-metrics-config.yaml
+      - config.yaml
     options:
       labels:
         app.kubernetes.io/part-of: flux

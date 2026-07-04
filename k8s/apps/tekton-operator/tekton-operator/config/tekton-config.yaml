@@ -18,11 +18,14 @@ spec:
     keep: 50
   dashboard:
     readonly: false
+    options: {}
   platforms:
     kubernetes:
       pipelinesAsCode:
         enable: false
+        options: {}
   result:
+    options: {}
     disabled: false
     is_external_db: true
     db_host: "192.168.1.84"

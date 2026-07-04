@@ -1,0 +1,18 @@
+apiVersion: schema.plugin.fluxcd.io/v1beta1
+kind: Config
+validate:
+  schemaLocation:
+    - default
+    - 'https://k8s-schemas-jnobrega.pages.dev/{{.Group}}/{{.Kind}}_{{.Version}}.json'
+  skipCELRules: true
+  skipFile:
+    - kustomization.yaml
+    - kustomizeconfig.yaml
+    - values.yaml
+    # non-K8s app config files (no apiVersion/kind)
+    - config.yaml
+    # component templates — ${APP} substitution always fails name/value regex
+    - '_*.yaml'
+  skipJSONPath:
+    - Secret:/sops
+  failFast: true

@@ -6,6 +6,6 @@ resources:
 configMapGenerator:
   - name: flux-mirror-config
     files:
-      - mirror.yaml=./config/mirror.yaml
+      - mirror.yaml=./config/config.yaml
 generatorOptions:
   disableNameSuffixHash: true
