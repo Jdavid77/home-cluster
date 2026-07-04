@@ -10,7 +10,7 @@ replacements:
       - select:
           kind: GrafanaFolder
         fieldPaths:
-          - _metadata.name
+          - metadata.name
   - source:
       kind: Namespace
       fieldPath: metadata.name
@@ -18,4 +18,4 @@ replacements:
       - select:
           kind: GrafanaFolder
         fieldPaths:
-          - _spec.title
+          - spec.title
