@@ -20,6 +20,16 @@
         "commitMessageTopic": "{{{groupName}}} group"
       },
       "minimumGroupSize": 2
+    },
+    {
+      "description": "Substrate Group",
+      "groupName": "substrate",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["/substrate/"],
+      "group": {
+        "commitMessageTopic": "{{{groupName}}} group"
+      },
+      "minimumGroupSize": 2
     }
   ]
 }
