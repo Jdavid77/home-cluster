@@ -14,7 +14,7 @@ spec:
   valuesFrom:
     - kind: ConfigMap
       name: kube-state-metrics-config
-      valuesKey: kube-state-metrics-config.yaml
+      valuesKey: config.yaml
   values:
     crds:
       enabled: false
