@@ -21,11 +21,11 @@ Find every `.yaml` file under `k8s/` that:
 
 ```bash
 find k8s/ -name "*.yaml" | while read f; do
-  grep -q 'apiVersion:' "$f" || continue          # must have apiVersion
+  grep -q '^apiVersion:' "$f" || continue          # must have top-level apiVersion
   grep -q '# yaml-language-server' "$f" && continue  # skip if already annotated
   api=$(grep -m1 '^apiVersion:' "$f" | awk '{print $2}')
   case "$api" in
-    v1|apps/v1|batch/v1|rbac.authorization.k8s.io/v1|networking.k8s.io/v1|policy/v1|storage.k8s.io/v1|admissionregistration.k8s.io/v1|mirror.plugin.fluxcd.io/v1beta1) continue ;;
+    v1|apps/v1|batch/v1|rbac.authorization.k8s.io/v1|networking.k8s.io/v1|policy/v1|storage.k8s.io/v1|admissionregistration.k8s.io/v1|admissionregistration.k8s.io/v1beta1|apiextensions.k8s.io/v1|mirror.plugin.fluxcd.io/v1beta1) continue ;;
   esac
   echo "$f"
 done

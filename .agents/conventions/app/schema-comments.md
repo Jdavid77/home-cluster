@@ -43,10 +43,11 @@ kind: HelmRelease
 
 ## Files that do NOT get schema comments
 
-The following files are skipped by Flux schema validation (`.fluxschema.yaml`) AND do not need schema comments:
+Files that do not need schema comments:
 
 - `values.yaml`
 - `config.yaml`
+- `kustomizeconfig.yaml`
 
 Note: `_*.yaml` component template files (e.g. `_local.yaml`) ARE skipped by Flux validation (because `${APP}` substitutions fail regex rules) but **do still get schema comments** for editor support.
 
@@ -63,3 +64,4 @@ Native Kubernetes API types are not served by the custom schema server. Skip the
 - `storage.k8s.io/v1`
 - `admissionregistration.k8s.io/v1`
 - `mirror.plugin.fluxcd.io/v1beta1`
+- `apiextensions.k8s.io/v1`
