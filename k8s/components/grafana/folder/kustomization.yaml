@@ -3,19 +3,19 @@ kind: Component
 resources:
   - _folder.yaml
 replacements:
-  - _source:
+  - source:
       kind: Namespace
       fieldPath: metadata.name
     targets:
-      - _select:
+      - select:
           kind: GrafanaFolder
         fieldPaths:
           - _metadata.name
-  - _source:
+  - source:
       kind: Namespace
       fieldPath: metadata.name
     targets:
-      - _select:
+      - select:
           kind: GrafanaFolder
         fieldPaths:
           - _spec.title

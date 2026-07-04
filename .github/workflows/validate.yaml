@@ -9,6 +9,9 @@ on:
       - .flux-schema.yaml
   schedule:
     - cron: 0 */12 * * * # Every 12 hours
+  push:
+    branches:
+      - main
 jobs:
   schema:
     name: Schema Validation
