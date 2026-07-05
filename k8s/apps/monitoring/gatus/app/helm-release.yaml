@@ -12,6 +12,12 @@ spec:
     name: app-template
     namespace: flux-system
   values:
+    defaultPodOptions:
+      automountServiceAccountToken: true
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65534
+        runAsGroup: 65534
     controllers:
       *app :
         annotations:
@@ -72,27 +78,12 @@ spec:
                 memory: 100Mi
               limits:
                 memory: 250Mi
-    defaultPodOptions:
-      automountServiceAccountToken: true
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 65534
-        runAsGroup: 65534
     service:
       app:
         controller: *app
         ports:
           http:
             port: *port
-    serviceMonitor:
-      app:
-        serviceName: *app
-        endpoints:
-          - port: http
-            scheme: http
-            path: /metrics
-            interval: 1m
-            scrapeTimeout: 10s
     route:
       main:
         parentRefs:
@@ -106,6 +97,18 @@ spec:
           - backendRefs:
               - name: *app
                 port: *port
+    persistence:
+      config:
+        type: emptyDir
+      config-file:
+        type: configMap
+        name: gatus-configmap
+        globalMounts:
+          - path: /config/config.yaml
+            subPath: config.yaml
+            readOnly: true
+    serviceAccount:
+      gatus: {}
     rbac:
       bindings:
         gatus:
@@ -125,15 +128,12 @@ spec:
             - apiGroups: ["gateway.networking.k8s.io"]
               resources: ["gateways", "httproutes"]
               verbs: ["get", "watch", "list"]
-    serviceAccount:
-      gatus: {}
-    persistence:
-      config:
-        type: emptyDir
-      config-file:
-        type: configMap
-        name: gatus-configmap
-        globalMounts:
-          - path: /config/config.yaml
-            subPath: config.yaml
-            readOnly: true
+    serviceMonitor:
+      app:
+        serviceName: *app
+        endpoints:
+          - port: http
+            scheme: http
+            path: /metrics
+            interval: 1m
+            scrapeTimeout: 10s

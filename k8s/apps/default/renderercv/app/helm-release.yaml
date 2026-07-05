@@ -13,6 +13,10 @@ spec:
     namespace: flux-system
   maxHistory: 2
   values:
+    defaultPodOptions:
+      imagePullSecrets:
+        - name: zot-registry-secret
+      automountServiceAccountToken: false
     controllers:
       *app :
         replicas: 1
@@ -60,10 +64,6 @@ spec:
               runAsUser: 101
               runAsGroup: 101
               seccompProfile: {type: RuntimeDefault}
-    defaultPodOptions:
-      imagePullSecrets:
-        - name: zot-registry-secret
-      automountServiceAccountToken: false
     service:
       code-server:
         controller: *app

@@ -8,6 +8,24 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 from checks.hr_order import CANONICAL_VALUES_ORDER, CANONICAL_CONTROLLER_ORDER, CANONICAL_CONTAINER_ORDER
 
 _KEY_RE = re.compile(r'(\w[\w-]*):')
+_ANCHOR_RE = re.compile(r'&(\w+)')
+_ALIAS_RE = re.compile(r'\*(\w+)')
+
+
+def _has_anchor_conflict(proposed_blocks):
+    """Return True if the proposed block order would create a forward anchor reference."""
+    internal_anchors = set()
+    for _, block_lines in proposed_blocks:
+        internal_anchors.update(_ANCHOR_RE.findall(''.join(block_lines)))
+
+    seen = set()
+    for _, block_lines in proposed_blocks:
+        text = ''.join(block_lines)
+        aliases = set(_ALIAS_RE.findall(text))
+        if aliases & internal_anchors - seen:
+            return True
+        seen.update(_ANCHOR_RE.findall(text))
+    return False
 
 
 def _get_children_and_end(lines, parent_line, parent_indent):
@@ -52,9 +70,12 @@ def _reorder_children(lines, parent_line, parent_indent, canonical):
         return False
 
     key_pos = {k: i for i, k in enumerate(canonical)}
-    child_blocks.sort(key=lambda b: key_pos.get(b[0], len(canonical)))
+    proposed = sorted(child_blocks, key=lambda b: key_pos.get(b[0], len(canonical)))
 
-    lines[block_start:block_end] = [line for _, block in child_blocks for line in block]
+    if _has_anchor_conflict(proposed):
+        return False
+
+    lines[block_start:block_end] = [line for _, block in proposed for line in block]
     return True
 
 

@@ -12,6 +12,8 @@ spec:
     name: app-template
     namespace: flux-system
   values:
+    defaultPodOptions:
+      terminationGracePeriodSeconds: 120
     controllers:
       qbittorrent:
         replicas: 1
@@ -56,17 +58,15 @@ spec:
               FIREWALL_INPUT_PORTS: *port
               FIREWALL_OUTBOUND_SUBNETS: 10.244.0.0/16,10.96.0.0/12
               UPDATER_PERIOD: 24h
-            resources:
-              limits:
-                squat.ai/tun: "1"
             envFrom:
               - secretRef:
                   name: vpn-secret
             securityContext:
               capabilities: {add: ["NET_ADMIN"]}
               allowPrivilegeEscalation: false
-    defaultPodOptions:
-      terminationGracePeriodSeconds: 120
+            resources:
+              limits:
+                squat.ai/tun: "1"
     service:
       app:
         controller: *app

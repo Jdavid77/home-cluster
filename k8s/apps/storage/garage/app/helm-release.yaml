@@ -12,6 +12,14 @@ spec:
     name: app-template
     namespace: flux-system
   values:
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1002
+        runAsGroup: 100
+        fsGroup: 100
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile: {type: RuntimeDefault}
     controllers:
       garage:
         annotations:
@@ -35,14 +43,6 @@ spec:
                 cpu: 100m
               limits:
                 memory: 512Mi
-    defaultPodOptions:
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 1002
-        runAsGroup: 100
-        fsGroup: 100
-        fsGroupChangePolicy: OnRootMismatch
-        seccompProfile: {type: RuntimeDefault}
     service:
       app:
         ports:
@@ -81,6 +81,26 @@ spec:
           - backendRefs:
               - name: *app
                 port: *api-port
+    persistence:
+      config:
+        enabled: true
+        type: configMap
+        name: garage
+        globalMounts:
+          - path: /etc/garage.toml
+            subPath: configuration.toml
+      data:
+        type: nfs
+        server: 192.168.1.84
+        path: /garage-data
+        globalMounts:
+          - path: /data
+      meta:
+        type: nfs
+        server: 192.168.1.84
+        path: /garage-meta
+        globalMounts:
+          - path: /meta
     configMaps:
       config:
         data:
@@ -103,26 +123,6 @@ spec:
 
             [admin]
             api_bind_addr = "[::]:3903"
-    persistence:
-      config:
-        enabled: true
-        type: configMap
-        name: garage
-        globalMounts:
-          - path: /etc/garage.toml
-            subPath: configuration.toml
-      data:
-        type: nfs
-        server: 192.168.1.84
-        path: /garage-data
-        globalMounts:
-          - path: /data
-      meta:
-        type: nfs
-        server: 192.168.1.84
-        path: /garage-meta
-        globalMounts:
-          - path: /meta
     serviceMonitor:
       main:
         enabled: true

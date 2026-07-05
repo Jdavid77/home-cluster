@@ -14,12 +14,6 @@ spec:
   values:
     controllers:
       n8n:
-        pod:
-          securityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
-            fsGroup: 1000
-            fsGroupChangePolicy: "OnRootMismatch"
         initContainers:
           init-db:
             image:
@@ -69,15 +63,21 @@ spec:
               N8N_SMTP_HOST: mail.gmx.com
               N8N_SMTP_PORT: 587
               N8N_SMTP_SSL: "false"
+            envFrom:
+              - secretRef:
+                  name: n8n-secret
             resources:
               requests:
                 cpu: 20m
                 memory: 256M
               limits:
                 memory: 1Gi
-            envFrom:
-              - secretRef:
-                  name: n8n-secret
+        pod:
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+            fsGroupChangePolicy: "OnRootMismatch"
     service:
       n8n:
         controller: n8n

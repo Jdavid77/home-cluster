@@ -12,6 +12,12 @@ spec:
     name: app-template
     namespace: flux-system
   values:
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65534
+        runAsGroup: 65534
+        seccompProfile: {type: RuntimeDefault}
     controllers:
       cloudflared:
         replicas: 2
@@ -82,26 +88,12 @@ spec:
                 memory: 105Mi
               limits:
                 memory: 105Mi
-    defaultPodOptions:
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 65534
-        runAsGroup: 65534
-        seccompProfile: {type: RuntimeDefault}
     service:
       cloudflared:
         controller: cloudflared
         ports:
           http:
             port: 8080
-    serviceMonitor:
-      cloudflared:
-        serviceName: cloudflared
-        endpoints:
-          - port: http
-            metricRelabelings:
-              - action: labeldrop
-                regex: (pod)
     persistence:
       config:
         type: configMap
@@ -117,3 +109,11 @@ spec:
           - path: /etc/cloudflared/creds/credentials.json
             subPath: credentials.json
             readOnly: true
+    serviceMonitor:
+      cloudflared:
+        serviceName: cloudflared
+        endpoints:
+          - port: http
+            metricRelabelings:
+              - action: labeldrop
+                regex: (pod)

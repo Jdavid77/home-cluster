@@ -12,6 +12,14 @@ spec:
     name: app-template
     namespace: flux-system
   values:
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1002
+        runAsGroup: 1002
+        fsGroup: 1002
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile: {type: RuntimeDefault}
     controllers:
       metube:
         annotations:
@@ -42,14 +50,6 @@ spec:
                         {"key":"FFmpegMetadata","add_metadata":"True","add_infojson":"True","add_chapters":"False"}
                   ]
                 }
-    defaultPodOptions:
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 1002
-        runAsGroup: 1002
-        fsGroup: 1002
-        fsGroupChangePolicy: OnRootMismatch
-        seccompProfile: {type: RuntimeDefault}
     service:
       app:
         controller: *app

@@ -24,14 +24,6 @@ spec:
         annotations:
           secret.reloader.stakater.com/reload: immich-secret
           configmap.reloader.stakater.com/reload: immich-configmap
-        pod:
-          enableServiceLinks: false
-          securityContext:
-            runAsUser: 1002
-            runAsGroup: 100
-            runAsNonRoot: true
-            fsGroup: 100
-            fsGroupChangePolicy: OnRootMismatch
         initContainers:
           init-db:
             image:
@@ -51,6 +43,14 @@ spec:
                   name: immich-secret
               - configMapRef:
                   name: immich-configmap
+        pod:
+          enableServiceLinks: false
+          securityContext:
+            runAsUser: 1002
+            runAsGroup: 100
+            runAsNonRoot: true
+            fsGroup: 100
+            fsGroupChangePolicy: OnRootMismatch
     service:
       server:
         controller: server
