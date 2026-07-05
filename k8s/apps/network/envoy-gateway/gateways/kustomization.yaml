@@ -8,3 +8,4 @@ resources:
   - ./referencegrant.yaml
   - ./monitor.yaml
   - ./grafanadashboard.yaml
+  - ./redirect.yaml
