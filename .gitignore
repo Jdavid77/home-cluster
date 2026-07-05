@@ -8,3 +8,5 @@ omv/**/.env
 .mcp.json
 .claude/*
 !.claude/skills
+__pycache__/
+*.pyc
