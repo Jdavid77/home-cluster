@@ -5,7 +5,6 @@ metadata:
   name: &app grist
 spec:
   targetNamespace: automation
-  path: ./k8s/apps/automation/grist/app
   dependsOn:
     - name: volsync
       namespace: backup
@@ -13,6 +12,7 @@ spec:
       namespace: external-secrets
     - name: envoy
       namespace: network
+  path: ./k8s/apps/automation/grist/app
   prune: true
   sourceRef:
     kind: GitRepository

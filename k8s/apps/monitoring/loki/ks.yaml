@@ -5,13 +5,13 @@ metadata:
   name: loki
 spec:
   targetNamespace: monitoring
-  path: ./k8s/apps/monitoring/loki/app
-  prune: true
   dependsOn:
     - name: longhorn
       namespace: longhorn-system
     - name: envoy
       namespace: network
+  path: ./k8s/apps/monitoring/loki/app
+  prune: true
   sourceRef:
     kind: GitRepository
     name: home-cluster

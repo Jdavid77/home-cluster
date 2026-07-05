@@ -5,11 +5,11 @@ metadata:
   name: openshell
 spec:
   targetNamespace: automation
-  path: ./k8s/apps/automation/openshell/app
-  prune: true
   dependsOn:
     - name: external-secrets-store
       namespace: external-secrets
+  path: ./k8s/apps/automation/openshell/app
+  prune: true
   sourceRef:
     kind: GitRepository
     name: home-cluster

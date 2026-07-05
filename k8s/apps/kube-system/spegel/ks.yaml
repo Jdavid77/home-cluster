@@ -5,7 +5,6 @@ metadata:
   name: spegel
 spec:
   targetNamespace: kube-system
-  path: ./k8s/apps/kube-system/spegel/app
   dependsOn:
     - name: external-secrets-store
       namespace: external-secrets
@@ -13,6 +12,7 @@ spec:
       namespace: network
     - name: prometheus-operator-crds
       namespace: monitoring
+  path: ./k8s/apps/kube-system/spegel/app
   prune: true
   sourceRef:
     kind: GitRepository

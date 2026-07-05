@@ -4,10 +4,10 @@ kind: Kustomization
 metadata:
   name: renovate-operator
 spec:
+  targetNamespace: development
   dependsOn:
     - name: envoy
       namespace: network
-  targetNamespace: development
   path: ./k8s/apps/development/renovate/app
   prune: true
   sourceRef:
@@ -30,9 +30,9 @@ kind: Kustomization
 metadata:
   name: renovate-jobs
 spec:
+  targetNamespace: development
   dependsOn:
     - name: renovate-operator
-  targetNamespace: development
   path: ./k8s/apps/development/renovate/jobs
   prune: true
   sourceRef:

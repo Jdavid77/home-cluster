@@ -5,22 +5,22 @@ metadata:
   name: &app audiobookshelf
 spec:
   targetNamespace: media
-  path: ./k8s/apps/media/audiobookshelf/app
   dependsOn:
     - name: volsync
       namespace: backup
     - name: envoy
       namespace: network
-  healthChecks:
-    - apiVersion: helm.toolkit.fluxcd.io/v2
-      kind: HelmRelease
-      name: audiobookshelf
-      namespace: media
+  path: ./k8s/apps/media/audiobookshelf/app
   prune: true
   sourceRef:
     kind: GitRepository
     name: home-cluster
     namespace: flux-system
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      name: audiobookshelf
+      namespace: media
   components:
     - ../../../../components/volsync/local
     - ../../../../components/volsync/remote

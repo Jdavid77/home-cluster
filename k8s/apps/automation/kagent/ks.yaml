@@ -32,8 +32,6 @@ metadata:
   name: kagent
 spec:
   targetNamespace: automation
-  path: ./k8s/apps/automation/kagent/app
-  prune: true
   dependsOn:
     - name: kagent-crds
     - name: openshell
@@ -44,6 +42,8 @@ spec:
       namespace: external-secrets
     - name: envoy
       namespace: network
+  path: ./k8s/apps/automation/kagent/app
+  prune: true
   sourceRef:
     kind: GitRepository
     name: home-cluster
@@ -65,11 +65,11 @@ metadata:
   name: kagent-agents
 spec:
   targetNamespace: automation
-  path: ./k8s/apps/automation/kagent/agents
-  prune: true
   dependsOn:
     - name: kagent
     - name: kagent-crds
+  path: ./k8s/apps/automation/kagent/agents
+  prune: true
   sourceRef:
     kind: GitRepository
     name: home-cluster
@@ -86,14 +86,14 @@ metadata:
   name: kagent-mcps
 spec:
   targetNamespace: automation
-  path: ./k8s/apps/automation/kagent/mcps
-  prune: true
   dependsOn:
     - name: kagent
     - name: external-secrets-store
       namespace: external-secrets
     - name: envoy
       namespace: network
+  path: ./k8s/apps/automation/kagent/mcps
+  prune: true
   sourceRef:
     kind: GitRepository
     name: home-cluster

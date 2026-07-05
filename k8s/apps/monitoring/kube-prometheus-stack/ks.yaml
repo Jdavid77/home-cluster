@@ -5,7 +5,6 @@ metadata:
   name: kube-prometheus-stack
 spec:
   targetNamespace: monitoring
-  path: ./k8s/apps/monitoring/kube-prometheus-stack/app
   dependsOn:
     - name: longhorn
       namespace: longhorn-system
@@ -15,6 +14,7 @@ spec:
       namespace: monitoring
     - name: envoy
       namespace: network
+  path: ./k8s/apps/monitoring/kube-prometheus-stack/app
   prune: true
   sourceRef:
     kind: GitRepository

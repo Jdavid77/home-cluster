@@ -5,12 +5,12 @@ metadata:
   name: cilium
 spec:
   targetNamespace: kube-system
-  path: ./k8s/apps/kube-system/cilium/app
   dependsOn:
     - name: envoy
       namespace: network
     - name: prometheus-operator-crds
       namespace: monitoring
+  path: ./k8s/apps/kube-system/cilium/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -33,10 +33,10 @@ metadata:
   name: cilium-resources
 spec:
   targetNamespace: kube-system
-  path: ./k8s/apps/kube-system/cilium/resources
-  prune: true
   dependsOn:
     - name: cilium
+  path: ./k8s/apps/kube-system/cilium/resources
+  prune: true
   sourceRef:
     kind: GitRepository
     name: home-cluster

@@ -5,7 +5,6 @@ metadata:
   name: pihole-exporter
 spec:
   targetNamespace: monitoring
-  path: ./k8s/apps/monitoring/pihole-exporter/app
   dependsOn:
     - name: external-secrets-store
       namespace: external-secrets
@@ -13,6 +12,7 @@ spec:
       namespace: monitoring
     - name: prometheus-operator-crds
       namespace: monitoring
+  path: ./k8s/apps/monitoring/pihole-exporter/app
   prune: true
   sourceRef:
     kind: GitRepository

@@ -4,12 +4,12 @@ kind: Kustomization
 metadata:
   name: atlantis
 spec:
+  targetNamespace: development
   dependsOn:
     - name: external-secrets-store
       namespace: external-secrets
     - name: envoy
       namespace: network
-  targetNamespace: development
   path: ./k8s/apps/development/atlantis/app
   prune: true
   sourceRef:

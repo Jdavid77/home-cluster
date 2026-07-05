@@ -5,21 +5,21 @@ metadata:
   name: external-secrets-store
 spec:
   targetNamespace: external-secrets
+  dependsOn:
+    - name: external-secrets
+      namespace: external-secrets
   path: ./k8s/apps/external-secrets/akeyless/store
   prune: true
   sourceRef:
     kind: GitRepository
     name: home-cluster
     namespace: flux-system
-  wait: true
-  interval: 30m
-  retryInterval: 2m
-  timeout: 15m
-  dependsOn:
-    - name: external-secrets
-      namespace: external-secrets
   healthCheckExprs:
     - apiVersion: external-secrets.io/v1
       kind: ClusterSecretStore
       failed: status.conditions.filter(e, e.type == 'Ready').all(e, e.status == 'False')
       current: status.conditions.filter(e, e.type == 'Ready').all(e, e.status == 'True')
+  wait: true
+  interval: 30m
+  retryInterval: 2m
+  timeout: 15m

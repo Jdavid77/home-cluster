@@ -5,10 +5,10 @@ metadata:
   name: external-secrets
 spec:
   targetNamespace: external-secrets
-  path: ./k8s/apps/external-secrets/external-secrets/app
   dependsOn:
     - name: prometheus-operator-crds
       namespace: monitoring
+  path: ./k8s/apps/external-secrets/external-secrets/app
   prune: true
   sourceRef:
     kind: GitRepository

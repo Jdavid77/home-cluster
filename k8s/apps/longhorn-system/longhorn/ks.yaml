@@ -35,9 +35,9 @@ metadata:
   name: longhorn-jobs
 spec:
   targetNamespace: longhorn-system
-  path: ./k8s/apps/longhorn-system/longhorn/jobs
   dependsOn:
     - name: longhorn
+  path: ./k8s/apps/longhorn-system/longhorn/jobs
   prune: true
   sourceRef:
     kind: GitRepository
@@ -55,9 +55,9 @@ metadata:
   name: longhorn-storageclasses
 spec:
   targetNamespace: longhorn-system
-  path: ./k8s/apps/longhorn-system/longhorn/storageclasses
   dependsOn:
     - name: longhorn
+  path: ./k8s/apps/longhorn-system/longhorn/storageclasses
   prune: true
   sourceRef:
     kind: GitRepository

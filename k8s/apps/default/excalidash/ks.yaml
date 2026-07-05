@@ -4,12 +4,12 @@ kind: Kustomization
 metadata:
   name: &app excalidash
 spec:
+  targetNamespace: default
   dependsOn:
     - name: volsync
       namespace: backup
     - name: envoy
       namespace: network
-  targetNamespace: default
   path: ./k8s/apps/default/excalidash/app
   prune: true
   sourceRef:

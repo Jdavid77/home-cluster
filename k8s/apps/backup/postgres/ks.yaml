@@ -5,10 +5,10 @@ metadata:
   name: postgres-backup
 spec:
   targetNamespace: backup
-  path: ./k8s/apps/backup/postgres/cron
   dependsOn:
     - name: external-secrets-store
       namespace: external-secrets
+  path: ./k8s/apps/backup/postgres/cron
   prune: true
   sourceRef:
     kind: GitRepository

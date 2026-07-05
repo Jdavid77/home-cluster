@@ -4,6 +4,7 @@ kind: Kustomization
 metadata:
   name: &app linkding
 spec:
+  targetNamespace: default
   dependsOn:
     - name: volsync
       namespace: backup
@@ -11,7 +12,6 @@ spec:
       namespace: network
     - name: external-secrets-store
       namespace: external-secrets
-  targetNamespace: default
   path: ./k8s/apps/default/linkding/app
   prune: true
   sourceRef:

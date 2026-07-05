@@ -5,6 +5,10 @@ metadata:
   name: cloudflared-tunnel
 spec:
   targetNamespace: network
+  dependsOn:
+    - name: external-dns-cloudflare
+    - name: external-secrets-store
+      namespace: external-secrets
   path: ./k8s/apps/network/cloudflared/app
   prune: true
   sourceRef:
@@ -25,7 +29,3 @@ spec:
   interval: 30m
   retryInterval: 2m
   timeout: 15m
-  dependsOn:
-    - name: external-dns-cloudflare
-    - name: external-secrets-store
-      namespace: external-secrets

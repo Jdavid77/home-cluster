@@ -5,12 +5,12 @@ metadata:
   name: crd-schema-publisher
 spec:
   targetNamespace: kube-system
-  path: ./k8s/apps/kube-system/crd-schema-publisher/app
   dependsOn:
     - name: prometheus-operator-crds
       namespace: monitoring
     - name: grafana-operator
       namespace: monitoring
+  path: ./k8s/apps/kube-system/crd-schema-publisher/app
   prune: true
   sourceRef:
     kind: GitRepository

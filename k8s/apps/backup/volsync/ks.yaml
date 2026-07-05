@@ -4,6 +4,7 @@ kind: Kustomization
 metadata:
   name: volsync
 spec:
+  targetNamespace: backup
   dependsOn:
     - name: snapshot-controller
     - name: longhorn-storageclasses
@@ -12,7 +13,6 @@ spec:
       namespace: storage
     - name: grafana-operator
       namespace: monitoring
-  targetNamespace: backup
   path: ./k8s/apps/backup/volsync/app
   prune: true
   sourceRef:

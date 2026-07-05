@@ -5,7 +5,6 @@ metadata:
   name: &app shelfmark
 spec:
   targetNamespace: media
-  path: ./k8s/apps/media/shelfmark/app
   dependsOn:
     - name: zot
       namespace: storage
@@ -13,16 +12,17 @@ spec:
       namespace: backup
     - name: envoy
       namespace: network
+  path: ./k8s/apps/media/shelfmark/app
   prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-cluster
+    namespace: flux-system
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
       name: shelfmark
       namespace: media
-  sourceRef:
-    kind: GitRepository
-    name: home-cluster
-    namespace: flux-system
   components:
     - ../../../../components/volsync/local
     - ../../../../components/volsync/remote

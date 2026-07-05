@@ -5,12 +5,12 @@ metadata:
   name: snapshot-controller
 spec:
   targetNamespace: backup
-  path: ./k8s/apps/backup/snapshot-controller/app
   dependsOn:
     - name: longhorn
       namespace: longhorn-system
     - name: prometheus-operator-crds
       namespace: monitoring
+  path: ./k8s/apps/backup/snapshot-controller/app
   prune: true
   sourceRef:
     kind: GitRepository

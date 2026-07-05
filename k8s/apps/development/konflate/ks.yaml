@@ -4,12 +4,12 @@ kind: Kustomization
 metadata:
   name: konflate
 spec:
+  targetNamespace: development
   dependsOn:
     - name: envoy
       namespace: network
     - name: external-secrets-store
       namespace: external-secrets
-  targetNamespace: development
   path: ./k8s/apps/development/konflate/app
   prune: true
   sourceRef:

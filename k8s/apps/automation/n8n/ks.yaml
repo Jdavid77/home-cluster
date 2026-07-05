@@ -5,7 +5,6 @@ metadata:
   name: &app n8n
 spec:
   targetNamespace: automation
-  path: ./k8s/apps/automation/n8n/app
   dependsOn:
     - name: volsync
       namespace: backup
@@ -15,6 +14,7 @@ spec:
       namespace: network
     - name: prometheus-operator-crds
       namespace: monitoring
+  path: ./k8s/apps/automation/n8n/app
   prune: true
   sourceRef:
     kind: GitRepository

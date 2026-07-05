@@ -5,10 +5,10 @@ metadata:
   name: tailscale-operator
 spec:
   targetNamespace: network
-  path: ./k8s/apps/network/tailscale/operator
   dependsOn:
     - name: external-secrets-store
       namespace: external-secrets
+  path: ./k8s/apps/network/tailscale/operator
   prune: true
   sourceRef:
     kind: GitRepository
@@ -36,9 +36,9 @@ metadata:
   name: tailscale-connectors
 spec:
   targetNamespace: network
-  path: ./k8s/apps/network/tailscale/connectors
   dependsOn:
     - name: tailscale-device
+  path: ./k8s/apps/network/tailscale/connectors
   prune: true
   sourceRef:
     kind: GitRepository
@@ -56,9 +56,9 @@ metadata:
   name: tailscale-device
 spec:
   targetNamespace: network
-  path: ./k8s/apps/network/tailscale/device
   dependsOn:
     - name: tailscale-operator
+  path: ./k8s/apps/network/tailscale/device
   prune: true
   sourceRef:
     kind: GitRepository

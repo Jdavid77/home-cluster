@@ -5,12 +5,12 @@ metadata:
   name: external-dns-cloudflare
 spec:
   targetNamespace: network
-  path: ./k8s/apps/network/external-dns/cloudflare
   dependsOn:
     - name: external-secrets-store
       namespace: external-secrets
     - name: grafana-operator
       namespace: monitoring
+  path: ./k8s/apps/network/external-dns/cloudflare
   prune: true
   sourceRef:
     kind: GitRepository
@@ -38,10 +38,10 @@ metadata:
   name: external-dns-pihole
 spec:
   targetNamespace: network
-  path: ./k8s/apps/network/external-dns/pihole
   dependsOn:
     - name: external-secrets-store
       namespace: external-secrets
+  path: ./k8s/apps/network/external-dns/pihole
   prune: true
   sourceRef:
     kind: GitRepository

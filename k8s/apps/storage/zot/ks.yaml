@@ -5,12 +5,12 @@ metadata:
   name: &app zot
 spec:
   targetNamespace: storage
-  path: ./k8s/apps/storage/zot/app
   dependsOn:
     - name: external-secrets-store
       namespace: external-secrets
     - name: envoy
       namespace: network
+  path: ./k8s/apps/storage/zot/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -43,10 +43,10 @@ metadata:
   name: flux-mirror
 spec:
   targetNamespace: storage
-  path: ./k8s/apps/storage/zot/flux-mirror
-  prune: true
   dependsOn:
     - name: zot
+  path: ./k8s/apps/storage/zot/flux-mirror
+  prune: true
   sourceRef:
     kind: GitRepository
     name: home-cluster

@@ -28,13 +28,13 @@ metadata:
   name: tuppr-upgrades
 spec:
   targetNamespace: system-upgrade
+  dependsOn:
+    - name: tuppr
   path: ./k8s/apps/system-upgrade/tuppr/upgrade
+  prune: true
   sourceRef:
     kind: GitRepository
     name: home-cluster
     namespace: flux-system
-  prune: true
   wait: false
   interval: 20m
-  dependsOn:
-    - name: tuppr

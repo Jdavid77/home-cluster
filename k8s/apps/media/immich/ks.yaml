@@ -5,13 +5,13 @@ metadata:
   name: &app immich
 spec:
   targetNamespace: media
-  path: ./k8s/apps/media/immich/app
-  prune: true
   dependsOn:
     - name: external-secrets-store
       namespace: external-secrets
     - name: envoy
       namespace: network
+  path: ./k8s/apps/media/immich/app
+  prune: true
   sourceRef:
     kind: GitRepository
     name: home-cluster
