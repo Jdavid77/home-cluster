@@ -73,18 +73,6 @@ image → env → envFrom → probes → securityContext → resources
 - Image tag must include the digest pinned with `@sha256:<digest>`.
 - Port defined as `&port <number>` anchor; referenced with `*port` in `backendRefs`.
 
-## Resource requests
-
-Always set at minimum:
-
-```yaml
-resources:
-  requests:
-    cpu: 10m
-```
-
-Add `memory` requests and limits sized to the app. Do not set `cpu` limits.
-
 ## Probes
 
 Add liveness/readiness probes when the app exposes a health endpoint. Use an anchor to avoid duplication:

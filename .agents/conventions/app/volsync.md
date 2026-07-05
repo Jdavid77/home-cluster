@@ -46,14 +46,3 @@ persistence:
     globalMounts:
       - path: /data
 ```
-
-## Postgres apps (KEDA component)
-
-If the app uses postgres and has VolSync storage, also add the KEDA postgres component so the database scales down during backup:
-
-```yaml
-components:
-  - ../../../../components/volsync/local
-  - ../../../../components/volsync/remote
-  - ../../../../components/keda/postgres
-```
