@@ -6,21 +6,15 @@ metadata:
 spec:
   interval: 15m
   timeout: 5m
-  maxHistory: 2
   chartRef:
     kind: OCIRepository
     name: app-template
     namespace: flux-system
+  maxHistory: 2
   values:
     controllers:
       audiobookshelf:
         replicas: 1
-        pod:
-          securityContext:
-            runAsUser: &uid 1002
-            runAsGroup: &gid 100
-            fsGroup: 100
-            fsGroupChangePolicy: OnRootMismatch
         containers:
           audiobookshelf:
             image:
@@ -29,8 +23,8 @@ spec:
             env:
               TZ: Europe/Lisbon
               PORT: &port 8080
-              AUDIOBOOKSHELF_UID: *uid
-              AUDIOBOOKSHELF_GID: *gid
+              AUDIOBOOKSHELF_UID: &uid 1002
+              AUDIOBOOKSHELF_GID: &gid 100
               CONFIG_PATH: /config
               METADATA_PATH: /config/metadata
             probes:
@@ -48,6 +42,12 @@ spec:
                 memory: 200Mi
               limits:
                 memory: 600Mi
+        pod:
+          securityContext:
+            runAsUser: *uid
+            runAsGroup: *gid
+            fsGroup: 100
+            fsGroupChangePolicy: OnRootMismatch
     service:
       audiobookshelf:
         controller: audiobookshelf

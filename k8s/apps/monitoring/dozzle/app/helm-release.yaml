@@ -10,6 +10,14 @@ spec:
     name: app-template
     namespace: flux-system
   values:
+    defaultPodOptions:
+      automountServiceAccountToken: true
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
     controllers:
       *app :
         annotations:
@@ -38,14 +46,12 @@ spec:
               capabilities: {drop: ["ALL"]}
         serviceAccount:
           identifier: dozzle
-    defaultPodOptions:
-      automountServiceAccountToken: true
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
-        fsGroupChangePolicy: OnRootMismatch
+    service:
+      dozzle:
+        controller: *app
+        ports:
+          http:
+            port: &port 8080
     route:
       main:
         parentRefs:
@@ -58,13 +64,7 @@ spec:
         rules:
           - backendRefs:
               - name: *app
-                port: &port 8080
-    service:
-      dozzle:
-        controller: *app
-        ports:
-          http:
-            port: *port
+                port: *port
     serviceAccount:
       dozzle: {}
     rbac:

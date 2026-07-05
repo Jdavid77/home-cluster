@@ -13,6 +13,15 @@ spec:
     namespace: flux-system
   maxHistory: 2
   values:
+    defaultPodOptions:
+      imagePullSecrets:
+        - name: ghcr-secret
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+        runAsGroup: 1001
+        seccompProfile: {type: RuntimeDefault}
     controllers:
       ryanair-api:
         replicas: 1
@@ -30,24 +39,21 @@ spec:
                 enabled: false
               readiness: *probes
               startup: *probes
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: {drop: ["ALL"]}
             resources:
               limits:
                 memory: 256Mi
               requests:
                 cpu: 50m
-            securityContext:
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
-              capabilities: {drop: ["ALL"]}
-    defaultPodOptions:
-      imagePullSecrets:
-        - name: ghcr-secret
-      automountServiceAccountToken: false
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 1001
-        runAsGroup: 1001
-        seccompProfile: {type: RuntimeDefault}
+    service:
+      main:
+        controller: ryanair-api
+        ports:
+          http:
+            port: &port 3000
     route:
       main:
         parentRefs:
@@ -60,10 +66,4 @@ spec:
         rules:
           - backendRefs:
               - name: ryanair-api
-                port: &port 3000
-    service:
-      main:
-        controller: ryanair-api
-        ports:
-          http:
-            port: *port
+                port: *port

@@ -13,6 +13,10 @@ spec:
     namespace: flux-system
   maxHistory: 2
   values:
+    defaultPodOptions:
+      automountServiceAccountToken: true
+      imagePullSecrets:
+        - name: gh-secret
     controllers:
       *app :
         replicas: 1
@@ -30,11 +34,6 @@ spec:
                 enabled: false
               readiness: *probes
               startup: *probes
-            resources:
-              limits:
-                memory: 75Mi
-              requests:
-                cpu: 50m
             securityContext:
               runAsNonRoot: true
               runAsUser: 65534
@@ -42,6 +41,11 @@ spec:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
               capabilities: {drop: ["ALL"]}
+            resources:
+              limits:
+                memory: 75Mi
+              requests:
+                cpu: 50m
           frontend:
             image:
               repository: ghcr.io/jdavid77/kubernetes-live-metrics-dashboard-frontend
@@ -61,21 +65,23 @@ spec:
                 enabled: false
               readiness: *probes
               startup: *probes
-            resources:
-              limits:
-                memory: 150Mi
-              requests:
-                cpu: 50m
             securityContext:
               runAsNonRoot: true
               runAsUser: 101
               runAsGroup: 101
               allowPrivilegeEscalation: false
               capabilities: {drop: ["ALL"]}
-    defaultPodOptions:
-      automountServiceAccountToken: true
-      imagePullSecrets:
-        - name: gh-secret
+            resources:
+              limits:
+                memory: 150Mi
+              requests:
+                cpu: 50m
+    service:
+      main:
+        controller: *app
+        ports:
+          http:
+            port: &port 8080
     route:
       main:
         parentRefs:
@@ -88,13 +94,7 @@ spec:
         rules:
           - backendRefs:
               - name: *app
-                port: &port 8080
-    service:
-      main:
-        controller: *app
-        ports:
-          http:
-            port: *port
+                port: *port
     serviceAccount:
       *app :
         enabled: true
