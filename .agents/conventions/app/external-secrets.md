@@ -42,12 +42,4 @@ spec:
 
 ## `healthCheckExprs` entry in `ks.yaml`
 
-When an ExternalSecret is present, add this block to `ks.yaml` so Flux tracks sync failures:
-
-```yaml
-healthCheckExprs:
-  - apiVersion: external-secrets.io/v1
-    kind: ExternalSecret
-    failed: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSyncedError')
-    current: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSynced')
-```
+When an ExternalSecret is present, add a `healthCheckExprs` block to `ks.yaml` so Flux tracks sync failures. See `kustomization.md` for the exact snippet.

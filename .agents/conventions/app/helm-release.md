@@ -38,19 +38,7 @@ spec:
         ports:
           http:
             port: &port 8080
-    route:
-      main:
-        parentRefs:
-          - kind: Gateway
-            name: internal
-            namespace: network
-            sectionName: websecure
-        hostnames:
-          - my-app.jnobrega.com
-        rules:
-          - backendRefs:
-              - name: *app
-                port: *port
+    # route — see routing.md for the full route block
 ```
 
 ## Rules
