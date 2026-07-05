@@ -1,0 +1,43 @@
+# Canonical property ordering for Flux Kustomization and HelmRelease resources.
+# This is the single source of truth — both convention docs and lint scripts read from here.
+# Edit here to change the enforced order.
+
+ks_spec:
+  - targetNamespace
+  - dependsOn
+  - path
+  - prune
+  - sourceRef
+  - healthChecks
+  - healthCheckExprs
+  - components
+  - postBuild
+  - wait
+  - interval
+  - retryInterval
+  - timeout
+
+hr_values:
+  - defaultPodOptions
+  - controllers
+  - service
+  - route
+  - persistence
+  - serviceAccount
+  - rbac
+
+hr_controller:
+  - replicas
+  - strategy
+  - annotations
+  - initContainers
+  - containers
+  - pod
+
+hr_container:
+  - image
+  - env
+  - envFrom
+  - probes
+  - securityContext
+  - resources

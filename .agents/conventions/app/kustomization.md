@@ -4,6 +4,8 @@ Every app has a `ks.yaml` at `k8s/apps/{namespace}/{app}/ks.yaml`. This file def
 
 ## Property order
 
+Canonical order is defined in `ordering.yaml` (key `ks_spec`) and enforced by the lint check.
+
 Properties inside `spec` must follow this order:
 
 ```yaml

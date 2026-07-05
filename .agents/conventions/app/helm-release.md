@@ -41,6 +41,28 @@ spec:
     # route — see routing.md for the full route block
 ```
 
+## Ordering
+
+Canonical key order is defined in `ordering.yaml` (keys `hr_values`, `hr_controller`, `hr_container`) and enforced by the lint check.
+
+**Top-level `values:` keys** (optional keys omitted when not needed):
+
+```
+defaultPodOptions → controllers → service → route → persistence → serviceAccount → rbac
+```
+
+**Inside `controllers.<name>:`**
+
+```
+replicas → strategy → annotations → initContainers → containers → pod
+```
+
+**Inside `containers.<name>:`**
+
+```
+image → env → envFrom → probes → securityContext → resources
+```
+
 ## Rules
 
 - `metadata.name` always uses `&app` anchor; reference with `*app` in `service.app.controller`, `healthChecks`, and `backendRefs`.

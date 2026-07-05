@@ -1,14 +1,12 @@
 #!/usr/bin/env python3
-"""One-off script to fix ks.yaml spec property order across all app files."""
+"""Bulk-fix ks.yaml spec property order across all app files."""
 import os
-import re
 import sys
 
-CANONICAL_SPEC_ORDER = [
-    "targetNamespace", "dependsOn", "path", "prune", "sourceRef",
-    "healthChecks", "healthCheckExprs", "components", "postBuild",
-    "wait", "interval", "retryInterval", "timeout",
-]
+sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
+from checks.ks_order import CANONICAL_SPEC_ORDER
+
+import re
 
 SPEC_KEY_RE = re.compile(r'^  (\w+):')
 
@@ -60,7 +58,6 @@ def fix_file(filepath):
     with open(filepath, encoding='utf-8') as f:
         content = f.read()
 
-    # Split into per-document line lists, preserving --- separators
     segments = []
     current_lines = []
     for line in content.splitlines(keepends=True):

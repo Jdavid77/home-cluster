@@ -12,6 +12,12 @@ python3 .claude/skills/lint/scripts/lint.py
 ```
 
 - Exit code 0 → all checks passed, tell the user.
-- Exit code 1 → report each listed file to the user and explain that it is missing a `# yaml-language-server: $schema=...` comment at the top. Do not auto-fix — warn only.
+- Exit code 1 → report each violation. Do not auto-fix — warn only.
 
-Native API groups that skip the schema comment check are defined in `.agents/conventions/app/schema-comments.md`. To add a new check, edit `scripts/lint.py`. To bulk-fix ordering violations, run `python3 .claude/skills/lint/scripts/fix_ks_order.py`.
+| # | Check | Convention | Fix |
+|---|---|---|---|
+| 1 | Schema comments on CRD YAML files | `schema-comments.md` | — |
+| 2 | `ks.yaml` spec property order | `ordering.yaml` → `ks_spec` | `fixes/ks_order.py` |
+| 3 | `helm-release.yaml` values order (app-template only) | `ordering.yaml` → `hr_values/hr_controller/hr_container` | `fixes/hr_order.py` |
+
+New check: add a module under `scripts/checks/`, import in `scripts/lint.py`. New fix: add a script under `scripts/fixes/`.
