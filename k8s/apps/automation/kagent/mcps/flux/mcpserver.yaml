@@ -16,7 +16,7 @@ spec:
       - serve
       - --transport=http
       - --port=9090
-      - --read-onlyy=true
+      - --read-only=true
     volumeMounts:
       - mountPath: /tmp
         name: temp
