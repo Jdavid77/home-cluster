@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/kagent.dev/mcpserver_v1alpha1.json
+apiVersion: kagent.dev/v1alpha1
+kind: MCPServer
+metadata:
+  name: flux-mcp
+spec:
+  transportType: http
+  httpTransport:
+    targetPort: 9090
+    path: /mcp
+  deployment:
+    image: ghcr.io/controlplaneio-fluxcd/flux-operator-mcp:v0.53.0
+    port: 9090
+    imagePullPolicy: IfNotPresent
+    args:
+      - serve
+      - --transport=http
+      - --port=9090
+      - --readonly=true
+    volumeMounts:
+      - mountPath: /tmp
+        name: temp
+    volumes:
+      - name: temp
+        emptyDir: {}
+    serviceAccountName: flux-mcp
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+          - ALL
+      readOnlyRootFilesystem: true
+      runAsNonRoot: true
+      seccompProfile:
+        type: RuntimeDefault
+    env:
+      RUNTIME_NAMESPACE: "automation"
+    resources:
+      limits:
+        cpu: "1"
+        memory: 1Gi
+      requests:
+        cpu: 10m
+        memory: 64Mi

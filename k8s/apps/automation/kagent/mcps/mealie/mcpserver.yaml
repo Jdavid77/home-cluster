@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/kagent.dev/mcpserver_v1alpha1.json
+apiVersion: kagent.dev/v1alpha1
+kind: MCPServer
+metadata:
+  name: mealie-mcp
+spec:
+  transportType: http
+  httpTransport:
+    targetPort: 3000
+    path: /mcp
+  deployment:
+    image: ghcr.io/jdavid77/mealie-mcp-ts:2026.06.15 # {"$imagepolicy": "automation:mealie-mcp-ts:tag"}
+    port: 3000
+    env:
+      MEALIE_URL: http://mealie.default.svc.cluster.local:9000
+      ALLOWED_HOSTS: "mcp.jnobrega.com,localhost"
+    secretRefs:
+      - name: mealie-mcp-secret
+    podSecurityContext:
+      runAsNonRoot: true
+      runAsUser: 1000
+      runAsGroup: 1000
+      seccompProfile:
+        type: RuntimeDefault
+    securityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      capabilities:
+        drop:
+          - ALL
+    resources:
+      requests:
+        cpu: 25m
+        memory: 128Mi
+      limits:
+        memory: 512Mi

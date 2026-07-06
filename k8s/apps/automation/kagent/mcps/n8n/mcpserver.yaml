@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/kagent.dev/mcpserver_v1alpha1.json
+apiVersion: kagent.dev/v1alpha1
+kind: MCPServer
+metadata:
+  name: n8n-mcp
+spec:
+  transportType: http
+  httpTransport:
+    targetPort: 3000
+    path: /mcp
+  deployment:
+    image: registry.jnobrega.com/mirror/czlonkowski/n8n-mcp:2.63.0 # {"$imagepolicy": "automation:n8n-mcp:tag"}
+    port: 3000
+    imagePullSecrets:
+      - name: zot-registry-secret
+    env:
+      MCP_MODE: http
+      PORT: "3000"
+      N8N_API_URL: http://n8n.automation.svc.cluster.local:5678
+      WEBHOOK_SECURITY_MODE: permissive
+      DISABLE_CONSOLE_OUTPUT: "false"
+    secretRefs:
+      - name: n8n-mcp-secret
+    podSecurityContext:
+      fsGroup: 1000
+      fsGroupChangePolicy: OnRootMismatch
+      runAsGroup: 1000
+      runAsNonRoot: true
+      runAsUser: 1000
+    securityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      capabilities:
+        drop:
+          - ALL
+      seccompProfile:
+        type: RuntimeDefault
+    volumeMounts:
+      - name: tmp
+        mountPath: /tmp
+      - name: tmp
+        mountPath: /app/.cache
+        subPath: cache
+    volumes:
+      - name: tmp
+        emptyDir: {}
+    resources:
+      requests:
+        cpu: 25m
+        memory: 128Mi
+      limits:
+        memory: 512Mi

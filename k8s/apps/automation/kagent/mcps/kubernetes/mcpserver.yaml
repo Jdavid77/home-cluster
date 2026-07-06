@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/kagent.dev/mcpserver_v1alpha1.json
+apiVersion: kagent.dev/v1alpha1
+kind: MCPServer
+metadata:
+  name: kubernetes-mcp
+spec:
+  transportType: http
+  httpTransport:
+    targetPort: 8080
+    path: /mcp
+  deployment:
+    image: ghcr.io/containers/kubernetes-mcp-server:v0.0.63
+    port: 8080
+    serviceAccountName: kubernetes-mcp
+    args:
+      - --config
+      - /etc/kubernetes-mcp-server/config.toml
+    volumeMounts:
+      - name: config
+        mountPath: /etc/kubernetes-mcp-server
+        readOnly: true
+    volumes:
+      - name: config
+        configMap:
+          name: kubernetes-mcp-config
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+          - ALL
+      readOnlyRootFilesystem: true
+      runAsNonRoot: true
+      seccompProfile:
+        type: RuntimeDefault

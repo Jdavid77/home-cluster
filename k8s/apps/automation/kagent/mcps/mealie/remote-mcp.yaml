@@ -1,9 +1,0 @@
-# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/kagent.dev/remotemcpserver_v1alpha2.json
-apiVersion: kagent.dev/v1alpha2
-kind: RemoteMCPServer
-metadata:
-  name: mealie-mcp
-spec:
-  description: Mealie MCP Server
-  protocol: STREAMABLE_HTTP
-  url: http://mealie-mcp-server.automation.svc.cluster.local:3000/mcp

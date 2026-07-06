@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kubernetes-mcp-config
+data:
+  config.toml: |-
+    cluster_provider_strategy = "in-cluster"
+    disable_destructive = true
+    list_output = "table"
+    log_level = 2
+    port = "8080"
+    read_only = true
+    stateless = true
+    toolsets = ["core", "config", "helm"]
