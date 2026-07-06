@@ -9,7 +9,7 @@ spec:
     targetPort: 3000
     path: /mcp
   deployment:
-    image: 2.63.0 # {"$imagepolicy": "automation:n8n-mcp"}
+    image: registry.jnobrega.com/mirror/czlonkowski/n8n-mcp:2.63.0 # {"$imagepolicy": "automation:n8n-mcp"}
     port: 3000
     imagePullSecrets:
       - name: zot-registry-secret
