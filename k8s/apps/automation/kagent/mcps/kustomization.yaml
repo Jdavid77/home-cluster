@@ -6,3 +6,4 @@ resources:
   - ./kubernetes
   - ./mealie
   - ./n8n
+  - ./route.yaml

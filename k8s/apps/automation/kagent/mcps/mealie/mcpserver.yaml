@@ -11,6 +11,8 @@ spec:
   deployment:
     image: ghcr.io/jdavid77/mealie-mcp-ts:2026.06.15 # {"$imagepolicy": "automation:mealie-mcp-ts"}
     port: 3000
+    labels:
+      agentgateway.dev/mcp: "true"
     env:
       MEALIE_URL: http://mealie.default.svc.cluster.local:9000
       ALLOWED_HOSTS: "mcp.jnobrega.com,localhost"

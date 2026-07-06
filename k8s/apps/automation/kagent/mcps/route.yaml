@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/agentgateway.dev/agentgatewaybackend_v1alpha1.json
+apiVersion: agentgateway.dev/v1alpha1
+kind: AgentgatewayBackend
+metadata:
+  name: mcp-backend
+spec:
+  mcp:
+    targets:
+      - name: mcp-server-everything
+        selector:
+          services:
+            matchLabels:
+              agentgateway.dev/mcp: "true"

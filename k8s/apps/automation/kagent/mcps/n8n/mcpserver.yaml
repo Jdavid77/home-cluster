@@ -11,6 +11,8 @@ spec:
   deployment:
     image: registry.jnobrega.com/mirror/czlonkowski/n8n-mcp:2.63.0 # {"$imagepolicy": "automation:n8n-mcp"}
     port: 3000
+    labels:
+      agentgateway.dev/mcp: "true"
     imagePullSecrets:
       - name: zot-registry-secret
     env:

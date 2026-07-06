@@ -11,6 +11,8 @@ spec:
   deployment:
     image: ghcr.io/containers/kubernetes-mcp-server:v0.0.63
     port: 8080
+    labels:
+      agentgateway.dev/mcp: "true"
     serviceAccountName: kubernetes-mcp
     args:
       - --config
