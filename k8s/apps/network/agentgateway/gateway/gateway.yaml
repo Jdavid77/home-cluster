@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/gateway.networking.k8s.io/gateway_v1.json
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: agentgateway
+  annotations:
+    external-dns.alpha.kubernetes.io/target: ai.jnobrega.com
+    gatus.home-operations.com/endpoint: |-
+      group: AI
+      interval: 1m
+      ui:
+        hide-hostname: true
+        hide-url: true
+      alerts:
+        - type: pushover
+          send-on-resolved: true
+spec:
+  gatewayClassName: agentgateway
+  infrastructure:
+    annotations:
+      external-dns.alpha.kubernetes.io/hostname: ai.jnobrega.com
+      io.cilium/lb-ipam-ips: 192.168.1.249
+    labels:
+      cilium.l2.announce: "true"
+  listeners:
+    - name: websecure
+      protocol: HTTPS
+      port: 443
+      allowedRoutes:
+        namespaces:
+          from: All
+      tls:
+        certificateRefs:
+          - kind: Secret
+            name: jnobrega.com-tls
