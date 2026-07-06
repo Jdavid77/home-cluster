@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: automation
 resources:
   - ./namespace.yaml
+  - ./agentgateway/ks.yaml
   - ./n8n/ks.yaml
   - ./grist/ks.yaml
   - ./kagent/ks.yaml

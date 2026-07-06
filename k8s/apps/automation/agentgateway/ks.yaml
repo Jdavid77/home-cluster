@@ -4,8 +4,8 @@ kind: Kustomization
 metadata:
   name: agentgateway-crds
 spec:
-  targetNamespace: network
-  path: ./k8s/apps/network/agentgateway/crds
+  targetNamespace: automation
+  path: ./k8s/apps/automation/agentgateway/crds
   prune: true
   sourceRef:
     kind: GitRepository
@@ -15,7 +15,7 @@ spec:
     - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
       name: agentgateway-crds
-      namespace: network
+      namespace: automation
   wait: true
   interval: 30m
   retryInterval: 2m
@@ -27,10 +27,10 @@ kind: Kustomization
 metadata:
   name: &app agentgateway
 spec:
-  targetNamespace: network
+  targetNamespace: automation
   dependsOn:
     - name: agentgateway-crds
-  path: ./k8s/apps/network/agentgateway/app
+  path: ./k8s/apps/automation/agentgateway/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -40,7 +40,7 @@ spec:
     - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
       name: *app
-      namespace: network
+      namespace: automation
   wait: true
   interval: 30m
   retryInterval: 2m
@@ -52,11 +52,12 @@ kind: Kustomization
 metadata:
   name: agentgateway-gateway
 spec:
-  targetNamespace: network
+  targetNamespace: automation
   dependsOn:
     - name: agentgateway
     - name: envoy-certificates
-  path: ./k8s/apps/network/agentgateway/gateway
+      namespace: network
+  path: ./k8s/apps/automation/agentgateway/gateway
   prune: true
   sourceRef:
     kind: GitRepository
