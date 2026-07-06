@@ -16,11 +16,11 @@ spec:
       - --config
       - /etc/kubernetes-mcp-server/config.toml
     volumeMounts:
-      - name: config
+      - name: mcp-config
         mountPath: /etc/kubernetes-mcp-server
         readOnly: true
     volumes:
-      - name: config
+      - name: mcp-config
         configMap:
           name: kubernetes-mcp-config
     securityContext:
