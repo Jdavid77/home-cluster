@@ -54,3 +54,5 @@ resources:
   - substrate.yaml
   - substrate-crds.yaml
   - openshell.yaml
+  - agentgateway.yaml
+  - agentgateway-crds.yaml
