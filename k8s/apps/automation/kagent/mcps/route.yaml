@@ -2,12 +2,49 @@
 apiVersion: agentgateway.dev/v1alpha1
 kind: AgentgatewayBackend
 metadata:
-  name: mcp-backend
+  name: mcp
 spec:
   mcp:
     targets:
-      - name: mcp-server-everything
-        selector:
-          services:
-            matchLabels:
-              agentgateway.dev/mcp: "true"
+      - name: flux
+        static:
+          host: flux-mcp.automation.svc.cluster.local
+          port: 9090
+          protocol: StreamableHTTP
+      - name: kubernetes
+        static:
+          host: kubernetes-mcp.automation.svc.cluster.local
+          port: 8080
+          protocol: StreamableHTTP
+      - name: mealie
+        static:
+          host: mealie-mcp.automation.svc.cluster.local
+          port: 3000
+          protocol: StreamableHTTP
+      - name: n8n
+        static:
+          host: n8n-mcp.automation.svc.cluster.local
+          port: 3000
+          protocol: StreamableHTTP
+---
+# yaml-language-server: $schema=https://k8s-schemas.home-operations.com/gateway.networking.k8s.io/httproute_v1.json
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: mcp
+spec:
+  parentRefs:
+    - name: ai-internal
+      namespace: automation
+      sectionName: websecure
+  hostnames:
+    - mcp.jnobrega.com
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /mcp
+      backendRefs:
+        - name: mcp
+          group: agentgateway.dev
+          kind: AgentgatewayBackend
