@@ -35,7 +35,7 @@ metadata:
 spec:
   parentRefs:
     - name: ai-internal
-      namespace: automation
+      namespace: network
       sectionName: websecure
   hostnames:
     - mcp.jnobrega.com
