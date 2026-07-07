@@ -1,6 +1,6 @@
 services:
   tailscale:
-    image: "tailscale/tailscale:v1.98.4"
+    image: "tailscale/tailscale:v1.98.8"
     container_name: tailnord-tailscale
     hostname: tailnord-tailscale
     command:
