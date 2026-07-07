@@ -3,6 +3,8 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
   name: ai-internal
+  labels:
+    external-dns.internal/provider: pi-hole
   annotations:
     external-dns.alpha.kubernetes.io/target: ai.jnobrega.com
     gatus.home-operations.com/endpoint: |-
