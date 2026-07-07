@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - gateway.yaml
   - mcp.yaml
+  - secret.yaml

@@ -18,6 +18,10 @@ spec:
           protocol: StreamableHTTP
       - name: n8n
         static:
+          policies:
+            auth:
+              secretRef:
+                name: n8n-mcp-auth
           host: n8n-mcp.automation.svc.cluster.local
           port: 3000
           protocol: StreamableHTTP
