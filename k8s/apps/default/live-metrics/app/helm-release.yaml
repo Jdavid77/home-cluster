@@ -25,7 +25,7 @@ spec:
           backend:
             image:
               repository: ghcr.io/jdavid77/kubernetes-live-metrics-dashboard-backend
-              tag: 1.2.1 # {"$imagepolicy": "default:kubernetes-live-metrics-dashboard-backend:tag"}
+              tag: 1.2.2 # {"$imagepolicy": "default:kubernetes-live-metrics-dashboard-backend:tag"}
             env:
               CORS_ORIGIN: https://live.jnobrega.com
               PORT: "8000"
