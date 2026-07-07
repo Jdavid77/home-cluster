@@ -16,11 +16,6 @@ spec:
           host: kubernetes-mcp.automation.svc.cluster.local
           port: 8080
           protocol: StreamableHTTP
-      - name: mealie
-        static:
-          host: mealie-mcp.automation.svc.cluster.local
-          port: 3000
-          protocol: StreamableHTTP
       - name: n8n
         static:
           host: n8n-mcp.automation.svc.cluster.local
