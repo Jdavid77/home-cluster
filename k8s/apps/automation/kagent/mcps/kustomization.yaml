@@ -4,5 +4,4 @@ kind: Kustomization
 resources:
   - ./flux
   - ./kubernetes
-  - ./mealie
   - ./n8n
