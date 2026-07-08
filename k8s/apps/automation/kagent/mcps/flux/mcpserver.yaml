@@ -9,7 +9,7 @@ spec:
     targetPort: 9090
     path: /mcp
   deployment:
-    image: ghcr.io/controlplaneio-fluxcd/flux-operator-mcp:v0.53.0
+    image: ghcr.io/controlplaneio-fluxcd/flux-operator-mcp:v0.54.1
     port: 9090
     labels:
       agentgateway.dev/mcp: "true"
