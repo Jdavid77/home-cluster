@@ -7,4 +7,4 @@ terraform = "latest"
 "aqua:siderolabs/talos" = {version = "latest", exe = "talosctl"}
 "aqua:budimanjojo/talhelper" = "latest"
 "aqua:kustomize" = "latest"
-"aqua:fluxcd/flux2" = "2.9.0"
+"aqua:fluxcd/flux2" = "2.9.1"
