@@ -63,8 +63,3 @@ spec:
               - op: add
                 path: /spec/template/metadata/annotations/reloader.stakater.com~1auto
                 value: "true"
-              - op: add
-                path: /spec/template/spec/containers/0/env/-
-                value:
-                  name: SSL_CERT_FILE
-                  value: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt

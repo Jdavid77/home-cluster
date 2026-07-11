@@ -26,6 +26,7 @@
       "groupName": "substrate",
       "matchDatasources": ["docker"],
       "matchPackageNames": ["/substrate/"],
+      "labels": ["manual-update"],
       "group": {
         "commitMessageTopic": "{{{groupName}}} group"
       },
