@@ -18,7 +18,7 @@ spec:
       imagePullSecrets:
         - name: gh-secret
     controllers:
-      *app:
+      *app :
         replicas: 1
         strategy: RollingUpdate
         containers:
@@ -96,7 +96,7 @@ spec:
               - name: *app
                 port: *port
     serviceAccount:
-      *app:
+      *app :
         enabled: true
     rbac:
       roles:
