@@ -50,6 +50,8 @@ spec:
           "http": {
             "address": "0.0.0.0",
             "port": "5000",
+            "readTimeout": "300s",
+            "writeTimeout": "300s",
             "externalUrl": "https://registry.jnobrega.com",
             "auth": {
               "htpasswd": {
