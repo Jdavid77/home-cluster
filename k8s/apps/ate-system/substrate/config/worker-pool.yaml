@@ -1,0 +1,8 @@
+apiVersion: ate.dev/v1alpha1
+kind: WorkerPool
+metadata:
+  name: default
+  namespace: automation
+spec:
+  replicas: 2
+  ateomImage: ghcr.io/kagent-dev/substrate/ateom-gvisor:v0.0.7

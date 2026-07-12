@@ -9,7 +9,7 @@ spec:
   platform: substrate
   substrate:
     workerPoolRef:
-      name: kagent-default
+      name: default
     snapshotsConfig:
       location: gs://agent-snapshots/promql-agent
   declarative:

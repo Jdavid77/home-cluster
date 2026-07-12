@@ -81,9 +81,9 @@ spec:
         - name: OPENSHELL_INSECURE
           value: "true"
     substrateWorkerPool:
-      create: true
-      ateomImage: ghcr.io/kagent-dev/substrate/ateom-gvisor:v0.0.7
-      replicas: 2
+      create: false
+      # ateomImage: ghcr.io/kagent-dev/substrate/ateom-gvisor:v0.0.7
+      # replicas: 2
     database:
       postgres:
         bundled:
