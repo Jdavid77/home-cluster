@@ -25,7 +25,6 @@ spec:
       namespace: media
   components:
     - ../../../../components/volsync/local
-    - ../../../../components/volsync/remote
     - ../../../../components/keda/nfs
   postBuild:
     substitute:

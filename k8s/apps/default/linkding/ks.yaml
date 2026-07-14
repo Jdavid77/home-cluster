@@ -30,7 +30,6 @@ spec:
       current: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSynced')
   components:
     - ../../../../components/volsync/local
-    - ../../../../components/volsync/remote
   postBuild:
     substitute:
       APP: *app

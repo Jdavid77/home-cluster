@@ -32,7 +32,6 @@ spec:
       current: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSynced')
   components:
     - ../../../../components/volsync/local
-    - ../../../../components/volsync/remote
     - ../../../../components/keda/postgres
     - ../../../../components/middlewares/authentik
     - ../../../../components/storage/dragonfly/emulated
