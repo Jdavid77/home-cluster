@@ -1,21 +1,6 @@
 #!/usr/bin/env bash
 
-set -eou pipefail
-
-if ! command -v kubectl > /dev/null; then
-    echo "Kubectl not installed , exiting ..."
-    exit 1
-fi
-
-if ! command -v flux > /dev/null; then
-    echo "Flux CLI not installed , exiting ..."
-    exit 1
-fi
-
-if ! command -v jq > /dev/null; then
-    echo "jq not installed, exiting..."
-    exit 1
-fi
+set -e
 
 echo "Finding HelmReleases with 'field is immutable' errors..."
 RELEASES=$(kubectl get helmreleases -A -o json | jq -r '.items[] | select(.status.conditions[]? | select(.type == "Ready" and .status == "False" and (.message // "" | contains("field is immutable")))) | "\(.metadata.namespace)/\(.metadata.name)"')

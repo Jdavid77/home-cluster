@@ -2,14 +2,6 @@
 
 set -e
 
-usage() {
-    echo "Usage: $0 [suspend|resume]"
-    exit 1
-}
-
-[[ $# -ne 1 ]] && usage
-[[ "$1" != "suspend" && "$1" != "resume" ]] && usage
-
 ACTION=$1
 
 suspend() {

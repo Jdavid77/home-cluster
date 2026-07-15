@@ -1,0 +1,24 @@
+version: '3'
+
+tasks:
+  update:
+    desc: Suspend/Resume Flux kustomizations, helm releases, KEDA scaled objects, and scale down deployments
+    cmd: .scripts/update.sh {{ .OPERATION }}
+    requires:
+      vars: [OPERATION]
+    preconditions:
+      - sh: "[ \"$(kubectl config current-context)\" = \"admin@home-cluster\" ]"
+        msg: "kubectl context must be admin@home-cluster"
+      - sh: "[ '{{.OPERATION}}' = 'suspend' ] || [ '{{.OPERATION}}' = 'resume' ]"
+        msg: "OPERATION must be 'suspend' or 'resume'"
+
+  reset:
+    desc: Reset Talos nodes (--graceful=false --wipe-mode all). Optionally pass node IPs as args
+    prompt: This will WIPE all nodes. Are you sure?
+    vars:
+      NODES:
+        sh: kubectl get nodes -o wide --no-headers | awk '{ print $6 }' | tr '\n' ' '
+    preconditions:
+      - sh: "[ \"$(kubectl config current-context)\" = \"admin@home-cluster\" ]"
+        msg: "kubectl context must be admin@home-cluster"
+    cmd: .scripts/reset.sh {{ .NODES }}

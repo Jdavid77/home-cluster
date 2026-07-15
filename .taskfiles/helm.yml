@@ -1,0 +1,13 @@
+version: '3'
+
+tasks:
+  fix-immutable:
+    desc: Fix HelmReleases stuck with 'field is immutable' errors
+    preconditions:
+      - sh: command -v kubectl
+        msg: kubectl not installed
+      - sh: command -v flux
+        msg: flux not installed
+      - sh: command -v jq
+        msg: jq not installed
+    cmd: .scripts/update-immutable-apps.sh
