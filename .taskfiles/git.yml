@@ -1,0 +1,8 @@
+version: '3'
+
+tasks:
+  install-hooks:
+    desc: Install git hooks
+    cmds:
+      - cp .scripts/enforce-commit-msg.sh .git/hooks/commit-msg
+      - chmod +x .git/hooks/commit-msg
