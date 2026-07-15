@@ -63,7 +63,7 @@ spec:
           mariadb:
             image:
               repository: lscr.io/linuxserver/mariadb
-              tag: 11.4.12@sha256:362791707f68232001d6b4e35739f2a8987a60e13a7d0c9b26c538fb55673de4
+              tag: 11.8.8@sha256:137aff725da4af1effb06e9f98b346e40586cf6ef214d232ea84d7c1e8de69d5
             env:
               TZ: Europe/Lisbon
               MYSQL_USER: booklore
