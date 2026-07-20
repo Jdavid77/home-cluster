@@ -36,7 +36,7 @@ spec:
           app:
             image:
               repository: ghcr.io/jdavid77/akeyless-to-s3
-              tag: v2026.07.13 # {"$imagepolicy": "backup:akeyless-to-s3:tag"}
+              tag: v2026.07.20 # {"$imagepolicy": "backup:akeyless-to-s3:tag"}
               pullPolicy: Always
             env:
               AKEYLESS_GATEWAY_URL: "https://api.akeyless.io"
