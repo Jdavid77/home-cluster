@@ -5,4 +5,4 @@ metadata:
   namespace: automation
 spec:
   replicas: 2
-  ateomImage: ghcr.io/kagent-dev/substrate/ateom-gvisor:v0.0.9
+  ateomImage: ghcr.io/kagent-dev/substrate/ateom-gvisor:v0.0.10
