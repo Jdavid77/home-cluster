@@ -19,7 +19,7 @@ spec:
         tag: v0.156.0@sha256:5ff32ebb65accc207ac9d0dbf6a9d362175f6d70829d697ea5264e33054bc674
       collectorImage:
         repository: ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-contrib
-        tag: 0.156.0@sha256:84036a61f0ee4a7aaa62f357a822ec2738b81a986d70fe12ff23fefce34ae8d1
+        tag: 0.157.0@sha256:4eb842091c796156d4d3c994eb22ba793590f5723719dbf6b8436cb4dfc17f48
     admissionWebhooks:
       certManager:
         enabled: false
