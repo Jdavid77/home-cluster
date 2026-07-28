@@ -18,14 +18,14 @@ spec:
       imagePullSecrets:
         - name: gh-secret
     controllers:
-      *app :
+      *app:
         replicas: 1
         strategy: RollingUpdate
         containers:
           backend:
             image:
               repository: ghcr.io/jdavid77/kubernetes-live-metrics-dashboard-backend
-              tag: 1.2.6 # {"$imagepolicy": "default:kubernetes-live-metrics-dashboard-backend:tag"}
+              tag: 1.2.7 # {"$imagepolicy": "default:kubernetes-live-metrics-dashboard-backend:tag"}
             env:
               CORS_ORIGIN: https://live.jnobrega.com
               PORT: "8000"
@@ -96,7 +96,7 @@ spec:
               - name: *app
                 port: *port
     serviceAccount:
-      *app :
+      *app:
         enabled: true
     rbac:
       roles:
