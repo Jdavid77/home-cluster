@@ -100,3 +100,9 @@ spec:
         path: /photos
         globalMounts:
           - path: /srv/photos
+      confidential:
+        type: nfs
+        server: 192.168.1.84
+        path: /confidential
+        globalMounts:
+          - path: /srv/confidential
