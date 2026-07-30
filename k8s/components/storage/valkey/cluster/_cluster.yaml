@@ -16,6 +16,10 @@ spec:
     cluster-node-timeout: "5000"
     appendonly: "yes"
     protected-mode: "no"
+    # when a pod is rescheduled and gets a new IP
+    # the nodes.conf persisted on each PVC has the old IP hardcoded
+    cluster-preferred-endpoint-type: "hostname"
+    cluster-announce-hostname: "$(hostname).valkey-valkey-${APP}.ate-system.svc.cluster.local"
   podDisruptionBudget:
     mode: Cluster
   scheduling:
