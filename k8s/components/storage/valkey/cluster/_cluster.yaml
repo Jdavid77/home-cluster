@@ -16,7 +16,10 @@ spec:
     cluster-node-timeout: "5000"
     appendonly: "yes"
     protected-mode: "no"
-  topologySpreadConstraints:
-    - maxSkew: 1
-      topologyKey: kubernetes.io/hostname
-      whenUnsatisfiable: ScheduleAnyway
+  podDisruptionBudget:
+    mode: Cluster
+  scheduling:
+    topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: ScheduleAnyway
