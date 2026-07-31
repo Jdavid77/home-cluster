@@ -12,6 +12,16 @@ tasks:
       - sh: "[ '{{.OPERATION}}' = 'suspend' ] || [ '{{.OPERATION}}' = 'resume' ]"
         msg: "OPERATION must be 'suspend' or 'resume'"
 
+  etcd-defrag:
+    desc: Defragment etcd on all control plane nodes sequentially
+    vars:
+      NODES:
+        sh: kubectl get nodes -o wide --no-headers | grep "control-plane" | awk '{ print $6 }' | tr '\n' ' '
+    preconditions:
+      - sh: "[ \"$(kubectl config current-context)\" = \"admin@home-cluster\" ]"
+        msg: "kubectl context must be admin@home-cluster"
+    cmd: .scripts/etcd-defrag.sh {{ .NODES }}
+
   reset:
     desc: Reset Talos nodes (--graceful=false --wipe-mode all). Optionally pass node IPs as args
     prompt: This will WIPE all nodes. Are you sure?
