@@ -16,9 +16,30 @@ spec:
     cluster-node-timeout: "5000"
     appendonly: "yes"
     protected-mode: "no"
-    # when a pod is rescheduled and gets a new IP
-    # the nodes.conf persisted on each PVC has the old IP hardcoded
-    cluster-preferred-endpoint-type: "hostname"
+  containers:
+    - name: server
+      env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+      # when a pod is rescheduled and gets a new IP
+      # the nodes.conf persisted on each PVC has the old IP hardcoded
+      # it required manual intervention using CLUSTER MEET
+      # Passing the new required args via command to make use of POD_NAME
+      command:
+        - valkey-server
+        - /config/valkey.conf
+        - --cluster-announce-ip
+        - $(POD_IP)
+        - --cluster-announce-hostname
+        - $(POD_NAME).valkey-valkey-${APP}.ate-system.svc.cluster.local
+        - --cluster-preferred-endpoint-type
+        - hostname
+        - --primaryuser
+        - _replication
+        - --primaryauth
+        - $(PRIMARY_AUTH)
   podDisruptionBudget:
     mode: Cluster
   scheduling:
