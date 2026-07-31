@@ -58,8 +58,7 @@ spec:
             patch: |-
               - op: add
                 path: /spec/template/metadata/annotations/reloader.stakater.com~1auto
-                value: "true
-          # try this way
+                value: "true"
           - target:
               kind: StatefulSet
               name: valkey-cluster
