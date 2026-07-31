@@ -25,11 +25,36 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
+  name: substrate-bootstrap
+spec:
+  dependsOn:
+    - name: substrate-crds
+  path: ./k8s/apps/ate-system/substrate/bootstrap
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-cluster
+    namespace: flux-system
+  healthChecks:
+    - apiVersion: batch/v1
+      kind: Job
+      name: substrate-ca-bootstrap
+      namespace: podcertificate-controller-system
+  wait: true
+  interval: 30m
+  retryInterval: 2m
+  timeout: 5m
+---
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
   name: &app substrate
 spec:
   targetNamespace: ate-system
   dependsOn:
     - name: substrate-crds
+    - name: substrate-bootstrap
   path: ./k8s/apps/ate-system/substrate/app
   prune: true
   sourceRef:

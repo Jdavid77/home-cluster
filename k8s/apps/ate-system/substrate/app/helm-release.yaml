@@ -12,11 +12,7 @@ spec:
   values:
 
     auth:
-      mode: jwt
-      jwt:
-        # Must match the actual SA token issuer — on bare-metal this is the API server IP, not kubernetes.default.svc.cluster.local.
-        # Verify with: kubectl get --raw /.well-known/openid-configuration | jq .issuer
-        issuer: https://192.168.1.110:6443
+      mode: mtls
 
     createNamespace: false
 

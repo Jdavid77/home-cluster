@@ -13,7 +13,7 @@ additionalApiServerCertSans:
 cniConfig:
   name: none
 patches:
-  - "@patches/kubelet-certificates.yaml"
+  - "@patches/kubelet.yaml"
   - "@patches/kubePrism.yaml"
   - "@patches/containerd.yaml"
   - "@patches/sysctls.yaml"
