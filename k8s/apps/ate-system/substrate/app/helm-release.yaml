@@ -20,12 +20,8 @@ spec:
 
     createNamespace: false
 
-    # i dont want 6 replicas of this LOL
     valkey:
-      enabled: false
-
-    redis:
-      clusterAddress: valkey-valkey-substrate.ate-system.svc.cluster.local:6379
+      enabled: true
 
     # Use garage
     rustfs:
@@ -62,4 +58,18 @@ spec:
             patch: |-
               - op: add
                 path: /spec/template/metadata/annotations/reloader.stakater.com~1auto
-                value: "true"
+                value: "true
+          # try this way
+          - target:
+              kind: StatefulSet
+              name: valkey-cluster
+            patch: |-
+              - op: replace
+                path: /spec/template/spec/containers/0/command
+                value:
+                  - sh
+                  - -c
+                  - >-
+                    exec valkey-server /etc/valkey/valkey.conf
+                    --cluster-announce-hostname "$(hostname).valkey-cluster-service.ate-system.svc.cluster.local"
+                    --cluster-preferred-endpoint-type hostname
