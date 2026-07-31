@@ -41,11 +41,6 @@ spec:
       kind: HelmRelease
       name: substrate
       namespace: ate-system
-  components:
-    - ../../../../components/storage/valkey/cluster
-  postBuild:
-    substitute:
-      APP: *app
   wait: true
   interval: 30m
   retryInterval: 2m
