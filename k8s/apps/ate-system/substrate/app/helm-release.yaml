@@ -59,6 +59,14 @@ spec:
               - op: add
                 path: /spec/template/metadata/annotations/reloader.stakater.com~1auto
                 value: "true"
+              # ate-api-server uses Go's system CA pool for OIDC discovery, not
+              # the cluster CA, even though --client-jwt-ca-cert is passed.
+              # SSL_CERT_FILE makes Go add the cluster CA to that pool.
+              - op: add
+                path: /spec/template/spec/containers/0/env/-
+                value:
+                  name: SSL_CERT_FILE
+                  value: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
           - target:
               kind: StatefulSet
               name: valkey-cluster
