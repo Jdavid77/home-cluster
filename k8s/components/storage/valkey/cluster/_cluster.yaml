@@ -3,7 +3,7 @@
 apiVersion: valkey.io/v1alpha1
 kind: ValkeyCluster
 metadata:
-  name: valkey-${APP}
+  name: ${APP}
 spec:
   shards: 1
   replicas: 2
@@ -29,7 +29,7 @@ spec:
       # Passing the new required args via command to make use of POD_NAME
       args:
         - --cluster-announce-hostname
-        - $(POD_NAME).valkey-valkey-${APP}.ate-system.svc.cluster.local
+        - $(POD_NAME).valkey-${APP}.ate-system.svc.cluster.local
         - --cluster-preferred-endpoint-type
         - hostname
   podDisruptionBudget:
