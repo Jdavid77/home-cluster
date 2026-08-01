@@ -16,17 +16,23 @@ suspend() {
     done
 
     echo "==> Pausing KEDA scaled objects..."
-    k get scaledobjects -A | awk 'NR>1 {print $1, $2}' | while read ns so; do
-        k annotate scaledobject "$so" -n "$ns" \
+    kubectl get scaledobjects -A | awk 'NR>1 {print $1, $2}' | while read ns so; do
+        kubectl annotate scaledobject "$so" -n "$ns" \
             autoscaling.keda.sh/paused="true" \
-            autoscaling.keda.sh/paused-replicas="0" \
             --overwrite
     done
 
-    echo "==> Scaling down all deployments..."
-    k get deploy -A | awk 'NR>1 {print $1, $2}' | while read ns deploy; do
-        k scale deployment "$deploy" -n "$ns" --replicas=0
-    done
+    echo "==> Scaling down deployments with Longhorn PVCs..."
+    kubectl get pvc -A -o custom-columns='NS:.metadata.namespace,NAME:.metadata.name,SC:.spec.storageClassName' \
+        | awk '/longhorn/ {print $1, $2}' \
+        | while read -r ns pvc; do
+            kubectl get deploy -n "$ns" -o json \
+                | jq -r --arg pvc "$pvc" \
+                    '.items[] | select(.spec.template.spec.volumes[]?.persistentVolumeClaim.claimName == $pvc) | .metadata.name' \
+                | while read -r deploy; do
+                    kubectl scale deployment "$deploy" -n "$ns" --replicas=0
+                done
+        done
 
     echo "Done. Cluster workloads suspended."
 }
@@ -43,10 +49,9 @@ resume() {
     done
 
     echo "==> Unpausing KEDA scaled objects..."
-    k get scaledobjects -A | awk 'NR>1 {print $1, $2}' | while read ns so; do
-        k annotate scaledobject "$so" -n "$ns" \
+    kubectl get scaledobjects -A | awk 'NR>1 {print $1, $2}' | while read ns so; do
+        kubectl annotate scaledobject "$so" -n "$ns" \
             autoscaling.keda.sh/paused- \
-            autoscaling.keda.sh/paused-replicas- \
             --overwrite
     done
 

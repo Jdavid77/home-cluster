@@ -6,9 +6,10 @@ metadata:
   namespace: system-upgrade
 spec:
   talos:
-    version: v1.13.0
+    version: v1.13.7
   policy:
     rebootMode: powercycle
+    waitForVolumeDetach: true
   healthChecks:
     - apiVersion: volsync.backube/v1alpha1
       kind: ReplicationSource
