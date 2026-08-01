@@ -31,6 +31,7 @@ spec:
   postBuild:
     substitute:
       APP: authentik-server
+      MAX_REPLICAS: "2"
   wait: true
   interval: 30m
   retryInterval: 2m
