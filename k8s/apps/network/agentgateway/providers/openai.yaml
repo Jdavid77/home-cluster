@@ -14,7 +14,7 @@ spec:
     template:
       engineVersion: v2
       data:
-        Authorization: '{{ OPENAI_API_KEY }}'
+        Authorization: '{{ .OPENAI_API_KEY }}'
   dataFrom:
     - extract:
         key: /kagent/openai
