@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/external-secrets.io/externalsecret_v1.json
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: &secret openai-secret
+spec:
+  refreshInterval: 5m
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: akeyless-secret-store
+  target:
+    name: *secret
+    creationPolicy: Owner
+    template:
+      engineVersion: v2
+  dataFrom:
+    - extract:
+        key: /kagent/openai
+---
+apiVersion: agentgateway.dev/v1alpha1
+kind: AgentgatewayBackend
+metadata:
+  name: openai
+spec:
+  ai:
+    provider:
+      openai:
+        model: gpt-5.4-2026-03-05
+  policies:
+    auth:
+      secretRef:
+        name: openai-secret
+    ai:
+      routes:
+        "/v1/responses": "Responses"
+        "/v1/chat/completions": "Completions"
+        "/v1/models": "Models"
+        "*": "Passthrough"
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: openai
+spec:
+  parentRefs:
+    - name: ai-internal
+      namespace: network
+      sectionName: websecure
+  rules:
+    - backendRefs:
+      - name: openai
+        group: agentgateway.dev
+        kind: AgentgatewayBackend
