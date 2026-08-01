@@ -5,7 +5,6 @@ omv/**/.env
 .decrypted
 *.tmp.yaml
 .tmp.env
-.mcp.json
 .claude/*
 !.claude/skills
 __pycache__/

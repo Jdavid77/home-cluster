@@ -46,6 +46,8 @@ spec:
     - name: ai-internal
       namespace: network
       sectionName: websecure
+  hostnames:
+    - openai.jnobrega.com
   rules:
     - backendRefs:
       - name: openai
