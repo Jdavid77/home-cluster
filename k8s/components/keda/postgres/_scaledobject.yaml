@@ -9,12 +9,17 @@ spec:
   maxReplicaCount: ${MAX_REPLICAS:=1}
   advanced:
     restoreToOriginalReplicaCount: true
+    scalingModifiers:
+      formula: "trig_postgres * ${MAX_REPLICAS:=1}"
+      target: "1"
+      activationTarget: "0"
   scaleTargetRef:
     apiVersion: apps/v1
     kind: ${CONTROLLER:=Deployment}
     name: ${APP}
   triggers:
-    - type: prometheus
+    - name: trig_postgres
+      type: prometheus
       metadata:
         serverAddress: http://prometheus-operated.monitoring.svc.cluster.local:9090
         query: max_over_time(probe_success{instance=~".+:5432"}[1m])
