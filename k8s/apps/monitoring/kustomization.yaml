@@ -15,7 +15,6 @@ resources:
   - ./gatus/ks.yaml
   - ./blackbox-exporter/ks.yaml
   - ./keda/ks.yaml
-  - ./dozzle/ks.yaml
   - ./kromgo/ks.yaml
 components:
   - ../../components/alerts/alertmanager
