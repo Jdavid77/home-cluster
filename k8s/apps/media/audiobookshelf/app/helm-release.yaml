@@ -19,7 +19,7 @@ spec:
           audiobookshelf:
             image:
               repository: ghcr.io/advplyr/audiobookshelf
-              tag: 2.35.1@sha256:54a0f832278d5fbc10a038cfb9da26f227dfc6fa054f645699dbfa0ff0b97502
+              tag: 2.36.0@sha256:e388e90e381ae3fa8660346612b2955f2c555ede81c9c286e2218bdf966b4de8
             env:
               TZ: Europe/Lisbon
               PORT: &port 8080
