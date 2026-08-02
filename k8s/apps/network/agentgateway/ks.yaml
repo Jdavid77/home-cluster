@@ -78,15 +78,15 @@ spec:
     - name: agentgateway-gateway
   path: ./k8s/apps/network/agentgateway/mcp
   prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-cluster
+    namespace: flux-system
   healthCheckExprs:
     - apiVersion: external-secrets.io/v1
       kind: ExternalSecret
       failed: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSyncedError')
       current: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSynced')
-  sourceRef:
-    kind: GitRepository
-    name: home-cluster
-    namespace: flux-system
   wait: true
   interval: 30m
   retryInterval: 2m
@@ -104,15 +104,15 @@ spec:
     - name: agentgateway-gateway
   path: ./k8s/apps/network/agentgateway/providers
   prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-cluster
+    namespace: flux-system
   healthCheckExprs:
     - apiVersion: external-secrets.io/v1
       kind: ExternalSecret
       failed: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSyncedError')
       current: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSynced')
-  sourceRef:
-    kind: GitRepository
-    name: home-cluster
-    namespace: flux-system
   wait: true
   interval: 30m
   retryInterval: 2m

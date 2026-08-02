@@ -16,6 +16,7 @@ spec:
       remoteRef:
         key: /github/jnobrega-bot-key
 ---
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/generators.external-secrets.io/githubaccesstoken_v1alpha1.json
 # 2. create a GithubAccessToken using GitHub App Credentials
 apiVersion: generators.external-secrets.io/v1alpha1
 kind: GithubAccessToken
@@ -30,6 +31,7 @@ spec:
         name: jnobrega-bot-pem
         key: private_key_pem
 ---
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/external-secrets.io/externalsecret_v1.json
 # 3. create a secret containing the required keys
 apiVersion: external-secrets.io/v1
 kind: ExternalSecret

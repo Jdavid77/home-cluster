@@ -10,6 +10,7 @@ spec:
   secretRef:
     name: gh-secret
 ---
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/image.toolkit.fluxcd.io/imagerepository_v1.json
 apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImageRepository
 metadata:
@@ -21,6 +22,7 @@ spec:
   secretRef:
     name: gh-secret
 ---
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/image.toolkit.fluxcd.io/imagepolicy_v1.json
 apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImagePolicy
 metadata:
@@ -32,6 +34,7 @@ spec:
     semver:
       range: '>=1.0.0'
 ---
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/image.toolkit.fluxcd.io/imagepolicy_v1.json
 apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImagePolicy
 metadata:

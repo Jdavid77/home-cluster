@@ -3,7 +3,8 @@ import re
 import sys
 
 CONVENTIONS_FILE = ".agents/conventions/app/schema-comments.md"
-_TOP_LEVEL_API_VERSION = re.compile(r'^apiVersion:\s*(\S+)')
+_API_VERSION = re.compile(r'^apiVersion:\s*(\S+)', re.MULTILINE)
+_DOC_SEP = re.compile(r'^---[ \t]*$', re.MULTILINE)
 
 
 def _load_native_api_groups():
@@ -31,21 +32,15 @@ def check_schema_comments(root="k8s/"):
             with open(filepath, encoding="utf-8", errors="ignore") as f:
                 content = f.read()
 
-            api_version = None
-            for line in content.splitlines():
-                m = _TOP_LEVEL_API_VERSION.match(line)
-                if m:
-                    api_version = m.group(1)
-                    break
-            if api_version is None:
-                continue
-
-            if "# yaml-language-server" in content:
-                continue
-
-            if api_version in native_groups:
-                continue
-
-            issues.append(filepath)
+            for doc in _DOC_SEP.split(content):
+                m = _API_VERSION.search(doc)
+                if not m:
+                    continue
+                if m.group(1) in native_groups:
+                    continue
+                if "# yaml-language-server" in doc:
+                    continue
+                issues.append(filepath)
+                break
 
     return issues

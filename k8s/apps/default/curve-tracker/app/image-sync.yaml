@@ -10,6 +10,7 @@ spec:
   secretRef:
     name: gh-secret
 ---
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/image.toolkit.fluxcd.io/imagepolicy_v1.json
 apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImagePolicy
 metadata:

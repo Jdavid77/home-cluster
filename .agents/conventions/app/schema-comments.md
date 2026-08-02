@@ -63,5 +63,6 @@ Native Kubernetes API types are not served by the custom schema server. Skip the
 - `policy/v1`
 - `storage.k8s.io/v1`
 - `admissionregistration.k8s.io/v1`
+- `admissionregistration.k8s.io/v1beta1`
 - `mirror.plugin.fluxcd.io/v1beta1`
 - `apiextensions.k8s.io/v1`
