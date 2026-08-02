@@ -6,7 +6,7 @@ metadata:
   namespace: development
 spec:
   discoveryFilters:
-    - "Jdavid77/*"
+    - "Jdavid77/home-cluster"
   extraEnv:
     - name: LOG_LEVEL
       value: debug
