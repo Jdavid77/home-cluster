@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     akeyless = {
-      version = "2.0.3"
+      version = "2.0.4"
       source  = "akeyless-community/akeyless"
     }
     sops = {
