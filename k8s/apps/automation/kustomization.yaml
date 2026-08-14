@@ -9,6 +9,7 @@ resources:
   - ./kagent/ks.yaml
   - ./openshell/ks.yaml
   - ./agent-sandbox/ks.yaml
+  - ./agentgateway/ks.yaml
 components:
   - ../../components/alerts/alertmanager
   - ../../components/flux/ghcr

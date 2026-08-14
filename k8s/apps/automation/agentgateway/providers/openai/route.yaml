@@ -6,7 +6,7 @@ metadata:
 spec:
   parentRefs:
     - name: ai-internal
-      namespace: network
+      namespace: automation
       sectionName: websecure
   hostnames:
     - openai.jnobrega.com
