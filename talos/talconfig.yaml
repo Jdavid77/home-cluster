@@ -227,7 +227,17 @@ nodes:
     controlPlane: false
     nodeAnnotations:
       installerImage: '{{ .MachineConfig.MachineInstall.InstallImage }}'
+    schematic:
+      customization:
+        systemExtensions:
+          officialExtensions:
+            - siderolabs/i915
     patches:
+      - |-
+        machine:
+          kernel:
+            modules:
+              - name: i915
       - |-
         machine:
           kubelet:
