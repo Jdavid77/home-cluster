@@ -227,6 +227,8 @@ nodes:
     controlPlane: false
     nodeAnnotations:
       installerImage: '{{ .MachineConfig.MachineInstall.InstallImage }}'
+    nodeLabels:
+      intel.feature.node.kubernetes.io/gpu: "true"
     schematic:
       customization:
         systemExtensions:

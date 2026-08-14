@@ -12,6 +12,7 @@ spec:
     namespace: flux-system
   values:
     name: intel-gpu-plugin
-    # for now
     sharedDevNum: 2
     nodeFeatureRule: false
+    nodeSelector:
+      intel.feature.node.kubernetes.io/gpu: "true"
