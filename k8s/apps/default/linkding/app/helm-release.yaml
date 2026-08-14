@@ -20,7 +20,7 @@ spec:
           app:
             image:
               repository: ghcr.io/sissbruecker/linkding
-              tag: 1.45.0-alpine@sha256:8404735cf38363507c478ebb726c67c58023564609552b9cf52eefc38ad37863
+              tag: 1.46.0-alpine@sha256:edde1ffed22b6a326bc0a4eb07136e3648062b71ddfabebee2a025a9df7d0a7c
             envFrom:
               - secretRef:
                   name: linkding-secret
