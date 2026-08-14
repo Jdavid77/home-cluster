@@ -2,7 +2,7 @@
 clusterName: home-cluster
 endpoint: https://192.168.1.110:6443
 # renovate: datasource=docker depName=ghcr.io/siderolabs/installer
-talosVersion: v1.13.8
+talosVersion: v1.13.7
 # renovate: datasource=docker depName=ghcr.io/siderolabs/kubelet
 kubernetesVersion: v1.36.3
 additionalMachineCertSans:
@@ -232,6 +232,8 @@ nodes:
         systemExtensions:
           officialExtensions:
             - siderolabs/i915
+            - siderolabs/iscsi-tools
+            - siderolabs/util-linux-tools
     patches:
       - |-
         machine:
@@ -258,3 +260,5 @@ nodes:
     machineSpec:
       mode: metal
       arch: amd64
+
+

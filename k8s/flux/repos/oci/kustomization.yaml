@@ -56,3 +56,5 @@ resources:
   - openshell.yaml
   - agentgateway.yaml
   - agentgateway-crds.yaml
+  - intel-device-plugins-operator.yaml
+  - intel-device-plugins-gpu.yaml
