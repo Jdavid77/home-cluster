@@ -29,7 +29,7 @@ spec:
           frontend:
             image:
               repository: ghcr.io/seanmorley15/adventurelog-frontend
-              tag: latest@sha256:af4e53e1965f2b7d62f0e487e7bfa15bf5da0b221588bb8a802eaee66b38bdd1
+              tag: latest@sha256:51ee22428b4192f4372b54f84c8b90cd710311ad99993c5045f53b51717dd3f7
             env:
               PUBLIC_SERVER_URL: "http://adventurelog.default.svc.cluster.local:8000"
               BODY_SIZE_LIMIT: Infinity
