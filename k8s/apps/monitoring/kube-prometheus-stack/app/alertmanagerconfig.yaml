@@ -16,6 +16,11 @@ spec:
       - receiver: pushover
         matchers:
           - name: severity
+            value: warning
+            matchType: =
+      - receiver: pushover
+        matchers:
+          - name: severity
             value: critical
             matchType: =
     groupBy:
