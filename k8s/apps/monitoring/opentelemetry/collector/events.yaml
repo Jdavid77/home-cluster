@@ -58,7 +58,7 @@ spec:
           - k8s.event.reason
           - k8s.object.name
           - k8s.namespace.name
-      :
+      memory_limiter:
         check_interval: 1s
         limit_percentage: 75
         spike_limit_percentage: 15
