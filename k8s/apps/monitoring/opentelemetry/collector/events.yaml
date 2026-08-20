@@ -8,7 +8,7 @@ kind: ClusterRole
 metadata:
   name: otel-collector-events
 rules:
-  - apiGroups: [""]
+  - apiGroups: ["v1"]
     resources: ["events"]
     verbs: ["get", "list", "watch"]
 ---
