@@ -20,6 +20,8 @@ spec:
       collectorImage:
         repository: ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-contrib
         tag: 0.159.0@sha256:4f4276c07cee9055f2ab630a86330243f85e208c388ee697bea2a44dab896c3f
-    admissionWebhooks:
-      certManager:
-        enabled: false
+    extraEnvs:
+    - name: NAMESPACE
+      valueFrom:
+        fieldRef:
+          fieldPath: metadata.namespace
