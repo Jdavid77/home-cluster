@@ -1,3 +1,30 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: otel-collector-events
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: otel-collector-events
+rules:
+  - apiGroups: [""]
+    resources: ["events"]
+    verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: &name otel-collector-events
+subjects:
+  - kind: ServiceAccount
+    name: *name
+    namespace: observability
+roleRef:
+  kind: ClusterRole
+  name: *name
+  apiGroup: rbac.authorization.k8s.io
+---
 # yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/opentelemetry.io/opentelemetrycollector_v1beta1.json
 apiVersion: opentelemetry.io/v1beta1
 kind: OpenTelemetryCollector
@@ -7,7 +34,7 @@ spec:
   managementState: managed
   upgradeStrategy: automatic
   mode: deployment
-  serviceAccount: collector
+  serviceAccount: otel-collector-events
   ports:
     - name: health
       port: 13113
@@ -26,6 +53,15 @@ spec:
             group: v1
     processors:
       batch: {}
+      groupbyattrs:
+        keys:
+          - k8s.event.reason
+          - k8s.object.name
+          - k8s.namespace.name
+      :
+        check_interval: 1s
+        limit_percentage: 75
+        spike_limit_percentage: 15
     exporters:
       debug:
         verbosity: detailed
@@ -35,5 +71,5 @@ spec:
       pipelines:
         logs:
           receivers: [k8sobjects]
-          processors: [batch]
+          processors: [batch, groupbyattrs, memory_limiter]
           exporters: [otlphttp/loki, debug]
