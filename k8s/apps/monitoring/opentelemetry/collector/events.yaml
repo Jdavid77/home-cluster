@@ -45,12 +45,8 @@ spec:
           fieldPath: spec.nodeName
   config:
     receivers:
-      k8sobjects:
+      k8s_events:
         auth_type: serviceAccount
-        objects:
-          - name: events
-            mode: watch
-            group: v1
     processors:
       batch: {}
       groupbyattrs:
