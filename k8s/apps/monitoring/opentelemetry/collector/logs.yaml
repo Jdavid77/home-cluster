@@ -56,6 +56,7 @@ spec:
           - /var/log/pods/*/*/*.log
         exclude:
           - /var/log/pods/*/opentelemetry-collector/*.log
+          - /var/log/pods/*/otc-container/*.log
         include_file_path: true
         include_file_name: false
         retry_on_failure:
@@ -66,9 +67,11 @@ spec:
             max_log_size: 102400
             type: container
           - id: json-parser
+            if: 'body matches "^\\{"'
             on_error: send
             type: json_parser
           - id: severity-parser
+            if: 'type(body) == "map" && body["level"] != nil'
             on_error: send
             parse_from: body.level
             type: severity_parser
