@@ -66,6 +66,6 @@ spec:
     service:
       pipelines:
         logs:
-          receivers: [k8sobjects]
+          receivers: [k8s_events]
           processors: [batch, groupbyattrs, memory_limiter]
           exporters: [otlphttp/loki, debug]
