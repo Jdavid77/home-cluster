@@ -110,10 +110,6 @@ spec:
       kind: HelmRelease
       name: n8n-mcp-server
       namespace: automation
-    - apiVersion: helm.toolkit.fluxcd.io/v2
-      kind: HelmRelease
-      name: mealie-mcp-server
-      namespace: automation
   wait: true
   interval: 30m
   retryInterval: 2m
