@@ -64,7 +64,7 @@ spec:
   serviceAccount: otel-github-collector
   ports:
     - name: prometheus
-      port: 8888
+      port: 9464
   env:
     - name: GITHUB_TOKEN
       valueFrom:
@@ -92,7 +92,7 @@ spec:
         spike_limit_percentage: 25
     exporters:
       prometheus:
-        endpoint: 0.0.0.0:8888
+        endpoint: 0.0.0.0:9464
     service:
       extensions: [bearertokenauth/github]
       pipelines:
