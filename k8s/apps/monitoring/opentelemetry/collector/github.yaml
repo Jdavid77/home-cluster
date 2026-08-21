@@ -105,22 +105,21 @@ spec:
             search_query: "repo:Jdavid77/home-cluster"
             auth:
               authenticator: bearertokenauth/github
+            metrics:
+              vcs.change.time_to_approval:
+                enabled: false
+              vcs.ref.lines_delta:
+                enabled: false
+              vcs.ref.revisions_delta:
+                enabled: false
+              vcs.repository.count:
+                enabled: false
     processors:
       batch: {}
       memory_limiter:
         check_interval: 5s
         limit_percentage: 80
         spike_limit_percentage: 25
-      filter/github:
-        metrics:
-          include:
-            match_type: strict
-            metric_names:
-              - vcs_change_count
-              - vcs_ref_count
-              - vcs_change_duration_seconds
-              - vcs_change_time_to_merge_seconds
-              - vcs_ref_time_seconds
     exporters:
       prometheus:
         endpoint: 0.0.0.0:9464
@@ -129,6 +128,6 @@ spec:
       pipelines:
         metrics:
           receivers: [github]
-          processors: [memory_limiter, filter/github, batch]
+          processors: [memory_limiter, batch]
           exporters: [prometheus]
 
