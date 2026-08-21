@@ -1,0 +1,103 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: otel-github-collector
+---
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/external-secrets.io/externalsecret_v1.json
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: jnobrega-bot-pem
+spec:
+  refreshInterval: 5m0s
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: akeyless-secret-store
+  target:
+    name: jnobrega-bot-pem
+  data:
+    - secretKey: private_key_pem
+      remoteRef:
+        key: /github/jnobrega-bot-key
+---
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/generators.external-secrets.io/githubaccesstoken_v1alpha1.json
+apiVersion: generators.external-secrets.io/v1alpha1
+kind: GithubAccessToken
+metadata:
+  name: jnobrega-bot-auth-token
+spec:
+  appID: "1087240"
+  installID: "62936655"
+  auth:
+    privateKey:
+      secretRef:
+        name: jnobrega-bot-pem
+        key: private_key_pem
+---
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/external-secrets.io/externalsecret_v1.json
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: github-token
+spec:
+  refreshInterval: 5m0s
+  target:
+    name: github-token
+    creationPolicy: Owner
+    deletionPolicy: "Delete"
+  dataFrom:
+    - sourceRef:
+        generatorRef:
+          apiVersion: generators.external-secrets.io/v1alpha1
+          kind: GithubAccessToken
+          name: jnobrega-bot-auth-token
+---
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/opentelemetry.io/opentelemetrycollector_v1beta1.json
+apiVersion: opentelemetry.io/v1beta1
+kind: OpenTelemetryCollector
+metadata:
+  name: otel-github
+spec:
+  managementState: managed
+  upgradeStrategy: automatic
+  mode: deployment
+  serviceAccount: otel-github-collector
+  ports:
+    - name: prometheus
+      port: 8888
+  env:
+    - name: GITHUB_TOKEN
+      valueFrom:
+        secretKeyRef:
+          name: github-token
+          key: token
+  config:
+    extensions:
+      bearertokenauth/github:
+        token: ${env:GITHUB_TOKEN}
+    receivers:
+      github:
+        initial_delay: 1s
+        collection_interval: 300s
+        scrapers:
+          scraper:
+            github_org: Jdavid77
+            auth:
+              authenticator: bearertokenauth/github
+    processors:
+      batch: {}
+      memory_limiter:
+        check_interval: 5s
+        limit_percentage: 80
+        spike_limit_percentage: 25
+    exporters:
+      prometheus:
+        endpoint: 0.0.0.0:8888
+    service:
+      extensions: [bearertokenauth/github]
+      pipelines:
+        metrics:
+          receivers: [github]
+          processors: [memory_limiter, batch]
+          exporters: [prometheus]
+
