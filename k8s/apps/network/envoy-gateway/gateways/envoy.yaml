@@ -54,7 +54,9 @@ spec:
   compression:
     - type: Brotli
     - type: Gzip
+  # Prevent iddle conns being dropped
   tcpKeepalive: {}
+  # For long lived connections
   timeout:
     http:
       requestTimeout: 0s
@@ -65,6 +67,7 @@ kind: ClientTrafficPolicy
 metadata:
   name: envoy
 spec:
+  # Tell envoy to trust LB ip, and get the one before as the real IP
   clientIPDetection:
     xForwardedFor:
       numTrustedHops: 1
@@ -77,6 +80,7 @@ spec:
     http:
       requestReceivedTimeout: 0s
   tls:
+    # 1.1 and 1.0 already outdaded
     minVersion: "1.2"
     alpnProtocols:
       - h2
