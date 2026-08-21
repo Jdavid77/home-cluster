@@ -81,6 +81,7 @@ spec:
         collection_interval: 300s
         scrapers:
           scraper:
+            timeout: 60s
             github_org: Jdavid77
             auth:
               authenticator: bearertokenauth/github
