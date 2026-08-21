@@ -60,7 +60,7 @@ spec:
               N8N_COMMUNITY_PACKAGES_ALLOW_TOOL_USAGE: "true"
               NODE_FUNCTION_ALLOW_BUILTIN: "*"
               #===SMTP CONFIGURATION===
-              N8N_SMTP_HOST: mail.gmx.com
+              N8N_SMTP_HOST: mail.gmx.com.
               N8N_SMTP_PORT: 587
               N8N_SMTP_SSL: "false"
             envFrom:

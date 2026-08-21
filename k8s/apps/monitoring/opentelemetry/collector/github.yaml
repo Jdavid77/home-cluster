@@ -40,7 +40,7 @@ kind: ExternalSecret
 metadata:
   name: github-token
 spec:
-  refreshInterval: 5m0s
+  refreshInterval: 1m
   target:
     name: github-token
     creationPolicy: Owner
@@ -82,7 +82,7 @@ spec:
     - name: prometheus
       port: 9464
   podAnnotations:
-    secret.reloader.stakater.com/reload: github-token
+    reloader.stakater.com/auto: "true"
   env:
     - name: GITHUB_TOKEN
       valueFrom:
