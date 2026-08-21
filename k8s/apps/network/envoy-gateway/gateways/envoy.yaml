@@ -72,6 +72,8 @@ spec:
     xForwardedFor:
       numTrustedHops: 1
   http3: {}
+  http2:
+    onInvalidMessage: TerminateStream
   targetSelectors:
     - group: gateway.networking.k8s.io
       kind: Gateway
