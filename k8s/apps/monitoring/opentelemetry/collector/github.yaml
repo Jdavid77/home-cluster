@@ -74,7 +74,7 @@ kind: OpenTelemetryCollector
 metadata:
   name: otel-github
 spec:
-  managementState: managed
+  managementState: unmanaged
   upgradeStrategy: automatic
   mode: deployment
   serviceAccount: otel-github-collector
