@@ -101,6 +101,7 @@ spec:
           scraper:
             timeout: 60s
             github_org: Jdavid77
+            search_query: "repo:Jdavid77/home-cluster"
             auth:
               authenticator: bearertokenauth/github
     processors:
