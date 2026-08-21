@@ -57,7 +57,7 @@
       "targets": [
         {
           "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
-          "expr": "vcs_change_count{job=\"otel-github-collector\", vcs_change_state=\"open\", vcs_repository_name=\"home-cluster\"}",
+          "expr": "max(vcs_change_count{job=\"otel-github-collector\", vcs_change_state=\"open\", vcs_repository_name=\"home-cluster\"})",
           "legendFormat": "Open",
           "refId": "A"
         }
@@ -91,7 +91,7 @@
       "targets": [
         {
           "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
-          "expr": "vcs_change_count{job=\"otel-github-collector\", vcs_change_state=\"merged\", vcs_repository_name=\"home-cluster\"}",
+          "expr": "max(vcs_change_count{job=\"otel-github-collector\", vcs_change_state=\"merged\", vcs_repository_name=\"home-cluster\"})",
           "legendFormat": "Merged",
           "refId": "A"
         }
@@ -125,7 +125,7 @@
       "targets": [
         {
           "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
-          "expr": "vcs_ref_count{job=\"otel-github-collector\", vcs_ref_type=\"branch\", vcs_repository_name=\"home-cluster\"}",
+          "expr": "max(vcs_ref_count{job=\"otel-github-collector\", vcs_ref_type=\"branch\", vcs_repository_name=\"home-cluster\"})",
           "legendFormat": "Branches",
           "refId": "A"
         }
@@ -267,7 +267,7 @@
       "targets": [
         {
           "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
-          "expr": "vcs_change_duration_seconds{job=\"otel-github-collector\", vcs_change_state=\"open\", vcs_repository_name=\"home-cluster\"} / 86400",
+          "expr": "max by (vcs_ref_head_name) (vcs_change_duration_seconds{job=\"otel-github-collector\", vcs_change_state=\"open\", vcs_repository_name=\"home-cluster\"}) / 86400",
           "legendFormat": "{{vcs_ref_head_name}}",
           "refId": "A",
           "instant": true,
@@ -366,7 +366,7 @@
       "targets": [
         {
           "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
-          "expr": "vcs_ref_time_seconds{job=\"otel-github-collector\", vcs_repository_name=\"home-cluster\"} / 86400",
+          "expr": "max by (vcs_ref_head_name) (vcs_ref_time_seconds{job=\"otel-github-collector\", vcs_repository_name=\"home-cluster\"}) / 86400",
           "legendFormat": "{{vcs_ref_head_name}}",
           "refId": "A",
           "instant": true,
