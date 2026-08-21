@@ -96,6 +96,7 @@ spec:
     receivers:
       github:
         initial_delay: 1s
+        # watch out for github rate limit
         collection_interval: 300s
         scrapers:
           scraper:
