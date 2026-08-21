@@ -52,6 +52,22 @@ spec:
           kind: GithubAccessToken
           name: jnobrega-bot-auth-token
 ---
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/monitoring.coreos.com/servicemonitor_v1.json
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: otel-github-collector
+spec:
+  namespaceSelector:
+    matchNames:
+      - monitoring
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: otel-github-collector
+  endpoints:
+    - port: prometheus
+      path: /metrics
+---
 # yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/opentelemetry.io/opentelemetrycollector_v1beta1.json
 apiVersion: opentelemetry.io/v1beta1
 kind: OpenTelemetryCollector
