@@ -107,13 +107,13 @@ spec:
               authenticator: bearertokenauth/github
             metrics:
               vcs.change.time_to_approval:
-                enabled: false
+                enabled: false # time from open to first approval — not tracked
               vcs.ref.lines_delta:
-                enabled: false
+                enabled: false # lines added/removed per branch — not tracked
               vcs.ref.revisions_delta:
-                enabled: false
+                enabled: false # commits ahead/behind base — not tracked
               vcs.repository.count:
-                enabled: false
+                enabled: false # total repo count — not tracked
     processors:
       batch: {}
       memory_limiter:
