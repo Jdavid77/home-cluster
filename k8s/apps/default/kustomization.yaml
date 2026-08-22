@@ -12,6 +12,7 @@ resources:
   - live-metrics/ks.yaml
   - mealie/ks.yaml
   - renderercv/ks.yaml
+  - personal-blog/ks.yaml
   - ryanair-api/ks.yaml
   - wallos/ks.yaml
 components:
