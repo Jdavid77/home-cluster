@@ -81,18 +81,18 @@ spec:
   ports:
     - name: prometheus
       port: 9464
-  podAnnotations:
-    reloader.stakater.com/auto: "true"
-  env:
-    - name: GITHUB_TOKEN
-      valueFrom:
-        secretKeyRef:
-          name: github-token
-          key: token
+  volumes:
+    - name: github-token
+      secret:
+        secretName: github-token
+  volumeMounts:
+    - name: github-token
+      mountPath: /var/run/secrets/github
+      readOnly: true
   config:
     extensions:
       bearertokenauth/github:
-        token: ${env:GITHUB_TOKEN}
+        filename: /var/run/secrets/github/token
     receivers:
       github:
         initial_delay: 1s
