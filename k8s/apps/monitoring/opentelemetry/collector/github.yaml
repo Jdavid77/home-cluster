@@ -130,4 +130,31 @@ spec:
           receivers: [github]
           processors: [memory_limiter, batch]
           exporters: [prometheus]
+---
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/monitoring.coreos.com/prometheusrule_v1.json
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: otel-github-collector
+  labels:
+    prometheus: kube-prometheus
+    role: alert-rules
+spec:
+  groups:
+    - name: github.rules
+      rules:
+        - alert: GitHubStalePRWarning
+          expr: max by (vcs_ref_head_name) (vcs_change_duration_seconds{job="otel-github-collector", vcs_change_state="open"}) > 14 * 86400
+          for: 1h
+          labels:
+            severity: warning
+          annotations:
+            summary: "PR {{ $labels.vcs_ref_head_name }} has been open for {{ $value | humanizeDuration }}"
+        - alert: GitHubStalePRCritical
+          expr: max by (vcs_ref_head_name) (vcs_change_duration_seconds{job="otel-github-collector", vcs_change_state="open"}) > 30 * 86400
+          for: 1h
+          labels:
+            severity: critical
+          annotations:
+            summary: "PR {{ $labels.vcs_ref_head_name }} has been open for {{ $value | humanizeDuration }}"
 
