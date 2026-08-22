@@ -40,7 +40,7 @@ kind: ExternalSecret
 metadata:
   name: github-token
 spec:
-  refreshInterval: 1m
+  refreshInterval: 30m
   target:
     name: github-token
     creationPolicy: Owner
