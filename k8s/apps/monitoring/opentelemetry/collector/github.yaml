@@ -144,7 +144,7 @@ spec:
     - name: github.rules
       rules:
         - alert: GitHubStalePRWarning
-          expr: max by (vcs_ref_head_name) (vcs_change_duration_seconds{job="otel-github-collector", vcs_change_state="open"}) > 14 * 86400
+          expr: max by (vcs_ref_head_name) (vcs_change_duration_seconds{job="otel-github-collector", vcs_change_state="open"}) > 7 * 86400
           for: 1h
           labels:
             severity: warning
