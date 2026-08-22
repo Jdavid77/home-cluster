@@ -36,7 +36,6 @@ spec:
                 memory: 50M
             securityContext:
               allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
               capabilities: {drop: ["ALL"]}
     service:
       app:
