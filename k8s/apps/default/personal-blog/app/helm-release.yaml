@@ -18,6 +18,12 @@ spec:
         - name: gh-secret
     controllers:
       *app:
+        pod:
+          securityContext:
+            runAsUser: 101
+            runAsGroup: 101
+            runAsNonRoot: true
+            fsGroup: 101
         containers:
           app:
             image:
@@ -28,6 +34,10 @@ spec:
                 cpu: 10m
               limits:
                 memory: 50M
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: {drop: ["ALL"]}
     service:
       app:
         controller: *app
