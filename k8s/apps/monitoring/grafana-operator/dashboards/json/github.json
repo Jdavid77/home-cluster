@@ -57,7 +57,7 @@
       "targets": [
         {
           "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
-          "expr": "max(vcs_change_count{job=\"otel-github-collector\", vcs_change_state=\"open\", vcs_repository_name=\"home-cluster\"})",
+          "expr": "max(vcs_change_count{job=\"otel-github-collector\", vcs_change_state=\"open\", vcs_repository_name=\"$repository\"})",
           "legendFormat": "Open",
           "refId": "A"
         }
@@ -91,7 +91,7 @@
       "targets": [
         {
           "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
-          "expr": "max(vcs_ref_count{job=\"otel-github-collector\", vcs_ref_type=\"branch\", vcs_repository_name=\"home-cluster\"})",
+          "expr": "max(vcs_ref_count{job=\"otel-github-collector\", vcs_ref_type=\"branch\", vcs_repository_name=\"$repository\"})",
           "legendFormat": "Branches",
           "refId": "A"
         }
@@ -132,7 +132,7 @@
       "targets": [
         {
           "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
-          "expr": "max(vcs_change_duration_seconds{job=\"otel-github-collector\", vcs_change_state=\"open\", vcs_repository_name=\"home-cluster\"}) / 86400",
+          "expr": "max(vcs_change_duration_seconds{job=\"otel-github-collector\", vcs_change_state=\"open\", vcs_repository_name=\"$repository\"}) / 86400",
           "legendFormat": "Max Age",
           "refId": "A"
         }
@@ -168,7 +168,7 @@
       "targets": [
         {
           "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
-          "expr": "avg(vcs_change_time_to_merge_seconds{job=\"otel-github-collector\", vcs_repository_name=\"home-cluster\"}) / 86400",
+          "expr": "avg(vcs_change_time_to_merge_seconds{job=\"otel-github-collector\", vcs_repository_name=\"$repository\"}) / 86400",
           "legendFormat": "Avg Merge Time",
           "refId": "A"
         }
@@ -228,12 +228,12 @@
         "showHeader": true,
         "sortBy": [{ "desc": true, "displayName": "Age (days)" }]
       },
-      "title": "Open PRs — home-cluster",
+      "title": "Open PRs — $repository",
       "type": "table",
       "targets": [
         {
           "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
-          "expr": "max by (vcs_ref_head_name) (vcs_change_duration_seconds{job=\"otel-github-collector\", vcs_change_state=\"open\", vcs_repository_name=\"home-cluster\"}) / 86400",
+          "expr": "max by (vcs_ref_head_name) (vcs_change_duration_seconds{job=\"otel-github-collector\", vcs_change_state=\"open\", vcs_repository_name=\"$repository\"}) / 86400",
           "legendFormat": "{{vcs_ref_head_name}}",
           "refId": "A",
           "instant": true,
@@ -320,12 +320,12 @@
         "showHeader": true,
         "sortBy": [{ "desc": true, "displayName": "Age (days)" }]
       },
-      "title": "Branches — home-cluster",
+      "title": "Branches — $repository",
       "type": "table",
       "targets": [
         {
           "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
-          "expr": "max by (vcs_ref_head_name) (vcs_ref_time_seconds{job=\"otel-github-collector\", vcs_repository_name=\"home-cluster\"}) / 86400",
+          "expr": "max by (vcs_ref_head_name) (vcs_ref_time_seconds{job=\"otel-github-collector\", vcs_repository_name=\"$repository\"}) / 86400",
           "legendFormat": "{{vcs_ref_head_name}}",
           "refId": "A",
           "instant": true,
@@ -381,6 +381,24 @@
         "query": "prometheus",
         "refresh": 1,
         "type": "datasource"
+      },
+      {
+        "current": {},
+        "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+        "definition": "label_values(vcs_change_count{job=\"otel-github-collector\"}, vcs_repository_name)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Repository",
+        "multi": false,
+        "name": "repository",
+        "options": [],
+        "query": {
+          "query": "label_values(vcs_change_count{job=\"otel-github-collector\"}, vcs_repository_name)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "sort": 1,
+        "type": "query"
       }
     ]
   },
