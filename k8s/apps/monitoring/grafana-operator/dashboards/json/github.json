@@ -405,7 +405,7 @@
   "time": { "from": "now-7d", "to": "now" },
   "timepicker": {},
   "timezone": "browser",
-  "title": "home-cluster — GitHub",
+  "title": "GitHub — VCS Metrics",
   "uid": "github-vcs-metrics",
   "version": 1
 }
