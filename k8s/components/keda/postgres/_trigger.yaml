@@ -6,5 +6,5 @@ metadata:
 spec:
   secretTargetRef:
     - key: CONNECTION_STRING
-      name: ${APP}-secret
+      name: ${SECRET_NAME:=${APP}-secret}
       parameter: connection
