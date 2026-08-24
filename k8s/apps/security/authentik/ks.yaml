@@ -31,7 +31,6 @@ spec:
   postBuild:
     substitute:
       APP: authentik-server
-      SECRET_NAME: authentik-secret
       MAX_REPLICAS: "2"
   wait: true
   interval: 30m

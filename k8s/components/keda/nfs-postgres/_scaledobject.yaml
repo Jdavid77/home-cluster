@@ -26,10 +26,9 @@ spec:
         threshold: "1"
         ignoreNullValues: "0"
     - name: trig_postgres
-      type: postgresql
+      type: prometheus
       metadata:
-        query: "SELECT 1"
-        targetQueryValue: "1"
-        activationTargetQueryValue: "0"
-      authenticationRef:
-        name: ${APP}-pg-auth
+        serverAddress: http://prometheus-operated.monitoring.svc.cluster.local:9090
+        query: max_over_time(probe_success{instance=~".+:5432"}[1m])
+        threshold: "1"
+        ignoreNullValues: "0"
