@@ -11,11 +11,38 @@ spec:
   hostnames:
     - mcp.jnobrega.com
   rules:
-    - matches:
-        - path:
-            type: PathPrefix
-            value: /mcp
-      backendRefs:
-        - name: mcp
-          group: agentgateway.dev
-          kind: AgentgatewayBackend
+  - filters:
+    # Enable CORS for browser-based MCP clients
+    - type: CORS
+      cors:
+        allowCredentials: true
+        allowHeaders:
+        - Origin
+        - Authorization
+        - Content-Type
+        allowMethods:
+        - "*"
+        allowOrigins:
+        - "*"
+        exposeHeaders:
+        - Origin
+        - Mcp-Session-Id
+        maxAge: 86400
+    backendRefs:
+    - group: agentgateway.dev
+      kind: AgentgatewayBackend
+      name: mcp
+    matches:
+    # Main MCP endpoint to connect to the MCP server
+    - path:
+        type: PathPrefix
+        value: /mcp
+    # Path to access resource server metadata
+    - path:
+        type: PathPrefix
+        value: /.well-known/oauth-protected-resource/mcp
+    # Path to access authorization server metadata, including the
+    # gateway-served client registration endpoint
+    - path:
+        type: PathPrefix
+        value: /.well-known/oauth-authorization-server/mcp
