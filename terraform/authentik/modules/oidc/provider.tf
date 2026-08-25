@@ -11,10 +11,13 @@ resource "authentik_provider_oauth2" "oidc_provider" {
   name                  = var.authentik_oidc_application_name
   client_id             = random_id.this.dec
   authorization_flow    = data.authentik_flow.this.id
-  client_secret         = random_password.this.result
+  client_type           = var.authentik_oidc_client_type
+  client_secret         = var.authentik_oidc_client_type == "confidential" ? random_password.this.result : null
   property_mappings     = data.authentik_property_mapping_provider_scope.this.ids
   signing_key           = data.authentik_certificate_key_pair.this.id
   invalidation_flow     = data.authentik_flow.invalidation.id
   allowed_redirect_uris = var.authentik_oidc_redirect_uris
+  require_pkce          = var.authentik_oidc_client_type == "public"
+  sub_mode              = var.authentik_oidc_sub_mode
 
 }

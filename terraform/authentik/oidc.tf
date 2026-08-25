@@ -23,6 +23,14 @@ locals {
       authentik_oidc_application_icon_url    = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFyoFpFCCGUMA9HfEuKI7EWRx6mM_ujQ7Y-g&s"
       authentik_oidc_application_description = "Zot OAuth application"
       authentik_oidc_redirect_uris           = [{ url = "https://registry.${local.external_host}/auth/callback/oidc" }]
+    },
+    {
+      authentik_oidc_application_name        = "agentgateway-MCP"
+      authentik_oidc_application_icon_url    = "https://pbs.twimg.com/profile_images/2060173161937661955/h5E0qB8i.jpg"
+      authentik_oidc_application_description = "AgentGateway MCP OAuth application"
+      authentik_oidc_client_type             = "public"
+      authentik_oidc_sub_mode                = "user_username"
+      authentik_oidc_redirect_uris           = [{ matching_mode = "regex", url = ".*" }]
     }
   ]
 
@@ -42,4 +50,6 @@ module "oidc" {
   authentik_oidc_application_icon_url    = each.value.authentik_oidc_application_icon_url
   authentik_oidc_application_description = each.value.authentik_oidc_application_description
   authentik_oidc_redirect_uris           = each.value.authentik_oidc_redirect_uris
+  authentik_oidc_client_type             = try(each.value.authentik_oidc_client_type, "confidential")
+  authentik_oidc_sub_mode                = try(each.value.authentik_oidc_sub_mode, "hashed_user_id")
 }
