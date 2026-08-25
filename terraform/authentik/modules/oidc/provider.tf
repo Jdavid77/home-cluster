@@ -17,7 +17,6 @@ resource "authentik_provider_oauth2" "oidc_provider" {
   signing_key           = data.authentik_certificate_key_pair.this.id
   invalidation_flow     = data.authentik_flow.invalidation.id
   allowed_redirect_uris = var.authentik_oidc_redirect_uris
-  require_pkce          = var.authentik_oidc_client_type == "public"
   sub_mode              = var.authentik_oidc_sub_mode
 
 }
