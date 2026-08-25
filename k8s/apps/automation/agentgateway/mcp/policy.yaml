@@ -22,7 +22,7 @@ spec:
             backendRef:
               name: authentik-server
               kind: Service
-              namespace: authentik
+              namespace: security
               port: 80
             # authentik serves JWKS at {issuer}/jwks/, not /.well-known/jwks.json
             jwksPath: "/application/o/agentgateway-MCP/jwks/"
