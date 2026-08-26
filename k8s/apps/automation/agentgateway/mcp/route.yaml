@@ -11,24 +11,7 @@ spec:
   hostnames:
     - mcp.jnobrega.com
   rules:
-  - filters:
-    # Enable CORS for browser-based MCP clients
-    - type: CORS
-      cors:
-        allowCredentials: true
-        allowHeaders:
-        - Origin
-        - Authorization
-        - Content-Type
-        allowMethods:
-        - "*"
-        allowOrigins:
-        - "*"
-        exposeHeaders:
-        - Origin
-        - Mcp-Session-Id
-        maxAge: 86400
-    backendRefs:
+  - backendRefs:
     - group: agentgateway.dev
       kind: AgentgatewayBackend
       name: mcp
