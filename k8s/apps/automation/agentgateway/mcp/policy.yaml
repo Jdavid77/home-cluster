@@ -12,7 +12,7 @@ spec:
       mode: Strict
       providers:
       - # The authentik issuer URL, including the trailing slash
-        issuer: "https://auth.jnobrega.com/application/o/agentgateway-MCP/"
+        issuer: "https://auth.jnobrega.com/application/o/agentgateway-mcp/"
         # authentik sets the 'aud' claim to the OAuth client ID
         audiences:
         - "2051528611197305076177514453470682966907521782151600457328389209128896650981937688282404173261494"
@@ -25,7 +25,7 @@ spec:
               namespace: security
               port: 80
             # authentik serves JWKS at {issuer}/jwks/, not /.well-known/jwks.json
-            jwksPath: "/application/o/agentgateway-MCP/jwks/"
+            jwksPath: "/application/o/agentgateway-mcp/jwks/"
       mcp:
         # Use the native authentik provider
         provider: Authentik

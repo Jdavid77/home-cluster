@@ -1,8 +1,11 @@
 {
   "mcpServers": {
-    "home-mcp": {
+    "test-mcp": {
       "type": "http",
-      "url": "https://mcp.jnobrega.com/mcp"
+      "url": "https://mcp.jnobrega.com/mcp",
+      "oauth": {
+        "callbackPort": 9999
+      }
     }
   }
 }
