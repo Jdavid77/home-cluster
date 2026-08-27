@@ -28,7 +28,7 @@ spec:
           app:
             image:
               repository: ghcr.io/jdavid77/personal-blog
-              tag: v2026.08.27.04 # {"$imagepolicy": "default:personal-blog:tag"}
+              tag: v2026.08.27.05 # {"$imagepolicy": "default:personal-blog:tag"}
             resources:
               requests:
                 cpu: 10m
