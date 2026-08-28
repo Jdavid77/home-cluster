@@ -15,8 +15,6 @@ spec:
   values:
     defaultPodOptions:
       automountServiceAccountToken: true
-      imagePullSecrets:
-        - name: gh-secret
     controllers:
       *app:
         replicas: 1
