@@ -62,7 +62,7 @@ spec:
                 spec:
                   httpGet:
                     port: &port 8084
-                    path: /login
+                    path: /api/health
               readiness: *probes
             resources:
               requests:
