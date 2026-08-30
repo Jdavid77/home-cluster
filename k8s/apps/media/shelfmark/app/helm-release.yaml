@@ -108,6 +108,8 @@ spec:
             subPath: var-log
           - path: /app/downloaded_files
             subPath: app-downloaded-files
+          - path: /tmp/shelfmark
+            subPath: tmp-shelfmark
       ingests:
         type: nfs
         server: 192.168.1.84
