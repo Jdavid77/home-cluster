@@ -50,6 +50,7 @@ spec:
             env:
               CACHE_DIR: /cache
               INGEST_DIR: /booklore-ingest
+              LOG_LEVEL: DEBUG
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
