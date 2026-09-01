@@ -38,7 +38,15 @@ spec:
                   failureThreshold: 3
               readiness: *probes
               startup:
-                enabled: false
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: *port
+                  initialDelaySeconds: 0
+                  periodSeconds: 5
+                  failureThreshold: 30
             resources:
               requests:
                 cpu: 10m
@@ -51,6 +59,12 @@ spec:
             port: *port
     route:
       main:
+        annotations:
+          # Probe /health directly to avoid a 4-hop redirect chain (/ → /bookmarks → /login → /login/).
+          # Envoy reuses pooled connections across hops; if uWSGI closes one mid-chain, Envoy
+          # returns UC 503. /health responds 200 in a single request, sidestepping the race.
+          gatus.home-operations.com/endpoint: |
+            url: https://bookmarks.jnobrega.com/health
         parentRefs:
           - kind: Gateway
             name: internal
