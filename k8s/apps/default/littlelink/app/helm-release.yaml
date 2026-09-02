@@ -39,9 +39,9 @@ spec:
               NAME: "@joaodavid77"
               THEME: Dark
               BIO: "DevOps Engineer | Homelab | 🇵🇹"
-              BUTTON_ORDER: GITHUB,LINKED_IN,MEDIUM,LIVEMETRICS,CV,EMAIL
-              CUSTOM_BUTTON_TEXT: 'HomeLab Live Metrics, Curriculum Vitae'
-              CUSTOM_BUTTON_URL: 'https://live.jnobrega.com,https://cv.jnobrega.com'
+              BUTTON_ORDER: GITHUB,LINKED_IN,BLOG,LIVEMETRICS,CV,EMAIL
+              CUSTOM_BUTTON_TEXT: 'Blog,HomeLab Live Metrics, Curriculum Vitae'
+              CUSTOM_BUTTON_URL: 'https://blog.jnobrega.com,https://live.jnobrega.com,https://cv.jnobrega.com'
               CUSTOM_BUTTON_COLOR: '#962523,#1F0B36,#00CC00'
               CUSTOM_BUTTON_TEXT_COLOR: '#ffffff,#ffffff'
               CUSTOM_BUTTON_ALT_TEXT: 'Blog,HomeLab Live Metrics,Curriculum Vitae'
