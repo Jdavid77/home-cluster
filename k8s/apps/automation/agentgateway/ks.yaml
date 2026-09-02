@@ -91,29 +91,3 @@ spec:
   interval: 30m
   retryInterval: 2m
   timeout: 15m
----
-# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: &app agentgateway-providers
-spec:
-  targetNamespace: automation
-  dependsOn:
-    - name: agentgateway
-    - name: agentgateway-gateway
-  path: ./k8s/apps/automation/agentgateway/providers
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: home-cluster
-    namespace: flux-system
-  healthCheckExprs:
-    - apiVersion: external-secrets.io/v1
-      kind: ExternalSecret
-      failed: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSyncedError')
-      current: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSynced')
-  wait: true
-  interval: 30m
-  retryInterval: 2m
-  timeout: 15m
