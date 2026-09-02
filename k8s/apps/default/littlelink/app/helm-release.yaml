@@ -42,14 +42,13 @@ spec:
               BUTTON_ORDER: GITHUB,LINKED_IN,MEDIUM,LIVEMETRICS,CV,EMAIL
               CUSTOM_BUTTON_TEXT: 'HomeLab Live Metrics, Curriculum Vitae'
               CUSTOM_BUTTON_URL: 'https://live.jnobrega.com,https://cv.jnobrega.com'
-              CUSTOM_BUTTON_COLOR: '#F59E0B,#00CC00'
+              CUSTOM_BUTTON_COLOR: '#962523,#1F0B36,#00CC00'
               CUSTOM_BUTTON_TEXT_COLOR: '#ffffff,#ffffff'
-              CUSTOM_BUTTON_ALT_TEXT: 'HomeLab Live Metrics,Curriculum Vitae'
-              CUSTOM_BUTTON_NAME: 'LIVEMETRICS,CV'
-              CUSTOM_BUTTON_ICON: 'fas fa-computer,fas fa-file'
+              CUSTOM_BUTTON_ALT_TEXT: 'Blog,HomeLab Live Metrics,Curriculum Vitae'
+              CUSTOM_BUTTON_NAME: 'BLOG,LIVEMETRICS,CV'
+              CUSTOM_BUTTON_ICON: 'fas fa-blog,fas fa-server,fas fa-file'
               GITHUB: https://github.com/Jdavid77
               LINKED_IN: https://www.linkedin.com/in/joaodavid77/
-              MEDIUM: https://medium.com/@johnynobrega17
               EMAIL: johnynobrega17@gmail.com
               EMAIL_TEXT: Email me!
               FOOTER: João David Nóbrega © 2024-Present
