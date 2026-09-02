@@ -43,7 +43,7 @@ spec:
               CUSTOM_BUTTON_TEXT: 'Blog,HomeLab Live Metrics, Curriculum Vitae'
               CUSTOM_BUTTON_URL: 'https://blog.jnobrega.com,https://live.jnobrega.com,https://cv.jnobrega.com'
               CUSTOM_BUTTON_COLOR: '#962523,#1F0B36,#00CC00'
-              CUSTOM_BUTTON_TEXT_COLOR: '#ffffff,#ffffff'
+              CUSTOM_BUTTON_TEXT_COLOR: '#ffffff,#ffffff,#ffffff'
               CUSTOM_BUTTON_ALT_TEXT: 'Blog,HomeLab Live Metrics,Curriculum Vitae'
               CUSTOM_BUTTON_NAME: 'BLOG,LIVEMETRICS,CV'
               CUSTOM_BUTTON_ICON: 'fas fa-blog,fas fa-server,fas fa-file'
