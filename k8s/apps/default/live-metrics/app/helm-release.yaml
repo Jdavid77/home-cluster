@@ -47,7 +47,7 @@ spec:
           frontend:
             image:
               repository: ghcr.io/jdavid77/kubernetes-live-metrics-dashboard-frontend
-              tag: v2026.08.28.01 # {"$imagepolicy": "default:kubernetes-live-metrics-dashboard-frontend:tag"}
+              tag: v2026.09.04.01 # {"$imagepolicy": "default:kubernetes-live-metrics-dashboard-frontend:tag"}
             env:
               REACT_APP_REFRESH_INTERVAL: "5000"
               REACT_APP_LOGO_URL: https://avatars.githubusercontent.com/u/49655819?v=4
