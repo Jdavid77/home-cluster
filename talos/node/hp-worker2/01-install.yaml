@@ -1,0 +1,6 @@
+---
+apiVersion: v1alpha1
+kind: UnattendedInstallConfig
+provisioning:
+  diskSelector:
+    match: disk.wwid == "naa.50014ee6597e703e" && disk.model == "WDC WD10JPVX-22J"

@@ -1,0 +1,7 @@
+---
+apiVersion: v1alpha1
+kind: CRICustomizationConfig
+name: images-customization
+content: |-
+  [plugins."io.containerd.cri.v1.images"]
+    discard_unpacked_layers = false

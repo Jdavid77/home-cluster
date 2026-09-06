@@ -1,0 +1,18 @@
+machine:
+  network:
+    interfaces:
+      - deviceSelector:
+          hardwareAddr: "10:60:4b:73:34:97"
+          physical: true
+        dhcp: true
+        dhcpOptions:
+          routeMetric: 1024
+        mtu: 1500
+---
+apiVersion: v1alpha1
+kind: ResolverConfig
+nameservers:
+  - address: 192.168.1.139
+  - address: 1.1.1.1
+searchDomains:
+  disableDefault: true

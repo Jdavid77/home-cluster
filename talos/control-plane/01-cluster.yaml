@@ -1,0 +1,9 @@
+---
+apiVersion: v1alpha1
+kind: KubeControllerManagerConfig
+extraArgs:
+  feature-gates: ClusterTrustBundle=true,PodCertificateRequest=true
+---
+apiVersion: v1alpha1
+kind: KubeProxyConfig
+enabled: false

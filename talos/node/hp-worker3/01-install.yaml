@@ -1,0 +1,6 @@
+---
+apiVersion: v1alpha1
+kind: UnattendedInstallConfig
+provisioning:
+  diskSelector:
+    match: disk.wwid == "naa.5000039fd2d5861c" && disk.model == "TOSHIBA DT01ACA0"

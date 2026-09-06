@@ -1,0 +1,32 @@
+clusterName: home-cluster
+clusterEndpoint: https://192.168.1.110:6443
+# renovate: datasource=docker depName=ghcr.io/siderolabs/installer
+talosVersion: v1.13.9
+# renovate: datasource=docker depName=ghcr.io/siderolabs/kubelet
+kubernetesVersion: v1.37.0
+nodes:
+  - host: bmax1-master
+    ip: 192.168.1.81
+    role: control-plane
+  - host: soyo2-master
+    ip: 192.168.1.82
+    role: control-plane
+  - host: soyo3-master
+    ip: 192.168.1.83
+    role: control-plane
+  - host: hp-worker3
+    ip: 192.168.1.93
+    role: worker
+    schematicId: "@schematics/hp-worker3.yaml"
+  - host: hp-worker2
+    ip: 192.168.1.92
+    role: worker
+    schematicId: "@schematics/hp-worker2.yaml"
+  - host: hp-worker1
+    ip: 192.168.1.91
+    role: worker
+    schematicId: "@schematics/hp-worker1.yaml"
+  - host: localstorage-worker1
+    ip: 192.168.1.101
+    role: worker
+    schematicId: "@schematics/localstorage-worker1.yaml"
