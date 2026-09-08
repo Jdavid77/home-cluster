@@ -9,7 +9,7 @@ spec:
     - name: authentik.outpost.rules
       rules:
         - alert: AuthentikOutpostDisconnected
-          expr: authentik_outposts_connected{outpost="proxy"} == 0
+          expr: sum(authentik_outposts_connected{outpost="proxy"}) == 0
           for: 2m
           labels:
             severity: high
