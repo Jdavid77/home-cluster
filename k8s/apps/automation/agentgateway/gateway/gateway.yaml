@@ -6,7 +6,7 @@ metadata:
   labels:
     external-dns.internal/provider: pi-hole
   annotations:
-    external-dns.alpha.kubernetes.io/target: ai.jnobrega.com
+    external-dns.kubernetes.io/target: ai.jnobrega.com
     gatus.home-operations.com/endpoint: |-
       group: AI
       interval: 1m
@@ -20,7 +20,7 @@ spec:
   gatewayClassName: agentgateway
   infrastructure:
     annotations:
-      external-dns.alpha.kubernetes.io/hostname: ai.jnobrega.com
+      external-dns.kubernetes.io/hostname: ai.jnobrega.com
       io.cilium/lb-ipam-ips: 192.168.1.249
     labels:
       cilium.l2.announce: "true"
