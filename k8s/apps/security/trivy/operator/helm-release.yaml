@@ -12,13 +12,14 @@ spec:
     namespace: flux-system
   maxHistory: 2
   values:
+
     excludeNamespaces: "kube-system"
+
     operator:
-      logDevMode: true
       replicas: 1
-      scanJobsConcurrentLimit: 3
+      scanJobsConcurrentLimit: 1
       scanJobTTL: 30s
-      scanJobTimeout: "10m"
+      scanJobTimeout: "20m"
       builtInTrivyServer: true
       vulnerabilityScannerScanInterval: "24h"
       configAuditScannerScanInterval: "24h"
@@ -28,17 +29,21 @@ spec:
         reloader.stakater.com/auto: "true"
       privateRegistryScanSecretsNames: 
         "storage": "zot-registry-secret"
+
     trivy:
       debug: true
       slow: true # flag is to use less CPU/memory for scanning though it takes more time than normal scanning
       ignoreUnfixed: true
-      mode: Standalone
+      mode: CLientServer
       severity: HIGH,CRITICAL
       storageClassEnabled: false # ephemeral storage
       resources:
         limits:
-          cpu: 500m
           memory: 1Gi
+
+    trivyOperator:
+      skipResourceByLabels: app.kubernetes.io/created-by=volsync
+
     nodeCollector:
       volumeMounts:
         - name: etc-os-release
@@ -48,5 +53,6 @@ spec:
         - name: etc-os-release
           hostPath:
             path: /etc/os-release
+            
     serviceMonitor:
       enabled: true
