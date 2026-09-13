@@ -6,7 +6,7 @@ metadata:
   namespace: system-upgrade
 spec:
   talos:
-    version: v1.13.7
+    version: v1.14.0
   policy:
     rebootMode: powercycle
     waitForVolumeDetach: true
