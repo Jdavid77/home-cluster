@@ -34,9 +34,9 @@ spec:
       debug: true
       slow: true
       ignoreUnfixed: true
-      mode: CLientServer
+      mode: ClientServer
       severity: HIGH,CRITICAL
-      storageClassEnabled: false 
+      storageClassEnabled: false
       resources:
         limits:
           memory: 1Gi
