@@ -13,7 +13,7 @@ spec:
   maxHistory: 2
   values:
 
-    excludeNamespaces: "kube-system"
+    excludeNamespaces: "kube-system,flux-system"
 
     operator:
       replicas: 1
@@ -32,11 +32,11 @@ spec:
 
     trivy:
       debug: true
-      slow: true # flag is to use less CPU/memory for scanning though it takes more time than normal scanning
+      slow: true
       ignoreUnfixed: true
       mode: CLientServer
       severity: HIGH,CRITICAL
-      storageClassEnabled: false # ephemeral storage
+      storageClassEnabled: false 
       resources:
         limits:
           memory: 1Gi
@@ -44,15 +44,35 @@ spec:
     trivyOperator:
       skipResourceByLabels: app.kubernetes.io/created-by=volsync
 
+    # https://github.com/aquasecurity/trivy-operator/issues/2566
     nodeCollector:
+      useNodeSelector: false
       volumeMounts:
-        - name: etc-os-release
-          mountPath: /host/etc/os-release
+        - mountPath: /var/lib/etcd
+          name: var-lib-etcd
+          readOnly: true
+        - mountPath: /var/lib/kubelet
+          name: var-lib-kubelet
+          readOnly: true
+        - mountPath: /var/lib/kube-scheduler
+          name: var-lib-kube-scheduler
+          readOnly: true
+        - mountPath: /var/lib/kube-controller-manager
+          name: var-lib-kube-controller-manager
           readOnly: true
       volumes:
-        - name: etc-os-release
+        - name: var-lib-etcd
           hostPath:
-            path: /etc/os-release
-            
+            path: /var/lib/etcd
+        - name: var-lib-kubelet
+          hostPath:
+            path: /var/lib/kubelet
+        - name: var-lib-kube-scheduler
+          hostPath:
+            path: /var/lib/kube-scheduler
+        - name: var-lib-kube-controller-manager
+          hostPath:
+            path: /var/lib/kube-controller-manager
+
     serviceMonitor:
       enabled: true
