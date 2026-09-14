@@ -27,7 +27,7 @@
 
 This repository contains the configuration for my home Kubernetes cluster — a 7-node bare-metal setup running on [Talos OS](https://www.talos.dev/), managed entirely through GitOps.
 
-- **[Talhelper](https://budimanjojo.github.io/talhelper/latest/)** generates and maintains Talos machine configs
+- **[topf](https://github.com/postfinance/topf)** generates and maintains Talos machine configs (see [migration notes](/.claude/skills/migrate-talhelper-to-topf/SKILL.md))
 - **[Flux](https://fluxcd.io/)** continuously reconciles the cluster state from this repository
 - **[Renovate](https://docs.renovatebot.com/)** automates dependency updates via pull requests
 - **[Terraform](https://www.terraform.io/)** provisions external dependencies (Cloudflare, Akeyless, Backblaze)
@@ -52,10 +52,13 @@ This repository contains the configuration for my home Kubernetes cluster — a 
     ├── 📁 postgres18
     └── 📁 vectorchord
 📁 talos
-├── 📁 clusterconfig    # talos machine configs for each node
-├── 📁 patches          # talos config patches
-├── talconfig.yaml
-└── talsecret.sops.yaml
+├── 📁 all              # patches applied to every node
+├── 📁 control-plane    # patches applied to control plane nodes
+├── 📁 worker           # patches applied to worker nodes
+├── 📁 node             # per-node patches
+├── 📁 schematics       # talos image schematics
+├── topf.yaml
+└── secrets.sops.yaml
 📁 terraform
 ├── 📁 authentik
 ├── 📁 akeyless

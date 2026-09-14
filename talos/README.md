@@ -1,3 +1,3 @@
-**Props to Budimanjojo**:
+**Props to postfinance**:
 
-[Talhelper](https://budimanjojo.github.io/talhelper/latest/)
+[topf](https://github.com/postfinance/topf) — see [`.claude/skills/migrate-talhelper-to-topf`](../.claude/skills/migrate-talhelper-to-topf/SKILL.md) for migration notes from talhelper.
