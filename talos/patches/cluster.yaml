@@ -1,7 +1,0 @@
-cluster:
-  allowSchedulingOnMasters: false
-  controllerManager:
-    extraArgs:
-      feature-gates: ClusterTrustBundle=true,PodCertificateRequest=true
-  proxy:
-    disabled: true
