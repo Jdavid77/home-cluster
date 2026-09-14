@@ -1,6 +1,7 @@
-machine:
-  kubelet:
-    extraArgs:
-      feature-gates: GracefulNodeShutdown=true,ClusterTrustBundle=true,ClusterTrustBundleProjection=true,PodCertificateRequest=true
-    extraConfig:
-      maxPods: 150
+---
+apiVersion: v1alpha1
+kind: KubeletConfig
+extraArgs:
+  feature-gates: GracefulNodeShutdown=true,ClusterTrustBundle=true,ClusterTrustBundleProjection=true,PodCertificateRequest=true
+config:
+  maxPods: 150

@@ -17,16 +17,16 @@ nodes:
   - host: hp-worker3
     ip: 192.168.1.93
     role: worker
-    schematicId: "@schematics/hp-worker3.yaml"
+    schematicId: "@schematics/worker.yaml.tpl"
   - host: hp-worker2
     ip: 192.168.1.92
     role: worker
-    schematicId: "@schematics/hp-worker2.yaml"
+    schematicId: "@schematics/worker.yaml.tpl"
   - host: hp-worker1
     ip: 192.168.1.91
     role: worker
-    schematicId: "@schematics/hp-worker1.yaml"
+    schematicId: "@schematics/worker.yaml.tpl"
   - host: localstorage-worker1
     ip: 192.168.1.101
     role: worker
-    schematicId: "@schematics/localstorage-worker1.yaml"
+    schematicId: "@schematics/worker.yaml.tpl"

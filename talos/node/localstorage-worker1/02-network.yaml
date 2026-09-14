@@ -1,18 +1,10 @@
-machine:
-  network:
-    interfaces:
-      - deviceSelector:
-          hardwareAddr: "00:e0:4c:73:3b:3b"
-          physical: true
-        dhcp: true
-        dhcpOptions:
-          routeMetric: 1024
-        mtu: 1500
 ---
 apiVersion: v1alpha1
-kind: ResolverConfig
-nameservers:
-  - address: 192.168.1.139
-  - address: 1.1.1.1
-searchDomains:
-  disableDefault: true
+kind: DHCPv4Config
+name: enp1s0
+routeMetric: 1024
+---
+apiVersion: v1alpha1
+kind: LinkConfig
+name: enp1s0
+mtu: 1500
