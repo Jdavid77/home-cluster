@@ -7,7 +7,7 @@ Monorepo for a self-hosted homelab: a Talos Linux Kubernetes cluster managed by 
 | Directory | Purpose |
 |---|---|
 | `k8s/` | All cluster workloads — Flux Kustomizations, HelmReleases, components |
-| `talos/` | Node configuration via `talhelper` (`talconfig.yaml` + `patches/`) |
+| `talos/` | Node configuration via `topf` (`topf.yaml` + patch tree under `all/`, `control-plane/`, `worker/`, `node/`) |
 | `terraform/` | External service infrastructure (Akeyless, Authentik, Backblaze, Garage) |
 | `bootstrap/` | One-time cluster init — do not modify during normal operations |
 | `omv/` | Separate NAS host running Docker Compose — not part of the cluster |
