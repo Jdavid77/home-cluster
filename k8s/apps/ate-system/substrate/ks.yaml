@@ -27,7 +27,6 @@ kind: Kustomization
 metadata:
   name: &app substrate
 spec:
-  targetNamespace: ate-system
   dependsOn:
     - name: substrate-crds
   path: ./k8s/apps/ate-system/substrate/app
