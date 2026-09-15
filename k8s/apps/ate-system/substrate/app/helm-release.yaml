@@ -50,3 +50,7 @@ spec:
               - op: add
                 path: /spec/volumeClaimTemplates/0/spec/storageClassName
                 value: openebs-hostpath
+              - op: add
+                path: /spec/template/spec/nodeSelector
+                value:
+                  kubernetes.io/hostname: localstorage-worker1
