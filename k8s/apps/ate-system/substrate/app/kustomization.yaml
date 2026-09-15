@@ -4,3 +4,6 @@ kind: Kustomization
 resources:
   - helm-release.yaml
   - secret.yaml
+  - authentication-config.yaml
+  - external-secrets.yaml
+  - ca-secrets.yaml
