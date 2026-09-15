@@ -69,21 +69,14 @@ spec:
       strategy: rollback
   values:
     controller:
-      openshell:
-        enabled: false
       substrate:
-        enabled: false
-        # ateApiEndpoint: dns:///api.ate-system.svc:443
-        # ateApiInsecure: true
-      # env:
-      #   - name: OPENSHELL_GATEWAY_URL
-      #     value: dns:///openshell.automation.svc:8080
-      #   - name: OPENSHELL_INSECURE
-      #     value: "true"
+        enabled: true
+        ateApiEndpoint: "dns:///api.ate-system.svc:443"
+        atenetRouterURL: "http://atenet-router.ate-system.svc:80"
+        defaultWorkerPool:
+          name: "kagent-default"
     substrateWorkerPool:
-      create: false
-      # ateomImage: ghcr.io/kagent-dev/substrate/ateom-gvisor:v0.0.7
-      # replicas: 2
+      create: true
     database:
       postgres:
         bundled:
@@ -102,9 +95,7 @@ spec:
     kagent-tools:
       enabled: true
     grafana-mcp:
-      enabled: true
-      grafana:
-        url: http://grafana-service.monitoring.svc.cluster.local:3000
+      enabled: false
     # Disable Agent CR's , converted into Sandbox Agents
     querydoc:
       enabled: false
@@ -128,8 +119,3 @@ spec:
       enabled: false
     cilium-debug-agent:
       enabled: false
-  valuesFrom:
-    - kind: Secret
-      name: grafana-service-account-token
-      targetPath: grafana-mcp.grafana.serviceAccountToken
-      valuesKey: token
