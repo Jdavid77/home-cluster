@@ -51,6 +51,7 @@ spec:
         atenetRouterURL: "http://atenet-router.ate-system.svc:80"
         defaultWorkerPool:
           name: "default"
+          namespace: "ate-system"
     substrateWorkerPool:
       # chart complains that ateomImage is needed
       # but then flux complains that workerPool doesnt have that property...
