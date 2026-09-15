@@ -11,17 +11,7 @@ spec:
     namespace: flux-system
   values:
 
-    auth:
-      mode: jwt
-      jwt:
-        # Must match the actual SA token issuer — on bare-metal this is the API server IP, not kubernetes.default.svc.cluster.local.
-        # Verify with: kubectl get --raw /.well-known/openid-configuration | jq .issuer
-        issuer: https://192.168.1.110:6443
-
     createNamespace: false
-
-    valkey:
-      enabled: true
 
     # Use garage
     rustfs:
@@ -53,30 +43,9 @@ spec:
     - kustomize:
         patches:
           - target:
-              kind: Deployment
-              name: ate-api-server-deployment
-            patch: |-
-              - op: add
-                path: /spec/template/metadata/annotations/reloader.stakater.com~1auto
-                value: "true"
-              # ate-api-server uses Go's system CA pool for OIDC discovery, not
-              # the cluster CA, even though --client-jwt-ca-cert is passed.
-              # SSL_CERT_FILE makes Go add the cluster CA to that pool.
-              - op: add
-                path: /spec/template/spec/containers/0/env/-
-                value:
-                  name: SSL_CERT_FILE
-                  value: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-          - target:
               kind: StatefulSet
-              name: valkey-cluster
+              name: postgres
             patch: |-
-              - op: replace
-                path: /spec/template/spec/containers/0/command
-                value:
-                  - sh
-                  - -c
-                  - >-
-                    exec valkey-server /etc/valkey/valkey.conf
-                    --cluster-announce-hostname "$(hostname).valkey-cluster-service.ate-system.svc.cluster.local"
-                    --cluster-preferred-endpoint-type hostname
+              - op: add
+                path: /spec/volumeClaimTemplates/0/spec/storageClassName
+                value: openebs-hostpath
