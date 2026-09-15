@@ -6,4 +6,5 @@ metadata:
   namespace: automation
 spec:
   replicas: 2
-  ateomImage: ghcr.io/kagent-dev/substrate/ateom-gvisor:v0.0.21
+  workerImage: ghcr.io/kagent-dev/substrate/ateom-gvisor:v0.0.29
+  sandboxClass: gvisor

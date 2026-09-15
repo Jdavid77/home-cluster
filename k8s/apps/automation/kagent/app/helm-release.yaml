@@ -23,41 +23,6 @@ spec:
   interval: 15m
   timeout: 5m
   maxHistory: 2
-  postRenderers:
-    - kustomize:
-        patches:
-          - patch: |-
-              apiVersion: apps/v1
-              kind: Deployment
-              metadata:
-                name: kagent-controller
-              spec:
-                template:
-                  spec:
-                    volumes:
-                      - name: kagent-secret-vol
-                        secret:
-                          secretName: kagent-secret
-                          items:
-                            - key: POSTGRES_DATABASE_URL
-                              path: POSTGRES_DATABASE_URL
-                    initContainers:
-                      - name: init-db
-                        image: ghcr.io/home-operations/postgres-init:18.6@sha256:b6d3af974df781c673d37e49bdddfa14a6f5be28b18d2cb7713f0449bea4057b
-                        securityContext:
-                          runAsUser: 65534
-                        envFrom:
-                          - secretRef:
-                              name: kagent-secret
-                    containers:
-                      - name: controller
-                        volumeMounts:
-                          - name: kagent-secret-vol
-                            mountPath: /secrets
-                            readOnly: true
-            target:
-              kind: Deployment
-              name: kagent-controller
   rollback:
     cleanupOnFail: true
     recreate: true
@@ -69,15 +34,29 @@ spec:
       strategy: rollback
   values:
     controller:
+      volumes:
+        - name: kagent-secret-vol
+          secret:
+            secretName: kagent-secret
+            items:
+              - key: POSTGRES_DATABASE_URL
+                path: POSTGRES_DATABASE_URL
+      volumeMounts:
+        - name: kagent-secret-vol
+          mountPath: /secrets
+          readOnly: true
       substrate:
         enabled: true
         ateApiEndpoint: "dns:///api.ate-system.svc:443"
         atenetRouterURL: "http://atenet-router.ate-system.svc:80"
         defaultWorkerPool:
-          name: "kagent-default"
+          name: "default"
     substrateWorkerPool:
-      create: true
-      ateomImage: ghcr.io/kagent-dev/ateom:0.9.11
+      # chart complains that ateomImage is needed
+      # but then flux complains that workerPool doesnt have that property...
+      # workerImage is the correct property, but the chart is not updated to reflect that.
+      create: false
+      # ateomImage: ghcr.io/kagent-dev/ateom:0.9.11
     database:
       postgres:
         bundled:
@@ -120,3 +99,25 @@ spec:
       enabled: false
     cilium-debug-agent:
       enabled: false
+  postRenderers:
+    - kustomize:
+        patches:
+          - patch: |-
+              apiVersion: apps/v1
+              kind: Deployment
+              metadata:
+                name: kagent-controller
+              spec:
+                template:
+                  spec:
+                    initContainers:
+                      - name: init-db
+                        image: ghcr.io/home-operations/postgres-init:18.6@sha256:b6d3af974df781c673d37e49bdddfa14a6f5be28b18d2cb7713f0449bea4057b
+                        securityContext:
+                          runAsUser: 65534
+                        envFrom:
+                          - secretRef:
+                              name: kagent-secret
+            target:
+              kind: Deployment
+              name: kagent-controller
