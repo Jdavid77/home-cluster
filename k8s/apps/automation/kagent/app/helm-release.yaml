@@ -45,6 +45,8 @@ spec:
         - name: kagent-secret-vol
           mountPath: /secrets
           readOnly: true
+      # waiting for new chart release
+      # at the moment , the chart doesnt mount the mTlS podCertificates
       substrate:
         enabled: true
         ateApiEndpoint: "dns:///api.ate-system.svc:443"
