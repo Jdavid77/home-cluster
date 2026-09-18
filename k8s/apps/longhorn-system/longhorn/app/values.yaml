@@ -20,7 +20,8 @@ defaultSettings:
   storageReservedPercentageForDefaultDisk: 5
   guaranteedEngineManagerCPU: 20
   guaranteedReplicaManagerCPU: 20
-  orphanAutoDeletion: true
+  orphanResourceAutoDeletion: true
+  orphanResourceAutoDeletionGracePeriod: 60
   concurrentAutomaticEngineUpgradePerNodeLimit: 3
   defaultLonghornStaticStorageClass: longhorn
   nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
