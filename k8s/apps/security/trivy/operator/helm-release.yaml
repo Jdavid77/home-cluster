@@ -29,6 +29,17 @@ spec:
         reloader.stakater.com/auto: "true"
       privateRegistryScanSecretsNames: 
         "storage": "zot-registry-secret"
+    
+    alternateReportStorage:
+      enabled: true
+      mountPath: "/mnt/data/trivy-operator"
+      volumeName: "trivy-operator-pvc"
+      storage: "10Gi"
+      # -- storageClassName for the PVC (optional, uses cluster default if not specified)
+      storageClassName: "openebs-hostpath"
+      podSecurityContext:
+        runAsUser: 10000
+        fsGroup: 10000
 
     trivy:
       debug: true
@@ -40,6 +51,8 @@ spec:
       resources:
         limits:
           memory: 1Gi
+      nodeSelector:
+        kubernetes.io/hostname: localstorage-worker1
 
     trivyOperator:
       skipResourceByLabels: app.kubernetes.io/created-by=volsync
