@@ -51,8 +51,9 @@ spec:
       resources:
         limits:
           memory: 1Gi
-      nodeSelector:
-        kubernetes.io/hostname: localstorage-worker1
+        
+    nodeSelector:
+      kubernetes.io/hostname: localstorage-worker1
 
     trivyOperator:
       skipResourceByLabels: app.kubernetes.io/created-by=volsync
