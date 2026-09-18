@@ -14,6 +14,12 @@ spec:
   values:
     gitHub:
       serverCheckForUpdates: false
+    fileRepository:
+      enabled: true
+      pvcName: "trivy-operator-pvc"
+      basePath: "/var/lib/trivy-operator"
+    nodeSelector:
+      kubernetes.io/hostname: localstorage-worker1
     history:
       enabled: false
     ingress:
@@ -24,7 +30,7 @@ spec:
           - ALL
       readOnlyRootFilesystem: true
       runAsNonRoot: true
-      runAsUser: 1000
+      runAsUser: 10000
     resources:
       requests:
         cpu: 100m
