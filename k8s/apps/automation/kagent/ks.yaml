@@ -36,8 +36,8 @@ spec:
     - name: kagent-crds
     # - name: openshell
     # - name: agent-sandbox
-    # - name: substrate
-    #   namespace: ate-system
+    - name: substrate
+      namespace: ate-system
     - name: external-secrets-store
       namespace: external-secrets
     - name: envoy
@@ -57,26 +57,27 @@ spec:
   interval: 30m
   retryInterval: 2m
   timeout: 15m
+---
 # yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
-# apiVersion: kustomize.toolkit.fluxcd.io/v1
-# kind: Kustomization
-# metadata:
-#   name: kagent-agents
-# spec:
-#   targetNamespace: automation
-#   dependsOn:
-#     - name: kagent
-#     - name: kagent-crds
-#   path: ./k8s/apps/automation/kagent/agents
-#   prune: true
-#   sourceRef:
-#     kind: GitRepository
-#     name: home-cluster
-#     namespace: flux-system
-#   wait: true
-#   interval: 30m
-#   retryInterval: 2m
-#   timeout: 15m
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: kagent-agents
+spec:
+  targetNamespace: automation
+  dependsOn:
+    - name: kagent
+    - name: kagent-crds
+  path: ./k8s/apps/automation/kagent/agents
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-cluster
+    namespace: flux-system
+  wait: true
+  interval: 30m
+  retryInterval: 2m
+  timeout: 15m
 ---
 # yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
