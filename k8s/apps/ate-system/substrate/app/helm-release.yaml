@@ -1,4 +1,14 @@
 # yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+
+# NOTE: atenet-egress in the current chart version does not mount the necessary volumes
+# for the egress-mitm ClusterTrustBundle — golden snapshots are blocked until this is resolved.
+#
+# Error from ate-api-server logs (golden snapshot blocked):
+# {"time":"2026-09-21T15:37:48.60183401Z","level":"ERROR","msg":"Failed to reconcile actor template, requeueing","template":{"type":"*ateapipb.ActorTemplate","ates
+# pace":"automation","name":"k8s-agent-k8s-agent-b3a998e17c8a"},"err":"while resuming golden actor: workflow failed at step CallAteletRestore: while creating workl
+# oad from spec: rpc error: code = Internal desc = while populating system-info volume \"egress-trust\": while collecting volume contents: system-info projection \
+# "trust-bundle.pem\": trust bundle \"egress-mitm.ate.dev\": ClusterTrustBundle \"egress-mitm.ate.dev:mitm:primary-bundle\" not found"}
+
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -14,9 +24,11 @@ spec:
 
     createNamespace: false
 
-    # Use garage
     rustfs:
       enabled: false
+
+    credentialProvider:
+      namespacePolicies: []
 
     atelet:
       gcpAuthForImagePulls: false
