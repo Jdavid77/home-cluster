@@ -53,13 +53,11 @@ spec:
         atenetRouterURL: "http://atenet-router.ate-system.svc:80"
         defaultWorkerPool:
           name: "default"
-          namespace: "ate-system"
     substrateWorkerPool:
-      # chart complains that ateomImage is needed
-      # but then flux complains that workerPool doesnt have that property...
-      # workerImage is the correct property, but the chart is not updated to reflect that.
-      create: false
-      # ateomImage: ghcr.io/kagent-dev/ateom:0.9.11
+      create: true
+      name: default
+      replicas: 2
+      workerImage: "ghcr.io/kagent-dev/substrate/ateom-gvisor:v0.0.30"
     database:
       postgres:
         bundled:
