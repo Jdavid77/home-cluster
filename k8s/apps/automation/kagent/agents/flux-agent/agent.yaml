@@ -1,99 +1,111 @@
-# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/kagent.dev/sandboxagent_v1alpha2.json
-apiVersion: kagent.dev/v1alpha2
-kind: SandboxAgent
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/kagent.dev/harness_v1alpha3.json
+apiVersion: kagent.dev/v1alpha3
+kind: Harness
 metadata:
   name: flux-agent
 spec:
-  description: A Flux CD / GitOps expert that inspects Flux CD Resources
-  type: Declarative
-  platform: substrate
+  kagent: {}
+  workload:
+    image: ghcr.io/kagent-dev/kagent/golang-adk@sha256:c8ab012e9774d50e20ffa8cd035ddebff69486a2843b3af281f5f6ebc67ab512
   substrate:
     workerPoolRef:
       name: default
-    snapshotsConfig:
+    snapshotPolicy:
       location: gs://agent-snapshots/flux-agent
-  declarative:
-    runtime: go
-    modelConfig: default-model-config
-    systemMessage: |-
-      # Flux Observability Agent
+  allowedAgentTemplates:
+    selector:
+      matchLabels:
+        kagent.dev/harness: flux-agent
+---
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/kagent.dev/agenttemplate_v1alpha3.json
+apiVersion: kagent.dev/v1alpha3
+kind: AgentTemplate
+metadata:
+  name: flux-agent
+  labels:
+    kagent.dev/harness: flux-agent
+spec:
+  description: A Flux CD / GitOps expert that inspects Flux CD Resources
+  modelConfig:
+    name: default-model-config
+  promptTemplate:
+    dataSources:
+      - alias: builtin
+        kind: ConfigMap
+        name: kagent-builtin-prompts
+  systemPrompt: |-
+    # Flux Observability Agent
 
-      You are a read-only Kubernetes and Flux CD expert. Your purpose is to inspect live cluster state, diagnose Flux reconciliation failures, and explain what is wrong and what needs to change — without making any changes yourself.
+    You are a read-only Kubernetes and Flux CD expert. Your purpose is to inspect live cluster state, diagnose Flux reconciliation failures, and explain what is wrong and what needs to change — without making any changes yourself.
 
-      ## Capabilities
+    ## Capabilities
 
-      - Inspect any Kubernetes resource: pods, events, deployments, Flux CRDs (Kustomization, HelmRelease, GitRepository, OCIRepository, ImageUpdateAutomation, Alert, etc.)
-      - Fetch controller and pod logs to trace errors
-      - Read cluster metrics to assess resource pressure
-      - Search Flux documentation for CRD references and examples
-      - Trace dependency chains to explain why a resource is stuck or failing
+    - Inspect any Kubernetes resource: pods, events, deployments, Flux CRDs (Kustomization, HelmRelease, GitRepository, OCIRepository, ImageUpdateAutomation, Alert, etc.)
+    - Fetch controller and pod logs to trace errors
+    - Read cluster metrics to assess resource pressure
+    - Search Flux documentation for CRD references and examples
+    - Trace dependency chains to explain why a resource is stuck or failing
 
-      ## Available Tools
+    ## Available Tools
 
-      - `get_flux_instance`: Current Flux installation status and version.
-      - `get_kubernetes_resources`: List or describe any Kubernetes resource.
-      - `get_kubernetes_logs`: Fetch logs from pods or Flux controllers.
-      - `get_kubernetes_metrics`: Resource utilization for nodes and workloads.
-      - `get_kubernetes_api_versions`: All API groups and versions in the cluster.
-      - `search_flux_docs`: Flux documentation for CRD references and guides.
+    - `get_flux_instance`: Current Flux installation status and version.
+    - `get_kubernetes_resources`: List or describe any Kubernetes resource.
+    - `get_kubernetes_logs`: Fetch logs from pods or Flux controllers.
+    - `get_kubernetes_metrics`: Resource utilization for nodes and workloads.
+    - `get_kubernetes_api_versions`: All API groups and versions in the cluster.
+    - `search_flux_docs`: Flux documentation for CRD references and guides.
 
-      ## Troubleshooting Approach
+    ## Troubleshooting Approach
 
-      1. Check Flux resource status conditions and events first.
-      2. Follow the dependency chain — a stuck Kustomization often has a failing upstream dependency.
-      3. Fetch controller logs only when status conditions don't reveal the root cause.
-      4. State the root cause clearly, then describe exactly what change is needed to fix it.
+    1. Check Flux resource status conditions and events first.
+    2. Follow the dependency chain — a stuck Kustomization often has a failing upstream dependency.
+    3. Fetch controller logs only when status conditions don't reveal the root cause.
+    4. State the root cause clearly, then describe exactly what change is needed to fix it.
 
-      ## Tool Usage Best Practices
+    ## Tool Usage Best Practices
 
-      {{include "builtin/tool-usage-best-practices"}}
+    {{include "builtin/tool-usage-best-practices"}}
 
-      ## Safety Protocols
+    ## Safety Protocols
 
-      {{include "builtin/safety-guardrails"}}
+    {{include "builtin/safety-guardrails"}}
 
-      ## Response Style
+    ## Response Style
 
-      - Be concise and direct.
-      - Use code blocks for YAML snippets and resource output.
-      - Always state the root cause before proposing a fix.
-
-    promptTemplate:
-      dataSources:
-        - alias: builtin
-          kind: ConfigMap
-          name: kagent-builtin-prompts
-    a2aConfig:
-      skills:
-        - id: observe-and-troubleshoot-cluster
-          name: Observe and Troubleshoot Cluster
-          description: Observe and troubleshoot Flux resources and Kubernetes cluster state
-          inputModes:
-            - text
-          outputModes:
-            - text
-          tags:
-            - kustomization
-            - debug
-          examples:
-            - Tell me why the Flux Kustomization is stuck on reconciling.
-        - id: flux-docs
-          name: Flux Documentation Search
-          description: Answer questions about Flux configuration using the official documentation.
-          tags:
-            - docs
-            - reference
-          examples:
-            - What fields do I have available for a Helm Release spec?
-    tools:
-      - type: McpServer
-        mcpServer:
-          name: flux-mcp
-          kind: RemoteMCPServer
-          toolNames:
-            - get_flux_instance
-            - get_kubernetes_api_versions
-            - get_kubernetes_logs
-            - get_kubernetes_metrics
-            - get_kubernetes_resources
-            - search_flux_docs
+    - Be concise and direct.
+    - Use code blocks for YAML snippets and resource output.
+    - Always state the root cause before proposing a fix.
+  a2aConfig:
+    skills:
+      - id: observe-and-troubleshoot-cluster
+        name: Observe and Troubleshoot Cluster
+        description: Observe and troubleshoot Flux resources and Kubernetes cluster state
+        inputModes:
+          - text
+        outputModes:
+          - text
+        tags:
+          - kustomization
+          - debug
+        examples:
+          - Tell me why the Flux Kustomization is stuck on reconciling.
+      - id: flux-docs
+        name: Flux Documentation Search
+        description: Answer questions about Flux configuration using the official documentation.
+        tags:
+          - docs
+          - reference
+        examples:
+          - What fields do I have available for a Helm Release spec?
+  tools:
+    - type: McpServer
+      mcpServer:
+        name: flux-mcp
+        kind: RemoteMCPServer
+        toolNames:
+          - get_flux_instance
+          - get_kubernetes_api_versions
+          - get_kubernetes_logs
+          - get_kubernetes_metrics
+          - get_kubernetes_resources
+          - search_flux_docs
