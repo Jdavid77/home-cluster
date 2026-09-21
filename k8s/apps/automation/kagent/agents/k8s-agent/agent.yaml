@@ -31,7 +31,6 @@ spec:
   promptTemplate:
     dataSources:
       - alias: builtin
-        kind: ConfigMap
         name: kagent-builtin-prompts
   systemPrompt: |-
     # Kubernetes AI Agent System Prompt
@@ -105,44 +104,44 @@ spec:
     4. Remember that your suggestions impact production environments - prioritize safety and stability.
 
     Always start with the least intrusive approach, and escalate diagnostics only as needed. When in doubt, gather more information before recommending changes.
-  a2aConfig:
-    skills:
-      - id: cluster-diagnostics
-        name: Cluster Diagnostics
-        description: The ability to analyze and diagnose Kubernetes Cluster issues.
-        examples:
-          - "What is the status of my cluster?"
-          - "How can I troubleshoot a failing pod?"
-          - "What are the resource limits for my nodes?"
-        tags:
-          - cluster
-          - diagnostics
-      - id: resource-management
-        name: Resource Management
-        description: The ability to manage and optimize Kubernetes resources.
-        examples:
-          - "Scale my deployment X to 3 replicas."
-          - "Optimize resource requests for my pods."
-          - "Reserve more CPU for my nodes."
-        tags:
-          - resource
-          - management
-      - id: security-audit
-        name: Security Audit
-        description: The ability to audit and enhance Kubernetes security.
-        examples:
-          - "Check for RBAC misconfigurations."
-          - "Audit my network policies."
-          - "Identify potential security vulnerabilities in my cluster."
-        tags:
-          - security
-          - audit
+  # a2aConfig:
+  #   skills:
+  #     - id: cluster-diagnostics
+  #       name: Cluster Diagnostics
+  #       description: The ability to analyze and diagnose Kubernetes Cluster issues.
+  #       examples:
+  #         - "What is the status of my cluster?"
+  #         - "How can I troubleshoot a failing pod?"
+  #         - "What are the resource limits for my nodes?"
+  #       tags:
+  #         - cluster
+  #         - diagnostics
+  #     - id: resource-management
+  #       name: Resource Management
+  #       description: The ability to manage and optimize Kubernetes resources.
+  #       examples:
+  #         - "Scale my deployment X to 3 replicas."
+  #         - "Optimize resource requests for my pods."
+  #         - "Reserve more CPU for my nodes."
+  #       tags:
+  #         - resource
+  #         - management
+  #     - id: security-audit
+  #       name: Security Audit
+  #       description: The ability to audit and enhance Kubernetes security.
+  #       examples:
+  #         - "Check for RBAC misconfigurations."
+  #         - "Audit my network policies."
+  #         - "Identify potential security vulnerabilities in my cluster."
+  #       tags:
+  #         - security
+  #         - audit
   tools:
-    - type: McpServer
-      mcpServer:
-        name: kagent-tool-server
-        kind: RemoteMCPServer
-        toolNames:
+    - mcp:
+        server:
+          kind: RemoteMCPServer
+          name: kagent-tool-server
+        tools:
           - k8s_check_service_connectivity
           - k8s_patch_resource
           - k8s_remove_annotation

@@ -31,7 +31,6 @@ spec:
   promptTemplate:
     dataSources:
       - alias: builtin
-        kind: ConfigMap
         name: kagent-builtin-prompts
   systemPrompt: |-
     # Flux Observability Agent
@@ -75,34 +74,34 @@ spec:
     - Be concise and direct.
     - Use code blocks for YAML snippets and resource output.
     - Always state the root cause before proposing a fix.
-  a2aConfig:
-    skills:
-      - id: observe-and-troubleshoot-cluster
-        name: Observe and Troubleshoot Cluster
-        description: Observe and troubleshoot Flux resources and Kubernetes cluster state
-        inputModes:
-          - text
-        outputModes:
-          - text
-        tags:
-          - kustomization
-          - debug
-        examples:
-          - Tell me why the Flux Kustomization is stuck on reconciling.
-      - id: flux-docs
-        name: Flux Documentation Search
-        description: Answer questions about Flux configuration using the official documentation.
-        tags:
-          - docs
-          - reference
-        examples:
-          - What fields do I have available for a Helm Release spec?
+  # a2aConfig:
+  #   skills:
+  #     - id: observe-and-troubleshoot-cluster
+  #       name: Observe and Troubleshoot Cluster
+  #       description: Observe and troubleshoot Flux resources and Kubernetes cluster state
+  #       inputModes:
+  #         - text
+  #       outputModes:
+  #         - text
+  #       tags:
+  #         - kustomization
+  #         - debug
+  #       examples:
+  #         - Tell me why the Flux Kustomization is stuck on reconciling.
+  #     - id: flux-docs
+  #       name: Flux Documentation Search
+  #       description: Answer questions about Flux configuration using the official documentation.
+  #       tags:
+  #         - docs
+  #         - reference
+  #       examples:
+  #         - What fields do I have available for a Helm Release spec?
   tools:
-    - type: McpServer
-      mcpServer:
-        name: flux-mcp
-        kind: RemoteMCPServer
-        toolNames:
+    - mcp:
+        server:
+          kind: RemoteMCPServer
+          name: flux-mcp
+        tools:
           - get_flux_instance
           - get_kubernetes_api_versions
           - get_kubernetes_logs
