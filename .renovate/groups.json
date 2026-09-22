@@ -22,6 +22,49 @@
       "minimumGroupSize": 2
     },
     {
+      "description": "Agentgateway Group",
+      "groupName": "agentgateway",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["/agentgateway/"],
+      "labels": ["manual-update"],
+      "group": {
+        "commitMessageTopic": "{{{groupName}}} group"
+      },
+      "minimumGroupSize": 2
+    },
+    {
+      "description": "Intel Device Plugins Group",
+      "groupName": "intel-device-plugins",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["/intel-device-plugins/"],
+      "labels": ["manual-update"],
+      "group": {
+        "commitMessageTopic": "{{{groupName}}} group"
+      },
+      "minimumGroupSize": 2
+    },
+    {
+      "description": "Kagent Group",
+      "groupName": "kagent",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["/kagent/"],
+      "labels": ["manual-update"],
+      "group": {
+        "commitMessageTopic": "{{{groupName}}} group"
+      },
+      "minimumGroupSize": 2
+    },
+    {
+      "description": "AdventureLog Group",
+      "groupName": "adventurelog",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["/adventurelog/"],
+      "group": {
+        "commitMessageTopic": "{{{groupName}}} group"
+      },
+      "minimumGroupSize": 2
+    },
+    {
       "description": "Substrate Group",
       "groupName": "substrate",
       "matchDatasources": ["docker"],

@@ -35,6 +35,7 @@ resources:
   - trivy-operator-dashboard.yaml
   - cilium.yaml
   - x509-certificate-exporter.yaml
+  - kagent.yaml
   - kagent-crds.yaml
   - kmcp-crds.yaml
   - konflate.yaml
