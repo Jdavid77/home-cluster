@@ -5,10 +5,16 @@ metadata:
   name: kagent
   namespace: automation
 spec:
-  chartRef:
-    kind: OCIRepository
-    name: kagent
-    namespace: flux-system
+  chart:
+    spec:
+      chart: kagent
+      version: 1.0.0-alpha1
+      interval: 5m
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: kagent-charts
+        namespace: flux-system
   install:
     crds: CreateReplace
     remediation:
