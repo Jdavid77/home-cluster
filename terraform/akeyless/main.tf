@@ -1,15 +1,25 @@
-terraform {
-  backend "s3" {
-    bucket = "jnobrega-tf-state"
-    key    = "akeyless.tfstate"
-    region = "eu-central-003"
-    endpoints = {
-      s3 = "https://s3.eu-central-003.backblazeb2.com"
+locals {
+  keys = {
+    flux = {
+      name = "Flux-Key"
+      roles = [
+        { name = "ReadOnly", path = "/*", capabilities = ["read", "list"] },
+        { name = "CM-Read-Write", path = "/cert-manager/*", capabilities = ["create", "update", "read", "delete", "list"] },
+      ]
     }
-    skip_credentials_validation = true
-    skip_region_validation      = true
-    skip_metadata_api_check     = true
-    skip_requesting_account_id  = true
-    skip_s3_checksum            = true
+    omv = {
+      name = "OMV"
+      roles = [
+        { name = "CM-Read-Write", path = "/cert-manager/*", capabilities = ["create", "update", "read", "delete", "list"] },
+      ]
+    }
   }
+}
+
+module "key" {
+  source   = "./modules/key"
+  for_each = local.keys
+
+  name  = each.value.name
+  roles = each.value.roles
 }

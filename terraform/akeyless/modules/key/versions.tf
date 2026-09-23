@@ -1,13 +1,8 @@
 terraform {
-  required_version = "~> 1.9"
   required_providers {
     akeyless = {
       source  = "akeyless-community/akeyless"
       version = "~> 2.0"
-    }
-    sops = {
-      source  = "carlpett/sops"
-      version = "~> 1.0"
     }
   }
 }
