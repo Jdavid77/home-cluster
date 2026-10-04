@@ -26,3 +26,5 @@ defaultSettings:
   defaultLonghornStaticStorageClass: longhorn
   nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
   upgradeChecker: false
+  v1DataEngine: true
+  v2DataEngine: false
