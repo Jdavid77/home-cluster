@@ -5,7 +5,7 @@ metadata:
   name: dragonfly-${APP}
 spec:
 
-  image: ghcr.io/dragonflydb/dragonfly:v2.0.0
+  image: ghcr.io/dragonflydb/dragonfly:v2.0.2
   replicas: ${DRAGONFLY_REPLICAS:=1}
 
   resources:
