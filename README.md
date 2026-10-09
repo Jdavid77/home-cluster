@@ -30,13 +30,16 @@ This repository contains the configuration for my home Kubernetes cluster — a 
 - **[topf](https://github.com/postfinance/topf)** generates and maintains Talos machine configs (see [migration notes](/.claude/skills/migrate-talhelper-to-topf/SKILL.md))
 - **[Flux](https://fluxcd.io/)** continuously reconciles the cluster state from this repository
 - **[Renovate](https://docs.renovatebot.com/)** automates dependency updates via pull requests
-- **[Terraform](https://www.terraform.io/)** provisions external dependencies (Cloudflare, Akeyless, Backblaze)
+- **[Terraform](https://www.terraform.io/)** provisions external dependencies (Akeyless, Authentik, Backblaze, Garage)
 
 ---
 
 ## 📂 Repository Structure
 
 ```
+📁 .agents             # conventions for working on the repo
+📁 .claude
+└── 📁 skills           # reusable Claude Code skills (commit, lint, create-app...)
 📁 bootstrap
 ├── 📁 secrets          # encrypted secrets applied once at cluster bootstrap
 ├── crds.helmfile.yaml  # pre-installs CRDs before operators
@@ -58,7 +61,7 @@ This repository contains the configuration for my home Kubernetes cluster — a 
 ├── 📁 node             # per-node patches
 ├── 📁 schematics       # talos image schematics
 ├── topf.yaml
-└── secrets.sops.yaml
+└── secrets.yaml
 📁 terraform
 ├── 📁 authentik
 ├── 📁 akeyless
@@ -151,7 +154,7 @@ These tools complement the Kubernetes infrastructure by providing essential func
             <tr>
                 <td><img width="32" src="https://icon.icepanel.io/Technology/svg/Cloudflare.svg" alt="Cloudflare logo" /></td>
                 <td><a href="https://www.cloudflare.com/en-gb/">Cloudflare</a></td>
-                <td>DNS management service for handling domain name resolutions.</td>
+                <td>DNS management, Tunnel for public access and R2 object storage (offsite PVC backups).</td>
             </tr>
             <tr>
                 <td><img width="32" src="https://images.icon-icons.com/699/PNG/512/gmx_icon-icons.com_61633.png" alt="GMX logo" /></td>
@@ -161,12 +164,12 @@ These tools complement the Kubernetes infrastructure by providing essential func
             <tr>
                 <td><img width="32" src="https://icon.icepanel.io/Technology/svg/HashiCorp-Terraform.svg" alt="Terraform logo" /></td>
                 <td><a href="https://www.terraform.io/">Terraform</a></td>
-                <td>IAC tool for automating the provisioning and management of outside dependencies (Akeyless, Cloudflare, etc...).</td>
+                <td>IAC tool for automating the provisioning and management of outside dependencies (Akeyless, Authentik, Backblaze, Garage).</td>
             </tr>
             <tr>
                 <td><img width="32" src="https://avatars.githubusercontent.com/u/10283486?s=200&v=4" alt="Backblaze logo" /></td>
                 <td><a href="https://www.backblaze.com/">Backblaze B2</a></td>
-                <td>S3 Object Storage ( Mainly for Backups )</td>
+                <td>S3 Object Storage (offsite Postgres backups)</td>
             </tr>
     </table>
 
@@ -266,6 +269,8 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
 
 ## ⚙️ Infrastructure
 
+### Networking
+
 <table>
     <tr>
         <th>Logo</th>
@@ -273,35 +278,9 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
         <th>Description</th>
     </tr>
     <tr>
-        <td><img width="32" src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/cert-manager.svg"></td>
-        <td><a href="https://cert-manager.io/">Cert Manager</a></td>
-        <td>Let's Encrypt Certificates for SSL/TLS</td>
-    </tr>
-    <tr>
         <td><img width="32" src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/cilium.svg"></td>
         <td><a href="https://cilium.io/">Cilium</a></td>
-        <td>CNI </td>
-    </tr>
-        <tr>
-        <td><img width="32" src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/longhorn.svg"></td>
-        <td><a href="https://longhorn.io/">Longhorn</a></td>
-        <td>Distributed block storage for POD's persistent volumes </td>
-    </tr>
-    </tr>
-        <tr>
-        <td><img width="32" src="https://garagehq.deuxfleurs.fr/images/garage-logo.svg"></td>
-        <td><a href="https://garagehq.deuxfleurs.fr/">Garage</a></td>
-        <td>S3 Object storage</td>
-    </tr>
-    <tr>
-        <td><img width="32" src="https://github.com/kubernetes-sigs/external-dns/raw/master/docs/img/external-dns.png"></td>
-        <td><a href="https://github.com/kubernetes-sigs/external-dns">External DNS</a></td>
-        <td>Synchronizes exposed Kubernetes Services and Ingresses with DNS providers.</td>
-    </tr>
-    <tr>
-        <td><img width="32" src="https://external-secrets.io/latest/pictures/eso-round-logo.svg"></td>
-        <td><a href="https://external-secrets.io/latest/">External Secrets Operator</a></td>
-        <td>Used with Akeyless Platform to retrieve and push secrets</td>
+        <td>CNI</td>
     </tr>
     <tr>
         <td><img width="32" src="https://icon.icepanel.io/Technology/svg/Envoy.svg"></td>
@@ -309,14 +288,59 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
         <td>Kubernetes-based Application Gateway</td>
     </tr>
     <tr>
+        <td><img width="32" src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/cloudflare.svg"></td>
+        <td><a href="https://github.com/cloudflare/cloudflared">Cloudflared</a></td>
+        <td>Cloudflare Tunnel client</td>
+    </tr>
+    <tr>
+        <td><img width="32" src="https://github.com/kubernetes-sigs/external-dns/raw/master/docs/img/external-dns.png"></td>
+        <td><a href="https://github.com/kubernetes-sigs/external-dns">External DNS</a></td>
+        <td>Synchronizes exposed Kubernetes Services and Ingresses with DNS providers (Cloudflare and Pi-hole)</td>
+    </tr>
+    <tr>
         <td><img width="32" src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/tailscale.svg"></td>
         <td><a href="https://tailscale.com/kb/1236/kubernetes-operator">Tailscale Operator</a></td>
         <td>Secure access to Kubernetes</td>
     </tr>
     <tr>
-        <td><img width="32" src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/cloudflare.svg"></td>
-        <td><a href="https://github.com/cloudflare/cloudflared">Cloudflared</a></td>
-        <td>Cloudflare Tunnel client</td>
+        <td><img width="32" src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/cert-manager.svg"></td>
+        <td><a href="https://cert-manager.io/">Cert Manager</a></td>
+        <td>Let's Encrypt Certificates for SSL/TLS</td>
+    </tr>
+    <tr>
+        <td><img width="32" src="https://raw.githubusercontent.com/spegel-org/website/main/static/images/logo-transparent.svg"></td>
+        <td><a href="https://spegel.dev/">Spegel</a></td>
+        <td>Stateless cluster-local OCI image mirror</td>
+    </tr>
+</table>
+
+### Storage
+
+<table>
+    <tr>
+        <th>Logo</th>
+        <th>Name</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td><img width="32" src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/longhorn.svg"></td>
+        <td><a href="https://longhorn.io/">Longhorn</a></td>
+        <td>Distributed block storage for POD's persistent volumes</td>
+    </tr>
+    <tr>
+        <td><img width="32" src="https://avatars.githubusercontent.com/u/20769039?s=200&v=4"></td>
+        <td><a href="https://openebs.io/">OpenEBS</a></td>
+        <td>Local PV storage</td>
+    </tr>
+    <tr>
+        <td><img width="32" src="https://garagehq.deuxfleurs.fr/images/garage-logo.svg"></td>
+        <td><a href="https://garagehq.deuxfleurs.fr/">Garage</a></td>
+        <td>S3 Object storage</td>
+    </tr>
+    <tr>
+        <td><img width="32" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnse03izNg3zoCDzCnuiejoD-SdxxunV2S8ddgvgfm7g&s"></td>
+        <td><a href="https://zotregistry.dev/">Zot</a></td>
+        <td>OCI registry</td>
     </tr>
     <tr>
         <td><img width="32" src="https://avatars.githubusercontent.com/u/104819355?s=200&v=4"></td>
@@ -328,15 +352,45 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
         <td><a href="https://volsync.readthedocs.io/en/stable/">Volsync</a></td>
         <td>PVC backups using Restic</td>
     </tr>
+</table>
+
+### Security & Identity
+
+<table>
+    <tr>
+        <th>Logo</th>
+        <th>Name</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td><img width="32" src="https://external-secrets.io/latest/pictures/eso-round-logo.svg"></td>
+        <td><a href="https://external-secrets.io/latest/">External Secrets Operator</a></td>
+        <td>Used with Akeyless Platform to retrieve and push secrets</td>
+    </tr>
     <tr>
         <td><img width="32" src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/authentik.svg"></td>
         <td><a href="https://goauthentik.io/">Authentik</a></td>
         <td>Open source identity provider</td>
     </tr>
     <tr>
-        <td><img width="32" src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/flux-cd.svg"></td>
-        <td><a href="https://fluxcd.io/">Flux CD</a></td>
-        <td>GitOps tool of choice</td>
+        <td><img width="32" src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/kyverno.svg"></td>
+        <td><a href="https://kyverno.io/">Kyverno</a></td>
+        <td>Policy engine</td>
+    </tr>
+    <tr>
+        <td><img width="32" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTcm35O1VEUCQFSJkWHcraPyikNvdJf6A9pASB0kntSg&s=10"></td>
+        <td><a href="https://aquasecurity.github.io/trivy-operator/">Trivy Operator</a></td>
+        <td>Continuous in-cluster vulnerability and misconfiguration scanning</td>
+    </tr>
+</table>
+
+### Observability
+
+<table>
+    <tr>
+        <th>Logo</th>
+        <th>Name</th>
+        <th>Description</th>
     </tr>
     <tr>
         <td><img width="32" src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/prometheus.svg"></td>
@@ -354,14 +408,39 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
         <td>Log aggregation</td>
     </tr>
     <tr>
+        <td><img width="32" src="https://avatars.githubusercontent.com/u/49998002?v=4"></td>
+        <td><a href="https://opentelemetry.io/">OpenTelemetry</a></td>
+        <td>Telemetry collection</td>
+    </tr>
+    <tr>
         <td><img width="32" src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/gatus.svg"></td>
         <td><a href="https://gatus.io/">Gatus</a></td>
         <td>Automated service health monitoring</td>
+    </tr>
+</table>
+
+### GitOps & Operations
+
+<table>
+    <tr>
+        <th>Logo</th>
+        <th>Name</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td><img width="32" src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/flux-cd.svg"></td>
+        <td><a href="https://fluxcd.io/">Flux CD</a></td>
+        <td>GitOps tool of choice</td>
     </tr>
     <tr>
         <td><img width="32" src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/keda.svg"></td>
         <td><a href="https://keda.sh/">KEDA</a></td>
         <td>Kubernetes event-driven autoscaling</td>
+    </tr>
+    <tr>
+        <td><img width="32" src="https://avatars.githubusercontent.com/u/152294696?s=200&v=4"></td>
+        <td><a href="https://github.com/home-operations/tuppr">Tuppr</a></td>
+        <td>Automated Talos and Kubernetes upgrades</td>
     </tr>
 </table>
 
@@ -372,7 +451,6 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
 The backbone of my home storage infrastructure is built on a Raspberry Pi 4 running [OpenMediaVault](https://www.openmediavault.org/), a dedicated network-attached storage solution. The system utilizes two SSDs (2TB + 1TB) configured to store:
 
 -   Media content (books, audiobooks)
--   Longhorn volume backups
 -   System configurations
 -   Docker Containers Data
 
@@ -403,6 +481,41 @@ The NAS hosts several essential containers:
 
 Docker Compose files for all NAS services are stored in [`omv/docker/`](./omv/docker/) and imported via OMV's Compose plugin.
 
+
+---
+
+## 🌐 Networking
+
+```mermaid
+graph LR
+    classDef pub fill:#f87171,stroke:#fff,stroke-width:2px,color:#fff,font-weight:bold;
+    classDef gw fill:#60a5fa,stroke:#fff,stroke-width:2px,color:#fff,font-weight:bold;
+    classDef dns fill:#facc15,stroke:#fff,stroke-width:2px,color:#000,font-weight:bold;
+
+    INET[🌐 Internet]:::pub
+    CF[Cloudflare DNS + Tunnel]:::pub
+    CFD[cloudflared]:::pub
+    LAN[🏠 LAN clients]:::dns
+    PH[Pi-hole]:::dns
+    EXT[Envoy Gateway<br/>external]:::gw
+    INT[Envoy Gateway<br/>internal]:::gw
+    APPS[Apps]:::gw
+
+    INET --> CF --> CFD --> EXT --> APPS
+    LAN --> PH --> INT --> APPS
+```
+
+-   **Public:** apps behind the `external` gateway are reached through a Cloudflare Tunnel — no ports are forwarded on the router.
+-   **Internal:** `internal` gateway hostnames are published to Pi-hole by External DNS and only resolve on the LAN.
+-   **Tailscale:** provides private remote access. Tailscale clients use Pi-hole as their DNS server, so `internal` hostnames resolve the same way remotely as on the LAN. The NAS also runs a Tailscale exit node egressing over NordVPN.
+
+---
+
+## 💾 Storage & Backups
+
+-   **PVCs:** backed up by Volsync (Restic) to Garage in-cluster and to Cloudflare R2 offsite.
+-   **Postgres:** backup CronJobs write to Garage and to Backblaze B2 (encrypted).
+-   **Akeyless:** has its own backup CronJob.
 
 ---
 
