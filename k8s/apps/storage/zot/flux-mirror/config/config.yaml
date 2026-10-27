@@ -36,3 +36,8 @@ artifacts:
     selector:
       semver: ">= 3.0.0"
       limit: 5
+  - source: docker.io/pypiserver/pypiserver
+    destination: registry.jnobrega.com/mirror/pypiserver/pypiserver
+    selector:
+      semver: ">=2.4.0"
+      limit: 5

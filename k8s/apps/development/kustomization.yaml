@@ -7,6 +7,8 @@ resources:
   - ./atlantis/ks.yaml
   - ./renovate/ks.yaml
   - ./konflate/ks.yaml
+  - ./pypiserver/ks.yaml
 components:
   - ../../components/alerts/alertmanager
+  - ../../components/flux/image-automation
   - ../../components/grafana/folder
