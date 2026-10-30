@@ -5,3 +5,5 @@ extraArgs:
   feature-gates: GracefulNodeShutdown=true,ClusterTrustBundle=true,ClusterTrustBundleProjection=true,PodCertificateRequest=true
 config:
   maxPods: 150
+  # GC unused images by age; the 85% disk threshold never triggers on large disks
+  imageMaximumGCAge: 72h
