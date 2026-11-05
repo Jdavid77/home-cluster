@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app amd-device-plugin
+spec:
+  interval: 15m
+  timeout: 5m
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+    namespace: flux-system
+  maxHistory: 2
+  values:
+    defaultPodOptions:
+      priorityClassName: system-node-critical
+      nodeSelector:
+        kubernetes.io/hostname: hp-worker3
+    controllers:
+      amd-device-plugin:
+        type: daemonset
+        strategy: RollingUpdate
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: docker.io/rocm/k8s-device-plugin
+              tag: 1.31.0.11@sha256:e4df5dc9a7fa34e2344852256dcc5762171a6d68f1f9a34026ce26786ae335e2
+            securityContext:
+              privileged: true
+              capabilities:
+                drop: ["ALL"]
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 64Mi
+    persistence:
+      device-plugins:
+        type: hostPath
+        hostPath: /var/lib/kubelet/device-plugins
+        globalMounts:
+          - path: /var/lib/kubelet/device-plugins
+      sys:
+        type: hostPath
+        hostPath: /sys
+        globalMounts:
+          - path: /sys
