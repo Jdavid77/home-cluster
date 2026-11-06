@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: llmkube
+spec:
+  interval: 15m
+  timeout: 5m
+  maxHistory: 2
+  chartRef:
+    kind: OCIRepository
+    name: llmkube
+    namespace: flux-system
+  values:
+    controllerManager:
+      initContainer:
+        # OMV /models export only accepts the OMV user 1002 / group users (100).
+        user: 1002
+        defaultFSGroup: 100
+    modelCache:
+      mode: shared
+      existingClaim: llmkube-model-cache
+      accessMode: ReadWriteMany
+      prep: never
