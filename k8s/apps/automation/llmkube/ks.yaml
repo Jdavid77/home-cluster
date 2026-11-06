@@ -30,6 +30,8 @@ spec:
   targetNamespace: automation
   dependsOn:
     - name: llmkube
+    - name: keda-add-ons-http
+      namespace: monitoring
   path: ./k8s/apps/automation/llmkube/models
   prune: true
   sourceRef:

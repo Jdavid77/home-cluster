@@ -29,7 +29,7 @@ spec:
   env:
     - name: XDG_CACHE_HOME
       value: /tmp/.cache
-  replicas: 1
+  # replicas is owned by KEDA (ScaledObject below)
   contextSize: 4096
   # Non-causal pooling: a single input must fit in one ubatch, and the attention
   # score buffer grows with ubatch². 2048 caps each input at 2048 tokens (plenty
@@ -51,3 +51,59 @@ spec:
     runAsUser: 1002
     runAsGroup: 100
     fsGroup: 100
+---
+# Scale-to-zero: callers use http://qwen3-embedding.automation.svc.cluster.local:8080,
+# which resolves to the KEDA HTTP interceptor. It holds requests while the
+# InferenceService scales up from 0, then forwards them to the real Service.
+apiVersion: v1
+kind: Service
+metadata:
+  name: qwen3-embedding
+spec:
+  type: ExternalName
+  externalName: keda-add-ons-http-interceptor-proxy.monitoring.svc.cluster.local
+  ports:
+    - port: 8080
+---
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/http.keda.sh/interceptorroute_v1beta1.json
+apiVersion: http.keda.sh/v1beta1
+kind: InterceptorRoute
+metadata:
+  name: qwen3-embedding-0-6b
+spec:
+  target:
+    service: qwen3-embedding-0-6b
+    port: 8080
+  rules:
+    - hosts:
+        - qwen3-embedding
+        - qwen3-embedding.automation
+        - qwen3-embedding.automation.svc
+        - qwen3-embedding.automation.svc.cluster.local
+  scalingMetric:
+    concurrency:
+      targetValue: 4
+  timeouts:
+    # Cold start (pod scheduling + model load) is ~16s; fail rather than hang.
+    readiness: 120s
+---
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/keda.sh/scaledobject_v1alpha1.json
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: qwen3-embedding-0-6b
+spec:
+  # KEDA drives the InferenceService's /scale subresource, so the model's
+  # manifest must not set spec.replicas or Flux would fight it.
+  scaleTargetRef:
+    apiVersion: inference.llmkube.dev/v1alpha1
+    kind: InferenceService
+    name: qwen3-embedding-0-6b
+  minReplicaCount: 0
+  maxReplicaCount: 1
+  cooldownPeriod: 600
+  triggers:
+    - type: external-push
+      metadata:
+        scalerAddress: keda-add-ons-http-external-scaler.monitoring:9090
+        interceptorRoute: qwen3-embedding-0-6b
