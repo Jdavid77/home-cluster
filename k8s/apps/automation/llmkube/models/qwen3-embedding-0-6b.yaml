@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/inference.llmkube.dev/model_v1alpha1.json
+apiVersion: inference.llmkube.dev/v1alpha1
+kind: Model
+metadata:
+  name: qwen3-embedding-0-6b
+spec:
+  source: https://huggingface.co/Qwen/Qwen3-Embedding-0.6B-GGUF/resolve/main/Qwen3-Embedding-0.6B-Q8_0.gguf
+  sha256: 06507c7b42688469c4e7298b0a1e16deff06caf291cf0a5b278c308249c3e439
+  format: gguf
+  quantization: Q8_0
+  hardware:
+    accelerator: vulkan
+    gpu:
+      enabled: true
+      count: 1
+      vendor: intel
+      resourceName: gpu.intel.com/i915
+---
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/inference.llmkube.dev/inferenceservice_v1alpha1.json
+apiVersion: inference.llmkube.dev/v1alpha1
+kind: InferenceService
+metadata:
+  name: qwen3-embedding-0-6b
+spec:
+  modelRef: qwen3-embedding-0-6b
+  runtime: llamacpp
+  mode: embedding
+  image: ghcr.io/ggml-org/llama.cpp:server-vulkan-b12033@sha256:421137599beb2135a9e1d664fa8991a3f4f5f953440a9d7622c7a61b63185fe8
+  env:
+    - name: XDG_CACHE_HOME
+      value: /tmp/.cache
+  replicas: 1
+  contextSize: 4096
+  # Non-causal pooling: a single input must fit in one ubatch, and the attention
+  # score buffer grows with ubatch². 2048 caps each input at 2048 tokens (plenty
+  # for RAG chunks) and saves ~1GB of shared iGPU RAM vs 8192, at the same speed.
+  batchSize: 4096
+  uBatchSize: 2048
+  resources:
+    gpu: 1
+    cpu: "1"
+    memory: 1Gi
+    memoryLimit: 4Gi
+  podSecurityContext:
+    runAsNonRoot: true
+    runAsUser: 1002
+    runAsGroup: 100
+    fsGroup: 100
