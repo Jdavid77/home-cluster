@@ -16,7 +16,6 @@ spec:
       count: 1
       vendor: amd
       runtime: vulkan
-      # The ROCm device plugin advertises amd.com/gpu, not devic.es/dri-render.
       resourceName: amd.com/gpu
 ---
 # yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/inference.llmkube.dev/inferenceservice_v1alpha1.json
@@ -27,17 +26,25 @@ metadata:
 spec:
   modelRef: qwen3-4b
   runtime: llamacpp
+  # LLMKube's Vulkan image ships a single AVX2-only CPU backend, which the
+  # i5-3470 (Ivy Bridge) can't load; upstream bundles all CPU variants.
+  image: ghcr.io/ggml-org/llama.cpp:server-vulkan-b12033@sha256:421137599beb2135a9e1d664fa8991a3f4f5f953440a9d7622c7a61b63185fe8
+  env:
+    # Mesa shader cache; HOME is / for the non-root uid.
+    - name: XDG_CACHE_HOME
+      value: /tmp/.cache
   replicas: 1
-  contextSize: 8192
-  flashAttention: true
+  # 8k spills the KV cache out of the 4GB VRAM into GTT over PCIe 3.0 x4.
+  contextSize: 4096
   jinja: true
+  # Vulkan flash attention is ~3x slower at prompt processing on RDNA2, and
+  # llama.cpp defaults to "auto", so it must be forced off explicitly.
+  extraArgs: ["--flash-attn", "off"]
   resources:
     gpu: 1
     cpu: "1"
     memory: 2Gi
     memoryLimit: 6Gi
-  # OMV /models export only accepts uid 1002 / gid users (100); the model
-  # downloader init container inherits this.
   podSecurityContext:
     runAsNonRoot: true
     runAsUser: 1002
