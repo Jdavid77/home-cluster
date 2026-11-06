@@ -1,0 +1,45 @@
+---
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/inference.llmkube.dev/model_v1alpha1.json
+apiVersion: inference.llmkube.dev/v1alpha1
+kind: Model
+metadata:
+  name: qwen3-4b
+spec:
+  source: https://huggingface.co/Qwen/Qwen3-4B-GGUF/resolve/main/Qwen3-4B-Q4_K_M.gguf
+  sha256: 7485fe6f11af29433bc51cab58009521f205840f5b4ae3a32fa7f92e8534fdf5
+  format: gguf
+  quantization: Q4_K_M
+  hardware:
+    accelerator: vulkan
+    gpu:
+      enabled: true
+      count: 1
+      vendor: amd
+      runtime: vulkan
+      # The ROCm device plugin advertises amd.com/gpu, not devic.es/dri-render.
+      resourceName: amd.com/gpu
+---
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/inference.llmkube.dev/inferenceservice_v1alpha1.json
+apiVersion: inference.llmkube.dev/v1alpha1
+kind: InferenceService
+metadata:
+  name: qwen3-4b
+spec:
+  modelRef: qwen3-4b
+  runtime: llamacpp
+  replicas: 1
+  contextSize: 8192
+  flashAttention: true
+  jinja: true
+  resources:
+    gpu: 1
+    cpu: "1"
+    memory: 2Gi
+    memoryLimit: 6Gi
+  # OMV /models export only accepts uid 1002 / gid users (100); the model
+  # downloader init container inherits this.
+  podSecurityContext:
+    runAsNonRoot: true
+    runAsUser: 1002
+    runAsGroup: 100
+    fsGroup: 100
