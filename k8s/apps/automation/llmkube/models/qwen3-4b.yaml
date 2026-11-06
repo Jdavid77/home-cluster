@@ -39,9 +39,13 @@ spec:
   jinja: true
   # Vulkan flash attention is ~3x slower at prompt processing on RDNA2, and
   # llama.cpp defaults to "auto", so it must be forced off explicitly.
+  # Thinking mode is on by default and burns thousands of tokens before
+  # answering; clients like Mealie can't send per-request template kwargs.
   extraArgs:
     - --flash-attn
     - "off"
+    - --chat-template-kwargs
+    - '{"enable_thinking":false}'
     - --alias
     - qwen3-4b
   resources:
