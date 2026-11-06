@@ -44,6 +44,7 @@ resources:
   - atlantis.yaml
   - blackbox-exporter.yaml
   - keda.yaml
+  - keda-add-ons-http.yaml
   - trust-manager.yaml
   - kguardian.yaml
   - renovate-operator.yaml
