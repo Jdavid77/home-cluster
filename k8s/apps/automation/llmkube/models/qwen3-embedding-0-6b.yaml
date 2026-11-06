@@ -101,7 +101,7 @@ spec:
     name: qwen3-embedding-0-6b
   minReplicaCount: 0
   maxReplicaCount: 1
-  cooldownPeriod: 600
+  cooldownPeriod: 300
   triggers:
     - type: external-push
       metadata:
