@@ -39,9 +39,11 @@ spec:
   extraArgs:
     - --alias
     - qwen3-embedding
+  # Request only (no CPU limit); the iGPU does the work and the node's CPU
+  # requests are tight (Prometheus is pinned there).
   resources:
     gpu: 1
-    cpu: "1"
+    cpu: 100m
     memory: 1Gi
     memoryLimit: 4Gi
   podSecurityContext:
