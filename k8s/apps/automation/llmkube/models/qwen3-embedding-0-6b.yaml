@@ -36,7 +36,9 @@ spec:
   # for RAG chunks) and saves ~1GB of shared iGPU RAM vs 8192, at the same speed.
   batchSize: 4096
   uBatchSize: 2048
-  extraArgs: ["--alias", "qwen3-embedding"]
+  extraArgs:
+    - --alias
+    - qwen3-embedding
   resources:
     gpu: 1
     cpu: "1"

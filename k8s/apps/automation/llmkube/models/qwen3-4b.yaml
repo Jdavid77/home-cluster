@@ -39,7 +39,11 @@ spec:
   jinja: true
   # Vulkan flash attention is ~3x slower at prompt processing on RDNA2, and
   # llama.cpp defaults to "auto", so it must be forced off explicitly.
-  extraArgs: ["--flash-attn", "off", "--alias", "qwen3-4b"]
+  extraArgs:
+    - --flash-attn
+    - "off"
+    - --alias
+    - qwen3-4b
   resources:
     gpu: 1
     cpu: "1"
