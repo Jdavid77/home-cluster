@@ -1,0 +1,120 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app whisper
+spec:
+  interval: 15m
+  timeout: 5m
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+    namespace: flux-system
+  maxHistory: 2
+  values:
+    defaultPodOptions:
+      nodeSelector:
+        kubernetes.io/hostname: localstorage-worker1
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1002
+        runAsGroup: 100
+        fsGroup: 100
+    controllers:
+      whisper:
+        # Only one free i915 slot next to the embedding model; a surge pod
+        # would sit Pending forever.
+        strategy: Recreate
+        annotations:
+          reloader.stakater.com/auto: "true"
+        initContainers:
+          download-model:
+            image:
+              repository: docker.io/curlimages/curl
+              tag: 8.18.0@sha256:d94d07ba9e7d6de898b6d96c1a072f6f8266c687af78a74f380087a0addf5d17
+            command:
+              - sh
+              - -c
+              - |
+                set -eu
+                mkdir -p /models/whisper
+                f=/models/whisper/ggml-small.bin
+                [ -s "$f" ] && exit 0
+                curl -fsSL --retry 3 -o "$f.tmp" https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-small.bin
+                mv "$f.tmp" "$f"
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 128Mi
+        containers:
+          app:
+            image:
+              repository: ghcr.io/ggml-org/whisper.cpp
+              tag: main-vulkan@sha256:509566c4982f84231776376a7f1e34b54f0d0be75136349fbec40f9efb8888e6
+            # OpenAI-compatible transcription for Mealie: it posts mp3 to
+            # /v1/audio/transcriptions and reads {"text": ...}.
+            command:
+              - whisper-server
+            args:
+              - --model
+              - /models/whisper/ggml-small.bin
+              - --host
+              - 0.0.0.0
+              - --port
+              - "8080"
+              - --inference-path
+              - /v1/audio/transcriptions
+              - --convert
+              - --tmp-dir
+              - /tmp
+              - --threads
+              - "2"
+            env:
+              HOME: /tmp
+              # Mesa shader cache
+              XDG_CACHE_HOME: /tmp/.cache
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: &port 8080
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+              startup:
+                enabled: false
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                  - ALL
+            resources:
+              requests:
+                cpu: 100m
+                memory: 512Mi
+              limits:
+                memory: 2Gi
+                gpu.intel.com/i915: 1
+    service:
+      app:
+        controller: *app
+        ports:
+          http:
+            port: *port
+    persistence:
+      models:
+        type: nfs
+        server: 192.168.1.84
+        path: /models
+        globalMounts:
+          - path: /models
+      tmp:
+        type: emptyDir
+        globalMounts:
+          - path: /tmp

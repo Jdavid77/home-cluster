@@ -10,6 +10,7 @@ resources:
   - ./agent-sandbox/ks.yaml
   - ./agentgateway/ks.yaml
   - ./llmkube/ks.yaml
+  - ./whisper/ks.yaml
 components:
   - ../../components/alerts/alertmanager
   - ../../components/flux/ghcr
