@@ -31,7 +31,7 @@ spec:
           download-model:
             image:
               repository: docker.io/curlimages/curl
-              tag: 8.18.0@sha256:d94d07ba9e7d6de898b6d96c1a072f6f8266c687af78a74f380087a0addf5d17
+              tag: 8.23.0@sha256:3fb7e13e5d179a845c97d78204f3f1064d1907037f26a3ebf91710571151fd93
             command:
               - sh
               - -c
