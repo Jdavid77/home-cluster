@@ -28,7 +28,7 @@
       "automergeType": "pr",
       "ignoreTests": false,
       "matchUpdateTypes": ["minor", "patch"],
-      "packageNames": [
+      "matchPackageNames": [
         "/opentelemetry-operator/",
         "/opentelemetry-collector-releases/"
       ],

@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: Validate Renovate
+
+concurrency:
+  group: renovate-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - renovate.json
+      - .renovate/**
+      - .github/workflows/validate-renovate.yaml
+  push:
+    branches:
+      - main
+    paths:
+      - renovate.json
+      - .renovate/**
+      - .github/workflows/validate-renovate.yaml
+
+env:
+  # renovate: datasource=npm depName=renovate
+  RENOVATE_VERSION: 44.198.3
+
+jobs:
+  validate:
+    name: Renovate Config Validation
+    runs-on: home-ops-runner
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            renovate.json
+            .renovate
+
+      # just to install node
+      - name: Setup mise
+        uses: jdx/mise-action@e6a8b3978addb5a52f2b4cd9d91eafa7f0ab959d # v4.2.0
+        with:
+          install: false
+
+      - name: Validate Config
+        run: >-
+          mise exec node@24 --
+          npx --yes --package "renovate@${RENOVATE_VERSION}" --
+          renovate-config-validator --strict --no-global
+          renovate.json .renovate/*.json
