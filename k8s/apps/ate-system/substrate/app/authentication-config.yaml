@@ -6,7 +6,6 @@ metadata:
   namespace: ate-system
 data:
   authentication.yaml: |
-    actorIdentityJWTProvider: kubernetes
     jwtProviders:
     - name: kubernetes
       issuer: https://192.168.1.110:6443
