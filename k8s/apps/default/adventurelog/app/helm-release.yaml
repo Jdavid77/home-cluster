@@ -26,54 +26,49 @@ spec:
               - secretRef:
                   name: adventurelog-secret
         containers:
-          frontend:
+          app:
             image:
-              repository: ghcr.io/seanmorley15/adventurelog-frontend
-              tag: latest@sha256:84845e38ccf4487fbca6b580f19dd8a6c65669bf384ea7463ab018ca8a47c0dc
+              repository: ghcr.io/seanmorley15/adventurelog
+              tag: latest@sha256:b65149c8a84b89e1101e22e10ad217a5be443c8408244ec97aa4535d24dce6ad
             env:
-              PUBLIC_SERVER_URL: "http://adventurelog.default.svc.cluster.local:8000"
-              BODY_SIZE_LIMIT: Infinity
-              ORIGIN: "https://adventurelog.jnobrega.com"
-            probes:
-              liveness: &probes
-                enabled: false
-              readiness: *probes
-              startup: *probes
-            resources:
-              requests:
-                cpu: 50m
-                memory: 100Mi
-          server:
-            image:
-              repository: ghcr.io/seanmorley15/adventurelog-backend
-              tag: latest@sha256:84845e38ccf4487fbca6b580f19dd8a6c65669bf384ea7463ab018ca8a47c0dc
-            env:
-              PUBLIC_URL: https://adventurelog-backend.jnobrega.com
-              FRONTEND_URL: https://adventurelog.jnobrega.com
-              CSRF_TRUSTED_ORIGINS: https://adventurelog-backend.jnobrega.com,https://adventurelog.jnobrega.com
-              DEBUG: "true"
+              SITE_URL: https://adventurelog.jnobrega.com
               DJANGO_ADMIN_USERNAME: admin
               ENABLE_RATE_LIMITS: "true"
             envFrom: *secret
             probes:
               liveness: &probes
-                enabled: false
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: &port 80
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+                  failureThreshold: 3
               readiness: *probes
-              startup: *probes
+              startup:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: *port
+                  periodSeconds: 10
+                  failureThreshold: 30
             resources:
               requests:
-                cpu: 125m
-                memory: 500Mi
+                cpu: 175m
+                memory: 600Mi
     service:
       app:
         controller: *app
         ports:
           http:
-            port: &frontend-port 3000
-          base:
-            port: &server-port 8000
+            port: *port
     route:
-      frontend:
+      app:
         parentRefs:
           - kind: Gateway
             name: internal
@@ -84,19 +79,7 @@ spec:
         rules:
           - backendRefs:
               - name: *app
-                port: *frontend-port
-      server:
-        parentRefs:
-          - kind: Gateway
-            name: internal
-            namespace: network
-            sectionName: websecure
-        hostnames:
-          - adventurelog-backend.jnobrega.com
-        rules:
-          - backendRefs:
-              - name: *app
-                port: *server-port
+                port: *port
     persistence:
       config:
         enabled: true
