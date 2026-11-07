@@ -21,4 +21,4 @@ spec:
       pathStyle: true
       # Secret with AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY keys. Empty uses the
       # SDK's default credential chain.
-      credentialsSecret: "substrate-secret"
+      credentialsSecret: "substrate-atelet-secret"

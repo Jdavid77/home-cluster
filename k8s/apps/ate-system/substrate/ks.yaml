@@ -25,10 +25,78 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
+  name: substrate-podcert
+spec:
+  dependsOn:
+    - name: external-secrets-store
+      namespace: external-secrets
+  path: ./k8s/apps/ate-system/substrate/podcert
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-cluster
+    namespace: flux-system
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      name: substrate-podcert
+      namespace: ate-system
+  healthCheckExprs:
+    - apiVersion: external-secrets.io/v1
+      kind: ExternalSecret
+      failed: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSyncedError')
+      current: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSynced')
+  wait: true
+  interval: 30m
+  retryInterval: 2m
+  timeout: 15m
+---
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: substrate-postgres
+spec:
+  targetNamespace: ate-system
+  dependsOn:
+    - name: external-secrets-store
+      namespace: external-secrets
+  path: ./k8s/apps/ate-system/substrate/postgres
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-cluster
+    namespace: flux-system
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      name: substrate-postgres
+      namespace: ate-system
+    - apiVersion: batch/v1
+      kind: Job
+      name: substrate-db-init
+      namespace: ate-system
+  healthCheckExprs:
+    - apiVersion: external-secrets.io/v1
+      kind: ExternalSecret
+      failed: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSyncedError')
+      current: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSynced')
+  wait: true
+  interval: 30m
+  retryInterval: 2m
+  timeout: 15m
+---
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
   name: &app substrate
 spec:
   dependsOn:
     - name: substrate-crds
+    - name: substrate-podcert
+    - name: substrate-postgres
+    - name: substrate-atelet
   path: ./k8s/apps/ate-system/substrate/app
   prune: true
   sourceRef:
@@ -40,6 +108,38 @@ spec:
       kind: HelmRelease
       name: substrate
       namespace: ate-system
+  wait: true
+  interval: 30m
+  retryInterval: 2m
+  timeout: 15m
+---
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: substrate-atelet
+spec:
+  dependsOn:
+    - name: substrate-crds
+    - name: substrate-podcert
+    - name: external-secrets-store
+      namespace: external-secrets
+  path: ./k8s/apps/ate-system/substrate/atelet
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-cluster
+    namespace: flux-system
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      name: substrate-atelet
+      namespace: ate-system
+  healthCheckExprs:
+    - apiVersion: external-secrets.io/v1
+      kind: ExternalSecret
+      failed: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSyncedError')
+      current: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSynced')
   wait: true
   interval: 30m
   retryInterval: 2m

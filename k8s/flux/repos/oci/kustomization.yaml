@@ -54,6 +54,8 @@ resources:
   - tekton-operator.yaml
   - substrate.yaml
   - substrate-crds.yaml
+  - substrate-podcert.yaml
+  - substrate-atelet.yaml
   - openshell.yaml
   - agentgateway.yaml
   - agentgateway-crds.yaml

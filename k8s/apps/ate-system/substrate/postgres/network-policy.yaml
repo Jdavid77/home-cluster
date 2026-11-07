@@ -1,0 +1,25 @@
+---
+# The substrate chart denies all ingress in ate-system. Its own postgres policy
+# targets a named container port that app-template does not declare, so admit
+# ate-api-server and the setup Job here by port number.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: substrate-postgres
+spec:
+  podSelector:
+    matchLabels:
+      app: postgres
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: ate-api-server
+        - podSelector:
+            matchLabels:
+              app: substrate-db-init
+      ports:
+        - protocol: TCP
+          port: 5432
