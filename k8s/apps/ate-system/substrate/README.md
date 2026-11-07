@@ -36,6 +36,7 @@ substrate-postgres ────────────────────�
 | `/substrate/actor-id-ca-pool` | CA pool | substrate |
 | `/substrate/actor-id-jwt-pool` | JWT signing pool | substrate |
 | `/substrate/actor-id-ca-certs` | CA certs | substrate |
+| `/substrate/egress-mitm-ca-pool` | `pool`, `tls.crt`, `tls.key` | atenet-egress (HTTPS interception) |
 
 ### Other requirements
 
