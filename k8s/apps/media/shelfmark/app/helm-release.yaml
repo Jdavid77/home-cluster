@@ -49,6 +49,8 @@ spec:
               - shelfmark.main:app
             env:
               CACHE_DIR: /cache
+              # Normally set by the bypassed entrypoint; Chromium crashes with HOME=/
+              HOME: /tmp/shelfmark/home
               INGEST_DIR: /booklore-ingest
               LOG_LEVEL: DEBUG
             securityContext:
@@ -70,7 +72,7 @@ spec:
                 cpu: 50m
                 memory: 200Mi
               limits:
-                memory: 600Mi
+                memory: 1Gi
     service:
       app:
         controller: *app
@@ -107,10 +109,16 @@ spec:
             subPath: run
           - path: /var/log
             subPath: var-log
-          - path: /app/downloaded_files
-            subPath: app-downloaded-files
           - path: /tmp/shelfmark
             subPath: tmp-shelfmark
+          # /app/{downloaded,archived}_files are image symlinks into these; the
+          # entrypoint normally creates them, but we bypass it with `command`.
+          - path: /tmp/shelfmark/seleniumbase/downloaded_files
+            subPath: seleniumbase-downloaded-files
+          - path: /tmp/shelfmark/seleniumbase/archived_files
+            subPath: seleniumbase-archived-files
+          - path: /tmp/shelfmark/home
+            subPath: home
       ingests:
         type: nfs
         server: 192.168.1.84
