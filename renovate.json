@@ -5,8 +5,7 @@
     "github>Jdavid77/home-cluster//.renovate/autoMerge.json",
     "github>Jdavid77/home-cluster//.renovate/groups.json",
     "github>Jdavid77/home-cluster//.renovate/labels.json",
-    ":timezone(Europe/Lisbon)",
-    "customManagers:githubActionsVersions"
+    ":timezone(Europe/Lisbon)"
   ],
   "dependencyDashboardTitle": "Home-Ops Renovate Dashboard",
   "suppressNotifications": ["prEditedNotification", "prIgnoreNotification"],
