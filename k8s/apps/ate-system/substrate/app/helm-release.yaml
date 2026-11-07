@@ -48,7 +48,7 @@ spec:
       # Cluster-wide snapshot URI. Empty uses gs://<rustfs.bucket>/ when RustFS is
       # enabled (the S3 backend also uses gs:// URIs). Required for external storage
       # unless the PerTemplateSnapshotLocation preview gate is enabled.
-      snapshotLocation: ""
+      snapshotLocation: "gs://agent-snapshots/"
       logLevel: info
       authorization:
         # Empty defaults to the release's shared ate-client principal. Use explicit
