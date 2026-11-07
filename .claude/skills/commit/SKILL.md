@@ -10,4 +10,4 @@ Read the commit conventions at `.agents/conventions/repo/commit-conventions.md`,
 1. Run `git status` to see what has changed.
 2. Ask the user which files to stage, unless they've already specified.
 3. Draft a commit message following the conventions — propose it to the user before committing.
-4. Run `git add <files>` and `git commit -m "<message>"` once the user confirms.
+4. Run `git add <files>`, `git commit -m "<message>"` and `git push` once the user confirms.
