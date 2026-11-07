@@ -1,0 +1,24 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app substrate-atelet
+  namespace: ate-system
+spec:
+  interval: 5m
+  chartRef:
+    kind: OCIRepository
+    name: *app
+    namespace: flux-system
+  values:
+    substrateReleaseName: substrate
+    objectStore:
+      # Snapshot backend: s3 or gcs.
+      backend: s3
+      # S3 endpoint URL. Empty uses the AWS endpoint for the region.
+      endpoint: "http://garage.storage.svc.cluster.local:3900"
+      region: "us-east-1"
+      # Address buckets by path rather than by virtual host.
+      pathStyle: true
+      # Secret with AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY keys. Empty uses the
+      # SDK's default credential chain.
+      credentialsSecret: "substrate-secret"

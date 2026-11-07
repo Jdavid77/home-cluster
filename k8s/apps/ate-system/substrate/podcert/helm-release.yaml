@@ -1,0 +1,17 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app substrate-podcert
+  namespace: ate-system
+spec:
+  interval: 5m
+  chartRef:
+    kind: OCIRepository
+    name: *app
+    namespace: flux-system
+  values:
+    createNamespace: false
+    # Namespace containing the Substrate API server.
+    postgresClientNamespace: ate-system
+    # Service account used by the Substrate API server.
+    postgresClientServiceAccount: ate-api-server
