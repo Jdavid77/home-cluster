@@ -25,6 +25,14 @@ locals {
       authentik_oidc_redirect_uris           = [{ url = "https://sheets.${local.external_host}/oauth2/callback" }]
     },
     {
+      authentik_oidc_application_name        = "Linkding"
+      authentik_oidc_application_icon_url    = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/linkding.png"
+      authentik_oidc_application_description = "Linkding OAuth application"
+      authentik_oidc_client_type             = "confidential"
+      authentik_oidc_sub_mode                = "hashed_user_id"
+      authentik_oidc_redirect_uris           = [{ url = "https://bookmarks.${local.external_host}/oidc/callback/" }]
+    },
+    {
       authentik_oidc_application_name        = "Zot"
       authentik_oidc_application_icon_url    = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFyoFpFCCGUMA9HfEuKI7EWRx6mM_ujQ7Y-g&s"
       authentik_oidc_application_description = "Zot OAuth application"
