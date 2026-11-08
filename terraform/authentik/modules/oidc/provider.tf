@@ -18,5 +18,6 @@ resource "authentik_provider_oauth2" "oidc_provider" {
   invalidation_flow     = data.authentik_flow.invalidation.id
   allowed_redirect_uris = var.authentik_oidc_redirect_uris
   sub_mode              = var.authentik_oidc_sub_mode
+  grant_types           = var.authentik_oidc_grant_types
 
 }
