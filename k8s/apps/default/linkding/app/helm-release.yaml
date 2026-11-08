@@ -21,6 +21,12 @@ spec:
             image:
               repository: ghcr.io/sissbruecker/linkding
               tag: 1.47.0-alpine@sha256:04e67acd04f1f1b3edd1bdd36fcf0dd5efaf8cdd99444e14be92c608575fa87a
+            env:
+              LD_ENABLE_OIDC: True
+              OIDC_OP_AUTHORIZATION_ENDPOINT: https://auth.jnobrega.com/application/o/authorize/
+              OIDC_OP_TOKEN_ENDPOINT: https://auth.jnobrega.com/application/o/token/
+              OIDC_OP_USER_ENDPOINT: https://auth.jnobrega.com/application/o/userinfo/
+              OIDC_OP_JWKS_ENDPOINT: https://auth.jnobrega.com/application/o/Linkding/jwks/
             envFrom:
               - secretRef:
                   name: linkding-secret
