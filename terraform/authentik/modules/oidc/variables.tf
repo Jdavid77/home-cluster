@@ -49,3 +49,9 @@ variable "authentik_oidc_redirect_uris" {
   description = "List of allowed redirect URIs for the OIDC provider"
   default     = []
 }
+
+variable "authentik_oidc_grant_types" {
+  type        = list(string)
+  description = "Allowed grant types for the OIDC provider. Null keeps Authentik's server-side default."
+  default     = null
+}

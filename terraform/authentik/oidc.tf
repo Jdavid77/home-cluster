@@ -31,6 +31,7 @@ locals {
       authentik_oidc_client_type             = "confidential"
       authentik_oidc_sub_mode                = "hashed_user_id"
       authentik_oidc_redirect_uris           = [{ url = "https://bookmarks.${local.external_host}/oidc/callback/" }]
+      authentik_oidc_grant_types             = ["authorization_code", "refresh_token"]
     },
     {
       authentik_oidc_application_name        = "Zot"
@@ -68,4 +69,5 @@ module "oidc" {
   authentik_oidc_redirect_uris           = each.value.authentik_oidc_redirect_uris
   authentik_oidc_client_type             = each.value.authentik_oidc_client_type
   authentik_oidc_sub_mode                = each.value.authentik_oidc_sub_mode
+  authentik_oidc_grant_types             = lookup(each.value, "authentik_oidc_grant_types", null)
 }
