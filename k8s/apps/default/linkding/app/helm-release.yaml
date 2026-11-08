@@ -74,7 +74,7 @@ spec:
             url: https://bookmarks.jnobrega.com/health
         parentRefs:
           - kind: Gateway
-            name: internal
+            name: external
             namespace: network
             sectionName: websecure
         hostnames:
