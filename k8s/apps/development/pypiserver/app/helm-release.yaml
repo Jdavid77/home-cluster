@@ -23,7 +23,7 @@ spec:
           app:
             image:
               repository: registry.jnobrega.com/mirror/pypiserver/pypiserver
-              tag: v2.4.2 # {"$imagepolicy": "development:pypiserver:tag"}
+              tag: v2.4.3 # {"$imagepolicy": "development:pypiserver:tag"}
             args:
               - run
               - --port=8080
