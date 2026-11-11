@@ -8,7 +8,6 @@ resources:
   - ./grist/ks.yaml
   - ./kagent/ks.yaml
   - ./kmcp/ks.yaml
-  - ./agent-sandbox/ks.yaml
   - ./agentgateway/ks.yaml
   - ./llmkube/ks.yaml
   - ./whisper/ks.yaml
