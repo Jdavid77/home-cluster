@@ -1,0 +1,64 @@
+---
+# Creates the shared `kagent` database on the NAS (if missing) and provisions
+# both schemas in it: `substrate` and `kagent`, each with its owner/read-write
+# roles and login users. Each setup.sql is idempotent and must run in a single
+# transaction.
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-init
+  annotations:
+    kustomize.toolkit.fluxcd.io/force: enabled
+spec:
+  backoffLimit: 6
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: db-init
+          image: docker.io/library/postgres:18.6-alpine@sha256:123b17998ccaf47e53b502e8c6a1e79afd8f579c6f3eec83c563da026f957395
+          command:
+            - /bin/sh
+            - -c
+            - |
+              set -eu
+              until pg_isready -d postgres; do sleep 2; done
+              if [ -z "$(psql --no-psqlrc -d postgres -tAc "SELECT 1 FROM pg_database WHERE datname = '$PGDATABASE'")" ]; then
+                createdb "$PGDATABASE"
+              fi
+              psql --no-psqlrc -v ON_ERROR_STOP=1 --single-transaction \
+                --set=substrate_schema=substrate \
+                --set=substrate_owner_role=substrate_owner \
+                --set=substrate_owner_user=substrate_owner_user \
+                --set=substrate_owner_password="$SUBSTRATE_OWNER_PASS" \
+                --set=substrate_readwrite_role=substrate_readwrite \
+                --set=substrate_readwrite_user=substrate_readwrite_user \
+                --set=substrate_readwrite_password="$SUBSTRATE_READWRITE_PASS" \
+                --file /setup/substrate.sql
+              psql --no-psqlrc -v ON_ERROR_STOP=1 --single-transaction \
+                --set=kagent_schema=kagent \
+                --set=kagent_owner_role=kagent_owner \
+                --set=kagent_owner_user=kagent_owner_user \
+                --set=kagent_owner_password="$KAGENT_OWNER_PASS" \
+                --set=kagent_readwrite_role=kagent_readwrite \
+                --set=kagent_readwrite_user=kagent_readwrite_user \
+                --set=kagent_readwrite_password="$KAGENT_READWRITE_PASS" \
+                --file /setup/kagent.sql
+          env:
+            - name: PGHOST
+              value: 192.168.1.84
+            - name: PGPORT
+              value: "5432"
+            - name: PGDATABASE
+              value: kagent
+          envFrom:
+            - secretRef:
+                name: db-init-secret
+          volumeMounts:
+            - name: setup
+              mountPath: /setup
+              readOnly: true
+      volumes:
+        - name: setup
+          configMap:
+            name: db-setup

@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - secret.yaml
+  - db-init.yaml
+configMapGenerator:
+  - name: db-setup
+    files:
+      # Keep the tags in sync with the substrate and kagent chart versions.
+      - substrate.sql=https://raw.githubusercontent.com/kagent-dev/substrate/v1.0.1/pkg/postgressetup/setup.sql
+      - kagent.sql=https://raw.githubusercontent.com/kagent-dev/kagent/v1.0.0/go/core/pkg/postgressetup/setup.sql

@@ -27,6 +27,7 @@ kind: Kustomization
 metadata:
   name: substrate-podcert
 spec:
+  targetNamespace: podcertificate-controller-system
   dependsOn:
     - name: external-secrets-store
       namespace: external-secrets
@@ -40,7 +41,7 @@ spec:
     - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
       name: substrate-podcert
-      namespace: ate-system
+      namespace: podcertificate-controller-system
   healthCheckExprs:
     - apiVersion: external-secrets.io/v1
       kind: ExternalSecret
@@ -50,31 +51,28 @@ spec:
   interval: 30m
   retryInterval: 2m
   timeout: 15m
+
 ---
 # yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: substrate-postgres
+  name: substrate-db
 spec:
   targetNamespace: ate-system
   dependsOn:
     - name: external-secrets-store
       namespace: external-secrets
-  path: ./k8s/apps/ate-system/substrate/postgres
+  path: ./k8s/apps/ate-system/substrate/db
   prune: true
   sourceRef:
     kind: GitRepository
     name: home-cluster
     namespace: flux-system
   healthChecks:
-    - apiVersion: helm.toolkit.fluxcd.io/v2
-      kind: HelmRelease
-      name: substrate-postgres
-      namespace: ate-system
     - apiVersion: batch/v1
       kind: Job
-      name: substrate-db-init
+      name: db-init
       namespace: ate-system
   healthCheckExprs:
     - apiVersion: external-secrets.io/v1
@@ -95,7 +93,7 @@ spec:
   dependsOn:
     - name: substrate-crds
     - name: substrate-podcert
-    - name: substrate-postgres
+    - name: substrate-db
     - name: substrate-atelet
   path: ./k8s/apps/ate-system/substrate/app
   prune: true

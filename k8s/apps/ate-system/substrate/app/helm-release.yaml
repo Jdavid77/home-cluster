@@ -14,7 +14,6 @@ spec:
 
     createNamespace: false
 
-    # Kagent requires this
     preview:
       - PerTemplateSnapshotLocation
       - GoldenEgressPolicy
@@ -39,18 +38,26 @@ spec:
     rustfs:
       enabled: false
 
-    # atelet daemonset overrides. Defaults use the in-cluster RustFS deployment for
-    # snapshots. Set rustfs.enabled=false and override these fields when using
-    # external storage.
-    # extraArgs / extraEnv are appended verbatim for installer-specific knobs
-    # (e.g. registry replacement for kind).
     atelet:
       enabled: false
 
-    # Additional arguments appended to the ateapi defaults.
     ateApi:
-      # Cluster-wide snapshot URI. Empty uses gs://<rustfs.bucket>/ when RustFS is
-      # enabled (the S3 backend also uses gs:// URIs). Required for external storage
-      # unless the PerTemplateSnapshotLocation preview gate is enabled.
       snapshotLocation: "gs://agent-snapshots/"
       logLevel: info
+      authorization:
+        # kagent-controller must own its actors, otherwise agents fail with
+        # RuntimePreparationFailed (PermissionDenied).
+        bootstrapOwners:
+          - spiffe://cluster.local/ns/automation/sa/kagent-controller
+          - system:serviceaccount:ate-system:ate-client
+
+    atenetRouter:
+      # Lets kagent-controller reach agents through the router.
+      ingressAllowedSPIFFEIDs:
+        - spiffe://cluster.local/ns/automation/sa/kagent-controller
+
+    credentialProvider:
+      # Default-deny: agents in the kagent atespace may read Secrets in automation.
+      namespacePolicies:
+        - atespace: automation
+          allowedNamespaces: [automation]
