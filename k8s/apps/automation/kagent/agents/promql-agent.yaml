@@ -1,29 +1,20 @@
-# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/kagent.dev/harness_v1alpha3.json
-apiVersion: kagent.dev/v1alpha3
-kind: Harness
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/api.kagent.dev/agent_v1alpha3.json
+apiVersion: api.kagent.dev/v1alpha3
+kind: Agent
 metadata:
   name: promql-agent
 spec:
-  kagent: {}
-  workload:
-    image: ghcr.io/kagent-dev/kagent/golang-adk@sha256:c8ab012e9774d50e20ffa8cd035ddebff69486a2843b3af281f5f6ebc67ab512
-  substrate:
-    workerPoolRef:
-      name: default
-    snapshotPolicy:
-      location: gs://agent-snapshots/promql-agent
-  allowedAgentTemplates:
-    selector:
-      matchLabels:
-        kagent.dev/harness: promql-agent
+  harnessRef:
+    name: kagent-default
+  template:
+    ref:
+      name: promql-agent
 ---
-# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/kagent.dev/agenttemplate_v1alpha3.json
-apiVersion: kagent.dev/v1alpha3
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/api.kagent.dev/agenttemplate_v1alpha3.json
+apiVersion: api.kagent.dev/v1alpha3
 kind: AgentTemplate
 metadata:
   name: promql-agent
-  labels:
-    kagent.dev/harness: promql-agent
 spec:
   description: GeneratePromQLTool generates PromQL queries from natural language descriptions.
   modelConfig:
