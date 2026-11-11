@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/api.kagent.dev/remotemcpserver_v1alpha3.json
+# Exposes the kmcp-managed MCPServer to kagent agents (AgentTemplates only accept RemoteMCPServer).
+apiVersion: api.kagent.dev/v1alpha3
+kind: RemoteMCPServer
+metadata:
+  name: n8n-mcp
+spec:
+  description: n8n MCP server
+  protocol: STREAMABLE_HTTP
+  url: http://n8n-mcp.automation.svc.cluster.local:3000/mcp

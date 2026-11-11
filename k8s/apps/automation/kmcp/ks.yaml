@@ -1,0 +1,97 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: kmcp-crds
+spec:
+  targetNamespace: automation
+  path: ./k8s/apps/automation/kmcp/crds
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-cluster
+    namespace: flux-system
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      name: kmcp-crds
+      namespace: automation
+  wait: true
+  interval: 30m
+  retryInterval: 2m
+  timeout: 15m
+---
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: kmcp
+spec:
+  targetNamespace: automation
+  dependsOn:
+    - name: kmcp-crds
+  path: ./k8s/apps/automation/kmcp/app
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-cluster
+    namespace: flux-system
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      name: kmcp
+      namespace: automation
+  wait: true
+  interval: 30m
+  retryInterval: 2m
+  timeout: 15m
+---
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: kmcp-mcps
+spec:
+  targetNamespace: automation
+  dependsOn:
+    - name: kmcp
+    - name: kagent  # RemoteMCPServer CRD
+    - name: external-secrets-store
+      namespace: external-secrets
+  path: ./k8s/apps/automation/kmcp/mcps
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-cluster
+    namespace: flux-system
+  wait: true
+  interval: 30m
+  retryInterval: 2m
+  timeout: 15m
+---
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: kmcp-backend
+spec:
+  targetNamespace: automation
+  dependsOn:
+    - name: agentgateway
+    - name: agentgateway-gateway
+    - name: kmcp-mcps
+  path: ./k8s/apps/automation/kmcp/backend
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-cluster
+    namespace: flux-system
+  healthCheckExprs:
+    - apiVersion: external-secrets.io/v1
+      kind: ExternalSecret
+      failed: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSyncedError')
+      current: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSynced')
+  wait: true
+  interval: 30m
+  retryInterval: 2m
+  timeout: 15m

@@ -37,6 +37,7 @@ resources:
   - x509-certificate-exporter.yaml
   - kagent.yaml
   - kagent-crds.yaml
+  - kmcp.yaml
   - kmcp-crds.yaml
   - konflate.yaml
   - kubernetes-mcp.yaml
