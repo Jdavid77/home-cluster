@@ -5,3 +5,5 @@ metadata:
   labels:
     pod-security.kubernetes.io/enforce: privileged
     pod-security.kubernetes.io/enforce-version: latest
+    # Admits kagent-controller through substrate's default-deny NetworkPolicies in ate-system.
+    ate.dev/api-access: "true"

@@ -2,67 +2,58 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: kagent
+  name: &app kagent
   namespace: automation
 spec:
-  chart:
-    spec:
-      chart: kagent
-      version: 1.0.0-alpha1
-      interval: 5m
-      reconcileStrategy: ChartVersion
-      sourceRef:
-        kind: HelmRepository
-        name: kagent-charts
-  install:
-    crds: CreateReplace
-    remediation:
-      retries: 3
-    strategy:
-      name: RetryOnFailure
   interval: 15m
-  timeout: 5m
+  timeout: 12m
   maxHistory: 2
-  rollback:
-    cleanupOnFail: true
-    recreate: true
-  upgrade:
-    cleanupOnFail: true
-    crds: CreateReplace
-    remediation:
-      retries: 3
-      strategy: rollback
+  chartRef:
+    kind: OCIRepository
+    name: *app
+    namespace: flux-system
   values:
+    # Connection strings come from kagent-postgres-owner / kagent-postgres-readwrite
+    # (chart defaults), provisioned by the db-init Job in ate-system (substrate-db).
     controller:
-      volumes:
-        - name: kagent-secret-vol
-          secret:
-            secretName: kagent-secret
-            items:
-              - key: POSTGRES_DATABASE_URL
-                path: POSTGRES_DATABASE_URL
-      volumeMounts:
-        - name: kagent-secret-vol
-          mountPath: /secrets
-          readOnly: true
-      # waiting for new chart release
-      # at the moment , the chart doesnt mount the mTlS podCertificates
-      substrate:
+      replicas: 2
+      # Chart default maxUnavailable: 1 keeps one controller up during drains.
+      pdb:
         enabled: true
-        ateApiEndpoint: "dns:///api.ate-system.svc:443"
-        atenetRouterURL: "http://atenet-router.ate-system.svc:80"
-        defaultWorkerPool:
-          name: "default"
+      # Pod certificates + trust bundle for the Substrate API server (mTLS).
+      substrateClientCertificate:
+        enabled: true
+    ui:
+      httpRoute:
+        enabled: true
+        parentRefs:
+          - name: internal
+            namespace: network
+            sectionName: websecure
+        hostnames:
+          - kagent.jnobrega.com
+        rules:
+          - matches:
+              - path:
+                  type: PathPrefix
+                  value: /
     substrateWorkerPool:
       create: true
-      name: default
-      replicas: 2
-      workerImage: "ghcr.io/kagent-dev/substrate/ateom-gvisor:v0.0.30"
-    database:
-      postgres:
-        bundled:
-          enabled: false
-        urlFile: /secrets/POSTGRES_DATABASE_URL
+      workerImage: "ghcr.io/kagent-dev/substrate/ateworker-gvisor:v1.0.1"
+    # Shared Harness for all agents. Chart 1.0.0 has no `harnesses` values yet
+    # (added on main after the release); switch to them once a newer chart ships.
+    extraObjects:
+      - apiVersion: api.kagent.dev/v1alpha3
+        kind: Harness
+        metadata:
+          name: kagent-default
+        spec:
+          kagent: {}
+          substrate:
+            workerPoolRef:
+              name: kagent-default
+            snapshotPolicy:
+              location: gs://agent-snapshots/kagent/
     providers:
       default: openAI
       openAI:
@@ -70,55 +61,5 @@ spec:
         model: gpt-5.4-mini
         apiKeySecretRef: kagent-openai
         apiKeySecretKey: OPENAI_API_KEY
-    # Enable MCP Tools
-    kmcp:
-      enabled: true
     kagent-tools:
       enabled: true
-    grafana-mcp:
-      enabled: false
-    # Disable Agent CR's , converted into Sandbox Agents
-    querydoc:
-      enabled: false
-    k8s-agent:
-      enabled: false
-    kgateway-agent:
-      enabled: false
-    helm-agent:
-      enabled: false
-    cilium-policy-agent:
-      enabled: false
-    observability-agent:
-      enabled: false
-    promql-agent:
-      enabled: false
-    argo-rollouts-agent:
-      enabled: false
-    istio-agent:
-      enabled: false
-    cilium-manager-agent:
-      enabled: false
-    cilium-debug-agent:
-      enabled: false
-  postRenderers:
-    - kustomize:
-        patches:
-          - patch: |-
-              apiVersion: apps/v1
-              kind: Deployment
-              metadata:
-                name: kagent-controller
-              spec:
-                template:
-                  spec:
-                    initContainers:
-                      - name: init-db
-                        image: ghcr.io/home-operations/postgres-init:18.6@sha256:87627baaddb0cabed4ebe033e75038e5c7b6b081c18e86514c99067179a90719
-                        securityContext:
-                          runAsUser: 65534
-                        envFrom:
-                          - secretRef:
-                              name: kagent-secret
-            target:
-              kind: Deployment
-              name: kagent-controller

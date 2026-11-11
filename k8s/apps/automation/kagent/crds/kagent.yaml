@@ -9,8 +9,3 @@ spec:
     kind: OCIRepository
     name: *app
     namespace: flux-system
-  values:
-    kmcp:
-      enabled: true
-    substrate:
-      enabled: true

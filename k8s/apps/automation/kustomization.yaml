@@ -6,7 +6,7 @@ resources:
   - ./namespace.yaml
   - ./n8n/ks.yaml
   - ./grist/ks.yaml
-  # - ./kagent/ks.yaml
+  - ./kagent/ks.yaml
   - ./agent-sandbox/ks.yaml
   - ./agentgateway/ks.yaml
   - ./llmkube/ks.yaml
