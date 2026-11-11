@@ -38,6 +38,28 @@ spec:
     rustfs:
       enabled: false
 
+    # The ate-api-server's objectstore-plugin (credential exchange) needs the same
+    # Garage settings as substrate-atelet; without them it falls back to AWS and
+    # snapshot uploads time out (GoldenActorCrashed).
+    objectStorePlugin:
+      extraEnv:
+        - name: AWS_REGION
+          value: us-east-1
+        - name: AWS_ENDPOINT_URL
+          value: http://garage.storage.svc.cluster.local:3900
+        - name: AWS_S3_USE_PATH_STYLE
+          value: "true"
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: substrate-atelet-secret
+              key: AWS_ACCESS_KEY_ID
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: substrate-atelet-secret
+              key: AWS_SECRET_ACCESS_KEY
+
     atelet:
       enabled: false
 
