@@ -35,16 +35,6 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: status.hostIP
-    - name: ryanair
-      configUrl: https://github.com/Jdavid77/ryanair-api
-      type: dind
-      minRunners: 1
-      maxRunners: 5
-      envs:
-        - name: NODE
-          valueFrom:
-            fieldRef:
-              fieldPath: status.hostIP
   resourcesTemplate: |-
     ---
     apiVersion: helm.toolkit.fluxcd.io/v2

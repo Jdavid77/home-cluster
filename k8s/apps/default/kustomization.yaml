@@ -13,7 +13,6 @@ resources:
   - mealie/ks.yaml
   - renderercv/ks.yaml
   - personal-blog/ks.yaml
-  - ryanair-api/ks.yaml
   - wallos/ks.yaml
 components:
   - ../../components/alerts/alertmanager
