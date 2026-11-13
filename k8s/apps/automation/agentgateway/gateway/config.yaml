@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/agentgateway.dev/agentgatewayparameters_v1alpha1.json
+apiVersion: agentgateway.dev/v1alpha1
+kind: AgentgatewayParameters
+metadata:
+  name: ai-internal
+spec:
+  logging:
+    format: json
+    level: info
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      memory: 512Mi
+  deployment:
+    spec:
+      replicas: 2
+  podDisruptionBudget:
+    spec:
+      minAvailable: 1
