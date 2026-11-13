@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/networking.k8s.io/networkpolicy_v1.json
+# Cilium runs with socketLB.hostNamespaceOnly, so a pod reaching a ClusterIP whose
+# backend sits on the same node gets Garage's reply dropped by its own ingress
+# policy (default-deny-ingress). Admit Garage so snapshot uploads/downloads work
+# from atelet and the ate-api-server object-store plugin on Garage's node.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-garage
+spec:
+  podSelector:
+    matchExpressions:
+      - key: app
+        operator: In
+        values:
+          - atelet
+          - ate-api-server
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: storage
+          podSelector:
+            matchLabels:
+              app.kubernetes.io/name: garage
