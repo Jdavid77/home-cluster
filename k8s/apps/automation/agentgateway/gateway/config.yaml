@@ -4,6 +4,11 @@ kind: AgentgatewayParameters
 metadata:
   name: ai-internal
 spec:
+  image:
+    registry: ghcr.io
+    repository: agentgateway/agentgateway
+    tag: v1.7.0
+    digest: sha256:60216aafb03d37f94e952ff3d51d2f630a65b10ecaebdc0a864882f92610c45b
   logging:
     format: json
     level: info
