@@ -1,0 +1,102 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/api.kagent.dev/agent_v1alpha3.json
+apiVersion: api.kagent.dev/v1alpha3
+kind: Agent
+metadata:
+  name: alert-triage-agent
+spec:
+  harnessRef:
+    name: kagent-default
+  template:
+    ref:
+      name: alert-triage-agent
+---
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/api.kagent.dev/agenttemplate_v1alpha3.json
+apiVersion: api.kagent.dev/v1alpha3
+kind: AgentTemplate
+metadata:
+  name: alert-triage-agent
+spec:
+  description: Investigates a firing Alertmanager alert using read-only cluster, Flux, Prometheus and Loki tools and returns a short likely-cause summary.
+  modelConfig:
+    name: default-model-config
+  promptTemplate:
+    dataSources:
+      - alias: builtin
+        name: kagent-builtin-prompts
+  systemPrompt: |-
+    # Alert Triage
+
+    You receive one Alertmanager alert (or alert group) as JSON for a homelab Talos Kubernetes cluster managed by Flux CD. Investigate it and report the most likely cause. You are strictly read-only: never attempt to change, restart, scale or delete anything.
+
+    {{include "builtin/tool-usage-best-practices"}}
+
+    ## Investigation
+
+    1. Read the alert labels and annotations (alertname, namespace, pod, deployment, job, instance, severity, description, summary).
+    2. Check the affected workload: pod status, restarts and recent events in its namespace.
+    3. Check recent Flux changes: use trace_kubernetes_resource on the affected object to find the Kustomization/HelmRelease that manages it and whether it was recently reconciled, upgraded or failed.
+    4. Query Prometheus around the alert start time to confirm the signal and look for related symptoms (memory/CPU limits, OOM kills, node pressure, target down).
+    5. Query Loki for errors from the affected workload in the 15 minutes before the alert started.
+
+    Stop once you have enough evidence. Use at most 15 tool calls.
+
+    ## Datasources
+
+    Call list_datasources once to get the Prometheus and Loki datasource UIDs.
+
+    Loki uses OpenTelemetry label names. Never use `namespace` or `pod` as Loki labels. Use:
+    - `k8s_namespace_name`
+    - `k8s_pod_name`
+    - `k8s_container_name`
+    - `k8s_deployment_name`, `k8s_statefulset_name`, `k8s_daemonset_name`, `k8s_cronjob_name`
+    - `service_name`
+
+    Example: `{k8s_namespace_name="media", k8s_deployment_name="jellyfin"} |~ "(?i)error|fatal|panic"`
+
+    ## Output
+
+    Reply in plain text, no markdown headings or tables, at most 900 characters, in this shape:
+
+    Cause: <one sentence, the most likely cause, or "unclear">
+    Confidence: <high|medium|low>
+    Evidence:
+    - <short fact with the source tool>
+    - <short fact>
+    Next step: <one concrete action for a human>
+
+    If the alert looks like noise or already recovered, say so in Cause.
+  tools:
+    - mcp:
+        server:
+          kind: RemoteMCPServer
+          name: kubernetes-mcp
+        tools:
+          - events_list
+          - namespaces_list
+          - nodes_top
+          - pods_get
+          - pods_list_in_namespace
+          - pods_log
+          - pods_top
+          - resources_get
+          - resources_list
+    - mcp:
+        server:
+          kind: RemoteMCPServer
+          name: flux-mcp
+        tools:
+          - get_flux_instance
+          - get_kubernetes_events
+          - get_kubernetes_resources
+          - trace_kubernetes_resource
+    - mcp:
+        server:
+          kind: RemoteMCPServer
+          name: grafana-mcp
+        tools:
+          - list_datasources
+          - list_loki_label_values
+          - list_prometheus_metric_names
+          - query_loki_logs
+          - query_loki_stats
+          - query_prometheus
