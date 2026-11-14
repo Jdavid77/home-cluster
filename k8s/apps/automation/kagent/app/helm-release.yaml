@@ -58,8 +58,10 @@ spec:
       default: openAI
       openAI:
         provider: OpenAI
-        model: gpt-5.4-mini
-        apiKeySecretRef: kagent-openai
-        apiKeySecretKey: OPENAI_API_KEY
+        model: anthropic/claude-haiku-5.5
+        apiKeySecretRef: kagent-openrouter
+        apiKeySecretKey: OPENROUTER_API_KEY
+        config:
+          baseUrl: https://openrouter.ai/api/v1
     kagent-tools:
       enabled: true
