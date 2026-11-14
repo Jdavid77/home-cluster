@@ -58,10 +58,11 @@ spec:
       default: openAI
       openAI:
         provider: OpenAI
-        model: anthropic/claude-haiku-5.5
-        apiKeySecretRef: kagent-openrouter
-        apiKeySecretKey: OPENROUTER_API_KEY
+        # Alias resolved by agentgateway (AgentgatewayModel "default"), which also holds the provider key
+        model: default
+        apiKeySecretRef: null
+        apiKeySecretKey: null
         config:
-          baseUrl: https://openrouter.ai/api/v1
+          baseUrl: https://ai.jnobrega.com/v1
     kagent-tools:
       enabled: true
