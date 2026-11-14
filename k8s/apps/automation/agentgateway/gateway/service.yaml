@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ai-internal-admin
+spec:
+  selector:
+    gateway.networking.k8s.io/gateway-name: ai-internal
+  ports:
+    - name: admin
+      port: 15000
+      targetPort: 15000
