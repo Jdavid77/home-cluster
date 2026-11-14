@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/agentgateway.dev/agentgatewaymodel_v1alpha1.json
+apiVersion: agentgateway.dev/v1alpha1
+kind: AgentgatewayModel
+metadata:
+  name: openrouter-claude-haiku
+spec:
+  parentRefs:
+    - name: ai-internal
+      sectionName: websecure
+  provider: Openrouter
+  match:
+    model: anthropic/claude-haiku-5.5
+  visibility: Internal
+  policies:
+    auth:
+      secretRef:
+        name: agentgateway-openrouter
+---
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/agentgateway.dev/agentgatewaymodel_v1alpha1.json
+# Alias clients request by name; repoint it here to swap the model without touching kagent
+apiVersion: agentgateway.dev/v1alpha1
+kind: AgentgatewayModel
+metadata:
+  name: default
+spec:
+  parentRefs:
+    - name: ai-internal
+      sectionName: websecure
+  virtualModel:
+    weighted:
+      targets:
+        - modelRef:
+            name: openrouter-claude-haiku
