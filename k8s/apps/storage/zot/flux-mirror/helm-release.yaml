@@ -36,7 +36,7 @@ spec:
           app:
             image:
               repository: ghcr.io/fluxcd/flux-mirror
-              tag: v0.15.0
+              tag: v0.16.0
             args:
               - sync
               - /config/mirror.yaml
