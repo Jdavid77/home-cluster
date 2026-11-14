@@ -35,6 +35,10 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
+        kinds:
+          - kind: HTTPRoute
+          - group: agentgateway.dev
+            kind: AgentgatewayModel
       tls:
         certificateRefs:
           - kind: Secret
