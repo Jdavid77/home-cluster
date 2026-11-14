@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/kagent.dev/mcpserver_v1alpha1.json
+apiVersion: kagent.dev/v1alpha1
+kind: MCPServer
+metadata:
+  name: grafana-mcp
+spec:
+  transportType: http
+  httpTransport:
+    targetPort: 8000
+    path: /mcp
+  deployment:
+    image: docker.io/grafana/mcp-grafana:2.3.0@sha256:c27248b5919d09d64ea273ca1b128b32902c6796f6e2dfcd11849d4f1363f9ed
+    port: 8000
+    imagePullPolicy: IfNotPresent
+    args:
+      - --transport=streamable-http
+      - --address=0.0.0.0:8000
+      - --allowed-hosts=grafana-mcp:8000,grafana-mcp.automation:8000,grafana-mcp.automation.svc:8000,grafana-mcp.automation.svc.cluster.local:8000
+      - --disable-write
+    env:
+      GRAFANA_URL: http://grafana-service.monitoring.svc.cluster.local:3000
+      GRAFANA_SERVICE_ACCOUNT_TOKEN_FILE: /var/run/secrets/grafana/token
+    podSecurityContext:
+      runAsNonRoot: true
+      runAsUser: 1000
+      runAsGroup: 1000
+    securityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      capabilities:
+        drop:
+          - ALL
+      seccompProfile:
+        type: RuntimeDefault
+    volumeMounts:
+      - name: grafana-token
+        mountPath: /var/run/secrets/grafana
+        readOnly: true
+      - name: tmp
+        mountPath: /tmp
+    volumes:
+      - name: grafana-token
+        secret:
+          secretName: grafana-service-account-token
+      - name: tmp
+        emptyDir: {}
+    resources:
+      requests:
+        cpu: 10m
+        memory: 64Mi
+      limits:
+        memory: 256Mi

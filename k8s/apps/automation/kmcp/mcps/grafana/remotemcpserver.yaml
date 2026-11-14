@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/api.kagent.dev/remotemcpserver_v1alpha3.json
+apiVersion: api.kagent.dev/v1alpha3
+kind: RemoteMCPServer
+metadata:
+  name: grafana-mcp
+spec:
+  description: Grafana MCP server (read-only)
+  protocol: STREAMABLE_HTTP
+  url: http://grafana-mcp.automation.svc.cluster.local:8000/mcp
