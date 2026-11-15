@@ -34,6 +34,9 @@ spec:
                 type: PathPrefix
                 value: /
       alertmanagerSpec:
+        # Apply AlertmanagerConfig routes to alerts from every namespace, not only monitoring
+        alertmanagerConfigMatcherStrategy:
+          type: None
         replicas: 1
         podAntiAffinity: hard
         nodeSelector:

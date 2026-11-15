@@ -8,21 +8,23 @@ spec:
     receiver: pushover
     repeatInterval: 12h
     routes:
+      # kagent alert-triage-agent investigates in the background; Pushover still gets the raw alert
+      - receiver: triage
+        continue: true
+        matchers:
+          - name: severity
+            value: warning|critical
+            matchType: =~
       - receiver: blackhole
         matchers:
           - name: alertname
-            value: InfoInhibitor
-            matchType: =
+            value: InfoInhibitor|Watchdog
+            matchType: =~
       - receiver: pushover
         matchers:
           - name: severity
-            value: warning
-            matchType: =
-      - receiver: pushover
-        matchers:
-          - name: severity
-            value: critical
-            matchType: =
+            value: warning|critical
+            matchType: =~
     groupBy:
       - alertname
       - job
@@ -42,6 +44,10 @@ spec:
           matchType: =
   receivers:
     - name: blackhole
+    - name: triage
+      webhookConfigs:
+        - url: http://llm.automation.svc.cluster.local:8080/alert-triage
+          sendResolved: false
     - name: pushover
       pushoverConfigs:
         - html: true
