@@ -13,13 +13,6 @@ locals {
         { name = "CM-Read-Write", path = "/cert-manager/*", capabilities = ["create", "update", "read", "delete", "list"] },
       ]
     }
-    # akeyless-mcp: item names only, never values
-    mcp = {
-      name = "MCP"
-      roles = [
-        { name = "List", path = "/*", capabilities = ["list"] },
-      ]
-    }
   }
 }
 
