@@ -15,3 +15,12 @@ output "omv_access_key" {
   value     = module.key["omv"].access_key
   sensitive = true
 }
+
+output "mcp_access_id" {
+  value = module.key["mcp"].access_id
+}
+
+output "mcp_access_key" {
+  value     = module.key["mcp"].access_key
+  sensitive = true
+}
