@@ -15,7 +15,8 @@ spec:
     args:
       - --transport=streamable-http
       - --address=0.0.0.0:8000
-      - --allowed-hosts=grafana-mcp:8000,grafana-mcp.automation:8000,grafana-mcp.automation.svc:8000,grafana-mcp.automation.svc.cluster.local:8000
+      # kagent egress proxy forwards the Host header without the port
+      - --allowed-hosts=grafana-mcp:8000,grafana-mcp.automation:8000,grafana-mcp.automation.svc:8000,grafana-mcp.automation.svc.cluster.local:8000,grafana-mcp.automation.svc.cluster.local
       - --disable-write
     env:
       GRAFANA_URL: http://grafana-service.monitoring.svc.cluster.local:3000
