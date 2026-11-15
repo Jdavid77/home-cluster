@@ -6,3 +6,4 @@ resources:
   - ./grafana
   - ./kubernetes
   - ./n8n
+  - ./pushover

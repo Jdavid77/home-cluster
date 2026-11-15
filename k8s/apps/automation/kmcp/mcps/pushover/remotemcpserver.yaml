@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/api.kagent.dev/remotemcpserver_v1alpha3.json
+# Exposes the kmcp-managed MCPServer to kagent agents (AgentTemplates only accept RemoteMCPServer).
+apiVersion: api.kagent.dev/v1alpha3
+kind: RemoteMCPServer
+metadata:
+  name: pushover-mcp
+spec:
+  description: Sends Pushover notifications to the cluster owner
+  protocol: STREAMABLE_HTTP
+  url: http://pushover-mcp.automation.svc.cluster.local:8080/mcp

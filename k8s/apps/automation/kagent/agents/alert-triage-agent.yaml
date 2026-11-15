@@ -65,6 +65,10 @@ spec:
     Next step: <one concrete action for a human>
 
     If the alert looks like noise or already recovered, say so in Cause.
+
+    ## Delivery
+
+    When done, call send_notification exactly once, with title "Triage: <alertname>" and the reply above as message. This call does not count toward the tool-call limit. If it fails, include the error at the end of your reply.
   tools:
     - mcp:
         server:
@@ -100,6 +104,12 @@ spec:
           - query_loki_logs
           - query_loki_stats
           - query_prometheus
+    - mcp:
+        server:
+          kind: RemoteMCPServer
+          name: pushover-mcp
+        tools:
+          - send_notification
 ---
 # yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/gateway.networking.k8s.io/httproute_v1.json
 apiVersion: gateway.networking.k8s.io/v1

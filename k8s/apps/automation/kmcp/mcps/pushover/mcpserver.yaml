@@ -1,0 +1,59 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/kagent.dev/mcpserver_v1alpha1.json
+apiVersion: kagent.dev/v1alpha1
+kind: MCPServer
+metadata:
+  name: pushover-mcp
+spec:
+  transportType: http
+  httpTransport:
+    targetPort: 8080
+    path: /mcp
+  deployment:
+    image: ghcr.io/astral-sh/uv:0.13.8-python3.13-alpine@sha256:f2d6278d0821c35881b010ddbf75825049661a98dbfdf61bbd1407e8dd544d00
+    port: 8080
+    labels:
+      agentgateway.dev/mcp: "true"
+    cmd: uv
+    args:
+      - run
+      - --no-project
+      - --with
+      - mcp==2.3.0
+      - python
+      - -I
+      - /app/server.py
+    env:
+      HOME: /tmp
+      UV_CACHE_DIR: /tmp/uv
+    secretRefs:
+      - name: pushover-mcp
+    volumeMounts:
+      - name: app
+        mountPath: /app
+        readOnly: true
+      - name: tmp
+        mountPath: /tmp
+    volumes:
+      - name: app
+        configMap:
+          name: pushover-mcp
+      - name: tmp
+        emptyDir: {}
+    podSecurityContext:
+      runAsNonRoot: true
+      runAsUser: 1000
+      runAsGroup: 1000
+    securityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      capabilities:
+        drop:
+          - ALL
+      seccompProfile:
+        type: RuntimeDefault
+    resources:
+      requests:
+        cpu: 10m
+        memory: 64Mi
+      limits:
+        memory: 256Mi
