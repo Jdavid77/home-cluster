@@ -31,16 +31,28 @@ def _items(path):
         "access-id": os.environ["AKEYLESS_ACCESS_ID"],
         "access-key": os.environ["AKEYLESS_ACCESS_KEY"],
     })["token"]
-    items, page = [], None
-    while True:
-        body = {"token": token, "path": path}
-        if page:
-            body["pagination-token"] = page
-        out = _request(f"{AKEYLESS}/list-items", body)
-        items += out.get("items") or []
-        page = out.get("next_page")
-        if not page:
-            return items
+    # list-items returns one folder level (items + subfolders), so walk the tree
+    items, folders, seen = {}, [path], set()
+    while folders:
+        folder = folders.pop()
+        if folder in seen:
+            continue
+        seen.add(folder)
+        page = None
+        while True:
+            body = {"token": token, "path": folder}
+            if page:
+                body["pagination-token"] = page
+            out = _request(f"{AKEYLESS}/list-items", body)
+            new = [i for i in out.get("items") or [] if i["item_name"] not in items]
+            items |= {i["item_name"]: i for i in new}
+            new_folders = [f for f in out.get("folders") or [] if f not in seen and f not in folders]
+            folders += new_folders
+            page = out.get("next_page")
+            # next_page can come back set even on the last page
+            if not page or not (new or new_folders):
+                break
+    return list(items.values())
 
 
 def _k8s(version, resource):
