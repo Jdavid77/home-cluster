@@ -12,7 +12,7 @@ spec:
       sectionName: websecure
   rules:
     - backendRefs:
-        - name: mcp-admin
+        - name: llm-admin
           port: 15000
       matches:
         - path:

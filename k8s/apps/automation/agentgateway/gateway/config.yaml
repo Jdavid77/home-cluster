@@ -9,6 +9,10 @@ spec:
     repository: agentgateway/agentgateway
     tag: v1.7.0
     digest: sha256:60216aafb03d37f94e952ff3d51d2f630a65b10ecaebdc0a864882f92610c45b
+  # Admin UI binds to localhost by default; expose it so the agentgateway-ui route can reach it
+  rawConfig:
+    config:
+      adminAddr: 0.0.0.0:15000
   # In-cluster only: agents reach it via atenet-egress, nothing on the LAN can
   service:
     spec:

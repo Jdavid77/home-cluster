@@ -7,3 +7,5 @@ resources:
   - policy.yaml
   - secret.yaml
   - models.yaml
+  - service.yaml
+  - route.yaml
