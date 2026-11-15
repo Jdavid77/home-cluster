@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/api.kagent.dev/egresspolicy_v1alpha3.json
+# atenet-egress swaps the Authorization header for a short-lived actor JWT that the llm gateway verifies
+apiVersion: api.kagent.dev/v1alpha3
+kind: EgressPolicy
+metadata:
+  name: llm-gateway
+spec:
+  destinations:
+    - origin: http://llm.automation.svc.cluster.local
+      authentication:
+        header: Authorization
+        prefix: "Bearer "
+        actorJwt:
+          audiences:
+            - llm-gateway
+          expirationSeconds: 900

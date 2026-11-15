@@ -9,8 +9,21 @@ spec:
       kind: Gateway
       name: llm
   frontend:
-    accessLog: {}
+    accessLog:
+      attributes:
+        add:
+          - name: substrate.actor
+            expression: jwt.sub
   traffic:
+    # Actor JWTs injected by atenet-egress (EgressPolicy llm-gateway); public JWKS from https://idp.ate-system.svc/openid/v1/jwks
+    jwtAuthentication:
+      mode: Optional
+      providers:
+        - issuer: https://idp.ate-system.svc
+          audiences:
+            - llm-gateway
+          jwks:
+            inline: '{"keys":[{"kty":"EC","kid":"1","use":"sig","alg":"ES256","crv":"P-256","x":"tIuIWUv3Qe0q8rxSDa53l-MJlBO3NACFERz_BvrlknI","y":"_ffOReyuOKBrbghai9M97PsU6HjWQ-1NWVZCq6Hi7lQ"}]}'
     timeouts:
       request: 120s
     retry:
