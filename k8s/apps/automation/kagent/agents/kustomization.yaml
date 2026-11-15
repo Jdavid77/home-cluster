@@ -5,3 +5,4 @@ resources:
   - alert-triage-agent.yaml
   - cilium-policy-agent.yaml
   - promql-agent.yaml
+  - secrets-audit-agent.yaml

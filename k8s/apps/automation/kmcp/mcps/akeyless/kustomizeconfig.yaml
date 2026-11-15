@@ -1,0 +1,7 @@
+# Rewrite the hashed ConfigMap name into the MCPServer so script changes roll the pod
+nameReference:
+  - kind: ConfigMap
+    version: v1
+    fieldSpecs:
+      - path: spec/deployment/volumes/configMap/name
+        kind: MCPServer
