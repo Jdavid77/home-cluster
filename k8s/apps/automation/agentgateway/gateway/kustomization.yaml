@@ -9,3 +9,4 @@ resources:
   - models.yaml
   - service.yaml
   - route.yaml
+  - alert-triage.yaml
