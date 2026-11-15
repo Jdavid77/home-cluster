@@ -13,14 +13,10 @@ spec:
     name: *app
     namespace: flux-system
   values:
-    # Connection strings come from kagent-postgres-owner / kagent-postgres-readwrite
-    # (chart defaults), provisioned by the db-init Job in ate-system (substrate-db).
     controller:
       replicas: 2
-      # Chart default maxUnavailable: 1 keeps one controller up during drains.
       pdb:
         enabled: true
-      # Pod certificates + trust bundle for the Substrate API server (mTLS).
       substrateClientCertificate:
         enabled: true
     ui:
