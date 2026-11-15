@@ -15,6 +15,27 @@ spec:
           - name: substrate.actor
             expression: jwt.sub
   traffic:
+    timeouts:
+      request: 120s
+    retry:
+      attempts: 2
+      backoff: 250ms
+      codes:
+        - 502
+        - 503
+---
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/agentgateway.dev/agentgatewaypolicy_v1alpha1.json
+apiVersion: agentgateway.dev/v1alpha1
+kind: AgentgatewayPolicy
+metadata:
+  name: llm-models
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: llm
+      sectionName: models
+  traffic:
     # Actor JWTs minted by Substrate (kagent ModelConfig actorJwt, audience llm-gateway); public JWKS from https://idp.ate-system.svc/openid/v1/jwks
     jwtAuthentication:
       mode: Strict
@@ -30,11 +51,3 @@ spec:
       policy:
         matchExpressions:
           - 'jwt.sub.startsWith("actor/automation/")'
-    timeouts:
-      request: 120s
-    retry:
-      attempts: 2
-      backoff: 250ms
-      codes:
-        - 502
-        - 503
