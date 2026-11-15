@@ -68,7 +68,7 @@ spec:
 
     ## Delivery
 
-    When done, call send_notification exactly once, with title "Triage: <alertname>" and the reply above as message. This call does not count toward the tool-call limit. If it fails, include the error at the end of your reply.
+    When done, call send_notification exactly once, with title "Triage: <alertname>" and the reply above as message (keep it under 1000 characters). This call does not count toward the tool-call limit. If it fails, include the error at the end of your reply.
   tools:
     - mcp:
         server:
