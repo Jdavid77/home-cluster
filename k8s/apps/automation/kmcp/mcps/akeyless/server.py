@@ -43,11 +43,11 @@ def _items(path):
             return items
 
 
-def _k8s(resource):
+def _k8s(version, resource):
     with open(f"{SA}/token") as f:
         token = f.read()
     ctx = ssl.create_default_context(cafile=f"{SA}/ca.crt")
-    url = f"{K8S}/apis/external-secrets.io/v1/{resource}"
+    url = f"{K8S}/apis/external-secrets.io/{version}/{resource}"
     return _request(url, headers={"Authorization": f"Bearer {token}"}, context=ctx)["items"]
 
 
@@ -68,11 +68,11 @@ def list_items(path: str = "/") -> list[dict]:
 def find_unused_secrets() -> dict:
     """Compare every Akeyless item under / with the keys referenced by ExternalSecrets and PushSecrets in the cluster, and return the items nothing references."""
     used = set()
-    for es in _k8s("externalsecrets"):
+    for es in _k8s("v1", "externalsecrets"):
         spec = es["spec"]
         used |= {_norm(d["remoteRef"]["key"]) for d in spec.get("data") or []}
         used |= {_norm(d["extract"]["key"]) for d in spec.get("dataFrom") or [] if "extract" in d}
-    for ps in _k8s("pushsecrets"):
+    for ps in _k8s("v1alpha1", "pushsecrets"):
         used |= {_norm(d["match"]["remoteRef"]["remoteKey"]) for d in ps["spec"].get("data") or []}
     items = _items("/")
     unused = [
