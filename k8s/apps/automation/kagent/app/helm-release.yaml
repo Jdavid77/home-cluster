@@ -62,6 +62,9 @@ spec:
           baseUrl: http://llm.automation.svc.cluster.local/v1
     kagent-tools:
       enabled: true
+    # Every alert creates a triage session; expire idle ones after a day instead of a week
+    sessions:
+      idleTtl: 86400s
   # Chart 1.0.1 can't set actorJwt on the default ModelConfig: Substrate mints an actor JWT
   # at atenet-egress for model calls, which the llm gateway verifies
   postRenderers:
