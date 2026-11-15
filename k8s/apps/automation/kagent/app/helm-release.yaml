@@ -63,6 +63,6 @@ spec:
         apiKeySecretRef: null
         apiKeySecretKey: null
         config:
-          baseUrl: https://ai.jnobrega.com/v1
+          baseUrl: http://llm.automation.svc.cluster.local/v1
     kagent-tools:
       enabled: true

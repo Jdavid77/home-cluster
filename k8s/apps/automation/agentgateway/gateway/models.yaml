@@ -5,8 +5,8 @@ metadata:
   name: openrouter-claude-haiku
 spec:
   parentRefs:
-    - name: ai-internal
-      sectionName: websecure
+    - name: llm
+      sectionName: http
   provider: Openrouter
   match:
     model: anthropic/claude-haiku-5.5
@@ -24,8 +24,8 @@ metadata:
   name: default
 spec:
   parentRefs:
-    - name: ai-internal
-      sectionName: websecure
+    - name: llm
+      sectionName: http
   virtualModel:
     weighted:
       targets:

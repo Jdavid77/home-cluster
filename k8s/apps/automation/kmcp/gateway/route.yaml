@@ -12,7 +12,7 @@ spec:
       sectionName: websecure
   rules:
     - backendRefs:
-        - name: ai-internal-admin
+        - name: mcp-admin
           port: 15000
       matches:
         - path:

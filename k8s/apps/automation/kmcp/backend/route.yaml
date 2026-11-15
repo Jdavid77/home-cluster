@@ -11,7 +11,7 @@ metadata:
         - "[STATUS] == 401"
 spec:
   parentRefs:
-    - name: ai-internal
+    - name: mcp
       namespace: automation
       sectionName: websecure
   hostnames:
