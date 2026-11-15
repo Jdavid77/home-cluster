@@ -66,3 +66,18 @@ spec:
           baseUrl: http://llm.automation.svc.cluster.local/v1
     kagent-tools:
       enabled: true
+  # Chart 1.0.1 can't set actorJwt on the default ModelConfig: Substrate mints an actor JWT
+  # at atenet-egress for model calls, which the llm gateway verifies
+  postRenderers:
+    - kustomize:
+        patches:
+          - target:
+              kind: ModelConfig
+              name: default-model-config
+            patch: |
+              - op: add
+                path: /spec/actorJwt
+                value:
+                  audiences:
+                    - llm-gateway
+                  expirationSeconds: 900

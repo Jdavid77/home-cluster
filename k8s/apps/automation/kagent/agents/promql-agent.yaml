@@ -6,8 +6,6 @@ metadata:
 spec:
   harnessRef:
     name: kagent-default
-  egressPolicyRefs:
-    - name: llm-gateway
   template:
     ref:
       name: promql-agent
