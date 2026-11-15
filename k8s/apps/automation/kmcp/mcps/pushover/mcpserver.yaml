@@ -9,7 +9,7 @@ spec:
     targetPort: 8080
     path: /mcp
   deployment:
-    image: ghcr.io/jdavid77/pushover-mcp:sha-88fc677d718881d7a72656cb88ca2886b056447e@sha256:e02e47c4c4b5afb22c178dc6370a62151416c4a537544a5f874bf8c69a68df6b
+    image: ghcr.io/jdavid77/pushover-mcp:v2026.11.15.01 # {"$imagepolicy": "automation:pushover-mcp"}
     port: 8080
     labels:
       agentgateway.dev/mcp: "true"

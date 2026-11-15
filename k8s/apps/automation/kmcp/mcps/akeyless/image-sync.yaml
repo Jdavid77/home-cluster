@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/image.toolkit.fluxcd.io/imagerepository_v1.json
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: akeyless-mcp
+spec:
+  image: ghcr.io/jdavid77/akeyless-mcp
+  interval: 5m
+  provider: generic
+---
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/image.toolkit.fluxcd.io/imagepolicy_v1.json
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: &repo akeyless-mcp
+spec:
+  imageRepositoryRef:
+    name: *repo
+  filterTags:
+    pattern: '^v\d{4}\.\d{2}\.\d{2}\.\d{2}$'
+  policy:
+    alphabetical:
+      order: asc
