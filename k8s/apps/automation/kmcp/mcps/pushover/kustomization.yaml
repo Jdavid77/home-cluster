@@ -5,9 +5,3 @@ resources:
   - mcpserver.yaml
   - remotemcpserver.yaml
   - secret.yaml
-configMapGenerator:
-  - name: pushover-mcp
-    files:
-      - server.py
-configurations:
-  - kustomizeconfig.yaml

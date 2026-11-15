@@ -10,7 +10,7 @@ metadata:
   name: akeyless-mcp
 rules:
   - apiGroups: ["external-secrets.io"]
-    resources: ["externalsecrets", "pushsecrets"]
+    resources: ["externalsecrets"]
     verbs: ["list"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1

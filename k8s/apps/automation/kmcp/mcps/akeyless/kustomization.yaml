@@ -6,9 +6,3 @@ resources:
   - rbac.yaml
   - remotemcpserver.yaml
   - secret.yaml
-configMapGenerator:
-  - name: akeyless-mcp
-    files:
-      - server.py
-configurations:
-  - kustomizeconfig.yaml

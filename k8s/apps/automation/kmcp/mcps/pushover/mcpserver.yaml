@@ -9,36 +9,12 @@ spec:
     targetPort: 8080
     path: /mcp
   deployment:
-    image: ghcr.io/astral-sh/uv:0.13.8-python3.13-alpine@sha256:f2d6278d0821c35881b010ddbf75825049661a98dbfdf61bbd1407e8dd544d00
+    image: ghcr.io/jdavid77/pushover-mcp:sha-88fc677d718881d7a72656cb88ca2886b056447e@sha256:e02e47c4c4b5afb22c178dc6370a62151416c4a537544a5f874bf8c69a68df6b
     port: 8080
     labels:
       agentgateway.dev/mcp: "true"
-    cmd: uv
-    args:
-      - run
-      - --no-project
-      - --with
-      - mcp==2.3.0
-      - python
-      - -I
-      - /app/server.py
-    env:
-      HOME: /tmp
-      UV_CACHE_DIR: /tmp/uv
     secretRefs:
       - name: pushover-mcp
-    volumeMounts:
-      - name: app
-        mountPath: /app
-        readOnly: true
-      - name: tmp
-        mountPath: /tmp
-    volumes:
-      - name: app
-        configMap:
-          name: pushover-mcp
-      - name: tmp
-        emptyDir: {}
     podSecurityContext:
       runAsNonRoot: true
       runAsUser: 1000
@@ -54,6 +30,6 @@ spec:
     resources:
       requests:
         cpu: 10m
-        memory: 64Mi
+        memory: 16Mi
       limits:
-        memory: 256Mi
+        memory: 64Mi
