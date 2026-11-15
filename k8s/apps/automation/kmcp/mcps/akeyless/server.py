@@ -71,7 +71,7 @@ def _norm(key):
 def list_items(path: str = "/") -> list[dict]:
     """List Akeyless item names (not values) under a path, including subfolders."""
     return [
-        {"name": i["item_name"], "type": i.get("item_type"), "last_accessed": i.get("access_date")}
+        {"name": i["item_name"], "type": i.get("item_type")}
         for i in _items(path)
     ]
 
@@ -88,7 +88,7 @@ def find_unused_secrets() -> dict:
         used |= {_norm(d["match"]["remoteRef"]["remoteKey"]) for d in ps["spec"].get("data") or []}
     items = _items("/")
     unused = [
-        {"name": i["item_name"], "type": i.get("item_type"), "last_accessed": i.get("access_date")}
+        {"name": i["item_name"], "type": i.get("item_type")}
         for i in items
         if _norm(i["item_name"]) not in used
     ]
