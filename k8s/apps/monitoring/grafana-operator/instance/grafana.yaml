@@ -52,7 +52,7 @@ spec:
       disable_sanitize_html: "true"
     plugins:
       plugin_admin_enabled: "false"
-      preinstall_sync: "grafana-clock-panel,grafana-piechart-panel,grafana-worldmap-panel,grafana-mqtt-datasource"
+      preinstall_sync: "grafana-clock-panel,grafana-piechart-panel,grafana-worldmap-panel,grafana-mqtt-datasource,victoriametrics-logs-datasource"
     security:
       angular_support_enabled: "true"
       allow_embedding: "true"
