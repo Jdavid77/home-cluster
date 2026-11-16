@@ -24,6 +24,10 @@ rules:
     resources: ["secrets"]
     resourceNames: ["zot-registry-secret"]
     verbs: ["get", "patch"]
+  # create can't be scoped by resourceNames; needed for the first run
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["create"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -37,7 +41,7 @@ subjects:
   - kind: ServiceAccount
     name: zot-token-rotator
 ---
-# mints a 24h zot-pull token every 6h into zot-registry-secret
+# mints a 24h zot-pull token every 6h into zot-registry-secret (created if missing)
 apiVersion: batch/v1
 kind: CronJob
 metadata:
@@ -67,9 +71,14 @@ spec:
                 - |
                   set -eu
                   token=$(kubectl create token zot-pull --audience zot --duration 24h)
-                  auth=$(printf 'zot:%s' "$token" | base64 -w0)
-                  config=$(printf '{"auths":{"registry.jnobrega.com":{"auth":"%s"}}}' "$auth" | base64 -w0)
-                  kubectl patch secret zot-registry-secret --type merge -p "{\"data\":{\".dockerconfigjson\":\"$config\"}}"
+                  kubectl create secret docker-registry zot-registry-secret \
+                    --docker-server=registry.jnobrega.com --docker-username=zot --docker-password="$token" \
+                    --dry-run=client -o yaml \
+                  | kubectl annotate --local -f - -o yaml \
+                      reflector.v1.k8s.emberstack.com/reflection-allowed=true \
+                      reflector.v1.k8s.emberstack.com/reflection-auto-enabled=true \
+                      reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces=default,media,automation,development \
+                  | kubectl apply --server-side --field-manager=zot-token-rotator -f -
               env:
                 - {name: HOME, value: /tmp}
               volumeMounts:
