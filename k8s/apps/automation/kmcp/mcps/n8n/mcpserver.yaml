@@ -13,8 +13,6 @@ spec:
     port: 3000
     labels:
       agentgateway.dev/mcp: "true"
-    imagePullSecrets:
-      - name: zot-registry-secret
     env:
       MCP_MODE: http
       PORT: "3000"

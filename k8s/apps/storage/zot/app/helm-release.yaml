@@ -73,11 +73,9 @@ spec:
             "accessControl": {
               "repositories": {
                 "**": {
+                  "anonymousPolicy": ["read"],
+                  "defaultPolicy": ["read"],
                   "policies": [
-                    {
-                      "users": ["https://192.168.1.110:6443/system:serviceaccount:storage:zot-pull"],
-                      "actions": ["read"]
-                    },
                     {
                       "users": ["https://192.168.1.110:6443/system:serviceaccount:storage:flux-mirror"],
                       "actions": ["read", "create", "update", "delete"]

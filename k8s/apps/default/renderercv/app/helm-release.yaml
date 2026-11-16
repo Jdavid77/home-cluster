@@ -14,8 +14,6 @@ spec:
   maxHistory: 2
   values:
     defaultPodOptions:
-      imagePullSecrets:
-        - name: zot-registry-secret
       automountServiceAccountToken: false
     controllers:
       *app :

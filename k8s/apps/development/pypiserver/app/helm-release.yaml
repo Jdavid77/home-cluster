@@ -12,9 +12,6 @@ spec:
     namespace: flux-system
   maxHistory: 2
   values:
-    defaultPodOptions:
-      imagePullSecrets:
-        - name: zot-registry-secret
     controllers:
       pypiserver:
         annotations:

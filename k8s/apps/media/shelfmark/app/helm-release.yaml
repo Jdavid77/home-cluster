@@ -13,8 +13,6 @@ spec:
     namespace: flux-system
   values:
     defaultPodOptions:
-      imagePullSecrets:
-        - name: zot-registry-secret
       automountServiceAccountToken: false
       enableServiceLinks: false
       securityContext:

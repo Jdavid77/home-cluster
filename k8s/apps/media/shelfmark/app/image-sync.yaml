@@ -7,8 +7,7 @@ spec:
   image: registry.jnobrega.com/mirror/shelfmark
   interval: 5m
   provider: generic
-  secretRef:
-    name: zot-registry-secret
+  serviceAccountName: shelfmark-image-scan
 ---
 # yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/image.toolkit.fluxcd.io/imagepolicy_v1.json
 apiVersion: image.toolkit.fluxcd.io/v1
@@ -21,3 +20,14 @@ spec:
   policy:
     semver:
       range: '>=1.0.0'
+---
+# zot maps this SA's token to a read-only identity
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: shelfmark-image-scan
+  annotations:
+    credential.auth.fluxcd.io/provider: kubernetes
+    credential.auth.fluxcd.io/type: jwt
+    credential.auth.fluxcd.io/audiences: zot
+    credential.auth.fluxcd.io/username: zot
