@@ -34,14 +34,6 @@ locals {
       authentik_oidc_grant_types             = ["authorization_code", "refresh_token"]
     },
     {
-      authentik_oidc_application_name        = "Zot"
-      authentik_oidc_application_icon_url    = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFyoFpFCCGUMA9HfEuKI7EWRx6mM_ujQ7Y-g&s"
-      authentik_oidc_application_description = "Zot OAuth application"
-      authentik_oidc_client_type             = "confidential"
-      authentik_oidc_sub_mode                = "hashed_user_id"
-      authentik_oidc_redirect_uris           = [{ url = "https://registry.${local.external_host}/auth/callback/oidc" }]
-    },
-    {
       authentik_oidc_application_name        = "agentgateway-MCP"
       authentik_oidc_application_icon_url    = "https://pbs.twimg.com/profile_images/2060173161937661955/h5E0qB8i.jpg"
       authentik_oidc_application_description = "AgentGateway MCP OAuth application"
