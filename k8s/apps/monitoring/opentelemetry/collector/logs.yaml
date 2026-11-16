@@ -108,8 +108,6 @@ spec:
         limit_percentage: 80
         spike_limit_percentage: 25
     exporters:
-      otlphttp/loki:
-        endpoint: http://loki-gateway.monitoring/otlp
       otlphttp/victoria-logs:
         endpoint: http://victoria-logs.monitoring:9428/insert/opentelemetry
     service:
@@ -117,7 +115,7 @@ spec:
         logs:
           receivers: [filelog]
           processors: [k8sattributes, memory_limiter, batch]
-          exporters: [otlphttp/loki, otlphttp/victoria-logs]
+          exporters: [otlphttp/victoria-logs]
   tolerations:
     - key: node.kubernetes.io/dedicated
       operator: Equal

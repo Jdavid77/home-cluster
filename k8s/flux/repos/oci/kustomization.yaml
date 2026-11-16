@@ -19,7 +19,6 @@ resources:
   - reloader.yaml
   - spegel.yaml
   - kube-prometheus-stack.yaml
-  - loki.yaml
   - victoria-logs.yaml
   - longhorn.yaml
   - opentelemetry-operator.yaml
