@@ -19,6 +19,10 @@ spec:
     crds:
       enabled: false
     cleanPrometheusOperatorObjectNames: true
+    defaultRules:
+      disabled:
+        # every hpa here is a keda dependency gate that sits at max by design
+        KubeHpaMaxedOut: true
     alertmanager:
       route:
         main:
