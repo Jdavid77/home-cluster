@@ -44,6 +44,7 @@ spec:
               - --drift-exit-code=0
             env:
               DOCKER_CONFIG: /docker
+              MIRROR_REGISTRY: registry.jnobrega.com/mirror
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
