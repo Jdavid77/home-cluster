@@ -23,8 +23,8 @@
   "panels": [
     {
       "datasource": {
-        "type": "loki",
-        "uid": "loki"
+        "type": "victoriametrics-logs-datasource",
+        "uid": "victoria-logs"
       },
       "fieldConfig": {
         "defaults": {},
@@ -52,13 +52,12 @@
       "targets": [
         {
           "datasource": {
-            "type": "loki",
-            "uid": "loki"
+            "type": "victoriametrics-logs-datasource",
+            "uid": "victoria-logs"
           },
-          "direction": "backward",
-          "editorMode": "builder",
-          "expr": "{service_name=\"unknown_service\"} | json | label_format level=object_type | level =~ `(Warning|Error)` | line_format `Source: {{.object_source_component}} - {{.object_involvedObject_kind}} {{.object_involvedObject_name}} - {{.object_message}}`",
-          "queryType": "range",
+          "editorMode": "code",
+          "expr": "k8s.event.reason:* severity_text:in(Warning, Error) | format \"Source: <k8s.event.reporting_controller> - <k8s.object.kind> <k8s.object.name> - <_msg>\" as _msg",
+          "queryType": "instant",
           "refId": "A"
         }
       ],
