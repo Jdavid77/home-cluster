@@ -1,0 +1,14 @@
+---
+apiVersion: v1alpha1
+kind: KubeAuthenticationConfig
+configuration:
+  anonymous:
+    enabled: true
+    conditions:
+      - path: /livez
+      - path: /readyz
+      - path: /healthz
+      # service-account issuer discovery, so zot can verify SA tokens
+      - path: /.well-known/openid-configuration
+      - path: /openid/v1/jwks
+  jwt: []
