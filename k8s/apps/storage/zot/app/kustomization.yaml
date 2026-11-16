@@ -7,3 +7,13 @@ resources:
   - ./secret.yaml
   - ./service.yaml
   - ./token-rotator.yaml
+configMapGenerator:
+  - name: zot-config
+    files:
+      - ./config/config.json
+generatorOptions:
+  disableNameSuffixHash: true
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled
+    # helm created this cm before; stops helm deleting it on upgrade
+    helm.sh/resource-policy: keep

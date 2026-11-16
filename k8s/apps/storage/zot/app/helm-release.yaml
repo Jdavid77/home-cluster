@@ -15,98 +15,10 @@ spec:
   values:
     replicaCount: 3
     mountConfig: true
-    configFiles:
-      config.json: |
-        {
-          "distSpecVersion": "1.1.1",
-          "storage": {
-            "rootDirectory": "/tmp/zot",
-            "gc": true,
-            "dedupe": false,
-            "retention": {
-              "dryRun": false,
-              "delay": "24h",
-              "policies": [
-                {
-                  "repositories": ["**"],
-                  "deleteReferrers": true,
-                  "keepTags": [
-                    {
-                      "mostRecentlyPushedCount": 5
-                    }
-                  ]
-                }
-              ]
-            },
-            "storageDriver": {
-              "name": "s3",
-              "region": "us-east-1",
-              "bucket": "zot",
-              "regionendpoint": "http://garage.storage.svc.cluster.local:3900",
-              "secure": false,
-              "skipverify": true
-            }
-          },
-          "http": {
-            "address": "0.0.0.0",
-            "port": "5000",
-            "readTimeout": "300s",
-            "writeTimeout": "300s",
-            "externalUrl": "https://registry.jnobrega.com",
-            "compat": ["docker2s2"],
-            "auth": {
-              "htpasswd": {
-                "path": "/secret/htpasswd"
-              },
-              "bearer": {
-                "realm": "https://registry.jnobrega.com/zot/auth/token",
-                "service": "registry.jnobrega.com",
-                "oidc": [
-                  {
-                    "issuer": "https://192.168.1.110:6443",
-                    "audiences": ["zot"],
-                    "certificateAuthorityFile": "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
-                  }
-                ]
-              }
-            },
-            "accessControl": {
-              "repositories": {
-                "**": {
-                  "policies": [
-                    {
-                      "users": [
-                        "https://192.168.1.110:6443/system:serviceaccount:storage:zot-pull",
-                        "https://192.168.1.110:6443/system:serviceaccount:automation:n8n-mcp-image-scan",
-                        "https://192.168.1.110:6443/system:serviceaccount:default:rendercv-image-scan",
-                        "https://192.168.1.110:6443/system:serviceaccount:development:pypiserver-image-scan",
-                        "https://192.168.1.110:6443/system:serviceaccount:media:grimmory-image-scan",
-                        "https://192.168.1.110:6443/system:serviceaccount:media:shelfmark-image-scan"
-                      ],
-                      "actions": ["read"]
-                    },
-                    {
-                      "users": ["https://192.168.1.110:6443/system:serviceaccount:storage:flux-mirror"],
-                      "actions": ["read", "create", "update", "delete"]
-                    }
-                  ]
-                }
-              },
-              "adminPolicy": {
-                "users": ["admin"],
-                "actions": ["read", "create", "update", "delete"]
-              }
-            }
-          },
-          "log": {
-            "level": "info"
-          },
-          "extensions": {
-            "ui": { "enable": true },
-            "search": { "enable": true },
-            "scrub": { "enable": true, "interval": "24h" }
-          }
-        }
+    # config lives in ./config/config.json (configMapGenerator); null stops the chart creating its own
+    configFiles: null
+    deploymentAnnotations:
+      reloader.stakater.com/auto: "true"
     mountSecret: true
     secretFiles:
       htpasswd: |-
