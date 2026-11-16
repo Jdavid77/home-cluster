@@ -1,6 +1,14 @@
 metrics:
   serviceMonitor:
     enabled: true
+networkPolicies:
+  metricsScrapeSources:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: monitoring
+      podSelector:
+        matchLabels:
+          app.kubernetes.io/name: prometheus
 persistence:
   defaultClass: true
   defaultClassReplicaCount: 2
