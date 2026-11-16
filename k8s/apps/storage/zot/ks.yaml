@@ -26,16 +26,6 @@ spec:
       kind: ExternalSecret
       failed: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSyncedError')
       current: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSynced')
-  components:
-    - ../../../../components/keda/nfs
-  # 3 replicas while nfs is up, 0 when it's down
-  patches:
-    - target:
-        kind: ScaledObject
-      patch: |
-        - op: add
-          path: /spec/idleReplicaCount
-          value: 0
   postBuild:
     substitute:
       APP: *app
