@@ -10,6 +10,7 @@ resources:
   - ./grafana-operator/ks.yaml
   - ./pihole-exporter/ks.yaml
   - ./loki/ks.yaml
+  - ./victoria-logs/ks.yaml
   - ./opentelemetry/ks.yaml
   - ./prometheus-operator-crds/ks.yaml
   - ./gatus/ks.yaml

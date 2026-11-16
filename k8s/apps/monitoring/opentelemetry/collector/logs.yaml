@@ -110,12 +110,14 @@ spec:
     exporters:
       otlphttp/loki:
         endpoint: http://loki-gateway.monitoring/otlp
+      otlphttp/victoria-logs:
+        endpoint: http://victoria-logs.monitoring:9428/insert/opentelemetry
     service:
       pipelines:
         logs:
           receivers: [filelog]
           processors: [k8sattributes, memory_limiter, batch]
-          exporters: [otlphttp/loki]
+          exporters: [otlphttp/loki, otlphttp/victoria-logs]
   tolerations:
     - key: node.kubernetes.io/dedicated
       operator: Equal

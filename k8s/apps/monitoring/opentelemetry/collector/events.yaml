@@ -63,9 +63,11 @@ spec:
         verbosity: detailed
       otlphttp/loki:
         endpoint: http://loki-gateway.monitoring/otlp
+      otlphttp/victoria-logs:
+        endpoint: http://victoria-logs.monitoring:9428/insert/opentelemetry
     service:
       pipelines:
         logs:
           receivers: [k8s_events]
           processors: [batch, groupbyattrs, memory_limiter]
-          exporters: [otlphttp/loki, debug]
+          exporters: [otlphttp/loki, otlphttp/victoria-logs, debug]

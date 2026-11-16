@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: victoria-logs
+  namespace: monitoring
+spec:
+  interval: 15m
+  timeout: 5m
+  maxHistory: 2
+  chartRef:
+    kind: OCIRepository
+    name: victoria-logs
+    namespace: flux-system
+  values:
+    server:
+      fullnameOverride: victoria-logs
+      retentionPeriod: 14d
+      persistentVolume:
+        enabled: true
+        storageClassName: openebs-hostpath
+        size: 50Gi
+      nodeSelector:
+        kubernetes.io/hostname: localstorage-worker1
+      route:
+        enabled: true
+        parentRefs:
+          - name: internal
+            namespace: network
+            sectionName: websecure
+        hostnames:
+          - logs.jnobrega.com
+      serviceMonitor:
+        enabled: true
