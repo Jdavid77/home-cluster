@@ -16,7 +16,7 @@ kind: AgentTemplate
 metadata:
   name: alert-triage-agent
 spec:
-  description: Investigates a firing Alertmanager alert using read-only cluster, Flux, Prometheus and Loki tools and returns a short likely-cause summary.
+  description: Investigates a firing Alertmanager alert using read-only cluster, Flux, Prometheus and VictoriaLogs tools and returns a short likely-cause summary.
   modelConfig:
     name: default-model-config
   promptTemplate:
@@ -36,22 +36,22 @@ spec:
     2. Check the affected workload: pod status, restarts and recent events in its namespace.
     3. Check recent Flux changes: use trace_kubernetes_resource on the affected object to find the Kustomization/HelmRelease that manages it and whether it was recently reconciled, upgraded or failed.
     4. Query Prometheus around the alert start time to confirm the signal and look for related symptoms (memory/CPU limits, OOM kills, node pressure, target down).
-    5. Query Loki for errors from the affected workload in the 15 minutes before the alert started.
+    5. Query VictoriaLogs for errors from the affected workload in the 15 minutes before the alert started.
 
     Stop once you have enough evidence. Use at most 15 tool calls.
 
     ## Datasources
 
-    Call list_datasources once to get the Prometheus and Loki datasource UIDs.
+    Call list_datasources once to get the Prometheus datasource UID.
 
-    Loki uses OpenTelemetry label names. Never use `namespace` or `pod` as Loki labels. Use:
-    - `k8s_namespace_name`
-    - `k8s_pod_name`
-    - `k8s_container_name`
-    - `k8s_deployment_name`, `k8s_statefulset_name`, `k8s_daemonset_name`, `k8s_cronjob_name`
-    - `service_name`
+    Logs live in VictoriaLogs and are queried with LogsQL through the query tool (start/end in RFC3339, always set limit to 50 or less). Fields keep their OpenTelemetry names with dots. Never use `namespace` or `pod`. Use:
+    - `k8s.namespace.name`
+    - `k8s.pod.name`
+    - `k8s.container.name`
+    - `k8s.deployment.name`, `k8s.statefulset.name`, `k8s.daemonset.name`, `k8s.cronjob.name`
+    - `service.name`
 
-    Example: `{k8s_namespace_name="media", k8s_deployment_name="jellyfin"} |~ "(?i)error|fatal|panic"`
+    Example: `k8s.namespace.name:media k8s.deployment.name:jellyfin (i(error) OR i(fatal) OR i(panic))`
 
     ## Output
 
@@ -99,11 +99,15 @@ spec:
           name: grafana-mcp
         tools:
           - list_datasources
-          - list_loki_label_values
           - list_prometheus_metric_names
-          - query_loki_logs
-          - query_loki_stats
           - query_prometheus
+    - mcp:
+        server:
+          kind: RemoteMCPServer
+          name: victorialogs-mcp
+        tools:
+          - query
+          - field_values
     - mcp:
         server:
           kind: RemoteMCPServer

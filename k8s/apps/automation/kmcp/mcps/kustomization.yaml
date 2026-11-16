@@ -8,3 +8,4 @@ resources:
   - ./kubernetes
   - ./n8n
   - ./pushover
+  - ./victorialogs

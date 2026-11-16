@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/kagent.dev/mcpserver_v1alpha1.json
+apiVersion: kagent.dev/v1alpha1
+kind: MCPServer
+metadata:
+  name: victorialogs-mcp
+spec:
+  transportType: http
+  httpTransport:
+    targetPort: 8081
+    path: /mcp
+  deployment:
+    image: ghcr.io/victoriametrics/mcp-victorialogs:v1.9.0@sha256:753bb4fbe402ca1a782842f44636830f9895736f11d7fe783b924f8a0daf083d
+    port: 8081
+    imagePullPolicy: IfNotPresent
+    env:
+      VL_INSTANCE_ENTRYPOINT: http://victoria-logs.monitoring.svc.cluster.local:9428
+      MCP_SERVER_MODE: http
+      MCP_LISTEN_ADDR: :8081
+    podSecurityContext:
+      runAsNonRoot: true
+      runAsUser: 65534
+      runAsGroup: 65534
+    securityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      capabilities:
+        drop:
+          - ALL
+      seccompProfile:
+        type: RuntimeDefault
+    resources:
+      requests:
+        cpu: 10m
+        memory: 32Mi
+      limits:
+        memory: 128Mi
