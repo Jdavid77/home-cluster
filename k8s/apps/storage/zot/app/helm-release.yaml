@@ -56,17 +56,6 @@ spec:
             "auth": {
               "htpasswd": {
                 "path": "/secret/htpasswd"
-              },
-              "openid": {
-                "providers": {
-                  "oidc": {
-                    "credentialsFile": "/oidc/oidc-credentials.json",
-                    "name": "Authentik SSO",
-                    "issuer": "https://auth.jnobrega.com/application/o/Zot/",
-                    "keypath": "",
-                    "scopes": ["openid", "profile", "email", "groups"]
-                  }
-                }
               }
             }
           },
@@ -116,14 +105,3 @@ spec:
             cookieConfig:
               lifetimeType: Permanent
     persistence: false
-    # Extra Volume Mounts
-    extraVolumeMounts:
-      - name: oidc-credentials
-        mountPath: /oidc/oidc-credentials.json
-        subPath: oidc-credentials.json
-        readOnly: true
-    # Extra Volumes
-    extraVolumes:
-      - name: oidc-credentials
-        secret:
-          secretName: zot-oidc-secret
