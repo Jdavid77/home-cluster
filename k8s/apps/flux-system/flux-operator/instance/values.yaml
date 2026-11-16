@@ -3,6 +3,8 @@ instance:
     version: 2.10.x
   cluster:
     networkPolicy: false
+    # lets image-reflector mint SA tokens for zot (flux >= 2.10 no longer ships this RBAC)
+    objectIdentityRBAC: true
   components:
     - source-controller
     - kustomize-controller
