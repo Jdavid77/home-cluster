@@ -4,7 +4,7 @@ kind: ImageRepository
 metadata:
   name: n8n-mcp
 spec:
-  image: registry.jnobrega.com/mirror/czlonkowski/n8n-mcp
+  image: registry.jnobrega.com/mirror/n8n-mcp
   interval: 5m
   provider: generic
   secretRef:

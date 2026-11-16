@@ -24,7 +24,7 @@ spec:
         containers:
           app:
             image:
-              repository: registry.jnobrega.com/mirror/rendercv/rendercv
+              repository: registry.jnobrega.com/mirror/rendercv
               tag: v2.8 # {"$imagepolicy": "default:rendercv:tag"}
             probes:
               liveness: &probes

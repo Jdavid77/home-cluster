@@ -4,7 +4,7 @@ kind: ImageRepository
 metadata:
   name: rendercv
 spec:
-  image: registry.jnobrega.com/mirror/rendercv/rendercv
+  image: registry.jnobrega.com/mirror/rendercv
   interval: 5m
   provider: generic
   secretRef:

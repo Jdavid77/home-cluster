@@ -4,7 +4,7 @@ kind: ImageRepository
 metadata:
   name: shelfmark
 spec:
-  image: registry.jnobrega.com/mirror/calibrain/shelfmark
+  image: registry.jnobrega.com/mirror/shelfmark
   interval: 5m
   provider: generic
   secretRef:

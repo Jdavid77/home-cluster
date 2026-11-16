@@ -20,7 +20,7 @@ spec:
         containers:
           *app:
             image:
-              repository: registry.jnobrega.com/mirror/grimmory-tools/grimmory
+              repository: registry.jnobrega.com/mirror/grimmory
               tag: v3.5.0 # {"$imagepolicy": "media:grimmory:tag"}
             env:
               TZ: Europe/Lisbon

@@ -4,7 +4,7 @@ kind: ImageRepository
 metadata:
   name: grimmory
 spec:
-  image: registry.jnobrega.com/mirror/grimmory-tools/grimmory
+  image: registry.jnobrega.com/mirror/grimmory
   interval: 5m
   provider: generic
   secretRef:

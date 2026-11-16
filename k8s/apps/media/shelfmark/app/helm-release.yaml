@@ -32,7 +32,7 @@ spec:
         containers:
           app:
             image:
-              repository: registry.jnobrega.com/mirror/calibrain/shelfmark
+              repository: registry.jnobrega.com/mirror/shelfmark
               tag: v1.7.0 # {"$imagepolicy": "media:shelfmark:tag"}
             command:
               - gunicorn
