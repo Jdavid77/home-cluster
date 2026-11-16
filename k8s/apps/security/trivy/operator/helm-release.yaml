@@ -27,6 +27,8 @@ spec:
       configAuditScannerScanOnlyCurrentRevisions: true
       annotations:
         reloader.stakater.com/auto: "true"
+      privateRegistryScanSecretsNames: 
+        "storage": "zot-registry-secret"
     
     alternateReportStorage:
       enabled: true

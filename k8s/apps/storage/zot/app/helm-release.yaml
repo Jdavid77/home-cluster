@@ -73,9 +73,18 @@ spec:
             "accessControl": {
               "repositories": {
                 "**": {
-                  "anonymousPolicy": ["read"],
-                  "defaultPolicy": ["read"],
                   "policies": [
+                    {
+                      "users": [
+                        "https://192.168.1.110:6443/system:serviceaccount:storage:zot-pull",
+                        "https://192.168.1.110:6443/system:serviceaccount:automation:n8n-mcp-image-scan",
+                        "https://192.168.1.110:6443/system:serviceaccount:default:rendercv-image-scan",
+                        "https://192.168.1.110:6443/system:serviceaccount:development:pypiserver-image-scan",
+                        "https://192.168.1.110:6443/system:serviceaccount:media:grimmory-image-scan",
+                        "https://192.168.1.110:6443/system:serviceaccount:media:shelfmark-image-scan"
+                      ],
+                      "actions": ["read"]
+                    },
                     {
                       "users": ["https://192.168.1.110:6443/system:serviceaccount:storage:flux-mirror"],
                       "actions": ["read", "create", "update", "delete"]

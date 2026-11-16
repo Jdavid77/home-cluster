@@ -6,3 +6,4 @@ resources:
   - ./rbac.yaml
   - ./secret.yaml
   - ./service.yaml
+  - ./token-rotator.yaml
