@@ -11,6 +11,11 @@ spec:
           host: flux-mcp.automation.svc.cluster.local
           port: 9090
           protocol: StreamableHTTP
+      - name: grafana
+        static:
+          host: grafana-mcp.automation.svc.cluster.local
+          port: 8000
+          protocol: StreamableHTTP
       - name: kubernetes
         static:
           host: kubernetes-mcp.automation.svc.cluster.local
@@ -24,4 +29,9 @@ spec:
                 name: n8n-mcp-auth
           host: n8n-mcp.automation.svc.cluster.local
           port: 3000
+          protocol: StreamableHTTP
+      - name: victorialogs
+        static:
+          host: victorialogs-mcp.automation.svc.cluster.local
+          port: 8081
           protocol: StreamableHTTP
