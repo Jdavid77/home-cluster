@@ -13,7 +13,7 @@ spec:
     name: zot
     namespace: flux-system
   values:
-    replicaCount: 2
+    replicaCount: 1
     mountConfig: true
     # config lives in ./config/config.json (configMapGenerator); null stops the chart creating its own
     configFiles: null
@@ -49,10 +49,4 @@ spec:
             - path:
                 type: PathPrefix
                 value: /
-          sessionPersistence:
-            sessionName: zot-registry-session
-            type: Cookie
-            absoluteTimeout: 30m
-            cookieConfig:
-              lifetimeType: Permanent
     persistence: false
