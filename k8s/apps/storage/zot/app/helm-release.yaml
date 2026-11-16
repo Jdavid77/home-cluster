@@ -53,6 +53,7 @@ spec:
             "readTimeout": "300s",
             "writeTimeout": "300s",
             "externalUrl": "https://registry.jnobrega.com",
+            "compat": ["docker2s2"],
             "auth": {
               "htpasswd": {
                 "path": "/secret/htpasswd"
