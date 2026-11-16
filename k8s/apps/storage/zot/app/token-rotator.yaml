@@ -77,10 +77,12 @@ spec:
                   | kubectl annotate --local -f - -o yaml \
                       reflector.v1.k8s.emberstack.com/reflection-allowed=true \
                       reflector.v1.k8s.emberstack.com/reflection-auto-enabled=true \
-                      reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces=default,media,automation,development \
+                      reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces="$REFLECT_NAMESPACES" \
                   | kubectl apply --server-side --field-manager=zot-token-rotator -f -
               env:
                 - {name: HOME, value: /tmp}
+                # namespaces reflector copies the pull secret into
+                - {name: REFLECT_NAMESPACES, value: "default,media,automation,development"}
               volumeMounts:
                 - {name: tmp, mountPath: /tmp}
               securityContext:
