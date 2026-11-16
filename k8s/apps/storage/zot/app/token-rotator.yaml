@@ -41,7 +41,7 @@ subjects:
   - kind: ServiceAccount
     name: zot-token-rotator
 ---
-# mints a 24h zot-pull token every 6h into zot-registry-secret (created if missing)
+# mints a 12h zot-pull token every 6h into zot-registry-secret (created if missing)
 apiVersion: batch/v1
 kind: CronJob
 metadata:
@@ -71,7 +71,7 @@ spec:
               args:
                 - |
                   set -eu
-                  token=$(kubectl create token zot-pull --audience zot --duration 24h)
+                  token=$(kubectl create token zot-pull --audience zot --duration 12h)
                   kubectl create secret docker-registry zot-registry-secret \
                     --docker-server=registry.jnobrega.com --docker-username=zot --docker-password="$token" \
                     --dry-run=client -o yaml \
