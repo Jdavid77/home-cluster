@@ -29,8 +29,8 @@ spec:
   postBuild:
     substitute:
       APP: *app
-      MIN_REPLICAS: "3"
-      MAX_REPLICAS: "3"
+      MIN_REPLICAS: "2"
+      MAX_REPLICAS: "2"
   wait: true
   interval: 30m
   retryInterval: 2m

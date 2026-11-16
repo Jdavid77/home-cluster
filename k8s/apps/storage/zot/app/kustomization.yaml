@@ -9,7 +9,7 @@ resources:
   - ./token-rotator.yaml
 components:
   - ../../../../components/keda/nfs
-# 3 replicas while nfs is up, 0 when it's down (here, not in ks.yaml: cluster.yaml overwrites ks patches)
+# 2 replicas while nfs is up, 0 when it's down (here, not in ks.yaml: cluster.yaml overwrites ks patches)
 patches:
   - target:
       kind: ScaledObject
