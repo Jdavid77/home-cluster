@@ -57,6 +57,37 @@ spec:
             "auth": {
               "htpasswd": {
                 "path": "/secret/htpasswd"
+              },
+              "bearer": {
+                "realm": "https://registry.jnobrega.com/zot/auth/token",
+                "service": "registry.jnobrega.com",
+                "oidc": [
+                  {
+                    "issuer": "https://192.168.1.110:6443",
+                    "audiences": ["zot"],
+                    "certificateAuthorityFile": "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
+                  }
+                ]
+              }
+            },
+            "accessControl": {
+              "repositories": {
+                "**": {
+                  "policies": [
+                    {
+                      "users": ["https://192.168.1.110:6443/system:serviceaccount:storage:zot-pull"],
+                      "actions": ["read"]
+                    },
+                    {
+                      "users": ["https://192.168.1.110:6443/system:serviceaccount:storage:flux-mirror"],
+                      "actions": ["read", "create", "update", "delete"]
+                    }
+                  ]
+                }
+              },
+              "adminPolicy": {
+                "users": ["admin"],
+                "actions": ["read", "create", "update", "delete"]
               }
             }
           },

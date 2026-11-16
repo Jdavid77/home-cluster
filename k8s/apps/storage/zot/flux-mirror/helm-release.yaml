@@ -32,6 +32,20 @@ spec:
           failedJobsHistory: 1
           backoffLimit: 3
           parallelism: 0
+        initContainers:
+          docker-config:
+            image:
+              repository: docker.io/library/busybox
+              tag: 1.37.0@sha256:a7dbc319b1438115a207e11930dc4bb3e643dcb3ec0bdd694bb36cd8fad289ec
+            command: ["/bin/sh", "-c"]
+            args:
+              - |
+                auth=$(printf 'zot:%s' "$(cat /var/run/secrets/zot/token)" | base64 -w0)
+                printf '{"auths":{"registry.jnobrega.com":{"auth":"%s"}}}' "$auth" > /docker/config.json
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: {drop: ["ALL"]}
         containers:
           app:
             image:
@@ -64,9 +78,21 @@ spec:
             subPath: mirror.yaml
             readOnly: true
       docker-config:
-        type: secret
-        name: zot-registry-secret
+        type: emptyDir
         globalMounts:
-          - path: /docker/config.json
-            subPath: .dockerconfigjson
+          - path: /docker
+      # push identity: zot maps this token to system:serviceaccount:storage:flux-mirror
+      zot-token:
+        type: custom
+        volumeSpec:
+          projected:
+            sources:
+              - serviceAccountToken:
+                  audience: zot
+                  expirationSeconds: 21600
+                  path: token
+        globalMounts:
+          - path: /var/run/secrets/zot
             readOnly: true
+    serviceAccount:
+      flux-mirror: {}
