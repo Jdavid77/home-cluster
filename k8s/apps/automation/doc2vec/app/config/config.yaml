@@ -12,6 +12,9 @@ embedding:
     model: qwen3-embedding
     base_url: http://qwen3-embedding.automation.svc.cluster.local:8080/v1
 
+# product_name is the product's lowercase name and version is latest: the MCP
+# server picks the collection <product_name>_<version>, and the docs-search
+# skill relies on that convention.
 sources:
   - type: website
     product_name: agentgateway
