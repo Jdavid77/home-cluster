@@ -8,6 +8,8 @@ spec:
   dependsOn:
     - name: external-secrets-store
       namespace: external-secrets
+    - name: garage-cluster
+      namespace: storage
   path: ./k8s/apps/backup/akeyless/cron
   prune: true
   sourceRef:
