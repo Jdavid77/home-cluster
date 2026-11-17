@@ -31,12 +31,13 @@ spec:
     - name: XDG_CACHE_HOME
       value: /tmp/.cache
   # replicas is owned by KEDA (ScaledObject below)
-  contextSize: 4096
-  # Non-causal pooling: a single input must fit in one ubatch, and the attention
-  # score buffer grows with ubatch². 2048 caps each input at 2048 tokens (plenty
-  # for RAG chunks) and saves ~1GB of the 4GB VRAM vs 8192, at the same speed.
-  batchSize: 4096
-  uBatchSize: 2048
+  contextSize: 8192
+  # Non-causal pooling: a single input must fit in one ubatch, so ubatch caps the
+  # input length. The attention score buffer grows with ubatch², which fits now
+  # that the model has the 4GB VRAM to itself. llama-server forces
+  # batch = ubatch for embeddings anyway.
+  batchSize: 8192
+  uBatchSize: 8192
   # Vulkan flash attention is ~3x slower at prompt processing on RDNA2 (all an
   # embedding model does), and llama.cpp defaults to "auto".
   extraArgs:
