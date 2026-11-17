@@ -33,12 +33,13 @@ spec:
   components:
     - ../../../../components/volsync/local
     - ../../../../components/volsync/remote
-    - ../../../../components/keda/postgres
+    - ../../../../components/keda/dependencies
     - ../../../../components/middlewares/authentik
     - ../../../../components/storage/dragonfly/emulated
   postBuild:
     substitute:
       APP: *app
+      DEPENDS_ON: "postgres"
       EXT_AUTH_TARGET: n8n-form
       VOLSYNC_PGID: &uid "1000"
       VOLSYNC_PUID: *uid

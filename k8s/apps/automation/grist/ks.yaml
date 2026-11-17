@@ -31,10 +31,11 @@ spec:
   components:
     - ../../../../components/volsync/local
     - ../../../../components/volsync/remote
-    - ../../../../components/keda/postgres
+    - ../../../../components/keda/dependencies
   postBuild:
     substitute:
       APP: *app
+      DEPENDS_ON: "postgres"
       VOLSYNC_PGID: &uid "1000"
       VOLSYNC_PUID: *uid
       VOLSYNC_CACHE_CAPACITY: 5Gi

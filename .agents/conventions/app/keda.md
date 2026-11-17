@@ -1,32 +1,38 @@
 # KEDA Conventions
 
-KEDA components scale an app down to zero when its external dependencies become unreachable. Availability is detected via Prometheus probes on the dependency's port.
+The `keda/dependencies` component scales an app to zero while any of its external dependencies is unreachable, and runs exactly `REPLICAS` pods when all of them are up. It is an on/off gate, not autoscaling: the HPA KEDA creates has min == max, so it never trips `KubeHpaMaxedOut`.
 
-## Components
+Availability comes from Prometheus blackbox probes (`probe_success`) in `monitoring`.
 
-Pick the component that matches the app's dependencies:
-
-| Component | Use when app depends on |
-|---|---|
-| `keda/postgres` | Postgres |
-| `keda/nfs` | NFS |
-| `keda/vectorchord` | VectorChord |
-| `keda/nfs-postgres` | NFS **and** Postgres |
-| `keda/nfs-vectorchord` | NFS **and** VectorChord |
-
-Add the chosen component to `ks.yaml`:
+## Usage
 
 ```yaml
 components:
-  - ../../../../components/keda/postgres   # example
+  - ../../../../components/keda/dependencies
+postBuild:
+  substitute:
+    APP: *app
+    DEPENDS_ON: "nfs|postgres"
 ```
+
+## `DEPENDS_ON` values
+
+`DEPENDS_ON` is a `|`-separated list of probe names (the job is `probe/monitoring/<name>`). The app only runs when every listed probe is up.
+
+| Probe | Dependency |
+|---|---|
+| `nfs` | NFS (port 2049) |
+| `postgres` | Postgres (port 5432) |
+| `immich` | VectorChord (port 6001) |
+
+A new dependency only needs a new probe; no new component.
 
 ## `postBuild.substitute` variables
 
 | Variable | Default | Notes |
 |---|---|---|
 | `APP` | — | Required — use `*app` |
+| `DEPENDS_ON` | — | Required — see above |
+| `REPLICAS` | `1` | Pods to run while all dependencies are up |
 | `COOLDOWN_PERIOD` | `300` | Seconds before scaling back up |
-| `MIN_REPLICAS` | `0` | Set to `1` to disable scale-to-zero |
-| `MAX_REPLICAS` | `1` | |
 | `CONTROLLER` | `Deployment` | Override for StatefulSet etc. |

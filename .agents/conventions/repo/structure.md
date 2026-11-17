@@ -35,7 +35,7 @@ Shared reusable Kustomize components included via `components:` in `ks.yaml`. Av
 |---|---|
 | `components/volsync/local` | Local restic backup via Garage S3 |
 | `components/volsync/remote` | Remote restic backup via Backblaze B2 |
-| `components/keda/postgres` | KEDA ScaledObject to scale down postgres before VolSync |
+| `components/keda/dependencies` | KEDA ScaledObject that scales an app to zero while its dependencies (NFS, Postgres, …) are down |
 | `components/alerts/` | Alerting rules |
 | `components/flux/` | Flux-related components |
 | `components/grafana/` | Grafana dashboards/datasources |

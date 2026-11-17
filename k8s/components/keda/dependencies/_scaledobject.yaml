@@ -5,8 +5,10 @@ metadata:
   name: ${APP}
 spec:
   cooldownPeriod: ${COOLDOWN_PERIOD:=300}
-  minReplicaCount: ${MIN_REPLICAS:=0}
-  maxReplicaCount: ${MAX_REPLICAS:=1}
+  # any dependency down -> 0; all up -> exactly REPLICAS
+  idleReplicaCount: 0
+  minReplicaCount: ${REPLICAS:=1}
+  maxReplicaCount: ${REPLICAS:=1}
   advanced:
     restoreToOriginalReplicaCount: true
   scaleTargetRef:
@@ -17,6 +19,8 @@ spec:
     - type: prometheus
       metadata:
         serverAddress: http://prometheus-operated.monitoring.svc.cluster.local:9090
-        query: max_over_time(probe_success{instance=~".+:2049"}[1m])
+        # 1 only when every probe listed in DEPENDS_ON is up
+        query: min(max_over_time(probe_success{job=~"probe/monitoring/(${DEPENDS_ON})"}[1m]))
         threshold: "1"
+        activationThreshold: "0"
         ignoreNullValues: "0"

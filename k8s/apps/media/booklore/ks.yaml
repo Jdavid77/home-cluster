@@ -28,10 +28,11 @@ spec:
   components:
     - ../../../../components/volsync/local
     - ../../../../components/volsync/remote
-    - ../../../../components/keda/nfs
+    - ../../../../components/keda/dependencies
   postBuild:
     substitute:
       APP: *app
+      DEPENDS_ON: "nfs"
       VOLSYNC_PGID: &uid "100"
       VOLSYNC_PUID: "1002"
       VOLSYNC_CACHE_CAPACITY: 1Gi

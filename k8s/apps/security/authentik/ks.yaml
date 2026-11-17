@@ -27,11 +27,12 @@ spec:
       failed: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSyncedError')
       current: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSynced')
   components:
-    - ../../../../components/keda/postgres
+    - ../../../../components/keda/dependencies
   postBuild:
     substitute:
       APP: authentik-server
-      MAX_REPLICAS: "2"
+      DEPENDS_ON: "postgres"
+      REPLICAS: "2"
   wait: true
   interval: 30m
   retryInterval: 2m
