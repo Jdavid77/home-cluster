@@ -1,5 +1,9 @@
 # doc2vec crawl config. The MCP server must embed queries with the same model
 # and dimension, so change both together (and recreate the collections).
+# The controller re-reads this file every 30s; name and schedule (cron, TZ of
+# the pod) drive its scheduler.
+name: agentgateway
+schedule: "0 4 * * 0"
 embedding:
   provider: openai
   dimension: 1024

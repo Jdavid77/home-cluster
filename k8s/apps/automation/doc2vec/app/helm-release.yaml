@@ -1,0 +1,149 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app doc2vec
+spec:
+  interval: 15m
+  timeout: 5m
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+    namespace: flux-system
+  maxHistory: 2
+  values:
+    controllers:
+      doc2vec:
+        # One scheduler only, and a restart kills any crawl in progress
+        strategy: Recreate
+        annotations:
+          # Secret only: the controller hot-reloads the config ConfigMap, and a
+          # restart on every config change would kill a running crawl.
+          secret.reloader.stakater.com/reload: doc2vec-secret
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/home-operations/postgres-init
+              tag: 18.7@sha256:6d4cfa4b8d343eb6fa0de8dd9ec416a2007f346bb631fc8e246e1f39eee6c4aa
+              pullPolicy: IfNotPresent
+            envFrom: &envFrom
+              - secretRef:
+                  name: doc2vec-secret
+          # Native sidecar: crawl jobs render pages through it over CDP
+          browser:
+            image:
+              repository: ghcr.io/browserless/chromium
+              tag: v2.63.2@sha256:7611afcfc02e1040c2f0d03515d086e5be89eaf383e77a2370b690162040758a
+            restartPolicy: Always
+            env:
+              # A crawl holds one session for the whole run; 0 = no limit
+              TIMEOUT: "0"
+              CONCURRENT: "2"
+            resources:
+              requests:
+                cpu: 50m
+                memory: 256Mi
+              limits:
+                memory: 2Gi
+        containers:
+          app:
+            image:
+              repository: docker.io/library/node
+              tag: 24.22.3-slim@sha256:dc26ae92c9fb15cf6b1d63e20f0944b2efe0f115b20e00be48fb23fceb061c54
+            # Read-only UI: configs come from git (the ConfigMap directory).
+            # Each scheduled or manual run is a child `doc2vec run` process.
+            command:
+              - npx
+              - --yes
+              - doc2vec@2.17.5
+              - controller
+              - /config
+            workingDir: /tmp
+            env:
+              TZ: Europe/Lisbon
+              PORT: &port 8080
+              BROWSER_WS_ENDPOINT: ws://localhost:3000
+              HOME: /tmp
+              npm_config_cache: /tmp/.npm
+              npm_config_update_notifier: "false"
+              # The browser runs in the sidecar
+              PUPPETEER_SKIP_DOWNLOAD: "true"
+            envFrom: *envFrom
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/health
+                    port: *port
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+              # npx installs the package on every start (~1 min)
+              startup:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/health
+                    port: *port
+                  periodSeconds: 10
+                  failureThreshold: 30
+            securityContext:
+              runAsNonRoot: true
+              runAsUser: 1000
+              runAsGroup: 1000
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                  - ALL
+            resources:
+              requests:
+                cpu: 50m
+                memory: 256Mi
+              limits:
+                memory: 1536Mi
+    service:
+      app:
+        ports:
+          http:
+            port: *port
+    route:
+      app:
+        parentRefs:
+          - kind: Gateway
+            name: internal
+            namespace: network
+            sectionName: websecure
+        hostnames:
+          - doc2vec.jnobrega.com
+        rules:
+          - backendRefs:
+              - name: *app
+                port: *port
+    persistence:
+      config:
+        type: configMap
+        name: doc2vec-configs
+        advancedMounts:
+          doc2vec:
+            app:
+              - path: /config
+                readOnly: true
+      tmp:
+        type: emptyDir
+        advancedMounts:
+          doc2vec:
+            app:
+              - path: /tmp
+      shm:
+        type: emptyDir
+        medium: Memory
+        sizeLimit: 1Gi
+        advancedMounts:
+          doc2vec:
+            browser:
+              - path: /dev/shm

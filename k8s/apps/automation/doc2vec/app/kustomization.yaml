@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - helm-release.yaml
+  - secret.yaml
+configMapGenerator:
+  # Not doc2vec-config: the old name is still in kmcp-mcps' inventory, and
+  # reusing it would race that Kustomization's garbage collection.
+  - name: doc2vec-configs
+    files:
+      - config/config.yaml
+generatorOptions:
+  disableNameSuffixHash: true
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled

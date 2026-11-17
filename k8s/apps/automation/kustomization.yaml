@@ -12,6 +12,7 @@ resources:
   - ./llmkube/ks.yaml
   - ./whisper/ks.yaml
   - ./qdrant/ks.yaml
+  - ./doc2vec/ks.yaml
 components:
   - ../../components/alerts/alertmanager
   - ../../components/flux/ghcr
