@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/kagent.dev/mcpserver_v1alpha1.json
+apiVersion: kagent.dev/v1alpha1
+kind: MCPServer
+metadata:
+  name: doc2vec-mcp
+spec:
+  transportType: http
+  httpTransport:
+    targetPort: 3001
+    path: /mcp
+  deployment:
+    image: ghcr.io/kagent-dev/doc2vec/mcp:2.17.5@sha256:8dc64dc0272c35cb192cc5651e7cf489e18795ef5fb356f6accb1df662b9e522
+    port: 3001
+    imagePullPolicy: IfNotPresent
+    env:
+      TRANSPORT_TYPE: http
+      PORT: "3001"
+      VECTOR_DB_TYPE: qdrant
+      QDRANT_URL: http://qdrant.automation.svc.cluster.local:6333
+      # Queries must be embedded with the crawler's model (config/config.yaml)
+      OPENAI_BASE_URL: http://qwen3-embedding.automation.svc.cluster.local:8080/v1
+      OPENAI_MODEL: qwen3-embedding
+      # Required by the server, ignored by llama.cpp
+      OPENAI_API_KEY: unused
+    podSecurityContext:
+      runAsNonRoot: true
+      runAsUser: 14000
+      runAsGroup: 14000
+    securityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      capabilities:
+        drop:
+          - ALL
+      seccompProfile:
+        type: RuntimeDefault
+    resources:
+      requests:
+        cpu: 10m
+        memory: 64Mi
+      limits:
+        memory: 256Mi

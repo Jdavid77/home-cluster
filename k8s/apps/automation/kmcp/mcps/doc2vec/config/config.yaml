@@ -1,0 +1,23 @@
+# doc2vec crawl config. The MCP server must embed queries with the same model
+# and dimension, so change both together (and recreate the collections).
+embedding:
+  provider: openai
+  dimension: 1024
+  openai:
+    api_key: unused
+    model: qwen3-embedding
+    base_url: http://qwen3-embedding.automation.svc.cluster.local:8080/v1
+
+sources:
+  - type: website
+    product_name: agentgateway
+    version: latest
+    url: https://agentgateway.dev/docs/kubernetes/latest/
+    sitemap_url: https://agentgateway.dev/sitemap.xml
+    max_size: 1048576
+    database_config:
+      type: qdrant
+      params:
+        qdrant_url: http://qdrant.automation.svc.cluster.local
+        qdrant_port: 6333
+        collection_name: agentgateway_latest

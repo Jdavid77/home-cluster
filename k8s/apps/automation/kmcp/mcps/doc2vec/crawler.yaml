@@ -1,0 +1,100 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app doc2vec-crawler
+spec:
+  interval: 15m
+  timeout: 5m
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+    namespace: flux-system
+  maxHistory: 2
+  values:
+    controllers:
+      doc2vec-crawler:
+        type: cronjob
+        cronjob:
+          concurrencyPolicy: Forbid
+          timeZone: Europe/Lisbon
+          schedule: "0 4 * * 0"
+          successfulJobsHistory: 1
+          failedJobsHistory: 1
+          backoffLimit: 0
+        annotations:
+          reloader.stakater.com/auto: "true"
+        initContainers:
+          # Native sidecar: doc2vec renders pages through it over CDP and the
+          # Job completes when the crawler exits.
+          browser:
+            image:
+              repository: ghcr.io/browserless/chromium
+              tag: v2.63.2@sha256:7611afcfc02e1040c2f0d03515d086e5be89eaf383e77a2370b690162040758a
+            restartPolicy: Always
+            env:
+              # The crawler holds one session for the whole crawl
+              TIMEOUT: "7200000"
+              CONCURRENT: "2"
+            resources:
+              requests:
+                cpu: 100m
+                memory: 512Mi
+              limits:
+                memory: 2Gi
+        containers:
+          app:
+            image:
+              repository: docker.io/library/node
+              tag: 24.22.3-slim@sha256:dc26ae92c9fb15cf6b1d63e20f0944b2efe0f115b20e00be48fb23fceb061c54
+            command:
+              - npx
+              - --yes
+              - doc2vec@2.17.5
+              - run
+              - /config/config.yaml
+            workingDir: /tmp
+            env:
+              BROWSER_WS_ENDPOINT: ws://localhost:3000
+              HOME: /tmp
+              npm_config_cache: /tmp/.npm
+              npm_config_update_notifier: "false"
+              # The browser runs in the sidecar
+              PUPPETEER_SKIP_DOWNLOAD: "true"
+            securityContext:
+              runAsNonRoot: true
+              runAsUser: 1000
+              runAsGroup: 1000
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                  - ALL
+            resources:
+              requests:
+                cpu: 100m
+                memory: 256Mi
+              limits:
+                memory: 1Gi
+    persistence:
+      config:
+        type: configMap
+        name: doc2vec-config
+        advancedMounts:
+          doc2vec-crawler:
+            app:
+              - path: /config
+                readOnly: true
+      tmp:
+        type: emptyDir
+        advancedMounts:
+          doc2vec-crawler:
+            app:
+              - path: /tmp
+      shm:
+        type: emptyDir
+        medium: Memory
+        sizeLimit: 1Gi
+        advancedMounts:
+          doc2vec-crawler:
+            browser:
+              - path: /dev/shm

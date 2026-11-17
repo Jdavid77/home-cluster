@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/api.kagent.dev/remotemcpserver_v1alpha3.json
+apiVersion: api.kagent.dev/v1alpha3
+kind: RemoteMCPServer
+metadata:
+  name: doc2vec-mcp
+spec:
+  description: Semantic search over crawled documentation (doc2vec)
+  protocol: STREAMABLE_HTTP
+  url: http://doc2vec-mcp.automation.svc.cluster.local:3001/mcp
+  # The embedding model scales from zero (~16s cold start)
+  timeout: 60s
