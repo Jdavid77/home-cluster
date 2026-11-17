@@ -6,20 +6,15 @@ metadata:
 spec:
   mcp:
     targets:
+      - name: doc2vec
+        static:
+          host: doc2vec-mcp.automation.svc.cluster.local
+          port: 3001
+          protocol: StreamableHTTP
       - name: flux
         static:
           host: flux-mcp.automation.svc.cluster.local
           port: 9090
-          protocol: StreamableHTTP
-      - name: grafana
-        static:
-          host: grafana-mcp.automation.svc.cluster.local
-          port: 8000
-          protocol: StreamableHTTP
-      - name: kubernetes
-        static:
-          host: kubernetes-mcp.automation.svc.cluster.local
-          port: 8080
           protocol: StreamableHTTP
       - name: n8n
         static:
