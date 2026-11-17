@@ -40,6 +40,7 @@ locals {
       authentik_oidc_client_type             = "public"
       authentik_oidc_sub_mode                = "user_username"
       authentik_oidc_redirect_uris           = [{ matching_mode = "regex", url = ".*" }]
+      authentik_oidc_grant_types             = ["authorization_code", "refresh_token"]
     },
   ]
 
