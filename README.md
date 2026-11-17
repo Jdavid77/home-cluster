@@ -403,8 +403,8 @@ Hardware is a combination of mini PC's and desktop computers. Worker nodes have 
         <td>Metrics visualization and dashboards</td>
     </tr>
     <tr>
-        <td><img width="32" src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/loki.svg"></td>
-        <td><a href="https://grafana.com/oss/loki/">Loki</a></td>
+        <td><img width="32" src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/victoriametrics.svg"></td>
+        <td><a href="https://docs.victoriametrics.com/victorialogs/">VictoriaLogs</a></td>
         <td>Log aggregation</td>
     </tr>
     <tr>
