@@ -54,6 +54,8 @@ spec:
   jobTemplate:
     spec:
       backoffLimit: 3
+      # also cleans up manually triggered runs, which history limits don't
+      ttlSecondsAfterFinished: 86400
       template:
         spec:
           serviceAccountName: zot-token-rotator

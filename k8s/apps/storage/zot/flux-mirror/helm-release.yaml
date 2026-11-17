@@ -32,6 +32,8 @@ spec:
           failedJobsHistory: 1
           backoffLimit: 3
           parallelism: 0
+          # also cleans up manually triggered runs, which history limits don't
+          ttlSecondsAfterFinished: 86400
         initContainers:
           docker-config:
             image:
