@@ -50,5 +50,3 @@ spec:
             envFrom:
               - secretRef:
                   name: akeyless-backup-secret
-              - secretRef:
-                  name: akeyless-backup-s3
