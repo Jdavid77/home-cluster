@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/garage.rajsingh.info/garagereferencegrant_v1beta1.json
+# lets GarageBuckets and GarageKeys in namespaces labelled
+# garage.jnobrega.com/access: "true" use the garage cluster;
+# keys still only reach buckets in their own namespace
+apiVersion: garage.rajsingh.info/v1beta1
+kind: GarageReferenceGrant
+metadata:
+  name: garage
+spec:
+  from:
+    - kind: GarageBucket
+      namespaceSelector:
+        matchLabels:
+          garage.jnobrega.com/access: "true"
+    - kind: GarageKey
+      namespaceSelector:
+        matchLabels:
+          garage.jnobrega.com/access: "true"
+  to:
+    - kind: GarageCluster
+      name: garage
