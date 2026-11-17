@@ -13,8 +13,9 @@ spec:
     gpu:
       enabled: true
       count: 1
-      vendor: intel
-      resourceName: gpu.intel.com/i915
+      vendor: amd
+      runtime: vulkan
+      resourceName: amd.com/gpu
 ---
 # yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/inference.llmkube.dev/inferenceservice_v1alpha1.json
 apiVersion: inference.llmkube.dev/v1alpha1
@@ -33,14 +34,17 @@ spec:
   contextSize: 4096
   # Non-causal pooling: a single input must fit in one ubatch, and the attention
   # score buffer grows with ubatch². 2048 caps each input at 2048 tokens (plenty
-  # for RAG chunks) and saves ~1GB of shared iGPU RAM vs 8192, at the same speed.
+  # for RAG chunks) and saves ~1GB of the 4GB VRAM vs 8192, at the same speed.
   batchSize: 4096
   uBatchSize: 2048
+  # Vulkan flash attention is ~3x slower at prompt processing on RDNA2 (all an
+  # embedding model does), and llama.cpp defaults to "auto".
   extraArgs:
+    - --flash-attn
+    - "off"
     - --alias
     - qwen3-embedding
-  # Request only (no CPU limit); the iGPU does the work and the node's CPU
-  # requests are tight (Prometheus is pinned there).
+  # Request only (no CPU limit); the GPU does the work.
   resources:
     gpu: 1
     cpu: 100m
