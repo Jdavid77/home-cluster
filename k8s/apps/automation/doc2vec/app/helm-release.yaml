@@ -64,6 +64,8 @@ spec:
               PORT: &port 8080
               BROWSER_WS_ENDPOINT: ws://localhost:3000
               HOME: /tmp
+              # Broken-link report (404.yaml); defaults to the read-only config dir
+              DOC2VEC_REPORT_DIR: /tmp
               npm_config_cache: /tmp/.npm
               npm_config_update_notifier: "false"
               # The browser runs in the sidecar
