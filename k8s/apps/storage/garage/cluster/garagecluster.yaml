@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/garage.rajsingh.info/garagecluster_v1beta2.json
+# Garage itself is deployed with app-template (../app); garage-operator was only
+# discovered after that vanilla setup was running. This is a connectTo-only
+# management handle: the operator manages buckets and keys through the admin API
+# and creates no Garage workload.
+apiVersion: garage.rajsingh.info/v1beta2
+kind: GarageCluster
+metadata:
+  name: garage
+spec:
+  connectTo:
+    adminApiEndpoint: http://garage.storage.svc.cluster.local:3903
+    adminTokenSecretRef:
+      name: garage-secret
+      key: GARAGE_ADMIN_TOKEN
+    # keys are derived from this, so they are identical after a cluster rebuild
+    rpcSecretRef:
+      name: garage-secret
+      key: GARAGE_RPC_SECRET
