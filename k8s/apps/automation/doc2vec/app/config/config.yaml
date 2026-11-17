@@ -18,7 +18,7 @@ sources:
     version: latest
     url: https://agentgateway.dev/docs/kubernetes/latest/
     sitemap_url: https://agentgateway.dev/sitemap.xml
-    max_size: 1048576
+    max_size: 2097152
     database_config:
       type: qdrant
       params:
