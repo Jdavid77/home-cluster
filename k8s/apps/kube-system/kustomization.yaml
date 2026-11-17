@@ -12,7 +12,6 @@ resources:
   - ./crd-schema-publisher/ks.yaml
   - ./intel-device-plugin/ks.yaml
   - ./amd-device-plugin/ks.yaml
-  #- ./kguardian/ks.yaml
 components:
   - ../../components/alerts/alertmanager
   - ../../components/grafana/folder
