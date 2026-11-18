@@ -1,6 +1,6 @@
 ---
 name: docs-search
-description: Answer questions about third-party tools and products from the documentation indexed by doc2vec (currently agentgateway). Use whenever the user asks how to configure, use or troubleshoot one of those products, or asks to search the docs.
+description: Answer questions about third-party tools and products from the documentation indexed by doc2vec (currently agentgateway and llmkube). Use whenever the user asks how to configure, use or troubleshoot one of those products, or asks to search the docs.
 ---
 
 # Docs search (doc2vec)
