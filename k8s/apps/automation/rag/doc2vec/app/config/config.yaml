@@ -2,7 +2,7 @@
 # and dimension, so change both together (and recreate the collections).
 # The controller re-reads this file every 30s; name and schedule (cron, TZ of
 # the pod) drive its scheduler.
-name: docs
+name: AI
 schedule: "0 4 * * 0"
 embedding:
   provider: openai
@@ -28,4 +28,17 @@ sources:
         qdrant_url: http://qdrant.automation.svc.cluster.local
         qdrant_port: 6333
         collection_name: agentgateway_latest
+        keyword_index: true
+  - type: website
+    product_name: llmkube
+    version: latest
+    url: https://llmkube.com/docs
+    sitemap_url: https://llmkube.com/sitemap.xml
+    max_size: 2097152
+    database_config:
+      type: qdrant
+      params:
+        qdrant_url: http://qdrant.automation.svc.cluster.local
+        qdrant_port: 6333
+        collection_name: llmkube_latest
         keyword_index: true
