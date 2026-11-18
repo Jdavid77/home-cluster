@@ -20,12 +20,14 @@ If the tool returns `Not Found`, that product isn't indexed. Say so and answer f
 
 - `queryText` for questions: `"Instruct: Given a question, retrieve documentation passages that answer it\nQuery: <question>"`. The embedding model (Qwen3-Embedding) retrieves noticeably worse without this prefix.
 - For a bare field, CRD or term lookup, pass the term alone.
-- `limit`: 8 for how-to questions, 4 for exact lookups. Docs sites repeat sections across pages, so duplicates eat into the limit.
+- `limit`: 15 for how-to questions, 6 for exact lookups. Docs sites repeat sections across pages, so results include duplicates.
 - One topic per query; run several queries for multi-part questions.
 - To pull a full page (e.g. a complete YAML example), re-query with `urlPathPrefix` set to that page's URL.
 
 ## Answering
 
+- Treat snippets with the same body as one result, ignoring the `[Topic: ...]` line and headings. Use the highest-scoring copy and cite its URL.
+- Base the answer on the best 8 distinct passages at most.
 - Answer only from the returned snippets and cite their URLs.
 - The "Distance" in results is a similarity score: higher is better, below ~0.4 is usually noise.
 - If the snippets don't cover the question, say so instead of answering from memory.
