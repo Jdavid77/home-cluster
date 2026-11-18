@@ -27,8 +27,10 @@ If the tool returns `Not Found`, that product isn't indexed. Say so and answer f
 
 ## Answering
 
-- Treat snippets with the same body as one result, ignoring the `[Topic: ...]` line and headings. Use the highest-scoring copy and cite its URL.
+- Treat snippets with the same body as one result, ignoring the `[Topic: ...]` line and headings. Use the highest-scoring copy and reference its URL.
 - Base the answer on the best 8 distinct passages at most.
-- Answer only from the returned snippets and cite their URLs.
+- Answer only from the returned snippets.
+- Never put URLs in the body of the answer. Mark each claim with a plain-text numbered reference such as `[Link 1]`, reusing the number when citing the same page again.
+- End with a `## References` section that lists each referenced page, one per line, as `[Link 1] [Page name](URL)`.
 - The "Distance" in results is a similarity score: higher is better, but use it only to order results. Unrelated passages can still score above 0.7, so judge relevance from the text.
 - If the snippets don't cover the question, say so instead of answering from memory.
