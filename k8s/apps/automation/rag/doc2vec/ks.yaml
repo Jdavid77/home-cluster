@@ -10,7 +10,7 @@ spec:
       namespace: external-secrets
     - name: envoy
       namespace: network
-  path: ./k8s/apps/automation/doc2vec/app
+  path: ./k8s/apps/automation/rag/doc2vec/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -27,7 +27,7 @@ spec:
       failed: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSyncedError')
       current: status.conditions.filter(e, e.type == 'Ready').all(e, e.reason == 'SecretSynced')
   components:
-    - ../../../../components/keda/dependencies
+    - ../../../../../components/keda/dependencies
   postBuild:
     substitute:
       APP: *app

@@ -11,8 +11,8 @@ resources:
   - ./agentgateway/ks.yaml
   - ./llmkube/ks.yaml
   - ./whisper/ks.yaml
-  - ./qdrant/ks.yaml
-  - ./doc2vec/ks.yaml
+  - ./rag/qdrant/ks.yaml
+  - ./rag/doc2vec/ks.yaml
 components:
   - ../../components/alerts/alertmanager
   - ../../components/flux/ghcr

@@ -5,7 +5,7 @@ metadata:
   name: &app qdrant
 spec:
   targetNamespace: automation
-  path: ./k8s/apps/automation/qdrant/app
+  path: ./k8s/apps/automation/rag/qdrant/app
   prune: true
   sourceRef:
     kind: GitRepository
