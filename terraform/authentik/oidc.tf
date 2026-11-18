@@ -39,8 +39,10 @@ locals {
       authentik_oidc_application_description = "AgentGateway MCP OAuth application"
       authentik_oidc_client_type             = "public"
       authentik_oidc_sub_mode                = "user_username"
-      authentik_oidc_redirect_uris           = [{ matching_mode = "regex", url = ".*" }]
-      authentik_oidc_grant_types             = ["authorization_code", "refresh_token"]
+      # Public client: only local MCP clients may receive authorization codes
+      authentik_oidc_redirect_uris  = [{ matching_mode = "regex", url = "http://(localhost|127\\.0\\.0\\.1):[0-9]+/callback" }]
+      authentik_oidc_grant_types    = ["authorization_code", "refresh_token"]
+      authentik_oidc_offline_access = true
     },
   ]
 
@@ -63,4 +65,5 @@ module "oidc" {
   authentik_oidc_client_type             = each.value.authentik_oidc_client_type
   authentik_oidc_sub_mode                = each.value.authentik_oidc_sub_mode
   authentik_oidc_grant_types             = lookup(each.value, "authentik_oidc_grant_types", null)
+  authentik_oidc_offline_access          = lookup(each.value, "authentik_oidc_offline_access", false)
 }

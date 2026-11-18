@@ -55,3 +55,9 @@ variable "authentik_oidc_grant_types" {
   description = "Allowed grant types for the OIDC provider. Null keeps Authentik's server-side default."
   default     = null
 }
+
+variable "authentik_oidc_offline_access" {
+  type        = bool
+  description = "Allow the offline_access scope, which makes Authentik issue refresh tokens."
+  default     = false
+}
