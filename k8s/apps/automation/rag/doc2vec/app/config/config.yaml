@@ -28,3 +28,4 @@ sources:
         qdrant_url: http://qdrant.automation.svc.cluster.local
         qdrant_port: 6333
         collection_name: agentgateway_latest
+        keyword_index: true
