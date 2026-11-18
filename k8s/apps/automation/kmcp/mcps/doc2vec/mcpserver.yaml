@@ -22,6 +22,8 @@ spec:
       OPENAI_MODEL: qwen3-embedding
       # Required by the server, ignored by llama.cpp
       OPENAI_API_KEY: unused
+      # Keep only the best chunk of each page, so results are distinct pages
+      ONE_CHUNK_PER_PAGE: "true"
     podSecurityContext:
       runAsNonRoot: true
       runAsUser: 14000
