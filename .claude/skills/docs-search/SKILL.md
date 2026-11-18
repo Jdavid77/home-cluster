@@ -22,12 +22,12 @@ If the tool returns `Not Found`, that product isn't indexed. Say so and answer f
 - For a bare field, CRD or term lookup, pass the term alone.
 - `limit`: 15 for how-to questions, 6 for exact lookups. Docs sites repeat sections across pages, so results include duplicates.
 - One topic per query; run several queries for multi-part questions.
-- To pull a full page (e.g. a complete YAML example), re-query with `urlPathPrefix` set to that page's URL.
+- Search returns only the best chunk of each page. To read more of a page (e.g. a complete YAML example), call `doc2vec_get_chunks` with `filePath` set to the result's URL, plus the same `productName` and `version`. Use `startIndex` and `endIndex` (0-based) to limit long pages.
 
 ## Answering
 
 - Treat snippets with the same body as one result, ignoring the `[Topic: ...]` line and headings. Use the highest-scoring copy and cite its URL.
 - Base the answer on the best 8 distinct passages at most.
 - Answer only from the returned snippets and cite their URLs.
-- The "Distance" in results is a similarity score: higher is better, below ~0.4 is usually noise.
+- The "Distance" in results is a similarity score: higher is better, but use it only to order results. Unrelated passages can still score above 0.7, so judge relevance from the text.
 - If the snippets don't cover the question, say so instead of answering from memory.
