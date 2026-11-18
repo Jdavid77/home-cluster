@@ -37,6 +37,8 @@ spec:
           scopesSupported:
           - openid
           - profile
+          # Lets MCP clients renew short-lived tokens without a new login
+          - offline_access
           bearerMethodsSupported:
           - header
     # Allow only tokens from members of the mcp-agent group

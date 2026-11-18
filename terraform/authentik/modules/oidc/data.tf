@@ -11,9 +11,12 @@ data "authentik_certificate_key_pair" "this" {
 }
 
 data "authentik_property_mapping_provider_scope" "this" {
-  managed_list = [
-    "goauthentik.io/providers/oauth2/scope-email",
-    "goauthentik.io/providers/oauth2/scope-openid",
-    "goauthentik.io/providers/oauth2/scope-profile",
-  ]
+  managed_list = concat(
+    [
+      "goauthentik.io/providers/oauth2/scope-email",
+      "goauthentik.io/providers/oauth2/scope-openid",
+      "goauthentik.io/providers/oauth2/scope-profile",
+    ],
+    var.authentik_oidc_offline_access ? ["goauthentik.io/providers/oauth2/scope-offline_access"] : [],
+  )
 }
