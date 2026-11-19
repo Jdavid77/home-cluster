@@ -29,7 +29,8 @@ spec:
       RERANKER: openrouter
       # API base: doc2vec appends /rerank, so requests hit the llm-rerank route (POST /v1/rerank)
       RERANK_BASE_URL: http://llm.automation.svc.cluster.local/v1
-      RERANK_MODEL: nvidia/nemotron-3.5-rerank-8b:free
+      # nemotron-3.5-rerank-8b is only on OpenRouter as :free, whose safety screening rejects docs with shell/YAML examples (HTTP 422)
+      RERANK_MODEL: cohere/rerank-5-pro
     secretRefs:
       - name: doc2vec-mcp-secret
     podSecurityContext:
