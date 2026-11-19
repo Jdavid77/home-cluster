@@ -1,5 +1,6 @@
 site_name: home-cluster
 site_description: Documentation for my home Kubernetes cluster
+site_url: https://docs.jnobrega.com/
 repo_url: https://github.com/Jdavid77/home-cluster
 edit_uri: edit/main/docs/
 
