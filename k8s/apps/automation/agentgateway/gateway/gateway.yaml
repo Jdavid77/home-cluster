@@ -10,19 +10,11 @@ spec:
       group: agentgateway.dev
       kind: AgentgatewayParameters
       name: llm
+  # One listener; auth is applied per HTTPRoute (see ../models), since policies can't target an AgentgatewayModel
   listeners:
-    - name: models
+    - name: http
       protocol: HTTP
       port: 80
-      allowedRoutes:
-        namespaces:
-          from: Same
-        kinds:
-          - group: agentgateway.dev
-            kind: AgentgatewayModel
-    - name: agents
-      protocol: HTTP
-      port: 8080
       allowedRoutes:
         namespaces:
           from: Same

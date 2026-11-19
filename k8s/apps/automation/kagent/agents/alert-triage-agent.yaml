@@ -149,7 +149,7 @@ metadata:
 spec:
   parentRefs:
     - name: llm
-      sectionName: agents
+      sectionName: http
   rules:
     - matches:
         - path:

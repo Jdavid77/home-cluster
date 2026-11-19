@@ -46,7 +46,7 @@ spec:
     - name: blackhole
     - name: triage
       webhookConfigs:
-        - url: http://llm.automation.svc.cluster.local:8080/alert-triage
+        - url: http://llm.automation.svc.cluster.local/alert-triage
           sendResolved: false
     - name: pushover
       pushoverConfigs:

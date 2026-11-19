@@ -1,0 +1,67 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/agentgateway.dev/agentgatewaybackend_v1alpha1.json
+# Reranker for the doc2vec MCP server (RERANKER=openrouter). OpenRouter's rerank API isn't OpenAI-shaped,
+# so requests are forwarded as-is (Detect still extracts model and tokens for telemetry);
+# the model comes from doc2vec's RERANK_MODEL
+apiVersion: agentgateway.dev/v1alpha1
+kind: AgentgatewayBackend
+metadata:
+  name: openrouter-rerank
+spec:
+  ai:
+    provider:
+      openai: {}
+      host: openrouter.ai
+      port: 443
+  policies:
+    ai:
+      routes:
+        "*": Detect
+    auth:
+      secretRef:
+        name: agentgateway-openrouter
+    tls:
+      sni: openrouter.ai
+---
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/gateway.networking.k8s.io/httproute_v1.json
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: llm-rerank
+spec:
+  parentRefs:
+    - name: llm
+      sectionName: http
+  rules:
+    - matches:
+        - path:
+            type: Exact
+            value: /v1/rerank
+          method: POST
+      # Without a path on the backend, the upstream gets the request path as rewritten here
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplaceFullPath
+              replaceFullPath: /api/v1/rerank
+      backendRefs:
+        - group: agentgateway.dev
+          kind: AgentgatewayBackend
+          name: openrouter-rerank
+---
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/agentgateway.dev/agentgatewaypolicy_v1alpha1.json
+apiVersion: agentgateway.dev/v1alpha1
+kind: AgentgatewayPolicy
+metadata:
+  name: llm-rerank
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: llm-rerank
+  traffic:
+    # doc2vec has no actor JWT; it sends a gateway-issued key, replaced by the OpenRouter key upstream
+    apiKeyAuthentication:
+      mode: Strict
+      secretRef:
+        name: agentgateway-rerank-keys
