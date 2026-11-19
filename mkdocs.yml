@@ -6,6 +6,8 @@ edit_uri: edit/main/docs/
 
 theme:
   name: material
+  features:
+    - navigation.indexes
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
@@ -30,3 +32,6 @@ markdown_extensions:
 nav:
   - Overview: index.md
   - Talos: talos.md
+  - GitOps:
+      - gitops/index.md
+      - Components: gitops/components.md
