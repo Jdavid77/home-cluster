@@ -9,7 +9,8 @@ spec:
     targetPort: 3001
     path: /mcp
   deployment:
-    image: ghcr.io/kagent-dev/doc2vec/mcp:2.17.5@sha256:8dc64dc0272c35cb192cc5651e7cf489e18795ef5fb356f6accb1df662b9e522
+    # Fork build with RERANKER=openrouter and RERANK_BASE_URL (Jdavid77/doc2vec, feat/openrouter-reranker)
+    image: ghcr.io/jdavid77/doc2vec/mcp:2.17.5-rerank.1@sha256:10a5eecc3dc6bec6ad14eb91066ba51416bd79c76213aa5d6509fe7ae4e7afcc
     port: 3001
     imagePullPolicy: IfNotPresent
     env:
@@ -24,6 +25,12 @@ spec:
       OPENAI_API_KEY: unused
       # Keep only the best chunk of each page, so results are distinct pages
       ONE_CHUNK_PER_PAGE: "true"
+      # Rerank through the llm gateway, which swaps the gateway key (OPENROUTER_API_KEY) for the real OpenRouter key
+      RERANKER: openrouter
+      RERANK_BASE_URL: http://llm.automation.svc.cluster.local/v1
+      RERANK_MODEL: nvidia/nemotron-3.5-rerank-8b:free
+    secretRefs:
+      - name: doc2vec-mcp-secret
     podSecurityContext:
       runAsNonRoot: true
       runAsUser: 14000
