@@ -34,14 +34,14 @@ resource "authentik_outpost" "proxy" {
   config = jsonencode({
     log_level                      = "info"
     docker_labels                  = null
-    authentik_host                 = "https://auth.${local.external_host}"
+    authentik_host                 = "http://authentik-server.security.svc.cluster.local"
     docker_network                 = null
     container_image                = null
     docker_map_ports               = true
     refresh_interval               = "minutes=5"
     kubernetes_replicas            = 1
     kubernetes_namespace           = "security"
-    authentik_host_browser         = ""
+    authentik_host_browser         = "https://auth.${local.external_host}"
     object_naming_template         = "ak-outpost-%(name)s"
     authentik_host_insecure        = false
     kubernetes_json_patches        = null
