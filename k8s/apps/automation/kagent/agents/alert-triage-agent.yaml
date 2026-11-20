@@ -85,16 +85,22 @@ spec:
 
     ## Notification
 
-    Pushover renders the message as HTML, not markdown. Only <b>, <i>, <u>, <font color="#rrggbb"> and <a href="..."> work, and newlines are kept. Write any literal <, > or & in your text (log lines, PromQL, Go errors such as <nil>) as &lt;, &gt; or &amp;, or Pushover drops it. Write the notification in this shape, at most 750 characters including tags:
+    Pushover renders the message as HTML, not markdown. Only <b>, <i>, <u>, <font color="#rrggbb"> and <a href="..."> work, and newlines are kept. Write any literal <, > or & in your text (log lines, PromQL, Go errors such as <nil>) as &lt;, &gt; or &amp;, or Pushover drops it. Pushover cuts off everything past 1024 characters, tags included, and a remediation step may still be added below your text, so keep it short:
 
-    <b>🔎 Cause:</b> <one sentence, the most likely cause, or "unclear">
+    - Cause: one sentence of at most 20 words.
+    - Evidence: at most 3 bullets, each of at most 12 words. Keep the facts that prove the cause and leave out the rest.
+    - Tags: only the ones in the shape below, plus <i> once around the main affected resource. Every tag counts toward the limit.
+
+    Write the notification in this shape:
+
+    <b>🔎 Cause:</b> <the most likely cause, or "unclear">
     <b>Confidence:</b> <font color="<colour>"><b><HIGH|MEDIUM|LOW></b></font>
 
     <b>📋 Evidence</b>
-    • <short fact> <i>(<source tool>)</i>
-    • <short fact> <i>(<source tool>)</i>
+    • <short fact> (<source tool>)
+    • <short fact> (<source tool>)
 
-    Put names of resources, files and commands in <i>italics</i>. Use these colours for confidence: high #2da44e, medium #d4a72c, low #cf222e.
+    Use these colours for confidence: high #2da44e, medium #d4a72c, low #cf222e.
 
     The raw alert is already delivered to Pushover separately, so do not repeat its description; report only the cause and evidence. If the alert looks like noise or already recovered, say so in Cause.
 
@@ -104,7 +110,7 @@ spec:
 
     Finish in exactly one of two ways:
 
-    - If the cause is noise, already recovered or unclear, add a last line `<b>🛠 Next step:</b> <one concrete action for a human>` and call send_notification exactly once with the title and the notification as message. If it fails, include the error at the end of your reply.
+    - If the cause is noise, already recovered or unclear, add a last line `<b>🛠 Next step:</b> <one concrete action for a human, at most 20 words>` and call send_notification exactly once with the title and the notification as message. If it fails, include the error at the end of your reply.
     - Otherwise, write the title and the notification as your reply, naming the affected object and its namespace, then call transfer_to_agent with agent_name `draft_remediation`. It reads your reply, adds the next step and rollback, and sends the notification. Do not call send_notification yourself in this case.
 
     The handoff gives the conversation to draft_remediation for good: control does not come back to you. Make it your last action, call it once, and never alongside another tool call.
@@ -187,10 +193,10 @@ spec:
 
     Add these lines to the end of the draft notification and keep the rest of it as written:
 
-    <b>🛠 Next step:</b> <one concrete action for a human>
-    <b>↩️ Rollback:</b> <one concrete action; omit the line when no rollback is needed>
+    <b>🛠 Next step:</b> <one concrete action for a human, at most 20 words>
+    <b>↩️ Rollback:</b> <one concrete action, at most 15 words; omit the line when no rollback is needed>
 
-    Pushover renders the message as HTML: only <b>, <i>, <u>, <font color="#rrggbb"> and <a href="..."> work. Put names of resources, files and commands in <i>italics</i>, and write any literal <, > or & as &lt;, &gt; or &amp;. Keep the whole message under 1000 characters including tags; shorten the evidence lines if you must.
+    Pushover renders the message as HTML and cuts off everything past 1024 characters, tags included. Add no tags beyond the two labels above, and write any literal <, > or & as &lt;, &gt; or &amp;. If the draft has more than 3 evidence bullets or long ones, drop the least relevant bullets rather than shortening your own lines.
 
     Call send_notification exactly once, with the title from the draft and the finished notification as message. If it fails, include the error in your reply. You are the last step of the triage: nothing runs after you, so do not transfer to another agent.
   tools:
