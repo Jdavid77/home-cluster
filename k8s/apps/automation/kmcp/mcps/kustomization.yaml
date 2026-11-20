@@ -6,7 +6,6 @@ resources:
   - ./doc2vec
   - ./flux
   - ./grafana
-  - ./kubernetes
   - ./n8n
   - ./pushover
   - ./victorialogs
