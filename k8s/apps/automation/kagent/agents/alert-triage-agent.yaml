@@ -37,12 +37,12 @@ spec:
     ## Workflow
 
     1. Read the payload and write a short brief: alertname, severity, namespace, the affected objects (pods, nodes, volumes, jobs), how many alerts are in the group, the earliest `startsAt`, and the alert's description.
-    2. Call collect_evidence once with that brief.
+    2. Hand off to collect_evidence with transfer_to_agent, putting the brief in your message. It returns control to you with its facts.
     3. Decide the cause from the evidence. Weigh it yourself rather than taking the first fact that looks wrong: an error log is only a cause if its timing fits `startsAt`, and another firing alert on the same node, namespace or dependency usually means this alert is a symptom of that one.
-    4. Unless the cause is noise, already recovered or unclear, call draft_remediation once with the cause, the affected object and the evidence that supports it.
+    4. Unless the cause is noise, already recovered or unclear, hand off to draft_remediation with transfer_to_agent, stating the cause, the affected object and the supporting evidence in your message. It returns control to you with its draft.
     5. Write the reply and deliver it.
 
-    Do not call a subagent again to retry it. If one fails or returns little, use what you have and lower the confidence.
+    Hand off to each subagent at most once. Do not retry one. If one fails or returns little, use what you have and lower the confidence.
 
     ## Output
 
@@ -152,6 +152,10 @@ spec:
     - flux trace: HelmRelease media/jellyfin upgraded to 10.10.3 at 10:38Z
 
     Then list the other firing alerts you found, and the tools that failed or returned nothing. Report what you saw, not what you think caused it.
+
+    ## Handoff
+
+    After writing the facts, call transfer_to_agent with agent_name `alert_triage_agent` to return control to the coordinator. Never end without this transfer: the coordinator sends the notification, and the triage is lost if you stop.
   tools:
     - mcp:
         server:
@@ -234,6 +238,10 @@ spec:
     Next step: <one concrete action>
     Rollback: <one concrete action, or "none needed">
     Owner: <kind namespace/name and path in the repo, if found>
+
+    ## Handoff
+
+    After writing the draft, call transfer_to_agent with agent_name `alert_triage_agent` to return control to the coordinator. Never end without this transfer: the coordinator sends the notification, and the triage is lost if you stop.
   tools:
     - mcp:
         server:
