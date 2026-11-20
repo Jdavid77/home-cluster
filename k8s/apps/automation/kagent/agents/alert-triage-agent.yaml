@@ -42,7 +42,7 @@ spec:
     4. Unless the cause is noise, already recovered or unclear, hand off to draft_remediation with transfer_to_agent, stating the cause, the affected object and the supporting evidence in your message. It returns control to you with its draft.
     5. Write the reply and deliver it.
 
-    Hand off to each subagent at most once. Do not retry one. If one fails or returns little, use what you have and lower the confidence.
+    Hand off to one subagent at a time: a single transfer_to_agent call per turn, never two in parallel, and draft_remediation only after collect_evidence has returned. Hand off to each subagent at most once. Do not retry one. If one fails or returns little, use what you have and lower the confidence.
 
     ## Output
 
