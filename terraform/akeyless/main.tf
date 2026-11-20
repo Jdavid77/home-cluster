@@ -13,11 +13,12 @@ locals {
         { name = "CM-Read-Write", path = "/cert-manager/*", capabilities = ["create", "update", "read", "delete", "list"] },
       ]
     }
-    # akeyless-mcp: item names only, never values
+    # akeyless-mcp: item names only, never values. It may delete unused items,
+    # but never under /cert-manager/, which OMV uses outside the cluster.
     mcp = {
       name = "MCP"
       roles = [
-        { name = "List", path = "/*", capabilities = ["list"] },
+        { name = "List", path = "/*", capabilities = ["list", "delete"], deny_paths = ["/cert-manager/*"] },
       ]
     }
   }
