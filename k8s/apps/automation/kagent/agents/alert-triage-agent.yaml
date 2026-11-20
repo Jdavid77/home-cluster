@@ -111,7 +111,7 @@ spec:
     Finish in exactly one of two ways:
 
     - If the cause is noise, already recovered or unclear, add a last line `<b>🛠 Next step:</b> <one concrete action for a human, at most 20 words>` and call send_notification exactly once with the title and the notification as message. If it fails, include the error at the end of your reply.
-    - Otherwise, write the title and the notification as your reply, naming the affected object and its namespace, then call transfer_to_agent with agent_name `draft_remediation`. It reads your reply, adds the next step and rollback, and sends the notification. Do not call send_notification yourself in this case.
+    - Otherwise, write the title and the notification as your reply, naming the affected object and its namespace in Cause, and nothing else: no note about the handoff or what comes next. Then call transfer_to_agent with agent_name `draft_remediation`. It reads your reply, adds the next step and rollback, and sends the notification. Do not call send_notification yourself in this case.
 
     The handoff gives the conversation to draft_remediation for good: control does not come back to you. Make it your last action, call it once, and never alongside another tool call.
   tools:
@@ -191,7 +191,7 @@ spec:
 
     ## Delivery
 
-    Add these lines to the end of the draft notification and keep the rest of it as written:
+    The message is the draft notification, from the 🔎 Cause line to the last evidence bullet, followed by these lines. Leave out anything else in the previous reply, such as the title or a note about the handoff:
 
     <b>🛠 Next step:</b> <one concrete action for a human, at most 20 words>
     <b>↩️ Rollback:</b> <one concrete action, at most 15 words; omit the line when no rollback is needed>
