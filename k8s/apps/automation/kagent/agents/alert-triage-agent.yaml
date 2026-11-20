@@ -46,15 +46,19 @@ spec:
 
     ## Output
 
-    Reply in plain text, no markdown headings or tables, at most 900 characters, in this shape:
+    Pushover renders the message as HTML, not markdown. Only <b>, <i>, <u>, <font color="#rrggbb"> and <a href="..."> work, and newlines are kept. Write any literal <, > or & in your text (log lines, PromQL, Go errors such as <nil>) as &lt;, &gt; or &amp;, or Pushover drops it. Reply with at most 900 characters including tags, in this shape:
 
-    Cause: <one sentence, the most likely cause, or "unclear">
-    Confidence: <high|medium|low>
-    Evidence:
-    - <short fact with the source tool>
-    - <short fact>
-    Next step: <one concrete action for a human>
-    Rollback: <only if draft_remediation gave one>
+    <b>🔎 Cause:</b> <one sentence, the most likely cause, or "unclear">
+    <b>Confidence:</b> <font color="<colour>"><b><HIGH|MEDIUM|LOW></b></font>
+
+    <b>📋 Evidence</b>
+    • <short fact> <i>(<source tool>)</i>
+    • <short fact> <i>(<source tool>)</i>
+
+    <b>🛠 Next step:</b> <one concrete action for a human>
+    <b>↩️ Rollback:</b> <only if draft_remediation gave one; omit the line otherwise>
+
+    Put names of resources, files and commands in <i>italics</i>. Use these colours for confidence: high #2da44e, medium #d4a72c, low #cf222e.
 
     Confidence levels:
     - high: direct evidence of the cause, such as an OOMKilled reason, a failing event or an error log at the right time
@@ -65,7 +69,7 @@ spec:
 
     ## Delivery
 
-    When done, call send_notification exactly once, with title "Triage: <alertname> (<namespace>)" (omit the namespace if the alert has none) and the reply above as message (keep it under 1000 characters). If it fails, include the error at the end of your reply.
+    When done, call send_notification exactly once, with title "Triage: <alertname> (<namespace>)" (omit the namespace if the alert has none) and the reply above as message (keep it under 1000 characters, tags included). If it fails, include the error at the end of your reply.
   tools:
     - subAgent:
         name: collect_evidence
@@ -110,7 +114,7 @@ spec:
 
     ## Investigation
 
-    1. Call query_prometheus with `ALERTS{alertstate="firing"}` first, and record any other alert that shares the node, namespace or a dependency (node down, storage, Flux failure).
+    1. Call list_datasources, then query_prometheus with `ALERTS{alertstate="firing"}`, and record any other alert that shares the node, namespace or a dependency (node down, storage, Flux failure).
     2. Follow the playbook for the alertname if there is one, otherwise check the affected workload: pod status, restarts and recent events in its namespace.
     3. Check recent Flux changes: use trace_kubernetes_resource on the affected object to find the Kustomization/HelmRelease that manages it and whether it was recently reconciled, upgraded or failed. Record image tag or chart version changes and when they happened.
     4. Check the signal in Prometheus and look for related symptoms (memory/CPU limits, OOM kills, node pressure).
@@ -133,7 +137,7 @@ spec:
 
     ## Datasources
 
-    Call list_datasources once to get the Prometheus datasource UID.
+    Call list_datasources once to get the Prometheus datasource UID, and wait for its result before the first query_prometheus call. Do not run them in parallel or guess the UID.
 
     Logs live in VictoriaLogs and are queried with LogsQL through the query tool (start/end in RFC3339, always set limit to 50 or less). Fields keep their OpenTelemetry names with dots. Never use `namespace` or `pod`. Use:
     - `k8s.namespace.name`
