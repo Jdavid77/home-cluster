@@ -12,6 +12,16 @@ resource "akeyless_role" "this" {
     path       = each.value.path
     rule_type  = "item-rule"
   }
+
+  # deny overrides any other capability on the same path, within this role
+  dynamic "rules" {
+    for_each = each.value.deny_paths
+    content {
+      capability = ["deny"]
+      path       = rules.value
+      rule_type  = "item-rule"
+    }
+  }
 }
 
 resource "akeyless_associate_role_auth_method" "this" {

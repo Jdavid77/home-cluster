@@ -8,6 +8,7 @@ variable "roles" {
     name         = string
     path         = string
     capabilities = list(string)
+    deny_paths   = optional(list(string), [])
   }))
   default     = []
   description = "Roles to create and associate with this key."
