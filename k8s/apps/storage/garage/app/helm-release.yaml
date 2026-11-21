@@ -92,13 +92,13 @@ spec:
       data:
         type: nfs
         server: 192.168.1.84
-        path: /garage-data
+        path: /k8s/garage-data
         globalMounts:
           - path: /data
       meta:
         type: nfs
         server: 192.168.1.84
-        path: /garage-meta
+        path: /k8s/garage-meta
         globalMounts:
           - path: /meta
     configMaps:

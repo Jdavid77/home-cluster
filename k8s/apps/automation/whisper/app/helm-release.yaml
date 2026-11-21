@@ -111,7 +111,7 @@ spec:
       models:
         type: nfs
         server: 192.168.1.84
-        path: /models
+        path: /k8s/models
         globalMounts:
           - path: /models
       tmp:

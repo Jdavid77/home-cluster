@@ -113,7 +113,7 @@ spec:
       books:
         type: nfs
         server: 192.168.1.84
-        path: /ebooks
+        path: /k8s/ebooks
         advancedMounts:
           *app:
             *app:
@@ -121,7 +121,7 @@ spec:
       bookdrop:
         type: nfs
         server: 192.168.1.84
-        path: /book-ingests
+        path: /k8s/book-ingests
         advancedMounts:
           *app:
             *app:
