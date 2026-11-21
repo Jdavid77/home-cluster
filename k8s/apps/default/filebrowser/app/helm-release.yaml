@@ -85,24 +85,24 @@ spec:
       youtube:
         type: nfs
         server: 192.168.1.84
-        path: /youtube
+        path: /k8s/youtube
         globalMounts:
           - path: /srv/youtube
       ebooks:
         type: nfs
         server: 192.168.1.84
-        path: /ebooks
+        path: /k8s/ebooks
         globalMounts:
           - path: /srv/ebooks
       photos:
         type: nfs
         server: 192.168.1.84
-        path: /photos
+        path: /k8s/photos
         globalMounts:
           - path: /srv/photos
       confidential:
         type: nfs
         server: 192.168.1.84
-        path: /confidential
+        path: /k8s/confidential
         globalMounts:
           - path: /srv/confidential

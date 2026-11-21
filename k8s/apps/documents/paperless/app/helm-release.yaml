@@ -79,24 +79,24 @@ spec:
       data:
         type: nfs
         server: 192.168.1.84
-        path: /paperless-data
+        path: /k8s/paperless-data
         globalMounts:
           - path: /usr/src/paperless/data
       media:
         type: nfs
         server: 192.168.1.84
-        path: /paperless-media
+        path: /k8s/paperless-media
         globalMounts:
           - path: /usr/src/paperless/media
       consume:
         type: nfs
         server: 192.168.1.84
-        path: /paperless-consume
+        path: /k8s/paperless-consume
         globalMounts:
           - path: /usr/src/paperless/consume
       export:
         type: nfs
         server: 192.168.1.84
-        path: /paperless-export
+        path: /k8s/paperless-export
         globalMounts:
           - path: /usr/src/paperless/export

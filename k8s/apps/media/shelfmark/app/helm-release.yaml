@@ -122,6 +122,6 @@ spec:
       ingests:
         type: nfs
         server: 192.168.1.84
-        path: /book-ingests
+        path: /k8s/book-ingests
         globalMounts:
           - path: /booklore-ingest

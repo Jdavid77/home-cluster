@@ -83,7 +83,7 @@ spec:
       library:
         type: nfs
         server: 192.168.1.84
-        path: /photos
+        path: /k8s/photos
         globalMounts:
           - path: /usr/src/app/upload
       tmpfs:

@@ -75,7 +75,7 @@ spec:
       downloads:
         type: nfs
         server: 192.168.1.84
-        path: /youtube
+        path: /k8s/youtube
         globalMounts:
           - path: /downloads
       temp:

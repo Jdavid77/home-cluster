@@ -16,7 +16,7 @@ spec:
     - noatime
   nfs:
     server: 192.168.1.84
-    path: /models
+    path: /k8s/models
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
