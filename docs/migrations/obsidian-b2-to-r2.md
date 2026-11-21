@@ -4,15 +4,15 @@
 
 The Obsidian vault syncs to the `jnobrega-obsidian` bucket on Backblaze B2 through the Remotely Save plugin. This migration moves the bucket to Cloudflare R2, where the volsync backups already live.
 
-Nothing in the cluster uses this bucket. It is only declared in `terraform/backblaze/buckets.tf`, so the migration changes the bucket, the Remotely Save settings on each device, and that one Terraform file.
+Nothing in the cluster uses this bucket. Its only mention in the repo is `terraform/backblaze/buckets.tf`, so apart from the bucket itself, the migration touches the Remotely Save settings on each device and that one file.
 
 ## Decisions
 
 The R2 bucket is created by hand in the Cloudflare dashboard, like the volsync `jnobrega-<app>` buckets. The repo has no Cloudflare Terraform project, and R2 S3 keys are awkward to create from Terraform.
 
-The vault gets its own R2 API token, limited to its bucket, instead of reusing the volsync token in Akeyless (`/r2/key`). The token sits in Remotely Save on every device, so a leaked device key exposes only the vault.
+The vault gets its own R2 API token, limited to its bucket. The volsync token in Akeyless (`/r2/key`) stays out of it. This token sits in Remotely Save on every device, so if one device leaks it, only the vault is exposed.
 
-The data is copied server to server with rclone instead of letting Remotely Save upload into an empty bucket. The copy keeps the objects exactly as they are, including Remotely Save encryption, and Remotely Save never sees an empty remote that it could take for deletions.
+rclone copies the data server to server. Letting Remotely Save upload into an empty bucket would also work, but the copy keeps the objects exactly as they are, Remotely Save encryption included. Remotely Save also never sees an empty remote that it could mistake for deletions.
 
 ## Steps
 
@@ -21,15 +21,15 @@ The data is copied server to server with rclone instead of letting Remotely Save
 In the Cloudflare dashboard:
 
 1. Create the bucket `jnobrega-obsidian`. R2 bucket names only need to be unique within the account.
-2. Create an R2 API token with **Object Read & Write**, limited to that bucket. Keep the Access Key ID and Secret Access Key.
+2. Create an R2 API token with the Object Read & Write permission, limited to that bucket. It can also delete objects, which Remotely Save needs to sync deletions. Keep the Access Key ID and Secret Access Key.
 
 ### 2. Stop syncing
 
-On every device, turn off auto-sync and sync on save in Remotely Save. Run one last manual sync from the most up-to-date device, so nothing writes to B2 during the copy.
+On every device, turn off auto-sync and sync on save in Remotely Save. Then run one last manual sync from the most up-to-date device. After that nothing writes to B2 during the copy.
 
 ### 3. Copy the bucket
 
-Save this script as `obsidian-b2-to-r2.sh` and make it executable. It sets up both rclone remotes (`backblaze:` and `cloudflare:`) and runs the copy. It asks for the B2 and R2 keys when it starts, so they stay out of shell history.
+Save this script as `obsidian-b2-to-r2.sh` and make it executable. It sets up the two rclone remotes, `backblaze:` and `cloudflare:`, and runs rclone against them. It asks for the B2 and R2 keys when it starts, so they stay out of shell history.
 
 ```bash
 #!/usr/bin/env bash
@@ -78,7 +78,7 @@ export RCLONE_CONFIG_CLOUDFLARE_SECRET_ACCESS_KEY=$r2_secret
 rclone "${cmd[@]}"
 ```
 
-The B2 key for the bucket comes from Terraform if you don't have it:
+If you don't have the bucket's B2 key, Terraform has it:
 
 ```sh
 cd terraform/backblaze && terraform output -json bucket_credentials
@@ -105,22 +105,24 @@ On each device, change the S3 settings in Remotely Save:
 | Access Key ID / Secret | the new R2 token |
 | Encryption password | unchanged, if one is set |
 
-Run "Check connectivity", then a manual sync on one device. Nothing should be uploaded again or deleted. Then do the other devices and turn auto-sync back on.
+Run "Check connectivity", then a manual sync on one device. The sync should not upload anything again or delete anything. Then do the other devices and turn auto-sync back on.
 
-If a mobile device fails with a CORS error, turn on the plugin's bypass CORS option, or add a CORS rule to the R2 bucket that allows `app://obsidian.md`, `capacitor://localhost` and `http://localhost`.
+If a mobile device fails with a CORS error, turn on the plugin's bypass CORS option. The other fix is a CORS rule on the R2 bucket that allows `app://obsidian.md`, `capacitor://localhost` and `http://localhost`.
 
 ### 5. Remove the B2 bucket
 
 Once the vault has run on R2 for a while:
 
-1. Check the bucket in the B2 dashboard. File lock is enabled, so if a default retention is set, locked file versions can't be deleted until it expires.
+1. Check the bucket in the B2 dashboard. The bucket has file lock enabled. If it also has a default retention, B2 keeps locked file versions until the retention expires.
 2. Empty the bucket with `./obsidian-b2-to-r2.sh purge`. B2 won't destroy a bucket that still has files.
-3. Remove `jnobrega-obsidian` from `local.buckets` in `terraform/backblaze/buckets.tf` in a PR. Atlantis destroys the bucket and its application key.
+3. In a PR, remove `jnobrega-obsidian` from `local.buckets` in `terraform/backblaze/buckets.tf`. Atlantis destroys the bucket and its application key.
 
 ## Rollback
 
-Until step 5, the B2 bucket is still there. Point Remotely Save back at the B2 endpoint (`https://s3.eu-central-003.backblazeb2.com`, region `eu-central-003`) with the old key. Copy back first any changes made while on R2:
+The B2 bucket stays until step 5. To go back, first copy to B2 anything that changed while the vault was on R2:
 
 ```sh
 ./obsidian-b2-to-r2.sh rollback
 ```
+
+Then point Remotely Save back at the B2 endpoint, `https://s3.eu-central-003.backblazeb2.com` with region `eu-central-003`, and use the old key.
