@@ -1,108 +1,77 @@
 # NFS: one OMV share for the cluster
 
-The cluster's NFS data lives on the OMV NAS (`192.168.1.84`), spread over 14 shared folders, each exported on its own. This migration moves all of them into subfolders of one shared folder, `k8s`, so the cluster needs a single export.
+**Migrated:** 21 November 2026. The old shares are still in OMV until the [cleanup](#cleanup).
 
-The apps keep their inline `type: nfs` volumes. Only the `path` changes, from `/photos` to `/k8s/photos`. No new driver is needed.
+The cluster's NFS data lived on the OMV NAS (`192.168.1.84`), spread over 14 shared folders, each exported on its own. This migration copied all of them into subfolders of one shared folder, `k8s`, so the cluster now uses a single export.
 
-## Why not csi-driver-nfs
+The apps keep their inline `type: nfs` volumes. Only the `path` changed, from `/photos` to `/k8s/photos`, in [#2462](https://github.com/Jdavid77/home-cluster/pull/2462). No new driver was needed.
 
-[csi-driver-nfs](https://github.com/kubernetes-csi/csi-driver-nfs) adds a StorageClass that creates a new subfolder for every PVC. That suits new apps that need their own folder, but not this data:
+## What moved
 
-- Most folders are shared between apps (see below). A dynamic PVC belongs to one namespace and gets its own empty folder, so two apps can't share it.
-- The data already exists, and a dynamic PVC always starts empty. Reusing a folder would take a hand-written static PV per folder, which is more YAML than the inline `path` and adds nothing.
+All the folders are on the same disk, `/srv/dev-disk-by-uuid-ff763355-7fef-41fe-b2d7-6d368a3b4313`. A shared folder's name in OMV can differ from its folder on the disk, so the copy read from the real folder and wrote to `k8s/<share name>`:
 
-It can still be added later for new apps, pointing at the same `k8s` share.
+| Share | Folder on disk | New path | Size | Used by |
+|---|---|---|---|---|
+| `photos` | `photos/` | `/k8s/photos` | 9.6 GB | immich, filebrowser |
+| `ebooks` | `ebooks/` | `/k8s/ebooks` | 1.3 GB | booklore, filebrowser |
+| `youtube` | `youtube/` | `/k8s/youtube` | 2.3 GB | metube, filebrowser |
+| `confidential` | `confidential/` | `/k8s/confidential` | 0.2 MB | filebrowser |
+| `book-ingests` | `book-ingests/` | `/k8s/book-ingests` | empty | booklore, shelfmark |
+| `downloads` | `downloads/` | `/k8s/downloads` | 2.1 GB | qbittorrent, audiobookshelf |
+| `models` | `models/` | `/k8s/models` | 3.6 GB | whisper, llmkube |
+| `pypi` | `pypi/` | `/k8s/pypi` | empty | pypiserver |
+| `paperless-data` | `paperless/data/` | `/k8s/paperless-data` | 63 MB | paperless |
+| `paperless-media` | `paperless/media/` | `/k8s/paperless-media` | 15 MB | paperless |
+| `paperless-consume` | `paperless/consume/` | `/k8s/paperless-consume` | empty | paperless |
+| `paperless-export` | `paperless/export/` | `/k8s/paperless-export` | empty | paperless |
+| `garage-data` | `garage/data/` | `/k8s/garage-data` | 13.1 GB | garage |
+| `garage-meta` | `garage/meta/` | `/k8s/garage-meta` | 0.7 GB | garage |
 
-## What moves
+About 33 GB in total, against 1.8 TB free on the disk. The disk also has an empty `paperless-data` folder at its root that no share points at.
 
-| Folder | New path | Used by |
-|---|---|---|
-| `/photos` | `/k8s/photos` | immich, filebrowser |
-| `/ebooks` | `/k8s/ebooks` | booklore, filebrowser |
-| `/youtube` | `/k8s/youtube` | metube, filebrowser |
-| `/confidential` | `/k8s/confidential` | filebrowser |
-| `/book-ingests` | `/k8s/book-ingests` | booklore, shelfmark |
-| `/downloads` | `/k8s/downloads` | qbittorrent, audiobookshelf |
-| `/models` | `/k8s/models` | whisper, llmkube |
-| `/pypi` | `/k8s/pypi` | pypiserver |
-| `/paperless-data` | `/k8s/paperless-data` | paperless |
-| `/paperless-media` | `/k8s/paperless-media` | paperless |
-| `/paperless-consume` | `/k8s/paperless-consume` | paperless |
-| `/paperless-export` | `/k8s/paperless-export` | paperless |
-| `/garage-data` | `/k8s/garage-data` | garage |
-| `/garage-meta` | `/k8s/garage-meta` | garage |
+The OMV exports `minio` and `docs` aren't used by the cluster and weren't migrated.
 
-The folders keep their names, so only the prefix changes. Nothing in `omv/docker` mounts these folders, so the cluster is their only user.
+## What didn't change
 
-Every app that uses a folder must move together with it, and filebrowser and booklore each use several folders. The simplest safe order is one maintenance window: stop every app above, copy the last changes, switch every path in one commit and start the apps again.
-
-## What doesn't change
-
-- The `nfs` blackbox probe only checks TCP port 2049 on the NAS, so the KEDA dependency (`DEPENDS_ON: "nfs"`) keeps working.
+- The `nfs` blackbox probe only checks TCP port 2049 on the NAS, so the KEDA dependency (`DEPENDS_ON: "nfs"`) kept working.
 - zot depends on the `nfs` probe but mounts no NFS volume.
 
-## Before you start
+## Decisions
 
-- **Copy, don't move.** The data is copied into `k8s` and the old folders stay untouched until the cleanup, so a rollback only has to point the apps back at them. `mv` would be faster, but then rolling back means moving everything back.
-- **Free space.** Until the cleanup, every folder exists twice, so the disk that holds `k8s` needs room for all of it. All the folders are on the same disk, `/srv/dev-disk-by-uuid-ff763355-7fef-41fe-b2d7-6d368a3b4313`, and together they need far less than its free space. Check again with `du -sh` before starting. If there isn't enough room, migrate in batches and clean up each batch before the next.
-- **Export options.** Give the new `k8s` NFS share the same client and options as the current shares, so permissions and squashing behave the same.
-- **Ownership.** Apps run as specific users (immich runs as `1002:100`). `rsync -aHAX` keeps owners, permissions, hard links, ACLs and extended attributes.
+- The data was copied with `rsync`, not moved. The old folders stay untouched until the cleanup, so a rollback only has to point the apps back at them. `mv` would have been instant, but rolling back would mean moving everything back.
+- The data was copied twice: first while the apps ran, then a final `rsync --delete` with the apps stopped. Even without uploads, Garage, Paperless, qbittorrent and immich write to their folders on their own, and a copy of Garage's metadata taken while it's written can be inconsistent.
+- Everything moved in one maintenance window. filebrowser and booklore each use several folders, so every app stopped and every path changed in one commit.
+- The `k8s` export uses the same options as every old export, `192.168.1.0/24(rw,no_subtree_check,insecure)`, so the clients see no difference.
+
 
 ## Steps
 
+The NAS commands ran as root on OMV. The cluster commands ran from a workstation in zsh.
+
 ### 1. Create the share in OMV
 
-1. **Storage → Shared Folders:** add `k8s` on the chosen disk.
-2. **Services → NFS → Shares:** export `k8s` with the same options as the existing shares.
-3. Check it from a machine on the network: `showmount -e 192.168.1.84` should list `k8s`.
+1. **Storage → Shared Folders:** add `k8s` on the data disk (`ff763355…`).
+2. **Services → NFS → Shares:** export `k8s` with `192.168.1.0/24` and `rw,no_subtree_check,insecure`.
 
-The old shares stay exported until the cleanup, so the apps can go back to them at any time.
+Check it:
 
-### 2. Change the paths in Git
-
-On a branch, change every `path` in the table above. For example, in `k8s/apps/media/immich/app/helm-release.yaml`:
-
-```yaml
-persistence:
-  library:
-    type: nfs
-    server: 192.168.1.84
-    path: /k8s/photos
-    globalMounts:
-      - path: /usr/src/app/upload
+```sh
+D=/srv/dev-disk-by-uuid-ff763355-7fef-41fe-b2d7-6d368a3b4313
+ls -ld $D/k8s
+grep k8s /etc/exports
 ```
 
-The files to change:
+### 2. Find the real folders
 
-| File | Paths |
-|---|---|
-| `k8s/apps/media/immich/app/helm-release.yaml` | `/photos` |
-| `k8s/apps/default/filebrowser/app/helm-release.yaml` | `/youtube`, `/ebooks`, `/photos`, `/confidential` |
-| `k8s/apps/media/booklore/app/helm-release.yaml` | `/ebooks`, `/book-ingests` |
-| `k8s/apps/media/shelfmark/app/helm-release.yaml` | `/book-ingests` |
-| `k8s/apps/media/metube/app/helm-release.yaml` | `/youtube` |
-| `k8s/apps/media/qbittorrent/app/helm-release.yaml` | `/downloads` |
-| `k8s/apps/media/audiobookshelf/app/helm-release.yaml` | `/downloads` |
-| `k8s/apps/automation/whisper/app/helm-release.yaml` | `/models` |
-| `k8s/apps/automation/llmkube/app/pvc.yaml` | `/models` (in the PersistentVolume) |
-| `k8s/apps/development/pypiserver/app/helm-release.yaml` | `/pypi` |
-| `k8s/apps/documents/paperless/app/helm-release.yaml` | the four `/paperless-*` paths |
-| `k8s/apps/storage/garage/app/helm-release.yaml` | `/garage-data`, `/garage-meta` |
-
-Don't merge yet: the data has to be copied first.
-
-### 3. Copy the data while the apps run
-
-A shared folder's name in OMV can differ from its folder on the disk: the `garage-meta` share is the `garage/meta` folder. List the real folders with:
+The share names don't always match the folders on the disk (`garage-meta` is `garage/meta`). List them with:
 
 ```sh
 omv-confdbadm read conf.system.sharedfolder | jq -r '.[] | "\(.name)\t\(.reldirpath)"'
 ```
 
-The copy reads from each real folder and writes to `k8s/<share name>`, which matches the new paths in the table. Run as root on the NAS, inside `tmux` so a dropped SSH session doesn't stop it:
+That output gives the `share name:folder on disk` pairs that every copy uses:
 
 ```sh
-D=/srv/dev-disk-by-uuid-ff763355-7fef-41fe-b2d7-6d368a3b4313
 PAIRS="
 photos:photos
 ebooks:ebooks
@@ -119,7 +88,11 @@ paperless-export:paperless/export
 garage-data:garage/data
 garage-meta:garage/meta
 "
+```
 
+### 3. First copy, with the apps running
+
+```sh
 for p in $PAIRS; do
   name=${p%%:*}; src=${p#*:}
   echo "=== $src -> k8s/$name"
@@ -127,82 +100,166 @@ for p in $PAIRS; do
 done
 ```
 
-The disk also has an empty `paperless-data` folder at its root that no share points at; the real data is in `paperless/data`.
+`-aHAX` keeps owners, permissions, hard links, ACLs and extended attributes; the apps run as specific users. It took about 12 minutes, 5 of them for garage-data.
 
-Keep the trailing slashes: they copy the folder's content into the new folder, not the folder into it. This first copy takes as long as the data needs, but nothing is down yet. It doesn't need to be consistent, because step 5 copies again once the apps stop.
+### 4. Change the paths in Git
 
-### 4. Stop the apps
+[#2462](https://github.com/Jdavid77/home-cluster/pull/2462) changed 20 `path` values in 12 files from `/<share>` to `/k8s/<share>`:
 
-Suspend each app's Flux Kustomization, so Flux doesn't undo the changes below:
+| File | Paths |
+|---|---|
+| `k8s/apps/media/immich/app/helm-release.yaml` | `/photos` |
+| `k8s/apps/default/filebrowser/app/helm-release.yaml` | `/youtube`, `/ebooks`, `/photos`, `/confidential` |
+| `k8s/apps/media/booklore/app/helm-release.yaml` | `/ebooks`, `/book-ingests` |
+| `k8s/apps/media/shelfmark/app/helm-release.yaml` | `/book-ingests` |
+| `k8s/apps/media/metube/app/helm-release.yaml` | `/youtube` |
+| `k8s/apps/media/qbittorrent/app/helm-release.yaml` | `/downloads` |
+| `k8s/apps/media/audiobookshelf/app/helm-release.yaml` | `/downloads` |
+| `k8s/apps/automation/whisper/app/helm-release.yaml` | `/models` |
+| `k8s/apps/automation/llmkube/app/pvc.yaml` | `/models` (in the PersistentVolume) |
+| `k8s/apps/development/pypiserver/app/helm-release.yaml` | `/pypi` |
+| `k8s/apps/documents/paperless/app/helm-release.yaml` | the four `/paperless-*` paths |
+| `k8s/apps/storage/garage/app/helm-release.yaml` | `/garage-data`, `/garage-meta` |
+
+The PR stayed a draft until the final copy, since merging it earlier would start the apps on the new paths before the data was there.
+
+### 5. Stop the apps
+
+`APPS` lists the apps that have a KEDA ScaledObject, as `namespace/kustomization:scaledobject`. Each ScaledObject is named after the `APP` variable in the app's `ks.yaml`:
 
 ```sh
-flux suspend kustomization immich -n media
+APPS="
+media/immich:immich-server
+default/filebrowser:filebrowser
+media/booklore:booklore
+media/shelfmark:shelfmark
+media/metube:metube
+media/qbittorrent:qbittorrent
+media/audiobookshelf:audiobookshelf
+development/pypiserver:pypiserver
+documents/paperless:paperless
+storage/garage:garage
+"
 ```
 
-Most of these apps are scaled by the KEDA dependency component, which would start them again. Pause their ScaledObject at zero replicas:
+!!! note
+    The loops use `${=APPS}` because zsh doesn't split an unquoted `$APPS` into words. In bash, use `$APPS`.
+
+Suspend Flux, so it doesn't undo the changes below:
 
 ```sh
-kubectl annotate scaledobject immich-server -n media autoscaling.keda.sh/paused-replicas="0"
+for a in ${=APPS}; do ns=${a%%/*}; ks=${a#*/}; ks=${ks%%:*}
+  flux suspend kustomization "$ks" -n "$ns"; done
+for ks in whisper llmkube llmkube-models; do flux suspend kustomization "$ks" -n automation; done
 ```
 
-The ScaledObject is named after the app's `APP` variable in its `ks.yaml` (`immich-server` for immich, the app name for the others). whisper and llmkube have no ScaledObject: scale whisper with `kubectl scale --replicas=0`, and stop whatever uses the `llmkube-model-cache` PVC.
-
-Wait until no pod in the table still runs, so nothing writes during the final copy.
-
-### 5. Copy the last changes
-
-Run the same loop again, now with `--delete`, with `D` and `PAIRS` set as in step 3:
+Pause KEDA at zero, since it would otherwise start the apps again:
 
 ```sh
-for p in $PAIRS; do
-  name=${p%%:*}; src=${p#*:}
-  echo "=== $src -> k8s/$name"
-  rsync -aHAX --delete --info=progress2 "$D/$src/" "$D/k8s/$name/"
-done
+for a in ${=APPS}; do ns=${a%%/*}; so=${a#*:}
+  kubectl annotate scaledobject "$so" -n "$ns" autoscaling.keda.sh/paused-replicas="0" --overwrite; done
 ```
 
-Only files that changed since step 3 are copied, so this takes minutes rather than hours. `--delete` removes files from the copy that the apps deleted in the meantime, so the copy matches the original exactly. It deletes from the second path only, so with the paths swapped it would delete from the original: double-check their order before running it.
-
-To check, run the loop once more with `rsync -aHAX --delete --dry-run --itemize-changes`. It should print only the `===` lines.
-
-### 6. Recreate the llmkube PersistentVolume
-
-A PV's `nfs.path` can't be changed in place, so the PV and its PVC have to be recreated. The PV has `persistentVolumeReclaimPolicy: Retain`, and NFS PVs aren't deleted on the NAS anyway, so this doesn't touch the data:
+whisper has no ScaledObject:
 
 ```sh
-kubectl delete pvc llmkube-model-cache -n automation
+kubectl scale deployment whisper -n automation --replicas=0
+```
+
+### 6. Release the llmkube model cache
+
+A PV's `nfs.path` can't be changed in place, so the PV and its PVC had to be recreated. The PV has `persistentVolumeReclaimPolicy: Retain`, so this doesn't touch the data. `llmkube-controller-manager` mounts the PVC, so its pod has to be deleted before the PVC can go:
+
+```sh
+kubectl delete pvc llmkube-model-cache -n automation --wait=false
+kubectl get pods -n automation -o json \
+  | jq -r '.items[] | select(any(.spec.volumes[]?; .persistentVolumeClaim.claimName=="llmkube-model-cache")) | .metadata.name' \
+  | xargs -r kubectl delete pod -n automation
+kubectl get pvc llmkube-model-cache -n automation   # until NotFound
 kubectl delete pv llmkube-model-cache
 ```
 
-Flux recreates both with the new path when it reconciles in the next step.
+`llmkube-controller-manager` then stays `Pending` until Flux recreates the PVC in step 9.
 
-### 7. Merge and start the apps
+Check that nothing migrated still runs. Other pods in these namespaces (immich-valkey, dragonfly, garage-ui, zot) don't mount NFS and keep running:
 
-1. Merge the branch.
-2. Resume each Kustomization: `flux resume kustomization immich -n media`.
-3. Remove the KEDA pause: `kubectl annotate scaledobject immich-server -n media autoscaling.keda.sh/paused-replicas-`.
-4. Scale whisper back up if Flux hasn't already.
+```sh
+kubectl get pods -n media; kubectl get pods -n default -l app.kubernetes.io/name=filebrowser
+kubectl get pods -n development; kubectl get pods -n documents
+kubectl get pods -n storage; kubectl get pods -n automation
+```
 
-Check each app:
+### 7. Final copy
 
-- The pod is running and its NFS mount shows the data: `kubectl exec -n media deploy/immich-server -- ls /usr/src/app/upload`.
-- The app's UI shows its existing data (immich photos, paperless documents, booklore library).
-- Garage answers S3 requests, and `garage status` reports no errors.
+On the NAS, with `D` and `PAIRS` set as in steps 1 and 2:
 
-### 8. Clean up OMV
+```sh
+for p in $PAIRS; do name=${p%%:*}; src=${p#*:}; echo "=== $src -> k8s/$name"
+  rsync -aHAX --delete --info=progress2 "$D/$src/" "$D/k8s/$name/"; done
+```
 
-Once every app has run on the new paths for a while:
+`--delete` removes files from the copy that the apps deleted since the first copy. It deletes from the second path only, so the order of the two paths matters.
 
-1. **Services → NFS → Shares:** remove the old exports.
-2. **Storage → Shared Folders:** remove the old shared folders.
-3. Delete the old folders on the NAS to free the space, using the real folders from `PAIRS` (for example `paperless/data`, not the empty `paperless-data`). After this, rollback is no longer possible.
+Check that every copy matches its original:
+
+```sh
+for p in $PAIRS; do name=${p%%:*}; src=${p#*:}; echo "=== $name"
+  rsync -aHAX --delete --dry-run --itemize-changes "$D/$src/" "$D/k8s/$name/"; done
+```
+
+It printed only the `===` lines.
+
+### 8. Merge
+
+```sh
+gh pr ready 2462 && gh pr merge 2462 --squash
+```
+
+### 9. Start the apps
+
+Resume garage first, since volsync depends on it and filebrowser and other apps depend on volsync. The rest resume with `--wait=false`:
+
+```sh
+flux reconcile source git home-cluster -n flux-system
+flux resume kustomization garage -n storage
+for ks in llmkube llmkube-models whisper; do flux resume kustomization "$ks" -n automation --wait=false; done
+for a in ${=APPS}; do ns=${a%%/*}; ks=${a#*/}; ks=${ks%%:*}
+  flux resume kustomization "$ks" -n "$ns" --wait=false; done
+```
+
+Remove the KEDA pause:
+
+```sh
+for a in ${=APPS}; do ns=${a%%/*}; so=${a#*:}
+  kubectl annotate scaledobject "$so" -n "$ns" autoscaling.keda.sh/paused-replicas-; done
+```
+
+Resuming `llmkube` recreated the PV and PVC with `/k8s/models`, and the whisper HelmRelease upgrade brought it back to one replica.
+
+Check that the apps run and mount the new paths:
+
+```sh
+kubectl get pods -A | grep -E "immich|filebrowser|booklore|shelfmark|metube|qbittorrent|audiobookshelf|pypiserver|paperless|garage|whisper|llmkube"
+kubectl get pv llmkube-model-cache -o jsonpath='{.spec.nfs.path}{"\n"}'
+kubectl get pod -n media -l app.kubernetes.io/name=immich -o jsonpath='{.items[*].spec.volumes[?(@.nfs)].nfs.path}{"\n"}'
+```
+
+Then check each app's UI for its existing data.
+
+## Cleanup
+
+Not done yet. Once every app has run on the new paths for a while:
+
+1. **Services → NFS → Shares:** remove the 14 old exports.
+2. **Storage → Shared Folders:** remove the 14 old shared folders.
+3. On the NAS, delete the old folders, using the folders on disk from `PAIRS` (`paperless/data`, not the empty `paperless-data` at the root). After this, rollback is no longer possible.
 
 ## Rollback
 
-Until step 8, the old folders are untouched and still exported, so rolling back only switches the paths back:
+Until the cleanup, the old folders are untouched and still exported, so rolling back only switches the paths back:
 
-1. Stop the apps (step 4).
-2. Revert the commit, and recreate the llmkube PV and PVC as in step 6.
-3. Start the apps (step 7).
+1. Stop the apps (step 5) and release the llmkube model cache (step 6).
+2. Revert #2462.
+3. Start the apps (step 9).
 
-Anything the apps wrote after the switch exists only in `k8s`. To keep it, copy it back with the step 5 command, with the two paths swapped, before starting the apps.
+Anything the apps wrote after the switch exists only in `k8s`. To keep it, copy it back with the step 7 loop, with the two paths swapped, before starting the apps.
