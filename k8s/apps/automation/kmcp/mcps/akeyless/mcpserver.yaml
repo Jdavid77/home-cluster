@@ -9,7 +9,7 @@ spec:
     targetPort: 8080
     path: /mcp
   deployment:
-    image: ghcr.io/jdavid77/akeyless-mcp:v2026.11.20.01 # {"$imagepolicy": "automation:akeyless-mcp"}
+    image: ghcr.io/jdavid77/akeyless-mcp:v2026.11.21.01 # {"$imagepolicy": "automation:akeyless-mcp"}
     port: 8080
     serviceAccountName: akeyless-mcp
     labels:
