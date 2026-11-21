@@ -24,10 +24,10 @@ spec:
           port: 6001
           version: 18
           secret: vector
-    - backend: b2
-      region: eu-central-003
-      bucket: jnobrega-postgres-backup
-      endpoint: https://s3.eu-central-003.backblazeb2.com
+    - backend: r2
+      region: auto
+      bucket: jnobrega-postgres
+      endpoint: https://015ce648cc705f6d069fe6068434a576.r2.cloudflarestorage.com
       encryption: true
       servers:
         - name: main
