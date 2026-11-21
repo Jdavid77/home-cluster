@@ -37,3 +37,4 @@ nav:
       - Components: gitops/components.md
   - Migrations:
       - NFS to one share: migrations/nfs-single-share.md
+      - Obsidian B2 to R2: migrations/obsidian-b2-to-r2.md
