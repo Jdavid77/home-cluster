@@ -26,9 +26,11 @@ spec:
         matchExpressions:
           - 'jwt.sub.startsWith("actor/automation/")'
     # A request that gets Cloudflare evicted goes again to the next group (Haiku), so the agent never sees the 429
+    # or 403
     retry:
       attempts: 1
       codes:
+        - 403
         - 429
         - 500
         - 502
