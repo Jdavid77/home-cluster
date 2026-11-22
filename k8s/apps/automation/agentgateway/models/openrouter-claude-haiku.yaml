@@ -49,6 +49,9 @@ spec:
     - group: gateway.networking.k8s.io
       kind: HTTPRoute
       name: llm-chat
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: llm-cloudflare
   traffic:
     # Actor JWTs minted by Substrate (kagent ModelConfig actorJwt, audience llm-gateway); public JWKS from https://idp.ate-system.svc/openid/v1/jwks
     jwtAuthentication:
