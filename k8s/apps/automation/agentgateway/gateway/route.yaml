@@ -11,6 +11,18 @@ spec:
       namespace: network
       sectionName: websecure
   rules:
+    # Short link to the cost dashboard
+    - matches:
+        - path:
+            type: Exact
+            value: /analytics
+      filters:
+        - type: RequestRedirect
+          requestRedirect:
+            path:
+              type: ReplaceFullPath
+              replaceFullPath: /ui/llm/analytics
+            statusCode: 302
     - backendRefs:
         - name: llm-admin
           port: 15000
