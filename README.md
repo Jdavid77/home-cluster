@@ -30,7 +30,7 @@ This repository contains the configuration for my home Kubernetes cluster — a 
 - **[topf](https://github.com/postfinance/topf)** generates and maintains Talos machine configs (see [migration notes](/.claude/skills/migrate-talhelper-to-topf/SKILL.md))
 - **[Flux](https://fluxcd.io/)** continuously reconciles the cluster state from this repository
 - **[Renovate](https://docs.renovatebot.com/)** automates dependency updates via pull requests
-- **[Terraform](https://www.terraform.io/)** provisions external dependencies (Akeyless, Authentik, Backblaze, Garage)
+- **[Terraform](https://www.terraform.io/)** provisions external dependencies (Akeyless, Authentik, Garage)
 
 ---
 
@@ -65,7 +65,6 @@ This repository contains the configuration for my home Kubernetes cluster — a 
 📁 terraform
 ├── 📁 authentik
 ├── 📁 akeyless
-├── 📁 backblaze
 └── 📁 garage
 
 ```
@@ -154,7 +153,7 @@ These tools complement the Kubernetes infrastructure by providing essential func
             <tr>
                 <td><img width="32" src="https://icon.icepanel.io/Technology/svg/Cloudflare.svg" alt="Cloudflare logo" /></td>
                 <td><a href="https://www.cloudflare.com/en-gb/">Cloudflare</a></td>
-                <td>DNS management, Tunnel for public access and R2 object storage (offsite PVC backups).</td>
+                <td>DNS management, Tunnel for public access and R2 object storage (offsite PVC and Postgres backups).</td>
             </tr>
             <tr>
                 <td><img width="32" src="https://images.icon-icons.com/699/PNG/512/gmx_icon-icons.com_61633.png" alt="GMX logo" /></td>
@@ -164,12 +163,7 @@ These tools complement the Kubernetes infrastructure by providing essential func
             <tr>
                 <td><img width="32" src="https://icon.icepanel.io/Technology/svg/HashiCorp-Terraform.svg" alt="Terraform logo" /></td>
                 <td><a href="https://www.terraform.io/">Terraform</a></td>
-                <td>IAC tool for automating the provisioning and management of outside dependencies (Akeyless, Authentik, Backblaze, Garage).</td>
-            </tr>
-            <tr>
-                <td><img width="32" src="https://avatars.githubusercontent.com/u/10283486?s=200&v=4" alt="Backblaze logo" /></td>
-                <td><a href="https://www.backblaze.com/">Backblaze B2</a></td>
-                <td>S3 Object Storage (offsite Postgres backups)</td>
+                <td>IAC tool for automating the provisioning and management of outside dependencies (Akeyless, Authentik, Garage).</td>
             </tr>
     </table>
 
@@ -514,7 +508,7 @@ graph LR
 ## 💾 Storage & Backups
 
 -   **PVCs:** backed up by Volsync (Restic) to Garage in-cluster and to Cloudflare R2 offsite.
--   **Postgres:** backup CronJobs write to Garage and to Backblaze B2 (encrypted).
+-   **Postgres:** backup CronJobs write to Garage and to Cloudflare R2 (encrypted).
 -   **Akeyless:** has its own backup CronJob.
 
 ---
