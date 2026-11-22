@@ -13,6 +13,10 @@ spec:
   rawConfig:
     config:
       adminAddr: 0.0.0.0:15000
+      # Request-log database for the UI's LLM > Analytics cost dashboard; /tmp is the pod's emptyDir,
+      # so history is lost on restart. Pricing comes from the built-in model catalog
+      database:
+        url: sqlite:////tmp/data.db?mode=rwc
   # In-cluster only: agents reach it via atenet-egress, nothing on the LAN can
   service:
     spec:
@@ -26,9 +30,7 @@ spec:
       memory: 128Mi
     limits:
       memory: 512Mi
+  # One replica so the dashboard's SQLite file sees all traffic (each replica keeps its own)
   deployment:
     spec:
-      replicas: 2
-  podDisruptionBudget:
-    spec:
-      minAvailable: 1
+      replicas: 1
