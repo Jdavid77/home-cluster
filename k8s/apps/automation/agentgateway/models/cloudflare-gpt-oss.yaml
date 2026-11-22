@@ -59,3 +59,6 @@ spec:
             llmRequest.messages.map(m,
             m.role == "assistant" && has(m.content) && m.content == null
             ? merge(m, {"content": ""}) : m)
+        # Workers AI stops at 256 tokens when no limit is sent, which gpt-oss can spend on reasoning alone
+        - field: max_completion_tokens
+          expression: default(llmRequest.max_completion_tokens, 4096)
