@@ -12,6 +12,7 @@ resources:
   - ./crd-schema-publisher/ks.yaml
   - ./intel-device-plugin/ks.yaml
   - ./amd-device-plugin/ks.yaml
+  - ./etcd-defrag/ks.yaml
 components:
   - ../../components/alerts/alertmanager
   - ../../components/grafana/folder

@@ -1,0 +1,76 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app etcd-defrag
+spec:
+  interval: 15m
+  timeout: 5m
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+    namespace: flux-system
+  maxHistory: 2
+  values:
+    defaultPodOptions:
+      # etcd listens on the control-plane host; 127.0.0.1:2379 is the local member
+      hostNetwork: true
+      nodeSelector:
+        node-role.kubernetes.io/control-plane: ""
+      tolerations:
+        - key: node-role.kubernetes.io/control-plane
+          operator: Exists
+          effect: NoSchedule
+      # Talos owns /system/secrets/etcd as 60:60 with mode 0400, so only root (or uid 60) can read it
+      securityContext:
+        runAsNonRoot: false
+        runAsUser: 0
+        runAsGroup: 0
+        seccompProfile:
+          type: RuntimeDefault
+    controllers:
+      etcd-defrag:
+        type: cronjob
+        annotations:
+          reloader.stakater.com/auto: "true"
+        cronjob:
+          concurrencyPolicy: Forbid
+          timeZone: Europe/Lisbon
+          schedule: "0 22 * * *"
+          successfulJobsHistory: 1
+          failedJobsHistory: 1
+          backoffLimit: 0
+        containers:
+          app:
+            image:
+              repository: ghcr.io/ahrtr/etcd-defrag
+              tag: v0.48.0@sha256:7b579eff06a7e2feeb16360f67a7540dfa1b8365456df417b80df94b3f9b44b5
+            args:
+              - --endpoints=https://127.0.0.1:2379
+              - --cluster
+              - --cacert=/certs/ca.crt
+              - --cert=/certs/admin.crt
+              - --key=/certs/admin.key
+              # etcdDatabaseHighFragmentationRatio fires only when free > in use > 100MiB, so this defrags first
+              - --defrag-rule=dbQuotaUsage > 0.5 || dbSizeFree > 100*1024*1024
+              - --move-leader
+              - --wait-between-defrags=30s
+              - --auto-disalarm
+              - --disalarm-threshold=0.8
+            securityContext:
+              # Talos etcd's client key is root-readable only on the host.
+              privileged: true
+            resources:
+              requests:
+                cpu: 10m
+                memory: 32Mi
+              limits:
+                memory: 128Mi
+    persistence:
+      certs:
+        type: hostPath
+        # Talos EtcdPKIPath.
+        hostPath: /system/secrets/etcd
+        globalMounts:
+          - path: /certs
+            readOnly: true
