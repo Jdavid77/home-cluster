@@ -40,8 +40,9 @@ spec:
           name: cloudflare-gpt-oss
 ---
 # yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/agentgateway.dev/agentgatewaypolicy_v1alpha1.json
-# Workers AI rejects assistant messages with "content": null, which OpenAI clients (kagent) send alongside
-# tool_calls; rewrite them to "". A failed expression drops the field, so a bug here sends no messages at all
+# Workers AI requires a string content on every message, but OpenAI clients send assistant tool_calls messages
+# without content (kagent) or with "content": null; set it to "".
+# A failed expression drops the field, so a bug here sends no messages at all
 apiVersion: agentgateway.dev/v1alpha1
 kind: AgentgatewayPolicy
 metadata:
@@ -57,7 +58,7 @@ spec:
         - field: messages
           expression: >-
             llmRequest.messages.map(m,
-            m.role == "assistant" && has(m.content) && m.content == null
+            m.role == "assistant" && (!has(m.content) || m.content == null)
             ? merge(m, {"content": ""}) : m)
         # Workers AI stops at 256 tokens when no limit is sent, which gpt-oss can spend on reasoning alone
         - field: max_completion_tokens
