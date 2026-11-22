@@ -5,7 +5,7 @@ This repository holds the configuration for my home Kubernetes cluster: a 7-node
 - **[topf](https://github.com/postfinance/topf)** generates and applies the Talos machine configs.
 - **[Flux](https://fluxcd.io/)** reconciles the cluster state from this repository.
 - **[Renovate](https://docs.renovatebot.com/)** opens pull requests for dependency updates.
-- **[Terraform](https://www.terraform.io/)** manages the services outside the cluster (Akeyless, Authentik, Backblaze, Garage), planned and applied through Atlantis.
+- **[Terraform](https://www.terraform.io/)** manages the services outside the cluster (Akeyless, Authentik, Garage), planned and applied through Atlantis.
 
 ## Repository layout
 

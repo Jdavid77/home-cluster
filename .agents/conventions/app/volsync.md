@@ -12,7 +12,7 @@ Two components, always added together:
 ```yaml
 components:
   - ../../../../components/volsync/local    # Garage S3 (in-cluster)
-  - ../../../../components/volsync/remote   # Backblaze B2 (offsite)
+  - ../../../../components/volsync/remote   # Cloudflare R2 (offsite)
 ```
 
 ## `postBuild.substitute` block

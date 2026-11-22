@@ -28,15 +28,6 @@ projects:
         - ".env"
         - "modules/**/*.tf"
       enabled: true
-  - name: backblaze
-    dir: terraform/backblaze
-    workspace: default
-    workflow: upgrade
-    autoplan:
-      when_modified:
-        - "*.tf"
-        - ".env"
-      enabled: true
   - name: garage
     dir: terraform/garage
     workspace: default

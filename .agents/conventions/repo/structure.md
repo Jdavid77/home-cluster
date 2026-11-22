@@ -34,7 +34,7 @@ Shared reusable Kustomize components included via `components:` in `ks.yaml`. Av
 | Path | Purpose |
 |---|---|
 | `components/volsync/local` | Local restic backup via Garage S3 |
-| `components/volsync/remote` | Remote restic backup via Backblaze B2 |
+| `components/volsync/remote` | Remote restic backup via Cloudflare R2 |
 | `components/keda/dependencies` | KEDA ScaledObject that scales an app to zero while its dependencies (NFS, Postgres, …) are down |
 | `components/alerts/` | Alerting rules |
 | `components/flux/` | Flux-related components |
@@ -63,10 +63,9 @@ Each subdirectory is an independent Terraform workspace, auto-planned on PR by A
 |---|---|
 | `terraform/akeyless/` | Akeyless secrets, roles, API keys |
 | `terraform/authentik/` | Authentik SSO — OIDC clients, proxy providers, sources |
-| `terraform/backblaze/` | Backblaze B2 buckets (used by VolSync remote backups) |
 | `terraform/garage/` | Garage S3-compatible local storage (used by VolSync local backups) |
 
-When adding a new Akeyless secret path, edit `terraform/akeyless/`. When adding a new B2 bucket, edit `terraform/backblaze/`. Do not mix concerns across workspaces.
+When adding a new Akeyless secret path, edit `terraform/akeyless/`. Do not mix concerns across workspaces.
 
 ---
 
