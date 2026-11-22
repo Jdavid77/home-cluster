@@ -1,0 +1,92 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/agentgateway.dev/agentgatewaybackend_v1alpha1.json
+# Chat model for every kagent agent: gpt-oss-120b on the Workers AI free tier (10k Neurons/day), failing over
+# to Claude Haiku on OpenRouter once Cloudflare returns 429. Each provider replaces the model clients send
+# (kagent sends "default"), so models change here without touching kagent
+apiVersion: agentgateway.dev/v1alpha1
+kind: AgentgatewayBackend
+metadata:
+  name: llm-chat
+spec:
+  ai:
+    groups:
+      - providers:
+          # The path holds the Cloudflare account ID
+          - name: cloudflare-gpt-oss
+            openai:
+              model: "@cf/openai/gpt-oss-120b"
+            host: api.cloudflare.com
+            port: 443
+            path: /client/v4/accounts/015ce648cc705f6d069fe6068434a576/ai/v1/chat/completions
+            policies:
+              auth:
+                secretRef:
+                  name: agentgateway-cloudflare
+              tls:
+                sni: api.cloudflare.com
+      - providers:
+          # No OpenRouter preset, so the openai provider points at openrouter.ai
+          - name: openrouter-claude-haiku
+            openai:
+              model: anthropic/claude-haiku-5.5
+            host: openrouter.ai
+            port: 443
+            path: /api/v1/chat/completions
+            policies:
+              auth:
+                secretRef:
+                  name: agentgateway-openrouter
+              tls:
+                sni: openrouter.ai
+---
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/gateway.networking.k8s.io/httproute_v1.json
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: llm-chat
+spec:
+  parentRefs:
+    - name: llm
+      sectionName: http
+  rules:
+    - matches:
+        - path:
+            type: Exact
+            value: /v1/chat/completions
+      backendRefs:
+        - group: agentgateway.dev
+          kind: AgentgatewayBackend
+          name: llm-chat
+---
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/agentgateway.dev/agentgatewaypolicy_v1alpha1.json
+# Cloudflare only: request fixes for Workers AI, and eviction when the free Neurons run out
+apiVersion: agentgateway.dev/v1alpha1
+kind: AgentgatewayPolicy
+metadata:
+  name: llm-chat-cloudflare
+spec:
+  targetRefs:
+    - group: agentgateway.dev
+      kind: AgentgatewayBackend
+      name: llm-chat
+      sectionName: cloudflare-gpt-oss
+  backend:
+    # Out of free Neurons is a 429 (code 3036) until 00:00 UTC, so evict for long; the eviction backs off on
+    # repeats, and a Retry-After header overrides it
+    health:
+      unhealthyCondition: "response.code == 429 || response.code >= 500"
+      eviction:
+        duration: 30m
+        consecutiveFailures: 1
+    ai:
+      finalTransformations:
+        # Workers AI requires content on every message, but kagent sends assistant tool_calls messages without it;
+        # rebuild those with "content": "" (merge() fails on these maps).
+        # A failed expression drops the field, so a bug here sends no messages at all
+        - field: messages
+          expression: >-
+            llmRequest.messages.map(m,
+            m.role == "assistant" && has(m.tool_calls) && !has(m.content)
+            ? {"role": m.role, "content": "", "tool_calls": m.tool_calls} : m)
+        # Workers AI stops at 256 tokens when no limit is sent, which gpt-oss can spend on reasoning alone
+        - field: max_completion_tokens
+          expression: default(llmRequest.max_completion_tokens, 4096)
