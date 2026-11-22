@@ -20,7 +20,7 @@ spec:
       sni: api.cloudflare.com
 ---
 # yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/gateway.networking.k8s.io/httproute_v1.json
-# Agents opt in with a ModelConfig whose baseUrl ends in /cloudflare/v1; the llm-chat policy covers this route too
+# Agents opt in with a ModelConfig whose baseUrl ends in /cloudflare/v1; the llm-chat policy (policy.yaml) covers this route too
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
@@ -40,9 +40,6 @@ spec:
           name: cloudflare-gpt-oss
 ---
 # yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/agentgateway.dev/agentgatewaypolicy_v1alpha1.json
-# Workers AI requires content on every message, but kagent sends assistant tool_calls messages without it;
-# rebuild those with "content": "" (merge() fails on these maps).
-# A failed expression drops the field, so a bug here sends no messages at all
 apiVersion: agentgateway.dev/v1alpha1
 kind: AgentgatewayPolicy
 metadata:
@@ -55,6 +52,9 @@ spec:
   backend:
     ai:
       finalTransformations:
+        # Workers AI requires content on every message, but kagent sends assistant tool_calls messages without it;
+        # rebuild those with "content": "" (merge() fails on these maps).
+        # A failed expression drops the field, so a bug here sends no messages at all
         - field: messages
           expression: >-
             llmRequest.messages.map(m,
