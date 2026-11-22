@@ -38,3 +38,24 @@ spec:
         - group: agentgateway.dev
           kind: AgentgatewayBackend
           name: cloudflare-gpt-oss
+---
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/agentgateway.dev/agentgatewaypolicy_v1alpha1.json
+# Workers AI rejects assistant messages with "content": null, which OpenAI clients (kagent) send alongside
+# tool_calls; rewrite them to "". A failed expression drops the field, so a bug here sends no messages at all
+apiVersion: agentgateway.dev/v1alpha1
+kind: AgentgatewayPolicy
+metadata:
+  name: llm-cloudflare
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: llm-cloudflare
+  backend:
+    ai:
+      finalTransformations:
+        - field: messages
+          expression: >-
+            llmRequest.messages.map(m,
+            m.role == "assistant" && has(m.content) && m.content == null
+            ? merge(m, {"content": ""}) : m)
