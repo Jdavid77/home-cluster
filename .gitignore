@@ -1,5 +1,4 @@
 age.ageKey
-omv/**/.env
 .devcontainer/.env
 .terraform/
 .decrypted

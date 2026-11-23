@@ -15,7 +15,6 @@ This repository holds the configuration for my home Kubernetes cluster: a 7-node
 | `talos/` | Node configuration (`topf.yaml` plus patches for all nodes, control plane, workers and single nodes) |
 | `terraform/` | External services, one workspace per service |
 | `bootstrap/` | One-time cluster bootstrap (CRDs, Flux Operator and encrypted bootstrap secrets) |
-| `omv/` | Docker Compose services on the NAS, outside the cluster |
 
 ## Topology
 

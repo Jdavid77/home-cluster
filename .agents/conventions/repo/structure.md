@@ -81,17 +81,6 @@ Used only when bootstrapping the cluster from scratch. Do not modify during norm
 
 ---
 
-## `omv/` — NAS Host (Docker Compose)
+## NAS host (Docker Compose)
 
-This directory manages a separate physical host running OpenMediaVault with Docker Compose. It is **not** part of the Kubernetes cluster.
-
-Services in `omv/docker/` that the cluster depends on:
-
-| Service | Role |
-|---|---|
-| `postgres18/` | Shared PostgreSQL instance — cluster apps connect to this for their databases |
-| `vectorchord/` | pgvector-compatible Postgres for vector workloads |
-| `pihole/` | DNS server for the local network |
-| `exit-node/` | Tailscale exit node |
-
-Changes here are applied manually on the OMV host. There is no GitOps reconciliation for this directory.
+The OpenMediaVault NAS runs its services with Docker Compose. They're in a separate repo, [omv-compose](https://github.com/Jdavid77/omv-compose), managed by the OMV compose plugin. Cluster apps keep their databases in its `postgres18` stack, and Immich uses `vectorchord`.
