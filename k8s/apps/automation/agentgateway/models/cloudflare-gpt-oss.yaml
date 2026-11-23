@@ -1,0 +1,65 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/agentgateway.dev/agentgatewaybackend_v1alpha1.json
+# Workers AI free tier (10k Neurons/day) for light agents; the path holds the Cloudflare account ID
+apiVersion: agentgateway.dev/v1alpha1
+kind: AgentgatewayBackend
+metadata:
+  name: cloudflare-gpt-oss
+spec:
+  ai:
+    provider:
+      openai:
+        model: "@cf/openai/gpt-oss-120b"
+      host: api.cloudflare.com
+      port: 443
+      path: /client/v4/accounts/015ce648cc705f6d069fe6068434a576/ai/v1/chat/completions
+  policies:
+    auth:
+      secretRef:
+        name: agentgateway-cloudflare
+    tls:
+      sni: api.cloudflare.com
+---
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/gateway.networking.k8s.io/httproute_v1.json
+# Agents opt in with a ModelConfig whose baseUrl ends in /cloudflare/v1; the llm-agent-auth policy (policy.yaml) covers this route too
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: cloudflare-gpt-oss
+spec:
+  parentRefs:
+    - name: llm
+      sectionName: http
+  rules:
+    - matches:
+        - path:
+            type: Exact
+            value: /cloudflare/v1/chat/completions
+      backendRefs:
+        - group: agentgateway.dev
+          kind: AgentgatewayBackend
+          name: cloudflare-gpt-oss
+---
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/agentgateway.dev/agentgatewaypolicy_v1alpha1.json
+apiVersion: agentgateway.dev/v1alpha1
+kind: AgentgatewayPolicy
+metadata:
+  name: cloudflare-gpt-oss
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: cloudflare-gpt-oss
+  backend:
+    ai:
+      finalTransformations:
+        # Workers AI requires content on every message, but kagent sends assistant tool_calls messages without it;
+        # rebuild those with "content": "" (merge() fails on these maps).
+        # A failed expression drops the field, so a bug here sends no messages at all
+        - field: messages
+          expression: >-
+            llmRequest.messages.map(m,
+            m.role == "assistant" && has(m.tool_calls) && !has(m.content)
+            ? {"role": m.role, "content": "", "tool_calls": m.tool_calls} : m)
+        # Workers AI stops at 256 tokens when no limit is sent, which gpt-oss can spend on reasoning alone
+        - field: max_completion_tokens
+          expression: default(llmRequest.max_completion_tokens, 4096)

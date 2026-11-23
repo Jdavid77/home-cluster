@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/agentgateway.dev/agentgatewaybackend_v1alpha1.json
+# Chat model for kagent agents. The backend has no OpenRouter preset, so the openai provider points at openrouter.ai
+apiVersion: agentgateway.dev/v1alpha1
+kind: AgentgatewayBackend
+metadata:
+  name: openrouter-claude-haiku
+spec:
+  ai:
+    provider:
+      openai:
+        # Replaces the model clients send (kagent sends "default"); change it here to swap models without touching kagent
+        model: anthropic/claude-haiku-5.5
+      host: openrouter.ai
+      port: 443
+      path: /api/v1/chat/completions
+  policies:
+    auth:
+      secretRef:
+        name: agentgateway-openrouter
+    tls:
+      sni: openrouter.ai
+---
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/gateway.networking.k8s.io/httproute_v1.json
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: openrouter-claude-haiku
+spec:
+  parentRefs:
+    - name: llm
+      sectionName: http
+  rules:
+    - matches:
+        - path:
+            type: Exact
+            value: /v1/chat/completions
+      backendRefs:
+        - group: agentgateway.dev
+          kind: AgentgatewayBackend
+          name: openrouter-claude-haiku

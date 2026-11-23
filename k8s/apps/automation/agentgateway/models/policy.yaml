@@ -3,12 +3,15 @@
 apiVersion: agentgateway.dev/v1alpha1
 kind: AgentgatewayPolicy
 metadata:
-  name: llm-chat
+  name: llm-agent-auth
 spec:
   targetRefs:
     - group: gateway.networking.k8s.io
       kind: HTTPRoute
-      name: llm-chat
+      name: openrouter-claude-haiku
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: cloudflare-gpt-oss
   traffic:
     # Actor JWTs minted by Substrate (kagent ModelConfig actorJwt, audience llm-gateway); public JWKS from https://idp.ate-system.svc/openid/v1/jwks
     jwtAuthentication:
@@ -25,13 +28,3 @@ spec:
       policy:
         matchExpressions:
           - 'jwt.sub.startsWith("actor/automation/")'
-    # A request that gets Cloudflare evicted goes again to the next group (Haiku), so the agent never sees the 429
-    # or 403
-    retry:
-      attempts: 1
-      codes:
-        - 403
-        - 429
-        - 500
-        - 502
-        - 503

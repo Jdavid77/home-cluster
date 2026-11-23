@@ -4,5 +4,6 @@ kind: Kustomization
 resources:
   - secret.yaml
   - policy.yaml
-  - llm-chat.yaml
+  - openrouter-claude-haiku.yaml
   - openrouter-rerank.yaml
+  - cloudflare-gpt-oss.yaml

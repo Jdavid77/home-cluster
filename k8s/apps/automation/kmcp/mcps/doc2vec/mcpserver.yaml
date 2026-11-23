@@ -27,7 +27,7 @@ spec:
       ONE_CHUNK_PER_PAGE: "true"
       # Rerank through the llm gateway, which swaps the gateway key (OPENROUTER_API_KEY) for the real OpenRouter key
       RERANKER: openrouter
-      # API base: doc2vec appends /rerank, so requests hit the llm-rerank route (POST /v1/rerank)
+      # API base: doc2vec appends /rerank, so requests hit the openrouter-rerank route (POST /v1/rerank)
       RERANK_BASE_URL: http://llm.automation.svc.cluster.local/v1
       # nemotron-3.5-rerank-8b is only on OpenRouter as :free, whose safety screening rejects docs with shell/YAML examples (HTTP 422)
       RERANK_MODEL: cohere/rerank-5-pro
