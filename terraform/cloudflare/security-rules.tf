@@ -31,8 +31,8 @@ resource "cloudflare_ruleset" "security_rules" {
     {
       ref         = "skip-github-webhooks"
       description = "Skip the remaining security rules, rate limiting, managed rules and Super Bot Fight Mode for GitHub webhooks"
-      # The account IP list in lists.tf
-      expression = "(ip.src in $github_webhook)"
+      # Referencing the list (lists.tf) makes Terraform apply it before this rule
+      expression = format("(ip.src in $%s)", cloudflare_list.github_webhook.name)
       action     = "skip"
       action_parameters = {
         ruleset = "current"

@@ -6,7 +6,7 @@ data "http" "github_meta" {
   }
 }
 
-# Used by the webhook_bypass security rule
+# Used by the skip-github-webhooks security rule
 resource "cloudflare_list" "github_webhook" {
   account_id  = local.account_id
   name        = "github_webhook"
