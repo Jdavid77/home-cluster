@@ -68,7 +68,7 @@ Each subdirectory is an independent Terraform workspace, auto-planned on PR by A
 
 When adding a new Akeyless secret path, edit `terraform/akeyless/`. Do not mix concerns across workspaces.
 
-Cloudflare security rules: `ref` is `<action>-<what it matches>` in kebab-case (e.g. `block-known-bots`) and never changes once applied, since a new ref recreates the rule. `description` is `<Action> <what>[ for <scope>]` in sentence case and can change freely.
+Cloudflare security rules: `ref` is `<action>-<what it matches>` in kebab-case (e.g. `block-verified-bots`) and never changes once applied, since a new ref recreates the rule. `description` is `<Action> <what>[ for <scope>]` in sentence case and can change freely.
 
 ---
 
