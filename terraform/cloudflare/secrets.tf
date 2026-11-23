@@ -5,6 +5,7 @@ data "sops_file" "secrets" {
 }
 
 locals {
-  api_token = data.sops_file.secrets.data["CLOUDFLARE_API_TOKEN"]
-  zone_id   = data.sops_file.secrets.data["CLOUDFLARE_ZONE_ID"]
+  api_token  = data.sops_file.secrets.data["CLOUDFLARE_API_TOKEN"]
+  account_id = data.sops_file.secrets.data["CLOUDFLARE_ACCOUNT_ID"]
+  zone_id    = data.sops_file.secrets.data["CLOUDFLARE_ZONE_ID"]
 }
