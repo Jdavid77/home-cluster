@@ -41,6 +41,7 @@ architecture:
   topics:
     - id: ingress
       title: Traffic Ingress
+      icon: globe
       color: var(--color-info)
       summary: >-
         No ports are open on the home router. Public apps are reached through a Cloudflare Tunnel,
@@ -107,6 +108,7 @@ architecture:
             needs are advertised, and the rest of the LAN stays unreachable from the tailnet.
     - id: secrets
       title: Secrets
+      icon: lock
       color: var(--color-warning)
       summary: >-
         Apart from a few SOPS-encrypted bootstrap credentials, secrets never live in Git. Akeyless
@@ -135,6 +137,7 @@ architecture:
             together in a UI.
     - id: storage
       title: Storage & Backups
+      icon: database
       color: var(--color-success)
       summary: >-
         Every piece of state that matters has a local copy and an offsite copy. Databases live
@@ -166,6 +169,7 @@ architecture:
             Longhorn network replication and use local disks.
     - id: observability
       title: Observability
+      icon: activity
       color: var(--color-secondary)
       summary: >-
         Metrics, logs and uptime checks feed Grafana, and every alert ends up in a single
