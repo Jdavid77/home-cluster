@@ -47,17 +47,7 @@ spec:
           frontend:
             image:
               repository: ghcr.io/jdavid77/kubernetes-live-metrics-dashboard-frontend
-              tag: v2026.11.23.03 # {"$imagepolicy": "default:kubernetes-live-metrics-dashboard-frontend:tag"}
-            env:
-              REACT_APP_REFRESH_INTERVAL: "5000"
-              REACT_APP_LOGO_URL: https://avatars.githubusercontent.com/u/49655819?v=4
-              REACT_APP_GITHUB_URL: https://github.com/Jdavid77/home-cluster
-              REACT_APP_LINKEDIN_URL: https://www.linkedin.com/in/joaodavid77/
-              REACT_APP_INFRA_OS: Talos
-              REACT_APP_INFRA_STORAGE: Longhorn/OpenEBS
-              REACT_APP_INFRA_CNI: Cilium
-              REACT_APP_INFRA_LOAD_BALANCER: Envoy Gateway
-              REACT_APP_INFRA_GITOPS: "Flux CD"
+              tag: v2026.10.15.01 # {"$imagepolicy": "default:kubernetes-live-metrics-dashboard-frontend:tag"}
             probes:
               liveness: &probes
                 enabled: false
@@ -74,6 +64,15 @@ spec:
                 memory: 150Mi
               requests:
                 cpu: 50m
+    persistence:
+      config:
+        type: configMap
+        name: live-metrics-config
+        advancedMounts:
+          *app:
+            frontend:
+              - path: /usr/share/nginx/html/config
+                readOnly: true
     service:
       main:
         controller: *app
