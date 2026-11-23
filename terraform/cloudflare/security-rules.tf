@@ -1,11 +1,13 @@
-import {
-  to = cloudflare_ruleset.security_rules
-  id = "zones/${local.zone_id}/8a4a7407400d413bba8acb7adf30d6d5"
-}
-
 # The zone's custom rules (Security → Security rules) are one ruleset, so this owns the whole list:
 # a rule added in the dashboard is removed on the next apply.
-# Rules run in order; ref pins each one to the rule ID it had in the dashboard.
+# Rules run in order. The provider matches rules to the existing ones by ref, so keep each ref
+# stable: changing it recreates that rule with a new ID.
+#
+# Naming:
+#   ref          <action>-<what it matches>, kebab-case (e.g. block-verified-bots). Names the match,
+#                not the reason, so it survives edits to the expression.
+#   description  <Action> <what>[ for <scope>], sentence case. Shown in the dashboard and logs;
+#                free to change.
 resource "cloudflare_ruleset" "security_rules" {
   zone_id = local.zone_id
   name    = "default"
@@ -14,10 +16,11 @@ resource "cloudflare_ruleset" "security_rules" {
 
   rules = [
     {
-      ref         = "681e67c3355741399fa2e1b4652db7b4"
-      description = "Linkedin"
-      expression  = "(http.user_agent contains \"LinkedInBot\")"
-      action      = "skip"
+      ref         = "skip-linkedin-bot"
+      description = "Skip the remaining security rules and Super Bot Fight Mode for LinkedInBot"
+      # Verified only, so a spoofed LinkedInBot user agent doesn't get past the block rules
+      expression = "(http.user_agent contains \"LinkedInBot\" and cf.client.bot)"
+      action     = "skip"
       action_parameters = {
         ruleset = "current"
         phases = [
@@ -26,10 +29,10 @@ resource "cloudflare_ruleset" "security_rules" {
       }
     },
     {
-      ref         = "05fc30b9c3e34ea5bfaa8d7062c7c1d2"
-      description = "webhook_bypass"
-      # The account IP list in lists.tf
-      expression = "(ip.src in $github_webhook)"
+      ref         = "skip-github-webhooks"
+      description = "Skip the remaining security rules, rate limiting, managed rules and Super Bot Fight Mode for GitHub webhooks"
+      # Referencing the list (lists.tf) makes Terraform apply it before this rule
+      expression = format("(ip.src in $%s)", cloudflare_list.github_webhook.name)
       action     = "skip"
       action_parameters = {
         ruleset = "current"
@@ -41,14 +44,15 @@ resource "cloudflare_ruleset" "security_rules" {
       }
     },
     {
-      ref         = "74b177e409464398957d71091d071e96"
-      description = "Block Requests that come from Sketchy Places"
+      ref         = "block-countries"
+      description = "Block requests from high-risk countries"
       expression  = "(ip.geoip.country in {\"AF\" \"CN\" \"IR\" \"IQ\" \"IL\" \"KP\" \"PH\" \"RU\" \"UA\"})"
       action      = "block"
     },
     {
-      ref         = "a3ba31b75da045a5a4850a2c8748b5aa"
-      description = "Block Known Bots"
+      # cf.client.bot is Cloudflare's verified bots (search engines, link previews), not malicious ones
+      ref         = "block-verified-bots"
+      description = "Block verified bots"
       expression  = "(cf.client.bot)"
       action      = "block"
     },

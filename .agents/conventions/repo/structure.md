@@ -64,8 +64,11 @@ Each subdirectory is an independent Terraform workspace, auto-planned on PR by A
 | `terraform/akeyless/` | Akeyless secrets, roles, API keys |
 | `terraform/authentik/` | Authentik SSO — OIDC clients, proxy providers, sources |
 | `terraform/garage/` | Garage S3-compatible local storage (used by VolSync local backups) |
+| `terraform/cloudflare/` | Cloudflare security rules (WAF custom rules) and the `github_webhook` IP list |
 
 When adding a new Akeyless secret path, edit `terraform/akeyless/`. Do not mix concerns across workspaces.
+
+Cloudflare security rules: `ref` is `<action>-<what it matches>` in kebab-case (e.g. `block-verified-bots`) and never changes once applied, since a new ref recreates the rule. `description` is `<Action> <what>[ for <scope>]` in sentence case and can change freely.
 
 ---
 
