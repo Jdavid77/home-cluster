@@ -10,11 +10,6 @@ data "http" "github_meta" {
   }
 }
 
-import {
-  to = cloudflare_list.github_webhook
-  id = "${local.account_id}/2a515c7a69d348c597c14b5ea345b14c"
-}
-
 # Used by the webhook_bypass security rule
 resource "cloudflare_list" "github_webhook" {
   account_id  = local.account_id
