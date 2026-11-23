@@ -37,3 +37,12 @@ projects:
         - "*.tf"
         - ".env"
       enabled: true
+  - name: cloudflare
+    dir: terraform/cloudflare
+    workspace: default
+    workflow: upgrade
+    autoplan:
+      when_modified:
+        - "*.tf"
+        - ".env"
+      enabled: true
