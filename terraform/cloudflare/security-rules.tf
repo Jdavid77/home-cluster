@@ -2,6 +2,12 @@
 # a rule added in the dashboard is removed on the next apply.
 # Rules run in order. The provider matches rules to the existing ones by ref, so keep each ref
 # stable: changing it recreates that rule with a new ID.
+#
+# Naming:
+#   ref          <action>-<what it matches>, kebab-case (e.g. block-known-bots). Names the match,
+#                not the reason, so it survives edits to the expression.
+#   description  <Action> <what>[ for <scope>], sentence case. Shown in the dashboard and logs;
+#                free to change.
 resource "cloudflare_ruleset" "security_rules" {
   zone_id = local.zone_id
   name    = "default"
@@ -11,7 +17,7 @@ resource "cloudflare_ruleset" "security_rules" {
   rules = [
     {
       ref         = "skip-linkedin-bot"
-      description = "Linkedin"
+      description = "Skip Super Bot Fight Mode for LinkedInBot"
       expression  = "(http.user_agent contains \"LinkedInBot\")"
       action      = "skip"
       action_parameters = {
@@ -23,7 +29,7 @@ resource "cloudflare_ruleset" "security_rules" {
     },
     {
       ref         = "skip-github-webhooks"
-      description = "webhook_bypass"
+      description = "Skip rate limiting, managed rules and Super Bot Fight Mode for GitHub webhooks"
       # The account IP list in lists.tf
       expression = "(ip.src in $github_webhook)"
       action     = "skip"
@@ -38,13 +44,13 @@ resource "cloudflare_ruleset" "security_rules" {
     },
     {
       ref         = "block-countries"
-      description = "Block Requests that come from Sketchy Places"
+      description = "Block requests from high-risk countries"
       expression  = "(ip.geoip.country in {\"AF\" \"CN\" \"IR\" \"IQ\" \"IL\" \"KP\" \"PH\" \"RU\" \"UA\"})"
       action      = "block"
     },
     {
       ref         = "block-known-bots"
-      description = "Block Known Bots"
+      description = "Block known bots"
       expression  = "(cf.client.bot)"
       action      = "block"
     },
