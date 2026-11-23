@@ -47,7 +47,7 @@ spec:
           frontend:
             image:
               repository: ghcr.io/jdavid77/kubernetes-live-metrics-dashboard-frontend
-              tag: v2026.11.23.03 # {"$imagepolicy": "default:kubernetes-live-metrics-dashboard-frontend:tag"}
+              tag: v2026.11.23.04 # {"$imagepolicy": "default:kubernetes-live-metrics-dashboard-frontend:tag"}
             probes:
               liveness: &probes
                 enabled: false
