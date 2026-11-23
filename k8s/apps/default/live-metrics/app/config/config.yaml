@@ -149,7 +149,7 @@ architecture:
           role: Snapshot-based PVC backups with Restic
         - name: Garage
           role: In-cluster S3 object storage, the local backup target
-        - name: Cloudflare R2 / Backblaze B2
+        - name: Cloudflare R2
           role: Offsite object storage for PVC and Postgres backups
         - name: Postgres
           role: Runs in Docker on the NAS, outside the cluster
@@ -177,7 +177,7 @@ architecture:
           role: Grafana with dashboards defined as CRs
         - name: OpenTelemetry Collector
           role: Collects pod logs, Kubernetes events and GitHub data
-        - name: Loki
+        - name: VictoriaLogs
           role: Log storage and querying
         - name: Gatus
           role: Uptime checks declared as annotations on gateways and apps
