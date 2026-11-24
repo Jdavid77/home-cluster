@@ -42,7 +42,6 @@ omv-compose/
 ├── pihole/
 ├── postgres18/
 ├── vectorchord/
-├── scripts/renew-cert.sh
 └── renovate.json
 ```
 
