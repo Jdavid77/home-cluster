@@ -473,7 +473,7 @@ The NAS hosts several essential containers:
     </tr>
 </table>
 
-Docker Compose files for all NAS services are stored in [`omv/docker/`](./omv/docker/) and imported via OMV's Compose plugin.
+Docker Compose files for all NAS services are in [omv-compose](https://github.com/Jdavid77/omv-compose), managed by OMV's Compose plugin.
 
 
 ---
