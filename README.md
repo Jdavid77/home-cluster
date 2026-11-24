@@ -48,12 +48,6 @@ This repository contains the configuration for my home Kubernetes cluster — a 
 ├── 📁 apps             # applications and infrastructure workloads
 ├── 📁 components       # reusable kustomize components (volsync, keda, alerts...)
 └── 📁 flux             # root flux kustomizations and source repositories
-📁 omv
-└── 📁 docker           # containers running on OpenMediaVault
-    ├── 📁 exit-node
-    ├── 📁 pihole
-    ├── 📁 postgres18
-    └── 📁 vectorchord
 📁 talos
 ├── 📁 all              # patches applied to every node
 ├── 📁 control-plane    # patches applied to control plane nodes
