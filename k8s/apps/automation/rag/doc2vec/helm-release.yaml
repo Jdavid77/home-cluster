@@ -49,7 +49,7 @@ spec:
           app:
             image:
               repository: docker.io/library/node
-              tag: 26.13.1-slim@sha256:e6bedef217677b276c591795e169840edd9096dbf13f29df8ef8d1856b8820bc
+              tag: 26.13.1-slim@sha256:abe7e5a82b61a8ef67b315b85497c9e65173387ccf2f4a029248184b8e020be5
             # Read-only UI: configs come from git (the ConfigMap directory).
             # Each scheduled or manual run is a child `doc2vec run` process.
             command:
