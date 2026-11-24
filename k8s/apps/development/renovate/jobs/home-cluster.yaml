@@ -7,6 +7,7 @@ metadata:
 spec:
   discoveryFilters:
     - "Jdavid77/home-cluster"
+    - "Jdavid77/omv-compose"
   extraEnv:
     - name: LOG_LEVEL
       value: debug
