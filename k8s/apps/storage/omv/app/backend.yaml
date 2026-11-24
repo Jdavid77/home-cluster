@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/gateway.envoyproxy.io/backend_v1alpha1.json
+# The OMV web UI on the NAS, outside the cluster. Envoy terminates TLS, so the NAS serves plain HTTP.
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: Backend
+metadata:
+  name: omv
+spec:
+  endpoints:
+    - ip:
+        address: 192.168.1.84
+        port: 80
