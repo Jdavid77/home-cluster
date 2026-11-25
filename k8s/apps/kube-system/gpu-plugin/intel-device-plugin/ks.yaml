@@ -5,7 +5,7 @@ metadata:
   name: &app intel-device-plugin-operator
 spec:
   targetNamespace: kube-system
-  path: ./k8s/apps/kube-system/intel-device-plugin/app
+  path: ./k8s/apps/kube-system/gpu-plugin/intel-device-plugin/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -30,7 +30,7 @@ spec:
   targetNamespace: kube-system
   dependsOn:
     - name: intel-device-plugin-operator
-  path: ./k8s/apps/kube-system/intel-device-plugin/gpu
+  path: ./k8s/apps/kube-system/gpu-plugin/intel-device-plugin/gpu
   prune: true
   sourceRef:
     kind: GitRepository

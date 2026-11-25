@@ -5,7 +5,7 @@ metadata:
   name: &app amd-device-plugin
 spec:
   targetNamespace: kube-system
-  path: ./k8s/apps/kube-system/amd-device-plugin/app
+  path: ./k8s/apps/kube-system/gpu-plugin/amd-device-plugin/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -30,7 +30,7 @@ spec:
   targetNamespace: kube-system
   dependsOn:
     - name: amd-device-plugin
-  path: ./k8s/apps/kube-system/amd-device-plugin/labeller
+  path: ./k8s/apps/kube-system/gpu-plugin/amd-device-plugin/labeller
   prune: true
   sourceRef:
     kind: GitRepository

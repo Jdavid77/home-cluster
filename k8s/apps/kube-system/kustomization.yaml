@@ -10,8 +10,8 @@ resources:
   - ./kubelet-csr-approver/ks.yaml
   - ./spegel/ks.yaml
   - ./crd-schema-publisher/ks.yaml
-  - ./intel-device-plugin/ks.yaml
-  - ./amd-device-plugin/ks.yaml
+  - ./gpu-plugin/intel-device-plugin/ks.yaml
+  - ./gpu-plugin/amd-device-plugin/ks.yaml
   - ./etcd-defrag/ks.yaml
 components:
   - ../../components/alerts/alertmanager
