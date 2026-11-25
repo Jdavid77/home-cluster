@@ -74,6 +74,16 @@
         "commitMessageTopic": "{{{groupName}}} group"
       },
       "minimumGroupSize": 2
+    },
+    {
+      "description": "Excalidash Group",
+      "groupName": "excalidash",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["/excalidash/"],
+      "group": {
+        "commitMessageTopic": "{{{groupName}}} group"
+      },
+      "minimumGroupSize": 2
     }
   ]
 }
