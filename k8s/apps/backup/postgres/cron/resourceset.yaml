@@ -18,7 +18,7 @@ spec:
       servers:
         - name: main
           port: 5432
-          version: 18
+          version: 19
           secret: main
         - name: immich
           port: 6001
@@ -32,7 +32,7 @@ spec:
       servers:
         - name: main
           port: 5432
-          version: 18
+          version: 19
           secret: main
         - name: immich
           port: 6001
@@ -112,7 +112,7 @@ spec:
               app:
                 image:
                   repository: ghcr.io/jdavid77/pg-backup-s3
-                  tag: pg<< $server.version >>-20260614
+                  tag: pg<< $server.version >>-20261126
                   pullPolicy: IfNotPresent
                 env:
                   S3_REGION: << inputs.region >>
