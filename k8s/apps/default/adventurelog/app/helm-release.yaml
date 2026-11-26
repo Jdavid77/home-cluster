@@ -29,7 +29,7 @@ spec:
           app:
             image:
               repository: ghcr.io/seanmorley15/adventurelog
-              tag: latest@sha256:b65149c8a84b89e1101e22e10ad217a5be443c8408244ec97aa4535d24dce6ad
+              tag: latest@sha256:9b375cba3ba49cca2d020c0b0b6932a3153d8e3dbc08075c1c9384bfd4797807
             env:
               SITE_URL: https://adventurelog.jnobrega.com
               DJANGO_ADMIN_USERNAME: admin
