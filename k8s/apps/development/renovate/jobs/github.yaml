@@ -8,6 +8,7 @@ spec:
   discoveryFilters:
     - "Jdavid77/home-cluster"
     - "Jdavid77/omv-compose"
+    - "Jdavid77/custom-mcps"
   extraEnv:
     - name: LOG_LEVEL
       value: debug
