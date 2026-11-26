@@ -33,7 +33,7 @@ spec:
           app:
             image:
               repository: registry.jnobrega.com/mirror/shelfmark
-              tag: v1.7.0 # {"$imagepolicy": "media:shelfmark:tag"}
+              tag: v1.7.1 # {"$imagepolicy": "media:shelfmark:tag"}
             command:
               - gunicorn
             args:
