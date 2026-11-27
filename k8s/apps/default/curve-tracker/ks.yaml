@@ -23,9 +23,11 @@ spec:
       namespace: default
   components:
     - ../../../../components/storage/dragonfly/emulated
+    - ../../../../components/keda/dependencies
   postBuild:
     substitute:
       APP: curve-tracker
+      DEPENDS_ON: "postgres"
   wait: true
   interval: 30m
   retryInterval: 2m

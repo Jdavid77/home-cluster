@@ -49,6 +49,13 @@ spec:
       kind: HelmRelease
       name: kagent
       namespace: automation
+  components:
+    - ../../../../components/keda/dependencies
+  postBuild:
+    substitute:
+      APP: kagent
+      DEPENDS_ON: "postgres"
+      KEDA_TARGETS: kagent-controller,kagent-tools,kagent-ui
   wait: true
   interval: 30m
   retryInterval: 2m

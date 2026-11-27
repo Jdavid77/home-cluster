@@ -33,6 +33,7 @@ spec:
       APP: authentik-server
       DEPENDS_ON: "postgres"
       REPLICAS: "2"
+      KEDA_TARGETS: authentik-server,authentik-worker
   wait: true
   interval: 30m
   retryInterval: 2m

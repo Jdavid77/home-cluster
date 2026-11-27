@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=https://k8s-schemas-jnobrega.pages.dev/fluxcd.controlplane.io/resourceset_v1.json
+apiVersion: fluxcd.controlplane.io/v1
+kind: ResourceSet
+metadata:
+  name: ${APP}-keda
+spec:
+  inputs:
+    - # comma-separated workloads, each "name" or "name:replicas"; defaults to APP
+      targets: "${KEDA_TARGETS:=${APP}}"
+      replicas: "${REPLICAS:=1}"
+  # One ScaledObject per target. No $variables here: Flux substitution would eat them.
+  resourcesTemplate: |
+    <<- range splitList "," (inputs.targets | replace " " "") | compact >>
+    ---
+    apiVersion: keda.sh/v1alpha1
+    kind: ScaledObject
+    metadata:
+      name: << index (splitList ":" .) 0 >>
+      namespace: << inputs.provider.namespace >>
+    spec:
+      cooldownPeriod: ${COOLDOWN_PERIOD:=300}
+      # any dependency down -> 0; all up -> exactly the target's replicas
+      idleReplicaCount: 0
+      minReplicaCount: << if contains ":" . >><< index (splitList ":" .) 1 | int >><< else >><< inputs.replicas | int >><< end >>
+      maxReplicaCount: << if contains ":" . >><< index (splitList ":" .) 1 | int >><< else >><< inputs.replicas | int >><< end >>
+      advanced:
+        restoreToOriginalReplicaCount: true
+      scaleTargetRef:
+        apiVersion: apps/v1
+        kind: ${CONTROLLER:=Deployment}
+        name: << index (splitList ":" .) 0 >>
+      triggers:
+        - type: prometheus
+          metadata:
+            serverAddress: http://prometheus-operated.monitoring.svc.cluster.local:9090
+            # 1 only when every probe listed in DEPENDS_ON is up
+            query: min(max_over_time(probe_success{job=~"probe/monitoring/(${DEPENDS_ON})"}[1m]))
+            threshold: "1"
+            activationThreshold: "0"
+            ignoreNullValues: "0"
+    <<- end >>

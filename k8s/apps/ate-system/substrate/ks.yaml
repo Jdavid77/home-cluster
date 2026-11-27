@@ -90,6 +90,7 @@ kind: Kustomization
 metadata:
   name: &app substrate
 spec:
+  targetNamespace: ate-system
   dependsOn:
     - name: substrate-crds
     - name: substrate-podcert
@@ -106,6 +107,15 @@ spec:
       kind: HelmRelease
       name: substrate
       namespace: ate-system
+  components:
+    - ../../../../components/keda/dependencies
+  postBuild:
+    substitute:
+      APP: *app
+      DEPENDS_ON: "postgres"
+      KEDA_TARGETS: >-
+        ate-api-server, ate-controller, ate-idp-server:2,
+        atenet-egress, atenet-router, k8s-credential-provider
   wait: true
   interval: 30m
   retryInterval: 2m
