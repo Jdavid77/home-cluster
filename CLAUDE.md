@@ -17,3 +17,4 @@ See `.agents/conventions/` for detailed working conventions:
 
 - `.agents/conventions/app/` — how to add and configure apps in `k8s/apps/`
 - `.agents/conventions/repo/structure.md` — extended notes on each directory
+- `.agents/conventions/docs/runbooks.md` — how to structure a runbook in `docs/runbooks/`
