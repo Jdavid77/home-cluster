@@ -32,13 +32,10 @@ markdown_extensions:
 
 nav:
   - Overview: index.md
-  - Talos: talos.md
-  - GitOps:
-      - gitops/index.md
-      - Components: gitops/components.md
   - Migrations:
       - NFS to one share: migrations/nfs-single-share.md
       - Obsidian B2 to R2: migrations/obsidian-b2-to-r2.md
       - OMV compose to its own repo: migrations/omv-compose-repo.md
   - Runbooks:
       - NAS Postgres major upgrade: runbooks/nas-postgres-major-upgrade.md
+      - OMV compose stack update: runbooks/omv-compose-stacks.md

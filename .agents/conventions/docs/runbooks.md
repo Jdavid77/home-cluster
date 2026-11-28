@@ -1,6 +1,6 @@
 # Runbooks
 
-Runbooks live in `docs/runbooks/` and are listed under **Runbooks** in the `nav` of `mkdocs.yml`. The reference example is `docs/runbooks/nas-postgres-major-upgrade.md`.
+Runbooks live in `docs/runbooks/` and are listed under **Runbooks** in the `nav` of `mkdocs.yml`. A runbook is a procedure you repeat and keep up to date; a one-off change gets a migration record instead (see [`migrations.md`](migrations.md)). The reference example is `docs/runbooks/nas-postgres-major-upgrade.md`.
 
 ## Page skeleton
 
@@ -44,43 +44,12 @@ Things to verify by looking at output belong in Check. When a check needs a mult
 - **Command that doesn't fit on one line:** a code block inside the bullet, indented 4 spaces, with blank lines around it.
 - **Where it runs:** say so in the bullet when it isn't obvious ("… on the NAS prints nothing").
 
-## Code blocks
+## Formatting
 
-Every command block has a `title` that says where it runs:
+Code blocks, spacing and admonitions follow [`style.md`](style.md). On top of that:
 
-| Title | Where |
-|---|---|
-| `NAS` | On the NAS, in the Compose Files folder |
-| `Workstation` | Your machine, with `kubectl` on the cluster |
-| `This repo` | The root of this repo |
-
-Add a title to the table in the runbook's Overview if a runbook needs a new place. Titles need `pymdownx.highlight`, which `mkdocs.yml` enables.
-
-````md
-1. Scale them down.
-
-    ```sh title="This repo"
-    .claude/skills/postgres-apps/scripts/postgres-apps.sh down
-    ```
-````
-
-- Manual steps (editing a file in another repo, clicking in a UI) are prose in the step, not comments in a code block.
-- One block holds commands for one place only.
-- Keep long commands as short lines. A terminal can split a long line on paste.
-- Never put secrets in a command. Read them from a file on the host instead, as the `pg_dumpall` step does with `PGPASSWORD`.
-
-## Spacing
-
-- A blank line before and after every heading, paragraph, list, code block and admonition.
+- The Overview says what the code block titles mean.
 - A blank line between steps, always. Every Steps list then renders loose, with the same spacing whether or not its steps have code blocks.
 - No blank line between Check bullets, unless one holds a code block.
-- Anything inside a list item (paragraphs, code blocks, nested lists) is indented 4 spaces. Python-Markdown needs 4. With fewer, the block drops out of the list and the numbering restarts.
 
-## Checking a runbook
-
-Build the docs in strict mode, then open the page. Make sure no numbered list restarts, every code block has its title, and the Steps lists are spaced evenly:
-
-```sh title="This repo"
-pip install -r docs/requirements.txt
-mkdocs build --strict
-```
+Check the page as `style.md` describes before committing.
