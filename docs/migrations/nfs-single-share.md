@@ -217,7 +217,7 @@ gh pr ready 2462 && gh pr merge 2462 --squash
 
 ### 9. Started the apps
 
-garage was resumed first, since volsync depends on it and filebrowser and other apps depend on volsync. The rest were resumed with `--wait=false`:
+The garage Kustomization was resumed first, since volsync depends on it and filebrowser and other apps depend on volsync. The rest were resumed with `--wait=false`:
 
 ```sh title="Workstation"
 flux reconcile source git home-cluster -n flux-system
@@ -236,7 +236,7 @@ for a in ${=APPS}; do ns=${a%%/*}; so=${a#*:}
 
 Resuming `llmkube` recreated the PV and PVC with `/k8s/models`, and the whisper HelmRelease upgrade brought it back to one replica.
 
-These checked that the apps ran and mounted the new paths:
+Then checked that the apps ran and mounted the new paths:
 
 ```sh title="Workstation"
 kubectl get pods -A | grep -E "immich|filebrowser|booklore|shelfmark|metube|qbittorrent|audiobookshelf|pypiserver|paperless|garage|whisper|llmkube"
