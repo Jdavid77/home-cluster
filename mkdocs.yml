@@ -23,6 +23,7 @@ theme:
 markdown_extensions:
   - admonition
   - tables
+  - pymdownx.highlight
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
@@ -39,3 +40,5 @@ nav:
       - NFS to one share: migrations/nfs-single-share.md
       - Obsidian B2 to R2: migrations/obsidian-b2-to-r2.md
       - OMV compose to its own repo: migrations/omv-compose-repo.md
+  - Runbooks:
+      - NAS Postgres major upgrade: runbooks/nas-postgres-major-upgrade.md
