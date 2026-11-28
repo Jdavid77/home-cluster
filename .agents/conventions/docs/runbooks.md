@@ -9,7 +9,7 @@ Runbooks live in `docs/runbooks/` and are listed under **Runbooks** in the `nav`
 
 <one paragraph: what the runbook covers, and what it doesn't touch>
 
-**Last run:** <date>, <what was done> (see [History](#history)).
+**Last run:** <date>, <what was done>.
 
 ## Overview
 ## Prerequisites
@@ -18,15 +18,13 @@ Runbooks live in `docs/runbooks/` and are listed under **Runbooks** in the `nav`
 …
 ## Rollback
 ## Cleanup
-## History
-### <what was done>, <date>
 ```
 
 - **Top of the page:** only the scope paragraph and the **Last run** line.
 - **Overview:** how the procedure works and why it was chosen over the alternatives, and how to adapt the commands for the next run (for example, which version numbers to replace). It also says what the code block titles mean. A warning that applies to the whole page goes here, as a `!!! warning` at the end.
-- **Phases:** the procedure, in order, as `## <n>. <Phase>` headings. The numbers make cross-references possible ("until phase 3"). Prerequisites, Rollback, Cleanup and History stay unnumbered, because they sit outside the sequence.
+- **Phases:** the procedure, in order, as `## <n>. <Phase>` headings. The numbers make cross-references possible ("until phase 3"). Prerequisites, Rollback and Cleanup stay unnumbered, because they sit outside the sequence.
 - **Rollback and Cleanup:** leave either out when the procedure doesn't need it.
-- **History:** a `###` per run, with bullets for what happened, what went wrong and what changed afterwards. It's a log, so it doesn't get Steps or Checks.
+- **No history:** a runbook describes the procedure as it stands. When a run changes the procedure, update the runbook and the **Last run** line; what happened during a one-off run belongs in a migration record (see [`migrations.md`](migrations.md)).
 
 ## Shape of each section
 

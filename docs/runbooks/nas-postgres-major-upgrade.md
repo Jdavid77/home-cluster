@@ -2,7 +2,7 @@
 
 How to move the shared Postgres on the NAS (`192.168.1.84:5432`) to a new major version. Most cluster apps keep their databases there. Immich is separate: it uses the vectorchord stack on port 6001, and this runbook doesn't touch it.
 
-**Last run:** 26 November 2026, 18 → 19 (see [History](#history)).
+**Last run:** 26 November 2026, 18 → 19.
 
 ## Overview
 
@@ -216,13 +216,3 @@ After about a week without problems, remove the old stack. After that, the backu
 Then check that:
 
 - `docker ps -a --filter name=postgres18` on the NAS lists no container.
-
-## History
-
-### 18 → 19, 26 November 2026
-
-- Moved from `ghcr.io/baosystems/postgis:18-3.6` to `ghcr.io/jdavid77/postgis:19-3.7`. baosystems had no stable 19 build.
-- The first pg19 build of pg-backup-s3 failed. Alpine only packages `postgresql19-client` in edge/testing, so the image moved to the official `postgres:<major>-alpine` base.
-- All app databases matched after the copy. The `postgres` maintenance database lost 34 empty `tiger` tables: the old image had the `postgis_tiger_geocoder` extension and the new one doesn't ship it. Nothing used it.
-- The cutover used `OPERATION=suspend task cluster:update`, which only scales down deployments with a Longhorn PVC. Nine of the thirteen apps kept running, and the move to 5434 kept them off the old server. Afterwards, the KEDA `dependencies` component was extended to cover every app on the NAS Postgres, and the `postgres-apps` skill was written to pause it.
-- After the cutover, eight leftover databases with no app in the cluster were dropped with their roles: `gotify`, `homebox`, `sonarqube`, `mattermost`, `wallabag`, `watchyourlan`, `tekton-results` and `openshell`. The 26 November Garage backup still has them.

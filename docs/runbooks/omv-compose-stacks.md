@@ -2,7 +2,7 @@
 
 How to deploy a change to a Docker Compose stack on the NAS, such as an image update from Renovate. The stacks live in [omv-compose](https://github.com/Jdavid77/omv-compose), and the openmediavault-compose plugin runs them from a git checkout of it. This runbook doesn't cover adding a new stack.
 
-**Last run:** not run from this runbook yet (see [History](#history)).
+**Last run:** not run from this runbook yet.
 
 ## Overview
 
@@ -38,7 +38,3 @@ The plugin keeps its own copy of each stack and applies the file on disk only wh
 Before moving on, check that:
 
 - `docker ps` on the NAS shows the stack's containers running the new image.
-
-## History
-
-No runs recorded yet.
