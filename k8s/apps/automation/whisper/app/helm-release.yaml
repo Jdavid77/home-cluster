@@ -51,7 +51,7 @@ spec:
           app:
             image:
               repository: ghcr.io/ggml-org/whisper.cpp
-              tag: main-vulkan@sha256:c8725ead700d7a908f921d6a14367b739b581e2e1b2bc37f4c81a1dbad86452b
+              tag: main-vulkan@sha256:d9107cdc971bdc11c08e5ae2864c3e0b3c8238f88f747e169a554052f621b8cc
             # OpenAI-compatible transcription for Mealie: it posts mp3 to
             # /v1/audio/transcriptions and reads {"text": ...}.
             command:
